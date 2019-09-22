@@ -1,3 +1,7 @@
+/*
+    For creating tables in database
+ */
+
 CREATE TABLE User (
     id          INTEGER     NOT NULL AUTO_INCREMENT,
     username    VARCHAR(16) NOT NULL,
@@ -5,9 +9,9 @@ CREATE TABLE User (
     PRIMARY KEY (id)
 );
 
-CREATE TABLE UserInfo (
+CREATE TABLE User_Info (
     id                  INTEGER         NOT NULL,
-    at_a_station_no     INTEGER         NOT NULL,
+    at_a_station_no     VARCHAR (32)    NOT NULL,
     first_name          VARCHAR (32)    NOT NULL,
     last_name           VARCHAR (32)    NOT NULL,
     dob                 DATE            NOT NULL,
@@ -38,7 +42,7 @@ CREATE TABLE VHT (
 );
 
 CREATE TABLE Patient (
-    id                  INTEGER     NOT NULL AUTO_INCREMENT,
+    id                  INTEGER     NOT NULL,
     village_no          INTEGER     NOT NULL,
     initials            VARCHAR (4) NOT NULL,
     sex                 ENUM('F', 'M', 'Other'),
@@ -53,10 +57,10 @@ CREATE TABLE Patient (
     PRIMARY KEY (id)
 );
 
-CREATE TABLE DrugHistory (
+CREATE TABLE Drug_History (
     id          INTEGER NOT NULL AUTO_INCREMENT,
     patient     INTEGER NOT NULL,
-    notes       TEXT,
+    history     TEXT,
     PRIMARY KEY (id),
     FOREIGN KEY (patient) REFERENCES Patient(id)
 );
@@ -69,13 +73,13 @@ CREATE TABLE Medication (
     start_date      DATE            NOT NULL,
     end_date        DATE,
     PRIMARY KEY (id),
-    FOREIGN KEY (history_id) REFERENCES DrugHistory(id)
+    FOREIGN KEY (drug_history) REFERENCES Drug_History(id)
 );
 
-CREATE TABLE MedicalHistory (
+CREATE TABLE Medical_History (
     id          INTEGER NOT NULL AUTO_INCREMENT,
     patient     INTEGER NOT NULL,
-    notes       TEXT,
+    history     TEXT,
     PRIMARY KEY (id),
     FOREIGN KEY (patient) REFERENCES Patient(id)
 );
@@ -92,6 +96,28 @@ CREATE TABLE FollowUp (
     FOREIGN KEY (patient) REFERENCES Patient(id)
 );
 
+CREATE TABLE Reading (
+    id              INTEGER     NOT NULL AUTO_INCREMENT,
+    reader          INTEGER     NOT NULL,
+    patient         INTEGER     NOT NULL,
+    timestamp       TIMESTAMP   NOT NULL,
+    symptoms        SET('No Symptoms',
+                        'Headache',
+                        'Blurred vision',
+                        'Abdominal pain',
+                        'Feverish',
+                        'Unwell'),
+    other_symptoms  TEXT,
+    systolic_bp     INTEGER     NOT NULL,
+    diastolic_bp    INTEGER     NOT NULL,
+    pulse_rate      INTEGER     NOT NULL,
+    notes           TEXT,
+    need_followup   BOOLEAN,
+    PRIMARY KEY (id),
+    FOREIGN KEY (reader) REFERENCES User(id),
+    FOREIGN KEY (patient) REFERENCES Patient(id)
+);
+
 CREATE TABLE Referral (
     id          INTEGER     NOT NULL AUTO_INCREMENT,
     referrer    INTEGER     NOT NULL,
@@ -100,21 +126,4 @@ CREATE TABLE Referral (
     PRIMARY KEY (id),
     FOREIGN KEY (referrer) REFERENCES User(id),
     FOREIGN KEY (reading) REFERENCES Reading(id)
-);
-
-CREATE TABLE Reading (
-    id              INTEGER     NOT NULL AUTO_INCREMENT,
-    vht             INTEGER     NOT NULL,
-    patient         INTEGER     NOT NULL,
-    timestamp       TIMESTAMP   NOT NULL,
-    symptoms        SET,
-    other_symptoms  TEXT,
-    systolic_bp     INTEGER     NOT NULL,
-    diastolic_bp    INTEGER     NOT NULL,
-    pulse_rate      INTEGER     NOT NULL,
-    notes           TEXT,
-    need_followup   BOOLEAN,
-    PRIMARY KEY (id),
-    FOREIGN KEY (vht) REFERENCES User(id),
-    FOREIGN KEY (patient) REFERENCES Patient(id)
 );
