@@ -1,3 +1,4 @@
+INSERT INTO User (id, username, password) VALUES ('1', 'adminuser', 'password123!');
 /*
     For inserting initial data into tables.
 

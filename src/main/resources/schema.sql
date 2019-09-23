@@ -1,7 +1,6 @@
 /*
     For creating tables in database
  */
-
 CREATE TABLE User (
     id          VARCHAR (32)    NOT NULL,
     username    VARCHAR (16)    NOT NULL,
