@@ -1,0 +1,10 @@
+FROM openjdk:12-jdk as build
+WORKDIR /workspace/app
+ 
+COPY gradlew .
+COPY gradle gradle
+COPY build.gradle .
+#RUN ./gradlew dependencies
+ 
+COPY src src
+RUN ./gradlew build

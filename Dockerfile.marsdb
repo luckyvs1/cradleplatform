@@ -1,0 +1,5 @@
+FROM mysql
+
+ENV MYSQL_DATABASE marsdb
+
+COPY ./src/main/resources/ /docker-entrypoint-initdb.d/
