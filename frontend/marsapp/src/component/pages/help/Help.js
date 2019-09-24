@@ -1,15 +1,18 @@
 import React from "react";
 import {connect} from "react-redux";
 
-class Help  extends React.Component{
+class Help extends React.Component {
 
     render() {
         return (
-            <h1>
-                PLEASE HELP
-            </h1>
+            <div className="ui-toolbar">
+
+                <h1>
+                    PLEASE HELP
+                </h1>
+            </div>
         );
     }
 }
 
-export default connect(null, )(Help);
+export default connect(null,)(Help);

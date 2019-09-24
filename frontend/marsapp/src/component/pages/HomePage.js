@@ -13,37 +13,83 @@ import MenuList from '@material-ui/core/MenuList';
 import {makeStyles} from '@material-ui/core/styles';
 import "../../App.css"
 
-const TodoComponent = {
-    width: "100%",
-    // backgroundColor: "rgba(103,83,102,0.66)",
-    heigh   : "100%",
-}
-
-const styles = {
-    TodoComponent: TodoComponent,
-}
-
 
 const HomePage = ({isAuthenticated, logout}) => (
-    <div style={styles.TodoComponent}>
+    <div>
+        <div className="ui-toolbar">
             <h1>Home Page</h1>
-            {isAuthenticated ? (
-                <button onClick={() => logout()}>Logout</button>
-            ) : (
-                <ul>
-                    {/*link to login*/}
-                    <Link to="/login">Login</Link><br></br>
-                    <Link to="/signup">Sign Up </Link><br></br>
-                    <Link to="/upload">upload </Link><br></br>
-                    <Link to="/readings">readings </Link><br></br>
-                    <Link to="/addReadingDetail">add readings</Link><br></br>
-                    <Link to="/listPatient">list patient</Link><br></br>
-                    <Link to="/help">help</Link><br></br>
+        </div>
+        {isAuthenticated ? (
+            <button onClick={() => logout()}>Logout</button>
+        ) : (
 
-                </ul>
+                    <div className="ui-wrapper">
+                        <Link className="ui-topsites" to="/login">
+                            <a href="#" className="ui-topsites-item">
+                                <i className="fas fa-globe ui-topsite-icon"></i>
+                                <span>Login</span>
+                                <span className="ui-topsites-item-edit">
+                                    <i className="fas fa-ellipsis-v"></i>
+                                </span>
+                            </a></Link>
+                        <Link className="ui-topsites" to="/signup">
+                            <a href="#" className="ui-topsites-item">
+                                <i className="fas fa-globe ui-topsite-icon"></i>
+                                <span>Sign Up </span>
+                                <span className="ui-topsites-item-edit">
+                                    <i className="fas fa-ellipsis-v"></i>
+                                </span>
+                            </a></Link>
+                        <Link className="ui-topsites" to="/upload">
+                            <a href="#" className="ui-topsites-item">
+                                <i className="fas fa-globe ui-topsite-icon"></i>
+                                <span>upload </span>
+                                <span className="ui-topsites-item-edit">
+                                    <i className="fas fa-ellipsis-v"></i>
+                                </span>
+                            </a></Link>
+                        <Link className="ui-topsites" to="/readings">
+                            <a href="#" className="ui-topsites-item">
+                                <i className="fas fa-globe ui-topsite-icon"></i>
+                                <span>readings </span>
+                                <span className="ui-topsites-item-edit">
+                                    <i className="fas fa-ellipsis-v"></i>
+                                </span>
+                            </a></Link>
+                        <Link className="ui-topsites" to="/addReadingDetail">
+                            <a href="#" className="ui-topsites-item">
+                                <i className="fas fa-globe ui-topsite-icon"></i>
+                                <span>add readings</span>
+                                <span className="ui-topsites-item-edit">
+                                    <i className="fas fa-ellipsis-v"></i>
+                                </span>
+                            </a></Link>
+                        <Link className="ui-topsites" to="/listPatient">
+                            <a href="#" className="ui-topsites-item">
+                                <i className="fas fa-globe ui-topsite-icon"></i>
+                                <span>List Reading</span>
+                                <span className="ui-topsites-item-edit">
+                                    <i className="fas fa-ellipsis-v"></i>
+                                </span>
+                            </a>
+                        </Link>
+                        <Link className="ui-topsites" to="/help">
+                            <a href="#" className="ui-topsites-item">
+                                <i className="fas fa-globe ui-topsite-icon"></i>
+                                <span>Help</span>
+                                <span className="ui-topsites-item-edit">
+                                    <i className="fas fa-ellipsis-v"></i>
+                                </span>
+                            </a>
+                        </Link>
+                    </div>
 
-            )}
+
+        )}
+
     </div>
+
+
 );
 
 HomePage.propTypes = {

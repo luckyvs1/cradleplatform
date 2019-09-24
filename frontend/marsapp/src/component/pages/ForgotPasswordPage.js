@@ -1,29 +1,30 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { connect } from "react-redux";
-import { Message } from "semantic-ui-react";
+import {connect} from "react-redux";
+import {Message} from "semantic-ui-react";
 import ForgotPasswordForm from "../forms/ForgotPasswordForm";
-import { resetPasswordRequest } from "../../actions/auth";
+import {resetPasswordRequest} from "../../actions/auth";
 
 class ForgotPasswordPage extends React.Component {
     state = {
         success: false
     };
 
-    submit = data =>   console.log("reset password");
+    submit = data => console.log("reset password");
     // this.props
-        //     .resetPasswordRequest(data)
-        //     .then(() => this.setState({ success: true })
+    //     .resetPasswordRequest(data)
+    //     .then(() => this.setState({ success: true })
 
-            // );
+    // );
 
     render() {
         return (
-            <div>
+            <div className="ui-toolbar">
+
                 {this.state.success ? (
                     <Message>Email has been sent.</Message>
                 ) : (
-                    <ForgotPasswordForm submit={this.submit} />
+                    <ForgotPasswordForm submit={this.submit}/>
                 )}
             </div>
         );
@@ -34,4 +35,4 @@ ForgotPasswordPage.propTypes = {
     resetPasswordRequest: PropTypes.func.isRequired
 };
 
-export default connect(null, { resetPasswordRequest })(ForgotPasswordPage);
+export default connect(null, {resetPasswordRequest})(ForgotPasswordPage);

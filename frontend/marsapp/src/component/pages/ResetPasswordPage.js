@@ -1,9 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { connect } from "react-redux";
-import { Message } from "semantic-ui-react";
+import {connect} from "react-redux";
+import {Message} from "semantic-ui-react";
 import ResetPasswordForm from "../forms/ResetPasswordForm";
-import { validateToken, resetPassword } from "../../actions/auth";
+import {validateToken, resetPassword} from "../../actions/auth";
 
 class ResetPasswordPage extends React.Component {
     state = {
@@ -20,21 +20,22 @@ class ResetPasswordPage extends React.Component {
 
     }
 
-    submit = data =>             console.log("rest Password");
+    submit = data => console.log("rest Password");
 
     // this.props
     //         .resetPassword(data)
     //         .then(() => this.props.history.push("/login"));
 
     render() {
-        const { loading, success } = this.state;
+        const {loading, success} = this.state;
         const token = this.props.match.params.token;
 
         return (
-            <div>
+            <div className="ui-toolbar">
+
                 {loading && <Message>Loading</Message>}
                 {!loading &&
-                success && <ResetPasswordForm submit={this.submit} token={token} />}
+                success && <ResetPasswordForm submit={this.submit} token={token}/>}
                 {!loading && !success && <Message>Invalid Token</Message>}
             </div>
         );
@@ -54,6 +55,6 @@ ResetPasswordPage.propTypes = {
     }).isRequired
 };
 
-export default connect(null, { validateToken, resetPassword })(
+export default connect(null, {validateToken, resetPassword})(
     ResetPasswordPage
 );

@@ -1,22 +1,24 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { connect } from "react-redux";
+import {connect} from "react-redux";
 import SignupForm from "../forms/SignupForm";
-import { signup } from "../../actions/users";
+import {signup} from "../../actions/users";
 
 class SignupPage extends React.Component {
-    submit = data =>   console.log("sign up page has been called");
+    submit = data => console.log("sign up page has been called");
 
     // this.props.signup(data).then(() =>
-        //     console.log("update information")
+    //     console.log("update information")
 
     // this.props.history.push("/dashboard")
 // );
 
     render() {
         return (
-            <div>
-                <SignupForm submit={this.submit} />
+
+            <div className="ui-toolbar">
+
+                <SignupForm submit={this.submit}/>
             </div>
         );
     }
@@ -29,4 +31,4 @@ SignupPage.propTypes = {
     signup: PropTypes.func.isRequired
 };
 
-export default connect(null, { signup })(SignupPage);
+export default connect(null, {signup})(SignupPage);

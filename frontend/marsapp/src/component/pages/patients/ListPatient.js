@@ -1,15 +1,18 @@
 import React from "react";
 import {connect} from "react-redux";
 
-class ListPatient  extends React.Component{
+class ListPatient extends React.Component {
 
     render() {
         return (
-            <h1>
-                LISTING PATIENT
-            </h1>
+            <div className="ui-toolbar">
+
+                <h1>
+                    LISTING PATIENT
+                </h1>
+            </div>
         );
     }
 }
 
-export default connect(null, )(ListPatient);
+export default connect(null,)(ListPatient);

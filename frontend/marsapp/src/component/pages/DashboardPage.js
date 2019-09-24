@@ -1,10 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { connect } from "react-redux";
+import {connect} from "react-redux";
 import ConfirmEmailMessage from "../messages/ConfirmEmailMessage";
-import { allBooksSelector } from "../../reducers/books";
+import {allBooksSelector} from "../../reducers/books";
 // import AddBookCtA from "../ctas/AddBookCtA";
-import { fetchBooks } from "../../actions/books";
+import {fetchBooks} from "../../actions/books";
 
 class DashboardPage extends React.Component {
     componentDidMount = () => this.onInit(this.props);
@@ -12,10 +12,11 @@ class DashboardPage extends React.Component {
     onInit = props => props.fetchBooks();
 
     render() {
-        const { isConfirmed, books } = this.props;
+        const {isConfirmed, books} = this.props;
         return (
-            <div>
-                {!isConfirmed && <ConfirmEmailMessage />}
+            <div className="ui-toolbar">
+
+                {!isConfirmed && <ConfirmEmailMessage/>}
 
                 {/*{books.length === 0 ? <AddBookCtA /> : <p>You have books!</p>}*/}
             </div>
@@ -40,4 +41,4 @@ function mapStateToProps(state) {
     };
 }
 
-export default connect(mapStateToProps, { fetchBooks })(DashboardPage);
+export default connect(mapStateToProps, {fetchBooks})(DashboardPage);

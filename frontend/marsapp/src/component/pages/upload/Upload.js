@@ -6,9 +6,12 @@ class Upload  extends React.Component{
 
     render() {
         return (
-            <h1>
-                UPLOAD PAGE
-            </h1>
+            <div className="ui-toolbar">
+                <h1>
+                    UPLOAD PAGE
+                </h1>
+            </div>
+
         );
     }
 }

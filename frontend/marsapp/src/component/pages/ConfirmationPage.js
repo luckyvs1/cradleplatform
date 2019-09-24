@@ -1,9 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Message, Icon } from "semantic-ui-react";
-import { connect } from "react-redux";
-import { Link } from "react-router-dom";
-import { confirm } from "../../actions/auth";
+import {Message, Icon} from "semantic-ui-react";
+import {connect} from "react-redux";
+import {Link} from "react-router-dom";
+import {confirm} from "../../actions/auth";
 
 class ConfirmationPage extends React.Component {
     state = {
@@ -22,13 +22,14 @@ class ConfirmationPage extends React.Component {
     }
 
     render() {
-        const { loading, success } = this.state;
+        const {loading, success} = this.state;
 
         return (
-            <div>
+            <div className="ui-toolbar">
+
                 {loading && (
                     <Message icon>
-                        <Icon name="circle notched" loading />
+                        <Icon name="circle notched" loading/>
                         <Message.Header>Validating your email</Message.Header>
                     </Message>
                 )}
@@ -36,7 +37,7 @@ class ConfirmationPage extends React.Component {
                 {!loading &&
                 success && (
                     <Message success icon>
-                        <Icon name="checkmark" />
+                        <Icon name="checkmark"/>
                         <Message.Content>
                             <Message.Header>
                                 Thank you. Your account has been verified.
@@ -49,7 +50,7 @@ class ConfirmationPage extends React.Component {
                 {!loading &&
                 !success && (
                     <Message negative icon>
-                        <Icon name="warning sign" />
+                        <Icon name="warning sign"/>
                         <Message.Content>
                             <Message.Header>Ooops. Invalid token it seems.</Message.Header>
                         </Message.Content>
@@ -69,4 +70,4 @@ ConfirmationPage.propTypes = {
     }).isRequired
 };
 
-export default connect(null, { confirm })(ConfirmationPage);
+export default connect(null, {confirm})(ConfirmationPage);
