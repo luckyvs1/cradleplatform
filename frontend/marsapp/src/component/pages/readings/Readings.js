@@ -1,5 +1,6 @@
 import React from "react";
 import {connect} from "react-redux";
+import ReadingForm from "../../forms/readingForm/readingForm";
 
 class Readings extends React.Component {
 
@@ -10,6 +11,7 @@ class Readings extends React.Component {
                 <h1>
                     READINGS
                 </h1>
+                <ReadingForm></ReadingForm>
             </div>
         );
     }

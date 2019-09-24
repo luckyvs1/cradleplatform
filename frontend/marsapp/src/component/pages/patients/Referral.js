@@ -1,8 +1,11 @@
 import React from "react";
 import {connect} from "react-redux";
-import HelpForm from "../../forms/HelpForm";
+import ReferralForm from "../../forms/ReferralForm";
 
-class Help extends React.Component {
+
+class Referral extends React.Component {
+
+
 
     render() {
         return (
@@ -11,10 +14,11 @@ class Help extends React.Component {
                 <h1>
                     PLEASE HELP
                 </h1>
-                <HelpForm></HelpForm>
+                <ReferralForm></ReferralForm>
             </div>
-        );
+        )
     }
+
 }
 
-export default connect(null,)(Help);
+export default connect(null,)(Referral);

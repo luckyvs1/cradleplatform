@@ -17,6 +17,7 @@ import Upload from "./component/pages/upload/Upload";
 import './App.css';
 import Help from "./component/pages/help/Help";
 import ListPatient from "./component/pages/patients/ListPatient";
+import Referral from "./component/pages/patients/Referral";
 import Readings from "./component/pages/readings/Readings";
 import AddReadingDetail from "./component/pages/readings/addReadings/AddReadingDetail";
 
@@ -24,14 +25,14 @@ import AddReadingDetail from "./component/pages/readings/addReadings/AddReadingD
 const App = ({ location, isAuthenticated }) => (
     <div className="ui container">
         {isAuthenticated && <TopNavigation />}
-        <Route location={location} path="/" exact component={HomePage} />
+        <Route location={location} path="/" exact component={LoginPage} />
         <Route
             location={location}
             path="/confirmation/:token"
             exact
             component={ConfirmationPage}
         />
-        <GuestRoute location={location} path="/login" exact component={LoginPage} />
+        <GuestRoute location={location} path="/homePage" exact component={HomePage} />
         <GuestRoute
             location={location}
             path="/signup"
@@ -61,6 +62,12 @@ const App = ({ location, isAuthenticated }) => (
             path="/help"
             exact
             component={Help}
+        />
+        <GuestRoute
+            location={location}
+            path="/referral"
+            exact
+            component={Referral}
         />
         <GuestRoute
             location={location}

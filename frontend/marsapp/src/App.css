@@ -53,10 +53,9 @@ main {
 }
 
 .ui-wrapper {
-
   display: grid;
   grid-template-rows: auto auto;
-  grid-template-columns: auto auto auto auto;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-row-gap: 15px;
   width: 65%;
   margin: 2rem auto 0 auto;

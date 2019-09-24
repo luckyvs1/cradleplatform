@@ -24,22 +24,6 @@ const HomePage = ({isAuthenticated, logout}) => (
         ) : (
 
                     <div className="ui-wrapper">
-                        <Link className="ui-topsites" to="/login">
-                            <a href="#" className="ui-topsites-item">
-                                <i className="fas fa-sign-in-alt ui-topsite-icon"></i>
-                                <span>Login</span>
-                                <span className="ui-topsites-item-edit">
-                                    <i className="fas fa-ellipsis-v"></i>
-                                </span>
-                            </a></Link>
-                        <Link className="ui-topsites" to="/signup">
-                            <a href="#" className="ui-topsites-item">
-                                <i className="fas fa-user-plus ui-topsite-icon"></i>
-                                <span>Sign Up </span>
-                                <span className="ui-topsites-item-edit">
-                                    <i className="fas fa-ellipsis-v"></i>
-                                </span>
-                            </a></Link>
                         <Link className="ui-topsites" to="/upload">
                             <a href="#" className="ui-topsites-item">
                                 <i className="fas fa-upload ui-topsite-icon"></i>
@@ -77,6 +61,15 @@ const HomePage = ({isAuthenticated, logout}) => (
                             <a href="#" className="ui-topsites-item">
                                 <i className="fas fa-question ui-topsite-icon"></i>
                                 <span>Help</span>
+                                <span className="ui-topsites-item-edit">
+                                    <i className="fas fa-ellipsis-v"></i>
+                                </span>
+                            </a>
+                        </Link>
+                        <Link className="ui-topsites" to="/referral">
+                            <a href="#" className="ui-topsites-item">
+                                <i className="fas fa-retweet ui-topsite-icon"></i>
+                                <span>Referral</span>
                                 <span className="ui-topsites-item-edit">
                                     <i className="fas fa-ellipsis-v"></i>
                                 </span>
