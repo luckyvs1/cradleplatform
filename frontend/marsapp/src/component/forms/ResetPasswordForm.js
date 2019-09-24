@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Form, Button } from "semantic-ui-react";
 import InlineError from "../messages/InlineError";
+import "../../App.css"
 
 class ResetPasswordForm extends React.Component {
     state = {

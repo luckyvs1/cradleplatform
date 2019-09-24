@@ -1,9 +1,18 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Form, Button, Message } from "semantic-ui-react";
 import Validator from "validator";
 import InlineError from "../messages/InlineError";
-
+import {
+    Button,
+    Checkbox,
+    Form,
+    Input,
+    Radio,
+    Message,
+    Select,
+    TextArea,
+} from 'semantic-ui-react'
+import "../../App.css"
 
 // "Form" makes it easy to use
 
@@ -58,7 +67,7 @@ class LoginForm extends React.Component {
         const { data, errors, loading } = this.state;
 
         return (
-            <Form onSubmit={this.onSubmit} loading={loading}>
+            <Form onSubmit={this.onSubmit} loading={loading} size={'massive'}>
                 {errors.global && (
                     <Message negative>
                         <Message.Header>Something went wrong</Message.Header>
@@ -66,7 +75,7 @@ class LoginForm extends React.Component {
                     </Message>
                 )}
                 <Form.Field error={!!errors.email}>
-                    <label htmlFor="email">Email</label>
+                    <label htmlFor="email" > Email</label>
                     <input
                         type="email"
                         id="email"

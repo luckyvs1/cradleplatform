@@ -98,12 +98,13 @@ main {
 }
 
 .ui-topsites-item {
+  font-size: 1.5rem !Important;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  padding: 1rem;
-  border-radius: 8px;
+  padding: 2rem;
+  border-radius: 10px;
   position: relative;
   transition: background ease-in .3s;
 }

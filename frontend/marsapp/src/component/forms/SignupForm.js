@@ -1,6 +1,15 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Form, Button } from "semantic-ui-react";
+import {
+    Button,
+    Checkbox,
+    Form,
+    Input,
+    Radio,
+    Message,
+    Select,
+    TextArea,
+} from 'semantic-ui-react'
 import isEmail from "validator/lib/isEmail";
 import InlineError from "../messages/InlineError";
 
@@ -47,7 +56,7 @@ class SignupForm extends React.Component {
         const { data, errors, loading } = this.state;
 
         return (
-            <Form onSubmit={this.onSubmit} loading={loading}>
+            <Form onSubmit={this.onSubmit} loading={loading} size={'massive'}>
                 <Form.Field error={!!errors.email}>
                     <label htmlFor="email">Email</label>
                     <input
