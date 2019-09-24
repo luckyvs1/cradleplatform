@@ -13,7 +13,7 @@ import {
     Select,
     TextArea,
 } from 'semantic-ui-react'
-
+import "../../../App.css"
 
 const options = [
     {key: 'w', text: 'Weeks', value: 'weeks'},
@@ -26,7 +26,7 @@ class Upload extends React.Component {
     render() {
         return (
             <div className="ui-toolbar">
-                <Tabs defaultActiveKey="profile" id="uncontrolled-tab-example">
+                <Tabs className="">
                     <Tab eventKey="patientInfo" title="Patient">
                         <Form size={'massive'} >
                             <Form.Group grouped>
