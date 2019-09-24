@@ -11,10 +11,12 @@
   -webkit-tap-highlight-color: transparent;
 }
 
-body {
+ body  {
   background: linear-gradient(to right, #0575e6, #021b79);
   color: #FFF;
   font-family: 'Noto Sans HK', sans-serif;
+  font-size: 2rem !important;
+  font-weight: bold;
 }
 
 a {
@@ -240,7 +242,6 @@ main {
 .FormField {
   margin-bottom: 40px;
 }
-
 .FormField__Label {
   display: block;
   text-transform: uppercase;
