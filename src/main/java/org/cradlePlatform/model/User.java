@@ -4,42 +4,58 @@
  */
 package org.cradlePlatform.model;
 
+import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
+
+@Entity
+@Table(name = "User")
 public class User {
-	private String username;
-	private Role role;
 
-	public User() {
-		this.username = "";
-		this.role = null;
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private String id;
+
+	@NotEmpty(message = "Enter Username")
+	@Size(max = 16)
+	private String  username;
+
+	@NotEmpty(message = "Enter Password")
+	@Size(max = 32)
+	private String password;
+
+	public User(){
 	}
 
-	public User(String username, Role role) {
+	//User model
+	public User(String id, String username, String password){
+		this.id = id;
 		this.username = username;
-		this.role = role;
+		this.password = password;
 	}
 
-	public User(String username, String role) {
-		this.username = username;
-		this.role = Role.valueOf(role);
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
 	}
 
 	public String getUsername() {
 		return username;
 	}
 
-	public boolean hasRole(Role role) {
-		if (this.role == role) {
-			return true;
-		}
-		return false;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
-	public Role getRole() {
-		return this.role;
+	public String getPassword() {
+		return password;
 	}
 
-	public void setRole(Role role) {
-		this.role = role;
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 }
