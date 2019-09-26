@@ -9,7 +9,7 @@ class AddPatient extends React.Component {
             <div className="ui-toolbar">
 
                 <h1>
-                    PLEASE HELP
+                    Add Patient
                 </h1>
                 <AddPatientFrom></AddPatientFrom>
             </div>

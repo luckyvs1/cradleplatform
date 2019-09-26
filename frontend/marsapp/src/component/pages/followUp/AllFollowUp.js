@@ -9,7 +9,7 @@ class AllFollowUp extends React.Component {
             <div className="ui-toolbar">
 
                 <h1>
-                    PLEASE HELP
+                    All Follow Ups
                 </h1>
 
                 <AllFollowUpForm></AllFollowUpForm>

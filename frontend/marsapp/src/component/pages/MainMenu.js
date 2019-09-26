@@ -1,4 +1,4 @@
-import {Menu} from "semantic-ui-react";
+import {Menu , Dropdown} from "semantic-ui-react";
 import {Link} from "react-router-dom";
 import React from "react";
 
@@ -13,7 +13,14 @@ export default class MenuTabularOnLeft extends React.Component {
         return (
             <Menu fluid vertical tabular>
                 <Menu.Item
-                    as={Link} to="/upload"
+                    as={Link} to="/homePage"
+                    name='Dashboard'
+                    active={activeItem === 'upload'}
+                    onClick={this.handleItemClick}
+
+                />
+                <Menu.Item
+                    as={Link} to="/allFollowUp"
                     name='Follow Ups'
                     active={activeItem === 'upload'}
                     onClick={this.handleItemClick}
@@ -25,12 +32,27 @@ export default class MenuTabularOnLeft extends React.Component {
                     active={activeItem === 'referral'}
                     onClick={this.handleItemClick}
                 />
-                <Menu.Item
-                    as={Link} to="/upload"
-                    name='Patients'
-                    active={activeItem === 'patient'}
-                    onClick={this.handleItemClick}
-                />
+                <Dropdown item text='Patients'>
+                    <Dropdown.Menu>
+                        <Dropdown.Item as={Link} to="/listPatient"
+                                       name='Patients'
+                                       active={activeItem === 'patient'}
+                                       onClick={this.handleItemClick}
+                        >List All Patients</Dropdown.Item>
+                        <Dropdown.Item as={Link} to="/patientDetail"
+                                       name='Patients'
+                                       active={activeItem === 'patient'}
+                                       onClick={this.handleItemClick}
+                        >Find Patient</Dropdown.Item>
+                        <Dropdown.Item
+                            as={Link} to="/addPatient"
+                            name='Patients'
+                            active={activeItem === 'patient'}
+                            onClick={this.handleItemClick}
+                        >Add Patient</Dropdown.Item>
+                    </Dropdown.Menu>
+                </Dropdown>
+
                 <Menu.Item
                     as={Link} to="/upload"
                     name='Account'

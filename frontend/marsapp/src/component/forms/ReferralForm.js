@@ -115,8 +115,8 @@ class ReferralForm extends React.Component {
                     <Grid.Column width={2}>
                         <MenuTabularOnLeft></MenuTabularOnLeft>
                     </Grid.Column>
-                    <Grid.Column stretched width={12}>
-                        <Grid.Row streteched width={10}>
+                    <Grid.Column  width={14}>
+                        <Grid.Column  width={10}>
                                 <Form>
                                     <Form.Group  inlined width={'equal'}>
                                         <Form.Field>
@@ -148,8 +148,8 @@ class ReferralForm extends React.Component {
                                         </Form.Field>
                                     </Form.Group>
                                 </Form>
-                        </Grid.Row>
-                        <Grid.Row>
+                        </Grid.Column>
+                        <Grid.Column>
                                 <Paper className={useStyles.root}>
                                     <h2 style={useStyles.uiHeader}> Referrals List</h2>
                                     <Table className={useStyles.table}>
@@ -175,7 +175,7 @@ class ReferralForm extends React.Component {
                                         </TableBody>
                                     </Table>
                                 </Paper>
-                        </Grid.Row>
+                        </Grid.Column>
                     </Grid.Column>
 
                 </Grid>

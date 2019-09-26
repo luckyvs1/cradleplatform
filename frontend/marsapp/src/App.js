@@ -13,13 +13,15 @@ import ResetPasswordPage from "./component/pages/ResetPasswordPage";
 import UserRoute from "./component/routes/UserRoute";
 import GuestRoute from "./component/routes/GuestRoute";
 import TopNavigation from "./component/navigation/TopNavigation";
-import Upload from "./component/pages/upload/PatientDetail";
+import PatientDetail from "./component/pages/upload/PatientDetail";
 import './App.css';
 import Help from "./component/pages/help/Help";
 import ListPatient from "./component/pages/patients/ListPatient";
 import Referral from "./component/pages/Referral/Referral";
 import Readings from "./component/pages/readings/Readings";
 import AddReadingDetail from "./component/pages/readings/addReadings/AddReadingDetail";
+import AddPatient from "./component/pages/patients/AddPatient";
+import AllFollowUp from "./component/pages/followUp/AllFollowUp";
 
 
 const App = ({ location, isAuthenticated }) => (
@@ -71,9 +73,21 @@ const App = ({ location, isAuthenticated }) => (
         />
         <GuestRoute
             location={location}
-            path="/upload"
+            path="/patientDetail"
             exact
-            component={Upload}
+            component={PatientDetail}
+        />
+        <GuestRoute
+            location={location}
+            path="/allFollowUp"
+            exact
+            component={AllFollowUp}
+        />
+        <GuestRoute
+            location={location}
+            path="/addPatient"
+            exact
+            component={AddPatient}
         />
         <GuestRoute
             location={location}

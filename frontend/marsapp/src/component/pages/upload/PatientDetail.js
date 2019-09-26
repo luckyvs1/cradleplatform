@@ -4,6 +4,7 @@ import {connect} from "react-redux";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "../../../App.css"
 import UploadForm from "../../forms/UploadForm";
+import PatientDetailForm from "../../forms/PatientDetailForm";
 
 
 class PatientDetail extends React.Component {
@@ -11,9 +12,9 @@ class PatientDetail extends React.Component {
         return (
             <div className="ui-toolbar">
 
-                <h1 className="ui header">Upload page</h1>
+                <h1 className="ui header">Patient Detail</h1>
 
-                <UploadForm submit={this.submit}/>
+                <PatientDetailForm/>
 
             </div>
         )

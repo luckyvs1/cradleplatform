@@ -9,9 +9,10 @@ import {
     Select,
     TextArea,
     List,
-
+    Grid,
     Image,
 } from 'semantic-ui-react'
+import MenuTabularOnLeft from "../pages/MainMenu";
 
 class ListPatientForm extends  React.Component {
     // funcitons
@@ -22,45 +23,53 @@ class ListPatientForm extends  React.Component {
     render() {
         return (
             <div className="ui-toolbar">
-                <List selection verticalAlign='middle'>
-                    <List.Item>
-                        <Image avatar src='https://react.semantic-ui.com/images/avatar/small/christian.jpg' />
-                        <List.Content>
-                            <List.Header>Arron the MR.Robot HACKER</List.Header>
-                        </List.Content>
-                    </List.Item>
-                    <List.Item>
-                        <Image avatar src='https://react.semantic-ui.com/images/avatar/small/helen.jpg' />
-                        <List.Content>
-                            <List.Header>ALEX the CIA HACKER</List.Header>
-                        </List.Content>
-                    </List.Item>
-                    <List.Item>
-                        <Image avatar src='https://react.semantic-ui.com/images/avatar/small/helen.jpg' />
-                        <List.Content>
-                            <List.Header>JOVAN the FBI HACKER</List.Header>
-                        </List.Content>
-                    </List.Item>
-                    <List.Item>
-                        <Image avatar src='https://react.semantic-ui.com/images/avatar/small/daniel.jpg' />
-                        <List.Content>
-                            <List.Header>Gurinder the HARRY POTTER HACKER</List.Header>
-                        </List.Content>
-                    </List.Item>
-                    <List.Item>
-                        <Image avatar src='https://react.semantic-ui.com/images/avatar/small/daniel.jpg' />
-                        <List.Content>
-                            <List.Header>LUCKY the NASA HACKER</List.Header>
-                        </List.Content>
-                    </List.Item>
-                    <List.Item>
-                        <Image avatar src='https://react.semantic-ui.com/images/avatar/small/helen.jpg' />
-                        <List.Content>
-                            <List.Header>VICKY the GOOGLE HACKER</List.Header>
-                        </List.Content>
-                    </List.Item>
+                <Grid>
+                    <Grid.Column width={2}>
+                        <MenuTabularOnLeft></MenuTabularOnLeft>
+                    </Grid.Column>
+                    <Grid.Column width={14}>
+                        <List selection verticalAlign='middle'>
+                            <List.Item>
+                                <Image avatar src='https://react.semantic-ui.com/images/avatar/small/christian.jpg' />
+                                <List.Content>
+                                    <List.Header>Arron the MR.Robot HACKER</List.Header>
+                                </List.Content>
+                            </List.Item>
+                            <List.Item>
+                                <Image avatar src='https://react.semantic-ui.com/images/avatar/small/helen.jpg' />
+                                <List.Content>
+                                    <List.Header>ALEX the CIA HACKER</List.Header>
+                                </List.Content>
+                            </List.Item>
+                            <List.Item>
+                                <Image avatar src='https://react.semantic-ui.com/images/avatar/small/helen.jpg' />
+                                <List.Content>
+                                    <List.Header>JOVAN the FBI HACKER</List.Header>
+                                </List.Content>
+                            </List.Item>
+                            <List.Item>
+                                <Image avatar src='https://react.semantic-ui.com/images/avatar/small/daniel.jpg' />
+                                <List.Content>
+                                    <List.Header>Gurinder the HARRY POTTER HACKER</List.Header>
+                                </List.Content>
+                            </List.Item>
+                            <List.Item>
+                                <Image avatar src='https://react.semantic-ui.com/images/avatar/small/daniel.jpg' />
+                                <List.Content>
+                                    <List.Header>LUCKY the NASA HACKER</List.Header>
+                                </List.Content>
+                            </List.Item>
+                            <List.Item>
+                                <Image avatar src='https://react.semantic-ui.com/images/avatar/small/helen.jpg' />
+                                <List.Content>
+                                    <List.Header>VICKY the GOOGLE HACKER</List.Header>
+                                </List.Content>
+                            </List.Item>
 
-                </List>
+                        </List>
+
+                    </Grid.Column>
+                </Grid>
 
             </div>
 
