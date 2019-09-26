@@ -11,6 +11,7 @@ class AllFollowUp extends React.Component {
                 <h1>
                     PLEASE HELP
                 </h1>
+
                 <AllFollowUpForm></AllFollowUpForm>
             </div>
         );

@@ -9,6 +9,7 @@ import {
     Select,
     TextArea,
     List,
+
     Image,
 } from 'semantic-ui-react'
 
@@ -58,6 +59,7 @@ class ListPatientForm extends  React.Component {
                             <List.Header>VICKY the GOOGLE HACKER</List.Header>
                         </List.Content>
                     </List.Item>
+
                 </List>
 
             </div>

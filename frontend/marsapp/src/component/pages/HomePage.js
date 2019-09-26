@@ -13,6 +13,9 @@ import "../../App.css"
 import {Grid, Image, List, Menu, Segment} from 'semantic-ui-react'
 import Upload from "./upload/PatientDetail";
 import {Route} from "react-router-dom";
+var CanvasJSReact = require('./canvasjs.react');
+var CanvasJS = CanvasJSReact.CanvasJS;
+var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
