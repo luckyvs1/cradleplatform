@@ -12,8 +12,8 @@
   width: 100%;
 }
  html, body  {
-  background: linear-gradient(to right, #0575e6, #021b79);
-  color: #FFF;
+  background: linear-gradient(to right, #A0A4B8, #495E66);
+  color: rgba(0, 0, 0, 1);
   font-family: 'Noto Sans HK', sans-serif;
   font-size: 1rem !important;
   font-weight: bold;
@@ -23,7 +23,12 @@ body:before {
   content: "";
   display: block;
   height: 10%;
-  background: #00bdea;
+  background-image: url("res/background.png");
+  background-repeat: no-repeat;
+  background-size: auto ;
+  background-attachment: fixed;
+  background-position: left top;
+  max-height: 10%;
 }
 body:after {
   background: #208FF9;

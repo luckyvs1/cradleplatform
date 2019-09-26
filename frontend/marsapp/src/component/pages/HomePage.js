@@ -128,7 +128,7 @@ class HomePage extends React.Component {
                         {buttons}
                     </div>
                 </div>
-                <h1 as="ui header">Cradle App</h1>
+                <h1>Cradle App</h1>
                 <Grid>
 
                     <Grid.Column width={2}>
