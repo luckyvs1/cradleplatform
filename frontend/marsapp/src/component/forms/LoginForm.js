@@ -14,9 +14,6 @@ import {
 } from 'semantic-ui-react'
 import "../../App.css"
 
-// "Form" makes it easy to use
-
-
 class LoginForm extends React.Component {
     //state updates as user types
     state = {

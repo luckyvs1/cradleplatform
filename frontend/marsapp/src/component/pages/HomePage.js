@@ -13,9 +13,6 @@ import "../../App.css"
 import {Grid, Image, List, Menu, Segment} from 'semantic-ui-react'
 import Upload from "./upload/PatientDetail";
 import {Route} from "react-router-dom";
-var CanvasJSReact = require('./canvasjs.react');
-var CanvasJS = CanvasJSReact.CanvasJS;
-var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -23,6 +20,9 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import MenuTabularOnLeft from "./MainMenu";
+
+
 class FloatingMenuItem extends React.Component {
 
     handleClick() {
@@ -55,15 +55,6 @@ class FloatingMenuItem extends React.Component {
 
 
 
-const useStyles = makeStyles(theme => ({
-    root: {
-        width: '100%',
-        marginTop: theme.spacing(3),
-    },
-    table: {
-        width: '100%',
-    },
-}));
 
 function createData(name, calories, fat, carbs, protein) {
     return { name, calories, fat, carbs, protein };
@@ -76,7 +67,6 @@ const rows = [
     createData('111222888', 'hanny', 'Brian', new Date().toDateString()),
     createData('444555666', 'janny', 'Katy', new Date().toDateString()),
 ];
-
 
 class HomePage extends React.Component {
     state = {activeItem: 'bio'}
@@ -93,12 +83,28 @@ class HomePage extends React.Component {
         this.setState({toggled: !this.state.toggled});
     }
 
-    handleItemClick = (e, {name}) => {
-        this.setState({activeItem: name})
-    }
+
+     useStyles = makeStyles(theme => ({
+        root: {
+            width: '100%',
+            marginTop: theme.spacing(2),
+
+        },
+        table: {
+            minWidth: 650,
+        },
+        tableWrapper: {
+            overflowX: 'auto',
+        },
+         uiHeader: {
+            textAlign:'center',
+     }
+
+    }));
 
     render() {
         const {activeItem} = this.state
+        const useStyles= this.useStyles
         let buttons = [];
         let className = "floating-menu";
         let icon = "add";
@@ -126,44 +132,14 @@ class HomePage extends React.Component {
                 <Grid>
 
                     <Grid.Column width={2}>
-                        <Menu fluid vertical tabular>
-                            <Menu.Item
-                                as={Link} to="/upload"
-                                name='Follow Ups'
-                                active={activeItem === 'upload'}
-                                onClick={this.handleItemClick}
-
-                            />
-                            <Menu.Item
-                                as={Link} to="/upload"
-                                name='Referral'
-                                active={activeItem === 'referral'}
-                                onClick={this.handleItemClick}
-                            />
-                            <Menu.Item
-                                as={Link} to="/upload"
-                                name='Patients'
-                                active={activeItem === 'patient'}
-                                onClick={this.handleItemClick}
-                            />
-                            <Menu.Item
-                                as={Link} to="/upload"
-                                name='Account'
-                                active={activeItem === 'account'}
-                                onClick={this.handleItemClick}
-                            />
-                            <Menu.Item
-                                as={Link} to="/upload"
-                                name='Users'
-                                active={activeItem === 'users'}
-                                onClick={this.handleItemClick}
-                            />
-                        </Menu>
+                        <MenuTabularOnLeft></MenuTabularOnLeft>
                     </Grid.Column>
 
-                    <Grid.Column stretched width={6}>
-                        <Paper className="ui-wrapper">
-                            <Table className="ui-toolbar">
+                    <Grid.Column stretched width={8}>
+                        <Paper className={useStyles.root}>
+                            <h2  style={useStyles.uiHeader}>New Referrals</h2>
+
+                            <Table className={useStyles.table}>
                                 <TableHead>
                                     <TableRow>
                                         <TableCell>Patient Id</TableCell>
@@ -188,8 +164,9 @@ class HomePage extends React.Component {
                         </Paper>
                     </Grid.Column>
                     <Grid.Column stretched width={6}>
-                        <Paper className="ui-wrapper">
-                            <Table className="ui-toolbar">
+                        <Paper className={useStyles.root}>
+                            <h2 as="ui header" className='ui-header'>Upcoming Follow Up</h2>
+                            <Table className={useStyles.table}>
                                 <TableHead>
                                     <TableRow>
                                         <TableCell>Patient Id</TableCell>
@@ -225,87 +202,3 @@ class HomePage extends React.Component {
 
 export default HomePage;
 
-
-// const HomePage = ({isAuthenticated, logout}) => (
-//     <div>
-//         <div className="ui-toolbar">
-//             <h1>Home Page</h1>
-//         </div>
-//         {isAuthenticated ? (
-//             <button onClick={() => logout()}>Logout</button>
-//         ) : (
-//
-//                     <div className="ui-wrapper">
-//                         <Link className="ui-topsites" to="/upload">
-//                             <a href="#" className="ui-topsites-item">
-//                                 <i className="fas fa-upload ui-topsite-icon"></i>
-//                                 <span>upload </span>
-//                                 <span className="ui-topsites-item-edit">
-//                                     <i className="fas fa-ellipsis-v"></i>
-//                                 </span>
-//                             </a></Link>
-//                         <Link className="ui-topsites" to="/readings">
-//                             <a href="#" className="ui-topsites-item">
-//                                 <i className="fas fa-book-open ui-topsite-icon"></i>
-//                                 <span>readings </span>
-//                                 <span className="ui-topsites-item-edit">
-//                                     <i className="fas fa-ellipsis-v"></i>
-//                                 </span>
-//                             </a></Link>
-//                         <Link className="ui-topsites" to="/addReadingDetail">
-//                             <a href="#" className="ui-topsites-item">
-//                                 <i className="fas fa-plus-circle ui-topsite-icon"></i>
-//                                 <span>add readings</span>
-//                                 <span className="ui-topsites-item-edit">
-//                                     <i className="fas fa-ellipsis-v"></i>
-//                                 </span>
-//                             </a></Link>
-//                         <Link className="ui-topsites" to="/listPatient">
-//                             <a href="#" className="ui-topsites-item">
-//                                 <i className="fas fa-list ui-topsite-icon"></i>
-//                                 <span>List Reading</span>
-//                                 <span className="ui-topsites-item-edit">
-//                                     <i className="fas fa-ellipsis-v"></i>
-//                                 </span>
-//                             </a>
-//                         </Link>
-//                         <Link className="ui-topsites" to="/help">
-//                             <a href="#" className="ui-topsites-item">
-//                                 <i className="fas fa-question ui-topsite-icon"></i>
-//                                 <span>Help</span>
-//                                 <span className="ui-topsites-item-edit">
-//                                     <i className="fas fa-ellipsis-v"></i>
-//                                 </span>
-//                             </a>
-//                         </Link>
-//                         <Link className="ui-topsites" to="/referral">
-//                             <a href="#" className="ui-topsites-item">
-//                                 <i className="fas fa-retweet ui-topsite-icon"></i>
-//                                 <span>Referral</span>
-//                                 <span className="ui-topsites-item-edit">
-//                                     <i className="fas fa-ellipsis-v"></i>
-//                                 </span>
-//                             </a>
-//                         </Link>
-//                     </div>
-//
-//
-//         )}
-//
-//     </div>
-//
-//
-// );
-//
-// HomePage.propTypes = {
-//     isAuthenticated: PropTypes.bool.isRequired,
-//     logout: PropTypes.func.isRequired
-// };
-//
-// function mapStateToProps(state) {
-//     return {
-//         isAuthenticated: !!state.user.token
-//     };
-// }
-//
-// export default connect(mapStateToProps, {logout: actions.logout})(HomePage);
