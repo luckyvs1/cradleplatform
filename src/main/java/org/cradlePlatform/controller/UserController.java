@@ -20,7 +20,7 @@ public class UserController {
                                          @RequestParam String last_name, @RequestParam Date dob,
                                          @RequestParam String country, @RequestParam String phone,
                                          @RequestParam String email, @RequestParam String role){
-        //TODO: add stuff here + current timestamp?
+        //TODO: add stuff here
         return "Successfully saved";
     }
     @GetMapping(path="/getAll")
