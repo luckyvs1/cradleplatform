@@ -16,7 +16,7 @@ public class FollowUpController {
     private FollowUpRepository followUpRepository;
 
     @PostMapping(path="/add")
-    public @ResponseBody String addAFollowUp (@RequestParam int id, @RequestParam String patient_id,
+    public @ResponseBody String addAFollowUp (@RequestParam String patient_id,
                                              @RequestParam String notes, @RequestParam boolean required,
                                              @RequestParam String frequency, @RequestParam String diagnosis,
                                              @RequestParam String treatment){
