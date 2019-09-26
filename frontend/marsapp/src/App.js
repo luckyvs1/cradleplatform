@@ -21,6 +21,7 @@ import Referral from "./component/pages/Referral/Referral";
 import Readings from "./component/pages/readings/Readings";
 import AddReadingDetail from "./component/pages/readings/addReadings/AddReadingDetail";
 import AddPatient from "./component/pages/patients/AddPatient";
+import Account from "./component/pages/patients/account";
 import AllFollowUp from "./component/pages/followUp/AllFollowUp";
 
 
@@ -82,6 +83,12 @@ const App = ({ location, isAuthenticated }) => (
             path="/allFollowUp"
             exact
             component={AllFollowUp}
+        />
+        <GuestRoute
+            location={location}
+            path="/account"
+            exact
+            component={Account}
         />
         <GuestRoute
             location={location}

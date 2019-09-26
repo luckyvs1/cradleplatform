@@ -54,7 +54,7 @@ export default class MenuTabularOnLeft extends React.Component {
                 </Dropdown>
 
                 <Menu.Item
-                    as={Link} to="/upload"
+                    as={Link} to="/account"
                     name='Account'
                     active={activeItem === 'account'}
                     onClick={this.handleItemClick}
