@@ -3,7 +3,6 @@ import {connect} from "react-redux";
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "../../../App.css"
-import UploadForm from "../../forms/UploadForm";
 import PatientDetailForm from "../../forms/PatientDetailForm";
 
 
