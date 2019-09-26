@@ -1,4 +1,4 @@
-import {Menu , Dropdown} from "semantic-ui-react";
+import {Menu ,Icon, Dropdown} from "semantic-ui-react";
 import {Link} from "react-router-dom";
 import React from "react";
 
@@ -15,10 +15,10 @@ export default class MenuTabularOnLeft extends React.Component {
                 <Menu.Item
                     as={Link} to="/homePage"
                     name='Dashboard'
+                    className=""
                     active={activeItem === 'upload'}
                     onClick={this.handleItemClick}
-
-                />
+               />
                 <Menu.Item
                     as={Link} to="/allFollowUp"
                     name='Follow Ups'
