@@ -1,6 +1,6 @@
 import React from "react";
 import {connect} from "react-redux";
-import AddReadingForm from "../../../forms/readingForm/addReadingForm";
+import AddReadingForm from "../../../forms/readingForm/AddReadingForm";
 
 class AddReadingDetail extends React.Component {
 

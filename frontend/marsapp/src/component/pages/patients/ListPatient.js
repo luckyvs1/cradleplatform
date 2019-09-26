@@ -11,7 +11,7 @@ import {
     List,
     Image,
 } from 'semantic-ui-react'
-import ListPatientForm from "../../forms/listPatientForm";
+import ListPatientForm from "../../forms/ListPatientForm";
     
 class ListPatient extends React.Component {
 

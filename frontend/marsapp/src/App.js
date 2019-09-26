@@ -13,17 +13,17 @@ import ResetPasswordPage from "./component/pages/ResetPasswordPage";
 import UserRoute from "./component/routes/UserRoute";
 import GuestRoute from "./component/routes/GuestRoute";
 import TopNavigation from "./component/navigation/TopNavigation";
-import Upload from "./component/pages/upload/Upload";
+import Upload from "./component/pages/upload/PatientDetail";
 import './App.css';
 import Help from "./component/pages/help/Help";
 import ListPatient from "./component/pages/patients/ListPatient";
-import Referral from "./component/pages/patients/Referral";
+import Referral from "./component/pages/Referral/Referral";
 import Readings from "./component/pages/readings/Readings";
 import AddReadingDetail from "./component/pages/readings/addReadings/AddReadingDetail";
 
 
 const App = ({ location, isAuthenticated }) => (
-    <div className="ui container">
+    <div className="ui-toolbar">
         {isAuthenticated && <TopNavigation />}
         <Route location={location} path="/" exact component={LoginPage} />
         <Route

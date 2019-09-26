@@ -4,19 +4,29 @@
 
 @import url('https://use.fontawesome.com/releases/v5.6.3/css/fontawesome.css');
 
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-  -webkit-tap-highlight-color: transparent;
-}
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,400');
 
- body  {
+#application-root {
+  display: block;
+  height: 100%;
+  width: 100%;
+}
+ html, body  {
   background: linear-gradient(to right, #0575e6, #021b79);
   color: #FFF;
   font-family: 'Noto Sans HK', sans-serif;
-  font-size: 2rem !important;
+  font-size: 1rem !important;
   font-weight: bold;
+   height: 100%;
+}
+body:before {
+  content: "";
+  display: block;
+  height: 10%;
+  background: #00bdea;
+}
+body:after {
+  background: #208FF9;
 }
 
 a {
@@ -25,7 +35,6 @@ a {
 
 main {
   display: grid;
-
   flex-direction: column;
   width: 100vw;
   height: 100vh;
@@ -39,7 +48,7 @@ main {
 
 .ui-toolbar {
   padding: 1rem;
-  text-align: center;
+  text-align: left;
 }
 
 .ui-toolbar a {
@@ -59,7 +68,7 @@ main {
   grid-row-gap: 15px;
   width: 65%;
   margin: 2rem auto 0 auto;
-  text-align: center;
+  text-align: left;
 }
 
 .ui-searchbar {
@@ -91,7 +100,7 @@ main {
   grid-template-rows: auto auto;
   grid-template-columns: auto auto auto auto;
   grid-row-gap: 15px;
-  width: 65%;
+  width: 95%;
   margin: 2rem auto 0 auto;
   text-align: center;
 }
@@ -302,3 +311,55 @@ main {
   padding-bottom: 2px;
   margin-left: 5px;
 }
+
+.floating-menu {
+  position: absolute;
+  right: 8px;
+  bottom: 8px;
+  height: 42px;
+  text-align: right;
+  /*transition: height 250ms ease-in-out;*/
+}
+
+.floating-menu.open {
+  height: 150px;
+  overflow: hidden;
+}
+
+.floating-menu.open .floating-menu-item {
+  margin-top: 8px;
+}
+
+.floating-menu-item label{
+  display: inline-block;
+  margin-right: 8px;
+  padding: 4px 10px;
+  border-radius: 12px;
+  background: rgba(0,0,0,.25);
+  opacity: 0;
+  transition: opacity 250ms ease-in-out;
+}
+
+.floating-menu.open .floating-menu-item label {
+  opacity: 0.4;
+}
+
+.floating-menu-icon{
+  display: inline-block;
+  width: 42px;
+  height: 42px;
+  line-height: 42px;
+  vertical-align: middle;
+  background: #e53935;
+  border-radius: 50%;
+  border: none;
+  box-shadow: 0 2px 4px rgba(0,0,0,.2);
+  text-align: center;
+}
+
+.floating-menu-icon .material-icons {
+  font-size: 1rem;
+  color: #fff;
+  vertical-align: middle;
+}
+

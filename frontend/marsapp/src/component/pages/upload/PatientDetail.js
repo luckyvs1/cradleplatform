@@ -6,7 +6,7 @@ import "../../../App.css"
 import UploadForm from "../../forms/UploadForm";
 
 
-class Upload extends React.Component {
+class PatientDetail extends React.Component {
     render() {
         return (
             <div className="ui-toolbar">
@@ -20,4 +20,4 @@ class Upload extends React.Component {
     }
 }
 
-export default connect(null, {})(Upload);
+export default connect(null, {})(PatientDetail);
