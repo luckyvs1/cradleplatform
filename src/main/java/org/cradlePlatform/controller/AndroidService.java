@@ -17,7 +17,7 @@ public class AndroidService {
      * Returns patients associated with a VHT if the vhtId is valid.
      *
      * @param vhtId vht ID
-     * @return patients JSON body with status code 200 if successful, else status code 400
+     * @return Patients JSON body with status code 200 if successful, else status code 400
      */
     @GetMapping("/VHT/{vhtId}/patients")
     @ResponseStatus(HttpStatus.OK)
@@ -109,7 +109,7 @@ public class AndroidService {
      *
      * @param vhtId     vht ID
      * @param patientId patient ID
-     * @return patient JSON body with status code 200 if successful, else status code 400
+     * @return Patient JSON body with status code 200 if successful, else status code 400
      */
     @GetMapping("/VHT/{vhtId}/patients/{patientId}")
     @ResponseStatus(HttpStatus.OK)
@@ -182,11 +182,11 @@ public class AndroidService {
     }
 
     /**
-     * Returns reading information for a patient associated with a VHT if the vhtId is valid and the patientId is valid.
+     * Returns medication information for a patient associated with a VHT if the vhtId is valid and the patientId is valid.
      *
      * @param vhtId     vht ID
      * @param patientId patient ID
-     * @return reading JSON body with status code 200 if successful, else status code 400
+     * @return Medication JSON body with status code 200 if successful, else status code 400
      */
     @GetMapping("/VHT/{vhtId}/patients/{patientId}/medication")
     @ResponseStatus(HttpStatus.OK)
@@ -204,11 +204,11 @@ public class AndroidService {
     }
 
     /**
-     * Returns reading information for a patient associated with a VHT if the vhtId is valid and the patientId is valid.
+     * Returns follow up information for a patient associated with a VHT if the vhtId is valid and the patientId is valid.
      *
      * @param vhtId     vht ID
      * @param patientId patient ID
-     * @return reading JSON body with status code 200 if successful, else status code 400
+     * @return Follow up JSON body with status code 200 if successful, else status code 400
      */
     @GetMapping("/VHT/{vhtId}/patients/{patientId}/followup")
     @ResponseStatus(HttpStatus.OK)
