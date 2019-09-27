@@ -7,7 +7,7 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
 @Entity
-@Table(name = "DrugHistory")
+@Table(name = "Drug_History")
 public class DrugHistory {
 
     @Id
