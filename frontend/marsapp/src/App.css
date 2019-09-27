@@ -323,15 +323,15 @@ ui-header {
 
 .floating-menu {
   position: absolute;
-  right: 8px;
-  bottom: 8px;
-  height: 42px;
+  right: 20px;
+  bottom: 20px;
+  height: 62px;
   text-align: right;
   /*transition: height 250ms ease-in-out;*/
 }
 
 .floating-menu.open {
-  height: 150px;
+  height: 183px;
   overflow: hidden;
 }
 
@@ -369,6 +369,6 @@ ui-header {
 .floating-menu-icon .material-icons {
   font-size: 1rem;
   color: #fff;
-  vertical-align: middle;
+  position: absolute;
 }
 
