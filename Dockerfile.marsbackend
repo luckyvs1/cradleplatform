@@ -1,4 +1,4 @@
-FROM openjdk:12-jdk as build
+FROM openjdk:12-jdk
 WORKDIR /workspace/app
  
 COPY gradlew .

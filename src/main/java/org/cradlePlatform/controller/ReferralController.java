@@ -1,6 +1,7 @@
 package org.cradlePlatform.controller;
 
-import java.util.Date;
+import java.sql.Time;
+import java.sql.Timestamp;
 import org.cradlePlatform.model.Referral;
 import org.cradlePlatform.repository.ReferralRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,9 +15,9 @@ public class ReferralController {
 
     @PostMapping(path="/add")
     public @ResponseBody String addAReferral(@RequestParam String referrer_id,
-                                            @RequestParam int reading_id){
-        //TODO: add stuff here + current timestamp?
-
+                                             @RequestParam String reading_id,
+                                             @RequestParam Timestamp timestamp){
+        referralRepository.save(new Referral(referrer_id, reading_id, timestamp));
         return "Successfully saved";
     }
     @GetMapping(path="/getAll")
