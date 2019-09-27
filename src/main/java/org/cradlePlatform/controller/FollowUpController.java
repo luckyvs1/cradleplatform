@@ -20,8 +20,15 @@ public class FollowUpController {
                                              @RequestParam String notes, @RequestParam boolean required,
                                              @RequestParam String frequency, @RequestParam String diagnosis,
                                              @RequestParam String treatment){
-        //TODO: add stuff here
-        return "Successfully saved";
+
+        FollowUp newFollowUp = new FollowUp(patient_id, notes, required, frequency, diagnosis, treatment);
+        newFollowUp.setPatientID(patient_id);
+        newFollowUp.setFollowUpNotes(notes);
+        newFollowUp.setRequired(required);
+        newFollowUp.setFrequency(frequency);
+        newFollowUp.setDiagnosis(diagnosis);
+        newFollowUp.setTreatment(treatment);
+        return "Saved Follow Up";
     }
 
     @GetMapping(path="/getAll")
