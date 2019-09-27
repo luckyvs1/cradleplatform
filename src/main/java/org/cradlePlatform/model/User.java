@@ -24,7 +24,7 @@ public class User {
 	@Size(max = 32)
 	private String password;
 
-	public User(){
+	public User(String username, Role role){
 	}
 
 	//User model
