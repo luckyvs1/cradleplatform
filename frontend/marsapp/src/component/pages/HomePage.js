@@ -26,7 +26,7 @@ import MenuTabularOnLeft from "./MainMenu";
 class FloatingMenuItem extends React.Component {
 
     handleClick() {
-        this.props.action();
+        // this.props.action();
     }
 
     render() {
