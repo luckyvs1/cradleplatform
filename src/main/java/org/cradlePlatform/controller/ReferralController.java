@@ -2,6 +2,8 @@ package org.cradlePlatform.controller;
 
 import java.sql.Time;
 import java.sql.Timestamp;
+import java.util.Optional;
+
 import org.cradlePlatform.model.Referral;
 import org.cradlePlatform.repository.ReferralRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,4 +26,12 @@ public class ReferralController {
     public @ResponseBody Iterable<Referral> getAllReferral() {
         return referralRepository.findAll();
     }
+
+    @GetMapping(path="/getAll/{id}")
+    public @ResponseBody
+    Optional<Referral> getReferralById(@PathVariable(value = "id") String referrer_id){
+        return referralRepository.findById(referrer_id);
+    }
 }
+
+
