@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Optional;
+
 @Controller
 @RequestMapping(path="/drughistory")
 public class DrugHistoryController {
@@ -21,10 +23,16 @@ public class DrugHistoryController {
         return "Saved";
     }
 
-    @GetMapping(path="/all")
+    @GetMapping(path="/get")
     public @ResponseBody Iterable<DrugHistory> getAllDrugHistory(){
         //this returns a JSON or XML with the drugHistory
         return drugHistoryRepository.findAll();
+    }
+
+    @GetMapping(path="/get/{id}")
+    public @ResponseBody
+    Optional<DrugHistory> getDrugHistoryById(@PathVariable(value = "id") String patientID){
+        return drugHistoryRepository.findById(patientID);
     }
 
 }

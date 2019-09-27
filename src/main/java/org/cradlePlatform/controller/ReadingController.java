@@ -9,6 +9,7 @@ import java.util.Date;
 import org.cradlePlatform.model.Reading;
 import org.cradlePlatform.repository.ReadingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.cdi.Eager;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -44,3 +45,4 @@ public class ReadingController {
         return readingRepository.findAll();
     }
 }
+
