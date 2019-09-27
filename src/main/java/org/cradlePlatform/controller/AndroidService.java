@@ -21,7 +21,11 @@ public class AndroidService {
 	@PostMapping(path = "/api/readings", consumes = "application/json")
 	@ResponseStatus(HttpStatus.OK)
 	public void uploadReading(@RequestBody ReadingUploadWrapper reading) {
-		System.out.println(reading.getUsername() + " " + reading.getReading().getPatientId() + " " + reading.getReading().getGestationalAge().getTimeUnit());
+		System.out.printf("%s %s %s %s%n", reading.getUsername(), reading.getReading().getPatientId(), reading.getReading().getGestationalAge().getTimeUnit(), reading.getReading().getDate());
+		if (DBService.verifyUsernamePassword(reading.getUsername(), reading.getPassword())) {
+			// TODO: raise exception if save fails
+			DBService.saveReadingInDb(reading.getReading());
+		}
 	}
 
 	/**
