@@ -16,7 +16,7 @@ public class DrugHistoryController {
 
     @PostMapping(path="/add")
     public @ResponseBody String addDrugHistory (@RequestParam String id, @RequestParam String patientID, @RequestParam String historyText){
-        DrugHistory newDrugHistory = new DrugHistory(id, patientID); //should be user id, patient id?
+        DrugHistory newDrugHistory = new DrugHistory(); //should be user id, patient id?
         newDrugHistory.setPatientID(patientID);
         newDrugHistory.setHistoryText(historyText);
         drugHistoryRepository.save(newDrugHistory);
@@ -27,6 +27,10 @@ public class DrugHistoryController {
     public @ResponseBody Iterable<DrugHistory> getAllDrugHistory(){
         //this returns a JSON or XML with the drugHistory
         return drugHistoryRepository.findAll();
+    }
+    @GetMapping(path="/test")
+    public @ResponseBody String getTest(){
+        return "Hello World!";
     }
 
     @GetMapping(path="/get/{id}")
