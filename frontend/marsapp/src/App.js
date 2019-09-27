@@ -9,7 +9,6 @@ import SignupPage from "./component/pages/SignupPage";
 import ConfirmationPage from "./component/pages/ConfirmationPage";
 import ForgotPasswordPage from "./component/pages/ForgotPasswordPage";
 import ResetPasswordPage from "./component/pages/ResetPasswordPage";
-// import NewBookPage from "./component/pages/NewBookPage";
 import UserRoute from "./component/routes/UserRoute";
 import GuestRoute from "./component/routes/GuestRoute";
 import TopNavigation from "./component/navigation/TopNavigation";
@@ -21,7 +20,7 @@ import Referral from "./component/pages/Referral/Referral";
 import Readings from "./component/pages/readings/Readings";
 import AddReadingDetail from "./component/pages/readings/addReadings/AddReadingDetail";
 import AddPatient from "./component/pages/patients/AddPatient";
-import Account from "./component/pages/patients/account";
+import Account from "./component/pages/patients/Account";
 import AllFollowUp from "./component/pages/followUp/AllFollowUp";
 
 
@@ -114,12 +113,6 @@ const App = ({ location, isAuthenticated }) => (
             exact
             component={DashboardPage}
         />
-        {/*<UserRoute*/}
-        {/*    location={location}*/}
-        {/*    path="/books/new"*/}
-        {/*    exact*/}
-        {/*    component={NewBookPage}*/}
-        {/*/>*/}
     </div>
 );
 

@@ -14,22 +14,16 @@ export const userLoggedOut = () => ({
 export const login = credentials => dispatch =>     console.log("update information (login)");
 
 // api.user.login(credentials).then(user => {
-//         localStorage.bookwormJWT = user.token;
 //         setAuthorizationHeader(user.token);
 //         dispatch(userLoggedIn(user));
 //     });
 
 export const logout = () => dispatch => {console.log("update information (signup)");
-    // localStorage.removeItem("bookwormJWT");
     // setAuthorizationHeader();
     // dispatch(userLoggedOut());
 };
 
 export const confirm = token => dispatch => console.log("update information (confirm)");
-    // api.user.confirm(token).then(user => {
-    //     localStorage.bookwormJWT = user.token;
-    //     dispatch(userLoggedIn(user));
-    // });
 
 export const resetPasswordRequest = ({ email }) => () => console.log("update information (reset)");
     // api.user.resetPasswordRequest(email);
