@@ -1,22 +1,374 @@
-.App {
+@import url('https://fonts.googleapis.com/css?family=Noto+Sans+HK&display=swap');
+
+@import url('https://use.fontawesome.com/releases/v5.6.3/css/solid.css');
+
+@import url('https://use.fontawesome.com/releases/v5.6.3/css/fontawesome.css');
+
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,400');
+
+#application-root {
+  display: block;
+  height: 100%;
+  width: 100%;
+}
+ html, body  {
+  background: linear-gradient(to right, #A0A4B8, #495E66);
+  color: rgba(0, 0, 0, 1);
+  font-family: 'Noto Sans HK', sans-serif;
+  font-size: 1rem !important;
+  font-weight: bold;
+   height: 100%;
+}
+body:before {
+  content: "";
+  display: block;
+  height: 10%;
+  background-image: url("res/topBar.jpg");
+  background-repeat: no-repeat;
+  background-size: auto ;
+  background-attachment: fixed;
+  background-position: left top;
+  max-height: 10%;
+}
+body:after {
+  background: #208FF9;
+}
+
+a {
+  text-decoration: none;
+}
+
+main {
+  display: grid;
+  flex-direction: column;
+  width: 100vw;
+  height: 100vh;
+  user-select: none;
+}
+
+.fas {
+  font-size: 1.3rem;
+  color: #FFF;
+}
+
+.ui-toolbar {
+  padding: 1rem;
+  text-align: left;
+}
+
+.ui-toolbar a {
+  padding: 10px;
+  color: #FFF;
+  transition: background linear .2s;
+}
+
+ui-header {
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
+.ui-toolbar a:hover {
+  background: rgba(0, 0, 0, .25);
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.ui-wrapper {
+  display: grid;
+  grid-template-rows: auto auto;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-row-gap: 15px;
+  width: 65%;
+  margin: 2rem auto 0 auto;
+  text-align: left;
+}
+
+.ui-searchbar {
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  flex-direction: column;
+}
+
+.ui-searchbar h1 {
+  margin-bottom: 2rem;
+  font-size: 3rem;
+  color: #FFF;
+  letter-spacing: 4px;
+}
+
+.ui-searchbar input {
+  width: 30rem;
+  padding: 1rem 1rem;
+  border-radius: 30px;
+  border: none;
+  outline: 0;
+  font-family: 'Noto Sans HK', sans-serif;
+  font-weight: bold;
+}
+
+.ui-topsites {
+  display: grid;
+  grid-template-rows: auto auto;
+  grid-template-columns: auto auto auto auto;
+  grid-row-gap: 15px;
+  width: 95%;
+  margin: 2rem auto 0 auto;
+  text-align: center;
+}
+
+.ui-topsites-item {
+  font-size: 1.5rem !Important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 2rem;
+  border-radius: 10px;
+  position: relative;
+  transition: background ease-in .3s;
+}
+
+.ui-topsites-item:hover {
+  background: rgba(0, 0, 0, .15);
+}
+
+.ui-topsites-item:hover > .ui-topsite-icon {
+  background: #09F;
+}
+
+.ui-topsites-item-edit {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  opacity: 0;
+  transition: all linear .2s;
+}
+
+.ui-topsites-item-edit:hover {
+  opacity: 1;
+}
+
+.ui-topsite-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: .7rem;
+  width: 3rem;
+  height: 3rem;
+  background: rgba(0, 0, 0, .3);
+  border-radius: 50px;
+  pointer-events: none;
+  color: #FFF;
+  transition: background ease-in .1s;
+}
+
+
+.ui-topsites-item span {
+  color: #FFF;
+  letter-spacing: 2px;
+}
+
+.ui-edit {
+  width: 100%;
+  padding-right: 2rem;
+  text-align: right;
+}
+
+#btn-edit {
+  cursor: pointer;
+}
+
+.App {
+  height: 100vh;
+  display: flex;
+  color: red;
+}
+
+.App__Aside {
+  width: 100%;
+  background-color: #66DAC7;
+}
+
+.App__Form {
+  width: 100%;
+  background-color: #2E4158;
+  padding: 25px 40px;
+  overflow: auto;
+}
+
+.PageSwitcher {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 10%;
+}
+
+.PageSwitcher__Item {
+  background-color: #4C5D72;
+  color: #9DA6B1;
+  padding: 10px 25px;
+  cursor: pointer;
+  font-size: .9em;
+  border: none;
+  outline: none;
+  display: inline-block;
+  text-decoration: none;
+}
+
+.PageSwitcher__Item--Active {
+  background-color: #5ED0C0;
   color: white;
 }
 
-.App-link {
-  color: #09d3ac;
+.PageSwitcher__Item:first-child {
+  border-top-left-radius: 25px;
+  border-bottom-left-radius: 25px;
 }
+.PageSwitcher__Item:last-child {
+  border-top-right-radius: 25px;
+  border-bottom-right-radius: 25px;
+}
+
+.FormCenter {
+  margin-bottom: 100px;
+}
+
+
+
+
+.FormTitle {
+  color: #707C8B;
+  font-weight: 300;
+  margin-bottom: 50px;
+}
+
+.FormTitle__Link {
+  color: #707C8B;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 1.7em;
+  margin: 0 10px;
+  padding-bottom: 5px;
+}
+
+.FormTitle__Link:first-child {
+  margin-left: 0;
+}
+
+.FormTitle__Link--Active {
+  color: white;
+  border-bottom: 1px solid #199087;
+}
+
+.FormField {
+  margin-bottom: 40px;
+}
+.FormField__Label {
+  display: block;
+  text-transform: uppercase;
+  font-size: .9em;
+  color: white;
+}
+.FormField__Input {
+  width: 85%;
+  background-color: transparent;
+  border: none;
+  color: white;
+  outline: none;
+  border-bottom: 1px solid #445366;
+  font-size: 1em;
+  font-weight: 300;
+  padding-bottom: 10px;
+  margin-top: 10px;
+}
+
+.FormField__Input::placeholder {
+  color: #616E7F;
+}
+
+.FormField__Button {
+  background-color: #52C4B9;
+  color: white;
+  border: none;
+  outline: none;
+  border-radius: 25px;
+  padding: 15px 70px;
+  font-size: .8em;
+  font-weight: 500;
+}
+
+.FormField__Link {
+  color: #66707D;
+  text-decoration: none;
+  display: inline-block;
+  border-bottom: 1.5px solid #225E62;
+  padding-bottom: 5px;
+}
+
+.FormField__CheckboxLabel {
+  color: #646F7D;
+  font-size: .9em;
+}
+
+.FormField__Checkbox {
+  position: relative;
+  top: 1.5px;
+}
+
+.FormField__TermsLink {
+  color: white;
+  border-bottom: 1px solid #199087;
+  text-decoration: none;
+  display: inline-block;
+  padding-bottom: 2px;
+  margin-left: 5px;
+}
+
+.floating-menu {
+  position: absolute;
+  right: 8px;
+  bottom: 8px;
+  height: 42px;
+  text-align: right;
+  /*transition: height 250ms ease-in-out;*/
+}
+
+.floating-menu.open {
+  height: 150px;
+  overflow: hidden;
+}
+
+.floating-menu.open .floating-menu-item {
+  margin-top: 8px;
+}
+
+.floating-menu-item label{
+  display: inline-block;
+  margin-right: 8px;
+  padding: 4px 10px;
+  border-radius: 25px;
+  background: rgba(0,0,0,.25);
+  opacity: 0;
+  transition: opacity 250ms ease-in-out;
+}
+
+.floating-menu.open .floating-menu-item label {
+  opacity: 0.4;
+}
+
+.floating-menu-icon{
+  display: inline-block;
+  width: 60px;
+  height: 60px;
+  line-height: 60px;
+  vertical-align: middle;
+  background: #e53935;
+  border-radius: 50%;
+  border: none;
+  box-shadow: 0 2px 4px rgba(0,0,0,.2);
+  text-align: center;
+}
+
+.floating-menu-icon .material-icons {
+  font-size: 1rem;
+  color: #fff;
+  vertical-align: middle;
+}
+
