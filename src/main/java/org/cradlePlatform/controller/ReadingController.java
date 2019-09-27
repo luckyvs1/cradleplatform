@@ -4,6 +4,7 @@
 package org.cradlePlatform.controller;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Date;
 import org.cradlePlatform.model.Reading;
 import org.cradlePlatform.repository.ReadingRepository;
@@ -19,15 +20,25 @@ public class ReadingController {
 
     @PostMapping(path="/add")
     public @ResponseBody String addAReading(@RequestParam String reader_id, @RequestParam String patient_id,
-                                            @RequestParam Timestamp timestamp, @RequestParam String other_symptoms,
+                                            @RequestParam Timestamp timestamp, @RequestParam ArrayList<String> symptoms,
+                                            @RequestParam String other_symptoms,
                                             @RequestParam int systolic_bp, @RequestParam int diastolic_bp,
                                             @RequestParam int pulse_rate, @RequestParam String notes,
                                             @RequestParam boolean need_followup){
-        //TODO: not sure about arguments for symptoms
-        //TODO: add stuff here
+        Reading newReading = new Reading(patient_id, reader_id, timestamp, symptoms, other_symptoms, systolic_bp, diastolic_bp, notes, need_followup);
+        newReading.setPatientID(patient_id);
+        newReading.setReaderID(reader_id);
+        newReading.setTimestamp(timestamp);
+        newReading.setOtherSymptoms(other_symptoms);
+        newReading.setSystolicBloodPressure(systolic_bp);
+        newReading.setDiastolicBloodPressure(diastolic_bp);
+        newReading.setNotes(notes);
+        newReading.setNeedFollowUp(need_followup);
+        readingRepository.save(newReading);
 
-        return "Successfully saved";
+        return "Saved";
     }
+
     @GetMapping(path="/getAll")
     public @ResponseBody Iterable<Reading> getAllReadings() {
         return readingRepository.findAll();

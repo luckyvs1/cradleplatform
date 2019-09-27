@@ -13,11 +13,11 @@ public class DrugHistoryController {
     private DrugHistoryRepository drugHistoryRepository;
 
     @PostMapping(path="/add")
-    public @ResponseBody String addDrugHistory (@RequestParam String patientID, @RequestParam String historyText){
-        DrugHistory n = new DrugHistory(patientID, patientID); //should be user id, patient id
-        n.setPatientID(patientID);
-        n.setHistoryText(historyText);
-        drugHistoryRepository.save(n);
+    public @ResponseBody String addDrugHistory (@RequestParam String id, @RequestParam String patientID, @RequestParam String historyText){
+        DrugHistory newDrugHistory = new DrugHistory(id, patientID); //should be user id, patient id?
+        newDrugHistory.setPatientID(patientID);
+        newDrugHistory.setHistoryText(historyText);
+        drugHistoryRepository.save(newDrugHistory);
         return "Saved";
     }
 
