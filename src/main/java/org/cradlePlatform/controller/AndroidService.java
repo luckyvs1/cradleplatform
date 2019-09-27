@@ -141,7 +141,7 @@ public class AndroidService {
                 "  \"readings\": {\n" +
                 "    \"id\": \"1\",\n" +
                 "    \"symptoms\": {\n" +
-                "      \"noSymptoms\": true\n" +
+                "      \"noSymptoms\": true,\n" +
                 "      \"headache\": false,\n" +
                 "      \"blurredVision\": false,\n" +
                 "      \"abdominalPain\": false,\n" +
@@ -188,7 +188,7 @@ public class AndroidService {
                 "    \"id\": \"1\",\n" +
                 "    \"patientId\": \"1234\",\n" +
                 "    \"symptoms\": {\n" +
-                "      \"noSymptoms\": true\n" +
+                "      \"noSymptoms\": true,\n" +
                 "      \"headache\": false,\n" +
                 "      \"blurredVision\": false,\n" +
                 "      \"abdominalPain\": false,\n" +
