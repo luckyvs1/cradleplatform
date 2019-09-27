@@ -38,7 +38,7 @@ public class AndroidService {
                 "  \"readings\": {\n" +
                 "    \"id\": \"1\",\n" +
                 "    \"symptoms\": {\n" +
-                "      \"noSymptoms\": true\n" +
+                "      \"noSymptoms\": true,\n" +
                 "      \"headache\": false,\n" +
                 "      \"blurredVision\": false,\n" +
                 "      \"abdominalPain\": false,\n" +
@@ -83,7 +83,7 @@ public class AndroidService {
                 "  \"readings\": {\n" +
                 "    \"id\": \"1\",\n" +
                 "    \"symptoms\": {\n" +
-                "      \"noSymptoms\": true\n" +
+                "      \"noSymptoms\": true,\n" +
                 "      \"headache\": false,\n" +
                 "      \"blurredVision\": false,\n" +
                 "      \"abdominalPain\": false,\n" +
