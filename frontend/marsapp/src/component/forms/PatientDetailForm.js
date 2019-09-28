@@ -3,6 +3,7 @@ import Tabs from "react-bootstrap/Tabs";
 import Tab from "react-bootstrap/Tab";
 import {Checkbox, Form, Input, Select, Grid, List, TextArea} from "semantic-ui-react";
 import MenuTabularOnLeft from "../pages/MainMenu";
+import {Link} from "react-router-dom";
 
 /**
  * This class handles how the Patient Detail page will be displayed.
@@ -51,13 +52,13 @@ export default class PatientDetailForm extends React.Component {
                         </div>
                         <div>
                             <Tabs className="">
-                                <Tab eventKey="patientInfo" title="Reading History">
+                                <Tab eventKey="reading_history" title="Reading History">
                                     <List selection>
                                         <List.Item>
                                             <table style={listPatientReadings}>
                                                 <tr style={listPatientReadings}>
                                                     <td style={listPatientReadings}><span style={statusGreen}>_</span></td>
-                                                    <td style={listPatientReadings}>2019/02/03</td>
+                                                    <td style={listPatientReadings}>2019/03/13</td>
                                                     <td style={listPatientReadings}>
                                                         <b>BP/DP:</b> 120/80 <br />
                                                         <b>Heart Rate (bpm):</b> 60
@@ -66,6 +67,8 @@ export default class PatientDetailForm extends React.Component {
                                                         <b>Pregnant:</b> Yes<br />
                                                         <b>Gestational Age:</b> 5 Months
                                                     </td>
+                                                    <td style={listPatientReadings}><b>Symptoms:</b> ...</td>
+
                                                 </tr>
                                             </table>
                                         </List.Item>
@@ -82,62 +85,45 @@ export default class PatientDetailForm extends React.Component {
                                                         <b>Pregnant:</b> Yes<br />
                                                         <b>Gestational Age:</b> 4 Months
                                                     </td>
+                                                    <td style={listPatientReadings}><b>Symptoms:</b> ...</td>
                                                 </tr>
                                             </table>
                                         </List.Item>
+                                        <List.Item>
+                                            <table style={listPatientReadings}>
+                                                <tr style={listPatientReadings}>
+                                                    <td style={listPatientReadings}><span style={statusYellow}>v</span></td>
+                                                    <td style={listPatientReadings}>2019/01/02</td>
+                                                    <td style={listPatientReadings}>
+                                                        <b>BP/DP:</b> 180/80 <br />
+                                                        <b>Heart Rate (bpm):</b> 80
+                                                    </td>
+                                                    <td style={listPatientReadings}>
+                                                        <b>Pregnant:</b> Yes<br />
+                                                        <b>Gestational Age:</b> 3 Months
+                                                    </td>
+                                                    <td style={listPatientReadings}><b>Symptoms:</b> ...</td>
+
+                                                </tr>
+                                            </table>
+                                        </List.Item>
+                                        <List.Item>
+                                            <List.Content
+                                                as={Link} to="/AddReadingDetail">
+                                                <input type="submit" value="New Reading"/>
+                                            </List.Content>
+                                        </List.Item>
                                     </List>
                                 </Tab>
-                                <Tab eventKey="symptoms" title="Medical History">
-                                    <Form>
-                                        <Form.Group grouped>
-                                            <Form.Field
-                                                control={Checkbox}
-                                                label='No Symptoms (patient Healthy)'
-                                            />
-                                            <Form.Field
-                                                control={Checkbox}
-                                                label='Headache'
-                                            />
-                                            <Form.Field
-                                                control={Checkbox}
-                                                label='Blurred vision'
-                                            />
-                                            <Form.Field
-                                                control={Checkbox}
-                                                label='Abdominal pain'
-                                            />
-                                            <Form.Field
-                                                control={Checkbox}
-                                                label='Bleeding'
-                                            />
-                                            <Form.Field
-                                                control={Checkbox}
-                                                label='Feverish'
-                                            />
-                                            <Form.Field
-                                                control={Checkbox}
-                                                label='Unwell'
-                                            />
-                                            <Form.Field
-                                                control={TextArea}
-                                                label='Other Symptoms'
-                                                placeholder='Tell us more about you... that is breaking'
-                                            />
-                                        </Form.Group>
-                                    </Form>
+                                <Tab eventKey="medical_history" title="Medical History">
                                 </Tab>
-                                <Tab eventKey="vitals" title="Drug History">
-                                    <Form size={'big'}>
-
-                                    </Form>
+                                <Tab eventKey="drug_history" title="Drug History">
                                 </Tab>
 
-                                <Tab eventKey="summary" title="Current Medications">
-
+                                <Tab eventKey="medication" title="Current Medications">
                                 </Tab>
 
-                                <Tab eventKey="summary" title="Follow Ups">
-
+                                <Tab eventKey="follow_up" title="Follow Ups">
                                 </Tab>
 
                             </Tabs>
