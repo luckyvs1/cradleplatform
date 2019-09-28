@@ -24,18 +24,16 @@ class LoginPage extends React.Component {
 
     render() {
         return (
-            <div className="ui-toolbar">
-
-                <h1 class="ui header">Login page</h1>
-
-
-                        <LoginForm submit={this.submit}/>
-
-                        <Link to="/forgot_password">Forgot Password?</Link>
-                        <Link to="/signup">Sign Up?</Link>
-                        <Link className="ui-topsites" to="/homePage">GO TO HOME</Link>
+            <div className="ui-toolbar ">
+                <div className={"login"}>
+                    <h1 class="ui header">Login page</h1>
 
 
+                    <LoginForm submit={this.submit}/>
+
+
+
+                </div>
             </div>
         );
     }
