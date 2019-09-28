@@ -13,23 +13,17 @@ export const userLoggedOut = () => ({
 
 export const login = credentials => dispatch =>     console.log("update information (login)");
 
-// api.user.login(credentials).then(user => {
-//         setAuthorizationHeader(user.token);
-//         dispatch(userLoggedIn(user));
+// api.user.login().then(user => {
 //     });
 
 export const logout = () => dispatch => {console.log("update information (signup)");
-    // setAuthorizationHeader();
-    // dispatch(userLoggedOut());
 };
 
 export const confirm = token => dispatch => console.log("update information (confirm)");
 
 export const resetPasswordRequest = ({ email }) => () => console.log("update information (reset)");
-    // api.user.resetPasswordRequest(email);
 
 export const validateToken = token => () => console.log("update information (validate)");
-    // api.user.validateToken(token);
 
-export const resetPassword = data => () => console.log("update information (reset)");
-    // api.user.resetPassword(data);
+export const testAPICALL = data => () => console.log("update information (reset)");
+    api.user.hello(null);

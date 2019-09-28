@@ -1,22 +1,47 @@
-import axios from "axios";
+import React, {Component} from 'react';
+import axios from "axios/dist/axios"
 
 export default {
     user: {
-        login: credentials => console.log("Login has been called send data please"),
-            // axios.post("/api/auth", { credentials }).then(res => res.data.user),
-        signup: user =>console.log("Sign up has been called send data please"),
-            // axios.post("/api/users", { user }).then(res => res.data.user),
-        confirm: token =>
-            console.log("CONFIRM?"),
-            // axios
-            //     .post("/api/auth/confirmation", { token })
-            //     .then(res => res.data.user),
-        resetPasswordRequest: email => console.log("reset password has been called"),
-            // axios.post("/api/auth/reset_password_request", { email }),
-        validateToken: token => console.log("valid token has been called"),
-            // axios.post("/api/auth/validate_token", { token }),
-        resetPassword: data => console.log("reset password has been called"),
-        // axios.post("/api/auth/reset_password", { data })
+        hello: data => {
+            axios.get("/hello").then(res => console.log(res))
+        },
+        login: data =>{
+            axios.post("/login", {}).then(res => console.log(res))
+        },
     },
+    patient: {
+        mockPatients : data =>{
+            axios.get("/VHT/1/patients}", {}).then(res => console.log(res))
+        },
+        mockPatient: data => {
+            axios.get("/VHT/{1}/patients/{1}", {}).then(res => console.log(res))
+        }
+    },
+
+    reading:{
+        mockReading: data =>{
+            axios.get("/VHT/{vhtId}/patients/{patientId}/reading" , {}).then(res => console.log(res))
+        },
+        uploadReading: data =>{
+            axios.post("/api/readings" , {}).then(res => console.log(res))
+        },
+        uploadSyncData: data =>{
+            axios.post("/api/sync" , {}).then(res => console.log(res))
+        },
+
+    },
+    medication:{
+        mockMedication:data =>{
+            axios.get("/VHT/{vhtId}/patients/{patientId}/medication",{}).then(res => console.log(res))
+        }
+    },
+    followUp: {
+        mockFollowUp:data =>{
+            axios.get("/VHT/{vhtId}/patients/{patientId}/followup", {}).then(res => console.log(res))
+        }
+    }
+
+
 
 };
