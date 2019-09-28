@@ -18,11 +18,16 @@ public class UserController {
     private UserRepository userRepository;
 
     @PostMapping(path="/add")
-    public @ResponseBody String addAUser(@RequestParam String at_a_station_no, @RequestParam String first_name,
-                                         @RequestParam String last_name, @RequestParam Date dob,
-                                         @RequestParam String country, @RequestParam String phone,
-                                         @RequestParam String email, @RequestParam RoleType role,
-                                         @RequestParam String username, @RequestParam String password){
+    public @ResponseBody String addAUser(@RequestParam String at_a_station_no,
+                                         @RequestParam String first_name,
+                                         @RequestParam String last_name,
+                                         @RequestParam Date dob,
+                                         @RequestParam String country,
+                                         @RequestParam String phone,
+                                         @RequestParam String email,
+                                         @RequestParam RoleType role,
+                                         @RequestParam String username,
+                                         @RequestParam String password){
         User newUser = new User();
         newUser.setUsername(username);
         newUser.setId(at_a_station_no);

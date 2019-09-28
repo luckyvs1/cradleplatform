@@ -15,7 +15,9 @@ public class DrugHistoryController {
     private DrugHistoryRepository drugHistoryRepository;
 
     @PostMapping(path="/add")
-    public @ResponseBody String addDrugHistory (@RequestParam String id, @RequestParam String patientID, @RequestParam String historyText){
+    public @ResponseBody String addDrugHistory (@RequestParam String id,
+                                                @RequestParam String patientID,
+                                                @RequestParam String historyText){
         DrugHistory newDrugHistory = new DrugHistory(); //should be user id, patient id?
         newDrugHistory.setPatientId(patientID);
         newDrugHistory.setHistoryText(historyText);

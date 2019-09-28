@@ -20,11 +20,15 @@ public class ReadingController {
     private ReadingRepository readingRepository;
 
     @PostMapping(path="/add")
-    public @ResponseBody String addAReading(@RequestParam String reader_id, @RequestParam String patient_id,
-                                            @RequestParam Timestamp timestamp, @RequestParam ArrayList<String> symptoms,
+    public @ResponseBody String addAReading(@RequestParam String reader_id,
+                                            @RequestParam String patient_id,
+                                            @RequestParam Timestamp timestamp,
+                                            @RequestParam ArrayList<String> symptoms,
                                             @RequestParam String other_symptoms,
-                                            @RequestParam int systolic_bp, @RequestParam int diastolic_bp,
-                                            @RequestParam int pulse_rate, @RequestParam String notes,
+                                            @RequestParam int systolic_bp,
+                                            @RequestParam int diastolic_bp,
+                                            @RequestParam int pulse_rate,
+                                            @RequestParam String notes,
                                             @RequestParam boolean need_followup){
         Reading newReading = new Reading();
         newReading.setPatientID(patient_id);

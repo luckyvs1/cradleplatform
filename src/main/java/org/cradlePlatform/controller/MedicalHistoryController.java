@@ -15,7 +15,8 @@ public class MedicalHistoryController {
     private MedicalHistoryRepository medicalHistoryRepository;
 
     @PostMapping(path="/add")
-    public @ResponseBody String addMedicalHistory (@RequestParam int id, @RequestParam String patient_id,
+    public @ResponseBody String addMedicalHistory (@RequestParam int id,
+                                                   @RequestParam String patient_id,
                                                    @RequestParam String med_history_text){
         MedicalHistory newMedicalHistory = new MedicalHistory();
         newMedicalHistory.setPatientID(patient_id);

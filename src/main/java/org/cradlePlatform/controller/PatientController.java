@@ -17,10 +17,14 @@ public class PatientController {
     private PatientRepository patientRepository;
 
     @PostMapping(path="/add")
-    public @ResponseBody String addNewPatient (@RequestParam String id, @RequestParam String village_no,
-                                               @RequestParam String initials, @RequestParam Sex sex,
-                                               @RequestParam int age, @RequestParam boolean pregnant,
-                                               @RequestParam GestationalAgeTimeUnit gestation_age_unit, @RequestParam int gestation_age){
+    public @ResponseBody String addNewPatient (@RequestParam String id,
+                                               @RequestParam String village_no,
+                                               @RequestParam String initials,
+                                               @RequestParam Sex sex,
+                                               @RequestParam int age,
+                                               @RequestParam boolean pregnant,
+                                               @RequestParam GestationalAgeTimeUnit gestation_age_unit,
+                                               @RequestParam int gestation_age){
         Patient newPatient = new Patient();
         newPatient.setId(id);
         newPatient.setVillage_no(village_no);
