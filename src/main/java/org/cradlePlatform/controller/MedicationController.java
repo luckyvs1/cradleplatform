@@ -16,17 +16,17 @@ public class MedicationController {
     private MedicationRepository medicationRepository;
 
     @PostMapping(path="/add")
-    public @ResponseBody String addNewMedication (@RequestParam int drug_history_id,
-                                                  @RequestParam String drug_name,
+    public @ResponseBody String addNewMedication (@RequestParam int drugHistoryId,
+                                                  @RequestParam String drugName,
                                                   @RequestParam String dosage,
-                                                  @RequestParam Date start_date,
-                                                  @RequestParam Date end_date){
+                                                  @RequestParam Date startDate,
+                                                  @RequestParam Date endDate){
         Medication newMedication = new Medication();
-        newMedication.setDrugHistoryID(drug_history_id);
-        newMedication.setDrugName(drug_name);
+        newMedication.setDrugHistoryID(drugHistoryId);
+        newMedication.setDrugName(drugName);
         newMedication.setDosage(dosage);
-        newMedication.setStartDate(start_date);
-        newMedication.setEndDate(end_date);
+        newMedication.setStartDate(startDate);
+        newMedication.setEndDate(endDate);
         medicationRepository.save(newMedication);
         return "Saved Medication";
     }
@@ -39,7 +39,7 @@ public class MedicationController {
 
     @GetMapping(path="/getAll/{id}")
     public @ResponseBody
-    Optional<Medication> getPatientById(@PathVariable(value = "id") String drug_history_id){
-        return medicationRepository.findById(drug_history_id);
+    Optional<Medication> getPatientById(@PathVariable(value = "id") String drugHistoryId){
+        return medicationRepository.findById(drugHistoryId);
     }
 }

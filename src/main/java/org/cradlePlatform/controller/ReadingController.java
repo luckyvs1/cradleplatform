@@ -20,28 +20,28 @@ public class ReadingController {
     private ReadingRepository readingRepository;
 
     @PostMapping(path="/add")
-    public @ResponseBody String addAReading(@RequestParam String reader_id,
-                                            @RequestParam String patient_id,
+    public @ResponseBody String addAReading(@RequestParam String readerId,
+                                            @RequestParam String patientId,
                                             @RequestParam Timestamp timestamp,
                                             @RequestParam ArrayList<String> symptoms,
-                                            @RequestParam String other_symptoms,
-                                            @RequestParam int systolic_bp,
-                                            @RequestParam int diastolic_bp,
-                                            @RequestParam int pulse_rate,
+                                            @RequestParam String otherSymptoms,
+                                            @RequestParam int systolicBp,
+                                            @RequestParam int diastolicBp,
+                                            @RequestParam int pulseRate,
                                             @RequestParam String notes,
-                                            @RequestParam boolean need_followup){
+                                            @RequestParam boolean needFollowup){
         Reading newReading = new Reading();
-        newReading.setPatientID(patient_id);
-        newReading.setReaderID(reader_id);
+        newReading.setPatientID(patientId);
+        newReading.setReaderID(readerId);
         newReading.setTimestamp(timestamp);
-        newReading.setOtherSymptoms(other_symptoms);
-        newReading.setSystolicBloodPressure(systolic_bp);
-        newReading.setDiastolicBloodPressure(diastolic_bp);
+        newReading.setOtherSymptoms(otherSymptoms);
+        newReading.setSystolicBloodPressure(systolicBp);
+        newReading.setDiastolicBloodPressure(diastolicBp);
         newReading.setNotes(notes);
-        newReading.setNeedFollowUp(need_followup);
+        newReading.setNeedFollowUp(needFollowup);
         readingRepository.save(newReading);
 
-        return "Saved";
+        return "Saved Reading";
     }
 
     @GetMapping(path="/getAll")

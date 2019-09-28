@@ -16,14 +16,14 @@ public class ReferralController {
     private ReferralRepository referralRepository;
 
     @PostMapping(path="/add")
-    public @ResponseBody String addAReferral(@RequestParam int referrer_id,
-                                             @RequestParam String reading_id,
+    public @ResponseBody String addAReferral(@RequestParam int referrerId,
+                                             @RequestParam String readingId,
                                              @RequestParam Timestamp timestamp){
         Referral newReferral = new Referral();
-        newReferral.setId(referrer_id);
-        newReferral.setReadingID(reading_id);
+        newReferral.setId(referrerId);
+        newReferral.setReadingID(readingId);
         newReferral.setTimestamp(timestamp);
-        return "Successfully saved";
+        return "Saved Referral";
     }
 
     @GetMapping(path="/getAll")
@@ -33,8 +33,8 @@ public class ReferralController {
 
     @GetMapping(path="/getAll/{id}")
     public @ResponseBody
-    Optional<Referral> getReferralById(@PathVariable(value = "id") String referrer_id){
-        return referralRepository.findById(referrer_id);
+    Optional<Referral> getReferralById(@PathVariable(value = "id") String referrerId){
+        return referralRepository.findById(referrerId);
     }
 }
 

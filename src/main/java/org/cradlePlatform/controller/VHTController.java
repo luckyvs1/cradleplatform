@@ -17,7 +17,7 @@ public class VHTController {
         VHT newVHT = new VHT();
         newVHT.setId(id);
         vhtRepository.save(newVHT);
-        return "Saved";
+        return "Saved VHT";
     }
 
     @GetMapping(path="/all")
