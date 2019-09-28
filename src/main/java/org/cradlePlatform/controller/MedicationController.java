@@ -16,7 +16,7 @@ public class MedicationController {
     private MedicationRepository medicationRepository;
 
     @PostMapping(path="/add")
-    public @ResponseBody String addNewMedication (@RequestParam String drug_history_id, @RequestParam String drug_name,
+    public @ResponseBody String addNewMedication (@RequestParam int drug_history_id, @RequestParam String drug_name,
                                                   @RequestParam String dosage, @RequestParam Date start_date,
                                                   @RequestParam Date end_date){
         Medication newMedication = new Medication();
@@ -35,9 +35,9 @@ public class MedicationController {
         return medicationRepository.findAll();
     }
 
-    @GetMapping(path="/byId")
+    @GetMapping(path="/getAll/{id}")
     public @ResponseBody
-    Optional<Medication> getMedicationById(String patient_id){
-        return medicationRepository.findById(patient_id);
+    Optional<Medication> getPatientById(@PathVariable(value = "id") String drug_history_id){
+        return medicationRepository.findById(drug_history_id);
     }
 }
