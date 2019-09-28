@@ -39,11 +39,6 @@ export default class MenuTabularOnLeft extends React.Component {
                                        active={activeItem === 'patient'}
                                        onClick={this.handleItemClick}
                         >List All Patients</Dropdown.Item>
-                        <Dropdown.Item as={Link} to="/patientDetail"
-                                       name='Patients'
-                                       active={activeItem === 'patient'}
-                                       onClick={this.handleItemClick}
-                        >Find Patient</Dropdown.Item>
                         <Dropdown.Item
                             as={Link} to="/addPatient"
                             name='Patients'

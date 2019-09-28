@@ -27,12 +27,12 @@ class AddPatientFrom extends  React.Component {
                     </Grid.Column>
                     <Grid.Column width={14}>
                         <Grid.Column>
-                            <Form size={'large'} >
+                            <Form size={'small'} >
                                 <Form.Group grouped>
                                     <Form.Field
                                         control={Input}
-                                        label='First name'
-                                        placeholder='First name'
+                                        label='Patient ID'
+                                        placeholder='Patient ID'
                                     />
                                     <Form.Field
                                         control={Input}
@@ -45,11 +45,16 @@ class AddPatientFrom extends  React.Component {
                                         placeholder='Age'
                                     />
                                     <Form.Field
+                                        control={Checkbox}
+                                        label='Pregnant'
+                                        placeholder='Pregnant'
+                                    />
+                                    <Form.Field
                                         control={Input}
                                         label='Gestational Age'
                                         placeholder='Gestational Age'
                                     />
-
+                                    <input type="submit" value="Submit"/>
                                 </Form.Group>
                             </Form>
 
