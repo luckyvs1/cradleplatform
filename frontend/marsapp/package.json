@@ -52,5 +52,6 @@
     "redux-devtools-extension": "^2.13.8",
     "semantic-ui-react": "^0.88.1",
     "validator": "^11.1.0"
-  }
+  },
+  "proxy": "http://localhost:8080"
 }

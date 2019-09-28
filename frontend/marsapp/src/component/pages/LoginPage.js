@@ -18,11 +18,9 @@ import {
 } from 'semantic-ui-react'
 
 class LoginPage extends React.Component {
-    submit = (data) => console.log("update information")
-
-    // this.props.login(data).then(() =>
-    //         this.props.history.push("/dashboard")
-    //     );
+    submit = (data) =>
+        this.props.login(data).then(() => this.props.history.push("/")
+        );
 
     render() {
         return (
