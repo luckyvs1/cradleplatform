@@ -21,7 +21,7 @@ class ListPatient extends React.Component {
             <div className="ui-toolbar">
 
                 <h1>
-                    List All Patients
+                    All Patients
                 </h1>
                 <ListPatientForm></ListPatientForm>
             </div>
