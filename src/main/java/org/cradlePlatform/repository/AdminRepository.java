@@ -1,9 +1,10 @@
 package org.cradlePlatform.repository;
 
-import org.cradlePlatform.model.Reading;
+import org.cradlePlatform.model.Admin;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ReadingRepository extends CrudRepository<Reading, String> {
+public interface AdminRepository extends CrudRepository<Admin, String> {
+
 }
