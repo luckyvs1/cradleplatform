@@ -35,9 +35,9 @@ public class MedicationController {
         return medicationRepository.findAll();
     }
 
-    @GetMapping(path="/byId")
+    @GetMapping(path="/getAll/{id}")
     public @ResponseBody
-    Optional<Medication> getMedicationById(String patient_id){
-        return medicationRepository.findById(patient_id);
+    Optional<Medication> getPatientById(@PathVariable(value = "id") String drug_history_id){
+        return medicationRepository.findById(drug_history_id);
     }
 }

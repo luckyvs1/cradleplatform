@@ -21,7 +21,7 @@ public class VHTController {
     }
 
     @GetMapping(path="/all")
-    public @ResponseBody Iterable<VHT> getAllVHT() {
+    public @ResponseBody Iterable<VHT> getAllVHTs() {
         //This returns a JSON or XML with the users
         return vhtRepository.findAll();
     }

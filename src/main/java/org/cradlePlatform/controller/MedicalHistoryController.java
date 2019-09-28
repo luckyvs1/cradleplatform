@@ -30,10 +30,4 @@ public class MedicalHistoryController {
         //This returns a JSON or XML with the users
         return medicalHistoryRepository.findAll();
     }
-
-    @GetMapping(path="/byId")
-    public @ResponseBody
-    Optional<MedicalHistory> getMedicalHistoryById(String patient_id){
-        return medicalHistoryRepository.findById(patient_id);
-    }
 }
