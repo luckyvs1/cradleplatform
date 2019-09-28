@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Optional;
+
 @Controller
 @RequestMapping(path="/healthworker")
 public class HealthWorkerController {
@@ -24,5 +26,10 @@ public class HealthWorkerController {
     public @ResponseBody Iterable<HealthWorker> getAllHealthWorkers(){
         //This returns a JSON or XML with the users
         return healthWorkerRepository.findAll();
+    }
+    @GetMapping(path="/getAll/{id}")
+    public @ResponseBody
+    Optional<HealthWorker> getPatientById(@PathVariable(value = "id") String health_worker_id){
+        return healthWorkerRepository.findById(health_worker_id);
     }
 }

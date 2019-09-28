@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
+import java.util.Optional;
 
 public class UserController {
     @Autowired
@@ -34,5 +35,11 @@ public class UserController {
     @GetMapping(path="/getAll")
     public @ResponseBody Iterable<User> getAllUser() {
         return userRepository.findAll();
+    }
+
+    @GetMapping(path="/getAll/{id}")
+    public @ResponseBody
+    Optional<User> getUserById(@PathVariable(value = "id") String referrer_id){
+        return userRepository.findById(referrer_id);
     }
 }

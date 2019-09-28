@@ -16,11 +16,16 @@ public class ReferralController {
     private ReferralRepository referralRepository;
 
     @PostMapping(path="/add")
-    public @ResponseBody String addAReferral(@RequestParam String referrer_id,
+    public @ResponseBody String addAReferral(@RequestParam int referrer_id,
                                              @RequestParam String reading_id,
                                              @RequestParam Timestamp timestamp){
+        Referral newReferral = new Referral();
+        newReferral.setId(referrer_id);
+        newReferral.setReadingID(reading_id);
+        newReferral.setTimestamp(timestamp);
         return "Successfully saved";
     }
+
     @GetMapping(path="/getAll")
     public @ResponseBody Iterable<Referral> getAllReferral() {
         return referralRepository.findAll();
