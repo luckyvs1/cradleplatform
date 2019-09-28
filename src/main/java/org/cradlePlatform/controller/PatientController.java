@@ -18,23 +18,23 @@ public class PatientController {
 
     @PostMapping(path="/add")
     public @ResponseBody String addNewPatient (@RequestParam String id,
-                                               @RequestParam String village_no,
+                                               @RequestParam String villageNo,
                                                @RequestParam String initials,
                                                @RequestParam Sex sex,
                                                @RequestParam int age,
                                                @RequestParam boolean pregnant,
-                                               @RequestParam GestationalAgeTimeUnit gestation_age_unit,
+                                               @RequestParam GestationalAgeTimeUnit gestationAgeUnit,
                                                @RequestParam int gestation_age){
         Patient newPatient = new Patient();
         newPatient.setId(id);
-        newPatient.setVillage_no(village_no);
+        newPatient.setVillage_no(villageNo);
         newPatient.setInitials(initials);
         newPatient.setSex(sex);
         newPatient.setAge(age);
         newPatient.setPregnant(pregnant);
-        newPatient.setGestationAgeUnit(gestation_age_unit);
+        newPatient.setGestationAgeUnit(gestationAgeUnit);
         newPatient.setGestationAge(gestation_age);
-        return "Saved";
+        return "Saved Patient";
     }
 
     @GetMapping(path="/all")
@@ -45,7 +45,7 @@ public class PatientController {
 
     @GetMapping(path="/getAll/{id}")
     public @ResponseBody
-    Optional<Patient> getPatientById(@PathVariable(value = "id") String patient_id){
-        return patientRepository.findById(patient_id);
+    Optional<Patient> getPatientById(@PathVariable(value = "id") String patientId){
+        return patientRepository.findById(patientId);
     }
 }

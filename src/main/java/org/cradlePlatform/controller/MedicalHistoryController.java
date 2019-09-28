@@ -16,11 +16,11 @@ public class MedicalHistoryController {
 
     @PostMapping(path="/add")
     public @ResponseBody String addMedicalHistory (@RequestParam int id,
-                                                   @RequestParam String patient_id,
-                                                   @RequestParam String med_history_text){
+                                                   @RequestParam String patientId,
+                                                   @RequestParam String medHistoryText){
         MedicalHistory newMedicalHistory = new MedicalHistory();
-        newMedicalHistory.setPatientID(patient_id);
-        newMedicalHistory.setMedicalHistoryText(med_history_text);
+        newMedicalHistory.setPatientID(patientId);
+        newMedicalHistory.setMedicalHistoryText(medHistoryText);
         newMedicalHistory.setId(id);
         medicalHistoryRepository.save(newMedicalHistory);
         return "Saved Medical History";

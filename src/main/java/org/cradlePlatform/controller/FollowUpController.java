@@ -18,14 +18,14 @@ public class FollowUpController {
     private FollowUpRepository followUpRepository;
 
     @PostMapping(path="/add")
-    public @ResponseBody String addAFollowUp (@RequestParam String patient_id,
+    public @ResponseBody String addAFollowUp (@RequestParam String patientId,
                                               @RequestParam String notes,
                                               @RequestParam boolean required,
                                               @RequestParam String frequency,
                                               @RequestParam String diagnosis,
                                               @RequestParam String treatment){
         FollowUp newFollowUp = new FollowUp();
-        newFollowUp.setPatientID(patient_id);
+        newFollowUp.setPatientID(patientId);
         newFollowUp.setFollowUpNotes(notes);
         newFollowUp.setRequired(required);
         newFollowUp.setFrequency(frequency);

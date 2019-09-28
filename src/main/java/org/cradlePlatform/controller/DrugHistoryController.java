@@ -22,7 +22,7 @@ public class DrugHistoryController {
         newDrugHistory.setPatientId(patientID);
         newDrugHistory.setHistoryText(historyText);
         drugHistoryRepository.save(newDrugHistory);
-        return "Saved";
+        return "Saved Drug History";
     }
 
     @GetMapping(path="/get")
