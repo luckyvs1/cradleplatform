@@ -5,8 +5,8 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
 @Entity
-@Table(name = "Drug_History")
-public class DrugHistory {
+@Table(name = "Medical_History")
+public class MedicalHistory {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
@@ -14,12 +14,13 @@ public class DrugHistory {
     @NotEmpty(message = "ID Can't Be Empty")
     private int id;
 
-    @Column(name="patient_id", nullable=false, unique=false)
+    @Column(name="patient_id", length=32, nullable=false)
     @NotEmpty(message = "Patient ID Can't Be Empty")
     @Size(max = 32)
-    private String patientId;
+    private String patientID;
 
-    private String historyText;
+    @Column(name="history")
+    private String MedicalHistoryText;
 
     public int getId() {
         return id;
@@ -29,19 +30,19 @@ public class DrugHistory {
         this.id = id;
     }
 
-    public String getHistoryText() {
-        return historyText;
+    public String getPatientID() {
+        return patientID;
     }
 
-    public void setHistoryText(String historyText) {
-        this.historyText = historyText;
+    public void setPatientID(String patientID) {
+        this.patientID = patientID;
     }
 
-    public String getPatientId() {
-        return patientId;
+    public String getMedicalHistoryText() {
+        return MedicalHistoryText;
     }
 
-    public void setPatientId(String patientId) {
-        this.patientId = patientId;
+    public void setMedicalHistoryText(String medicalHistoryText) {
+        MedicalHistoryText = medicalHistoryText;
     }
 }
