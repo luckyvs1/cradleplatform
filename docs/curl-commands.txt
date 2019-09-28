@@ -1,3 +1,10 @@
 curl -i -H "Content-Type: application/json" -X GET localhost:8080/hello
 
 curl -i -H "Content-Type: application/json" -X POST -d '{"username": "coolguy", "password": "hunter2" }' localhost:8080/login
+
+# GET Requests for Android Service
+curl -i -H "Content-Type: application/json" -X GET localhost:8080/VHT/1/patients
+curl -i -H "Content-Type: application/json" -X GET localhost:8080/VHT/1/patients/2
+curl -i -H "Content-Type: application/json" -X GET localhost:8080/VHT/1/patients/2/reading
+curl -i -H "Content-Type: application/json" -X GET localhost:8080/VHT/1/patients/2/medication
+curl -i -H "Content-Type: application/json" -X GET localhost:8080/VHT/1/patients/2/followup
