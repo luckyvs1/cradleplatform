@@ -16,7 +16,7 @@ public class MedicationController {
     private MedicationRepository medicationRepository;
 
     @PostMapping(path="/add")
-    public @ResponseBody String addNewMedication (@RequestParam String drug_history_id, @RequestParam String drug_name,
+    public @ResponseBody String addNewMedication (@RequestParam int drug_history_id, @RequestParam String drug_name,
                                                   @RequestParam String dosage, @RequestParam Date start_date,
                                                   @RequestParam Date end_date){
         Medication newMedication = new Medication();
