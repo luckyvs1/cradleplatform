@@ -57,7 +57,6 @@ class AddPatientFrom extends  React.Component {
                                     <input type="submit" value="Submit"/>
                                 </Form.Group>
                             </Form>
-
                         </Grid.Column>
                     </Grid.Column>
                 </Grid>

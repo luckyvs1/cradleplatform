@@ -9,7 +9,7 @@ class AddReadingDetail extends React.Component {
             <div className="ui-toolbar">
 
                 <h1>
-                    add READING HERE PAGE
+                    Add Reading
                 </h1>
                 <AddReadingForm></AddReadingForm>
             </div>
