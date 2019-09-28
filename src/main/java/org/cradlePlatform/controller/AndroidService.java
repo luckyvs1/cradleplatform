@@ -24,12 +24,13 @@ public class AndroidService {
 	@PostMapping(path = "/api/readings", consumes = "application/json")
 	@ResponseStatus(HttpStatus.OK)
 	public void uploadReading(@RequestBody ReadingUploadWrapper reading) {
-		System.out.printf("%s %s %s %s%n", reading.getUsername(), reading.getReading().getPatientId(), reading.getReading().getGestationalAge().getTimeUnit(), reading.getReading().getDate());
+		System.out.printf("%s %s %s %s%n", reading.getUsername(), reading.getReading().get(1).getPatientId(), reading.getReading().get(1).getGestationalAge().getTimeUnit(), reading.getReading().get(1).getDate());
 		if (DBService.verifyUsernamePassword(reading.getUsername(), reading.getPassword())) {
 			// TODO: raise exception if save fails
-			DBService.saveReadingInDb(reading.getReading());
+			DBService.saveReadingInDb(reading.getReading().get(1));
 		}
 	}
+
 
 	/**
 	 * Receive patient, referral, and follow-up data from a VHT's Cradle Android app
@@ -38,7 +39,7 @@ public class AndroidService {
 	@PostMapping(path = "/api/sync", consumes = "application/json")
 	@ResponseStatus(HttpStatus.OK)
 	public void uploadSyncData(@RequestBody SyncDataWrapper data) {
-
+		
 	}
 
     /**
