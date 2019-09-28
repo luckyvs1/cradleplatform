@@ -32,6 +32,12 @@ class ListPatientForm extends  React.Component {
                         <input type="text" className="input" onChange={this.handleChange} placeholder="Search..." />
                         <List selection verticalAlign='middle'>
                             <List.Item>
+                                <List.Content
+                                    as={Link} to="/addPatient">
+                                    <input type="submit" value="New Patient"/>
+                                </List.Content>
+                            </List.Item>
+                            <List.Item>
                                 <Image avatar src='https://react.semantic-ui.com/images/avatar/small/christian.jpg' />
                                 <List.Content
                                     as={Link} to="/patientDetail">
@@ -74,7 +80,6 @@ class ListPatientForm extends  React.Component {
                                     <List.Header>Test 6</List.Header>
                                 </List.Content>
                             </List.Item>
-
                         </List>
 
                     </Grid.Column>
