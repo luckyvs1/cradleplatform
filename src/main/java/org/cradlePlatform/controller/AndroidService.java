@@ -4,14 +4,42 @@
  */
 package org.cradlePlatform.controller;
 
+import org.cradlePlatform.model.ReadingUploadWrapper;
+import org.cradlePlatform.model.SyncDataWrapper;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+
 @RestController
 public class AndroidService {
+
+	/**
+	 * Receive a single reading from a VHT's Cradle Android app.
+	 * @param reading The incoming reading.
+	 */
+	@PostMapping(path = "/api/readings", consumes = "application/json")
+	@ResponseStatus(HttpStatus.OK)
+	public void uploadReading(@RequestBody ReadingUploadWrapper reading) {
+		System.out.printf("%s %s %s %s%n", reading.getUsername(), reading.getReading().getPatientId(), reading.getReading().getGestationalAge().getTimeUnit(), reading.getReading().getDate());
+		if (DBService.verifyUsernamePassword(reading.getUsername(), reading.getPassword())) {
+			// TODO: raise exception if save fails
+			DBService.saveReadingInDb(reading.getReading());
+		}
+	}
+
+	/**
+	 * Receive patient, referral, and follow-up data from a VHT's Cradle Android app
+	 * during a server-app sync process.
+	 */
+	@PostMapping(path = "/api/sync", consumes = "application/json")
+	@ResponseStatus(HttpStatus.OK)
+	public void uploadSyncData(@RequestBody SyncDataWrapper data) {
+
+	}
 
     /**
      * Returns patients associated with a VHT if the vhtId is valid.
