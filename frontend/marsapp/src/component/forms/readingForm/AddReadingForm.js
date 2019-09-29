@@ -1,3 +1,9 @@
+/**
+ * Class: AddReadingForm
+ * Summary:
+ *  Contains the contents and functionality of the AddReading page.
+ */
+
 import React from "react";
 import MenuTabularOnLeft from "../../pages/MainMenu";
 import {

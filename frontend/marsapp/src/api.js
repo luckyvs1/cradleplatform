@@ -1,3 +1,8 @@
+/**
+ * Summary:
+ *  Handles the API calls
+ */
+
 import React, {Component} from 'react';
 import axios from "axios/dist/axios"
 

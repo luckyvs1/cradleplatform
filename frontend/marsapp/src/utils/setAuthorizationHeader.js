@@ -1,3 +1,8 @@
+/**
+ * Summary:
+ *  For handling the different user role permissions
+ */
+
 // import axios from "axios";
 
 export default (token = null) => {

@@ -1,3 +1,9 @@
+/**
+ * Class: CreateReferral
+ * Summary:
+ *  Base file for showing contents of Create Referral page.
+ */
+
 import React from "react";
 import {connect} from "react-redux";
 import CreateReferralForm from "../../forms/CreateReferralForm";

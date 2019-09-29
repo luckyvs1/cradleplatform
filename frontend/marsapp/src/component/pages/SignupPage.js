@@ -1,3 +1,10 @@
+/**
+ * Class: SignupPage
+ * Summary:
+ *  Base file for showing contents of Sign up page.
+ * Note: May remove this as we will want only admins to create users
+ */
+
 import React from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";

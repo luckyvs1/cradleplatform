@@ -1,5 +1,10 @@
-import React from "react";
+/**
+ * Class: ListPatientForm
+ * Summary:
+ *  Contains the contents and functionality of the List of Patients page.
+ */
 
+import React from "react";
 import {
     Button,
     Checkbox,

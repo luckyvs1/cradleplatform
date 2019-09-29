@@ -1,3 +1,9 @@
+/**
+ * Class: AccountForm
+ * Summary:
+ *  Contains the contents and functionality of the Account page.
+ */
+
 import React from "react";
 import MenuTabularOnLeft from "../pages/MainMenu";
 import {Checkbox, Form, Input, Select, Grid, List, TextArea} from "semantic-ui-react";

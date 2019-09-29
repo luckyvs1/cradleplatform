@@ -1,3 +1,9 @@
+/**
+ * Class: CreateReferralForm
+ * Summary:
+ *  Contains the contents and functionality of the Create Referral page.
+ */
+
 import React from "react";
 import MenuTabularOnLeft from "../pages/MainMenu";
 import {
