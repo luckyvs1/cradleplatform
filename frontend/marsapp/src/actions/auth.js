@@ -1,4 +1,4 @@
-import { USER_LOGGED_IN, USER_LOGGED_OUT } from "../types";
+import {USER_LOGGED_IN, USER_LOGGED_OUT} from "../types";
 import api from "../api";
 import setAuthorizationHeader from "../utils/setAuthorizationHeader";
 
@@ -11,25 +11,24 @@ export const userLoggedOut = () => ({
     type: USER_LOGGED_OUT
 });
 
-export const login = credentials => dispatch =>     console.log("update information (login)");
+export const login = credentials => dispatch => {
+    console.log(credentials)
+    // api.user.login(credentials).then(user => dispatch(userLoggedIn(user)))
+    api.user.mockPatients().then(user => dispatch(userLoggedIn(user)))
+};
 
-// api.user.login(credentials).then(user => {
-//         setAuthorizationHeader(user.token);
-//         dispatch(userLoggedIn(user));
+// api.user.login().then(user => {
 //     });
 
-export const logout = () => dispatch => {console.log("update information (signup)");
-    // setAuthorizationHeader();
-    // dispatch(userLoggedOut());
+export const logout = () => dispatch => {
+    console.log("update information (signup)");
 };
 
 export const confirm = token => dispatch => console.log("update information (confirm)");
 
-export const resetPasswordRequest = ({ email }) => () => console.log("update information (reset)");
-    // api.user.resetPasswordRequest(email);
+export const resetPasswordRequest = ({email}) => () => console.log("update information (reset)");
 
 export const validateToken = token => () => console.log("update information (validate)");
-    // api.user.validateToken(token);
 
-export const resetPassword = data => () => console.log("update information (reset)");
-    // api.user.resetPassword(data);
+export const testAPICALL = data => () => console.log("update information (reset)");
+api.user.hello();

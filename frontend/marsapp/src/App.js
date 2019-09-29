@@ -25,6 +25,7 @@ import AllFollowUp from "./component/pages/followUp/AllFollowUp";
 
 
 const App = ({ location, isAuthenticated }) => (
+
     <div className="ui-toolbar">
         {isAuthenticated && <TopNavigation />}
         <Route location={location} path="/" exact component={LoginPage} />

@@ -1,5 +1,7 @@
 import React from "react";
 import {connect} from "react-redux";
+import {testAPICALL} from "../../../actions/auth";
+
 import {
     Button,
     Checkbox,
@@ -14,13 +16,12 @@ import {
 import ListPatientForm from "../../forms/ListPatientForm";
     
 class ListPatient extends React.Component {
-
     render() {
         return (
             <div className="ui-toolbar">
 
                 <h1>
-                    List All Patients
+                    All Patients
                 </h1>
                 <ListPatientForm></ListPatientForm>
             </div>
@@ -28,4 +29,4 @@ class ListPatient extends React.Component {
     }
 }
 
-export default connect(null,)(ListPatient);
+export default connect(null,{testAPICALL})(ListPatient);
