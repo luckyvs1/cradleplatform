@@ -16,7 +16,12 @@ export default class HeaderMenu extends React.Component {
                 <Grid.Column width={5}>
                     <h1>Cradle Platform</h1>
                 </Grid.Column>
-                <Grid.Column width={7}  floated='right'>
+                <Grid.Column width={6}  floated='right'>
+                    <div className="my-btn">
+                        <div className="my-btn-border"></div>
+                        <i className="fas fa-bell btn-bell"></i>
+                    </div>
+
                     <Menu horizontal secondary floated='right'>
                         <Menu.Item
                             as={Link} to="/homePage"
@@ -33,6 +38,7 @@ export default class HeaderMenu extends React.Component {
                         />
                     </Menu>
                 </Grid.Column>
+                <Grid.Column width={1}></Grid.Column>
             </Grid>
 
 

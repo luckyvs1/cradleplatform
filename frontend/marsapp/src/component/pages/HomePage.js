@@ -13,7 +13,7 @@ import "../../App.css"
 import {Grid, Image, List, Menu, Segment} from 'semantic-ui-react'
 import Upload from "./upload/PatientDetail";
 import {Route} from "react-router-dom";
-import { makeStyles } from '@material-ui/core/styles';
+import {makeStyles} from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -53,8 +53,6 @@ class FloatingMenuItem extends React.Component {
         </div>;
     }
 }
-
-
 
 
 function createData(name, calories, fat, carbs, protein) {
@@ -125,82 +123,77 @@ class HomePage extends React.Component {
 
         return (
             <div className="ui-toolbar">
-                <div className="container">
-                    <div className={className}>
-                        {buttons}
+                <div className="ui-toolbar">
+                    <div className="container">
+                        <div className={className}>
+                            {buttons}
+                        </div>
                     </div>
-                </div>
-                <div className="my-btn">
-                    <div className="my-btn-border"></div>
-                    <i className="fas fa-bell btn-bell"></i>
-                </div>
+                    <HeaderMenu></HeaderMenu>
+                    <Grid>
+                        <Grid.Column width={3}>
+                            <MenuTabularOnLeft></MenuTabularOnLeft>
+                        </Grid.Column>
 
-                <HeaderMenu></HeaderMenu>
+                        <Grid.Column stretched width={7}>
+                            <Paper className={useStyles.root}>
+                                <h2 style={useStyles.uiHeader}>New Referrals</h2>
 
-                <Grid>
-
-                    <Grid.Column width={3}>
-                        <MenuTabularOnLeft></MenuTabularOnLeft>
-                    </Grid.Column>
-
-                    <Grid.Column stretched width={7}>
-                        <Paper className={useStyles.root}>
-                            <h2  style={useStyles.uiHeader}>New Referrals</h2>
-
-                            <Table className={useStyles.table}>
-                                <TableHead>
-                                    <TableRow>
-                                        <TableCell>Patient Id</TableCell>
-                                        <TableCell align="right">Patient Name</TableCell>
-                                        <TableCell align="right">Referred By</TableCell>
-                                        <TableCell align="right">Referral Date</TableCell>
-                                    </TableRow>
-                                </TableHead>
-                                <TableBody>
-                                    {rows.map(row => (
-                                        <TableRow key={row.name} component={Link} to={"/referralDetail"}>
-                                            <TableCell component="th" scope="row">
-                                                {row.name}
-                                            </TableCell>
-                                            <TableCell align="right">{row.calories}</TableCell>
-                                            <TableCell align="right">{row.fat}</TableCell>
-                                            <TableCell align="right">{row.carbs}</TableCell>
+                                <Table className={useStyles.table}>
+                                    <TableHead>
+                                        <TableRow>
+                                            <TableCell>Patient Id</TableCell>
+                                            <TableCell align="right">Patient Name</TableCell>
+                                            <TableCell align="right">Referred By</TableCell>
+                                            <TableCell align="right">Referral Date</TableCell>
                                         </TableRow>
-                                    ))}
-                                </TableBody>
-                            </Table>
-                        </Paper>
-                    </Grid.Column>
-                    <Grid.Column stretched width={6}>
-                        <Paper className={useStyles.root}>
-                            <h2 as="ui header" className='ui-header'>Upcoming Follow Up</h2>
-                            <Table className={useStyles.table}>
-                                <TableHead>
-                                    <TableRow>
-                                        <TableCell>Patient Id</TableCell>
-                                        <TableCell align="right">Patient Name</TableCell>
-                                        <TableCell align="right">Location</TableCell>
-                                        <TableCell align="right">Follow-up Date</TableCell>
-                                    </TableRow>
-                                </TableHead>
-                                <TableBody>
-                                    {rows.map(row => (
-                                        <TableRow key={row.name}>
-                                            <TableCell component="th" scope="row">
-                                                {row.name}
-                                            </TableCell>
-                                            <TableCell align="right">{row.calories}</TableCell>
-                                            <TableCell align="right">{row.fat}</TableCell>
-                                            <TableCell align="right">{row.carbs}</TableCell>
+                                    </TableHead>
+                                    <TableBody>
+                                        {rows.map(row => (
+                                            <TableRow key={row.name} component={Link} to={"/referralDetail"}>
+                                                <TableCell component="th" scope="row">
+                                                    {row.name}
+                                                </TableCell>
+                                                <TableCell align="right">{row.calories}</TableCell>
+                                                <TableCell align="right">{row.fat}</TableCell>
+                                                <TableCell align="right">{row.carbs}</TableCell>
+                                            </TableRow>
+                                        ))}
+                                    </TableBody>
+                                </Table>
+                            </Paper>
+                        </Grid.Column>
+                        <Grid.Column stretched width={6}>
+                            <Paper className={useStyles.root}>
+                                <h2 as="ui header" className='ui-header'>Upcoming Follow Up</h2>
+                                <Table className={useStyles.table}>
+                                    <TableHead>
+                                        <TableRow>
+                                            <TableCell>Patient Id</TableCell>
+                                            <TableCell align="right">Patient Name</TableCell>
+                                            <TableCell align="right">Location</TableCell>
+                                            <TableCell align="right">Follow-up Date</TableCell>
                                         </TableRow>
-                                    ))}
-                                </TableBody>
-                            </Table>
-                        </Paper>
+                                    </TableHead>
+                                    <TableBody>
+                                        {rows.map(row => (
+                                            <TableRow key={row.name}>
+                                                <TableCell component="th" scope="row">
+                                                    {row.name}
+                                                </TableCell>
+                                                <TableCell align="right">{row.calories}</TableCell>
+                                                <TableCell align="right">{row.fat}</TableCell>
+                                                <TableCell align="right">{row.carbs}</TableCell>
+                                            </TableRow>
+                                        ))}
+                                    </TableBody>
+                                </Table>
+                            </Paper>
 
 
-                    </Grid.Column>
-                </Grid>
+                        </Grid.Column>
+                    </Grid>
+                </div>
             </div>
 
         );
