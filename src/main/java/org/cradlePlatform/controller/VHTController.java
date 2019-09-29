@@ -12,7 +12,7 @@ public class VHTController {
     @Autowired
     private VHTRepository vhtRepository;
 
-    @PostMapping(path="/addVHT")
+    @PostMapping(path="/vht")
     public @ResponseBody String addNewVHT (@RequestParam String id) {
         VHT newVHT = new VHT();
         newVHT.setId(id);
@@ -20,7 +20,7 @@ public class VHTController {
         return "Saved VHT";
     }
 
-    @GetMapping(path="/allVHTs")
+    @GetMapping(path="/vht")
     public @ResponseBody Iterable<VHT> getAllVHTs() {
         //This returns a JSON or XML with the users
         return vhtRepository.findAll();

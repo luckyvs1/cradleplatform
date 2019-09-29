@@ -9,11 +9,12 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Date;
 import java.util.Optional;
 
+@RestController
 public class UserInfoController {
     @Autowired
     private UserInfoRepository userInfoRepository;
 
-    @PostMapping(path="addUserInfo")
+    @PostMapping(path="userInfo")
     public @ResponseBody String addUserInfo(@RequestParam String id,
                                             @RequestParam String atAStationNo,
                                             @RequestParam String firstName,
@@ -39,12 +40,12 @@ public class UserInfoController {
         return "Saved user Info";
     }
 
-    @GetMapping(path="/getAllUserInfo")
+    @GetMapping(path="/userInfo")
     public @ResponseBody Iterable<UserInfo> getAllUserInfo(){
         return userInfoRepository.findAll();
     }
 
-    @GetMapping(path="/getAllUserInfo/{id}")
+    @GetMapping(path="/userInfo/{id}")
     public @ResponseBody
     Optional<UserInfo> getUserInfoById(@PathVariable(value = "id") String userId){
         return userInfoRepository.findById(userId);

@@ -9,12 +9,11 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Optional;
 
 @Controller
-@RequestMapping(path="/medicalhistory")
 public class MedicalHistoryController {
     @Autowired
     private MedicalHistoryRepository medicalHistoryRepository;
 
-    @PostMapping(path="/addMedHistory")
+    @PostMapping(path="/medHistory")
     public @ResponseBody String addMedicalHistory (@RequestParam int id,
                                                    @RequestParam String patientId,
                                                    @RequestParam String medHistoryText){
@@ -26,7 +25,7 @@ public class MedicalHistoryController {
         return "Saved Medical History";
     }
 
-    @GetMapping(path="/allMedHistory")
+    @GetMapping(path="/medHistory")
     public @ResponseBody Iterable<MedicalHistory> getAllMedicalHistory(){
         //This returns a JSON or XML with the users
         return medicalHistoryRepository.findAll();

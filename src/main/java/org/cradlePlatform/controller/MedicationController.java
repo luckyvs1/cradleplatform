@@ -10,12 +10,11 @@ import java.util.Date;
 import java.util.Optional;
 
 @Controller
-@RequestMapping(path="/medication")
 public class MedicationController {
     @Autowired
     private MedicationRepository medicationRepository;
 
-    @PostMapping(path="/addNewMed")
+    @PostMapping(path="/medication")
     public @ResponseBody String addNewMedication (@RequestParam int drugHistoryId,
                                                   @RequestParam String drugName,
                                                   @RequestParam String dosage,
@@ -31,13 +30,13 @@ public class MedicationController {
         return "Saved Medication";
     }
 
-    @GetMapping(path="/allMeds")
+    @GetMapping(path="/medication")
     public @ResponseBody Iterable<Medication> getAllMedication(){
         //This returns a JSON or XML with the medication
         return medicationRepository.findAll();
     }
 
-    @GetMapping(path="/getAll/{id}")
+    @GetMapping(path="/medication/{id}")
     public @ResponseBody
     Optional<Medication> getPatientById(@PathVariable(value = "id") String drugHistoryId){
         return medicationRepository.findById(drugHistoryId);
