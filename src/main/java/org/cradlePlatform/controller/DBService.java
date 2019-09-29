@@ -37,4 +37,9 @@ class DBService {
 		// TODO: implement db query, raise exception if fail
 		return true;
 	}
+
+	public static boolean saveReferralInDb(Referral referral) {
+		// TODO: implement db query, raise exception if fail
+		return true;
+	}
 }

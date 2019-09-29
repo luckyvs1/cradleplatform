@@ -5,6 +5,7 @@
 package org.cradlePlatform.controller;
 
 import org.cradlePlatform.model.ReadingUploadWrapper;
+import org.cradlePlatform.model.Referral;
 import org.cradlePlatform.model.SyncDataWrapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -24,20 +25,23 @@ public class AndroidService {
 	@PostMapping(path = "/api/readings", consumes = "application/json")
 	@ResponseStatus(HttpStatus.OK)
 	public void uploadReading(@RequestBody ReadingUploadWrapper reading) {
-		System.out.printf("%s %s %s %s%n", reading.getUsername(), reading.getReading().getPatientId(), reading.getReading().getGestationalAge().getTimeUnit(), reading.getReading().getDate());
+		System.out.printf("%s %s %s %s%n", reading.getUsername(), reading.getReading().get(1).getPatientId(), reading.getReading().get(1).getGestationalAge().getTimeUnit(), reading.getReading().get(1).getDateTime());
 		if (DBService.verifyUsernamePassword(reading.getUsername(), reading.getPassword())) {
 			// TODO: raise exception if save fails
-			DBService.saveReadingInDb(reading.getReading());
+			DBService.saveReadingInDb(reading.getReading().get(1));
 		}
 	}
 
+
 	/**
-	 * Receive patient, referral, and follow-up data from a VHT's Cradle Android app
-	 * during a server-app sync process.
+	 * Receive referral from a VHT's Cradle Android app.
 	 */
-	@PostMapping(path = "/api/sync", consumes = "application/json")
+	@PostMapping(path = "/api/referrals", consumes = "application/json")
 	@ResponseStatus(HttpStatus.OK)
-	public void uploadSyncData(@RequestBody SyncDataWrapper data) {
+	public void uploadReferral(@RequestBody Referral referral) {
+		if (DBService.verifyUsernamePassword(referral.getUsername(), referral.getPassword())) {
+			DBService.saveReferralInDb(referral);
+		}
 
 	}
 

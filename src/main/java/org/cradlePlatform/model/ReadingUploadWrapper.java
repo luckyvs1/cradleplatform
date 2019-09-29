@@ -1,18 +1,21 @@
 package org.cradlePlatform.model;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 public class ReadingUploadWrapper {
-	Reading reading;
+	ArrayList<Reading> readings;
 	String username;
 	String password;
 
-	public ReadingUploadWrapper(Reading reading, String username, String password) {
+	public ReadingUploadWrapper(Reading[] readings, String username, String password) {
 		this.username = username;
 		this.password = password;
-		this.reading = reading;
+		this.readings = new ArrayList<Reading>(Arrays.asList(readings));
 	}
 
-	public Reading getReading() {
-		return reading;
+	public ArrayList<Reading> getReading() {
+		return readings;
 	}
 
 	public String getUsername() {

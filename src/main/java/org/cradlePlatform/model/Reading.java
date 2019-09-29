@@ -3,7 +3,6 @@
  */
 package org.cradlePlatform.model;
 
-import java.sql.Date;
 
 public class Reading {
 	public enum Sex {MALE, FEMALE, OTHER}
@@ -15,7 +14,7 @@ public class Reading {
 	GestationalAge gestationalAge;
 	Sex sex;
 	boolean isPregnant;
-	Date date;
+	String dateTime; // TODO: figure out if we can go directly to some date/time format instead of String
 	String symptoms;
 	int systolic;  // Blood pressure, top number
 	int diastolic;  // Blood pressure, bottom number
@@ -32,7 +31,7 @@ public class Reading {
 	               GestationalAge gestationalAge,
 	               Sex sex,
 	               boolean isPregnant,
-	               Date date,
+	               String dateTime,
 	               String symptoms,
 	               int systolic,
 	               int diastolic,
@@ -44,7 +43,7 @@ public class Reading {
 		this.gestationalAge = gestationalAge;
 		this.sex = sex;
 		this.isPregnant = isPregnant;
-		this.date = date;
+		this.dateTime = dateTime;
 		this.symptoms = symptoms;
 		this.systolic = systolic;
 		this.diastolic = diastolic;
@@ -76,8 +75,8 @@ public class Reading {
 		return isPregnant;
 	}
 
-	public Date getDate() {
-		return date;
+	public String getDateTime() {
+		return dateTime;
 	}
 
 	public String getSymptoms() {
