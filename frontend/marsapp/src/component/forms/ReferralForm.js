@@ -21,7 +21,7 @@ import {
     Dropdown,
     Grid
 } from 'semantic-ui-react'
-
+import {Link} from "react-router-dom";
 
 function createData(name, calories, fat, carbs, protein) {
     return {name, calories, fat, carbs, protein};
@@ -146,6 +146,11 @@ class ReferralForm extends React.Component {
                                                 options={friendOptions}
                                             />
                                         </Form.Field>
+                                        <Form.Field
+                                            as={Link} to="/createReferral">
+                                            <input type="submit" value="New Referral" />
+                                        </Form.Field>
+
                                     </Form.Group>
                                 </Form>
                         </Grid.Column>
@@ -163,8 +168,8 @@ class ReferralForm extends React.Component {
                                         </TableHead>
                                         <TableBody>
                                             {rows.map(row => (
-                                                <TableRow key={row.name}>
-                                                    <TableCell component="th" scope="row">
+                                                <TableRow key={row.name} component={Link} to={"/referralDetail"}>
+                                                    <TableCell component="th" scope="row" >
                                                         {row.name}
                                                     </TableCell>
                                                     <TableCell align="right">{row.calories}</TableCell>
