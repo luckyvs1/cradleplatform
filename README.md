@@ -18,6 +18,24 @@ performance and metrics.
 This project uses a combination of Spring Boot, MySQL, and React.
 It will be able to communicate with the current Cradle Capture App in order to sync information between the mobile and web application. 
 
+### Directory Structure
+
+```
+cradleplatform
+- docs (Documentation and useful scripts and tools for development)
+- frontend (Front-end React code to display the UI)
+- gradle/wrapper (Gradle files)
+- backend (Back-end files with server code)
+  - src
+    - main
+      - java/org/cradlePlatform/ (Java source files)
+        - controller (Controller classes containing functionality and business logic)
+        - model (Data classes representing entities and information in the system)
+      - resources (Resource files; sql files)
+    - test (Unit and integration test files)
+  
+```
+
 ## Running with Docker
 
 ### --- Database Server
