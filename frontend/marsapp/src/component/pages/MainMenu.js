@@ -63,14 +63,21 @@ export default class MenuTabularOnLeft extends React.Component {
                     name='Account'
                     active={activeItem === 'account'}
                     onClick={this.handleItemClick}
-                />
+                >
+                    <Icon name="grid folder open"/>
+                    Account
+                </Menu.Item>
                 <Menu.Item
                     as={Link} to="/listUser"
                     name='Users'
                     active={activeItem === 'user'}
                     onClick={this.handleItemClick}
-                />
+                >
+                    <Icon name='grid user md'/>
+                    Users
+                </Menu.Item>
             </Menu>
 
-        )}
+        )
+    }
 }

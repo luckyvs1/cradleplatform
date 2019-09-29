@@ -148,9 +148,9 @@ class ReferralForm extends React.Component {
                                         </Form.Field>
                                         <Form.Field
                                             as={Link} to="/createReferral">
+                                            <label><br/></label>
                                             <input type="submit" value="New Referral" />
                                         </Form.Field>
-
                                     </Form.Group>
                                 </Form>
                         </Grid.Column>
