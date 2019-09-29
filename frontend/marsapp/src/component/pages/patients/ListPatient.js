@@ -20,9 +20,7 @@ class ListPatient extends React.Component {
         return (
             <div className="ui-toolbar">
 
-                <h1>
-                    All Patients
-                </h1>
+
                 <ListPatientForm></ListPatientForm>
             </div>
         );

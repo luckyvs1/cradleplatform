@@ -11,9 +11,11 @@ import {
     List,
     Grid,
     Image,
+    Icon,
 } from 'semantic-ui-react'
 import {Link} from "react-router-dom";
 import MenuTabularOnLeft from "../pages/MainMenu";
+import HeaderMenu from "../pages/HeaderMenu";
 
 class ListPatientForm extends  React.Component {
     // funcitons
@@ -24,19 +26,26 @@ class ListPatientForm extends  React.Component {
     render() {
         return (
             <div className="ui-toolbar">
+                <HeaderMenu></HeaderMenu>
                 <Grid>
                     <Grid.Column width={3}>
                         <MenuTabularOnLeft></MenuTabularOnLeft>
                     </Grid.Column>
                     <Grid.Column width={13}>
-                        <input type="text" className="input" onChange={this.handleChange} placeholder="Search..." />
+                        <h3>
+                            All Patients
+                        </h3>
+                        <Grid.Row>
+                            <Grid.Column floated='left'>
+                                <Button icon labelPosition='left'as={Link} to="/patientDetail" >
+                                    <Icon name='add circle' /> New Patient
+                                </Button>
+                            </Grid.Column>
+                            <Grid.Column floated='right'>
+                                <input type="text" className="input" onChange={this.handleChange} placeholder="Search..." />
+                            </Grid.Column>
+                        </Grid.Row>
                         <List selection verticalAlign='middle'>
-                            <List.Item>
-                                <List.Content
-                                    as={Link} to="/addPatient">
-                                    <input type="submit" value="New Patient"/>
-                                </List.Content>
-                            </List.Item>
                             <List.Item>
                                 <Image avatar src='https://react.semantic-ui.com/images/avatar/small/christian.jpg' />
                                 <List.Content

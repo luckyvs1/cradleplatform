@@ -543,8 +543,8 @@ ui-header {
 .my-btn {
     height: 60px;
     width: 60px;
-    top: 15%;
-    left: 95%;
+    top: 13%;
+    left: 57%;
     box-shadow: -1px 2px 10px #999;
     background: #ef7575;
     animation-name: col;
