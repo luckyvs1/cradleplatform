@@ -11,7 +11,7 @@ export default class MenuTabularOnLeft extends React.Component {
         const {activeItem} = this.state
 
         return (
-            <Menu fluid vertical tabular>
+            <Menu fluid vertical tabular size={'massive'}>
                 <Menu.Item
                     as={Link} to="/homePage"
                     name='Dashboard'
