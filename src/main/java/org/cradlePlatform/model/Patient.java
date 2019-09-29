@@ -54,7 +54,7 @@ public class Patient {
         this.id = id;
     }
 
-    public String getVillage_no() {
+    public String getVillageNo() {
         return village_no;
     }
 
