@@ -32,4 +32,9 @@ class DBService {
 		User user = new User(username, role);
 		return user;
 	}
+
+	public static boolean saveReadingInDb(Reading reading) {
+		// TODO: implement db query, raise exception if fail
+		return true;
+	}
 }
