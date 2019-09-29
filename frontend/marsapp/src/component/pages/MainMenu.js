@@ -1,14 +1,14 @@
-import {Menu ,Icon, Dropdown} from "semantic-ui-react";
+import {Menu, Icon, Dropdown} from "semantic-ui-react";
 import {Link} from "react-router-dom";
 import React from "react";
 
 export default class MenuTabularOnLeft extends React.Component {
-    state = { activeItem: 'bio' }
+    state = {activeItem: 'bio'}
 
-    handleItemClick = (e, { name }) => this.setState({ activeItem: name })
+    handleItemClick = (e, {name}) => this.setState({activeItem: name})
 
     render() {
-        const { activeItem } = this.state
+        const {activeItem} = this.state
 
         return (
             <Menu fluid vertical tabular>
@@ -17,21 +17,26 @@ export default class MenuTabularOnLeft extends React.Component {
                     name='Dashboard'
                     className=""
                     active={activeItem === 'upload'}
-                    onClick={this.handleItemClick}
-               />
+                    onClick={this.handleItemClick}>
+                    <Icon name='grid dashboard'/>
+                    Dashboard
+                </Menu.Item>
                 <Menu.Item
                     as={Link} to="/allFollowUp"
                     name='Follow Ups'
                     active={activeItem === 'upload'}
-                    onClick={this.handleItemClick}
-
-                />
+                    onClick={this.handleItemClick}>
+                    <Icon name='grid searchengin'/>
+                    Follow Ups
+                </Menu.Item>
                 <Menu.Item
                     as={Link} to="/referral"
                     name='Referral'
                     active={activeItem === 'referral'}
-                    onClick={this.handleItemClick}
-                />
+                    onClick={this.handleItemClick}>
+                    <Icon name='grid redo'/>
+                    Referral
+                </Menu.Item>
                 <Dropdown item text='Patients'>
                     <Dropdown.Menu>
                         <Dropdown.Item as={Link} to="/listPatient"
