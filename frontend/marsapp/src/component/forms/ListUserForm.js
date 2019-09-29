@@ -27,10 +27,10 @@ class ListUserForm extends  React.Component {
             <div className="ui-toolbar">
                 <HeaderMenu></HeaderMenu>
                 <Grid>
-                    <Grid.Column width={2}>
+                    <Grid.Column width={3}>
                         <MenuTabularOnLeft></MenuTabularOnLeft>
                     </Grid.Column>
-                    <Grid.Column width={12}>
+                    <Grid.Column width={13}>
                         <h3>
                             All Users
                         </h3>

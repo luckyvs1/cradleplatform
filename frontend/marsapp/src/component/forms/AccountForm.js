@@ -10,10 +10,10 @@ class AccountForm extends React.Component {
             <div className="ui-toolbar">
                 <HeaderMenu></HeaderMenu>
                 <Grid>
-                    <Grid.Column width={2}>
+                    <Grid.Column width={3}>
                         <MenuTabularOnLeft/>
                     </Grid.Column>
-                    <Grid.Column width={12}>
+                    <Grid.Column width={13}>
                         <h3>
                             Your Account
                         </h3>

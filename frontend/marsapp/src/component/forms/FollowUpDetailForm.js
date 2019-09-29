@@ -37,10 +37,10 @@ class FollowUpDetailForm extends  React.Component {
             <div className="ui-toolbar">
                 <HeaderMenu></HeaderMenu>
                 <Grid>
-                    <Grid.Column width={2}>
+                    <Grid.Column width={3}>
                         <MenuTabularOnLeft/>
                     </Grid.Column>
-                    <Grid.Column width={10}>
+                    <Grid.Column width={11}>
                         <h3>
                             Follow Up Details
                         </h3>
