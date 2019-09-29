@@ -9,7 +9,7 @@ class CreateReferral extends React.Component {
             <div className="ui-toolbar">
 
                 <h1>
-                    PLEASE HELP
+                    Create Referral
                 </h1>
                 <CreateReferralForm></CreateReferralForm>
             </div>

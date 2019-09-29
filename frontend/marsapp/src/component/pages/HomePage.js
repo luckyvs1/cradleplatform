@@ -156,7 +156,7 @@ class HomePage extends React.Component {
                                 </TableHead>
                                 <TableBody>
                                     {rows.map(row => (
-                                        <TableRow key={row.name}>
+                                        <TableRow key={row.name} component={Link} to={"/referralDetail"}>
                                             <TableCell component="th" scope="row">
                                                 {row.name}
                                             </TableCell>
