@@ -22,6 +22,7 @@ import {
     Grid
 } from 'semantic-ui-react'
 import {Link} from "react-router-dom";
+import HeaderMenu from "../pages/HeaderMenu";
 
 function createData(name, calories, fat, carbs, protein) {
     return {name, calories, fat, carbs, protein};
@@ -110,53 +111,55 @@ class ReferralForm extends React.Component {
 
         return (
             <div className="ui-toolbar">
-
+                <HeaderMenu></HeaderMenu>
                 <Grid>
                     <Grid.Column width={3}>
                         <MenuTabularOnLeft></MenuTabularOnLeft>
                     </Grid.Column>
                     <Grid.Column  width={13}>
                         <Grid.Column  width={9}>
-                                <Form>
-                                    <Form.Group  inlined width={'equal'}>
-                                        <Form.Field>
-                                            <label>Assign To:</label>
-                                            <Dropdown
-                                                placeholder='Select Assignee'
-                                                fluid
-                                                selection
-                                                options={friendOptions}
-                                            />
-                                        </Form.Field>
-                                        <Form.Field>
-                                            <label>Status:</label>
-                                            <Dropdown
-                                                placeholder='Select Status'
-                                                fluid
-                                                selection
-                                                options={friendOptions}
-                                            />
-                                        </Form.Field>
-                                        <Form.Field>
-                                            <label>Sort By:</label>
-                                            <Dropdown
-                                                placeholder='Select Sort By'
-                                                fluid
-                                                selection
-                                                options={friendOptions}
-                                            />
-                                        </Form.Field>
-                                        <Form.Field
-                                            as={Link} to="/createReferral">
-                                            <label><br/></label>
-                                            <input type="submit" value="New Referral" />
-                                        </Form.Field>
-                                    </Form.Group>
-                                </Form>
+                            <h3>
+                                Referral
+                            </h3>
+                            <Form>
+                                <Form.Group  inlined width={'equal'}>
+                                    <Form.Field>
+                                        <label>Assign To:</label>
+                                        <Dropdown
+                                            placeholder='Select Assignee'
+                                            fluid
+                                            selection
+                                            options={friendOptions}
+                                        />
+                                    </Form.Field>
+                                    <Form.Field>
+                                        <label>Status:</label>
+                                        <Dropdown
+                                            placeholder='Select Status'
+                                            fluid
+                                            selection
+                                            options={friendOptions}
+                                        />
+                                    </Form.Field>
+                                    <Form.Field>
+                                        <label>Sort By:</label>
+                                        <Dropdown
+                                            placeholder='Select Sort By'
+                                            fluid
+                                            selection
+                                            options={friendOptions}
+                                        />
+                                    </Form.Field>
+                                    <Form.Field
+                                        as={Link} to="/createReferral">
+                                        <label><br/></label>
+                                        <input type="submit" value="New Referral" />
+                                    </Form.Field>
+                                </Form.Group>
+                            </Form>
                         </Grid.Column>
                         <Grid.Column>
                                 <Paper className={useStyles.root}>
-                                    <h2 style={useStyles.uiHeader}> Referrals List</h2>
                                     <Table className={useStyles.table}>
                                         <TableHead>
                                             <TableRow>

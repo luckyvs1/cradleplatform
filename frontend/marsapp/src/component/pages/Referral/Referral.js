@@ -12,9 +12,7 @@ class Referral extends React.Component {
 
             <div className="ui-toolbar">
 
-                <h1>
-                    Referral
-                </h1>
+
                 <ReferralForm></ReferralForm>
             </div>
         )

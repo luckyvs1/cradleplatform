@@ -8,9 +8,7 @@ class FollowUpDetail extends React.Component {
         return (
             <div className="ui-toolbar">
 
-                <h1>
-                    Follow Up Details
-                </h1>
+
                 <FollowUpDetailForm></FollowUpDetailForm>
             </div>
         );

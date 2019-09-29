@@ -8,9 +8,7 @@ class Help extends React.Component {
         return (
             <div className="ui-toolbar">
 
-                <h1>
-                    Learning Materials
-                </h1>
+
                 <HelpForm></HelpForm>
             </div>
         );

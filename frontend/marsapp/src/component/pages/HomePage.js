@@ -21,6 +21,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import MenuTabularOnLeft from "./MainMenu";
+import HeaderMenu from "./HeaderMenu";
 
 
 class FloatingMenuItem extends React.Component {
@@ -134,7 +135,8 @@ class HomePage extends React.Component {
                     <i className="fas fa-bell btn-bell"></i>
                 </div>
 
-                <h1>Cradle App</h1>
+                <HeaderMenu></HeaderMenu>
+
                 <Grid>
 
                     <Grid.Column width={3}>

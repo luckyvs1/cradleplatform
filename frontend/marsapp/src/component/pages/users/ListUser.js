@@ -19,9 +19,7 @@ class ListUser extends React.Component {
     render() {
         return (
             <div className="ui-toolbar">
-                <h1>
-                    All Users
-                </h1>
+
                 <ListUserForm></ListUserForm>
             </div>
         );

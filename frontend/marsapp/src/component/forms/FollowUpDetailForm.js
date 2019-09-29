@@ -6,6 +6,7 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import TableCell from "@material-ui/core/TableCell";
 import TableBody from "@material-ui/core/TableBody";
+import HeaderMenu from "../pages/HeaderMenu";
 
 class FollowUpDetailForm extends  React.Component {
     // funcitons
@@ -34,11 +35,15 @@ class FollowUpDetailForm extends  React.Component {
 
         return (
             <div className="ui-toolbar">
+                <HeaderMenu></HeaderMenu>
                 <Grid>
                     <Grid.Column width={2}>
                         <MenuTabularOnLeft/>
                     </Grid.Column>
                     <Grid.Column width={10}>
+                        <h3>
+                            Follow Up Details
+                        </h3>
                         <Table>
                             <TableRow>
                                 <TableCell>

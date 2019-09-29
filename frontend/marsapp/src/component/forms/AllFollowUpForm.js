@@ -20,6 +20,7 @@ import {
 import {makeStyles} from "@material-ui/core";
 import MenuTabularOnLeft from "../pages/MainMenu";
 import {Link} from "react-router-dom";
+import HeaderMenu from "../pages/HeaderMenu";
 
 
 
@@ -65,11 +66,13 @@ class AllFollowUpForm extends  React.Component {
 
         return (
             <div className="ui-toolbar">
+                <HeaderMenu></HeaderMenu>
                <Grid>
                    <Grid.Column width={3}>
                        <MenuTabularOnLeft></MenuTabularOnLeft>
                    </Grid.Column>
                    <Grid.Column width={13}>
+                       <h3>All Follow Ups</h3>
                        <Grid.Column stretched width={5}>
                            <Paper className={useStyles.root}>
                                <Table className={useStyles.table}>
