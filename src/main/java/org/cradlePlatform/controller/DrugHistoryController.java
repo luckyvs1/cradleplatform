@@ -5,7 +5,6 @@ import org.cradlePlatform.repository.DrugHistoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.Optional;
 
 @Controller
@@ -28,10 +27,6 @@ public class DrugHistoryController {
     public @ResponseBody Iterable<DrugHistory> getAllDrugHistory(){
         //this returns a JSON or XML with the drugHistory
         return drugHistoryRepository.findAll();
-    }
-    @GetMapping(path="/test")
-    public @ResponseBody String getTest(){
-        return "Hello World!";
     }
 
     @GetMapping(path="/drugHistory/{id}")

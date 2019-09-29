@@ -38,7 +38,7 @@ public class PatientController {
 
     @GetMapping(path="/patients")
     public @ResponseBody Iterable<Patient> getAllPatients(){
-        //This returns a JSON or XML with the patients
+        //this returns a JSON or XML with the patients
         return patientRepository.findAll();
     }
 

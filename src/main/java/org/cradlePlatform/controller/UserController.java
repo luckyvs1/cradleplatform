@@ -4,34 +4,23 @@
  */
 package org.cradlePlatform.controller;
 
-import org.cradlePlatform.model.RoleType;
 import org.cradlePlatform.model.User;
 import org.cradlePlatform.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Date;
 import java.util.Optional;
 
-@RestController
+@Controller
 public class UserController {
     @Autowired
     private UserRepository userRepository;
 
     @PostMapping(path="/user")
-    public @ResponseBody String addAUser(@RequestParam String atAStationNo,
-                                         @RequestParam String firstName,
-                                         @RequestParam String lastName,
-                                         @RequestParam Date DOB,
-                                         @RequestParam String country,
-                                         @RequestParam String phone,
-                                         @RequestParam String email,
-                                         @RequestParam RoleType role,
-                                         @RequestParam String username,
-                                         @RequestParam String password){
+    public @ResponseBody String addUser(@RequestParam String username,
+                                        @RequestParam String password){
         User newUser = new User();
         newUser.setUsername(username);
-        newUser.setId(atAStationNo);
         newUser.setPassword(password);
 
         userRepository.save(newUser);
@@ -39,8 +28,14 @@ public class UserController {
         return "Saved New User";
     }
 
-    @GetMapping(path="/user")
+    @GetMapping(path="/user/all")
     public @ResponseBody Iterable<User> getAllUser() {
+
+        User newUser = new User();
+        newUser.setUsername("test");
+        newUser.setPassword("test123");
+        userRepository.save(newUser);
+
         return userRepository.findAll();
     }
 
