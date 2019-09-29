@@ -12,7 +12,9 @@ import {
     Image,
     Grid,
 } from 'semantic-ui-react'
-class AddPatientFrom extends  React.Component {
+import HeaderMenu from "../pages/HeaderMenu";
+
+class AddPatientFrom extends React.Component {
     // funcitons
 //    states
     //submit
@@ -21,13 +23,17 @@ class AddPatientFrom extends  React.Component {
     render() {
         return (
             <div className="ui-toolbar">
+                <HeaderMenu></HeaderMenu>
                 <Grid>
-                    <Grid.Column width={2}>
+                    <Grid.Column width={3}>
                         <MenuTabularOnLeft></MenuTabularOnLeft>
                     </Grid.Column>
-                    <Grid.Column width={14}>
+                    <Grid.Column width={13}>
+                        <h3>
+                            Add Patient
+                        </h3>
                         <Grid.Column>
-                            <Form size={'small'} >
+                            <Form size={'small'}>
                                 <Form.Group grouped>
                                     <Form.Field
                                         control={Input}

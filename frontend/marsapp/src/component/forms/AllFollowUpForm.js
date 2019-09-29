@@ -19,7 +19,8 @@ import {
 } from 'semantic-ui-react'
 import {makeStyles} from "@material-ui/core";
 import MenuTabularOnLeft from "../pages/MainMenu";
-
+import {Link} from "react-router-dom";
+import HeaderMenu from "../pages/HeaderMenu";
 
 
 
@@ -27,11 +28,11 @@ function createData(name, calories, fat, carbs, protein) {
     return { name, calories, fat, carbs, protein };
 }
 const rows = [
-    createData('111555666', 'Alex', 'thomas', new Date().toDateString()),
-    createData('222555444', 'Bob', 'theo', new Date().toDateString()),
-    createData('111222333', 'fanny', 'theresha', new Date().toDateString()),
-    createData('111222888', 'hanny', 'Brian', new Date().toDateString()),
-    createData('444555666', 'janny', 'Katy', new Date().toDateString()),
+    createData('111555666', 'Alex', 'thomas', 'Once a week', 'Ongoing'),
+    createData('222555444', 'Bob', 'theo', 'Once a month', 'Ongoing'),
+    createData('111222333', 'fanny', 'theresha', 'Once a week', 'Ongoing'),
+    createData('111222888', 'hanny', 'Brian', 'Once a week', 'Ended'),
+    createData('444555666', 'janny', 'Katy', 'Once a week', 'Ended'),
 ];
 
 
@@ -65,31 +66,34 @@ class AllFollowUpForm extends  React.Component {
 
         return (
             <div className="ui-toolbar">
+                <HeaderMenu></HeaderMenu>
                <Grid>
-                   <Grid.Column width={2}>
+                   <Grid.Column width={3}>
                        <MenuTabularOnLeft></MenuTabularOnLeft>
                    </Grid.Column>
-                   <Grid.Column width={14}>
-                       <Grid.Column stretched width={6}>
+                   <Grid.Column width={13}>
+                       <h3>All Follow Ups</h3>
+                       <Grid.Column stretched width={5}>
                            <Paper className={useStyles.root}>
-                               <h2 as="ui header" className='ui-header'>Upcoming Follow Up</h2>
                                <Table className={useStyles.table}>
                                    <TableHead>
                                        <TableRow>
-                                           <TableCell>Patient Id</TableCell>
+                                           <TableCell>Patient ID</TableCell>
                                            <TableCell align="right">Patient Name</TableCell>
-                                           <TableCell align="right">Referred By</TableCell>
-                                           <TableCell align="right">Referral Date</TableCell>
+                                           <TableCell align="right">Location</TableCell>
+                                           <TableCell align="right">Status</TableCell>
+                                           <TableCell align="right">Frequency</TableCell>
                                        </TableRow>
                                    </TableHead>
                                    <TableBody>
                                        {rows.map(row => (
-                                           <TableRow key={row.name}>
+                                           <TableRow key={row.name} component={Link} to={"/followUpDetail"}>
                                                <TableCell component="th" scope="row">
                                                    {row.name}
                                                </TableCell>
                                                <TableCell align="right">{row.calories}</TableCell>
                                                <TableCell align="right">{row.fat}</TableCell>
+                                               <TableCell align="right">{row.protein}</TableCell>
                                                <TableCell align="right">{row.carbs}</TableCell>
                                            </TableRow>
                                        ))}

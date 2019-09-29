@@ -14,10 +14,10 @@ class ReadingForm extends  React.Component {
             <div className="ui-toolbar">
                 JUST FOR TESTING FOMR
                 <Grid>
-                    <Grid.Column width={2}>
+                    <Grid.Column width={3}>
                         <MenuTabularOnLeft></MenuTabularOnLeft>
                     </Grid.Column>
-                    <Grid.Column width={14}>
+                    <Grid.Column width={13}>
                         <Grid.Column>
                             <Form size={'small'} >
                                 <Form.Group grouped>

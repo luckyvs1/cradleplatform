@@ -8,9 +8,6 @@ class Account extends React.Component {
         return (
             <div className="ui-toolbar">
 
-                <h1>
-                    PLEASE HELP
-                </h1>
                 <AccountForm></AccountForm>
             </div>
         );

@@ -10,11 +10,7 @@ class PatientDetail extends React.Component {
     render() {
         return (
             <div className="ui-toolbar">
-
-                <h1 className="ui header">Patient Detail</h1>
-
                 <PatientDetailForm/>
-
             </div>
         )
     }

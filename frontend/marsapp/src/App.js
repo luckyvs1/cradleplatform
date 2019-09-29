@@ -22,8 +22,9 @@ import CreateReferral from "./component/pages/Referral/CreateReferral";
 import Readings from "./component/pages/readings/Readings";
 import AddReadingDetail from "./component/pages/readings/addReadings/AddReadingDetail";
 import AddPatient from "./component/pages/patients/AddPatient";
-import Account from "./component/pages/patients/Account";
+import Account from "./component/pages/users/Account";
 import AllFollowUp from "./component/pages/followUp/AllFollowUp";
+import FollowUpDetail from "./component/pages/followUp/FollowUpDetail";
 import ListUser from "./component/pages/users/ListUser"
 
 const App = ({ location, isAuthenticated }) => (
@@ -98,6 +99,12 @@ const App = ({ location, isAuthenticated }) => (
             exact
             component={AllFollowUp}
         />
+            <GuestRoute
+                location={location}
+                path="/followUpDetail"
+                exact
+                component={FollowUpDetail}
+            />
         <GuestRoute
             location={location}
             path="/account"

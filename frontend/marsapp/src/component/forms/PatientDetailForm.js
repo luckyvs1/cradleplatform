@@ -4,6 +4,7 @@ import Tab from "react-bootstrap/Tab";
 import {Checkbox, Form, Input, Select, Grid, List, TextArea} from "semantic-ui-react";
 import MenuTabularOnLeft from "../pages/MainMenu";
 import {Link} from "react-router-dom";
+import HeaderMenu from "../pages/HeaderMenu";
 
 /**
  * This class handles how the Patient Detail page will be displayed.
@@ -38,11 +39,13 @@ export default class PatientDetailForm extends React.Component {
     render() {
         return (
             <div className="ui-toolbar">
+                <HeaderMenu></HeaderMenu>
                 <Grid>
-                    <Grid.Column width={2}>
+                    <Grid.Column width={3}>
                         <MenuTabularOnLeft/>
                     </Grid.Column>
                     <Grid.Column width={12}>
+                        <h3>Patient Detail</h3>
                         <div>
                             <p><b>Patient ID:</b> 0123456</p>
                             <p><b>Initials:</b> AS</p>
