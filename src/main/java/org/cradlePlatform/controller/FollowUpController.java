@@ -12,12 +12,12 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Optional;
 
 @RestController
-@RequestMapping(path="/followup")
+
 public class FollowUpController {
     @Autowired
     private FollowUpRepository followUpRepository;
 
-    @PostMapping(path="/addAFollowUp")
+    @PostMapping(path="/followUp")
     public @ResponseBody String addAFollowUp (@RequestParam String patientId,
                                               @RequestParam String notes,
                                               @RequestParam boolean required,
@@ -34,7 +34,7 @@ public class FollowUpController {
         return "Saved Follow Up";
     }
 
-    @GetMapping(path="/getAllFollowUps")
+    @GetMapping(path="/followUp")
     public @ResponseBody Iterable<FollowUp> getAllFollowUp() {
         return followUpRepository.findAll();
     }

@@ -14,12 +14,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping(path="/readings")
+
 public class ReadingController {
     @Autowired
     private ReadingRepository readingRepository;
 
-    @PostMapping(path="/addReading")
+    @PostMapping(path="/reading")
     public @ResponseBody String addAReading(@RequestParam String readerId,
                                             @RequestParam String patientId,
                                             @RequestParam Timestamp timestamp,
@@ -44,7 +44,7 @@ public class ReadingController {
         return "Saved Reading";
     }
 
-    @GetMapping(path="/getAllReadings")
+    @GetMapping(path="/readings")
     public @ResponseBody Iterable<Reading> getAllReadings() {
         return readingRepository.findAll();
     }

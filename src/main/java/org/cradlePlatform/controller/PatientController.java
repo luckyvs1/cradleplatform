@@ -11,12 +11,11 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Optional;
 
 @Controller
-@RequestMapping(path="patient")
 public class PatientController {
     @Autowired
     private PatientRepository patientRepository;
 
-    @PostMapping(path="/addPatient")
+    @PostMapping(path="/patient")
     public @ResponseBody String addNewPatient (@RequestParam String id,
                                                @RequestParam String villageNo,
                                                @RequestParam String initials,
@@ -37,13 +36,13 @@ public class PatientController {
         return "Saved Patient";
     }
 
-    @GetMapping(path="/allPatients")
+    @GetMapping(path="/patients")
     public @ResponseBody Iterable<Patient> getAllPatients(){
         //This returns a JSON or XML with the patients
         return patientRepository.findAll();
     }
 
-    @GetMapping(path="/getAll/{id}")
+    @GetMapping(path="/patient/{id}")
     public @ResponseBody
     Optional<Patient> getPatientById(@PathVariable(value = "id") String patientId){
         return patientRepository.findById(patientId);

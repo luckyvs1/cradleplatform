@@ -13,11 +13,12 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Date;
 import java.util.Optional;
 
+@RestController
 public class UserController {
     @Autowired
     private UserRepository userRepository;
 
-    @PostMapping(path="/addUser")
+    @PostMapping(path="/user")
     public @ResponseBody String addAUser(@RequestParam String atAStationNo,
                                          @RequestParam String firstName,
                                          @RequestParam String lastName,
@@ -38,12 +39,12 @@ public class UserController {
         return "Saved New User";
     }
 
-    @GetMapping(path="/getAllUsers")
+    @GetMapping(path="/user")
     public @ResponseBody Iterable<User> getAllUser() {
         return userRepository.findAll();
     }
 
-    @GetMapping(path="/getAllUsers/{id}")
+    @GetMapping(path="/user/{id}")
     public @ResponseBody
     Optional<User> getUserById(@PathVariable(value = "id") String referrer_id){
         return userRepository.findById(referrer_id);

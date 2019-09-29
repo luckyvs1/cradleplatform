@@ -9,12 +9,11 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Optional;
 
 @Controller
-@RequestMapping(path="/healthworker")
 public class HealthWorkerController {
     @Autowired
     private HealthWorkerRepository healthWorkerRepository;
 
-    @PostMapping(path="/addHealthWorker")
+    @PostMapping(path="/healthWorker")
     public @ResponseBody String addNewHealthWorker(@RequestParam String id){
         HealthWorker newHealthWorker = new HealthWorker();
         newHealthWorker.setId(id);
@@ -22,12 +21,12 @@ public class HealthWorkerController {
         return "Saved Health Worker";
     }
 
-    @GetMapping(path="/allHealthWorkers")
+    @GetMapping(path="/healthWorker")
     public @ResponseBody Iterable<HealthWorker> getAllHealthWorkers(){
         //This returns a JSON or XML with the users
         return healthWorkerRepository.findAll();
     }
-    @GetMapping(path="/getAll/{id}")
+    @GetMapping(path="/healthWorker/{id}")
     public @ResponseBody
     Optional<HealthWorker> getPatientById(@PathVariable(value = "id") String health_worker_id){
         return healthWorkerRepository.findById(health_worker_id);

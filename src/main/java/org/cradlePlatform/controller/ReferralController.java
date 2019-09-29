@@ -10,12 +10,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping(path="/referrals")
 public class ReferralController {
     @Autowired
     private ReferralRepository referralRepository;
 
-    @PostMapping(path="/addReferral")
+    @PostMapping(path="/referral")
     public @ResponseBody String addAReferral(@RequestParam int referrerId,
                                              @RequestParam String readingId,
                                              @RequestParam Timestamp timestamp){
@@ -26,12 +25,12 @@ public class ReferralController {
         return "Saved Referral";
     }
 
-    @GetMapping(path="/getAllReferrals")
+    @GetMapping(path="/referral")
     public @ResponseBody Iterable<Referral> getAllReferral() {
         return referralRepository.findAll();
     }
 
-    @GetMapping(path="/getAll/{id}")
+    @GetMapping(path="/referral/{id}")
     public @ResponseBody
     Optional<Referral> getReferralById(@PathVariable(value = "id") String referrerId){
         return referralRepository.findById(referrerId);
