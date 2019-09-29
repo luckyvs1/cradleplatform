@@ -131,11 +131,11 @@ class HomePage extends React.Component {
                 <h1>Cradle App</h1>
                 <Grid>
 
-                    <Grid.Column width={2}>
+                    <Grid.Column width={3}>
                         <MenuTabularOnLeft></MenuTabularOnLeft>
                     </Grid.Column>
 
-                    <Grid.Column stretched width={8}>
+                    <Grid.Column stretched width={7}>
                         <Paper className={useStyles.root}>
                             <h2  style={useStyles.uiHeader}>New Referrals</h2>
 

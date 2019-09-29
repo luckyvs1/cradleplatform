@@ -66,11 +66,11 @@ class AllFollowUpForm extends  React.Component {
         return (
             <div className="ui-toolbar">
                <Grid>
-                   <Grid.Column width={2}>
+                   <Grid.Column width={3}>
                        <MenuTabularOnLeft></MenuTabularOnLeft>
                    </Grid.Column>
-                   <Grid.Column width={14}>
-                       <Grid.Column stretched width={6}>
+                   <Grid.Column width={13}>
+                       <Grid.Column stretched width={5}>
                            <Paper className={useStyles.root}>
                                <h2 as="ui header" className='ui-header'>Upcoming Follow Up</h2>
                                <Table className={useStyles.table}>

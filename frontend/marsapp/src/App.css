@@ -73,6 +73,12 @@ ui-header {
 .ui-toolbar a:hover {
     background: rgba(0, 0, 0, .25);
 }
+.ui-toolbar h1 {
+    font-family: "Comic Sans MS", cursive, sans-serif;
+    font-weight: bold;
+    margin-bottom: 5%;
+    text-align: center  ;
+}
 
 .ui-wrapper {
     display: grid;

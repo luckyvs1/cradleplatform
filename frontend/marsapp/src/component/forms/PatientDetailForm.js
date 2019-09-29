@@ -20,10 +20,10 @@ export default class PatientDetailForm extends React.Component {
         return (
             <div className="ui-toolbar">
                 <Grid>
-                    <Grid.Column width={2}>
+                    <Grid.Column width={3}>
                         <MenuTabularOnLeft/>
                     </Grid.Column>
-                        <Grid.Column width={4}>
+                        <Grid.Column width={3}>
                             <Form size={'large'}>
                                 <Form.Group grouped>
                                     <Form.Field

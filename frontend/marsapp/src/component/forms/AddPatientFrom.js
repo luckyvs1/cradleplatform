@@ -22,10 +22,10 @@ class AddPatientFrom extends  React.Component {
         return (
             <div className="ui-toolbar">
                 <Grid>
-                    <Grid.Column width={2}>
+                    <Grid.Column width={3}>
                         <MenuTabularOnLeft></MenuTabularOnLeft>
                     </Grid.Column>
-                    <Grid.Column width={14}>
+                    <Grid.Column width={13}>
                         <Grid.Column>
                             <Form size={'large'} >
                                 <Form.Group grouped>
