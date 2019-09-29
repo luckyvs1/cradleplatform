@@ -1,4 +1,14 @@
 # CradlePlatform
+## Project Intro
+The Cradle Software Project is aimed to aid medical personnel in developing countries better assist their patients. It will attempt to 
+eliminate current problems that these workers are currently facing in order to provide better assistance. Some of the most important 
+functions that this project will allow its users to obtain is the ability to manage their patients through a web interface. This will 
+eliminate problems such as losing documentation, losing referrals and not being able to keep patient information private amongst different 
+health workers. Additionally, it will allow patients to receive the proper care in a timely manner. 
+
+Project Specifics
+This project uses a combination of Spring Boot, MySQL, and React. It will be able to communicate with current Cradle Capture App in order to 
+sync information between the mobile and web application. 
 
 ## Running with Docker
 
