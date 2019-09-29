@@ -9,7 +9,7 @@ class Account extends React.Component {
             <div className="ui-toolbar">
 
                 <h1>
-                    PLEASE HELP
+                    Your Account
                 </h1>
                 <AccountForm></AccountForm>
             </div>

@@ -22,7 +22,7 @@ import CreateReferral from "./component/pages/Referral/CreateReferral";
 import Readings from "./component/pages/readings/Readings";
 import AddReadingDetail from "./component/pages/readings/addReadings/AddReadingDetail";
 import AddPatient from "./component/pages/patients/AddPatient";
-import Account from "./component/pages/patients/Account";
+import Account from "./component/pages/users/Account";
 import AllFollowUp from "./component/pages/followUp/AllFollowUp";
 import ListUser from "./component/pages/users/ListUser"
 
