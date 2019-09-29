@@ -25,10 +25,10 @@ class ListUserForm extends  React.Component {
         return (
             <div className="ui-toolbar">
                 <Grid>
-                    <Grid.Column width={3}>
+                    <Grid.Column width={2}>
                         <MenuTabularOnLeft></MenuTabularOnLeft>
                     </Grid.Column>
-                    <Grid.Column width={13}>
+                    <Grid.Column width={12}>
                         <Grid.Row>
                             <Grid.Column floated='left'>
                                 <Button icon labelPosition='left'>

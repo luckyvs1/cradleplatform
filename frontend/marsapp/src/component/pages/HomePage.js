@@ -177,8 +177,8 @@ class HomePage extends React.Component {
                                     <TableRow>
                                         <TableCell>Patient Id</TableCell>
                                         <TableCell align="right">Patient Name</TableCell>
-                                        <TableCell align="right">Referred By</TableCell>
-                                        <TableCell align="right">Referral Date</TableCell>
+                                        <TableCell align="right">Location</TableCell>
+                                        <TableCell align="right">Follow-up Date</TableCell>
                                     </TableRow>
                                 </TableHead>
                                 <TableBody>
