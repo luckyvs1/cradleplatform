@@ -1,23 +1,27 @@
 package org.cradlePlatform.model;
 
 
+import org.hibernate.annotations.GenericGenerator;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
+import java.io.Serializable;
 
 @Entity
-@Table(name = "User")
-public class User {
+@Table(name = "User", schema = "schema")
+public class User implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(generator="system-uuid")
+    @GenericGenerator(name="system-uuid", strategy = "uuid")
     @Column(name="id", nullable=false)
     private String id;
 
     @Column(name="username", nullable=false)
     @NotEmpty(message = "Enter Username")
     @Size(max = 16)
-    private String  username;
+    private String username;
 
     @Column(name="password", nullable=false)
     @NotEmpty(message = "Enter Password")
@@ -48,4 +52,10 @@ public class User {
         this.password = password;
     }
 
+    @Override
+    public String toString() {
+        return String.format(
+                "Customer[id=%d, username='%s', password='%s']",
+                id, username, password);
+    }
 }
