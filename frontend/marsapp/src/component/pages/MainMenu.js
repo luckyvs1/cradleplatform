@@ -76,6 +76,16 @@ export default class MenuTabularOnLeft extends React.Component {
                     <Icon name='grid user md'/>
                     Users
                 </Menu.Item>
+
+                <Menu.Item
+                    as={Link} to="/help"
+                    name='Learning Materials'
+                    active={activeItem === 'help'}
+                    onClick={this.handleItemClick}
+                >
+                    <Icon name='grid book'/>
+                    Learning Materials
+                </Menu.Item>
             </Menu>
 
         )

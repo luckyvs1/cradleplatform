@@ -9,7 +9,7 @@ class Help extends React.Component {
             <div className="ui-toolbar">
 
                 <h1>
-                    PLEASE HELP
+                    Learning Materials
                 </h1>
                 <HelpForm></HelpForm>
             </div>
