@@ -1,62 +1,63 @@
 package org.cradlePlatform.model;
 
-import javax.persistence.*;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Size;
-import java.sql.Timestamp;
-
-@Entity
-@Table(name = "Referral")
 public class Referral {
+	Reading reading;
+	String referrerName;
+	String username;
+	String password;
+	String healthCentre;
+	VitalsTrafficLight trafficLight;
+	String vitalsMessage;
+	String comment;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Column(name="id", nullable=false, unique=true)
-    @NotEmpty(message = "ID Can't Be Empty")
-    private int id;
 
-    @Column(name="referrer_id", length=32, nullable=false)
-    @NotEmpty(message = "Patient ID Can't Be Empty")
-    @Size(max = 32)
-    private String referrerID;
+	public Referral(Reading reading,
+	                String referrerName,
+	                String username,
+	                String password,
+	                String healthCentre,
+	                VitalsTrafficLight trafficLight,
+	                String vitalsMessage,
+	                String comment) {
+		this.reading = reading;
+		this.referrerName = referrerName;
+		this.username = username;
+		this.password = password;
+		this.healthCentre = healthCentre;
+		this.trafficLight = trafficLight;
+		this.vitalsMessage = vitalsMessage;
+		this.comment = comment;
+	}
 
-    @Column(name="reading_id", nullable=false)
-    @NotEmpty(message = "Reader ID Can't Be Empty")
-    private String readingID;
+	public Reading getReading() {
+		return reading;
+	}
 
-    @Column(name="timestamp", nullable=false)
-    @NotEmpty(message = "Timestamp Can't Be Empty")
-    private Timestamp timestamp;
+	public String getReferrerName() {
+		return referrerName;
+	}
 
-    public int getId() {
-        return id;
-    }
+	public String getUsername() {
+		return username;
+	}
 
-    public void setId(int id) {
-        this.id = id;
-    }
+	public String getPassword() {
+		return password;
+	}
 
-    public String getReferrerID() {
-        return referrerID;
-    }
+	public String getHealthCentre() {
+		return healthCentre;
+	}
 
-    public void setReferrerID(String referrerID) {
-        this.referrerID = referrerID;
-    }
+	public VitalsTrafficLight getTrafficLight() {
+		return trafficLight;
+	}
 
-    public String getReadingID() {
-        return readingID;
-    }
+	public String getVitalsMessage() {
+		return vitalsMessage;
+	}
 
-    public void setReadingID(String readingID) {
-        this.readingID = readingID;
-    }
-
-    public Timestamp getTimestamp() {
-        return timestamp;
-    }
-
-    public void setTimestamp(Timestamp timestamp) {
-        this.timestamp = timestamp;
-    }
+	public String getComment() {
+		return comment;
+	}
 }

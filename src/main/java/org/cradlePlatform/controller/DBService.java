@@ -31,4 +31,14 @@ class DBService {
 		User user = new User();
 		return user;
 	}
+
+	public static boolean saveReadingInDb(Reading reading) {
+		// TODO: implement db query, raise exception if fail
+		return true;
+	}
+
+	public static boolean saveReferralInDb(Referral referral) {
+		// TODO: implement db query, raise exception if fail
+		return true;
+	}
 }
