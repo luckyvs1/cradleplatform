@@ -19,7 +19,7 @@ public class ReadingController {
     @Autowired
     private ReadingRepository readingRepository;
 
-    @PostMapping(path="/add")
+    @PostMapping(path="/addReading")
     public @ResponseBody String addAReading(@RequestParam String readerId,
                                             @RequestParam String patientId,
                                             @RequestParam Timestamp timestamp,
@@ -44,7 +44,7 @@ public class ReadingController {
         return "Saved Reading";
     }
 
-    @GetMapping(path="/getAll")
+    @GetMapping(path="/getAllReadings")
     public @ResponseBody Iterable<Reading> getAllReadings() {
         return readingRepository.findAll();
     }

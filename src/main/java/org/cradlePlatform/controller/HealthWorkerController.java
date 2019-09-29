@@ -14,7 +14,7 @@ public class HealthWorkerController {
     @Autowired
     private HealthWorkerRepository healthWorkerRepository;
 
-    @PostMapping(path="/add")
+    @PostMapping(path="/addHealthWorker")
     public @ResponseBody String addNewHealthWorker(@RequestParam String id){
         HealthWorker newHealthWorker = new HealthWorker();
         newHealthWorker.setId(id);
@@ -22,7 +22,7 @@ public class HealthWorkerController {
         return "Saved Health Worker";
     }
 
-    @GetMapping(path="/all")
+    @GetMapping(path="/allHealthWorkers")
     public @ResponseBody Iterable<HealthWorker> getAllHealthWorkers(){
         //This returns a JSON or XML with the users
         return healthWorkerRepository.findAll();

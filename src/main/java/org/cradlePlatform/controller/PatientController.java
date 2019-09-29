@@ -16,7 +16,7 @@ public class PatientController {
     @Autowired
     private PatientRepository patientRepository;
 
-    @PostMapping(path="/add")
+    @PostMapping(path="/addPatient")
     public @ResponseBody String addNewPatient (@RequestParam String id,
                                                @RequestParam String villageNo,
                                                @RequestParam String initials,
@@ -37,7 +37,7 @@ public class PatientController {
         return "Saved Patient";
     }
 
-    @GetMapping(path="/all")
+    @GetMapping(path="/allPatients")
     public @ResponseBody Iterable<Patient> getAllPatients(){
         //This returns a JSON or XML with the patients
         return patientRepository.findAll();

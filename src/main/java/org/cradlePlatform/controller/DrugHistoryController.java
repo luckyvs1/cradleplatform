@@ -14,7 +14,7 @@ public class DrugHistoryController {
     @Autowired
     private DrugHistoryRepository drugHistoryRepository;
 
-    @PostMapping(path="/add")
+    @PostMapping(path="/addDrugHistory")
     public @ResponseBody String addDrugHistory (@RequestParam String id,
                                                 @RequestParam String patientID,
                                                 @RequestParam String historyText){
@@ -25,7 +25,7 @@ public class DrugHistoryController {
         return "Saved Drug History";
     }
 
-    @GetMapping(path="/get")
+    @GetMapping(path="/getAllDrugHistory")
     public @ResponseBody Iterable<DrugHistory> getAllDrugHistory(){
         //this returns a JSON or XML with the drugHistory
         return drugHistoryRepository.findAll();

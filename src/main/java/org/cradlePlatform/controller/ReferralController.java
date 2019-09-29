@@ -15,7 +15,7 @@ public class ReferralController {
     @Autowired
     private ReferralRepository referralRepository;
 
-    @PostMapping(path="/add")
+    @PostMapping(path="/addReferral")
     public @ResponseBody String addAReferral(@RequestParam int referrerId,
                                              @RequestParam String readingId,
                                              @RequestParam Timestamp timestamp){
@@ -26,7 +26,7 @@ public class ReferralController {
         return "Saved Referral";
     }
 
-    @GetMapping(path="/getAll")
+    @GetMapping(path="/getAllReferrals")
     public @ResponseBody Iterable<Referral> getAllReferral() {
         return referralRepository.findAll();
     }

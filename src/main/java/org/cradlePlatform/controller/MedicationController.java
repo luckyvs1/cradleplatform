@@ -15,7 +15,7 @@ public class MedicationController {
     @Autowired
     private MedicationRepository medicationRepository;
 
-    @PostMapping(path="/add")
+    @PostMapping(path="/addNewMed")
     public @ResponseBody String addNewMedication (@RequestParam int drugHistoryId,
                                                   @RequestParam String drugName,
                                                   @RequestParam String dosage,
@@ -31,7 +31,7 @@ public class MedicationController {
         return "Saved Medication";
     }
 
-    @GetMapping(path="/all")
+    @GetMapping(path="/allMeds")
     public @ResponseBody Iterable<Medication> getAllMedication(){
         //This returns a JSON or XML with the medication
         return medicationRepository.findAll();

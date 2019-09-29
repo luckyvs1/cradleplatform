@@ -61,7 +61,7 @@ public class UserInfo {
         return last_name;
     }
 
-    public Date getDob() {
+    public Date getDOB() {
         return dob;
     }
 

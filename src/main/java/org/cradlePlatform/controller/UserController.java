@@ -17,7 +17,7 @@ public class UserController {
     @Autowired
     private UserRepository userRepository;
 
-    @PostMapping(path="/add")
+    @PostMapping(path="/addUser")
     public @ResponseBody String addAUser(@RequestParam String atAStationNo,
                                          @RequestParam String firstName,
                                          @RequestParam String lastName,
@@ -38,7 +38,7 @@ public class UserController {
         return "Saved New User";
     }
 
-    @GetMapping(path="/getAll")
+    @GetMapping(path="/getAllUsers")
     public @ResponseBody Iterable<User> getAllUser() {
         return userRepository.findAll();
     }
