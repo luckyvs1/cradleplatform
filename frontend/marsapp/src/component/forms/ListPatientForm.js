@@ -37,7 +37,7 @@ class ListPatientForm extends  React.Component {
                         </h3>
                         <Grid.Row>
                             <Grid.Column floated='left'>
-                                <Button icon labelPosition='left'as={Link} to="/patientDetail" >
+                                <Button icon labelPosition='left'as={Link} to="/addPatient" >
                                     <Icon name='add circle' /> New Patient
                                 </Button>
                             </Grid.Column>
