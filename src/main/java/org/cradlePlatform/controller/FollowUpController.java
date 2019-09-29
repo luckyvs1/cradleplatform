@@ -17,7 +17,7 @@ public class FollowUpController {
     @Autowired
     private FollowUpRepository followUpRepository;
 
-    @PostMapping(path="/add")
+    @PostMapping(path="/addAFollowUp")
     public @ResponseBody String addAFollowUp (@RequestParam String patientId,
                                               @RequestParam String notes,
                                               @RequestParam boolean required,
@@ -34,7 +34,7 @@ public class FollowUpController {
         return "Saved Follow Up";
     }
 
-    @GetMapping(path="/getAll")
+    @GetMapping(path="/getAllFollowUps")
     public @ResponseBody Iterable<FollowUp> getAllFollowUp() {
         return followUpRepository.findAll();
     }

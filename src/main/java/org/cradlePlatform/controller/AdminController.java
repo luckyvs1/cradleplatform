@@ -13,7 +13,7 @@ public class AdminController {
     @Autowired
     private AdminRepository adminRepository;
 
-    @PostMapping(path="/add")
+    @PostMapping(path="/addNewAdmin")
     public @ResponseBody String addNewAdmin (@RequestParam String id){
         Admin newAdmin = new Admin();
         newAdmin.setId(id);
@@ -21,7 +21,7 @@ public class AdminController {
         return "Saved Admin";
     }
 
-    @GetMapping(path="/all")
+    @GetMapping(path="/allAdmins")
     public @ResponseBody Iterable<Admin> getAllAdmins(){
         //This returns a JSON or XML with the users
         return adminRepository.findAll();
