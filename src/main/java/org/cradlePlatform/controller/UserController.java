@@ -43,7 +43,7 @@ public class UserController {
         return userRepository.findAll();
     }
 
-    @GetMapping(path="/getAll/{id}")
+    @GetMapping(path="/getAllUsers/{id}")
     public @ResponseBody
     Optional<User> getUserById(@PathVariable(value = "id") String referrer_id){
         return userRepository.findById(referrer_id);
