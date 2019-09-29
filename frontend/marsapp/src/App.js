@@ -22,7 +22,7 @@ import AddReadingDetail from "./component/pages/readings/addReadings/AddReadingD
 import AddPatient from "./component/pages/patients/AddPatient";
 import Account from "./component/pages/patients/Account";
 import AllFollowUp from "./component/pages/followUp/AllFollowUp";
-
+import ListUser from "./component/pages/users/ListUser"
 
 const App = ({ location, isAuthenticated }) => (
 
@@ -113,6 +113,12 @@ const App = ({ location, isAuthenticated }) => (
             path="/dashboard"
             exact
             component={DashboardPage}
+        />
+        <GuestRoute
+            location={location}
+            path="/listUser"
+            exact
+            component={ListUser}
         />
     </div>
 );

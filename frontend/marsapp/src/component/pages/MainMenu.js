@@ -45,9 +45,9 @@ export default class MenuTabularOnLeft extends React.Component {
                     onClick={this.handleItemClick}
                 />
                 <Menu.Item
-                    as={Link} to="/upload"
+                    as={Link} to="/listUser"
                     name='Users'
-                    active={activeItem === 'users'}
+                    active={activeItem === 'user'}
                     onClick={this.handleItemClick}
                 />
             </Menu>
