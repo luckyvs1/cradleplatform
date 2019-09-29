@@ -27,7 +27,7 @@ public class PatientController {
                                                @RequestParam int gestation_age){
         Patient newPatient = new Patient();
         newPatient.setId(id);
-        newPatient.setVillage_no(villageNo);
+        newPatient.setVillageNo(villageNo);
         newPatient.setInitials(initials);
         newPatient.setSex(sex);
         newPatient.setAge(age);

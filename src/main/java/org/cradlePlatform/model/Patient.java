@@ -21,7 +21,7 @@ public class Patient {
     @Column(name="village_no", length=32, nullable=false)
     @NotEmpty(message = "Village Number Can't Be Empty")
     @Size(max = 32)
-    private String village_no;
+    private String villageNo;
 
     @Column(name="initials", length=4, nullable=false)
     @NotEmpty(message = "Initials Can't Be Empty")
@@ -55,11 +55,11 @@ public class Patient {
     }
 
     public String getVillageNo() {
-        return village_no;
+        return villageNo;
     }
 
-    public void setVillage_no(String village_no) {
-        this.village_no = village_no;
+    public void setVillageNo(String villageNo) {
+        this.villageNo = villageNo;
     }
 
     public String getInitials() {
@@ -118,5 +118,4 @@ public class Patient {
         }
         return false;
     }
-
 }
