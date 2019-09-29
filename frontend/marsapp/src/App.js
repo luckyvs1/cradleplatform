@@ -114,7 +114,7 @@ const App = ({ location, isAuthenticated }) => (
             exact
             component={DashboardPage}
         />
-        <UserRoute
+        <GuestRoute
             location={location}
             path="/listUser"
             exact
