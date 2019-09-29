@@ -25,10 +25,10 @@ class ListUserForm extends  React.Component {
         return (
             <div className="ui-toolbar">
                 <Grid>
-                    <Grid.Column width={2}>
+                    <Grid.Column width={3}>
                         <MenuTabularOnLeft></MenuTabularOnLeft>
                     </Grid.Column>
-                    <Grid.Column width={14}>
+                    <Grid.Column width={13}>
                         <Grid.Row>
                             <Grid.Column floated='left'>
                                 <Button icon labelPosition='left'>
@@ -44,45 +44,73 @@ class ListUserForm extends  React.Component {
                         </Grid.Row>
                         <List selection verticalAlign='middle'>
                             <List.Item>
+                                <List.Content floated='right'>
+                                    <Button color="red">Delete</Button>
+                                    <Button color="blue">Edit</Button>
+                                </List.Content>
                                 <Image avatar src='https://react.semantic-ui.com/images/avatar/small/christian.jpg' />
                                 <List.Content>
-                                    <List.Header>James Corden</List.Header>
-                                    <List.Description as='a'>james.corndog@gmail.com</List.Description>
+                                    <List>
+                                        <List.Header>James Corden</List.Header>
+                                        <List.Description as='a'>corndog@gmail.com</List.Description>
+                                        <List.Description>Admin</List.Description>
+                                    </List>
                                 </List.Content>
                             </List.Item>
                             <List.Item>
+                                <List.Content floated='right'>
+                                    <Button color="red">Delete</Button>
+                                    <Button color="blue">Edit</Button>
+                                </List.Content>
                                 <Image avatar src='https://react.semantic-ui.com/images/avatar/small/daniel.jpg' />
                                 <List.Content>
-                                    <List.Header>Conan OBrien</List.Header>
-                                    <List.Description as='a'>og_conan@gmail.com</List.Description>
+                                     <List>
+                                         <List.Header>Eric Andre</List.Header>
+                                         <List.Description as='a'>heyyyyy@gmail.com</List.Description>
+                                         <List.Description>VHT</List.Description>
+                                     </List>
                                 </List.Content>
                             </List.Item>
                             <List.Item>
-                                <Image avatar src='https://react.semantic-ui.com/images/avatar/small/helen.jpg' />
-                                <List.Content>
-                                    <List.Header>Jimmy Fallon</List.Header>
-                                    <List.Description as='a'>sir_laugh_alot@gmail.com</List.Description>
+                                <List.Content floated='right'>
+                                     <Button color="red">Delete</Button>
+                                     <Button color="blue">Edit</Button>
                                 </List.Content>
-                            </List.Item>
-                            <List.Item>
                                 <Image avatar src='https://react.semantic-ui.com/images/avatar/small/daniel.jpg' />
                                 <List.Content>
-                                    <List.Header>Jimmy Kimmel</List.Header>
-                                    <List.Description as='a'>kimmy_little@gmail.com</List.Description>
+                                     <List>
+                                          <List.Header>Jimmy Fallon</List.Header>
+                                          <List.Description as='a'>sir_laugh_alot@gmail.com</List.Description>
+                                          <List.Description>VHT</List.Description>
+                                     </List>
                                 </List.Content>
                             </List.Item>
                             <List.Item>
+                                <List.Content floated='right'>
+                                     <Button color="red">Delete</Button>
+                                     <Button color="blue">Edit</Button>
+                                </List.Content>
                                 <Image avatar src='https://react.semantic-ui.com/images/avatar/small/daniel.jpg' />
                                 <List.Content>
-                                    <List.Header>Trevor Noah</List.Header>
-                                    <List.Description as='a'>noah_ark@gmail.com</List.Description>
+                                    <List>
+                                        <List.Header>Conan OBrien</List.Header>
+                                        <List.Description as='a'>og_conan@gmail.com</List.Description>
+                                        <List.Description>HealthWorker</List.Description>
+                                    </List>
                                 </List.Content>
                             </List.Item>
                             <List.Item>
-                                <Image avatar src='https://react.semantic-ui.com/images/avatar/small/helen.jpg' />
+                                <List.Content floated='right'>
+                                     <Button color="red">Delete</Button>
+                                     <Button color="blue">Edit</Button>
+                                </List.Content>
+                                <Image avatar src='https://react.semantic-ui.com/images/avatar/small/christian.jpg' />
                                 <List.Content>
-                                    <List.Header>Stephen Colbert</List.Header>
-                                    <List.Description as='a'>steve@gmail.com</List.Description>
+                                    <List>
+                                        <List.Header>Trevor Noah</List.Header>
+                                        <List.Description as='a'>noah_ark@gmail.com</List.Description>
+                                        <List.Description>HealthWorker</List.Description>
+                                    </List>
                                 </List.Content>
                             </List.Item>
 
