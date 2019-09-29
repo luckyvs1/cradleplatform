@@ -115,7 +115,8 @@ class HomePage extends React.Component {
             buttons.push(
                 <FloatingMenuItem label="Item 1" icon="create" action="" key="i1"/>);
             buttons.push(
-                <FloatingMenuItem label="Item 2" icon="drafts" action="" key="i2"/>);
+                <FloatingMenuItem label="Short Cut 2" icon="drafts" action="" key="i2"/>);
+
         }
 
         buttons.push(<FloatingMenuItem label="" icon={icon} action={this.toggleMenu.bind(this)} key="m"/>);
@@ -128,6 +129,11 @@ class HomePage extends React.Component {
                         {buttons}
                     </div>
                 </div>
+                <div className="my-btn">
+                    <div className="my-btn-border"></div>
+                    <i className="fas fa-bell btn-bell"></i>
+                </div>
+
                 <h1>Cradle App</h1>
                 <Grid>
 
