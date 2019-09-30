@@ -1,45 +1,65 @@
 /**
- * User class represents a user of the software.
- * Any common members or functions will be found in this file.
+ * The User class represents a user and their log-in information.
+ * Their information will be stored on and fetched from the database.
  */
+
 package org.cradlePlatform.model;
 
-public class User {
-	private String username;
-	private Role role;
+import org.hibernate.annotations.GenericGenerator;
 
-	public User() {
-		this.username = "";
-		this.role = null;
-	}
+import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
+import java.io.Serializable;
 
-	public User(String username, Role role) {
-		this.username = username;
-		this.role = role;
-	}
+@Entity
+@Table(name = "User", schema = "schema")
+public class User implements Serializable {
 
-	public User(String username, String role) {
-		this.username = username;
-		this.role = Role.valueOf(role);
-	}
+    @Id
+    @GeneratedValue(generator="system-uuid")
+    @GenericGenerator(name="system-uuid", strategy = "uuid")
+    @Column(name="id", nullable=false)
+    private String id;
 
-	public String getUsername() {
-		return username;
-	}
+    @Column(name="username", nullable=false)
+    @NotEmpty(message = "Enter Username")
+    @Size(max = 16)
+    private String username;
 
-	public boolean hasRole(Role role) {
-		if (this.role == role) {
-			return true;
-		}
-		return false;
-	}
+    @Column(name="password", nullable=false)
+    @NotEmpty(message = "Enter Password")
+    @Size(max = 32)
+    private String password;
 
-	public Role getRole() {
-		return this.role;
-	}
+    public String getId() {
+        return id;
+    }
 
-	public void setRole(Role role) {
-		this.role = role;
-	}
+    public void setId(String id) {
+        this.id = id;
+    }
 
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    @Override
+    public String toString() {
+        return String.format(
+                "Customer[id=%d, username='%s', password='%s']",
+                id, username, password);
+    }
 }

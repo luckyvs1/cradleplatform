@@ -28,8 +28,7 @@ class DBService {
 	 */
 	public static User loadUserFromDb(String username) {
 		// TODO: fetch user data from db and return it
-		Role role = Role.VHT;
-		User user = new User(username, role);
+		User user = new User();
 		return user;
 	}
 

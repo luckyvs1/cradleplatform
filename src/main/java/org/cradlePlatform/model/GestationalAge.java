@@ -1,11 +1,10 @@
+/**
+ * The GestationalAge class represents the gestational age of a patient.
+ */
+
 package org.cradlePlatform.model;
 
 public class GestationalAge {
-	public enum GestationalAgeTimeUnit {
-		WEEKS,
-		MONTHS,
-		NONE
-	}
 	int age;
 	GestationalAgeTimeUnit timeUnit;
 
