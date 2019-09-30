@@ -1,7 +1,12 @@
+/**
+ * Class: ListPatient
+ * Summary:
+ *  Base file for showing contents of List of Patient page.
+ */
+
 import React from "react";
 import {connect} from "react-redux";
 import {testAPICALL} from "../../../actions/auth";
-
 import {
     Button,
     Checkbox,

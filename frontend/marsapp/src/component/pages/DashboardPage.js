@@ -1,3 +1,10 @@
+/**
+ * Class: DashboardPage
+ * Summary:
+ *  Base file for showing contents of Dashboard page.
+ *  For User Analytics.
+ */
+
 import React from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";

@@ -1,3 +1,11 @@
+/**
+ * Class: ConfirmationPage
+ * Summary:
+ *  Contains the contents and functionality of the Confirmation page.
+ *  Where users get directed to when verifying their email and account.
+ */
+
+
 import React from "react";
 import PropTypes from "prop-types";
 import {Message, Icon} from "semantic-ui-react";

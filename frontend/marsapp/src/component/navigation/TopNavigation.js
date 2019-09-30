@@ -1,3 +1,9 @@
+/**
+ * Summary:
+ *  The top bar used for navigating to Homepage, logout, and notification
+ * TODO: Now have HeaderMenu which does the same thing; consider which to use or if to merge the two files
+ */
+
 import React from "react";
 import PropTypes from "prop-types";
 import { Menu, Dropdown, Image } from "semantic-ui-react";

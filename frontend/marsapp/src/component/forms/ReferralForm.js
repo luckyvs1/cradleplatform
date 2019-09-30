@@ -1,3 +1,9 @@
+/**
+ * Class: ReferralForm
+ * Summary:
+ *  Contains the contents and functionality of the List of Referrals page.
+ */
+
 import React from "react";
 import {connect} from "react-redux";
 import Paper from "@material-ui/core/Paper";

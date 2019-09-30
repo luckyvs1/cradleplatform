@@ -1,3 +1,9 @@
+/**
+ * Class: AddReadingDetail
+ * Summary:
+ *  Base file for showing contents of Add Reading page.
+ */
+
 import React from "react";
 import {connect} from "react-redux";
 import AddReadingForm from "../../../forms/readingForm/AddReadingForm";

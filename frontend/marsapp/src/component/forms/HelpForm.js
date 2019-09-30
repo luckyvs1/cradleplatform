@@ -1,3 +1,9 @@
+/**
+ * Class: HelpForm
+ * Summary:
+ *  Contains the contents and functionality of the Help / Learning Mateirals page.
+ */
+
 import React from "react";
 import MenuTabularOnLeft from "../pages/MainMenu";
 import {Checkbox, Form, Input, Select, Grid, List, TextArea} from "semantic-ui-react";

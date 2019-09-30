@@ -1,3 +1,9 @@
+/**
+ * Class: PatientDetail
+ * Summary:
+ *  Base file for showing contents of List of Patient Detail page.
+ */
+
 import React from "react";
 import {connect} from "react-redux";
 

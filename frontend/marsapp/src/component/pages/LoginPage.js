@@ -1,3 +1,9 @@
+/**
+ * Class: LoginPage
+ * Summary:
+ *  Base file for showing contents of Login Page.
+ */
+
 import React from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";

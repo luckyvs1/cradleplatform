@@ -1,3 +1,10 @@
+/**
+ * File: auth.js
+ * Summary:
+ *  Handles authentication when a user logs in.
+ *  Handles logging out as well.
+ */
+
 import {USER_LOGGED_IN, USER_LOGGED_OUT} from "../types";
 import api from "../api";
 import setAuthorizationHeader from "../utils/setAuthorizationHeader";

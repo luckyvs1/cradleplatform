@@ -1,3 +1,9 @@
+/**
+ * Class: LoginForm
+ * Summary:
+ *  Contains the contents and functionality of the Login page.
+ */
+
 import React from "react";
 import PropTypes from "prop-types";
 import Validator from "validator";

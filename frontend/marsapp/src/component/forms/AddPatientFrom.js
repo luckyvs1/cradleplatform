@@ -1,3 +1,9 @@
+/**
+ * Class: AddPatientFrom
+ * Summary:
+ *  Contains the contents and functionality of the AddPatient page.
+ */
+
 import React from "react";
 import MenuTabularOnLeft from "../pages/MainMenu";
 import {

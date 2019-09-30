@@ -1,7 +1,12 @@
+/**
+ * Class: AddReadingForm
+ * Summary:
+ *  Contains the contents and functionality of the Readings page.
+ */
+
 import React from "react";
 import MenuTabularOnLeft from "../../pages/MainMenu";
 import {Checkbox, Form, Input, Select, Grid, List, TextArea} from "semantic-ui-react";
-
 
 class ReadingForm extends  React.Component {
     // funcitons

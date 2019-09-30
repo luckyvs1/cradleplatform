@@ -1,3 +1,8 @@
+/**
+ * Summary:
+ *  Displays the error message as a single line
+ */
+
 import React from "react";
 import PropTypes from "prop-types";
 

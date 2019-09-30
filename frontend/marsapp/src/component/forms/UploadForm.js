@@ -1,3 +1,11 @@
+/**
+ * Class: UploadForm
+ * Summary:
+ *  Contains the contents and functionality of the UploadForm page.
+ *  Handles uploaded referral data
+ * TODO: Also have CreateReferral; consider if we still need this page
+ */
+
 import React from "react";
 import Tabs from "react-bootstrap/Tabs";
 import Tab from "react-bootstrap/Tab";

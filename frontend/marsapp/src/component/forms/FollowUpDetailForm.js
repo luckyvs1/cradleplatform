@@ -1,3 +1,9 @@
+/**
+ * Class: FollowUpDetailForm
+ * Summary:
+ *  Contains the contents and functionality of the Follow Up Detail page.
+ */
+
 import React from "react";
 import MenuTabularOnLeft from "../pages/MainMenu";
 import {Checkbox, Form, Input, Select, Grid, Dropdown, Button, List, TextArea} from "semantic-ui-react";

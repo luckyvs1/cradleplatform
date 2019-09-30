@@ -1,3 +1,10 @@
+/**
+ * Main Class: HomePage
+ * Helper Classes: FloatingMenuItem
+ * Summary:
+ *  Contains the contents and functionality of the Home page.
+ */
+
 import React from "react";
 import PropTypes from "prop-types";
 import {Link} from "react-router-dom";

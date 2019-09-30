@@ -1,3 +1,9 @@
+/**
+ * Class: CreateReferralForm
+ * Summary:
+ *  Contains the contents and functionality of the Create Referral page.
+ */
+
 import React from "react";
 import MenuTabularOnLeft from "../pages/MainMenu";
 import {
@@ -11,8 +17,9 @@ import {
     List,
     Image,
     Dropdown,
-    Grid,
+    Grid, HeaderContent,
 } from 'semantic-ui-react'
+import HeaderMenu from "../pages/HeaderMenu";
 
 
 class CreateReferralForm extends  React.Component {
@@ -78,11 +85,16 @@ class CreateReferralForm extends  React.Component {
 
         return (
             <div className="ui-toolbar">
+                <HeaderMenu></HeaderMenu>
                 <Grid>
-                    <Grid.Column width={2}>
+                    <Grid.Column width={3}>
                         <MenuTabularOnLeft></MenuTabularOnLeft>
                     </Grid.Column>
-                    <Grid.Column width={14}>
+                    <Grid.Column width={13}>
+
+                        <h3>
+                            Create Referral
+                        </h3>
                         <Grid.Column>
                             <Form size={'small'} >
                                 <Form.Group grouped>
