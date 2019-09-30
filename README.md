@@ -30,3 +30,35 @@ sync information between the mobile and web application.
     - Run `java -jar build/libs/app-0.0.1-SNAPSHOT.jar` to run the spring boot application
     - You should see the spring boot application launching
     - Visit `http://localhost:8080` to view the app
+    
+## Project's Directory Stucture
+   
+    ├── docs                        # Documentation files (alternatively `doc`)  
+    |    ├──curl-commands.txt       # Curl request for Android services
+    |    ├──request_test.py         # Curl request test with mock data
+    ├── frontend                    # All files related to client side (React) 
+    |    ├──marsapp                 # All React files
+    |    |     ├──public            # Auto generated icons and React logos (contains static files)
+    |    |     ├──src               # Main front end files (contains all dynamic files)
+    |    |     |   ├──actions       # All action creators
+    |    |     |   ├──component     # All components
+    |    |     |   |     ├──forms           # Define how data is passed into the pages in "pages"
+    |    |     |   |     ├──messages        # Define how to render messages to client
+    |    |     |   |     ├──navigation      # Define top nagivation bar
+    |    |     |   |     ├──pages           # Define all pages for the app
+    |    |     |   |     ├──routes          # Define different path for user (logged in) and guest 
+    |    |     |   ├──reducers      # Define how an application's state change in response to an action
+    |    |     |   ├──res           # Contains other resources (pictures,...)
+    |    |     |   ├──utils         # Define what each user type can see
+    |    ├──README.md               # Instructions to run the client (React)
+    ├── gradle                      # Auto generated Gradle folder
+    |    ├──wrapper                 # Gradle wrapper files (a executable jar and a properties file)
+    ├── src                         # All backend server code (in Java)
+    |    ├──main                    
+    |    |   ├──java                
+    |    |   |   ├──org.cradlePlatform
+    |    |   |   |          ├──controller   # All controller classes
+    |    |   |   |          ├──model        # All model classes
+    |    |   ├──resources           # SQL/database files (schema,...)
+    |    ├──test                    # Contains all unit test files
+
