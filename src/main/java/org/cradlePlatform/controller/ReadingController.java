@@ -1,3 +1,6 @@
+/**
+ * ReadingController contains functions to retrieve and add a patient's current reading.
+ */
 /*
     Followed this tutorial: https://spring.io/guides/gs/accessing-data-mysql/
  */

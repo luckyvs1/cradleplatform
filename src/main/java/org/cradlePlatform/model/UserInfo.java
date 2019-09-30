@@ -1,5 +1,9 @@
-package org.cradlePlatform.model;
+/**
+ * The UserInfo class represents a user and their personal information.
+ * A User's information will be stored on and fetched from the database.
+ */
 
+package org.cradlePlatform.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;

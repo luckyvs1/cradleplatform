@@ -1,3 +1,7 @@
+/**
+ * The MedicalHistory class represents a patient's medical history.
+ * A patient's medical history will be stored on and fetched from the database.
+ */
 package org.cradlePlatform.model;
 
 import javax.persistence.*;

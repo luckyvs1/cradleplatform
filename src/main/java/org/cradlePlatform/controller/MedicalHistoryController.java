@@ -1,3 +1,6 @@
+/**
+ * MedicalHistoryController contains functions to retrieve and add patient's medical history.
+ */
 package org.cradlePlatform.controller;
 
 import org.cradlePlatform.model.MedicalHistory;

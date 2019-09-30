@@ -1,3 +1,7 @@
+/**
+ * MedicationController contains functions to retrieve and add a patient's medication.
+ * A specific drug can be retrieved by their assigned ID.
+ */
 package org.cradlePlatform.controller;
 
 import org.cradlePlatform.model.Medication;

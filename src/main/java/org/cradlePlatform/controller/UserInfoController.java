@@ -1,3 +1,7 @@
+/**
+ * UserInfoController contains functions to retrieve and add user information of all user types.
+ * A user can be found by their ID.
+ */
 package org.cradlePlatform.controller;
 
 import org.cradlePlatform.model.RoleType;

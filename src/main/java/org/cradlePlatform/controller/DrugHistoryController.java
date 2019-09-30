@@ -1,3 +1,8 @@
+/**
+ * DrugHistoryController contains functions to retrieve and adds drug history.
+ * A specific patient's drug history can be retrieved by their ID.
+ */
+
 package org.cradlePlatform.controller;
 
 import org.cradlePlatform.model.DrugHistory;

@@ -1,3 +1,7 @@
+/**
+ * DrugHistoryController contains functions to retrieve and add VHTs.
+ */
+
 package org.cradlePlatform.controller;
 
 import org.cradlePlatform.model.VHT;

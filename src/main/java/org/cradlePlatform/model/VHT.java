@@ -1,3 +1,6 @@
+/**
+ * The VHT class represents a VHT.
+ */
 package org.cradlePlatform.model;
 
 import javax.persistence.*;

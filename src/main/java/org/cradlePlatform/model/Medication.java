@@ -1,3 +1,8 @@
+/**
+ * The Patient class represents a drug and it's relevant information necessary
+ * for documentation. A patient's medication will be stored on and fetched
+ * from the database.
+ */
 package org.cradlePlatform.model;
 
 import javax.persistence.*;

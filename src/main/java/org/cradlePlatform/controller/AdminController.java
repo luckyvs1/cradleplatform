@@ -1,3 +1,6 @@
+/**
+ * AdminController contains functions to retrieve and adds Admin-level users.
+ */
 package org.cradlePlatform.controller;
 
 import org.cradlePlatform.model.Admin;

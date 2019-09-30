@@ -31,11 +31,6 @@ public class UserController {
     @GetMapping(path="/user/all")
     public @ResponseBody Iterable<User> getAllUser() {
 
-        User newUser = new User();
-        newUser.setUsername("test");
-        newUser.setPassword("test123");
-        userRepository.save(newUser);
-
         return userRepository.findAll();
     }
 

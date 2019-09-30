@@ -1,3 +1,7 @@
+/**
+ * ReferralController contains functions to retrieve and add referrals.
+ * A specific referral can be found by its ID.
+ */
 package org.cradlePlatform.controller;
 
 import java.sql.Time;

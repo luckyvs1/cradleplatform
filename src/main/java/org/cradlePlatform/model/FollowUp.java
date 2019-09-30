@@ -1,3 +1,8 @@
+/**
+ * The FollowUp class represents a follow-up report for patients.
+ * All relevant follow-up information for a patient will be stored
+ * on and fetched from the database.
+ */
 package org.cradlePlatform.model;
 
 import javax.persistence.*;

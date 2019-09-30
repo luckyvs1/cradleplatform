@@ -1,5 +1,5 @@
 /**
- * FollowUpController retrieves and adds Admins
+ * FollowUpController retrieves and adds patient follow-up information.
  */
 package org.cradlePlatform.controller;
 

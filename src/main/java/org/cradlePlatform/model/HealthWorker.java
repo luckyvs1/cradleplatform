@@ -1,3 +1,7 @@
+/**
+ * The HealthWorker class represents a healthworker.
+ */
+
 package org.cradlePlatform.model;
 
 import javax.persistence.*;

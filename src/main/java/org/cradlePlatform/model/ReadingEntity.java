@@ -1,3 +1,7 @@
+/**
+ * The Reading class represents a the patient's present medical reading
+ * A patient's reading will be stored on and fetched from the database.
+ */
 package org.cradlePlatform.model;
 
 import javax.persistence.*;

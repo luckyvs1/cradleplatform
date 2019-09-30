@@ -1,5 +1,9 @@
-package org.cradlePlatform.model;
+/**
+ * The User class represents a user and their log-in information.
+ * Their information will be stored on and fetched from the database.
+ */
 
+package org.cradlePlatform.model;
 
 import org.hibernate.annotations.GenericGenerator;
 

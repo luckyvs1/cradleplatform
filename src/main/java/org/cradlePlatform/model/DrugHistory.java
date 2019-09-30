@@ -1,3 +1,8 @@
+/**
+ * The DrugHistory class represents a drug history report for a specific patient.
+ * A drug history report will be stored on and fetched from the database.
+ */
+
 package org.cradlePlatform.model;
 
 import javax.persistence.*;

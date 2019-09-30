@@ -1,3 +1,7 @@
+/**
+ * PatientController contains functions to retrieve and add patients to the system.
+ * A patient's information can be retrieved by their ID.
+ */
 package org.cradlePlatform.controller;
 
 import org.cradlePlatform.model.GestationalAgeTimeUnit;

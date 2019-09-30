@@ -1,3 +1,7 @@
+/**
+ * HealthWorkerController contains functions to retrieve and add health workers.
+ * A health worker can be found by their ID.
+ */
 package org.cradlePlatform.controller;
 
 import org.cradlePlatform.model.HealthWorker;

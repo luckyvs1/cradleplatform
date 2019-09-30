@@ -1,3 +1,7 @@
+/**
+ * The Admin class represents an Admin-level user.
+ */
+
 package org.cradlePlatform.model;
 
 import javax.persistence.*;
