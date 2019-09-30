@@ -42,8 +42,8 @@ It will be able to communicate with the current Cradle Capture App in order to s
 ## Project's Directory Stucture
    
     ├── docs                        # Documentation files (alternatively `doc`)  
-    |    ├──curl-commands.txt       # Curl request for Android services
-    |    └──request_test.py         # Curl request test with mock data
+    |    ├──curl-commands.txt       
+    |    └──request_test.py         
     ├── frontend                    # All files related to client side (React) 
     |    ├──marsapp                 # All React files
     |    |     ├──public            # Auto generated icons and React logos (contains static files)
@@ -58,7 +58,7 @@ It will be able to communicate with the current Cradle Capture App in order to s
     |    |         ├──reducers      # Define how an application's state change in response to an action
     |    |         ├──res           # Contains other resources (pictures,...)
     |    |         └──utils         # Define what each user type can see
-    |    └──README.md               # Instructions to run the client (React)
+    |    └──README.md              
     ├── gradle                      # Auto generated Gradle folder
     |    └──wrapper                 # Gradle wrapper files (a executable jar and a properties file)
     └── src                         # All backend server code (in Java)
