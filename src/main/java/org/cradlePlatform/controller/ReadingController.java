@@ -7,6 +7,7 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 import org.cradlePlatform.model.Reading;
+import org.cradlePlatform.model.ReadingEntity;
 import org.cradlePlatform.repository.ReadingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.cdi.Eager;
@@ -30,7 +31,7 @@ public class ReadingController {
                                             @RequestParam int pulseRate,
                                             @RequestParam String notes,
                                             @RequestParam boolean needFollowup){
-        Reading newReading = new Reading();
+        ReadingEntity newReading = new ReadingEntity();
         newReading.setPatientID(patientId);
         newReading.setReaderID(readerId);
         newReading.setTimestamp(timestamp);
@@ -45,7 +46,7 @@ public class ReadingController {
     }
 
     @GetMapping(path="/readings")
-    public @ResponseBody Iterable<Reading> getAllReadings() {
+    public @ResponseBody Iterable<ReadingEntity> getAllReadings() {
         return readingRepository.findAll();
     }
 }

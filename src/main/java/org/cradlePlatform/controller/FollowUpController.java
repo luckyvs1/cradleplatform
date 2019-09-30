@@ -1,5 +1,5 @@
-/*
-    Followed this tutorial: https://spring.io/guides/gs/accessing-data-mysql/
+/**
+ * FollowUpController retrieves and adds Admins
  */
 package org.cradlePlatform.controller;
 
@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Optional;
 
 @RestController
-
 public class FollowUpController {
     @Autowired
     private FollowUpRepository followUpRepository;

@@ -25,7 +25,8 @@ public class LoginController {
 	public User logIn(@RequestBody LoginRequest user) {
 		boolean isVerified = DBService.verifyUsernamePassword(user.getUsername(), user.getPassword());
 		if (isVerified) {
-			User account = DBService.loadUserFromDb(user.getUsername(), user.getPassword());
+//			User account = DBService.loadUserFromDb(user.getUsername(), user.getPassword());
+			User account = new User();
 			return account;
 		}
 		System.out.println("Username or password is incorrect, try again");
