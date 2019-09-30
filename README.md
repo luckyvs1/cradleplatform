@@ -18,24 +18,6 @@ performance and metrics.
 This project uses a combination of Spring Boot, MySQL, and React.
 It will be able to communicate with the current Cradle Capture App in order to sync information between the mobile and web application. 
 
-### Directory Structure
-
-```
-cradleplatform
-- docs (Documentation and useful scripts and tools for development)
-- frontend (Front-end React code to display the UI)
-- gradle/wrapper (Gradle files)
-- backend (Back-end files with server code)
-  - src
-    - main
-      - java/org/cradlePlatform/ (Java source files)
-        - controller (Controller classes containing functionality and business logic)
-        - model (Data classes representing entities and information in the system)
-      - resources (Resource files; sql files)
-    - test (Unit and integration test files)
-  
-```
-
 ## Running with Docker
 
 ### --- Database Server
@@ -61,30 +43,30 @@ cradleplatform
    
     ├── docs                        # Documentation files (alternatively `doc`)  
     |    ├──curl-commands.txt       # Curl request for Android services
-    |    ├──request_test.py         # Curl request test with mock data
+    |    └──request_test.py         # Curl request test with mock data
     ├── frontend                    # All files related to client side (React) 
     |    ├──marsapp                 # All React files
     |    |     ├──public            # Auto generated icons and React logos (contains static files)
-    |    |     ├──src               # Main front end files (contains all dynamic files)
-    |    |     |   ├──actions       # All action creators
-    |    |     |   ├──component     # All components
-    |    |     |   |     ├──forms           # Define how data is passed into the pages in "pages"
-    |    |     |   |     ├──messages        # Define how to render messages to client
-    |    |     |   |     ├──navigation      # Define top nagivation bar
-    |    |     |   |     ├──pages           # Define all pages for the app
-    |    |     |   |     ├──routes          # Define different path for user (logged in) and guest 
-    |    |     |   ├──reducers      # Define how an application's state change in response to an action
-    |    |     |   ├──res           # Contains other resources (pictures,...)
-    |    |     |   ├──utils         # Define what each user type can see
-    |    ├──README.md               # Instructions to run the client (React)
+    |    |     └──src               # Main front end files (contains all dynamic files)
+    |    |         ├──actions       # All action creators
+    |    |         ├──component     # All components
+    |    |         |     ├──forms           # Define how data is passed into the pages in "pages"
+    |    |         |     ├──messages        # Define how to render messages to client
+    |    |         |     ├──navigation      # Define top nagivation bar
+    |    |         |     ├──pages           # Define all pages for the app
+    |    |         |     └──routes          # Define different path for user (logged in) and guest 
+    |    |         ├──reducers      # Define how an application's state change in response to an action
+    |    |         ├──res           # Contains other resources (pictures,...)
+    |    |         └──utils         # Define what each user type can see
+    |    └──README.md               # Instructions to run the client (React)
     ├── gradle                      # Auto generated Gradle folder
-    |    ├──wrapper                 # Gradle wrapper files (a executable jar and a properties file)
-    ├── src                         # All backend server code (in Java)
-    |    ├──main                    
-    |    |   ├──java                
-    |    |   |   ├──org.cradlePlatform
-    |    |   |   |          ├──controller   # All controller classes
-    |    |   |   |          ├──model        # All model classes
-    |    |   ├──resources           # SQL/database files (schema,...)
-    |    ├──test                    # Contains all unit test files
+    |    └──wrapper                 # Gradle wrapper files (a executable jar and a properties file)
+    └── src                         # All backend server code (in Java)
+         ├──main                    
+         |   ├──java                
+         |   |   └──org.cradlePlatform
+         |   |              ├──controller   # All controller classes
+         |   |              └──model        # All model classes
+         |   └──resources           # SQL/database files (schema,...)
+         └──test                    # Contains all unit test files
 
