@@ -1,3 +1,9 @@
+/**
+ * Class: ForgotPasswordPage
+ * Summary:
+ *  Contains the contents and functionality of the Forgot Password page.
+ */
+
 import React from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";

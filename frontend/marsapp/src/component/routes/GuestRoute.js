@@ -1,3 +1,8 @@
+/**
+ * Summary:
+ *  Handles routing for any guests (Visitors who are not logged in)
+ */
+
 import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";

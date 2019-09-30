@@ -1,3 +1,9 @@
+/**
+ * Class: PatientDetailForm
+ * Summary:
+ *  Contains the contents and functionality of the Patient Detail page.
+ */
+
 import React from "react";
 import Tabs from "react-bootstrap/Tabs";
 import Tab from "react-bootstrap/Tab";
@@ -5,11 +11,6 @@ import {Checkbox, Form, Input, Select, Grid, List, TextArea} from "semantic-ui-r
 import MenuTabularOnLeft from "../pages/MainMenu";
 import {Link} from "react-router-dom";
 import HeaderMenu from "../pages/HeaderMenu";
-
-/**
- * This class handles how the Patient Detail page will be displayed.
- * Used for UI Mockup.
- */
 
 const options = [
     {key: 'w', text: 'Weeks', value: 'weeks'},

@@ -1,3 +1,9 @@
+/**
+ * Class: AddUsersForm
+ * Summary:
+ *  Contains the contents and functionality of the AddUser page.
+ */
+
 import React from "react";
 
 class AddUsersForm extends  React.Component {

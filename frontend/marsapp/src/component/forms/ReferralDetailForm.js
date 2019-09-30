@@ -1,3 +1,9 @@
+/**
+ * Class: ReferralDetailForm
+ * Summary:
+ *  Contains the contents and functionality of the Referral Detail page.
+ */
+
 import React from "react";
 import MenuTabularOnLeft from "../pages/MainMenu";
 import {connect} from "react-redux";

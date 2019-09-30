@@ -1,3 +1,8 @@
+/**
+ * Summary:
+ *  ontains the confirm email message to verify account.
+ */
+
 import React from "react";
 import { Message } from "semantic-ui-react";
 

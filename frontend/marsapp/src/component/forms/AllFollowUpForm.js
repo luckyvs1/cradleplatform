@@ -1,3 +1,9 @@
+/**
+ * Class: AllFollowUpForm
+ * Summary:
+ *  Contains the contents and functionality of the FollowUp page.
+ */
+
 import React from "react";
 import Paper from "@material-ui/core/Paper";
 import Table from "@material-ui/core/Table";

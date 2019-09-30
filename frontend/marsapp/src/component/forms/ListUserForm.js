@@ -1,5 +1,10 @@
-import React from "react";
+/**
+ * Class: ListUserForm
+ * Summary:
+ *  Contains the contents and functionality of the List of Users page.
+ */
 
+import React from "react";
 import {
     Button,
     Icon,

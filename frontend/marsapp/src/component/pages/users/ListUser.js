@@ -1,3 +1,9 @@
+/**
+ * Class: ListUser
+ * Summary:
+ *  Base file for showing contents of List of User page.
+ */
+
 import React from "react";
 import {connect} from "react-redux";
 import {testAPICALL} from "../../../actions/auth";
