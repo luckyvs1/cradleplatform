@@ -779,9 +779,13 @@ li a {
 }
 
 
-
-
-
+.fields div {
+    padding-top: 1rem;
+    }
+.fields label{
+    padding-right:10%;
+    width: calc(100% - 70%);
+}
 
 
 

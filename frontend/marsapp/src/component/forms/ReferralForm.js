@@ -119,49 +119,52 @@ class ReferralForm extends React.Component {
             <div className="ui-toolbar">
                 <HeaderMenu></HeaderMenu>
                 <Grid>
-                    <Grid.Column width={3}>
+                    <Grid.Column width={1}>
+                    </Grid.Column>
+                    <Grid.Column width={2}>
+                        <Form size={'small'}>
+                            <Form.Group  grouped width={'equal'}>
+                                <Form.Field>
+                                    <label>Assign To:</label>
+                                    <Dropdown
+                                        placeholder='Select Assignee'
+                                        fluid
+                                        selection
+                                        options={friendOptions}
+                                    />
+                                </Form.Field>
+                                <Form.Field>
+                                    <label>Status:</label>
+                                    <Dropdown
+                                        placeholder='Select Status'
+                                        fluid
+                                        selection
+                                        options={friendOptions}
+                                    />
+                                </Form.Field>
+                                <Form.Field>
+                                    <label>Sort By:</label>
+                                    <Dropdown
+                                        placeholder='Select Sort By'
+                                        fluid
+                                        selection
+                                        options={friendOptions}
+                                    />
+                                </Form.Field>
+                                <Form.Field
+                                    as={Link} to="/createReferral">
+                                    <label><br/></label>
+                                    <input type="submit" value="New Referral" />
+                                </Form.Field>
+                            </Form.Group>
+                        </Form>
                     </Grid.Column>
                     <Grid.Column  width={13}>
                         <Grid.Column  width={9}>
                             <h3>
                                 Referral
                             </h3>
-                            <Form>
-                                <Form.Group  inlined width={'equal'}>
-                                    <Form.Field>
-                                        <label>Assign To:</label>
-                                        <Dropdown
-                                            placeholder='Select Assignee'
-                                            fluid
-                                            selection
-                                            options={friendOptions}
-                                        />
-                                    </Form.Field>
-                                    <Form.Field>
-                                        <label>Status:</label>
-                                        <Dropdown
-                                            placeholder='Select Status'
-                                            fluid
-                                            selection
-                                            options={friendOptions}
-                                        />
-                                    </Form.Field>
-                                    <Form.Field>
-                                        <label>Sort By:</label>
-                                        <Dropdown
-                                            placeholder='Select Sort By'
-                                            fluid
-                                            selection
-                                            options={friendOptions}
-                                        />
-                                    </Form.Field>
-                                    <Form.Field
-                                        as={Link} to="/createReferral">
-                                        <label><br/></label>
-                                        <input type="submit" value="New Referral" />
-                                    </Form.Field>
-                                </Form.Group>
-                            </Form>
+
                         </Grid.Column>
                         <Grid.Column>
                                 <Paper className={useStyles.root}>

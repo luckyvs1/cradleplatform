@@ -29,12 +29,14 @@ import {
     Row
 } from 'semantic-ui-react'
 import HeaderMenu from "../pages/HeaderMenu";
+import Tabs from "react-bootstrap/Tabs";
+import Tab from "react-bootstrap/Tab";
 
 const statusGreen = {
     backgroundColor: "green"
 };
 
-class ReferralDetailForm extends  React.Component {
+class ReferralDetailForm extends React.Component {
     // funcitons
 //    states
     //submit
@@ -88,264 +90,341 @@ class ReferralDetailForm extends  React.Component {
         ];
 
         return (
-            <div className="ui-toolbar">
+            <div className="ui-toolbar  ">
                 <HeaderMenu></HeaderMenu>
 
                 <Grid>
-                    <Grid.Column width={3}>
+                    <Grid.Column width={1}></Grid.Column>
+                    <Grid.Column width={2}>
+                        <Form size={'small  '}>
+                            <Form.Group grouped>
+                                <Form.Field>
+                                    <label>Assign To:</label>
+                                    <Dropdown
+                                        placeholder='Select Assignee'
+                                        fluid
+                                        selection
+                                        options={friendOptions}
+                                    />
+                                </Form.Field>
+                                <Form.Field>
+                                    <label>Status:</label>
+                                    <Dropdown
+                                        placeholder='Select Status'
+                                        fluid
+                                        selection
+                                        options={statusOptions}
+                                    />
+                                </Form.Field>
+                            </Form.Group>
+                        </Form>
                     </Grid.Column>
-                    <Grid.Column  width={13}>
-                        <Grid.Column  width={9}>
-                            <Form size={'small'}>
-                                <Form.Group inline>
-                                    <Form.Field inline>
-                                        <label>Assign To:</label>
-                                        <Dropdown
-                                            placeholder='Select Assignee'
-                                            fluid
-                                            selection
-                                            options={friendOptions}
-                                        />
-                                    </Form.Field>
-                                    <Form.Field>
-                                        <label>Status:</label>
-                                        <Dropdown
-                                            placeholder='Select Status'
-                                            fluid
-                                            selection
-                                            options={statusOptions}
-                                        />
-                                    </Form.Field>
-                                </Form.Group>
-                            </Form>
-                        </Grid.Column>
-                        <Grid.Column>
-                            <Table>
-                                <TableHead>
-                                    <TableRow>
-                                        <TableCell colSpan={4} align="left">
-                                            Patient Info
-                                        </TableCell>
-                                    </TableRow>
-                                </TableHead>
-                                <TableRow>
-                                    <TableCell align="right">
-                                        <b>Patient ID: </b>  <br />
-                                        <b>Initials: </b> <br />
-                                        <b>Age: </b> <br />
-                                        <b>Sex: </b> <br />
-                                        <b>Pregnant: </b> <br />
-                                        <b>Gestation Age: </b> <br />
-                                    </TableCell>
-                                    <TableCell align="left">
-                                        0123456 <br />
-                                        AS <br />
-                                        35 <br />
-                                        Female <br />
-                                        Yes <br />
-                                        5 Months <br />
-                                    </TableCell>
-                                    <TableCell align="right">
-                                        <b>Zone: </b>  <br />
-                                        <b>Block No: </b>  <br />
-                                        <b>Tank No: </b>  <br />
-                                        <b>Village No: </b> <br />
-                                        <b>Houshold No: </b> <br />
-                                    </TableCell>
-                                    <TableCell align="left">
-                                        5 <br />
-                                        5 <br />
-                                        5 <br />
-                                        5 <br />
-                                        5 <br />
-                                    </TableCell>
-                                </TableRow>
-                                <TableRow><TableCell colspan={4}/></TableRow>
-                            </Table>
-                        </Grid.Column>
+                    <Grid.Column width={13}>
 
-                        <Grid.Column>
-                            <Table>
-                                <TableHead>
-                                    <TableRow>
-                                        <TableCell colSpan={4} align="left">
-                                            Referral Detail
-                                        </TableCell>
-                                    </TableRow>
-                                </TableHead>
-                                <TableRow>
-                                    <TableCell align="right">
-                                        <b>Date: </b>  <br />
-                                        <b>Referrer: </b> <br />
-                                        <b>Referred to: </b> <br />
-                                    </TableCell>
-                                    <TableCell align="left">
-                                        2019/05/05 <br />
-                                        John Smith <br />
-                                        health_facility_name <br />
-                                    </TableCell>
-                                    <TableCell align="right">
-                                        <b>Blood Pressure: </b>  <br />
-                                        <b>Heart Rate: </b>  <br />
-                                        <b>Status: </b>  <br />
-                                    </TableCell>
-                                    <TableCell align="left">
-                                        120/80 <br />
-                                        60 <br />
-                                        <span style={statusGreen}>Likely Healthy</span> <br />
-                                    </TableCell>
-                                </TableRow>
-                                <TableRow>
-                                    <TableCell>
-                                        <b>Symptoms:</b>
-                                    </TableCell>
-                                    <TableCell colSpan={3} >
-                                        <Form size={'small'}>
-                                            <Form.Group grouped>
-                                                <Form.Field
-                                                    control={Checkbox}
-                                                    label='No Symptoms (patient Healthy)'
-                                                />
-                                                <Form.Field
-                                                    control={Checkbox}
-                                                    label='Headache'
-                                                />
-                                                <Form.Field
-                                                    control={Checkbox}
-                                                    label='Blurred vision'
-                                                />
-                                                <Form.Field
-                                                    control={Checkbox}
-                                                    label='Abdominal pain'
-                                                />
-                                                <Form.Field
-                                                    control={Checkbox}
-                                                    label='Bleeding'
-                                                />
-                                                <Form.Field
-                                                    control={Checkbox}
-                                                    label='Feverish'
-                                                />
-                                                <Form.Field
-                                                    control={Checkbox}
-                                                    label='Unwell'
-                                                />
+                        <Tabs className="" size={'large'}>
+                            <Tab eventKey="t" title="Patient Information">
+                                <Grid>
+                                    <Grid.Column width={8}>
+                                        <Form.Group grouped>
+                                            <Form.Field
+                                                control={Input}
+                                                label='Patient ID:'
+                                                value={'0123456'}
+                                            />
+                                            <Form.Field
+                                                control={Input}
+                                                label='Initials: '
+                                                value={'AS'}
+                                            />
+                                            <Form.Field
+                                                control={Input}
+                                                label='Age:'
+                                                value={'35'}
+
+                                            />
+                                            <Form.Field
+                                                control={Input}
+                                                label='Sex:'
+                                                value={'Female'}
+
+                                            />
+                                            <Form.Field
+                                                control={Input}
+                                                label='Pregnant:'
+                                                value={'Yes'}
+
+                                            />
+                                            <Form.Field
+                                                control={Input}
+                                                label='Age:'
+                                                value={'5 Months '}
+                                            />
+                                        </Form.Group>
+                                    </Grid.Column>
+                                    <Grid.Column width={8}>
+                                        <Form.Group grouped>
+                                            <Form.Field
+                                                control={Input}
+                                                label='Zone:'
+                                                value={'5'}
+                                            />
+                                            <Form.Field
+                                                control={Input}
+                                                label='Block No: '
+                                                value={'5'}
+                                            />
+                                            <Form.Field
+                                                control={Input}
+                                                label='Tank No:'
+                                                value={'5'}
+
+                                            />
+                                            <Form.Field
+                                                control={Input}
+                                                label='Village No:'
+                                                value={'5'}
+
+                                            />
+                                            <Form.Field
+                                                control={Input}
+                                                label='Houshold No:'
+                                                value={'5'}
+
+                                            />
+                                        </Form.Group>
+
+                                    </Grid.Column>
+                                </Grid>
+                            </Tab>
+                            <Tab eventKey="tt" title="Referral Detail">
+                                <Grid>
+                                    <Grid.Column width={8}>
+                                        <Form.Group grouped>
+                                            <Form.Field
+                                                control={Input}
+                                                label='Date:'
+                                                value={'2019/05/05 '}
+                                            />
+                                            <Form.Field
+                                                control={Input}
+                                                label='Referrer: '
+                                                value={'John Smith'}
+                                            />
+                                            <Form.Field
+                                                control={Input}
+                                                label='Referred to:'
+                                                value={'health_facility_name '}
+                                            />
+                                        </Form.Group>
+                                    </Grid.Column>
+                                    <Grid.Column width={8}>
+                                        <Form.Group grouped>
+                                            <Form.Field
+                                                control={Input}
+                                                label='Blood Pressure:'
+                                                value={' 120/80 '}
+                                            />
+                                            <Form.Field
+                                                control={Input}
+                                                label='Heart Rate: '
+                                                value={'60'}
+                                            />
+                                            <Form.Field
+                                                control={Input}
+                                                label='Status:'
+                                                value={'ikely Healthy'}
+                                            />
+                                        </Form.Group>
+
+                                    </Grid.Column>
+                                </Grid>
+                                <Grid.Column>
+                                    <Grid>
+                                        <Grid.Column width={3}>
+                                            <Form size={'small'}>
+                                                <Form.Group grouped>
+                                                    <Form.Field
+                                                        control={Checkbox}
+                                                        label='No Symptoms (patient Healthy)'
+                                                    />
+                                                    <Form.Field
+                                                        control={Checkbox}
+                                                        label='Headache'
+                                                    />
+                                                </Form.Group>
+                                            </Form>
+
+                                        </Grid.Column>
+                                        <Grid.Column width={3}>
+                                            <Form size={'small'}>
+                                                <Form.Group grouped>
+                                                    <Form.Field
+                                                        control={Checkbox}
+                                                        label='Headache'
+                                                    />
+                                                    <Form.Field
+                                                        control={Checkbox}
+                                                        label='Blurred vision'
+                                                    />
+                                                    <Form.Field
+                                                        control={Checkbox}
+                                                        label='Abdominal pain'
+                                                    />
+                                                </Form.Group>
+                                            </Form>
+                                        </Grid.Column>
+                                        <Grid.Column width={3}>
+                                            <Form size={'small'}>
+                                                <Form.Group grouped>
+                                                    <Form.Field
+                                                        control={Checkbox}
+                                                        label='Bleeding'
+                                                    />
+                                                    <Form.Field
+                                                        control={Checkbox}
+                                                        label='Feverish'
+                                                    />
+                                                    <Form.Field
+                                                        control={Checkbox}
+                                                        label='Unwell'
+                                                    />
+                                                </Form.Group>
+                                            </Form>
+                                        </Grid.Column>
+                                        <Grid.Column width={5}>
+                                            <Form size={'large'}>
                                                 <Form.Field
                                                     control={TextArea}
                                                     label='Other Symptoms'
                                                     placeholder='Tell us more about you... that is breaking'
                                                 />
-                                            </Form.Group>
-                                        </Form>
-                                    </TableCell>
-                                </TableRow>
-                                <TableRow>
-                                    <TableCell colspan={4}>
+                                                <Form.Field
+                                                    control={TextArea}
+                                                    label='Comments'
+                                                    placeholder='Additional comments and actions taken...'
+                                                />
+
+                                            </Form>
+                                        </Grid.Column>
+                                    </Grid>
+                                </Grid.Column>
+                            </Tab>
+                            <Tab eventKey="ttt" title="Diagnosis Detail">
+                                <Grid>
+                                    <Grid.Column width={8}>
                                         <Form size={'small'}>
                                             <Form.Field
-                                                control={TextArea}
-                                                label='Comments'
-                                                placeholder='Additional comments and actions taken...'
+                                                control={Input}
+                                                label='Date:'
+                                                value={'2019/05/15'}
                                             />
-                                        </Form>
-                                    </TableCell>
-                                </TableRow>
-                                <TableRow><TableCell colspan={4}/></TableRow>
-                            </Table>
-                        </Grid.Column>
+                                            <Form.Field
+                                                control={Input}
+                                                label='Healthworker:'
+                                                value={'Mary Sue'}
+                                            />
 
-                        <Grid.Column>
-                            <Table>
-                                <TableHead>
-                                    <TableRow>
-                                        <TableCell colSpan={4} align="left">
-                                            Diagnosis Detail
-                                        </TableCell>
-                                    </TableRow>
-                                </TableHead>
-                                <TableRow>
-                                    <TableCell align="right">
-                                        <b>Date: </b>  <br />
-                                        <b>Healthworker: </b> <br />
-                                    </TableCell>
-                                    <TableCell align="left">
-                                        2019/05/15 <br />
-                                        Mary Sue <br />
-                                    </TableCell>
-                                    <TableCell align="right">
-                                        <b>Blood Pressure: </b>  <br />
-                                        <b>Heart Rate: </b>  <br />
-                                        <b>Status: </b>  <br />
-                                    </TableCell>
-                                    <TableCell align="left">
-                                        120/80 <br />
-                                        60 <br />
-                                        <span style={statusGreen}>Likely Healthy</span> <br />
-                                    </TableCell>
-                                </TableRow>
-                                <TableRow>
-                                    <TableCell>
-                                        <b>Symptoms:</b>
-                                    </TableCell>
-                                    <TableCell colSpan={3} >
+                                        </Form>
+                                    </Grid.Column>
+                                    <Grid.Column width={8}>
                                         <Form size={'small'}>
-                                            <Form.Group grouped>
-                                                <Form.Field
-                                                    control={Checkbox}
-                                                    label='No Symptoms (patient Healthy)'
-                                                />
-                                                <Form.Field
-                                                    control={Checkbox}
-                                                    label='Headache'
-                                                />
-                                                <Form.Field
-                                                    control={Checkbox}
-                                                    label='Blurred vision'
-                                                />
-                                                <Form.Field
-                                                    control={Checkbox}
-                                                    label='Abdominal pain'
-                                                />
-                                                <Form.Field
-                                                    control={Checkbox}
-                                                    label='Bleeding'
-                                                />
-                                                <Form.Field
-                                                    control={Checkbox}
-                                                    label='Feverish'
-                                                />
-                                                <Form.Field
-                                                    control={Checkbox}
-                                                    label='Unwell'
-                                                />
+                                            <Form.Field
+                                                control={Input}
+                                                label='Blood Pressure: '
+                                                value={'120/80'}
+                                            />
+                                            <Form.Field
+                                                control={Input}
+                                                label='Heart Rate:'
+                                                value={'60'}
+                                            />
+                                            <Form.Field
+                                                control={Input}
+                                                label='Status:'
+                                                value={'Likely Healthy'}
+                                            />
+
+                                        </Form>
+                                    </Grid.Column>
+                                </Grid>
+                                <Grid.Column>
+                                    <Grid>
+                                        <Grid.Column width={3}>
+                                            <Form size={'small'}>
+                                                <Form.Group grouped>
+                                                    <Form.Field
+                                                        control={Checkbox}
+                                                        label='No Symptoms (patient Healthy)'
+                                                    />
+                                                    <Form.Field
+                                                        control={Checkbox}
+                                                        label='Headache'
+                                                    />
+                                                </Form.Group>
+                                            </Form>
+
+                                        </Grid.Column>
+                                        <Grid.Column width={3}>
+                                            <Form size={'small'}>
+                                                <Form.Group grouped>
+                                                    <Form.Field
+                                                        control={Checkbox}
+                                                        label='Headache'
+                                                    />
+                                                    <Form.Field
+                                                        control={Checkbox}
+                                                        label='Blurred vision'
+                                                    />
+                                                    <Form.Field
+                                                        control={Checkbox}
+                                                        label='Abdominal pain'
+                                                    />
+                                                </Form.Group>
+                                            </Form>
+                                        </Grid.Column>
+                                        <Grid.Column width={3}>
+                                            <Form size={'small'}>
+                                                <Form.Group grouped>
+                                                    <Form.Field
+                                                        control={Checkbox}
+                                                        label='Bleeding'
+                                                    />
+                                                    <Form.Field
+                                                        control={Checkbox}
+                                                        label='Feverish'
+                                                    />
+                                                    <Form.Field
+                                                        control={Checkbox}
+                                                        label='Unwell'
+                                                    />
+                                                </Form.Group>
+                                            </Form>
+                                        </Grid.Column>
+                                        <Grid.Column width={5}>
+                                            <Form size={'small'}>
                                                 <Form.Field
                                                     control={TextArea}
                                                     label='Other Symptoms'
                                                     placeholder='Tell us more about you... that is breaking'
                                                 />
-                                            </Form.Group>
-                                        </Form>
-                                    </TableCell>
-                                </TableRow>
-                                <TableRow>
-                                    <TableCell colspan={4}>
-                                        <Form size={'small'}>
-                                            <Form.Field
-                                                control={TextArea}
-                                                label='Follow-up Care Needed'
-                                                placeholder='Follow-up care detail...'
-                                            />
-                                            <Form.Field
-                                                control={TextArea}
-                                                label='Diagnosis'
-                                                placeholder='Diagnosis...'
-                                            />
-                                        </Form>
-                                    </TableCell>
-                                </TableRow>
-                                <TableRow><TableCell colspan={4}/></TableRow>
-                            </Table>
-                        </Grid.Column>
+                                                <Form.Field
+                                                    control={TextArea}
+                                                    label='Follow-up Care Needed'
+                                                    placeholder='Follow-up care detail...'
+                                                />
+                                                <Form.Field
+                                                    control={TextArea}
+                                                    label='Diagnosis'
+                                                    placeholder='Diagnosis...'
+                                                />
+                                            </Form>
+                                        </Grid.Column>
+                                    </Grid>
+                                </Grid.Column>
+                            </Tab>
+                        </Tabs>
+
+
                     </Grid.Column>
                 </Grid>
             </div>
