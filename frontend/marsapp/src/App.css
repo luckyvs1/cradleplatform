@@ -18,7 +18,7 @@ root {
 }
 
 html, body {
-    background: linear-gradient(to right, rgba(166, 170, 192, 0.91), #495d65);
+    background: linear-gradient(to right, rgba(192, 151, 153, 0.91), #535365);
     color: rgba(0, 0, 0, 1);
     font-family: 'Noto Sans HK', sans-serif;
     font-size: 1rem !important;
