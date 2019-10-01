@@ -30,7 +30,6 @@ class AddReadingForm extends  React.Component {
             <div className="ui-toolbar">
                 <Grid>
                     <Grid.Column width={3}>
-                        <MenuTabularOnLeft></MenuTabularOnLeft>
                     </Grid.Column>
                     <Grid.Column width={13}>
                         <Grid.Column>

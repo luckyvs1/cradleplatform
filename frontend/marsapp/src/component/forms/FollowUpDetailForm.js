@@ -44,7 +44,6 @@ class FollowUpDetailForm extends  React.Component {
                 <HeaderMenu></HeaderMenu>
                 <Grid>
                     <Grid.Column width={3}>
-                        <MenuTabularOnLeft/>
                     </Grid.Column>
                     <Grid.Column width={11}>
                         <h3>

@@ -120,7 +120,6 @@ class ReferralForm extends React.Component {
                 <HeaderMenu></HeaderMenu>
                 <Grid>
                     <Grid.Column width={3}>
-                        <MenuTabularOnLeft></MenuTabularOnLeft>
                     </Grid.Column>
                     <Grid.Column  width={13}>
                         <Grid.Column  width={9}>

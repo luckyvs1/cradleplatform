@@ -8,6 +8,7 @@ import {Menu ,Icon, Dropdown} from "semantic-ui-react";
 import {Link} from "react-router-dom";
 import React from "react";
 import {Grid} from 'semantic-ui-react'
+import MenuTabularOnLeft from "./MainMenu";
 
 export default class HeaderMenu extends React.Component {
     state = { activeItem: 'bio' }
@@ -19,15 +20,18 @@ export default class HeaderMenu extends React.Component {
 
         return (
             <Grid>
-                <Grid.Column width={5}>
+
+                <Grid.Column width={2}>
+                    <MenuTabularOnLeft></MenuTabularOnLeft>
+                </Grid.Column>
+                <Grid.Column width={6}>
                     <h1>Cradle Platform</h1>
                 </Grid.Column>
-                <Grid.Column width={6}  floated='right'>
+                <Grid.Column width={4}  floated='right'>
                     <div className="my-btn">
                         <div className="my-btn-border"></div>
                         <i className="fas fa-bell btn-bell"></i>
                     </div>
-
                     <Menu horizontal secondary floated='right'>
                         <Menu.Item
                             as={Link} to="/homePage"

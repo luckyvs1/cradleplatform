@@ -33,7 +33,6 @@ class ListUserForm extends  React.Component {
                 <HeaderMenu></HeaderMenu>
                 <Grid>
                     <Grid.Column width={3}>
-                        <MenuTabularOnLeft></MenuTabularOnLeft>
                     </Grid.Column>
                     <Grid.Column width={13}>
                         <h3>

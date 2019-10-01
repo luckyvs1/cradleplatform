@@ -20,7 +20,6 @@ class ReadingForm extends  React.Component {
                 JUST FOR TESTING FOMR
                 <Grid>
                     <Grid.Column width={3}>
-                        <MenuTabularOnLeft></MenuTabularOnLeft>
                     </Grid.Column>
                     <Grid.Column width={13}>
                         <Grid.Column>

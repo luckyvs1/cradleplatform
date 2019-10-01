@@ -43,7 +43,6 @@ export default class PatientDetailForm extends React.Component {
                 <HeaderMenu></HeaderMenu>
                 <Grid>
                     <Grid.Column width={3}>
-                        <MenuTabularOnLeft/>
                     </Grid.Column>
                     <Grid.Column width={12}>
                         <h3>Patient Detail</h3>
