@@ -312,7 +312,7 @@ class ReferralDetailForm extends React.Component {
                             <Tab eventKey="ttt" title="Diagnosis Detail">
                                 <Grid>
                                     <Grid.Column width={8}>
-                                        <Form size={'small'}>
+                                        <Form.Group grouped>
                                             <Form.Field
                                                 control={Input}
                                                 label='Date:'
@@ -323,11 +323,11 @@ class ReferralDetailForm extends React.Component {
                                                 label='Healthworker:'
                                                 value={'Mary Sue'}
                                             />
-
-                                        </Form>
+                                        </Form.Group>
                                     </Grid.Column>
                                     <Grid.Column width={8}>
-                                        <Form size={'small'}>
+                                        <Form.Group grouped>
+
                                             <Form.Field
                                                 control={Input}
                                                 label='Blood Pressure: '
@@ -343,8 +343,7 @@ class ReferralDetailForm extends React.Component {
                                                 label='Status:'
                                                 value={'Likely Healthy'}
                                             />
-
-                                        </Form>
+                                        </Form.Group>
                                     </Grid.Column>
                                 </Grid>
                                 <Grid.Column>
