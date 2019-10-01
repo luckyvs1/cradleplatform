@@ -36,7 +36,7 @@ class MenuLinks extends React.Component {
             }, {
                 text: 'List All Patients',
                 link: '/listPatient',
-                icon: 'grid user'
+                icon: 'grid list ul'
 
             }, {
                 text: 'Find Patient',
@@ -46,7 +46,7 @@ class MenuLinks extends React.Component {
             }, {
                 text: 'Add Patient',
                 link: '/addPatient',
-                icon: 'grid user'
+                icon: 'grid add square'
 
             }, {
                 text: 'Account',

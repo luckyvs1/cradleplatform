@@ -38,38 +38,49 @@ class AddPatientFrom extends React.Component {
                             Add Patient
                         </h3>
                         <Grid.Column>
-                            <Form size={'small'}>
-                                <Form.Group grouped>
-                                    <Form.Field
-                                        control={Input}
-                                        label='Patient ID'
-                                        placeholder='Patient ID'
-                                    />
-                                    <Form.Field
-                                        control={Input}
-                                        label='Initials'
-                                        placeholder='Initials'
-                                    />
-                                    <Form.Field
-                                        control={Input}
-                                        label='Age'
-                                        placeholder='Age'
-                                    />
-                                    <Form.Field
-                                        control={Checkbox}
-                                        label='Pregnant'
-                                        placeholder='Pregnant'
-                                    />
-                                    <Form.Field
-                                        control={Input}
-                                        label='Gestational Age'
-                                        placeholder='Gestational Age'
-                                    />
-                                    <input type="submit" value="Submit"/>
-                                </Form.Group>
-                            </Form>
+                            <Form.Group grouped>
+                                <Form.Field
+                                    control={Input}
+                                    label='Patient ID'
+                                    placeholder='Patient ID'
+                                />
+                                <Form.Field
+                                    control={Input}
+                                    label='Initials'
+                                    placeholder='Initials'
+                                />
+                            </Form.Group>
+                        </Grid.Column>
+                        <Grid.Column>
+                            <Form.Group grouped>
+                                <Form.Field
+                                    control={Input}
+                                    label='Age'
+                                    placeholder='Age'
+                                />
+                                <Form.Field
+                                    control={Checkbox}
+                                    label='Pregnant'
+                                    placeholder='Pregnant'
+                                />
+                                <Form.Field
+                                    control={Input}
+                                    label='Gestational Age'
+                                    placeholder='Gestational Age'
+                                />
+                            </Form.Group>
                         </Grid.Column>
                     </Grid.Column>
+                </Grid>
+                <Grid>
+                    <Grid.Row>
+                        <Grid.Column width={10}>
+                        </Grid.Column>
+                        <Grid.Column widht={6}>
+                            <input type="submit" value="Submit"/>
+
+                        </Grid.Column>
+                    </Grid.Row>
                 </Grid>
             </div>
 

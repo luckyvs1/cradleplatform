@@ -2,12 +2,10 @@
  * Summary:
  *  Handles the common CSS for all the pages.
  */
-
 @import url('https://fonts.googleapis.com/css?family=Noto+Sans+HK&display=swap');
 @import url('https://use.fontawesome.com/releases/v5.6.3/css/solid.css');
 @import url('https://use.fontawesome.com/releases/v5.6.3/css/fontawesome.css');
 @import url('https://fonts.googleapis.com/css?family=Roboto:300,400');
-
 
 
 root {
@@ -78,6 +76,7 @@ ui-header {
 .ui-toolbar a:hover {
     background: rgba(0, 0, 0, .25);
 }
+
 .ui-toolbar h1 {
     font-family: "Comic Sans MS", cursive, sans-serif;
     font-weight: bold;
@@ -536,8 +535,6 @@ ui-header {
 }
 
 
-
-
 .my-btn, .btn-bell {
     border-radius: 50%;
     position: absolute;
@@ -545,6 +542,7 @@ ui-header {
     left: 50%;
     transform: translate(-50%, -50%);
 }
+
 .my-btn {
     height: 60px;
     width: 60px;
@@ -556,6 +554,7 @@ ui-header {
     animation-duration: 2s;
     animation-iteration-count: infinite;
 }
+
 .my-btn-border {
     height: 59px;
     width: 59px;
@@ -563,13 +562,14 @@ ui-header {
     animation-name: bord-pop;
     animation-duration: 2s;
     animation-iteration-count: infinite;
-    box-shadow: 2px 2px 5px #ccc, -2px -2px 5px #ccc ;
+    box-shadow: 2px 2px 5px #ccc, -2px -2px 5px #ccc;
     border-radius: 50%;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
 }
+
 .btn-bell {
     color: white;
     font-size: 20px;
@@ -577,6 +577,7 @@ ui-header {
     animation-duration: 2s;
     animation-iteration-count: infinite;
 }
+
 @keyframes bord-pop {
     0% {
         transform: translate(-50%, -50%);
@@ -590,20 +591,22 @@ ui-header {
         opacity: 0;
     }
 }
+
 @keyframes col {
     0% {
-        transform: scale(1) translate(0,0);
+        transform: scale(1) translate(0, 0);
     }
     10% {
-        transform: scale(1.1) translate(0,0);
+        transform: scale(1.1) translate(0, 0);
     }
     75% {
-        transform: scale(1) translate(0,0);
+        transform: scale(1) translate(0, 0);
     }
     100% {
-        transform: scale(1) translate(0,0);
+        transform: scale(1) translate(0, 0);
     }
 }
+
 @keyframes bell-ring {
     0% {
         transform: translate(-50%, -50%);
@@ -614,16 +617,13 @@ ui-header {
     10%, 20% {
         transform: translate(-50%, -50%) rotate(-25deg);
     }
-    25%  {
+    25% {
         transform: translate(-50%, -50%) rotate(0deg);
     }
     100% {
         transform: translate(-50%, -50%) rotate(0deg);
     }
 }
-
-
-
 
 
 .menubar {
@@ -657,6 +657,7 @@ ui-header {
     transition: 0.5s ease-in-out;
     cursor: pointer;
 }
+
 #hambmenu span {
     position: absolute;
     height: 5px;
@@ -725,7 +726,7 @@ ui-header {
     height: calc(90vh - 60px);
     width: 157%;
     left: -15% !important;
-    top:22% !important;
+    top: 22% !important;
     background-color: #5e5e5e;
     -webkit-transform: translateX(-200%);
     transform: translateX(-78%);
@@ -734,6 +735,7 @@ ui-header {
     transition: transform 300ms, -webkit-transform 300ms;
     z-index: 10;
 }
+
 #menu ul {
     margin-top: 0px;
     padding: 0px;
@@ -741,11 +743,13 @@ ui-header {
     list-style-type: none;
     text-align: left;
 }
+
 #menu li {
     padding: 10px 0 10px 10px;
     font-size: 1.5em;
     border-bottom: 1px solid rgba(0, 0, 0, 0.14);
 }
+
 #menu li:last-child {
     border-bottom: none;
 }
@@ -764,7 +768,8 @@ li a {
     -webkit-transform: none;
     transform: none;
 }
-#menu.isopen i{
+
+#menu.isopen i {
 }
 
 @media screen and (max-width: 65px) {
@@ -775,19 +780,22 @@ li a {
 
 
 .ui.vertical.tabular.menu {
-    border-right:0;
+    border-right: 0;
 }
 
 
 .fields div {
     padding-top: 1rem;
-    }
-.fields label{
-    padding-right:10%;
+}
+
+.fields label {
+    padding-right: 10%;
     width: calc(100% - 70%);
 }
 
-
+.fields div .ui.fluid.dropdown {
+    width: calc(100% - 70%);
+}
 
 
 
