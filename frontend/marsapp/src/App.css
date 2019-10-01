@@ -722,10 +722,10 @@ ui-header {
 
 #menu {
     position: absolute;
-    height: calc(100vh - 60px);
+    height: calc(90vh - 60px);
     width: 157%;
     left: -15% !important;
-    top:23% !important;
+    top:22% !important;
     background-color: #5e5e5e;
     -webkit-transform: translateX(-200%);
     transform: translateX(-78%);

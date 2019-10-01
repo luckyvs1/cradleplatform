@@ -28,6 +28,7 @@ import {
     Grid,
     Row
 } from 'semantic-ui-react'
+import HeaderMenu from "../pages/HeaderMenu";
 
 const statusGreen = {
     backgroundColor: "green"
@@ -88,6 +89,8 @@ class ReferralDetailForm extends  React.Component {
 
         return (
             <div className="ui-toolbar">
+                <HeaderMenu></HeaderMenu>
+
                 <Grid>
                     <Grid.Column width={3}>
                     </Grid.Column>

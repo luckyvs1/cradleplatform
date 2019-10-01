@@ -7,6 +7,7 @@
 import React from "react";
 import MenuTabularOnLeft from "../../pages/MainMenu";
 import {Checkbox, Form, Input, Select, Grid, List, TextArea} from "semantic-ui-react";
+import HeaderMenu from "../../pages/HeaderMenu";
 
 class ReadingForm extends  React.Component {
     // funcitons
@@ -17,7 +18,8 @@ class ReadingForm extends  React.Component {
     render() {
         return (
             <div className="ui-toolbar">
-                JUST FOR TESTING FOMR
+                <HeaderMenu></HeaderMenu>
+
                 <Grid>
                     <Grid.Column width={3}>
                     </Grid.Column>
