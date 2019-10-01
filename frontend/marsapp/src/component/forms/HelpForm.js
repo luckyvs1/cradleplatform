@@ -6,8 +6,9 @@
 
 import React from "react";
 import MenuTabularOnLeft from "../pages/MainMenu";
-import {Checkbox,Embed, Form, Input, Select, Grid, List, TextArea} from "semantic-ui-react";
+import {Checkbox,Embed, Tab,Form, Input, Select, Grid, List, TextArea} from "semantic-ui-react";
 import HeaderMenu from "../pages/HeaderMenu";
+import {makeStyles} from "@material-ui/core";
 const EmbedExampleYouTube = () => (
     <Embed
         id='AMlBuC60LUQ'
@@ -23,11 +24,24 @@ const EmbedExampleYouTube1 = () => (
     />
 )
 
+const panes = [
+    { menuItem: 'Help Video 1', render: () => <Tab.Pane><EmbedExampleYouTube/></Tab.Pane> },
+    { menuItem: 'Help Video 2', render: () => <Tab.Pane><EmbedExampleYouTube1/></Tab.Pane> },
+]
+
+const TabExampleBasic = () => <Tab panes={panes} />
+
+
+
+
+
+
 class HelpForm extends  React.Component {
     // funcitons
 //    states
     //submit
     // validate
+
 
 
     render() {
@@ -41,10 +55,12 @@ class HelpForm extends  React.Component {
                             Learning Materials
                         </h3>
                         <div>
-                            <p>This page will contain links to learning materials and whatnot.</p>
+                            <Grid >
+                                <Grid.Row streched>
+                                    <TabExampleBasic>   </TabExampleBasic>
+                                </Grid.Row>
+                            </Grid>
                         </div>
-                        <EmbedExampleYouTube/>
-                        <EmbedExampleYouTube1/>
                     </Grid.Column>
                 </Grid>
             </div>
