@@ -15,7 +15,7 @@ import {
     Radio,
     Message,
     Select,
-    TextArea,
+    TextArea, Grid,
 } from 'semantic-ui-react'
 import isEmail from "validator/lib/isEmail";
 import InlineError from "../messages/InlineError";
@@ -33,19 +33,19 @@ class SignupForm extends React.Component {
     onChange = e =>
         this.setState({
             ...this.state,
-            data: { ...this.state.data, [e.target.name]: e.target.value }
+            data: {...this.state.data, [e.target.name]: e.target.value}
         });
 
     onSubmit = e => {
         e.preventDefault();
         const errors = this.validate(this.state.data);
-        this.setState({ errors });
+        this.setState({errors});
         if (Object.keys(errors).length === 0) {
-            this.setState({ loading: true });
+            this.setState({loading: true});
             this.props
                 .submit(this.state.data)
                 .catch(err =>
-                    this.setState({ errors: err.response.data.errors, loading: false })
+                    this.setState({errors: err.response.data.errors, loading: false})
                 );
         }
     };
@@ -60,37 +60,53 @@ class SignupForm extends React.Component {
     };
 
     render() {
-        const { data, errors, loading } = this.state;
+        const {data, errors, loading} = this.state;
 
         return (
-            <Form onSubmit={this.onSubmit} loading={loading} size={'massive'}>
-                <Form.Field error={!!errors.email}>
-                    <label htmlFor="email">Email</label>
-                    <input
-                        type="email"
-                        id="email"
-                        name="email"
-                        placeholder="email@email.com"
-                        value={data.email}
-                        onChange={this.onChange}
-                    />
-                    {errors.email && <InlineError text={errors.email} />}
-                </Form.Field>
+            <Grid>
 
-                <Form.Field error={!!errors.password}>
-                    <label htmlFor="password">Password</label>
-                    <input
-                        type="password"
-                        id="password"
-                        name="password"
-                        value={data.password}
-                        onChange={this.onChange}
-                    />
-                    {errors.password && <InlineError text={errors.password} />}
-                </Form.Field>
+                <Grid.Column>
+                    <div className={"stand"}>
+                        <div className={"outer-screen"}>
+                            <div className={"inner-screen"}>
+                                <Grid>
+                                    <Grid.Column width={1}></Grid.Column>
+                                    <Grid.Column width={14}>
+                                        <Form onSubmit={this.onSubmit} loading={loading} size={'large'}>
+                                            <Form.Field error={!!errors.email}>
+                                                <label htmlFor="email">Email</label>
+                                                <input
+                                                    type="email"
+                                                    id="email"
+                                                    name="email"
+                                                    placeholder="email@email.com"
+                                                    value={data.email}
+                                                    onChange={this.onChange}
+                                                />
+                                                {errors.email && <InlineError text={errors.email}/>}
+                                            </Form.Field>
 
-                <Button primary>Sign Up</Button>
-            </Form>
+                                            <Form.Field error={!!errors.password}>
+                                                <label htmlFor="password">Password</label>
+                                                <input
+                                                    type="password"
+                                                    id="password"
+                                                    name="password"
+                                                    value={data.password}
+                                                    onChange={this.onChange}
+                                                />
+                                                {errors.password && <InlineError text={errors.password}/>}
+                                            </Form.Field>
+
+                                            <Button primary>Sign Up</Button>
+                                        </Form>
+                                    </Grid.Column>
+                                </Grid>
+                            </div>
+                        </div>
+                    </div>
+                </Grid.Column>
+            </Grid>
         );
     }
 }
