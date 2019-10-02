@@ -31,6 +31,7 @@ import {
 import HeaderMenu from "../pages/HeaderMenu";
 import Tabs from "react-bootstrap/Tabs";
 import Tab from "react-bootstrap/Tab";
+import {PageWrapper} from "../../wrappers/crd-page";
 
 const statusGreen = {
     backgroundColor: "green"
@@ -90,12 +91,9 @@ class ReferralDetailForm extends React.Component {
         ];
 
         return (
-            <div className="ui-toolbar  ">
-                <HeaderMenu></HeaderMenu>
-
+            <PageWrapper>
                 <Grid>
-                    <Grid.Column width={1}></Grid.Column>
-                    <Grid.Column width={2}>
+                    <Grid.Column width={4}>
                         <Form size={'small  '}>
                             <Form.Group grouped>
                                 <Form.Field>
@@ -119,8 +117,7 @@ class ReferralDetailForm extends React.Component {
                             </Form.Group>
                         </Form>
                     </Grid.Column>
-                    <Grid.Column width={13}>
-
+                    <Grid.Column width={9}>
                         <Tabs className="" size={'large'}>
                             <Tab eventKey="t" title="Patient Information">
                                 <Grid>
@@ -422,11 +419,9 @@ class ReferralDetailForm extends React.Component {
                                 </Grid.Column>
                             </Tab>
                         </Tabs>
-
-
                     </Grid.Column>
                 </Grid>
-            </div>
+            </PageWrapper>
 
         );
     }

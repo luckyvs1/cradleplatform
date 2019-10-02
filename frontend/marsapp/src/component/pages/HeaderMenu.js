@@ -10,6 +10,8 @@ import React from "react";
 import {Grid} from 'semantic-ui-react'
 import MenuTabularOnLeft from "./MainMenu";
 
+
+
 export default class HeaderMenu extends React.Component {
     state = { activeItem: 'bio' }
 

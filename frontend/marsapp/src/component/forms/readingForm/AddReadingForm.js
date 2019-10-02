@@ -20,6 +20,7 @@ import {
 } from 'semantic-ui-react'
 import HeaderMenu from "../../pages/HeaderMenu";
 import {Grow} from "@material-ui/core";
+import {PageWrapper} from "../../../wrappers/crd-page";
 
 class AddReadingForm extends React.Component {
     // funcitons
@@ -29,13 +30,8 @@ class AddReadingForm extends React.Component {
 
     render() {
         return (
-            <div className="ui-toolbar">
-                <HeaderMenu></HeaderMenu>
-
+            <PageWrapper>
                 <Grid>
-
-                    <Grid.Column width={3}>
-                    </Grid.Column>
                     <Grid.Column width={4}>
                         <Form.Group grouped>
                             <Form.Field
@@ -137,7 +133,7 @@ class AddReadingForm extends React.Component {
                         </Grid.Column>
                     </Grid.Row>
                 </Grid>
-            </div>
+            </PageWrapper>
 
         );
     }
