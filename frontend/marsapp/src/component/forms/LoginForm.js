@@ -9,18 +9,12 @@ import PropTypes from "prop-types";
 import Validator from "validator";
 import InlineError from "../messages/InlineError";
 import {
-    Button,
-    Checkbox,
+    Row,
+    Col,
     Form,
-    Input,
-    Radio,
-    Message,
-    Select,
-    TextArea, Grid,
-} from 'semantic-ui-react'
+    Button
+} from 'react-bootstrap';
 import "../../App.css"
-import {Link} from "react-router-dom";
-
 
 class LoginForm extends React.Component {
     //state updates as user types
@@ -72,65 +66,52 @@ class LoginForm extends React.Component {
         const {data, errors, loading} = this.state;
 
         return (
-            <Grid>
-
-                <Grid.Column >
-                    <div className={"stand"}>
-                        <div className={"outer-screen"}>
-                            <div className={"inner-screen"}>
-                                <Grid>
-                                    <Grid.Column width={1}></Grid.Column>
-                                    <Grid.Column width={14}>
-                                        <Form onSubmit={this.onSubmit} loading={loading} size={'large'}>
-                                            {errors.global && (
-                                                <Message negative>
-                                                    <Message.Header>Something went wrong</Message.Header>
-                                                    <p>{errors.global}</p>
-                                                </Message>
-                                            )}
-                                            <Form.Field error={!!errors.email}>
-                                                <label htmlFor="email"> Email</label>
-                                                <input
-                                                    type="email"
-                                                    id="email"
-                                                    name="email"
-                                                    placeholder="example@example.com"
-                                                    value={data.email}
-                                                    onChange={this.onChange}
-                                                />
-                                                {/*error handling*/}
-                                                {errors.email && <InlineError text={errors.email}/>}
-                                            </Form.Field>
-                                            <Form.Field error={!!errors.password}>
-                                                <label htmlFor="password">Password</label>
-                                                <input
-                                                    type="password"
-                                                    id="password"
-                                                    name="password"
-                                                    placeholder="Make it secure"
-                                                    value={data.password}
-                                                    onChange={this.onChange}
-                                                />
-                                                {/*error handling*/}
-                                                {errors.password && <InlineError text={errors.password}/>}
-                                            </Form.Field>
-                                            <Button className={"submit-button"}>Login</Button>
-                                            <Form.Field>
-                                                <Link to="/signup">Sign Up?</Link><br/>
-
-                                                <Link to="/homePage">GO TO HOME</Link>
-                                            </Form.Field>
-                                        </Form>
-
-                                    </Grid.Column>
-                                </Grid>
-                            </div>
-                        </div>
-                    </div>
-
-                </Grid.Column>
-            </Grid>
-
+            <Row>
+                <Col md={4}></Col>
+                <Col md={4}>
+                    <Form onSubmit={this.onSubmit} loading={loading}>
+                        <Row>
+                            <Col>
+                                <Form.Group>
+                                    <Form.Label>Email</Form.Label>
+                                    <Form.Control type="email" placeholder="example@example.com" onChange={this.onChange} value={data.email} />
+                                    <Form.Text className="text-muted">
+                                        {/*error handling*/}
+                                        {errors.password && <InlineError text={errors.password} />}
+                                    </Form.Text>
+                                </Form.Group>
+                            </Col>
+                        </Row>
+                        <Row>
+                            <Col>
+                                <Form.Group>
+                                    <Form.Label>Password</Form.Label>
+                                    <Form.Control type="password" placeholder="Make it secure" onChange={this.onChange} value={data.password} />
+                                    <Form.Text className="text-muted">
+                                        {/*error handling*/}
+                                        {errors.password && <InlineError text={errors.password} />}
+                                    </Form.Text>
+                                </Form.Group>
+                            </Col>
+                        </Row>
+                        <Row>
+                            <Col>
+                                <Button variant="primary" type="submit">
+                                    Login
+                                </Button>
+                            </Col>
+                        </Row>
+                        <Row>
+                            <Col>
+                                <a href="/signup">Sign up?</a>
+                                <a href="/homePage">Go Home</a>
+                            </Col>
+                        </Row>
+                    </Form>
+                    
+                </Col>
+                <Col md={4}></Col>
+            </Row>
         );
     }
 }
