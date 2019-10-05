@@ -20,9 +20,10 @@ import {
     Grid, HeaderContent,
 } from 'semantic-ui-react'
 import HeaderMenu from "../pages/HeaderMenu";
+import {PageWrapper} from "../../wrappers/crd-page";
 
 
-class CreateReferralForm extends  React.Component {
+class CreateReferralForm extends React.Component {
     // funcitons
 //    states
     //submit
@@ -84,60 +85,50 @@ class CreateReferralForm extends  React.Component {
         ];
 
         return (
-            <div className="ui-toolbar">
-                <HeaderMenu></HeaderMenu>
-                <Grid>
-                    <Grid.Column width={3}>
-                        <MenuTabularOnLeft></MenuTabularOnLeft>
-                    </Grid.Column>
-                    <Grid.Column width={13}>
-
-                        <h3>
-                            Create Referral
-                        </h3>
-                        <Grid.Column>
-                            <Form size={'small'} >
-                                <Form.Group grouped>
-                                    <Form.Field>
-                                        <label>Patient:</label>
-                                        <Dropdown
-                                            placeholder='Select Patient'
-                                            fluid
-                                            selection
-                                            options={patientOptions}
-                                        />
-                                    </Form.Field>
-                                    <Form.Field>
-                                        <label>Reading:</label>
-                                        <Dropdown
-                                            placeholder='Select Reading'
-                                            fluid
-                                            selection
-                                            options={readingOptions}
-                                        />
-                                    </Form.Field>
-                                    <Form.Field>
-                                        <label>Refer to:</label>
-                                        <Dropdown
-                                            placeholder='Select Facility'
-                                            fluid
-                                            selection
-                                            options={facilityOptions}
-                                        />
-                                    </Form.Field>
-                                    <Form.Field
-                                        control={TextArea}
-                                        label='Comments'
-                                        placeholder='Additional comments and actions taken...'
-                                    />
-                                    <input type="submit" value="Submit"/>
-                                </Form.Group>
-                            </Form>
-
-                        </Grid.Column>
-                    </Grid.Column>
-                </Grid>
-            </div>
+            <PageWrapper>
+                <h3>
+                    Create Referral
+                </h3>
+                <Grid.Column>
+                    <Form size={'small'}>
+                        <Form.Group grouped>
+                            <Form.Field>
+                                <label>Patient:</label>
+                                <Dropdown
+                                    placeholder='Select Patient'
+                                    fluid
+                                    selection
+                                    options={patientOptions}
+                                />
+                            </Form.Field>
+                            <Form.Field>
+                                <label>Reading:</label>
+                                <Dropdown
+                                    placeholder='Select Reading'
+                                    fluid
+                                    selection
+                                    options={readingOptions}
+                                />
+                            </Form.Field>
+                            <Form.Field>
+                                <label>Refer to:</label>
+                                <Dropdown
+                                    placeholder='Select Facility'
+                                    fluid
+                                    selection
+                                    options={facilityOptions}
+                                />
+                            </Form.Field>
+                            <Form.Field
+                                control={TextArea}
+                                label='Comments'
+                                placeholder='Additional comments and actions taken...'
+                            />
+                            <input type="submit" value="Submit"/>
+                        </Form.Group>
+                    </Form>
+                </Grid.Column>
+            </PageWrapper>
 
         );
     }

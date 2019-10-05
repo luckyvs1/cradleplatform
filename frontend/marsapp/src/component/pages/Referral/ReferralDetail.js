@@ -14,10 +14,6 @@ class ReferralDetail extends React.Component {
     render() {
         return (
             <div className="ui-toolbar">
-
-                <h1>
-                    Referral and Diagnosis Details
-                </h1>
                 <ReferralDetailForm></ReferralDetailForm>
             </div>
         );

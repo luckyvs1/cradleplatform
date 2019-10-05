@@ -6,33 +6,55 @@
 
 import React from "react";
 import MenuTabularOnLeft from "../pages/MainMenu";
-import {Checkbox, Form, Input, Select, Grid, List, TextArea} from "semantic-ui-react";
+import {Checkbox, Embed, Tab, Form, Input, Select, Grid, List, TextArea} from "semantic-ui-react";
 import HeaderMenu from "../pages/HeaderMenu";
+import {makeStyles} from "@material-ui/core";
+import {PageWrapper} from "../../wrappers/crd-page";
 
-class HelpForm extends  React.Component {
+const EmbedExampleYouTube = () => (
+    <Embed
+        id='AMlBuC60LUQ'
+        placeholder=''
+        source='youtube'
+    />
+)
+const EmbedExampleYouTube1 = () => (
+    <Embed
+        id='1lCbhtBQr0Q'
+        placeholder=''
+        source='youtube'
+    />
+)
+
+const panes = [
+    {menuItem: 'Help Video 1', render: () => <Tab.Pane><EmbedExampleYouTube/></Tab.Pane>},
+    {menuItem: 'Help Video 2', render: () => <Tab.Pane><EmbedExampleYouTube1/></Tab.Pane>},
+]
+
+const TabExampleBasic = () => <Tab panes={panes}/>
+
+
+class HelpForm extends React.Component {
     // funcitons
 //    states
     //submit
     // validate
 
+
     render() {
         return (
-            <div className="ui-toolbar">
-                <HeaderMenu></HeaderMenu>
-                <Grid>
-                    <Grid.Column width={3}>
-                        <MenuTabularOnLeft/>
-                    </Grid.Column>
-                    <Grid.Column width={13}>
-                        <h3>
-                            Learning Materials
-                        </h3>
-                        <div>
-                            <p>This page will contain links to learning materials and whatnot.</p>
-                        </div>
-                    </Grid.Column>
-                </Grid>
-            </div>
+            <PageWrapper>
+                <h3>
+                    Learning Materials
+                </h3>
+                <div>
+                    <Grid>
+                        <Grid.Row streched>
+                            <TabExampleBasic> </TabExampleBasic>
+                        </Grid.Row>
+                    </Grid>
+                </div>
+            </PageWrapper>
 
         );
     }

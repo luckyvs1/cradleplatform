@@ -35,6 +35,7 @@ class UploadForm extends  React.Component {
     render() {
         return (
             <div className="ui-toolbar">
+
                 <Tabs className="">
                     <Tab eventKey="patientInfo" title="Patient">
                         <Form size={'massive'} >

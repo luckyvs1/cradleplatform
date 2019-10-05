@@ -19,6 +19,7 @@ import {
     Grid,
 } from 'semantic-ui-react'
 import HeaderMenu from "../pages/HeaderMenu";
+import {PageWrapper} from "../../wrappers/crd-page";
 
 class AddPatientFrom extends React.Component {
     // funcitons
@@ -28,51 +29,55 @@ class AddPatientFrom extends React.Component {
 
     render() {
         return (
-            <div className="ui-toolbar">
-                <HeaderMenu></HeaderMenu>
+            <PageWrapper>
+                <h3>
+                    Add Patient
+                </h3>
+                <Grid.Column>
+                    <Form.Group grouped>
+                        <Form.Field
+                            control={Input}
+                            label='Patient ID'
+                            placeholder='Patient ID'
+                        />
+                        <Form.Field
+                            control={Input}
+                            label='Initials'
+                            placeholder='Initials'
+                        />
+                    </Form.Group>
+                </Grid.Column>
+                <Grid.Column>
+                    <Form.Group grouped>
+                        <Form.Field
+                            control={Input}
+                            label='Age'
+                            placeholder='Age'
+                        />
+                        <Form.Field
+                            control={Checkbox}
+                            label='Pregnant'
+                            placeholder='Pregnant'
+                        />
+                        <Form.Field
+                            control={Input}
+                            label='Gestational Age'
+                            placeholder='Gestational Age'
+                        />
+                    </Form.Group>
+                </Grid.Column>
                 <Grid>
-                    <Grid.Column width={3}>
-                        <MenuTabularOnLeft></MenuTabularOnLeft>
-                    </Grid.Column>
-                    <Grid.Column width={13}>
-                        <h3>
-                            Add Patient
-                        </h3>
-                        <Grid.Column>
-                            <Form size={'small'}>
-                                <Form.Group grouped>
-                                    <Form.Field
-                                        control={Input}
-                                        label='Patient ID'
-                                        placeholder='Patient ID'
-                                    />
-                                    <Form.Field
-                                        control={Input}
-                                        label='Initials'
-                                        placeholder='Initials'
-                                    />
-                                    <Form.Field
-                                        control={Input}
-                                        label='Age'
-                                        placeholder='Age'
-                                    />
-                                    <Form.Field
-                                        control={Checkbox}
-                                        label='Pregnant'
-                                        placeholder='Pregnant'
-                                    />
-                                    <Form.Field
-                                        control={Input}
-                                        label='Gestational Age'
-                                        placeholder='Gestational Age'
-                                    />
-                                    <input type="submit" value="Submit"/>
-                                </Form.Group>
-                            </Form>
+                    <Grid.Row>
+                        <Grid.Column width={10}>
                         </Grid.Column>
-                    </Grid.Column>
+                        <Grid.Column widht={6}>
+                            <input type="submit" value="Submit"/>
+
+                        </Grid.Column>
+                    </Grid.Row>
                 </Grid>
-            </div>
+            </PageWrapper>
+
 
         );
     }
