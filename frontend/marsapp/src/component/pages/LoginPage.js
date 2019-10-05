@@ -9,6 +9,7 @@ import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import LoginForm from "../forms/LoginForm";
 import {login} from "../../actions/auth";
+import TopNavigation from "../navigation/TopNavigation";
 
 class LoginPage extends React.Component {
     submit = (data) =>
@@ -18,6 +19,7 @@ class LoginPage extends React.Component {
     render() {
         return (
             <div>
+                <TopNavigation authenticated={false}></TopNavigation>
                 <LoginForm submit={this.submit}/>
             </div>
         );
