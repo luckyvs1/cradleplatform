@@ -10,6 +10,11 @@ import {connect} from "react-redux";
 import LoginForm from "../forms/LoginForm";
 import {login} from "../../actions/auth";
 import TopNavigation from "../navigation/TopNavigation";
+import styled from 'styled-components';
+
+const TopMarginStyle = styled.div`
+  margin-top: 40px;
+`;
 
 class LoginPage extends React.Component {
     submit = (data) =>
@@ -20,7 +25,9 @@ class LoginPage extends React.Component {
         return (
             <div>
                 <TopNavigation authenticated={false}></TopNavigation>
-                <LoginForm submit={this.submit}/>
+                <TopMarginStyle>
+                    <LoginForm submit={this.submit}/>
+                </TopMarginStyle>
             </div>
         );
     }

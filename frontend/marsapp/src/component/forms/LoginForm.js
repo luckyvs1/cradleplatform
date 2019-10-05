@@ -67,63 +67,72 @@ class LoginForm extends React.Component {
         const {data, errors, loading} = this.state;
 
         return (
-            <Row>
-                <Col md={4}></Col>
-                <Col md={4}>
-                    <Form onSubmit={this.onSubmit} loading={loading}>
-                        <Row>
-                            <Col>
-                                <Form.Group>
-                                    <Form.Label>Email</Form.Label>
-                                    <Form.Control 
-                                        type="email" 
-                                        id="email" 
-                                        name="email" 
-                                        placeholder="example@example.com" 
-                                        onChange={this.onChange} 
-                                        value={data.email}/>
-                                    <Form.Text className="text-muted">
-                                        {/*error handling*/}
-                                        {errors.email && <InlineError text={errors.email} />}
-                                    </Form.Text>
-                                </Form.Group>
-                            </Col>
-                        </Row>
-                        <Row>
-                            <Col>
-                                <Form.Group>
-                                    <Form.Label>Password</Form.Label>
-                                    <Form.Control 
-                                        type="password" 
-                                        id="password" 
-                                        name="password" 
-                                        placeholder="Make it secure" 
-                                        onChange={this.onChange} 
-                                        value={data.password}/>
-                                    <Form.Text className="text-muted">
-                                        {/*error handling*/}
-                                        {errors.password && <InlineError text={errors.password} />}
-                                    </Form.Text>
-                                </Form.Group>
-                            </Col>
-                        </Row>
-                        <Row>
-                            <Col>
-                                <Button variant="primary" type="submit">
-                                    Login
-                                </Button>
-                            </Col>
-                        </Row>
-                        <Row>
-                            <Col>
-                                <a href="/signup">Sign up?</a>
-                                <a href="/homePage">Go Home</a>
-                            </Col>
-                        </Row>
-                    </Form>                    
-                </Col>
-                <Col md={4}></Col>
-            </Row>
+            <div>
+                <Row className="mb-4">
+                    <Col md={4}></Col>
+                    <Col md={4}>
+                        <h1>Login</h1>
+                    </Col>
+                    <Col md={4}></Col>
+                </Row>
+                <Row>
+                    <Col md={4}></Col>
+                    <Col md={4}>
+                        <Form onSubmit={this.onSubmit} loading={loading}>
+                            <Row>
+                                <Col>
+                                    <Form.Group>
+                                        <Form.Label>Email</Form.Label>
+                                        <Form.Control 
+                                            type="email" 
+                                            id="email" 
+                                            name="email" 
+                                            placeholder="example@example.com" 
+                                            onChange={this.onChange} 
+                                            value={data.email}/>
+                                        <Form.Text className="text-muted">
+                                            {/*error handling*/}
+                                            {errors.email && <InlineError text={errors.email} />}
+                                        </Form.Text>
+                                    </Form.Group>
+                                </Col>
+                            </Row>
+                            <Row>
+                                <Col>
+                                    <Form.Group>
+                                        <Form.Label>Password</Form.Label>
+                                        <Form.Control 
+                                            type="password" 
+                                            id="password" 
+                                            name="password" 
+                                            placeholder="Make it secure" 
+                                            onChange={this.onChange} 
+                                            value={data.password}/>
+                                        <Form.Text className="text-muted">
+                                            {/*error handling*/}
+                                            {errors.password && <InlineError text={errors.password} />}
+                                        </Form.Text>
+                                    </Form.Group>
+                                </Col>
+                            </Row>
+                            <Row className="mb-4">
+                                <Col>
+                                    <Button variant="primary" type="submit">
+                                        Login
+                                    </Button>
+                                </Col>
+                            </Row>
+                            <Row>
+                                <Col>
+                                    <a href="/signup">Sign up?</a>
+                                    <a href="/homePage">Go Home</a>
+                                </Col>
+                            </Row>
+                        </Form>                    
+                    </Col>
+                    <Col md={4}></Col>
+                </Row>
+            </div>
         );
     }
 }
