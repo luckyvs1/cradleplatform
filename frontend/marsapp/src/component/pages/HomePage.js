@@ -131,15 +131,15 @@ class HomePage extends React.Component {
         return (
             <div className="ui-toolbar">
                 <div className="ui-toolbar">
+                    <HeaderMenu></HeaderMenu>
+
                     <div className="container">
                         <div className={className}>
                             {buttons}
                         </div>
                     </div>
-                    <HeaderMenu></HeaderMenu>
                     <Grid>
                         <Grid.Column width={3}>
-                            <MenuTabularOnLeft></MenuTabularOnLeft>
                         </Grid.Column>
 
                         <Grid.Column stretched width={7}>

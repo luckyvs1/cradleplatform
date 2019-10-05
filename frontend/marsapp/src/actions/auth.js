@@ -20,8 +20,9 @@ export const userLoggedOut = () => ({
 
 export const login = credentials => dispatch => {
     console.log(credentials)
+    api.user.hello()
     // api.user.login(credentials).then(user => dispatch(userLoggedIn(user)))
-    api.user.mockPatients().then(user => dispatch(userLoggedIn(user)))
+    // api.user.mockPatients().then(user => dispatch(userLoggedIn(user)))
 };
 
 // api.user.login().then(user => {

@@ -4,96 +4,134 @@
  *  Base file for showing contents of Side bar menu on the left.
  */
 
-import {Menu, Icon, Dropdown} from "semantic-ui-react";
+import {Menu, Header, Icon, Image, Segment, Sidebar, Dropdown} from "semantic-ui-react";
 import {Link} from "react-router-dom";
 import React from "react";
+import {makeStyles} from "@material-ui/core";
 
-export default class MenuTabularOnLeft extends React.Component {
-    state = {activeItem: 'bio'}
 
-    handleItemClick = (e, {name}) => this.setState({activeItem: name})
+
+
+
+class MenuLinks extends React.Component {
+    constructor(props) {
+        super(props);
+        // Any number of links can be added here
+        this.state = {
+            links: [{
+                text: 'Dashboard',
+                link: '/homePage',
+                icon: 'grid dashboard'
+
+            }, {
+                text: 'Follow Ups',
+                link: '/allFollowUp',
+                icon: 'grid searchengin'
+
+            }, {
+                text: 'Referral',
+                link: '/referral',
+                icon: 'grid redo'
+
+            }, {
+                text: 'List All Patients',
+                link: '/listPatient',
+                icon: 'grid list ul'
+
+            }, {
+                text: 'Find Patient',
+                link: '/patientDetail',
+                icon: 'grid user'
+
+            }, {
+                text: 'Add Patient',
+                link: '/addPatient',
+                icon: 'grid add square'
+
+            }, {
+                text: 'Account',
+                link: '/account',
+                icon: 'grid folder open'
+
+            }, {
+                text: 'Users',
+                link: '/listUser',
+                icon: 'grid user md'
+
+            }, {
+                text: 'Learning Materials',
+                link: '/help',
+                icon: 'grid book'
+            }]
+        }
+    }
 
     render() {
-        const {activeItem} = this.state
+        let links = this.state.links.map((link, i) => <Menu.Item  vertical as={Link} to={link.link} >{link.text}<Icon name={link.icon}/></Menu.Item> );
 
         return (
-            <Menu fluid vertical tabular size={'massive'}>
-                <Menu.Item
-                    as={Link} to="/homePage"
-                    name='Dashboard'
-                    className=""
-                    active={activeItem === 'upload'}
-                    onClick={this.handleItemClick}>
-                    <Icon name='grid dashboard'/>
-                    Dashboard
-                </Menu.Item>
-                <Menu.Item
-                    as={Link} to="/allFollowUp"
-                    name='Follow Ups'
-                    active={activeItem === 'upload'}
-                    onClick={this.handleItemClick}>
-                    <Icon name='grid searchengin'/>
-                    Follow Ups
-                </Menu.Item>
-                <Menu.Item
-                    as={Link} to="/referral"
-                    name='Referral'
-                    active={activeItem === 'referral'}
-                    onClick={this.handleItemClick}>
-                    <Icon name='grid redo'/>
-                    Referral
-                </Menu.Item>
-                <Dropdown item text='Patients'>
-                    <Dropdown.Menu>
-                        <Dropdown.Item as={Link} to="/listPatient"
-                                       name='Patients'
-                                       active={activeItem === 'patient'}
-                                       onClick={this.handleItemClick}
-                        >List All Patients</Dropdown.Item>
-                        <Dropdown.Item as={Link} to="/patientDetail"
-                                       name='Patients'
-                                       active={activeItem === 'patient'}
-                                       onClick={this.handleItemClick}
-                        >Find Patient</Dropdown.Item>
-                        <Dropdown.Item
-                            as={Link} to="/addPatient"
-                            name='Patients'
-                            active={activeItem === 'patient'}
-                            onClick={this.handleItemClick}
-                        >Add Patient</Dropdown.Item>
-                    </Dropdown.Menu>
-                </Dropdown>
+            <div className={this.props.menuStatus} id='menu'>
+                <ul>
+                    {links}
+                </ul>
+            </div>
+        )
+    }
+}
 
-                <Menu.Item
-                    as={Link} to="/account"
-                    name='Account'
-                    active={activeItem === 'account'}
-                    onClick={this.handleItemClick}
-                >
-                    <Icon name="grid folder open"/>
-                    Account
-                </Menu.Item>
-                <Menu.Item
-                    as={Link} to="/listUser"
-                    name='Users'
-                    active={activeItem === 'user'}
-                    onClick={this.handleItemClick}
-                >
-                    <Icon name='grid user md'/>
-                    Users
-                </Menu.Item>
 
-                <Menu.Item
-                    as={Link} to="/help"
-                    name='Learning Materials'
-                    active={activeItem === 'help'}
-                    onClick={this.handleItemClick}
-                >
-                    <Icon name='grid book'/>
-                    Learning Materials
-                </Menu.Item>
-            </Menu>
+export default class MenuTabularOnLeft extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            isOpen: false
+        }
+        this._menuToggle = this._menuToggle.bind(this);
+        this._handleDocumentClick = this._handleDocumentClick.bind(this);
+    }
 
+    componentDidMount() {
+        document.addEventListener('click', this._handleDocumentClick, false);
+    }
+
+    componentWillUnmount() {
+        document.removeEventListener('click', this._handleDocumentClick, false);
+    }
+
+    _handleDocumentClick(e) {
+        if (!this.refs.root.contains(e.target) && this.state.isOpen === true) {
+            this.setState({
+                isOpen: false
+            });
+        }
+        ;
+    }
+
+    _menuToggle(e) {
+        e.stopPropagation();
+        this.setState({
+            isOpen: !this.state.isOpen
+        });
+    }
+
+
+    render() {
+        let menuStatus = this.state.isOpen ? 'isopen' : '';
+
+        const {activeItem} = this.state
+        return (
+            <div ref="root">
+                <div className="menubar">
+                    <div className="hambclicker" onClick={this._menuToggle}></div>
+                    <div id="hambmenu" className={menuStatus}><span></span><span></span><span></span><span></span></div>
+                    <div className="title">
+                        <span>{this.props.title}</span>
+                    </div>
+                </div>
+                <Menu fluid vertical tabular size={'massive'}>
+                    <MenuLinks menuStatus={menuStatus}/>
+                </Menu>
+            </div>
         )
     }
 }

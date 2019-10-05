@@ -32,7 +32,6 @@ class LoginPage extends React.Component {
         return (
             <div className="ui-toolbar ">
                 <div className={"login"}>
-                    <h1 class="ui header">Login page</h1>
 
 
                     <LoginForm submit={this.submit}/>

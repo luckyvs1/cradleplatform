@@ -81,7 +81,7 @@ class LoginForm extends React.Component {
                                 <Grid>
                                     <Grid.Column width={1}></Grid.Column>
                                     <Grid.Column width={14}>
-                                        <Form onSubmit={this.onSubmit} loading={loading} size={'small'}>
+                                        <Form onSubmit={this.onSubmit} loading={loading} size={'large'}>
                                             {errors.global && (
                                                 <Message negative>
                                                     <Message.Header>Something went wrong</Message.Header>
@@ -116,7 +116,6 @@ class LoginForm extends React.Component {
                                             </Form.Field>
                                             <Button className={"submit-button"}>Login</Button>
                                             <Form.Field>
-                                                <Link to="/forgot_password">Forgot Password?</Link>
                                                 <Link to="/signup">Sign Up?</Link><br/>
 
                                                 <Link to="/homePage">GO TO HOME</Link>

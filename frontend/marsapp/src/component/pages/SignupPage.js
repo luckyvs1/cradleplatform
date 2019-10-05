@@ -24,8 +24,10 @@ class SignupPage extends React.Component {
         return (
 
             <div className="ui-toolbar">
+                <div className={"login"}>
 
-                <SignupForm submit={this.submit}/>
+                    <SignupForm submit={this.submit}/>
+                </div>
             </div>
         );
     }
