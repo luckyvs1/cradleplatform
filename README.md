@@ -38,21 +38,23 @@ It will be able to communicate with the current Cradle Capture App in order to s
     |    |         ├──res           # Contains other resources (pictures,...)
     |    |         └──utils         # Define what each user type can see
     |    └──README.md              
-    ├── gradle                      # Auto generated Gradle folder
-    |    └──wrapper                 # Gradle wrapper files (a executable jar and a properties file)
-    └── src                         # All backend server code (in Java)
-         ├──main                    
-         |   ├──java                
-         |   |   └──org.cradlePlatform
-         |   |              ├──controller   # All controller classes
-         |   |              └──model        # All model classes
-         |   └──resources           # SQL/database files (schema,...)
-         └──test                    # Contains all unit test files
+    |
+    └── backend                     # Code containing backend server
+         ├──gradle                  # Auto generated Gradle folder
+         |     └──wrapper           # Gradle wrapper files (a executable jar and a properties file)
+         └── src                    # All backend server code (in Java)
+              ├──main                    
+              |   ├──java                
+              |   |   └──org.cradlePlatform
+              |   |              ├──controller   # All controller classes
+              |   |              └──model        # All model classes
+              |   └──resources           # SQL/database files (schema,...)
+              └──test                    # Contains all unit test files
 
 ## Running with Docker
 
 ### --- Database Server
-- First, cd into `root` of project directory
+- First, cd into `${root}/backend` of project directory
 1. Run:
     - `docker build -t marsdb -f Dockerfile.marsdb .`
     - This will build a docker image called `marsdb` that will run our database
@@ -65,14 +67,16 @@ It will be able to communicate with the current Cradle Capture App in order to s
     - `mysql -u root -p` and 
     - type `'pass'` when prompted to create a *MySQL* shell.
 
-### --- Backend Server
-First, cd into `root` of project directory
+### --- Backend Server (local development)
+First, cd into `${root}/backend` of project directory
 1. Run: 
-    - `docker build -t marsbackend -f Dockerfile.marsbackend .`
-    - This will build a docker image called `marsbackend` that we can run our app in.
-2.  To run the docker image, run: 
-    - `docker run --rm -it -p 8080:8080 --name marsserver --link marssql:db_host marsbackend /bin/bash` 
-    - This  `ssh`s you into the docker container and into the directory with the project resources, it also binds your machines port `8080` to docker's port `8080` so you can access docker container port `8080` from your web browser
+    - `docker run -it --rm -v `pwd`:/app -w /app -p 8080:8080 --link marssql:db_host openjdk:12-jdk bash`
+    - This will run a openjdk container linked to the database with the current folder attached as a volume for our local development
+      - NOTE: Any changes made to files inside the containers will be replicated on the host machine as well.
+      - NOTE: This also binds the host machines' port 8080 to docker containers' port 8080
+2. Run:
+    - `./gradlew build` to build your app
+3. Run:
     - To run the spring boot application, run: `java -jar build/libs/app-0.0.1-SNAPSHOT.jar` 
     - You should see the spring boot application launching
     - Visit `http://localhost:8080` to view the app
