@@ -29,6 +29,7 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import MenuTabularOnLeft from "./MainMenu";
 import HeaderMenu from "./HeaderMenu";
+import TopNavigation from "../navigation/TopNavigation";
 
 
 class FloatingMenuItem extends React.Component {
@@ -131,13 +132,15 @@ class HomePage extends React.Component {
         return (
             <div className="ui-toolbar">
                 <div className="ui-toolbar">
-                    <HeaderMenu></HeaderMenu>
+                    <TopNavigation authenticated={true}></TopNavigation>
 
-                    <div className="container">
+                    {/* Bottom right hand controls don't know what they're used for */}
+                    {/* <div className="container">
                         <div className={className}>
                             {buttons}
                         </div>
-                    </div>
+                    </div> */}
+
                     <Grid>
                         <Grid.Column width={3}>
                         </Grid.Column>

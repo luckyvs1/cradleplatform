@@ -5,15 +5,16 @@
  */
 
 import React, {Component} from "react";
+import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
 import gravatarUrl from "gravatar-url";
 import * as actions from "../../actions/auth";
 
 import {
     Nav,
     Navbar,
+    NavDropdown,
     Container
 } from 'react-bootstrap';
 
@@ -26,10 +27,43 @@ class TopNavigation extends Component {
                     <Container>
                         <Navbar.Brand href="#home">Cradle Platform {this.props.authenticated}</Navbar.Brand>
                         <Nav className="mr-auto">
-                            <Nav.Link href="#home">Home</Nav.Link>
-                            <Nav.Link href="#features">Features</Nav.Link>
-                            <Nav.Link href="#pricing">Pricing</Nav.Link>
+                            <Nav.Link as={Link} to="homePage">
+                                <i class="fas fa-tachometer-alt"></i> Dashboard
+                            </Nav.Link>
+                            <Nav.Link as={Link} to="allFollowUp">
+                                <i class="fas fa-search"></i> Follow Ups
+                            </Nav.Link>
+                            <Nav.Link as={Link} to="referral">
+                                <i class="fas fa-redo"></i> Referrals
+                            </Nav.Link>
+                            <NavDropdown title={<span><i class="fas fa-users"></i> Patients</span>} id="collasible-nav-dropdown">
+                                <NavDropdown.Item as={Link} to="listPatient">All Patients</NavDropdown.Item>
+                                <NavDropdown.Item as={Link} to="patientDetail" href="#action/3.2">Find Patient</NavDropdown.Item>
+                                <NavDropdown.Divider />
+                                <NavDropdown.Item as={Link} to="addPatient">Add Patient</NavDropdown.Item>
+                            </NavDropdown>
                         </Nav>
+                        <Nav>
+                            <Nav.Link as={Link} to="/homePage">
+                                <i class="fas fa-bell"></i>
+                            </Nav.Link>
+                            <NavDropdown title={<span><i class="fas fa-cogs"></i></span>} id="collasible-nav-dropdown">                                
+                                <NavDropdown.Item href="#action/3.2">
+                                    <i class="fas fa-user-alt"></i> Account
+                                </NavDropdown.Item>
+                                <NavDropdown.Item href="#action/3.2">
+                                    <i class="fas fa-users-cog"></i> Users
+                                </NavDropdown.Item>
+                                <NavDropdown.Divider />
+                                <NavDropdown.Item href="#action/3.3">
+                                    <i class="fas fa-graduation-cap"></i> Learning Materials
+                                </NavDropdown.Item>
+                                <NavDropdown.Divider />
+                                <NavDropdown.Item as={Link} to="/">
+                                    <i class="fas fa-sign-out-alt"></i> Logout
+                                </NavDropdown.Item>
+                            </NavDropdown>
+                        </Nav>                        
                     </Container>
                 </Navbar>
             )
