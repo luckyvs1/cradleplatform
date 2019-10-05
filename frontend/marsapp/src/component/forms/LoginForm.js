@@ -20,8 +20,8 @@ class LoginForm extends React.Component {
     //state updates as user types
     state = {
         data: {
-            email: "",
-            password: ""
+            email: '',
+            password: ''
         },
         loading: false,
         errors: {}
@@ -75,7 +75,13 @@ class LoginForm extends React.Component {
                             <Col>
                                 <Form.Group>
                                     <Form.Label>Email</Form.Label>
-                                    <Form.Control type="email" id="email" name="email" placeholder="example@example.com" onChange={this.onChange} value={data.email}/>
+                                    <Form.Control 
+                                        type="email" 
+                                        id="email" 
+                                        name="email" 
+                                        placeholder="example@example.com" 
+                                        onChange={this.onChange} 
+                                        value={data.email}/>
                                     <Form.Text className="text-muted">
                                         {/*error handling*/}
                                         {errors.email && <InlineError text={errors.email} />}
@@ -87,7 +93,13 @@ class LoginForm extends React.Component {
                             <Col>
                                 <Form.Group>
                                     <Form.Label>Password</Form.Label>
-                                    <Form.Control type="password" placeholder="Make it secure" onChange={this.onChange} value={data.password} />
+                                    <Form.Control 
+                                        type="password" 
+                                        id="password" 
+                                        name="password" 
+                                        placeholder="Make it secure" 
+                                        onChange={this.onChange} 
+                                        value={data.password}/>
                                     <Form.Text className="text-muted">
                                         {/*error handling*/}
                                         {errors.password && <InlineError text={errors.password} />}
@@ -108,8 +120,7 @@ class LoginForm extends React.Component {
                                 <a href="/homePage">Go Home</a>
                             </Col>
                         </Row>
-                    </Form>
-                    
+                    </Form>                    
                 </Col>
                 <Col md={4}></Col>
             </Row>
