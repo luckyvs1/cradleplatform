@@ -37,7 +37,8 @@ class LoginForm extends React.Component {
     * 1 - validate
     * 2 - submit data of login and catch errors
     * */
-    onSubmit = () => {
+    onSubmit = event => {
+        event.preventDefault();
         const errors = this.validate(this.state.data);
         this.setState({errors});
         if (Object.keys(errors).length === 0) {
@@ -74,10 +75,10 @@ class LoginForm extends React.Component {
                             <Col>
                                 <Form.Group>
                                     <Form.Label>Email</Form.Label>
-                                    <Form.Control type="email" placeholder="example@example.com" onChange={this.onChange} value={data.email} />
+                                    <Form.Control type="email" id="email" name="email" placeholder="example@example.com" onChange={this.onChange} value={data.email}/>
                                     <Form.Text className="text-muted">
                                         {/*error handling*/}
-                                        {errors.password && <InlineError text={errors.password} />}
+                                        {errors.email && <InlineError text={errors.email} />}
                                     </Form.Text>
                                 </Form.Group>
                             </Col>
