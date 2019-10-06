@@ -7,11 +7,16 @@
 import React from "react";
 import Tabs from "react-bootstrap/Tabs";
 import Tab from "react-bootstrap/Tab";
-import {Checkbox, Form, Input, Select, Grid, List, TextArea} from "semantic-ui-react";
-import MenuTabularOnLeft from "../pages/MainMenu";
 import {Link} from "react-router-dom";
-import HeaderMenu from "../pages/HeaderMenu";
-import {PageWrapper} from "../../wrappers/crd-page";
+import TopNavigation from "../navigation/TopNavigation";
+import {
+    Container,
+    Row,
+    Col,
+    Button,
+    Form,
+    Table
+} from 'react-bootstrap';
 
 const options = [
     {key: 'w', text: 'Weeks', value: 'weeks'},
@@ -32,169 +37,237 @@ const statusYellow = {
     backgroundColor: "yellow"
 };
 
+const statusRed = {
+    backgroundColor: "red"
+};
+
 export default class PatientDetailForm extends React.Component {
-    // funcitons
-//    states
-    //submit
+    // functions
+    // states
+    // submit
     // validate
 
     render() {
         return (
-            <PageWrapper>
-                <h3>Patient Detail</h3>
-                <div>
-                    <p><b>Patient ID:</b> 0123456</p>
-                    <p><b>Initials:</b> AS</p>
-                    <p><b>Sex:</b> F</p>
-                    <p><b>Age:</b> 33</p>
-                    <p></p>
-                </div>
-                <div>
-                    <Tabs className="">
-                        <Tab eventKey="reading_history" title="Reading History">
-                            <List selection>
-                                <List.Item as={Link} to="/readings">
-                                    <table style={listPatientReadings}>
-                                        <tr style={listPatientReadings}>
-                                            <td style={listPatientReadings}><span style={statusGreen}>_</span></td>
-                                            <td style={listPatientReadings}>2019/03/13</td>
-                                            <td style={listPatientReadings}>
-                                                <b>BP/DP:</b> 120/80 <br/>
-                                                <b>Heart Rate (bpm):</b> 60
+            <div>
+                <TopNavigation authenticated={true}></TopNavigation>
+                <Container>
+                    <Row>
+                        <Col>
+                            <h1>Patient Details</h1>
+                            <hr></hr>
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col md={2}>
+                            <strong>Patient ID:</strong>
+                        </Col>
+                        <Col md={4}>                            
+                            0123456
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col md={2}>
+                            <strong>Initials:</strong>
+                        </Col>
+                        <Col md={4}>
+                            AS
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col md={2}>
+                            <strong>Sex:</strong>
+                        </Col>
+                        <Col md={4}>
+                            Female
+                        </Col>
+                    </Row>
+                    <Row className="mb-4">
+                        <Col md={2}>
+                            <strong>Age:</strong>
+                        </Col>
+                        <Col md={4}>
+                            33
+                        </Col>
+                    </Row>
+                    <Tabs id="controlled-tab-example">
+                        <Tab eventKey="reading_information" title="Reading Information">
+                            <Table bordered hover size="sm">
+                                <tbody>
+                                    <tr>
+                                        <td className="text-center" style={statusGreen}>
+                                            <strong>-</strong>
+                                        </td>
+                                        <td>2019/03/13</td>
+                                        <td>
+                                            <b>BP/DP:</b> 120/80 <br/>
+                                            <b>Heart Rate (bpm):</b> 60
+                                        </td>
+                                        <td>
+                                            <b>Pregnant:</b> Yes<br />
+                                            <b>Gestational Age:</b> 5 Months
+                                        </td>
+                                        <td><b>Symptoms:</b> ...</td>
+                                    </tr>
+                                    <tr>
+                                        <td className="text-center" style={statusYellow}>
+                                            <strong>v</strong>
+                                        </td>
+                                        <td>2019/01/02</td>
+                                        <td>
+                                            <b>BP/DP:</b> 180/80 <br />
+                                            <b>Heart Rate (bpm):</b> 80
                                             </td>
-                                            <td style={listPatientReadings}>
-                                                <b>Pregnant:</b> Yes<br/>
-                                                <b>Gestational Age:</b> 5 Months
+                                        <td>
+                                            <b>Pregnant:</b> Yes<br />
+                                            <b>Gestational Age:</b> 3 Months
                                             </td>
-                                            <td style={listPatientReadings}><b>Symptoms:</b> ...</td>
-                                        </tr>
-                                    </table>
-                                </List.Item>
-                                <List.Item as={Link} to="/readings">
-                                    <table style={listPatientReadings}>
-                                        <tr style={listPatientReadings}>
-                                            <td style={listPatientReadings}><span style={statusYellow}>^</span></td>
-                                            <td style={listPatientReadings}>2019/02/02</td>
-                                            <td style={listPatientReadings}>
-                                                <b>BP/DP:</b> 140/80 <br/>
-                                                <b>Heart Rate (bpm):</b> 60
+                                        <td><b>Symptoms:</b> ...</td>
+                                    </tr>
+                                    <tr>
+                                        <td className="text-center" style={statusYellow}>
+                                            <strong>v</strong>
+                                        </td>
+                                        <td>2019/01/02</td>
+                                        <td>
+                                            <b>BP/DP:</b> 180/80 <br />
+                                            <b>Heart Rate (bpm):</b> 80
                                             </td>
-                                            <td style={listPatientReadings}>
-                                                <b>Pregnant:</b> Yes<br/>
-                                                <b>Gestational Age:</b> 4 Months
+                                        <td>
+                                            <b>Pregnant:</b> Yes<br />
+                                            <b>Gestational Age:</b> 3 Months
                                             </td>
-                                            <td style={listPatientReadings}><b>Symptoms:</b> ...</td>
-                                        </tr>
-                                    </table>
-                                </List.Item>
-                                <List.Item as={Link} to="/readings">
-                                    <table style={listPatientReadings}>
-                                        <tr style={listPatientReadings}>
-                                            <td style={listPatientReadings}><span style={statusYellow}>v</span></td>
-                                            <td style={listPatientReadings}>2019/01/02</td>
-                                            <td style={listPatientReadings}>
-                                                <b>BP/DP:</b> 180/80 <br/>
-                                                <b>Heart Rate (bpm):</b> 80
+                                        <td><b>Symptoms:</b> ...</td>
+                                    </tr>
+                                    <tr>
+                                        <td className="text-center" style={statusRed}>
+                                            <strong>o</strong>
+                                        </td>
+                                        <td>2019/01/02</td>
+                                        <td>
+                                            <b>BP/DP:</b> 180/80 <br />
+                                            <b>Heart Rate (bpm):</b> 80
                                             </td>
-                                            <td style={listPatientReadings}>
-                                                <b>Pregnant:</b> Yes<br/>
-                                                <b>Gestational Age:</b> 3 Months
+                                        <td>
+                                            <b>Pregnant:</b> Yes<br />
+                                            <b>Gestational Age:</b> 3 Months
                                             </td>
-                                            <td style={listPatientReadings}><b>Symptoms:</b> ...</td>
-                                        </tr>
-                                    </table>
-                                </List.Item>
-                                <List.Item>
-                                    <List.Content
-                                        as={Link} to="/AddReadingDetail">
-                                        <input type="submit" value="New Reading"/>
-                                    </List.Content>
-                                    <List.Content
-                                        as={Link} to="/">
-                                        <input type="submit" value="View List"/>
-                                    </List.Content>
-                                    <List.Content
-                                        as={Link} to="/">
-                                        <input type="submit" value="View Graph"/>
-                                    </List.Content>
-                                </List.Item>
-                            </List>
+                                        <td><b>Symptoms:</b> ...</td>
+                                    </tr>
+                                </tbody>
+                            </Table>
+                            <Row>
+                                <Col>
+                                    <Button variant="success" size="sm" as={Link} to="addReadingDetail">New Reading</Button>&nbsp;
+                                    <Button variant="primary" size="sm">View List</Button>&nbsp;
+                                    <Button variant="primary" size="sm">View Graph</Button>&nbsp;
+                                </Col>
+                            </Row>
                         </Tab>
                         <Tab eventKey="medical_history" title="Medical History">
-                            <TextArea>
-                                Medical history notes go here...
-                            </TextArea>
-                            <input type="submit" value="Edit"/>
+                            <Row>
+                                <Col>
+                                    <Form.Group>
+                                        <Form.Control
+                                            as="textarea"
+                                            rows="6"
+                                            placeholder="Medical History Notes go here..." />
+                                    </Form.Group>
+                                </Col>
+                            </Row>
+                            <Row>
+                                <Col>
+                                    <Button variant="warning">
+                                        Save Changes
+                                    </Button>
+                                </Col>
+                            </Row>
                         </Tab>
                         <Tab eventKey="drug_history" title="Drug History">
-                            <TextArea>
-                                Drug history notes go here...
-                            </TextArea>
-                            <input type="submit" value="Edit"/>
-                            <table style={listPatientReadings}>
-                                <tr style={listPatientReadings}>
-                                    <th style={listPatientReadings}>Start Date</th>
-                                    <th style={listPatientReadings}>End Date</th>
-                                    <th style={listPatientReadings}>Drug</th>
-                                    <th style={listPatientReadings}>Dosage</th>
-                                    <th style={listPatientReadings}>Side Effects</th>
-                                </tr>
-                                <tr style={listPatientReadings}>
-                                    <td style={listPatientReadings}>2019/02/02</td>
-                                    <td style={listPatientReadings}> -</td>
-                                    <td style={listPatientReadings}>drugname1</td>
-                                    <td style={listPatientReadings}>1 tablet twice a day</td>
-                                    <td style={listPatientReadings}>Sleepiness</td>
-                                </tr>
-                                <tr style={listPatientReadings}>
-                                    <td style={listPatientReadings}>2018/12/02</td>
-                                    <td style={listPatientReadings}>2019/01/22</td>
-                                    <td style={listPatientReadings}>drugname2</td>
-                                    <td style={listPatientReadings}>1 tablet twice a day</td>
-                                    <td style={listPatientReadings}>None</td>
-                                </tr>
-                            </table>
+                            <Table bordered hover size="sm">
+                                <thead>
+                                    <th>Start Date</th>
+                                    <th>End Date</th>
+                                    <th>Drug</th>
+                                    <th>Dosage</th>
+                                    <th>Side Effects</th>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>2019/02/02</td>
+                                        <td> -</td>
+                                        <td>drugname1</td>
+                                        <td>1 tablet twice a day</td>
+                                        <td>Sleepiness</td>
+                                    </tr>
+                                    <tr>
+                                        <td>2018/12/02</td>
+                                        <td>2019/01/22</td>
+                                        <td>drugname2</td>
+                                        <td>1 tablet twice a day</td>
+                                        <td>None</td>
+                                    </tr>
+                                </tbody>
+                            </Table>
+                            <Row>
+                                <Col>
+                                    <Form.Group>
+                                        <Form.Control
+                                            as="textarea"
+                                            rows="3"
+                                            placeholder="Drug history notes go here..." />
+                                    </Form.Group>
+                                </Col>
+                            </Row>
+                            <Row>
+                                <Col>
+                                    <Button variant="warning">
+                                        Save Changes
+                                    </Button>
+                                </Col>
+                            </Row>
                         </Tab>
-
-                        <Tab eventKey="medication" title="Current Medications">
-                            <table style={listPatientReadings}>
-                                <tr style={listPatientReadings}>
-                                    <th style={listPatientReadings}>Start Date</th>
-                                    <th style={listPatientReadings}>Drug</th>
-                                    <th style={listPatientReadings}>Dosage</th>
-                                    <th style={listPatientReadings}>Side Effects</th>
-                                </tr>
-                                <tr style={listPatientReadings}>
-                                    <td style={listPatientReadings}>2019/02/02</td>
-                                    <td style={listPatientReadings}>drugname1</td>
-                                    <td style={listPatientReadings}>1 tablet twice a day</td>
-                                    <td style={listPatientReadings}>Sleepiness</td>
-                                </tr>
-                            </table>
+                        <Tab eventKey="current_medication" title="Current Medication">
+                            <Table bordered hover size="sm">
+                                <thead>
+                                    <th>Start Date</th>
+                                    <th>Drug</th>
+                                    <th>Dosage</th>
+                                    <th>Side Effects</th>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>2019/02/02</td>
+                                        <td>drugname1</td>
+                                        <td>1 tablet twice a day</td>
+                                        <td>Sleepiness</td>
+                                    </tr>
+                                </tbody>
+                            </Table>
                         </Tab>
-
-                        <Tab eventKey="follow_up" title="Follow Ups">
-                            <table style={listPatientReadings}>
-                                <tr style={listPatientReadings}>
-                                    <th style={listPatientReadings}>VHT</th>
-                                    <th style={listPatientReadings}>Location</th>
-                                    <th style={listPatientReadings}>Frequency</th>
-                                    <th style={listPatientReadings}>Start Date</th>
-                                    <th style={listPatientReadings}>End Date</th>
-                                </tr>
-                                <tr style={listPatientReadings}>
-                                    <td style={listPatientReadings}>John Smith</td>
-                                    <td style={listPatientReadings}>Village No. 1</td>
-                                    <td style={listPatientReadings}>Once every 2 Weeks</td>
-                                    <td style={listPatientReadings}>2019/09/18</td>
-                                    <td style={listPatientReadings}>N/A</td>
-                                </tr>
-                            </table>
+                        <Tab eventKey="follow_ups" title="Follow Ups">
+                            <Table bordered hover size="sm">
+                                <thead>
+                                    <th>VHT</th>
+                                    <th>Location</th>
+                                    <th>Frequency</th>
+                                    <th>Start Date</th>
+                                    <th>End Date</th>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>John Smith</td>
+                                        <td>Village No. 1</td>
+                                        <td>Once every 2 Weeks</td>
+                                        <td>2019/09/18</td>
+                                        <td>N/A</td>
+                                    </tr>
+                                </tbody>
+                            </Table>
                         </Tab>
-
                     </Tabs>
-                </div>
-            </PageWrapper>
+                </Container>
+            </div>
 
         );
     }
