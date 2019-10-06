@@ -18,17 +18,6 @@ import {
     Table
 } from 'react-bootstrap';
 
-const options = [
-    {key: 'w', text: 'Weeks', value: 'weeks'},
-    {key: 'm', text: 'Month', value: 'month'},
-    {key: 'np', text: 'Not Pregnant', value: 'notPregnant'},
-];
-
-const listPatientReadings = {
-    verticalAlign: 'top',
-    padding: '10px'
-};
-
 const statusGreen = {
     backgroundColor: "green"
 };
