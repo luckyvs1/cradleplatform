@@ -7,7 +7,6 @@
 import React from "react";
 import {connect} from "react-redux";
 import Paper from "@material-ui/core/Paper";
-import Table from "@material-ui/core/Table";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import TableCell from "@material-ui/core/TableCell";
@@ -15,7 +14,6 @@ import TableBody from "@material-ui/core/TableBody";
 import {makeStyles} from "@material-ui/core";
 import MenuTabularOnLeft from "../pages/MainMenu";
 import {
-    Button,
     Checkbox,
     Form,
     Input,
@@ -28,8 +26,14 @@ import {
     Grid
 } from 'semantic-ui-react'
 import {Link} from "react-router-dom";
-import HeaderMenu from "../pages/HeaderMenu";
-import {PageWrapper} from "../../wrappers/crd-page";
+import TopNavigation from "../navigation/TopNavigation";
+import {
+    Container,
+    Row,
+    Col,
+    Table,
+    Button
+} from 'react-bootstrap';
 
 function createData(name, calories, fat, carbs, protein) {
     return {name, calories, fat, carbs, protein};
@@ -117,7 +121,53 @@ class ReferralForm extends React.Component {
 
 
         return (
-            <PageWrapper>
+            <div>
+                <TopNavigation authenticated={true}></TopNavigation>
+                <Container>
+                    <Row>
+                        <Col>
+                            <Row>
+                                <Col>
+                                    <h1>Referrals</h1>
+                                </Col>
+                                <Col className="text-right">
+                                    <Button variant="primary" size="sm">
+                                        Create New Referral
+                                    </Button>
+                                </Col>
+                            </Row>
+                            <hr></hr>
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col>
+                            <Table bordered hover size="sm">
+                                <thead>
+                                    <tr>
+                                        <th>Patient ID</th>
+                                        <th>Patient Name</th>
+                                        <th>Referred By</th>
+                                        <th>Referral Date</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {rows.map(row => (
+                                        <tr key={row.name} component={Link} to={"/followUpDetail"}>
+                                            <th scope="row">
+                                                <Link to="followUpDetail">
+                                                    {row.name}
+                                                </Link>
+                                            </th>
+                                            <td>{row.calories}</td>
+                                            <td>{row.fat}</td>
+                                            <td>{row.carbs}</td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </Table>
+                        </Col>
+                    </Row>
+                </Container>
                 <Grid>
                     <Grid.Column width={2}>
                         <Form size={'small'}>
@@ -193,7 +243,7 @@ class ReferralForm extends React.Component {
                     </Grid.Column>
 
                 </Grid>
-            </PageWrapper>
+            </div>
 
         );
     }

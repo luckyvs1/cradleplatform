@@ -16,10 +16,7 @@ class Referral extends React.Component {
 
     render() {
         return (
-
-            <div className="ui-toolbar">
-
-
+            <div>
                 <ReferralForm></ReferralForm>
             </div>
         )
