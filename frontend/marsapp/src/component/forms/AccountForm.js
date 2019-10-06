@@ -23,7 +23,7 @@ class AccountForm extends React.Component {
                 <Container>
                     <Row>
                         <Col>
-                            <h1>Add User</h1>
+                            <h1>Account</h1>
                             <hr></hr>
                         </Col>
                     </Row>

@@ -5,33 +5,87 @@
  */
 
 import React from "react";
+import { Link } from "react-router-dom";
+import TopNavigation from "../navigation/TopNavigation";
 import {
-    Button,
-    Icon,
-    Checkbox,
-    Form,
-    Input,
-    Radio,
-    Select,
-    TextArea,
-    List,
-    Grid,
+    Container,
+    Row,
+    Col,
+    Table,
     Image,
-} from 'semantic-ui-react'
-import MenuTabularOnLeft from "../pages/MainMenu";
-import HeaderMenu from "../pages/HeaderMenu";
-import {PageWrapper} from "../../wrappers/crd-page";
+    Button,
+    Dropdown,
+    ButtonGroup
+} from 'react-bootstrap';
 
 class ListUserForm extends React.Component {
-    // funcitons
-//    states
-    //submit
-    // validate
 
     render() {
         return (
-            <PageWrapper>
-                <h3>
+            <div>
+                <TopNavigation authenticated={true}></TopNavigation>
+                <Container>
+                    <Row className="mb-4">
+                        <Col>
+                            <Row>
+                                <Col>
+                                    <h1>All Users</h1>
+                                </Col>
+                                <Col className="text-right">
+                                    <Button variant="primary" size="sm" as={Link} to="account">
+                                        Add User
+                                    </Button>
+                                </Col>
+                            </Row>
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col>
+                            <Table hover size="sm">
+                                <tbody>
+                                    <tr>
+                                        <td width="10">
+                                            <Image src="https://react.semantic-ui.com/images/avatar/small/christian.jpg" rounded />
+                                        </td>
+                                        <td>
+                                            <Row>
+                                                <Col>
+                                                    <Link to="patientDetail">
+                                                        <strong>James Corden</strong> <br/>
+                                                        corndog@gmail.com <br/>
+                                                        Admin
+                                                    </Link>                                                
+                                                </Col>
+                                                <Col className="text-right">
+                                                    <Dropdown as={ButtonGroup}>
+                                                        <Button variant="warning" size="sm">Edit</Button>
+
+                                                        <Dropdown.Toggle split variant="warning" id="dropdown-split-basic" />
+
+                                                        <Dropdown.Menu>
+                                                            <Dropdown.Item href="#/action-1">Delete</Dropdown.Item>
+                                                        </Dropdown.Menu>
+                                                    </Dropdown>
+                                                </Col>
+                                            </Row>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <Image src="https://react.semantic-ui.com/images/avatar/small/daniel.jpg" rounded />
+                                        </td>
+                                        <td>
+                                            <Link to="patientDetail">
+                                                Test 2
+                                            </Link>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </Table>
+                        </Col>
+                    </Row>
+                </Container>
+                {/* <h3>
                     All Users
                 </h3>
                 <Grid.Row>
@@ -118,8 +172,8 @@ class ListUserForm extends React.Component {
                             </List>
                         </List.Content>
                     </List.Item>
-                </List>
-            </PageWrapper>
+                </List> */}
+            </div>
 
         );
     }
