@@ -12,10 +12,7 @@ class Account extends React.Component {
 
     render() {
         return (
-            <div className="ui-toolbar">
-
-                <AccountForm></AccountForm>
-            </div>
+            <AccountForm></AccountForm>
         );
     }
 }
