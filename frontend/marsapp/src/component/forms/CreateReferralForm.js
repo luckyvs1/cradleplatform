@@ -5,28 +5,22 @@
  */
 
 import React from "react";
-import MenuTabularOnLeft from "../pages/MainMenu";
+import { Link } from "react-router-dom";
+import InlineError from "../messages/InlineError";
+import TopNavigation from "../navigation/TopNavigation";
 import {
+    Container,
+    Row,
+    Col,
+    Table,
     Button,
-    Checkbox,
-    Form,
-    Input,
-    Radio,
-    Select,
-    TextArea,
-    List,
-    Image,
-    Dropdown,
-    Grid, HeaderContent,
-} from 'semantic-ui-react'
-import HeaderMenu from "../pages/HeaderMenu";
-import {PageWrapper} from "../../wrappers/crd-page";
-
+    Form
+} from 'react-bootstrap';
 
 class CreateReferralForm extends React.Component {
     // funcitons
-//    states
-    //submit
+    // states
+    // submit
     // validate
 
     render() {
@@ -85,50 +79,87 @@ class CreateReferralForm extends React.Component {
         ];
 
         return (
-            <PageWrapper>
-                <h3>
-                    Create Referral
-                </h3>
-                <Grid.Column>
-                    <Form size={'small'}>
-                        <Form.Group grouped>
-                            <Form.Field>
-                                <label>Patient:</label>
-                                <Dropdown
-                                    placeholder='Select Patient'
-                                    fluid
-                                    selection
-                                    options={patientOptions}
-                                />
-                            </Form.Field>
-                            <Form.Field>
-                                <label>Reading:</label>
-                                <Dropdown
-                                    placeholder='Select Reading'
-                                    fluid
-                                    selection
-                                    options={readingOptions}
-                                />
-                            </Form.Field>
-                            <Form.Field>
-                                <label>Refer to:</label>
-                                <Dropdown
-                                    placeholder='Select Facility'
-                                    fluid
-                                    selection
-                                    options={facilityOptions}
-                                />
-                            </Form.Field>
-                            <Form.Field
-                                control={TextArea}
-                                label='Comments'
-                                placeholder='Additional comments and actions taken...'
-                            />
-                            <input type="submit" value="Submit"/>
-                        </Form.Group>
-                    </Form>
-                </Grid.Column>
-            </PageWrapper>
+            <div>
+                <TopNavigation authenticated={true}></TopNavigation>
+                <Container>
+                    <Row>
+                        <Col>
+                            <h1>Create Referral</h1>
+                            <hr></hr>
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col>
+                            <Form>
+                                <Row>
+                                    <Col>
+                                        <Form.Group>
+                                            <Form.Label>Patient</Form.Label>
+                                            <Form.Control as="select">
+                                                {patientOptions.map(patient => (
+                                                    <option value={patient.value}>{patient.text}</option>
+                                                ))}
+                                            </Form.Control>
+                                            {/* enable his for error handling */}
+                                            {/* <Form.Text className="text-muted">
+                                                {errors.email && <InlineError text={errors.email} />}
+                                            </Form.Text> */}
+                                        </Form.Group>
+                                    </Col>
+                                </Row>
+                                <Row>
+                                    <Col>
+                                        <Form.Group>
+                                            <Form.Label>Reading</Form.Label>
+                                            <Form.Control as="select">
+                                                {readingOptions.map(reading => (
+                                                    <option value={reading.value}>{reading.text}</option>
+                                                ))}
+                                            </Form.Control>
+                                            {/* enable his for error handling */}
+                                            {/* <Form.Text className="text-muted">
+                                                {errors.email && <InlineError text={errors.email} />}
+                                            </Form.Text> */}
+                                        </Form.Group>
+                                    </Col>
+                                    <Col>
+                                        <Form.Group>
+                                            <Form.Label>Facility</Form.Label>
+                                            <Form.Control as="select">
+                                                {facilityOptions.map(facility => (
+                                                    <option value={facility.value}>{facility.text}</option>
+                                                ))}
+                                            </Form.Control>
+                                            {/* enable his for error handling */}
+                                            {/* <Form.Text className="text-muted">
+                                                {errors.email && <InlineError text={errors.email} />}
+                                            </Form.Text> */}
+                                        </Form.Group>
+                                    </Col>
+                                </Row>
+                                <Row>
+                                    <Col>
+                                        <Form.Group>
+                                            <Form.Label>Example textarea</Form.Label>
+                                            <Form.Control 
+                                                as="textarea" 
+                                                rows="3"
+                                                placeholder="Additional comments and actions taken..." />
+                                        </Form.Group>
+                                    </Col>
+                                </Row>
+                                <Row>
+                                    <Col>
+                                        <Button variant="success" as={Link} to="createReferral">
+                                            Create
+                                        </Button>
+                                    </Col>
+                                </Row>
+                            </Form>
+                        </Col>
+                    </Row>
+                </Container>
+            </div>
 
         );
     }
