@@ -160,7 +160,6 @@ class CreateReferralForm extends React.Component {
                     </Row>
                 </Container>
             </div>
-
         );
     }
 }

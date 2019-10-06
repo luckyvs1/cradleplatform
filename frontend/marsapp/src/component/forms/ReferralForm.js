@@ -154,7 +154,7 @@ class ReferralForm extends React.Component {
                                     {rows.map(row => (
                                         <tr key={row.name} component={Link} to={"/followUpDetail"}>
                                             <th scope="row">
-                                                <Link to="followUpDetail">
+                                                <Link to="referralDetail">
                                                     {row.name}
                                                 </Link>
                                             </th>

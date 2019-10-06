@@ -16,9 +16,7 @@ class Referral extends React.Component {
 
     render() {
         return (
-            <div>
-                <ReferralForm></ReferralForm>
-            </div>
+            <ReferralForm></ReferralForm>
         )
     }
 

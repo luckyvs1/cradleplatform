@@ -19,7 +19,7 @@ import {
 } from 'react-bootstrap';
 
 const bottomMarginStyle = {
-    'margin-bottom': '40px'
+    marginBottom: '40px'
 };
 
 class TopNavigation extends Component {
