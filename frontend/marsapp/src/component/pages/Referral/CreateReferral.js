@@ -12,9 +12,7 @@ class CreateReferral extends React.Component {
 
     render() {
         return (
-            <div className="ui-toolbar">
-                <CreateReferralForm></CreateReferralForm>
-            </div>
+            <CreateReferralForm></CreateReferralForm>
         );
     }
 }

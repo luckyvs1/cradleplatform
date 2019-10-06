@@ -5,93 +5,79 @@
  */
 
 import React from "react";
-import {
-    Button,
-    Checkbox,
-    Form,
-    Input,
-    Radio,
-    Select,
-    TextArea,
-    List,
-    Grid,
-    Image,
-    Icon,
-} from 'semantic-ui-react'
 import {Link} from "react-router-dom";
-import MenuTabularOnLeft from "../pages/MainMenu";
-import HeaderMenu from "../pages/HeaderMenu";
-import {PageWrapper} from "../../wrappers/crd-page";
+import TopNavigation from "../navigation/TopNavigation";
+import {
+    Container,
+    Row,
+    Col,
+    Table,
+    Image,
+    Button
+} from 'react-bootstrap';
 
 class ListPatientForm extends React.Component {
-    // funcitons
-//    states
-    //submit
+    // functions
+    // states
+    // submit
     // validate
 
     render() {
         return (
-            <PageWrapper>
-                <h3>
-                    All Patients
-                </h3>
-                <Grid.Row>
-                    <Grid.Column floated='left'>
-                        <Button icon labelPosition='left' as={Link} to="/addPatient">
-                            <Icon name='add circle'/> New Patient
-                        </Button>
-                    </Grid.Column>
-                    <Grid.Column floated='right'>
-                        <input type="text" className="input" onChange={this.handleChange} placeholder="Search..."/>
-                    </Grid.Column>
-                </Grid.Row>
-                <List selection verticalAlign='middle'>
-                    <List.Item>
-                        <Image avatar src='https://react.semantic-ui.com/images/avatar/small/christian.jpg'/>
-                        <List.Content
-                            as={Link} to="/patientDetail">
-                            <List.Header>Test 1</List.Header>
-                        </List.Content>
-
-                    </List.Item>
-                    <List.Item>
-                        <Image avatar src='https://react.semantic-ui.com/images/avatar/small/helen.jpg'/>
-                        <List.Content
-                            as={Link} to="/patientDetail">
-                            <List.Header>Test 2</List.Header>
-                        </List.Content>
-                    </List.Item>
-                    <List.Item>
-                        <Image avatar src='https://react.semantic-ui.com/images/avatar/small/helen.jpg'/>
-                        <List.Content
-                            as={Link} to="/patientDetail">
-                            <List.Header>Test 3</List.Header>
-                        </List.Content>
-                    </List.Item>
-                    <List.Item>
-                        <Image avatar src='https://react.semantic-ui.com/images/avatar/small/daniel.jpg'/>
-                        <List.Content
-                            as={Link} to="/patientDetail">
-                            <List.Header>Test 4</List.Header>
-                        </List.Content>
-                    </List.Item>
-                    <List.Item>
-                        <Image avatar src='https://react.semantic-ui.com/images/avatar/small/daniel.jpg'/>
-                        <List.Content
-                            as={Link} to="/patientDetail">
-                            <List.Header>Test 5</List.Header>
-                        </List.Content>
-                    </List.Item>
-                    <List.Item>
-                        <Image avatar src='https://react.semantic-ui.com/images/avatar/small/helen.jpg'/>
-                        <List.Content
-                            as={Link} to="/patientDetail">
-                            <List.Header>Test 6</List.Header>
-                        </List.Content>
-                    </List.Item>
-                </List>
-            </PageWrapper>
-
+            <div>
+                <TopNavigation authenticated={true}></TopNavigation>
+                <Container>
+                    <Row>
+                        <Col>
+                            <Row>
+                                <Col>
+                                    <h1>Patients</h1>
+                                </Col>
+                                <Col className="text-right">
+                                    <Button variant="primary" size="sm" as={Link} to="addPatient">
+                                        Create Patient
+                                    </Button>
+                                </Col>
+                            </Row>
+                            <hr></hr>
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col>
+                            <Table bordered hover size="sm">
+                                <thead>
+                                    <tr>
+                                        <th width="10"></th>
+                                        <th>Name</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <Image src="https://react.semantic-ui.com/images/avatar/small/helen.jpg" rounded />
+                                        </td>
+                                        <td>
+                                            <Link to="patientDetail">
+                                                Test 1
+                                            </Link>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <Image src="https://react.semantic-ui.com/images/avatar/small/daniel.jpg" rounded />
+                                        </td>
+                                        <td>
+                                            <Link to="patientDetail">
+                                                Test 2
+                                            </Link>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </Table>
+                        </Col>
+                    </Row>
+                </Container>
+            </div>
         );
     }
 }

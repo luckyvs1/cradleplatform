@@ -13,9 +13,7 @@ class AddPatient extends React.Component {
 
     render() {
         return (
-            <div className="ui-toolbar">
-                <AddPatientFrom></AddPatientFrom>
-            </div>
+            <AddPatientFrom></AddPatientFrom>
         );
     }
 }
