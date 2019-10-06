@@ -1,5 +1,5 @@
 /**
- * Class: AddPatientFrom
+ * Class: AddPatientForm
  * Summary:
  *  Contains the contents and functionality of the AddPatient page.
  */
@@ -21,7 +21,7 @@ import {
 import HeaderMenu from "../pages/HeaderMenu";
 import {PageWrapper} from "../../wrappers/crd-page";
 
-class AddPatientFrom extends React.Component {
+class AddPatientForm extends React.Component {
     // funcitons
 //    states
     //submit
@@ -83,4 +83,4 @@ class AddPatientFrom extends React.Component {
     }
 }
 
-export default AddPatientFrom;
+export default AddPatientForm;

@@ -7,13 +7,13 @@
 
 import React from "react";
 import {connect} from "react-redux";
-import AddPatientFrom from "../../forms/AddPatientFrom";
+import AddPatientForm from "../../forms/AddPatientForm";
 
 class AddPatient extends React.Component {
 
     render() {
         return (
-            <AddPatientFrom></AddPatientFrom>
+            <AddPatientForm></AddPatientForm>
         );
     }
 }
