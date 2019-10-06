@@ -7,14 +7,7 @@
 
 import React from "react";
 import { Link } from "react-router-dom";
-import { Grid } from 'semantic-ui-react'
 import { makeStyles } from '@material-ui/core/styles';
-// import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
 import TopNavigation from "../navigation/TopNavigation";
 import {
     Container,
@@ -22,7 +15,6 @@ import {
     Col,
     Table
 } from 'react-bootstrap';
-
 
 class FloatingMenuItem extends React.Component {
 
@@ -35,8 +27,7 @@ class FloatingMenuItem extends React.Component {
         // let buttonStyle = {
         //     backgroundImage: `url(${this.props.icon})`
         // }
-        if (this.props.icon == 'add') {
-            let buttonStyle = {}
+        if (this.props.icon === 'add') {
         }
 
         let label;
@@ -102,14 +93,10 @@ class HomePage extends React.Component {
     }));
 
     render() {
-        const { activeItem } = this.state
-        const useStyles = this.useStyles
         let buttons = [];
-        let className = "floating-menu";
         let icon = "add";
 
         if (this.state.toggled) {
-            className += " open";
             icon = "clear";
             buttons.push(
                 <FloatingMenuItem label="Item 1" icon="create" action="" key="i1" />);
@@ -201,69 +188,6 @@ class HomePage extends React.Component {
                         </Col>
                     </Row>
                 </Container>
-
-                    {/* <Grid>
-                        <Grid.Column width={3}>
-                        </Grid.Column>
-
-                        <Grid.Column stretched width={7}>
-                            <Paper className={useStyles.root}>
-                                <h2 style={useStyles.uiHeader}>New Referrals</h2>
-
-                                <Table className={useStyles.table}>
-                                    <TableHead>
-                                        <TableRow>
-                                            <TableCell>Patient Id</TableCell>
-                                            <TableCell align="right">Patient Name</TableCell>
-                                            <TableCell align="right">Referred By</TableCell>
-                                            <TableCell align="right">Referral Date</TableCell>
-                                        </TableRow>
-                                    </TableHead>
-                                    <TableBody>
-                                        {rows.map(row => (
-                                            <TableRow key={row.name} component={Link} to={"/referralDetail"}>
-                                                <TableCell component="th" scope="row">
-                                                    {row.name}
-                                                </TableCell>
-                                                <TableCell align="right">{row.calories}</TableCell>
-                                                <TableCell align="right">{row.fat}</TableCell>
-                                                <TableCell align="right">{row.carbs}</TableCell>
-                                            </TableRow>
-                                        ))}
-                                    </TableBody>
-                                </Table>
-                            </Paper>
-                        </Grid.Column>
-                        <Grid.Column stretched width={6}>
-                            <Paper className={useStyles.root}>
-                                <h2 as="ui header" className='ui-header'>Upcoming Follow Up</h2>
-                                <Table className={useStyles.table}>
-                                    <TableHead>
-                                        <TableRow>
-                                            <TableCell>Patient Id</TableCell>
-                                            <TableCell align="right">Patient Name</TableCell>
-                                            <TableCell align="right">Location</TableCell>
-                                            <TableCell align="right">Follow-up Date</TableCell>
-                                        </TableRow>
-                                    </TableHead>
-                                    <TableBody>
-                                        {rows.map(row => (
-                                            <TableRow key={row.name}>
-                                                <TableCell component="th" scope="row">
-                                                    {row.name}
-                                                </TableCell>
-                                                <TableCell align="right">{row.calories}</TableCell>
-                                                <TableCell align="right">{row.fat}</TableCell>
-                                                <TableCell align="right">{row.carbs}</TableCell>
-                                            </TableRow>
-                                        ))}
-                                    </TableBody>
-                                </Table>
-                            </Paper>
-
-
-                        </Grid.Column>
-                    </Grid> */}
             </div>
 
         );

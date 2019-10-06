@@ -23,51 +23,6 @@ class ReferralDetailForm extends React.Component {
     // validate
 
     render() {
-        const friendOptions = [
-            {
-                key: 'Jenny Hess',
-                text: 'Jenny Hess',
-                value: 'Jenny Hess',
-            },
-            {
-                key: 'Elliot Fu',
-                text: 'Elliot Fu',
-                value: 'Elliot Fu',
-            },
-            {
-                key: 'Stevie Feliciano',
-                text: 'Stevie Feliciano',
-                value: 'Stevie Feliciano',
-            },
-            {
-                key: 'Christian',
-                text: 'Christian',
-                value: 'Christian',
-            },
-            {
-                key: 'Matt',
-                text: 'Matt',
-                value: 'Matt',
-            },
-            {
-                key: 'Justen Kitsune',
-                text: 'Justen Kitsune',
-                value: 'Justen Kitsune',
-            },
-        ];
-
-        const statusOptions = [
-            {
-                key: 'Requires Response',
-                text: 'Requires Response',
-                value: 'Requires Response',
-            },
-            {
-                key: 'Done',
-                text: 'Done',
-                value: 'Done',
-            }
-        ];
 
         return (
             <div>
@@ -279,20 +234,6 @@ class ReferralDetailForm extends React.Component {
                                 </Col>
                                 <Col md={4}>
                                     <Form.Group>
-                                        <Form.Label>Referred to:</Form.Label>
-                                        <Form.Control
-                                            type="text"
-                                            id="referred_to"
-                                            name="referred_to"
-                                            value={'health_facility_name'} />
-                                        {/*error handling*/}
-                                        {/* <Form.Text className="text-muted">
-                                        {errors.email && <InlineError text={errors.email} />}
-                                    </Form.Text> */}
-                                    </Form.Group>
-                                </Col>
-                                <Col md={4}>
-                                    <Form.Group>
                                         <Form.Label>Blood Pressure</Form.Label>
                                         <Form.Control
                                             type="text"
@@ -327,6 +268,20 @@ class ReferralDetailForm extends React.Component {
                                             id="status"
                                             name="status"
                                             value={'Likely Healthy'} />
+                                        {/*error handling*/}
+                                        {/* <Form.Text className="text-muted">
+                                        {errors.email && <InlineError text={errors.email} />}
+                                    </Form.Text> */}
+                                    </Form.Group>
+                                </Col>
+                                <Col md={4}>
+                                    <Form.Group>
+                                        <Form.Label>Referred to:</Form.Label>
+                                        <Form.Control
+                                            type="text"
+                                            id="referred_to"
+                                            name="referred_to"
+                                            value={'health_facility_name'} />
                                         {/*error handling*/}
                                         {/* <Form.Text className="text-muted">
                                         {errors.email && <InlineError text={errors.email} />}

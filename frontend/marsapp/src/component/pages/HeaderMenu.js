@@ -4,7 +4,7 @@
  *  Base file for showing contents of Header Menu.
  */
 
-import {Menu ,Icon, Dropdown} from "semantic-ui-react";
+import {Menu} from "semantic-ui-react";
 import {Link} from "react-router-dom";
 import React from "react";
 import {Grid} from 'semantic-ui-react'
@@ -19,10 +19,9 @@ export default class HeaderMenu extends React.Component {
 
     render() {
         const { activeItem } = this.state
-
+        
         return (
             <Grid>
-
                 <Grid.Column width={2}>
                     <MenuTabularOnLeft></MenuTabularOnLeft>
                 </Grid.Column>
@@ -52,7 +51,5 @@ export default class HeaderMenu extends React.Component {
                 </Grid.Column>
                 <Grid.Column width={1}></Grid.Column>
             </Grid>
-
-
         )}
 }

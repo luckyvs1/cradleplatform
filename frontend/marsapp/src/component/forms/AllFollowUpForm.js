@@ -15,7 +15,6 @@ import {
     Table
 } from 'react-bootstrap';
 
-
 function createData(name, calories, fat, carbs, protein) {
     return {name, calories, fat, carbs, protein};
 }
@@ -30,10 +29,6 @@ const rows = [
 
 
 class AllFollowUpForm extends React.Component {
-    // funcitons
-//    states
-    //submit
-    // validate
 
     useStyles = makeStyles(theme => ({
         root: {
@@ -55,7 +50,6 @@ class AllFollowUpForm extends React.Component {
 
 
     render() {
-        const useStyles = this.useStyles
 
         return (
             <div>

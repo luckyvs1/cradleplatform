@@ -6,13 +6,11 @@
 
 import React from "react";
 import { Link } from "react-router-dom";
-import InlineError from "../messages/InlineError";
 import TopNavigation from "../navigation/TopNavigation";
 import {
     Container,
     Row,
     Col,
-    Table,
     Button,
     Form
 } from 'react-bootstrap';
@@ -100,7 +98,7 @@ class CreateReferralForm extends React.Component {
                                                     <option value={patient.value}>{patient.text}</option>
                                                 ))}
                                             </Form.Control>
-                                            {/* enable his for error handling */}
+                                            {/* enable this for error handling */}
                                             {/* <Form.Text className="text-muted">
                                                 {errors.email && <InlineError text={errors.email} />}
                                             </Form.Text> */}

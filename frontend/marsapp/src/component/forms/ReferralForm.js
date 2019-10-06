@@ -6,24 +6,10 @@
 
 import React from "react";
 import {connect} from "react-redux";
-import Paper from "@material-ui/core/Paper";
-import TableHead from "@material-ui/core/TableHead";
-import TableRow from "@material-ui/core/TableRow";
-import TableCell from "@material-ui/core/TableCell";
-import TableBody from "@material-ui/core/TableBody";
 import {makeStyles} from "@material-ui/core";
-import MenuTabularOnLeft from "../pages/MainMenu";
 import {
-    Checkbox,
     Form,
-    Input,
-    Radio,
-    Select,
-    TextArea,
-    List,
-    Image,
-    Dropdown,
-    Grid
+    Dropdown
 } from 'semantic-ui-react'
 import {Link} from "react-router-dom";
 import TopNavigation from "../navigation/TopNavigation";
@@ -84,8 +70,6 @@ class ReferralForm extends React.Component {
     }));
 
     render() {
-        const {activeItem} = this.state
-        const useStyles = this.useStyles
         const friendOptions = [
             {
                 key: 'Jenny Hess',

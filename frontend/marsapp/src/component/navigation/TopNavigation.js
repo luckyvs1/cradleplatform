@@ -8,7 +8,6 @@ import React, {Component} from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import gravatarUrl from "gravatar-url";
 import * as actions from "../../actions/auth";
 
 import {
@@ -29,7 +28,7 @@ class TopNavigation extends Component {
             return (
                 <Navbar bg="dark" variant="dark" style={bottomMarginStyle}>
                     <Container>
-                        <Navbar.Brand href="#home">Cradle Platform {this.props.authenticated}</Navbar.Brand>
+                        <Navbar.Brand href="/homePage">Cradle Platform {this.props.authenticated}</Navbar.Brand>
                         <Nav className="mr-auto">
                             <Nav.Link as={Link} to="homePage">
                                 <i className="fas fa-tachometer-alt"></i> Dashboard
@@ -75,7 +74,7 @@ class TopNavigation extends Component {
         return (
             <Navbar bg="dark" variant="dark">
                 <Container>
-                    <Navbar.Brand href="#home">Cradle Platform</Navbar.Brand>
+                    <Navbar.Brand href="/">Cradle Platform</Navbar.Brand>
                 </Container>
             </Navbar>
         )

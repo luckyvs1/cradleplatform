@@ -9,13 +9,8 @@ import React from "react";
 import PropTypes from "prop-types";
 import {
     Button,
-    Checkbox,
     Form,
-    Input,
-    Radio,
-    Message,
-    Select,
-    TextArea, Grid,
+    Grid
 } from 'semantic-ui-react'
 import isEmail from "validator/lib/isEmail";
 import InlineError from "../messages/InlineError";

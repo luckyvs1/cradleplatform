@@ -4,14 +4,9 @@
  *  Base file for showing contents of Side bar menu on the left.
  */
 
-import {Menu, Header, Icon, Image, Segment, Sidebar, Dropdown} from "semantic-ui-react";
+import {Menu, Icon} from "semantic-ui-react";
 import {Link} from "react-router-dom";
 import React from "react";
-import {makeStyles} from "@material-ui/core";
-
-
-
-
 
 class MenuLinks extends React.Component {
     constructor(props) {
@@ -118,7 +113,6 @@ export default class MenuTabularOnLeft extends React.Component {
     render() {
         let menuStatus = this.state.isOpen ? 'isopen' : '';
 
-        const {activeItem} = this.state
         return (
             <div ref="root">
                 <div className="menubar">
