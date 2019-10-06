@@ -12,9 +12,7 @@ class AddReadingDetail extends React.Component {
 
     render() {
         return (
-            <div className="ui-toolbar">
-                <AddReadingForm></AddReadingForm>
-            </div>
+            <AddReadingForm></AddReadingForm>
         );
     }
 }
