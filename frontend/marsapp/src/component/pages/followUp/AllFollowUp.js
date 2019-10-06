@@ -13,7 +13,7 @@ class AllFollowUp extends React.Component {
 
     render() {
         return (
-            <div className="ui-toolbar">
+            <div>
                 <AllFollowUpForm></AllFollowUpForm>
             </div>
         );

@@ -123,84 +123,84 @@ class HomePage extends React.Component {
 
         return (
             <div>
-                    <TopNavigation authenticated={true}></TopNavigation>
+                <TopNavigation authenticated={true}></TopNavigation>
 
-                    <Container>
-                        <Row>
-                            <Col>
-                                <Row>
-                                    <Col>
-                                        <h2>New Referrals</h2>
-                                        <hr></hr>
-                                    </Col>
-                                </Row>
-                                <Row>
-                                    <Col>
-                                        <Table bordered hover size="sm">
-                                            <thead>
-                                                <tr>
-                                                    <th>Patient ID</th>
-                                                    <th>Name</th>
-                                                    <th>Referred By</th>
-                                                    <th>Referral Date</th>
+                <Container>
+                    <Row>
+                        <Col>
+                            <Row>
+                                <Col>
+                                    <h2>New Referrals</h2>
+                                    <hr></hr>
+                                </Col>
+                            </Row>
+                            <Row>
+                                <Col>
+                                    <Table bordered hover size="sm">
+                                        <thead>
+                                            <tr>
+                                                <th>Patient ID</th>
+                                                <th>Name</th>
+                                                <th>Referred By</th>
+                                                <th>Referral Date</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {rows.map(row => (
+                                                <tr key={row.name}>
+                                                    <th scope="row">
+                                                        <Link to="referralDetail">
+                                                            {row.name}
+                                                        </Link>
+                                                    </th>
+                                                    <td>{row.calories}</td>
+                                                    <td>{row.fat}</td>
+                                                    <td>{row.carbs}</td>
                                                 </tr>
-                                            </thead>
-                                            <tbody>
-                                                {rows.map(row => (
-                                                    <tr key={row.name}>
-                                                        <th scope="row">
-                                                            <Link to="referralDetail">
-                                                                {row.name}
-                                                            </Link>
-                                                        </th>
-                                                        <td>{row.calories}</td>
-                                                        <td>{row.fat}</td>
-                                                        <td>{row.carbs}</td>
-                                                    </tr>
-                                                ))}
-                                            </tbody>
-                                        </Table>
-                                    </Col>
-                                </Row>
-                            </Col>
-                            <Col>
-                                <Row>
-                                    <Col>
-                                        <h2>Upcoming Follow-ups</h2>
-                                        <hr></hr>
-                                    </Col>
-                                </Row>
-                                <Row>
-                                    <Col>
-                                        <Table bordered hover size="sm">
-                                            <thead>
-                                                <tr>
-                                                    <th>Patient ID</th>
-                                                    <th>Name</th>
-                                                    <th>Location</th>
-                                                    <th>Follow-up Date</th>
+                                            ))}
+                                        </tbody>
+                                    </Table>
+                                </Col>
+                            </Row>
+                        </Col>
+                        <Col>
+                            <Row>
+                                <Col>
+                                    <h2>Upcoming Follow-ups</h2>
+                                    <hr></hr>
+                                </Col>
+                            </Row>
+                            <Row>
+                                <Col>
+                                    <Table bordered hover size="sm">
+                                        <thead>
+                                            <tr>
+                                                <th>Patient ID</th>
+                                                <th>Name</th>
+                                                <th>Location</th>
+                                                <th>Follow-up Date</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {rows.map(row => (
+                                                <tr key={row.name}>
+                                                    <th scope="row">
+                                                        <Link to="referralDetail">
+                                                            {row.name}
+                                                        </Link>
+                                                    </th>
+                                                    <td>{row.calories}</td>
+                                                    <td>{row.fat}</td>
+                                                    <td>{row.carbs}</td>
                                                 </tr>
-                                            </thead>
-                                            <tbody>
-                                                {rows.map(row => (
-                                                    <tr key={row.name}>
-                                                        <th scope="row">
-                                                            <Link to="referralDetail">
-                                                                {row.name}
-                                                            </Link>
-                                                        </th>
-                                                        <td>{row.calories}</td>
-                                                        <td>{row.fat}</td>
-                                                        <td>{row.carbs}</td>
-                                                    </tr>
-                                                ))}
-                                            </tbody>
-                                        </Table>
-                                    </Col>
-                                </Row>
-                            </Col>
-                        </Row>
-                    </Container>
+                                            ))}
+                                        </tbody>
+                                    </Table>
+                                </Col>
+                            </Row>
+                        </Col>
+                    </Row>
+                </Container>
 
                     {/* <Grid>
                         <Grid.Column width={3}>

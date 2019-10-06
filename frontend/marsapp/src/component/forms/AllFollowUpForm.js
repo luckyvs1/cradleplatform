@@ -5,29 +5,15 @@
  */
 
 import React from "react";
-import Paper from "@material-ui/core/Paper";
-import Table from "@material-ui/core/Table";
-import TableHead from "@material-ui/core/TableHead";
-import TableRow from "@material-ui/core/TableRow";
-import TableCell from "@material-ui/core/TableCell";
-import TableBody from "@material-ui/core/TableBody";
-import {
-    Button,
-    Checkbox,
-    Form,
-    Input,
-    Radio,
-    Select,
-    TextArea,
-    List,
-    Grid,
-    Image,
-} from 'semantic-ui-react'
 import {makeStyles} from "@material-ui/core";
-import MenuTabularOnLeft from "../pages/MainMenu";
 import {Link} from "react-router-dom";
-import HeaderMenu from "../pages/HeaderMenu";
-import { PageWrapper} from "../../wrappers/crd-page";
+import TopNavigation from "../navigation/TopNavigation";
+import {
+    Container,
+    Row,
+    Col,
+    Table
+} from 'react-bootstrap';
 
 
 function createData(name, calories, fat, carbs, protein) {
@@ -72,42 +58,47 @@ class AllFollowUpForm extends React.Component {
         const useStyles = this.useStyles
 
         return (
-            <PageWrapper>
-                <Grid.Column width={3}>
-                </Grid.Column>
-                <Grid.Column width={13}>
-                    <h3>All Follow Ups</h3>
-                    <Grid.Column stretched width={5}>
-                        <Paper className={useStyles.root}>
-                            <Table className={useStyles.table}>
-                                <TableHead>
-                                    <TableRow>
-                                        <TableCell>Patient ID</TableCell>
-                                        <TableCell align="right">Patient Name</TableCell>
-                                        <TableCell align="right">Location</TableCell>
-                                        <TableCell align="right">Status</TableCell>
-                                        <TableCell align="right">Frequency</TableCell>
-                                    </TableRow>
-                                </TableHead>
-                                <TableBody>
+            <div>
+                <TopNavigation authenticated={true}></TopNavigation>
+                <Container>
+                    <Row>
+                        <Col>
+                            <h1>All Follow-ups</h1>
+                            <hr></hr>
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col>
+                            <Table bordered hover size="sm">
+                                <thead>
+                                    <tr>
+                                        <th>Patient ID</th>
+                                        <th>Patient Name</th>
+                                        <th>Location</th>
+                                        <th>Status</th>
+                                        <th>Frequency</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
                                     {rows.map(row => (
-                                        <TableRow key={row.name} component={Link} to={"/followUpDetail"}>
-                                            <TableCell component="th" scope="row">
-                                                {row.name}
-                                            </TableCell>
-                                            <TableCell align="right">{row.calories}</TableCell>
-                                            <TableCell align="right">{row.fat}</TableCell>
-                                            <TableCell align="right">{row.protein}</TableCell>
-                                            <TableCell align="right">{row.carbs}</TableCell>
-                                        </TableRow>
+                                        <tr key={row.name} component={Link} to={"/followUpDetail"}>
+                                            <th scope="row">
+                                                <Link to="followUpDetail">
+                                                    {row.name}
+                                                </Link>
+                                            </th>
+                                            <td>{row.calories}</td>
+                                            <td>{row.fat}</td>
+                                            <td>{row.protein}</td>
+                                            <td>{row.carbs}</td>
+                                        </tr>
                                     ))}
-                                </TableBody>
+                                </tbody>
                             </Table>
-                        </Paper>
-                    </Grid.Column>
-                </Grid.Column>
-            </PageWrapper>
-
+                        </Col>
+                    </Row>
+                </Container>
+            </div>
         );
     }
 }
