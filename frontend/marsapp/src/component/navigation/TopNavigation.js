@@ -52,14 +52,14 @@ class TopNavigation extends Component {
                                 <i className="fas fa-bell"></i>
                             </Nav.Link>
                             <NavDropdown title={<span><i className="fas fa-cogs"></i></span>} id="collasible-nav-dropdown">                                
-                                <NavDropdown.Item href="#action/3.2">
+                                <NavDropdown.Item as={Link} to="account">
                                     <i className="fas fa-user-alt"></i> Account
                                 </NavDropdown.Item>
-                                <NavDropdown.Item href="#action/3.2">
+                                <NavDropdown.Item as={Link} to="listUser">
                                     <i className="fas fa-users-cog"></i> Users
                                 </NavDropdown.Item>
                                 <NavDropdown.Divider />
-                                <NavDropdown.Item href="#action/3.3">
+                                <NavDropdown.Item as={Link} to="help">
                                     <i className="fas fa-graduation-cap"></i> Learning Materials
                                 </NavDropdown.Item>
                                 <NavDropdown.Divider />
