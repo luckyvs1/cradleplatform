@@ -150,7 +150,7 @@ class CreateReferralForm extends React.Component {
                                 </Row>
                                 <Row>
                                     <Col>
-                                        <Button variant="success" as={Link} to="createReferral">
+                                        <Button variant="success" as={Link} to="referral">
                                             Create
                                         </Button>
                                     </Col>
