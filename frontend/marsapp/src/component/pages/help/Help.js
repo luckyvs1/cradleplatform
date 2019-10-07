@@ -13,11 +13,7 @@ class Help extends React.Component {
 
     render() {
         return (
-            <div className="ui-toolbar">
-
-
-                <HelpForm></HelpForm>
-            </div>
+            <HelpForm></HelpForm>
         );
     }
 }

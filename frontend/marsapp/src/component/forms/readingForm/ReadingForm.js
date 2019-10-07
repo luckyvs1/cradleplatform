@@ -5,17 +5,9 @@
  */
 
 import React from "react";
-import MenuTabularOnLeft from "../../pages/MainMenu";
-import {Checkbox, Form, Input, Select, Grid, List, TextArea} from "semantic-ui-react";
-import HeaderMenu from "../../pages/HeaderMenu";
+import {Checkbox, Form, Input, Grid} from "semantic-ui-react";
 import {PageWrapper} from "../../../wrappers/crd-page";
-
 class ReadingForm extends React.Component {
-    // funcitons
-//    states
-    //submit
-    // validate
-
     render() {
         return (
             <PageWrapper>
@@ -51,8 +43,6 @@ class ReadingForm extends React.Component {
                     </Form>
                 </Grid.Column>
             </PageWrapper>
-
-
         );
     }
 }

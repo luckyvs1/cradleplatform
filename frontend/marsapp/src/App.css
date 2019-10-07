@@ -2,14 +2,8 @@
  * Summary:
  *  Handles the common CSS for all the pages.
  */
-@import url('https://fonts.googleapis.com/css?family=Noto+Sans+HK&display=swap');
 @import url('https://use.fontawesome.com/releases/v5.6.3/css/solid.css');
 @import url('https://use.fontawesome.com/releases/v5.6.3/css/fontawesome.css');
-@import url('https://fonts.googleapis.com/css?family=Roboto:300,400');
-
-
-
-
 
 /*
 * handles main page css
@@ -22,7 +16,6 @@ root {
 }
 
 html, body {
-    background: #9da4a6 !important;
     color: rgba(0, 0, 0, 1);
     font-family: 'Noto Sans HK', sans-serif;
     font-size: 1rem !important;
@@ -51,32 +44,11 @@ main {
 * handles inner page css
 */
 
-.ui-toolbar {
-    padding: 1rem;
-    text-align: left;
-    height: 100% !important;
-}
-
-.ui-toolbar a {
-    padding: 5px;
-    color: #FFF;
-    transition: background linear .2s;
-}
-
 ui-header {
     text-align: center;
 }
 
-.ui-toolbar a:hover {
-    background: rgba(0, 0, 0, .25);
-}
 
-.ui-toolbar h1 {
-    font-family: "Comic Sans MS", cursive, sans-serif;
-    font-weight: bold;
-    margin-bottom: 5%;
-    text-align: center;
-}
 
 .ui-wrapper {
     display: grid;
@@ -641,56 +613,3 @@ li a {
 .ui.vertical.tabular.menu {
     border-right: 0;
 }
-
-
-/*
-* handles form fields css
-*/
-.fields div {
-    padding-top: 1rem;
-}
-
-.fields label {
-    padding-right: 10%;
-    width: calc(100% - 70%);
-}
-
-.fields div .ui.fluid.dropdown {
-    width: calc(100% - 70%);
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

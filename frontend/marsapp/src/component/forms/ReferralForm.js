@@ -6,30 +6,20 @@
 
 import React from "react";
 import {connect} from "react-redux";
-import Paper from "@material-ui/core/Paper";
-import Table from "@material-ui/core/Table";
-import TableHead from "@material-ui/core/TableHead";
-import TableRow from "@material-ui/core/TableRow";
-import TableCell from "@material-ui/core/TableCell";
-import TableBody from "@material-ui/core/TableBody";
 import {makeStyles} from "@material-ui/core";
-import MenuTabularOnLeft from "../pages/MainMenu";
 import {
-    Button,
-    Checkbox,
     Form,
-    Input,
-    Radio,
-    Select,
-    TextArea,
-    List,
-    Image,
-    Dropdown,
-    Grid
+    Dropdown
 } from 'semantic-ui-react'
 import {Link} from "react-router-dom";
-import HeaderMenu from "../pages/HeaderMenu";
-import {PageWrapper} from "../../wrappers/crd-page";
+import TopNavigation from "../navigation/TopNavigation";
+import {
+    Container,
+    Row,
+    Col,
+    Table,
+    Button
+} from 'react-bootstrap';
 
 function createData(name, calories, fat, carbs, protein) {
     return {name, calories, fat, carbs, protein};
@@ -80,8 +70,6 @@ class ReferralForm extends React.Component {
     }));
 
     render() {
-        const {activeItem} = this.state
-        const useStyles = this.useStyles
         const friendOptions = [
             {
                 key: 'Jenny Hess',
@@ -117,83 +105,89 @@ class ReferralForm extends React.Component {
 
 
         return (
-            <PageWrapper>
-                <Grid>
-                    <Grid.Column width={2}>
-                        <Form size={'small'}>
-                            <Form.Group grouped width={'equal'}>
-                                <Form.Field>
-                                    <label>Assign To:</label>
-                                    <Dropdown
-                                        placeholder='Select Assignee'
-                                        fluid
-                                        selection
-                                        options={friendOptions}
-                                    />
-                                </Form.Field>
-                                <Form.Field>
-                                    <label>Status:</label>
-                                    <Dropdown
-                                        placeholder='Select Status'
-                                        fluid
-                                        selection
-                                        options={friendOptions}
-                                    />
-                                </Form.Field>
-                                <Form.Field>
-                                    <label>Sort By:</label>
-                                    <Dropdown
-                                        placeholder='Select Sort By'
-                                        fluid
-                                        selection
-                                        options={friendOptions}
-                                    />
-                                </Form.Field>
-                                <Form.Field
-                                    as={Link} to="/createReferral">
-                                    <label><br/></label>
-                                    <input type="submit" value="New Referral"/>
-                                </Form.Field>
-                            </Form.Group>
-                        </Form>
-                    </Grid.Column>
-                    <Grid.Column width={13}>
-                        <Grid.Column width={9}>
-                            <h3>
-                                Referral
-                            </h3>
-
-                        </Grid.Column>
-                        <Grid.Column>
-                            <Paper className={useStyles.root}>
-                                <Table className={useStyles.table}>
-                                    <TableHead>
-                                        <TableRow>
-                                            <TableCell>Patient Id</TableCell>
-                                            <TableCell align="right">Patient Name</TableCell>
-                                            <TableCell align="right">Referred By</TableCell>
-                                            <TableCell align="right">Referral Date</TableCell>
-                                        </TableRow>
-                                    </TableHead>
-                                    <TableBody>
-                                        {rows.map(row => (
-                                            <TableRow key={row.name} component={Link} to={"/referralDetail"}>
-                                                <TableCell component="th" scope="row">
+            <div>
+                <TopNavigation authenticated={true}></TopNavigation>
+                <Container>
+                    <Row>
+                        <Col>
+                            <Row>
+                                <Col>
+                                    <h1>Referrals</h1>
+                                </Col>
+                                <Col className="text-right">
+                                    <Button variant="primary" size="sm" as={Link} to="createReferral">
+                                        Create New Referral
+                                    </Button>
+                                </Col>
+                            </Row>
+                            <hr></hr>
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col>
+                            <Table bordered hover size="sm">
+                                <thead>
+                                    <tr>
+                                        <th>Patient ID</th>
+                                        <th>Patient Name</th>
+                                        <th>Referred By</th>
+                                        <th>Referral Date</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {rows.map(row => (
+                                        <tr key={row.name} component={Link} to={"/followUpDetail"}>
+                                            <th scope="row">
+                                                <Link to="referralDetail">
                                                     {row.name}
-                                                </TableCell>
-                                                <TableCell align="right">{row.calories}</TableCell>
-                                                <TableCell align="right">{row.fat}</TableCell>
-                                                <TableCell align="right">{row.carbs}</TableCell>
-                                            </TableRow>
-                                        ))}
-                                    </TableBody>
-                                </Table>
-                            </Paper>
-                        </Grid.Column>
-                    </Grid.Column>
-
-                </Grid>
-            </PageWrapper>
+                                                </Link>
+                                            </th>
+                                            <td>{row.calories}</td>
+                                            <td>{row.fat}</td>
+                                            <td>{row.carbs}</td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </Table>
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col>
+                            <Form size={'small'}>
+                                <Form.Group grouped width={'equal'}>
+                                    <Form.Field>
+                                        <label>Assign To:</label>
+                                        <Dropdown
+                                            placeholder='Select Assignee'
+                                            fluid
+                                            selection
+                                            options={friendOptions}
+                                        />
+                                    </Form.Field>
+                                    <Form.Field>
+                                        <label>Status:</label>
+                                        <Dropdown
+                                            placeholder='Select Status'
+                                            fluid
+                                            selection
+                                            options={friendOptions}
+                                        />
+                                    </Form.Field>
+                                    <Form.Field>
+                                        <label>Sort By:</label>
+                                        <Dropdown
+                                            placeholder='Select Sort By'
+                                            fluid
+                                            selection
+                                            options={friendOptions}
+                                        />
+                                    </Form.Field>
+                                </Form.Group>
+                            </Form>
+                        </Col>
+                    </Row>
+                </Container>
+            </div>
 
         );
     }

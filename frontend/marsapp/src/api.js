@@ -3,14 +3,10 @@
  *  Handles the API calls
  */
 
-import React, {Component} from 'react';
 import axios from "axios/dist/axios"
-
-
 
 const host = "localhost";
 const port = "8080";
-
 
 export default {
     user: {

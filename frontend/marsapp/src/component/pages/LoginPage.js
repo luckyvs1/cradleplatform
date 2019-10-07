@@ -7,21 +7,14 @@
 import React from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
-import {Link} from "react-router-dom";
 import LoginForm from "../forms/LoginForm";
 import {login} from "../../actions/auth";
-import {
-    Button,
-    Checkbox,
-    Form,
-    Input,
-    Radio,
-    Select,
-    TextArea,
-    List,
-    Image,
-    Grid,
-} from 'semantic-ui-react'
+import TopNavigation from "../navigation/TopNavigation";
+import styled from 'styled-components';
+
+const TopMarginStyle = styled.div`
+  margin-top: 40px;
+`;
 
 class LoginPage extends React.Component {
     submit = (data) =>
@@ -30,15 +23,11 @@ class LoginPage extends React.Component {
 
     render() {
         return (
-            <div className="ui-toolbar ">
-                <div className={"login"}>
-
-
+            <div>
+                <TopNavigation authenticated={false}></TopNavigation>
+                <TopMarginStyle>
                     <LoginForm submit={this.submit}/>
-
-
-
-                </div>
+                </TopMarginStyle>
             </div>
         );
     }

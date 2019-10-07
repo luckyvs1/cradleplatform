@@ -5,57 +5,47 @@
  */
 
 import React from "react";
-import MenuTabularOnLeft from "../pages/MainMenu";
-import {Checkbox, Embed, Tab, Form, Input, Select, Grid, List, TextArea} from "semantic-ui-react";
-import HeaderMenu from "../pages/HeaderMenu";
-import {makeStyles} from "@material-ui/core";
-import {PageWrapper} from "../../wrappers/crd-page";
-
-const EmbedExampleYouTube = () => (
-    <Embed
-        id='AMlBuC60LUQ'
-        placeholder=''
-        source='youtube'
-    />
-)
-const EmbedExampleYouTube1 = () => (
-    <Embed
-        id='1lCbhtBQr0Q'
-        placeholder=''
-        source='youtube'
-    />
-)
-
-const panes = [
-    {menuItem: 'Help Video 1', render: () => <Tab.Pane><EmbedExampleYouTube/></Tab.Pane>},
-    {menuItem: 'Help Video 2', render: () => <Tab.Pane><EmbedExampleYouTube1/></Tab.Pane>},
-]
-
-const TabExampleBasic = () => <Tab panes={panes}/>
-
+import TopNavigation from "../navigation/TopNavigation";
+import {
+    Container,
+    Row,
+    Col,
+    Tab,
+    Tabs,
+    Table
+} from 'react-bootstrap';
 
 class HelpForm extends React.Component {
-    // funcitons
-//    states
-    //submit
-    // validate
-
 
     render() {
         return (
-            <PageWrapper>
-                <h3>
-                    Learning Materials
-                </h3>
-                <div>
-                    <Grid>
-                        <Grid.Row streched>
-                            <TabExampleBasic> </TabExampleBasic>
-                        </Grid.Row>
-                    </Grid>
-                </div>
-            </PageWrapper>
-
+            <div>
+                <TopNavigation authenticated={true}></TopNavigation>
+                <Container>
+                    <Row className="mb-4">
+                        <Col>
+                            <h1>Learning Materials</h1>
+                            <hr></hr>
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col>
+                            <Tabs>
+                                <Tab eventKey="help_video_1" title="Help Video 1">
+                                    <Table bordered hover size="sm">
+                                        <iframe title="Video 1" width="1280" height="720" src="https://www.youtube.com/embed/1lCbhtBQr0Q" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                    </Table>
+                                </Tab>
+                                <Tab eventKey="help_video_2" title="Help Video 2">
+                                    <Table bordered hover size="sm">
+                                        <iframe title="Video 2" width="1280" height="720" src="https://www.youtube.com/embed/AMlBuC60LUQ" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                    </Table>
+                                </Tab>
+                            </Tabs>
+                        </Col>
+                    </Row>
+                </Container>
+            </div>
         );
     }
 }

@@ -1,12 +1,12 @@
 /**
- * Class: AddReadingForm
+ * Class: AddPatientForm
  * Summary:
- *  Contains the contents and functionality of the AddReading page.
+ *  Contains the contents and functionality of the AddPatient page.
  */
 
 import React from "react";
 import { Link } from "react-router-dom";
-import TopNavigation from "../../navigation/TopNavigation";
+import TopNavigation from "../navigation/TopNavigation";
 import {
     Container,
     Row,
@@ -15,7 +15,11 @@ import {
     Form
 } from 'react-bootstrap';
 
-class AddReadingForm extends React.Component {
+class AddPatientForm extends React.Component {
+    // funcitons
+    // states
+    // submit
+    // validate
 
     render() {
         return (
@@ -24,7 +28,7 @@ class AddReadingForm extends React.Component {
                 <Container>
                     <Row>
                         <Col>
-                            <h1>Add Reading</h1>
+                            <h1>Add Patient</h1>
                             <hr></hr>
                         </Col>
                     </Row>
@@ -60,7 +64,7 @@ class AddReadingForm extends React.Component {
                             </Col>
                         </Row>
                         <Row>
-                            <Col md={4}>
+                            <Col>
                                 <Form.Group>
                                     <Form.Label>Age</Form.Label>
                                     <Form.Control
@@ -74,7 +78,7 @@ class AddReadingForm extends React.Component {
                                     </Form.Text> */}
                                 </Form.Group>
                             </Col>
-                            <Col md={4}>
+                            <Col>
                                 <Form.Group>
                                     <Form.Label>Pregnant</Form.Label>
                                     <Form.Control as="select">
@@ -87,7 +91,7 @@ class AddReadingForm extends React.Component {
                                     </Form.Text> */}
                                 </Form.Group>
                             </Col>
-                            <Col md={4}>
+                            <Col>
                                 <Form.Group>
                                     <Form.Label>Gestational Age</Form.Label>
                                     <Form.Control
@@ -101,74 +105,10 @@ class AddReadingForm extends React.Component {
                                     </Form.Text> */}
                                 </Form.Group>
                             </Col>
-                            <Col md={4}>
-                                <Form.Group>
-                                    <Form.Label>Blood Pressure</Form.Label>
-                                    <Form.Control
-                                        type="number"
-                                        id="blood_pressure"
-                                        name="blood_pressure"
-                                        placeholder="Blood Pressure" />
-                                    {/* enable his for error handling */}
-                                    {/* <Form.Text className="text-muted">
-                                        {errors.email && <InlineError text={errors.email} />}
-                                    </Form.Text> */}
-                                </Form.Group>
-                            </Col>
-                            <Col md={4}>
-                                <Form.Group>
-                                    <Form.Label>DP</Form.Label>
-                                    <Form.Control
-                                        type="number"
-                                        id="dp"
-                                        name="dp"
-                                        placeholder="DP" />
-                                    {/* enable his for error handling */}
-                                    {/* <Form.Text className="text-muted">
-                                        {errors.email && <InlineError text={errors.email} />}
-                                    </Form.Text> */}
-                                </Form.Group>
-                            </Col>
-                            <Col md={4}>
-                                <Form.Group>
-                                    <Form.Label>Heart Rate</Form.Label>
-                                    <Form.Control
-                                        type="number"
-                                        id="heart_rate"
-                                        name="heart_rate"
-                                        placeholder="Heart Rate" />
-                                    {/* enable his for error handling */}
-                                    {/* <Form.Text className="text-muted">
-                                        {errors.email && <InlineError text={errors.email} />}
-                                    </Form.Text> */}
-                                </Form.Group>
-                            </Col>
                         </Row>
                         <Row>
                             <Col>
-                                <Form.Group>
-                                    <Form.Label>Other Symptoms</Form.Label>
-                                    <Form.Control
-                                        as="textarea"
-                                        rows="3"
-                                        placeholder="Additional Symptoms" />
-                                </Form.Group>
-                            </Col>
-                        </Row>
-                        <Row className="mb-2">
-                            <Col>
-                                <Button variant="outline-primary" size="sm">No Symptoms</Button>&nbsp;
-                                    <Button variant="outline-primary" size="sm">Headache</Button>&nbsp;
-                                    <Button variant="outline-primary" size="sm">Bleeding</Button>&nbsp;
-                                    <Button variant="outline-primary" size="sm">Blurred Vision</Button>&nbsp;
-                                    <Button variant="outline-primary" size="sm">Feverish</Button>&nbsp;
-                                    <Button variant="outline-primary" size="sm">Adbdominal pain</Button>&nbsp;
-                                    <Button variant="outline-primary" size="sm">Unwell</Button>&nbsp;
-                                </Col>
-                        </Row>
-                        <Row>
-                            <Col>
-                                <Button variant="success" as={Link} to="patientDetail">
+                                <Button variant="success" as={Link} to="listPatient">
                                     Create
                                 </Button>
                             </Col>
@@ -176,9 +116,8 @@ class AddReadingForm extends React.Component {
                     </Form>
                 </Container>
             </div>
-
         );
     }
 }
 
-export default AddReadingForm;
+export default AddPatientForm;

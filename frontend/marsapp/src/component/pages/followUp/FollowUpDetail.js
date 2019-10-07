@@ -13,11 +13,7 @@ class FollowUpDetail extends React.Component {
 
     render() {
         return (
-            <div className="ui-toolbar">
-
-
-                <FollowUpDetailForm></FollowUpDetailForm>
-            </div>
+            <FollowUpDetailForm></FollowUpDetailForm>
         );
     }
 }

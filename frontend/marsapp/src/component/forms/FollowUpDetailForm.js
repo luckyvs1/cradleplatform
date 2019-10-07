@@ -5,20 +5,19 @@
  */
 
 import React from "react";
-import MenuTabularOnLeft from "../pages/MainMenu";
-import {Checkbox, Form, Input, Select, Grid, Dropdown, Button, List, TextArea} from "semantic-ui-react";
-import Table from "@material-ui/core/Table";
-import TableHead from "@material-ui/core/TableHead";
-import TableRow from "@material-ui/core/TableRow";
-import TableCell from "@material-ui/core/TableCell";
-import TableBody from "@material-ui/core/TableBody";
-import HeaderMenu from "../pages/HeaderMenu";
-import {PageWrapper} from "../../wrappers/crd-page";
+import TopNavigation from "../navigation/TopNavigation";
+import {
+    Row,
+    Col,
+    Form,
+    Button,
+    Container
+} from 'react-bootstrap';
 
 class FollowUpDetailForm extends React.Component {
     // funcitons
-//    states
-    //submit
+    // states
+    // submit
     // validate
 
     render() {
@@ -41,71 +40,130 @@ class FollowUpDetailForm extends React.Component {
         ];
 
         return (
-            <PageWrapper>
-                <Grid.Column width={11}>
-                    <h3>
-                        Follow Up Details
-                    </h3>
-                    <Form.Group grouped>
-                        <Form.Field
-                            control={Input}
-                            label='Patient:'
-                            value={'0123456'}
-                        />
-                        <Form.Field
-                            control={Input}
-                            label='Location:'
-                            value={'0123456'}
-                        />
-                        <Form.Field
-                            control={Input}
-                            label='Status:'
-                            value={'0123456'}
-                        />
-                        <Form.Field
-                            control={Input}
-                            label='Frequency:'
-                            value={'0123456'}
-                        />
-                        <Form.Field
-                            control={Date}
-                            label='Start Date:'
-                            value={'0123456'}
-                        />
-                        <Form.Field
-                            control={Date}
-                            label='End Date:'
-                            value={new Date()}
-                        />
-
-                        <Form.Field inline>
-                            <label>Alerts:</label>
-                            <Dropdown
-                                placeholder='Select alert'
-                                fluid
-                                selection
-                                options={alertOptions}
-                            />
-                        </Form.Field>
-                    </Form.Group>
-                </Grid.Column>
-
-                <Grid>
-                    <Grid.Column width={11}></Grid.Column>
-                    <Grid.Column width={5}>
-                        <Grid.Row>
-                            <Button>
-                                Edit
-                            </Button>
-                            <br/><br/>
-                            <Button>
-                                Mark as Done
-                            </Button>
-                        </Grid.Row>
-                    </Grid.Column>
-                </Grid>
-
-            </PageWrapper>
+            <div>
+                <TopNavigation authenticated={true}></TopNavigation>
+                <Container>
+                    <Row>
+                        <Col>
+                            <h1>Follow up Details</h1>
+                            <hr></hr>
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col>
+                            <Form.Group>
+                                <Form.Label>Patient</Form.Label>
+                                <Form.Control
+                                    type="text"
+                                    id="patient"
+                                    name="patient"
+                                    value={'0123456'} />
+                                {/*error handling*/}
+                                {/* <Form.Text className="text-muted">
+                                    {errors.email && <InlineError text={errors.email} />}
+                                </Form.Text> */}
+                            </Form.Group>
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col>
+                            <Form.Group>
+                                <Form.Label>Location</Form.Label>
+                                <Form.Control
+                                    type="text"
+                                    id="location"
+                                    name="location"
+                                    value={'0123456'} />
+                                {/*error handling*/}
+                                {/* <Form.Text className="text-muted">
+                                    {errors.email && <InlineError text={errors.email} />}
+                                </Form.Text> */}
+                            </Form.Group>
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col>
+                            <Form.Group>
+                                <Form.Label>Status</Form.Label>
+                                <Form.Control
+                                    type="text"
+                                    id="status"
+                                    name="status"
+                                    value={'0123456'} />
+                                {/*error handling*/}
+                                {/* <Form.Text className="text-muted">
+                                    {errors.email && <InlineError text={errors.email} />}
+                                </Form.Text> */}
+                            </Form.Group>
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col>
+                            <Form.Group>
+                                <Form.Label>Frequency</Form.Label>
+                                <Form.Control
+                                    type="text"
+                                    id="frequency"
+                                    name="frequency"
+                                    value={'0123456'} />
+                                {/*error handling*/}
+                                {/* <Form.Text className="text-muted">
+                                    {errors.email && <InlineError text={errors.email} />}
+                                </Form.Text> */}
+                            </Form.Group>
+                        </Col>
+                        <Col>
+                            <Form.Group>
+                                <Form.Label>Start Date</Form.Label>
+                                <Form.Control
+                                    type="date"
+                                    id="start_date"
+                                    name="start_date"/>
+                                {/*error handling*/}
+                                {/* <Form.Text className="text-muted">
+                                    {errors.email && <InlineError text={errors.email} />}
+                                </Form.Text> */}
+                            </Form.Group>
+                        </Col>
+                        <Col>
+                            <Form.Group>
+                                <Form.Label>End Date</Form.Label>
+                                <Form.Control
+                                    type="date"
+                                    id="end_date"
+                                    name="end_date" />
+                                {/*error handling*/}
+                                {/* <Form.Text className="text-muted">
+                                    {errors.email && <InlineError text={errors.email} />}
+                                </Form.Text> */}
+                            </Form.Group>
+                        </Col>
+                    </Row>
+                    <Row className="mb-4">
+                        <Col>
+                            <Form.Group>
+                                <Form.Label>Alerts</Form.Label>
+                                <Form.Control as="select">
+                                    {alertOptions.map(alert => (
+                                        <option key={alert.value} value={alert.value}>{alert.text}</option>
+                                    ))}
+                                </Form.Control>
+                                {/* enable his for error handling */}
+                                {/* <Form.Text className="text-muted">
+                                    {errors.email && <InlineError text={errors.email} />}
+                                </Form.Text> */}
+                            </Form.Group>
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col>
+                            <Button variant="warning">Edit</Button>
+                            &nbsp;
+                            <Button variant="success">Mark as Done</Button>
+                        </Col>
+                    </Row>
+                </Container>
+            </div>
         );
     }
 }
