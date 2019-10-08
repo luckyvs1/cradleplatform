@@ -46,6 +46,26 @@ public class Patient {
     @Column(name="gestation_age")
     private int gestationAge;
 
+    public Patient() {
+
+    }
+
+    public Patient(String id,
+                   String villageNo,
+                   String initials,
+                   int gestationAge,
+                   GestationalAgeTimeUnit gestationAgeUnit,
+                   Sex sex,
+                   boolean pregnant) {
+        setId(id);
+        setVillageNo(villageNo);
+        setInitials(initials);
+        setGestationAge(gestationAge);
+        setGestationAgeUnit(gestationAgeUnit);
+        setSex(sex);
+        setPregnant(pregnant);
+    }
+
     public String getId() {
         return id;
     }
