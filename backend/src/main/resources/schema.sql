@@ -15,7 +15,6 @@ CREATE TABLE User (
 
 CREATE TABLE User_Info (
     id                  VARCHAR (32)    NOT NULL,
-    at_a_station_no     VARCHAR (32)    NOT NULL,
     first_name          VARCHAR (32)    NOT NULL,
     last_name           VARCHAR (32)    NOT NULL,
     dob                 DATE            NOT NULL,
@@ -47,6 +46,7 @@ CREATE TABLE VHT (
 
 CREATE TABLE Patient (
     id                  VARCHAR (32)    NOT NULL,
+    attestation_no      VARCHAR (32)    NOT NULL,
     village_no          VARCHAR (32)    NOT NULL,
     initials            VARCHAR (4)     NOT NULL,
     sex                 ENUM('F', 'M', 'Other'),
@@ -109,6 +109,7 @@ CREATE TABLE Reading (
                         'Headache',
                         'Blurred vision',
                         'Abdominal pain',
+                        'Bleeding',
                         'Feverish',
                         'Unwell'),
     other_symptoms  TEXT,
