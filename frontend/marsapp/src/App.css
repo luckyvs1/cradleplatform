@@ -588,7 +588,7 @@ ui-header {
 
 li a {
     text-decoration: none;
-    color: black;
+    color: #f0f0f0 !important;
 }
 
 #menu.isopen {
@@ -641,6 +641,8 @@ li a {
     text-align: center;
     padding: 20px 0;
     z-index: 2000;
+    font-size: 24px!important;
+
 }
 .sidebar-brand h2 {
     margin: 0;
@@ -657,28 +659,41 @@ li a {
     padding: 0;
     list-style: none;
 }
-.sidebar-nav > li {
+.sidebar-nav > ul {
     text-indent: 10px;
     line-height: 42px;
 }
-.sidebar-nav > li a {
+.sidebar-nav > ul > a {
     display: block;
     text-decoration: none;
-    color: #757575;
-    font-weight: 600;
-    font-size: 18px;
+    color: #757575 !important;
+    font-weight: 600 !important;
+    font-size: 18px!important;
 }
-.sidebar-nav > li > a:hover,
-.sidebar-nav > li.active > a {
+.sidebar-nav > ul > a:hover,
+.sidebar-nav > ul.active > a {
     text-decoration: none;
-    color: #fff;
-    background: #9694c0;
+    color: #fff !important;
+    background: #454b54 !important;
 }
-.sidebar-nav > li > a i.fa {
-    font-size: 24px;
+.sidebar-nav > ul > a i.fa {
+    font-size: 18px;
     width: 60px;
 }
+.sidebar-nav > ul > div > a {
+    font-size: 18px;
+    display: block;
+    text-decoration: none;
+    color: #757575 !important;
+    font-weight: 600 !important;
+}
+.dropdown-menu {
 
+}
+
+.navbar>.container {
+    align-content: center !important;
+}
 #navbar-wrapper {
     width: 100%;
     position: absolute;
@@ -699,7 +714,7 @@ li a {
     color: #757575;
 }
 #navbar-wrapper .navbar a:hover {
-    color: #F8BE12;
+    color: #4b5b58;
 }
 
 #content-wrapper {
