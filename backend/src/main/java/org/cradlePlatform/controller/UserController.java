@@ -16,7 +16,7 @@ public class UserController {
     @Autowired
     private UserRepository userRepository;
 
-    @PostMapping(path="/user")
+    @PostMapping(path="/api/users")
     public @ResponseBody String addUser(@RequestParam String username,
                                         @RequestParam String password){
         User newUser = new User();
@@ -28,13 +28,13 @@ public class UserController {
         return "Saved New User";
     }
 
-    @GetMapping(path="/user/all")
+    @GetMapping(path="/api/users")
     public @ResponseBody Iterable<User> getAllUser() {
 
         return userRepository.findAll();
     }
 
-    @GetMapping(path="/user/{id}")
+    @GetMapping(path="/api/users/{id}")
     public @ResponseBody
     Optional<User> getUserById(@PathVariable(value = "id") String referrer_id){
         return userRepository.findById(referrer_id);

@@ -18,7 +18,7 @@ public class UserInfoController {
     @Autowired
     private UserInfoRepository userInfoRepository;
 
-    @PostMapping(path="userInfo")
+    @PostMapping(path="/api/userinformation")
     public @ResponseBody String addUserInfo(@RequestParam String id,
                                             @RequestParam String atAStationNo,
                                             @RequestParam String firstName,
@@ -44,12 +44,12 @@ public class UserInfoController {
         return "Saved user Info";
     }
 
-    @GetMapping(path="/userInfo")
+    @GetMapping(path="/api/userinformation")
     public @ResponseBody Iterable<UserInfo> getAllUserInfo(){
         return userInfoRepository.findAll();
     }
 
-    @GetMapping(path="/userInfo/{id}")
+    @GetMapping(path="/api/userinformation/{id}")
     public @ResponseBody
     Optional<UserInfo> getUserInfoById(@PathVariable(value = "id") String userId){
         return userInfoRepository.findById(userId);

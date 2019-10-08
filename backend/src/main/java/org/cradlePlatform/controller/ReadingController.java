@@ -9,6 +9,8 @@ package org.cradlePlatform.controller;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Optional;
+
 import org.cradlePlatform.model.Reading;
 import org.cradlePlatform.model.ReadingEntity;
 import org.cradlePlatform.repository.ReadingRepository;
@@ -23,7 +25,7 @@ public class ReadingController {
     @Autowired
     private ReadingRepository readingRepository;
 
-    @PostMapping(path="/reading")
+    @PostMapping(path="/api/readings")
     public @ResponseBody String addAReading(@RequestParam String readerId,
                                             @RequestParam String patientId,
                                             @RequestParam Timestamp timestamp,
@@ -48,9 +50,15 @@ public class ReadingController {
         return "Saved Reading";
     }
 
-    @GetMapping(path="/readings")
+    @GetMapping(path="/api/readings")
     public @ResponseBody Iterable<ReadingEntity> getAllReadings() {
         return readingRepository.findAll();
+    }
+
+    @GetMapping(path="/api/readings/{id}")
+    public @ResponseBody
+    Optional<ReadingEntity> getReferralById(@PathVariable(value = "id") String referrerId){
+        return readingRepository.findById(referrerId);
     }
 }
 
