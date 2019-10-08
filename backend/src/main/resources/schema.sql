@@ -5,7 +5,7 @@
 /*DROP TABLE IF EXISTS User;*/
 
 CREATE TABLE User (
-    id          VARCHAR (32)    NOT NULL AUTO_INCREMENT,
+    id          VARCHAR (32)    NOT NULL,
     username    VARCHAR (16)    NOT NULL,
     password    VARCHAR (32)    NOT NULL,
     PRIMARY KEY (id)
@@ -14,7 +14,7 @@ CREATE TABLE User (
 /*INSERT INTO User(id, username, password) VALUES('123345456', 'estUser', 'IAmPassword');*/
 
 CREATE TABLE User_Info (
-    id                  VARCHAR (32)    NOT NULL AUTO_INCREMENT,
+    id                  VARCHAR (32)    NOT NULL,
     at_a_station_no     VARCHAR (32)    NOT NULL,
     first_name          VARCHAR (32)    NOT NULL,
     last_name           VARCHAR (32)    NOT NULL,
@@ -28,19 +28,19 @@ CREATE TABLE User_Info (
 );
 
 CREATE TABLE Admin (
-    id VARCHAR (32) NOT NULL AUTO_INCREMENT,
+    id VARCHAR (32) NOT NULL,
     PRIMARY KEY (id),
     FOREIGN KEY (id) REFERENCES User(id) ON DELETE CASCADE
 );
 
 CREATE TABLE Healthworker (
-    id VARCHAR (32) NOT NULL AUTO_INCREMENT,
+    id VARCHAR (32) NOT NULL,
     PRIMARY KEY (id),
     FOREIGN KEY (id) REFERENCES User(id) ON DELETE CASCADE
 );
 
 CREATE TABLE VHT (
-    id VARCHAR (32) NOT NULL AUTO_INCREMENT,
+    id VARCHAR (32) NOT NULL,
     PRIMARY KEY (id),
     FOREIGN KEY (id) REFERENCES User(id) ON DELETE CASCADE
 );
