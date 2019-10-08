@@ -2,11 +2,11 @@ import requests
 import json
 
 header = {'content-type': 'application/json'}
-url = 'http://localhost:8080/api/eya'
+url = 'http://localhost:8080/api/user'
 data = {
-          "villageNo": "321",
-
-    }
+          "username": "oosr",
+          "password": "paswood",
+       }
 
 # url = 'http://localhost:8080/api/readings'
 # data = {
@@ -50,7 +50,7 @@ data = {
 #             ]
 #        }
 
-resp = requests.get(url, data=json.dumps(data), headers=header)
+resp = requests.post(url, data=json.dumps(data), headers=header)
 print(resp)
 print(resp.status_code)
 print(resp.text)

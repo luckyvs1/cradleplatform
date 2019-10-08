@@ -11,17 +11,17 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import java.util.Optional;
 
-@Controller
+@RestController
 public class UserController {
     @Autowired
     private UserRepository userRepository;
 
-    @PostMapping(path="/user")
-    public @ResponseBody String addUser(@RequestParam String username,
-                                        @RequestParam String password){
+    @PostMapping(path="/api/user")
+    public @ResponseBody String addUser(@RequestBody User user){
         User newUser = new User();
-        newUser.setUsername(username);
-        newUser.setPassword(password);
+        newUser.setId(user.getId());
+        newUser.setUsername(user.getUsername());
+        newUser.setPassword(user.getPassword());
 
         userRepository.save(newUser);
 
