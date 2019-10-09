@@ -50,6 +50,7 @@ CREATE TABLE Patient (
     first_name          VARCHAR (32),
     last_name           VARCHAR (32),
     village_no          VARCHAR (32)    NOT NULL,
+    zone_no             VARCHAR (32)    NOT NULL,
     initials            VARCHAR (4)     NOT NULL,
     sex                 ENUM('F', 'M', 'Other'),
     age                 INTEGER         NOT NULL,
@@ -144,9 +145,14 @@ CREATE TABLE Reading (
 CREATE TABLE Referral (
     id          INTEGER         NOT NULL AUTO_INCREMENT,
     referrer_id VARCHAR (32)    NOT NULL,
+    patient_id      VARCHAR (32)    NOT NULL,
     reading_id  INTEGER         NOT NULL,
     timestamp   TIMESTAMP       NOT NULL,
+    health_facility VARCHAR (32) NOT NULL,
+    notes_reason    TEXT,
+    notes_action    TEXT,
     PRIMARY KEY (id),
     FOREIGN KEY (referrer_id) REFERENCES User(id) ON DELETE CASCADE,
-    FOREIGN KEY (reading_id) REFERENCES Reading(id) ON DELETE CASCADE
+    FOREIGN KEY (reading_id) REFERENCES Reading(id) ON DELETE CASCADE,
+    FOREIGN KEY (patient_id) REFERENCES Patient(id) ON DELETE CASCADE
 );
