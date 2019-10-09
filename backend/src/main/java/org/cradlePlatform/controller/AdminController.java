@@ -21,7 +21,7 @@ public class AdminController {
 
     /**
      * Retrieve all Admins from the DB.
-     * @return 200: a JSON of Admin ids
+     * @return 200: a JSON of Admin ids or empty JSON otherwise
      */
     @GetMapping(path="/api/admins")
     public @ResponseBody Iterable<Admin> getAllAdmins() {
@@ -31,7 +31,7 @@ public class AdminController {
     /**
      * Retrieve the Admin from the DB whose id matches the given id.
      * @param id User/Admin id to find Admin by
-     * @return 200: a JSON with an Admin id if a matching Admin exists, or empty otherwise
+     * @return 200: a JSON with an Admin id if a matching Admin exists, or 'null' otherwise
      */
     @GetMapping(path="/api/admins/{id}")
     public @ResponseBody
