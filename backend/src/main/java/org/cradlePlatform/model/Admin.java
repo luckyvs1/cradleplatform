@@ -17,6 +17,10 @@ public class Admin {
     private String id;
 
     public Admin() {
+        this.id = "";
+    }
+
+    public Admin(String id) {
         this.id = id;
     }
 
