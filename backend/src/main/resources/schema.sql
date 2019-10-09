@@ -46,7 +46,9 @@ CREATE TABLE VHT (
 
 CREATE TABLE Patient (
     id                  VARCHAR (32)    NOT NULL,
-    attestation_no      VARCHAR (32)    NOT NULL,
+    attestation_no      VARCHAR (32),
+    first_name          VARCHAR (32),
+    last_name           VARCHAR (32),
     village_no          VARCHAR (32)    NOT NULL,
     initials            VARCHAR (4)     NOT NULL,
     sex                 ENUM('F', 'M', 'Other'),
@@ -57,7 +59,11 @@ CREATE TABLE Patient (
     CHECK (
             (pregnant IS TRUE AND gestation_age IS NOT NULL) OR
             (pregnant IS FALSE AND gestation_age IS NULL)
-    ),
+        ),
+    CHECK (
+            (attestation_no IS NOT NULL) OR
+            (first_name IS NOT NULL AND last_name IS NOT NULL)
+        ),
     PRIMARY KEY (id)
 );
 
