@@ -53,13 +53,13 @@ CREATE TABLE Patient (
     initials            VARCHAR (4)     NOT NULL,
     sex                 ENUM('F', 'M', 'Other'),
     age                 INTEGER         NOT NULL,
-    pregnant            BOOLEAN,
-    gestation_age_unit  ENUM('week', 'month', 'none'),
-    gestation_age       INTEGER,
-    CHECK (
-            (pregnant IS TRUE AND gestation_age IS NOT NULL) OR
-            (pregnant IS FALSE AND gestation_age IS NULL)
-        ),
+#     pregnant            BOOLEAN,
+#     gestation_age_unit  ENUM('week', 'month', 'none'),
+#     gestation_age       INTEGER,
+#     CHECK (
+#             (pregnant IS TRUE AND gestation_age IS NOT NULL) OR
+#             (pregnant IS FALSE AND gestation_age IS NULL)
+#         ),
     CHECK (
             (attestation_no IS NOT NULL) OR
             (first_name IS NOT NULL AND last_name IS NOT NULL)
@@ -123,7 +123,19 @@ CREATE TABLE Reading (
     diastolic_bp    INTEGER         NOT NULL,
     pulse_rate      INTEGER         NOT NULL,
     notes           TEXT,
-    need_followup   BOOLEAN,
+    need_followup   BOOLEAN         NOT NULL,
+    app_version     VARCHAR(32)     NOT NULL,
+    date_last_saved TIMESTAMP       NOT NULL,
+    date_recheck_vitals_needed TIMESTAMP    NOT NULL,
+    device_info     VARCHAR(32)     NOT NULL,
+    gestation_age_unit  ENUM('week', 'month', 'none'),
+    gestation_age       INTEGER,
+    manually_changed_OCR_results VARCHAR(16)   NOT NULL,
+    path_to_photo   VARCHAR(128)    NOT NULL,
+    total_OCR_seconds   FLOAT   NOT NULL,
+    region          VARCHAR(32) NOT NULL,
+    OCR_enabled     BOOLEAN         NOT NULL,
+    upload_images   BOOLEAN         NOT NULL,
     PRIMARY KEY (id),
     FOREIGN KEY (reader_id) REFERENCES User(id) ON DELETE CASCADE,
     FOREIGN KEY (patient_id) REFERENCES Patient(id) ON DELETE CASCADE
