@@ -53,6 +53,7 @@ public class AndroidService {
      */
     @GetMapping("/VHT/{vhtId}/patients")
     @ResponseStatus(HttpStatus.OK)
+    @CrossOrigin
     public String mockPatients(@PathVariable String vhtId) {
         return ("[\n" +
                 " {\n" +
@@ -157,6 +158,7 @@ public class AndroidService {
      */
     @GetMapping("/VHT/{vhtId}/patients/{patientId}")
     @ResponseStatus(HttpStatus.OK)
+    @CrossOrigin
     public String mockPatient(@PathVariable String vhtId, @PathVariable String patientId) {
         return ("{\n" +
                 "  \"patientId\": \"5678\",\n" +
@@ -214,6 +216,7 @@ public class AndroidService {
      */
     @GetMapping("/VHT/{vhtId}/patients/{patientId}/reading")
     @ResponseStatus(HttpStatus.OK)
+    @CrossOrigin
     public String mockReading(@PathVariable String vhtId, @PathVariable String patientId) {
         return ("{\n" +
                 "  \"readings\": {\n" +
@@ -246,6 +249,7 @@ public class AndroidService {
      */
     @GetMapping("/VHT/{vhtId}/patients/{patientId}/medication")
     @ResponseStatus(HttpStatus.OK)
+    @CrossOrigin
     public String mockMedication(@PathVariable String vhtId, @PathVariable String patientId) {
         return ("{\n" +
                 "  \"medications\": {\n" +

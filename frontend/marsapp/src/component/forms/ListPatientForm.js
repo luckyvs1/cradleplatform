@@ -32,7 +32,7 @@ class ListPatientForm extends React.Component {
         }
 
     componentDidMount(){
-        fetch('http://cmpt373.csil.sfu.ca:8084/VHT/1/patients/1', {mode: 'cors'})
+        fetch('http://localhost:8080/VHT/1/patients/1', {mode: 'cors'})
             .then(res => res.json())  //convert response from the API to JSON
             .then(json => {
                 this.setState({

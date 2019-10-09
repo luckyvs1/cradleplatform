@@ -22,13 +22,13 @@ export default {
             axios.get(`http://${host}:${port}/VHT/1/patients`, {}).then(res => console.log(res))
         },
         mockPatient: data => {
-            axios.get(`http://${host}:${port}/VHT/{1}/patients/{1}`, {}).then(res => console.log(res))
+            axios.get(`http://${host}:${port}/VHT/1/patients/1`, {}).then(res => console.log(res))
         }
     },
 
     reading:{
         mockReading: data =>{
-            axios.get(`http://${host}:${port}/VHT/{vhtId}/patients/{patientId}/reading` , {}).then(res => console.log(res))
+            axios.get(`http://${host}:${port}/VHT/1/patients/1/reading` , {}).then(res => console.log(res))
         },
         uploadReading: data =>{
             axios.post(`http://${host}:${port}/api/readings` , {}).then(res => console.log(res))
@@ -40,12 +40,12 @@ export default {
     },
     medication:{
         mockMedication:data =>{
-            axios.get(`http://${host}:${port}/VHT/{vhtId}/patients/{patientId}/medication`,{}).then(res => console.log(res))
+            axios.get(`http://${host}:${port}/VHT/1/patients/1/medication`,{}).then(res => console.log(res))
         }
     },
     followUp: {
         mockFollowUp:data =>{
-            axios.get(`http://${host}:${port}/VHT/{vhtId}/patients/{patientId}/followup`, {}).then(res => console.log(res))
+            axios.get(`http://${host}:${port}/VHT/1/patients/1/followup`, {}).then(res => console.log(res))
         }
     }
 
