@@ -54,13 +54,13 @@ CREATE TABLE Patient (
     initials            VARCHAR (4)     NOT NULL,
     sex                 ENUM('F', 'M', 'Other'),
     age                 INTEGER         NOT NULL,
-#     pregnant            BOOLEAN,
-#     gestation_age_unit  ENUM('week', 'month', 'none'),
-#     gestation_age       INTEGER,
-#     CHECK (
-#             (pregnant IS TRUE AND gestation_age IS NOT NULL) OR
-#             (pregnant IS FALSE AND gestation_age IS NULL)
-#         ),
+    pregnant            BOOLEAN,
+    gestation_age_unit  ENUM('week', 'month', 'none'),
+    current_gestation_age       INTEGER,
+    CHECK (
+            (pregnant IS TRUE AND current_gestation_age IS NOT NULL) OR
+            (pregnant IS FALSE AND current_gestation_age IS NULL)
+        ),
     CHECK (
             (attestation_no IS NOT NULL) OR
             (first_name IS NOT NULL AND last_name IS NOT NULL)
