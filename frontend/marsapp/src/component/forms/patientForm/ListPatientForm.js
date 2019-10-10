@@ -8,31 +8,82 @@ import React from "react";
 import {Link} from "react-router-dom";
 import TopNavigation from "../../navigation/TopNavigation";
 import {
-    Table
-} from 'semantic-ui-react'
-import {
     Container,
     Row,
     Col,
+    Table,
     Image,
-    Button
+    Button,
+    Form,
+    FormControl
 } from 'react-bootstrap';
 import {withRouter} from "react-router-dom";
+import _ from 'lodash';
 
-function createData(pid, initial, img) {
-    return {pid, initial, img};
+function createData(pid, initial) {
+    return {pid, initial};
 }
 
 const rows = [
-    createData('111555666', 'AD', 'https://react.semantic-ui.com/images/avatar/small/helen.jpg'),
-    createData('222555444', 'WE', 'https://react.semantic-ui.com/images/avatar/small/daniel.jpg'),
+    createData('111555666', 'AD'),
+    createData('222555444', 'WE'),
 ];
+
+const initialState = {
+    isLoading: false,
+    data: rows,
+    searchValue: ''
+};
 
 class ListPatientForm extends React.Component {
     // functions
     // states
     // submit
     // validate
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            isLoading: false,
+            data: [],
+            searchValue: ''
+        };
+
+        this.searchInput = React.createRef();
+    }
+
+    componentDidMount() {
+        // TODO: Use api to get data.
+        // TODO: Store all api data in 'row'
+        // Temporary:
+        this.setState(initialState);
+    }
+
+    handleSearchChange = () => {
+        this.setState({
+            isLoading: true,
+            searchValue: this.searchInput.current.value
+        });
+
+        setTimeout(() => {
+            console.log(this.state);
+
+            if (this.state.searchValue.length < 1) {
+                return this.setState(initialState);
+            }
+
+            const re = new RegExp(_.escapeRegExp(this.state.searchValue), 'i');
+            const matchId = (result) => re.test(result.pid);
+            const matchInitial = (result) => re.test(result.initial);
+            const dataId = _.filter(rows, matchId);
+            const dataInitial = _.filter(rows, matchInitial);
+
+            this.setState({
+                isLoading: false,
+                data: _.merge(dataId, dataInitial)
+            });
+        }, 300);
+    };
 
     handleItemClick = (row) => {
         this.props.history.push({
@@ -45,6 +96,8 @@ class ListPatientForm extends React.Component {
     };
 
     render() {
+        const { isLoading, searchValue, data } = this.state;
+
         return (
             <div>
                 <TopNavigation authenticated={true}></TopNavigation>
@@ -65,26 +118,36 @@ class ListPatientForm extends React.Component {
                         </Col>
                     </Row>
                     <Row>
+                        <Col className="text-right">
+                            <Form className="float-right" inline>
+                                <i className="fas fa-search"></i>
+                                <FormControl
+                                    ref={this.searchInput}
+                                    type="text"
+                                    placeholder="Search..."
+                                    className="mr-sm-2"
+                                    onChange={() => this.handleSearchChange()}
+                                />
+                            </Form>
+                        </Col>
+                    </Row>
+                    <Row>
                         <Col>
-                            <Table bordered hover size="small">
-                                <Table.Header>
-                                    <Table.Row>
-                                        <Table.HeaderCell width={1}></Table.HeaderCell>
-                                        <Table.HeaderCell>Initial</Table.HeaderCell>
-                                    </Table.Row>
-                                </Table.Header>
-                                <Table.Body>
-                                    {rows.map(row => (
-                                        <Table.Row key={row.pid} class='clickable-row' onClick={() => this.handleItemClick(row)}>
-                                            <Table.Cell>
-                                                <Image src={row.img} rounded />
-                                            </Table.Cell>
-                                            <Table.Cell>
-                                                {row.initial}
-                                            </Table.Cell>
-                                        </Table.Row>
+                            <Table hover size="sm">
+                                <thead>
+                                    <tr>
+                                        <th width="200">Patient ID</th>
+                                        <th>Initials</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {this.state.data.map(row => (
+                                        <tr key={row.pid} class='clickable-row' onClick={() => this.handleItemClick(row)}>
+                                            <td>{row.pid}</td>
+                                            <td>{row.initial}</td>
+                                        </tr>
                                     ))}
-                                </Table.Body>
+                                </tbody>
                             </Table>
                         </Col>
                     </Row>
