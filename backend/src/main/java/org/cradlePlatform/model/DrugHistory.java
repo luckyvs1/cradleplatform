@@ -5,6 +5,8 @@
 
 package org.cradlePlatform.model;
 
+import org.hibernate.annotations.GenericGenerator;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
@@ -14,9 +16,8 @@ import javax.validation.constraints.Size;
 public class DrugHistory {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name="id", nullable=false, unique=true)
-    @NotEmpty(message = "ID Can't Be Empty")
     private int id;
 
     @Column(name="patient_id", nullable=false, unique=false)
@@ -24,7 +25,13 @@ public class DrugHistory {
     @Size(max = 32)
     private String patientId;
 
+    @Column(name="history")
     private String historyText;
+
+    public DrugHistory() {
+        this.patientId = "";
+        this.historyText = "";
+    }
 
     public int getId() {
         return id;

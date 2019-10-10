@@ -17,27 +17,37 @@ public class DrugHistoryController {
     @Autowired
     private DrugHistoryRepository drugHistoryRepository;
 
-    @PostMapping(path="/drugHistory")
-    public @ResponseBody String addDrugHistory (@RequestParam String id,
-                                                @RequestParam String patientID,
-                                                @RequestParam String historyText){
-        DrugHistory newDrugHistory = new DrugHistory(); //should be user id, patient id?
-        newDrugHistory.setPatientId(patientID);
-        newDrugHistory.setHistoryText(historyText);
-        drugHistoryRepository.save(newDrugHistory);
-        return "Saved Drug History";
-    }
+    // GET mappings
 
-    @GetMapping(path="/drugHistory")
-    public @ResponseBody Iterable<DrugHistory> getAllDrugHistory(){
-        //this returns a JSON or XML with the drugHistory
+    /**
+     * Retrieve all DrugHistories from the DB.
+     * @return 200: a JSON of DrugHistory objects or empty JSON if none.
+     */
+    @GetMapping(path="/api/drugHistory")
+    public @ResponseBody Iterable<DrugHistory> getAllDrugHistory() {
         return drugHistoryRepository.findAll();
     }
 
-    @GetMapping(path="/drugHistory/{id}")
+    /**
+     * Retrieve a single DrugHistory from the DB by its corresponding patientID.
+     * @param patientID patientId of patient the DrugHistory corresponds to
+     * @return 200:
+     */
+    @GetMapping(path="/api/drugHistory/{patientId}")
     public @ResponseBody
-    Optional<DrugHistory> getDrugHistoryById(@PathVariable(value = "id") String patientID){
-        return drugHistoryRepository.findById(patientID);
+    Optional<DrugHistory> getDrugHistoryById(@PathVariable(value = "patientId") String patientID) {
+        return drugHistoryRepository.findByPatientId(patientID);
+    }
+
+    // POST mappings
+
+    @PostMapping(path="/api/drugHistory")
+    public @ResponseBody String addDrugHistory (@RequestBody DrugHistory dh) {
+        DrugHistory newDrugHistory = new DrugHistory();
+        newDrugHistory.setPatientId(dh.getPatientId());
+        newDrugHistory.setHistoryText(dh.getHistoryText());
+        drugHistoryRepository.save(newDrugHistory);
+        return "Saved Drug History";
     }
 
 }
