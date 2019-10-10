@@ -71,6 +71,7 @@ public class AndroidService {
                 "    \"id\": \"1\",\n" +
                 "    \"symptoms\": {\n" +
                 "      \"noSymptoms\": true,\n" +
+                "      \"bleeding\": true,\n" +
                 "      \"headache\": false,\n" +
                 "      \"blurredVision\": false,\n" +
                 "      \"abdominalPain\": false,\n" +
@@ -116,6 +117,7 @@ public class AndroidService {
                 "    \"id\": \"1\",\n" +
                 "    \"symptoms\": {\n" +
                 "      \"noSymptoms\": true,\n" +
+                "      \"bleeding\": false,\n" +
                 "      \"headache\": false,\n" +
                 "      \"blurredVision\": false,\n" +
                 "      \"abdominalPain\": false,\n" +
@@ -174,6 +176,7 @@ public class AndroidService {
                 "    \"id\": \"1\",\n" +
                 "    \"symptoms\": {\n" +
                 "      \"noSymptoms\": true,\n" +
+                "      \"bleeding\": false,\n" +
                 "      \"headache\": false,\n" +
                 "      \"blurredVision\": false,\n" +
                 "      \"abdominalPain\": false,\n" +
@@ -221,6 +224,7 @@ public class AndroidService {
                 "    \"patientId\": \"1234\",\n" +
                 "    \"symptoms\": {\n" +
                 "      \"noSymptoms\": true,\n" +
+                "      \"bleeding\": true,\n" +
                 "      \"headache\": false,\n" +
                 "      \"blurredVision\": false,\n" +
                 "      \"abdominalPain\": false,\n" +

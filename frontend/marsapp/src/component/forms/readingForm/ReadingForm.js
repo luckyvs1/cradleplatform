@@ -5,13 +5,29 @@
  */
 
 import React from "react";
-import {Checkbox, Form, Input, Grid} from "semantic-ui-react";
-import {PageWrapper} from "../../../wrappers/crd-page";
+import TopNavigation from "../../navigation/TopNavigation";
+import {
+    Container,
+    Row,
+    Col,
+} from 'react-bootstrap';
+import {
+    Button,
+    Checkbox,
+    Form,
+    Input,
+    Radio,
+    Select,
+    TextArea,
+} from 'semantic-ui-react'
+
+
 class ReadingForm extends React.Component {
     render() {
         return (
-            <PageWrapper>
-                <Grid.Column>
+            <div>
+                <TopNavigation authenticated={true}></TopNavigation>
+                <Container>
                     <Form size={'small'}>
                         <Form.Group grouped>
                             <Form.Field
@@ -41,8 +57,9 @@ class ReadingForm extends React.Component {
                             />
                         </Form.Group>
                     </Form>
-                </Grid.Column>
-            </PageWrapper>
+
+                </Container>
+            </div>
         );
     }
 }
