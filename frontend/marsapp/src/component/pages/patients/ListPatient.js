@@ -5,8 +5,8 @@
  */
 
 import React from "react";
-import {connect} from "react-redux";
-import ListPatientForm from "../../forms/ListPatientForm";
+import {connect} from "react-redux"
+import ListPatientForm from "../../forms/patientForm/ListPatientForm";
     
 class ListPatient extends React.Component {
     render() {
