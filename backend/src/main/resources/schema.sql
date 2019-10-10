@@ -48,11 +48,11 @@ CREATE TABLE Patient (
     sex                 ENUM('F', 'M', 'Other'),
     age                 INTEGER         NOT NULL,
     pregnant            BOOLEAN,
-    gestation_age_unit  ENUM('week', 'month', 'none'),
+    gestation_age_unit  ENUM('NONE', 'WEEK', 'MONTH'),
     gestation_age       INTEGER,
     CHECK (
             (pregnant IS TRUE AND gestation_age IS NOT NULL) OR
-            (pregnant IS FALSE AND gestation_age IS NULL)
+            (pregnant IS FALSE AND gestation_age = 0)
     ),
     PRIMARY KEY (id)
 );

@@ -6,6 +6,7 @@ package org.cradlePlatform.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Entity
@@ -13,37 +14,29 @@ import javax.validation.constraints.Size;
 public class Patient {
 
     @Id
-    @Column(name="id", length=32, nullable=false, unique=true)
-    @NotEmpty(message = "ID Can't Be Empty")
+    @NotEmpty
     @Size(max = 32)
     private String id;
 
-    @Column(name="village_no", length=32, nullable=false)
-    @NotEmpty(message = "Village Number Can't Be Empty")
+    @NotEmpty
     @Size(max = 32)
     private String villageNo;
 
-    @Column(name="initials", length=4, nullable=false)
-    @NotEmpty(message = "Initials Can't Be Empty")
+    @NotEmpty
     @Size(max = 4)
     private String initials;
 
-    @Column(name="sex")
     @Enumerated(EnumType.STRING)
     private Sex sex;
 
-    @Column(name="age", nullable=false)
-    @NotEmpty(message = "Age Can't Be Empty")
+    @NotEmpty
     private int age;
 
-    @Column(name="pregnant")
     private boolean pregnant;
 
-    @Column(name="gestation_age_unit")
     @Enumerated(EnumType.STRING)
     private GestationalAgeTimeUnit gestationAgeUnit;
 
-    @Column(name="gestation_age")
     private int gestationAge;
 
     public String getId() {
@@ -108,14 +101,5 @@ public class Patient {
 
     public void setGestationAge(int gestationAge) {
         this.gestationAge = gestationAge;
-    }
-
-    public boolean checkPregnantConditions() {
-        if (pregnant && gestationAge > 0) {
-            return true;
-        } else if (!pregnant && gestationAge == 0){
-            return true;
-        }
-        return false;
     }
 }

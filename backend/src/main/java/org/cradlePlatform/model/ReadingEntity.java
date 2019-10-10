@@ -6,6 +6,7 @@ package org.cradlePlatform.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -15,47 +16,33 @@ import java.util.ArrayList;
 public class ReadingEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Column(name="id", nullable=false, unique=true)
-    @NotEmpty(message = "ID Can't Be Empty")
+    @GeneratedValue
     private int id;
 
-    @Column(name="reader_id", length=32, nullable=false)
-    @NotEmpty(message = "Reader ID Can't Be Empty")
     @Size(max = 32)
     private String readerID;
 
-    @Column(name="patient_id", length=32, nullable=false)
-    @NotEmpty(message = "Patient ID Can't Be Empty")
     @Size(max = 32)
     private String patientID;
 
-    @Column(name="timestamp", nullable=false)
-    @NotEmpty(message = "Timestamp Can't Be Empty")
+    @NotNull
     private Timestamp timestamp;
 
-    @Column(name="systolic_bp", nullable=false)
-    @NotEmpty(message = "Systolic Blood Pressure Can't Be Empty")
+    @NotNull
     private int systolicBloodPressure;
 
-    @Column(name="diastolic_bp", nullable=false)
-    @NotEmpty(message = "Diastolic Blood Pressure Can't Be Empty")
+    @NotNull
     private int diastolicBloodPressure;
 
-    @Column(name="pulse_rate", nullable=false)
-    @NotEmpty(message = "Pulse Rate Can't Be Empty")
+    @NotNull
     private int pulseRate;
 
-    @Column(name="notes")
     private String notes;
 
-    @Column(name="need_followup")
     private Boolean needFollowUp;
 
-    @Column(name="symptoms")
     private ArrayList<String> symptoms;
 
-    @Column(name="other_symptoms", nullable=false)
     private String otherSymptoms;
 
     public int getId() {

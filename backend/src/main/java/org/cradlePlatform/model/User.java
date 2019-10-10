@@ -9,6 +9,7 @@ import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
 
@@ -19,15 +20,13 @@ public class User implements Serializable {
     @Id
     @GeneratedValue(generator="system-uuid")
     @GenericGenerator(name="system-uuid", strategy = "uuid")
-    @Column(name="id", nullable=false)
+    @NotNull
     private String id;
 
-    @Column(name="username", nullable=false)
     @NotEmpty(message = "Enter Username")
     @Size(max = 16)
     private String username;
 
-    @Column(name="password", nullable=false)
     @NotEmpty(message = "Enter Password")
     @Size(max = 32)
     private String password;

@@ -19,7 +19,7 @@ public class PatientController {
     @Autowired
     private PatientRepository patientRepository;
 
-    @PostMapping(path="/patient")
+    @PostMapping(path="/api/patients")
     public @ResponseBody String addNewPatient (@RequestParam String id,
                                                @RequestParam String villageNo,
                                                @RequestParam String initials,
@@ -37,16 +37,18 @@ public class PatientController {
         newPatient.setPregnant(pregnant);
         newPatient.setGestationAgeUnit(gestationAgeUnit);
         newPatient.setGestationAge(gestation_age);
+
+        patientRepository.save(newPatient);
+
         return "Saved Patient";
     }
 
-    @GetMapping(path="/patients")
+    @GetMapping(path="/api/patients")
     public @ResponseBody Iterable<Patient> getAllPatients(){
-        //this returns a JSON or XML with the patients
         return patientRepository.findAll();
     }
 
-    @GetMapping(path="/patient/{id}")
+    @GetMapping(path="/api/patient/{id}")
     public @ResponseBody
     Optional<Patient> getPatientById(@PathVariable(value = "id") String patientId){
         return patientRepository.findById(patientId);
