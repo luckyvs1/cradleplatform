@@ -7,7 +7,7 @@
 import React from "react";
 import {connect} from "react-redux";
 import {testAPICALL} from "../../../actions/auth";
-import ListPatientForm from "../../forms/ListPatientForm";
+import ListPatientForm from "../../forms/patientForm/ListPatientForm";
     
 class ListPatient extends React.Component {
     render() {

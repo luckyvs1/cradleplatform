@@ -6,7 +6,7 @@
 
 import React from "react";
 import {connect} from "react-redux";
-import AccountForm from "../../forms/AccountForm";
+import AccountForm from "../../forms/userForm/AccountForm";
 
 class Account extends React.Component {
 
