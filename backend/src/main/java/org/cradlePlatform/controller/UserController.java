@@ -7,6 +7,7 @@ package org.cradlePlatform.controller;
 import org.cradlePlatform.model.User;
 import org.cradlePlatform.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import java.util.Optional;
@@ -31,7 +32,22 @@ public class UserController {
     @GetMapping(path="/api/users")
     public @ResponseBody Iterable<User> getAllUser() {
 
+        User newUser = new User();
+        newUser.setUsername("test");
+        newUser.setPassword("test123");
+        userRepository.save(newUser);
+
         return userRepository.findAll();
+    }
+
+    @PostMapping("/api/login")
+    @ResponseStatus(HttpStatus.OK)
+    public User logIn(@RequestParam String username,
+                      @RequestParam String password) {
+
+        User account = userRepository.findUserByUsernameAndPassword(username, password);
+
+        return account;
     }
 
     @GetMapping(path="/api/users/{id}")

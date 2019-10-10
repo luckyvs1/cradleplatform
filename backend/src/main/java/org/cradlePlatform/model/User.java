@@ -24,11 +24,11 @@ public class User implements Serializable {
     private String id;
 
     @NotEmpty(message = "Enter Username")
-    @Size(max = 16)
+    @Size(min = 6, max = 16)
     private String username;
 
     @NotEmpty(message = "Enter Password")
-    @Size(max = 32)
+    @Size(min = 8, max = 32)
     private String password;
 
     public String getId() {
@@ -58,7 +58,7 @@ public class User implements Serializable {
     @Override
     public String toString() {
         return String.format(
-                "Customer[id=%d, username='%s', password='%s']",
+                "Customer[id=%s, username='%s', password='%s']",
                 id, username, password);
     }
 }
