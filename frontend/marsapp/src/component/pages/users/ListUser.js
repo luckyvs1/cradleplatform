@@ -8,7 +8,7 @@ import React from "react";
 import {connect} from "react-redux";
 import {testAPICALL} from "../../../actions/auth";
 
-import ListUserForm from "../../forms/ListUserForm";
+import ListUserForm from "../../forms/userForm/ListUserForm";
 
 class ListUser extends React.Component {
     render() {

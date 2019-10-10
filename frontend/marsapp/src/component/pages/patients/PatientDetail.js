@@ -9,7 +9,7 @@ import {connect} from "react-redux";
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "../../../App.css"
-import PatientDetailForm from "../../forms/PatientDetailForm";
+import PatientDetailForm from "../../forms/patientForm/PatientDetailForm";
 
 
 class PatientDetail extends React.Component {
