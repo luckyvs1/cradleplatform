@@ -8,41 +8,19 @@ import React from "react";
 import {Link} from "react-router-dom";
 import TopNavigation from "../../navigation/TopNavigation";
 import {
-    Table
-} from 'semantic-ui-react'
-import {
     Container,
     Row,
     Col,
+    Table,
     Image,
     Button
 } from 'react-bootstrap';
-import {withRouter} from "react-router-dom";
-
-function createData(pid, initial, img) {
-    return {pid, initial, img};
-}
-
-const rows = [
-    createData('111555666', 'AD', 'https://react.semantic-ui.com/images/avatar/small/helen.jpg'),
-    createData('222555444', 'WE', 'https://react.semantic-ui.com/images/avatar/small/daniel.jpg'),
-];
 
 class ListPatientForm extends React.Component {
     // functions
     // states
     // submit
     // validate
-
-    handleItemClick = (row) => {
-        this.props.history.push({
-            pathname: '/patientDetail',
-            state: {
-                pid: row.pid,
-                initial: row.initial
-            }
-        });
-    };
 
     render() {
         return (
@@ -66,25 +44,35 @@ class ListPatientForm extends React.Component {
                     </Row>
                     <Row>
                         <Col>
-                            <Table bordered hover size="small">
-                                <Table.Header>
-                                    <Table.Row>
-                                        <Table.HeaderCell width={1}></Table.HeaderCell>
-                                        <Table.HeaderCell>Initial</Table.HeaderCell>
-                                    </Table.Row>
-                                </Table.Header>
-                                <Table.Body>
-                                    {rows.map(row => (
-                                        <Table.Row key={row.pid} class='clickable-row' onClick={() => this.handleItemClick(row)}>
-                                            <Table.Cell>
-                                                <Image src={row.img} rounded />
-                                            </Table.Cell>
-                                            <Table.Cell>
-                                                {row.initial}
-                                            </Table.Cell>
-                                        </Table.Row>
-                                    ))}
-                                </Table.Body>
+                            <Table bordered hover size="sm">
+                                <thead>
+                                    <tr>
+                                        <th width="10"></th>
+                                        <th>Name</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <Image src="https://react.semantic-ui.com/images/avatar/small/helen.jpg" rounded />
+                                        </td>
+                                        <td>
+                                            <Link to="patientDetail">
+                                                Test 1
+                                            </Link>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <Image src="https://react.semantic-ui.com/images/avatar/small/daniel.jpg" rounded />
+                                        </td>
+                                        <td>
+                                            <Link to="patientDetail">
+                                                Test 2
+                                            </Link>
+                                        </td>
+                                    </tr>
+                                </tbody>
                             </Table>
                         </Col>
                     </Row>
@@ -94,5 +82,4 @@ class ListPatientForm extends React.Component {
     }
 }
 
-//export default ListPatientForm;
-export default withRouter(ListPatientForm);
+export default ListPatientForm;

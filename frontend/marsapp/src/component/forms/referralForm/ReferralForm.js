@@ -6,39 +6,36 @@
 
 import React from "react";
 import {connect} from "react-redux";
-import { makeStyles } from "@material-ui/core";
+import {makeStyles} from "@material-ui/core";
 import {
     Form,
-    Dropdown,
-    Table
+    Dropdown
 } from 'semantic-ui-react'
-import {
-    Link,
-    withRouter
-} from "react-router-dom";
+import {Link} from "react-router-dom";
 import TopNavigation from "../../navigation/TopNavigation";
 import {
     Container,
     Row,
     Col,
+    Table,
     Button
 } from 'react-bootstrap';
-import api from "../../../api"
+import api from "../../api"
 
-function createData(rid, pid, pname, referrer, assignee, dateof, status) {
-    return {rid, pid, pname, referrer, assignee, dateof, status};
+function createData(name, calories, fat, carbs, protein) {
+    return {name, calories, fat, carbs, protein};
 }
 
 const rows = [
-    createData('111555666', '111555666', 'AS', 'thomas', 'None', new Date().toDateString(), 'Require response'),
-    createData('111555666', '222555444', 'QW', 'theo', 'None', new Date().toDateString(), 'Require response'),
-    createData('111555666', '111222333', 'DW', 'theresha', 'Jenny Hess', new Date().toDateString(), 'Require response'),
-    createData('111555666', '111222888', 'GF', 'Brian', 'None', new Date().toDateString(), 'Require response'),
-    createData('111555666', '444555666', 'VV', 'Katy', 'Elliot Fu', new Date().toDateString(), 'Done'),
+    createData('111555666', 'Alex', 'thomas', new Date().toDateString()),
+    createData('222555444', 'Bob', 'theo', new Date().toDateString()),
+    createData('111222333', 'fanny', 'theresha', new Date().toDateString()),
+    createData('111222888', 'hanny', 'Brian', new Date().toDateString()),
+    createData('444555666', 'janny', 'Katy', new Date().toDateString()),
 ];
 
 class ReferralForm extends React.Component {
-    state = {activeItem: 'bio'};
+    state = {activeItem: 'bio'}
 
     constructor() {
         super();
@@ -49,13 +46,10 @@ class ReferralForm extends React.Component {
     }
 
     componentDidMount() {
-        console.log("api calling");
+        console.log("api calling")
         api.referral.getAllReferral(null).then(res => {
             // fetching all follow up
-            console.log("All referral: ", res);
-
-            const data = res.data;
-            this.setState({data})
+            console.log("All referral", res);
         })
     }
 
@@ -63,16 +57,9 @@ class ReferralForm extends React.Component {
         this.setState({toggled: !this.state.toggled});
     }
 
-    handleItemClick = (row) => {
-        this.props.history.push({
-            pathname: '/referralDetail',
-            state: {
-                rid: row.rid,
-                initials: row.pname
-            }
-        });
-    };
-
+    handleItemClick = (e, {name}) => {
+        this.setState({activeItem: name})
+    }
     useStyles = makeStyles(theme => ({
         root: {
             width: '100%',
@@ -107,8 +94,24 @@ class ReferralForm extends React.Component {
                 key: 'Stevie Feliciano',
                 text: 'Stevie Feliciano',
                 value: 'Stevie Feliciano',
-            }
-        ];
+            },
+            {
+                key: 'Christian',
+                text: 'Christian',
+                value: 'Christian',
+            },
+            {
+                key: 'Matt',
+                text: 'Matt',
+                value: 'Matt',
+            },
+            {
+                key: 'Justen Kitsune',
+                text: 'Justen Kitsune',
+                value: 'Justen Kitsune',
+            },
+        ]
+
 
         return (
             <div>
@@ -131,8 +134,36 @@ class ReferralForm extends React.Component {
                     </Row>
                     <Row>
                         <Col>
+                            <Table bordered hover size="sm">
+                                <thead>
+                                    <tr>
+                                        <th>Patient ID</th>
+                                        <th>Patient Name</th>
+                                        <th>Referred By</th>
+                                        <th>Referral Date</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {rows.map(row => (
+                                        <tr key={row.name} component={Link} to={"/followUpDetail"}>
+                                            <th scope="row">
+                                                <Link to="referralDetail">
+                                                    {row.name}
+                                                </Link>
+                                            </th>
+                                            <td>{row.calories}</td>
+                                            <td>{row.fat}</td>
+                                            <td>{row.carbs}</td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </Table>
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col>
                             <Form size={'small'}>
-                                <Form.Group widths={'equal'}>
+                                <Form.Group grouped width={'equal'}>
                                     <Form.Field>
                                         <label>Assign To:</label>
                                         <Dropdown
@@ -164,34 +195,6 @@ class ReferralForm extends React.Component {
                             </Form>
                         </Col>
                     </Row>
-                    <Row>
-                        <Col>
-                            <Table bordered hover size="small">
-                                <Table.Header>
-                                    <Table.Row>
-                                        <Table.HeaderCell >Patient ID</Table.HeaderCell>
-                                        <Table.HeaderCell >Patient Initials</Table.HeaderCell>
-                                        <Table.HeaderCell >Referred By</Table.HeaderCell>
-                                        <Table.HeaderCell >Assigned to</Table.HeaderCell>
-                                        <Table.HeaderCell >Referral Date</Table.HeaderCell>
-                                        <Table.HeaderCell >Status</Table.HeaderCell>
-                                    </Table.Row>
-                                </Table.Header>
-                                <Table.Body>
-                                    {rows.map(row => (
-                                        <Table.Row key={row.pid}  class='clickable-row' onClick={() => this.handleItemClick(row)}>
-                                            <Table.Cell >{row.pid}</Table.Cell>
-                                            <Table.Cell >{row.pname}</Table.Cell>
-                                            <Table.Cell >{row.referrer}</Table.Cell>
-                                            <Table.Cell >{row.assignee}</Table.Cell>
-                                            <Table.Cell >{row.dateof}</Table.Cell>
-                                            <Table.Cell >{row.status}</Table.Cell>
-                                        </Table.Row>
-                                    ))}
-                                </Table.Body>
-                            </Table>
-                        </Col>
-                    </Row>
                 </Container>
             </div>
 
@@ -199,5 +202,4 @@ class ReferralForm extends React.Component {
     }
 }
 
-//export default connect(null,)(ReferralForm);
-export default withRouter(ReferralForm);
+export default connect(null,)(ReferralForm);
