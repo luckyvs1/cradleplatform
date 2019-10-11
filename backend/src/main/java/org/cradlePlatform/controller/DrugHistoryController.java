@@ -31,7 +31,7 @@ public class DrugHistoryController {
     /**
      * Retrieve a single DrugHistory from the DB by its corresponding patientID.
      * @param patientID patientId of patient the DrugHistory corresponds to
-     * @return 200:
+     * @return 200: Success
      */
     @GetMapping(path="/api/drugHistory/{patientId}")
     public @ResponseBody
@@ -41,6 +41,11 @@ public class DrugHistoryController {
 
     // POST mappings
 
+	/**
+	 * Create a new DrugHistory in the DB.
+	 * @param dh DrugHistory formatted data to store
+	 * @return 200: Success
+	 */
     @PostMapping(path="/api/drugHistory")
     public @ResponseBody String addDrugHistory (@RequestBody DrugHistory dh) {
         DrugHistory newDrugHistory = new DrugHistory();
