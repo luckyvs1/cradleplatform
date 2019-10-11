@@ -9,6 +9,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Set;
 
 @Entity
@@ -43,7 +44,7 @@ public class ReadingEntity {
 
     private Boolean needFollowUp;
 
-    private Set<String> symptoms;
+    private ArrayList<String> symptoms;
 
     private String otherSymptoms;
 
@@ -111,11 +112,11 @@ public class ReadingEntity {
         this.needFollowUp = needFollowUp;
     }
 
-    public Set<String> getSymptoms() {
+    public ArrayList<String> getSymptoms() {
         return symptoms;
     }
 
-    public void setSymptoms(Set<String> symptoms) {
+    public void setSymptoms(ArrayList<String> symptoms) {
         this.symptoms = symptoms;
     }
 

@@ -7,6 +7,7 @@
 package org.cradlePlatform.controller;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Optional;
 import java.util.Set;
@@ -28,7 +29,7 @@ public class ReadingController {
     public @ResponseBody String addAReading(@RequestParam String readerId,
                                             @RequestParam String patientId,
                                             @RequestParam Timestamp timestamp,
-                                            @RequestParam Set<String> symptoms,
+                                            @RequestParam ArrayList<String> symptoms,
                                             @RequestParam String otherSymptoms,
                                             @RequestParam int systolicBp,
                                             @RequestParam int diastolicBp,
