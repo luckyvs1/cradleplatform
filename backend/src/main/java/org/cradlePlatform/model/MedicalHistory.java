@@ -13,9 +13,8 @@ import javax.validation.constraints.Size;
 public class MedicalHistory {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id", nullable=false, unique=true)
-    @NotEmpty(message = "ID Can't Be Empty")
     private int id;
 
     @Column(name="patient_id", length=32, nullable=false)
@@ -25,6 +24,7 @@ public class MedicalHistory {
 
     @Column(name="history")
     private String MedicalHistoryText;
+
 
     public int getId() {
         return id;
