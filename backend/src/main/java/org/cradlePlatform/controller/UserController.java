@@ -40,7 +40,7 @@ public class UserController {
         return userRepository.findAll();
     }
 
-    @PostMapping("/api/login")
+    @GetMapping("/api/login")
     @ResponseStatus(HttpStatus.OK)
     public User logIn(@RequestParam String username,
                       @RequestParam String password) {
