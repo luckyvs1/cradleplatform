@@ -55,11 +55,11 @@ CREATE TABLE Patient (
     sex                 ENUM('F', 'M', 'Other'),
     age                 INTEGER         NOT NULL,
     pregnant            BOOLEAN,
-    gestation_age_unit  ENUM('week', 'month', 'none'),
-    current_gestation_age       INTEGER,
+    gestational_age_unit  ENUM('week', 'month', 'none'),
+    current_gestational_age       INTEGER,
     CHECK (
-            (pregnant IS TRUE AND current_gestation_age IS NOT NULL) OR
-            (pregnant IS FALSE AND current_gestation_age IS NULL)
+            (pregnant IS TRUE AND current_gestational_age IS NOT NULL) OR
+            (pregnant IS FALSE AND current_gestational_age IS NULL)
         ),
     CHECK (
             (attestation_no IS NOT NULL) OR
@@ -129,8 +129,8 @@ CREATE TABLE Reading (
     date_last_saved TIMESTAMP       NOT NULL,
     date_recheck_vitals_needed TIMESTAMP    NOT NULL,
     device_info     VARCHAR(32)     NOT NULL,
-    gestation_age_unit  ENUM('week', 'month', 'none'),
-    gestation_age       INTEGER,
+    gestational_age_unit  ENUM('week', 'month', 'none'),
+    gestational_age       INTEGER,
     manually_changed_OCR_results VARCHAR(16)   NOT NULL,
     path_to_photo   VARCHAR(128)    NOT NULL,
     total_OCR_seconds   FLOAT   NOT NULL,
