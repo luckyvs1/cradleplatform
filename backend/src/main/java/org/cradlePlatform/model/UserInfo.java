@@ -13,7 +13,7 @@ import javax.validation.constraints.Size;
 import java.util.Date;
 
 @Entity
-@Table(name = "User_Info")
+@Table(name = "User_Info", schema = "schemas")
 public class UserInfo {
 
     @Id

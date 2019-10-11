@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.Set;
 
 @Entity
-@Table(name = "Reading")
+@Table(name = "Reading", schema = "schemas")
 public class ReadingEntity {
 
     @Id

@@ -11,7 +11,7 @@ import javax.validation.constraints.Size;
 import java.sql.Timestamp;
 
 @Entity
-@Table(name = "Referral")
+@Table(name = "Referral", schema = "schemas")
 public class ReferralEntity {
 
     @Id
