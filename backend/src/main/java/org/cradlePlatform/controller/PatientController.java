@@ -48,7 +48,7 @@ public class PatientController {
         return patientRepository.findAll();
     }
 
-    @GetMapping(path="/api/patient/{id}")
+    @GetMapping(path="/api/patients/{id}")
     public @ResponseBody
     Optional<Patient> getPatientById(@PathVariable(value = "id") String patientId){
         return patientRepository.findById(patientId);
