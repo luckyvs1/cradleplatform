@@ -9,4 +9,5 @@ import java.util.Optional;
 @Repository
 public interface FollowUpRepository extends CrudRepository<FollowUp, Integer> {
 	Iterable<FollowUp> findByPatientId(String patientId);
+	Optional<FollowUp> findTopByPatientIdOrderByIdDesc(String patientId);
 }

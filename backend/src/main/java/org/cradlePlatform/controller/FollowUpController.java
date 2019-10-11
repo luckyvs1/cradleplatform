@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Optional;
+
 
 @RestController
 public class FollowUpController {
@@ -34,6 +36,16 @@ public class FollowUpController {
     public @ResponseBody
     Iterable<FollowUp> getFollowUpByPatientId(@PathVariable(value = "patientId") String patientId) {
         return followUpRepository.findByPatientId(patientId);
+    }
+
+    /**
+     * Retrieve the last FollowUp for a particular patient from the DB by patientId.
+     * @return 200: a FollowUp or null if none
+     */
+    @GetMapping(path="/api/followUps/latest/{patientId}")
+    public @ResponseBody
+    Optional<FollowUp> getLastFollowUpByPatientId(@PathVariable(value = "patientId") String patientId) {
+        return followUpRepository.findTopByPatientIdOrderByIdDesc(patientId);
     }
 
     // POST mappings
