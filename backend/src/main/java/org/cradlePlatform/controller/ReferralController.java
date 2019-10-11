@@ -34,7 +34,7 @@ public class ReferralController {
         return referralRepository.findAll();
     }
 
-    @GetMapping(path="/api/referral/{id}")
+    @GetMapping(path="/api/referrals/{id}")
     public @ResponseBody
     Optional<ReferralEntity> getReferralById(@PathVariable(value = "id") String referrerId){
         return referralRepository.findById(referrerId);
