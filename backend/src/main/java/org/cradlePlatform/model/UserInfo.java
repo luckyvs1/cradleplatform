@@ -6,7 +6,9 @@
 package org.cradlePlatform.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.Date;
 
@@ -15,31 +17,30 @@ import java.util.Date;
 public class UserInfo {
 
     @Id
-
-    @NotEmpty(message = "ID Can't Be Empty")
+    @NotBlank
     @Size(max = 32)
     private String id;
 
-    @NotEmpty(message = "Station Number Can't Be Empty")
+    @NotBlank
     @Size(max = 32)
     private String at_a_station_no;
 
-    @NotEmpty(message = "First Name Can't Be Empty")
+    @NotBlank
     @Size(max = 32)
     private String first_name;
 
-    @NotEmpty(message = "Last Name Can't Be Empty")
+    @NotBlank
     @Size(max = 32)
     private String last_name;
 
-    @NotEmpty(message = "Date of Birth Can't Be Empty")
+    @NotNull
     private Date dob;
 
-    @NotEmpty(message = "Country Can't Be Empty")
+    @NotBlank
     @Size(max = 32)
     private String country;
 
-    @NotEmpty(message = "Phone Number Can't Be Empty")
+    @NotBlank
     @Size(max = 16)
     private String phone;
 

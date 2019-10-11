@@ -5,11 +5,11 @@
 package org.cradlePlatform.model;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.sql.Timestamp;
-import java.util.ArrayList;
+import java.util.Set;
 
 @Entity
 @Table(name = "Reading")
@@ -19,9 +19,11 @@ public class ReadingEntity {
     @GeneratedValue
     private int id;
 
+    @NotBlank
     @Size(max = 32)
     private String readerID;
 
+    @NotBlank
     @Size(max = 32)
     private String patientID;
 
@@ -41,7 +43,7 @@ public class ReadingEntity {
 
     private Boolean needFollowUp;
 
-    private ArrayList<String> symptoms;
+    private Set<String> symptoms;
 
     private String otherSymptoms;
 
@@ -109,11 +111,11 @@ public class ReadingEntity {
         this.needFollowUp = needFollowUp;
     }
 
-    public ArrayList<String> getSymptoms() {
+    public Set<String> getSymptoms() {
         return symptoms;
     }
 
-    public void setSymptoms(ArrayList<String> symptoms) {
+    public void setSymptoms(Set<String> symptoms) {
         this.symptoms = symptoms;
     }
 

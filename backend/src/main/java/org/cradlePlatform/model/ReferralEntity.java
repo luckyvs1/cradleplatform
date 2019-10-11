@@ -5,7 +5,8 @@
 package org.cradlePlatform.model;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.sql.Timestamp;
 
@@ -14,22 +15,18 @@ import java.sql.Timestamp;
 public class ReferralEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Column(name = "id", nullable = false, unique = true)
-    @NotEmpty(message = "ID Can't Be Empty")
+    @GeneratedValue
+    @NotNull
     private int id;
 
-    @Column(name = "referrer_id", length = 32, nullable = false)
-    @NotEmpty(message = "Patient ID Can't Be Empty")
+    @NotBlank
     @Size(max = 32)
     private String referrerID;
 
-    @Column(name = "reading_id", nullable = false)
-    @NotEmpty(message = "Reader ID Can't Be Empty")
+    @NotBlank
     private String readingID;
 
-    @Column(name = "timestamp", nullable = false)
-    @NotEmpty(message = "Timestamp Can't Be Empty")
+    @NotNull
     private Timestamp timestamp;
 
     public int getId() {

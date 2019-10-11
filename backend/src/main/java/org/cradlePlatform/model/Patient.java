@@ -5,7 +5,7 @@
 package org.cradlePlatform.model;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -14,22 +14,22 @@ import javax.validation.constraints.Size;
 public class Patient {
 
     @Id
-    @NotEmpty
+    @NotBlank
     @Size(max = 32)
     private String id;
 
-    @NotEmpty
+    @NotBlank
     @Size(max = 32)
     private String villageNo;
 
-    @NotEmpty
+    @NotBlank
     @Size(max = 4)
     private String initials;
 
     @Enumerated(EnumType.STRING)
     private Sex sex;
 
-    @NotEmpty
+    @NotNull
     private int age;
 
     private boolean pregnant;

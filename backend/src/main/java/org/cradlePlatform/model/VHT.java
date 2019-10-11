@@ -4,15 +4,16 @@
 package org.cradlePlatform.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "VHT")
 public class VHT {
 
     @Id
-    @Column(name="id", nullable=false, unique=true)
-    @NotEmpty(message = "ID can't be empty")
+    @NotBlank
     private String id;
 
     public String getId() {
