@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.Optional;
 
 @Controller
@@ -39,12 +38,14 @@ public class MedicalHistoryController {
 
     @PostMapping(path="/api/medicalHistories")
     @ResponseStatus(code = HttpStatus.CREATED)
-    public @ResponseBody String addMedicalHistory (@RequestBody MedicalHistory medHistory) {
+    public @ResponseBody String addMedicalHistory (@RequestBody MedicalHistory mh) {
         MedicalHistory newMedicalHistory = new MedicalHistory();
-        newMedicalHistory.setPatientID(medHistory.getPatientID());
-        newMedicalHistory.setMedicalHistoryText(medHistory.getMedicalHistoryText());
-        newMedicalHistory.setId(medHistory.getId());
-        medicalHistoryRepository.save(newMedicalHistory);
-        return "Saved Medical History";
+        //mh.setMedicalHistoryText("ura fat");
+        newMedicalHistory.setMedicalHistoryText("nononono");
+        return mh.getMedicalHistoryText() + " " + newMedicalHistory.getMedicalHistoryText();
+//        newMedicalHistory.setPatientId(medHistory.getPatientId());
+//        newMedicalHistory.setMedicalHistoryText(medHistory.getMedicalHistoryText());
+//        medicalHistoryRepository.save(newMedicalHistory);
+//        return "Saved Medical History";
     }
 }
