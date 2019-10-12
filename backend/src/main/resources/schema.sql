@@ -55,6 +55,7 @@ CREATE TABLE Patient (
     sex                 ENUM('F', 'M', 'Other'),
     age                 INTEGER         NOT NULL,
     pregnant            BOOLEAN,
+    gestation_start_date DATE           NOT NULL,
     gestational_age_unit  ENUM('week', 'month', 'none'),
     current_gestational_age       INTEGER,
     CHECK (
