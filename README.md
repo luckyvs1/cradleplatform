@@ -77,7 +77,7 @@ First, cd into `${root}/backend` of project directory
 2. Run:
     - `./gradlew build` to build your app
 3. Run:
-    - To run the spring boot application, run: `java -jar build/libs/app-0.0.1-SNAPSHOT.jar` 
+    - To run the spring boot application, run: `java -jar build/libs/cradlePlatform-0.0.1-SNAPSHOT.jar` 
     - You should see the spring boot application launching
     - Visit `http://localhost:8080` to view the app
 
