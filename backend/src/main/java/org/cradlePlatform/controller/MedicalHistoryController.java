@@ -40,12 +40,9 @@ public class MedicalHistoryController {
     @ResponseStatus(code = HttpStatus.CREATED)
     public @ResponseBody String addMedicalHistory (@RequestBody MedicalHistory mh) {
         MedicalHistory newMedicalHistory = new MedicalHistory();
-        //mh.setMedicalHistoryText("ura fat");
-        newMedicalHistory.setMedicalHistoryText("nononono");
-        return mh.getMedicalHistoryText() + " " + newMedicalHistory.getMedicalHistoryText();
-//        newMedicalHistory.setPatientId(medHistory.getPatientId());
-//        newMedicalHistory.setMedicalHistoryText(medHistory.getMedicalHistoryText());
-//        medicalHistoryRepository.save(newMedicalHistory);
-//        return "Saved Medical History";
+        newMedicalHistory.setPatientId(mh.getPatientId());
+        newMedicalHistory.setMedicalHistoryText(mh.getMedicalHistoryText());
+        medicalHistoryRepository.save(newMedicalHistory);
+        return "Saved Medical History";
     }
 }

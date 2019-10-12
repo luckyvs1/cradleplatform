@@ -23,11 +23,12 @@ public class MedicalHistory {
     private String patientId;
 
     @Column(name="history")
-    private String historyText;
+    private String medicalHistoryText;
+
 
     public MedicalHistory() {
         this.patientId = "";
-        this.historyText = "";
+        this.medicalHistoryText = "";
     }
 
     public int getId() {
@@ -47,10 +48,10 @@ public class MedicalHistory {
     }
 
     public String getMedicalHistoryText() {
-        return historyText;
+        return medicalHistoryText;
     }
 
-    public void setMedicalHistoryText(String historyText) {
-        this.historyText = historyText;
+    public void setMedicalHistoryText(String medicalHistoryText) {
+        this.medicalHistoryText = medicalHistoryText;
     }
 }

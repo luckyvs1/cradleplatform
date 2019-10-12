@@ -7,6 +7,6 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface MedicalHistoryRepository extends CrudRepository<MedicalHistory, String> {
+public interface MedicalHistoryRepository extends CrudRepository<MedicalHistory, Integer> {
 	Optional<MedicalHistory> findTopByPatientIdOrderByIdDesc(String patientId);
 }
