@@ -48,9 +48,13 @@ public class PatientController {
         return patientRepository.findAll();
     }
 
-    @GetMapping(path="/api/patients/{id}")
-    public @ResponseBody
-    Optional<Patient> getPatientById(@PathVariable(value = "id") String patientId){
+    @GetMapping(path="/api/patients/{id:\\d+}")
+    public @ResponseBody Optional<Patient> getPatientById(@PathVariable(value = "id") String patientId){
         return patientRepository.findById(patientId);
+    }
+
+    @GetMapping(path="/api/patients/{initials}")
+    public @ResponseBody Patient getPatientByInitials(@PathVariable(value = "initials") String initials){
+        return patientRepository.findByInitials(initials);
     }
 }
