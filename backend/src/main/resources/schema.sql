@@ -138,6 +138,11 @@ CREATE TABLE Reading (
     region          VARCHAR(32) NOT NULL,
     OCR_enabled     BOOLEAN         NOT NULL,
     upload_images   BOOLEAN         NOT NULL,
+    reading_analysis  SET('Green',
+                          'Yellow_up',
+                          'Yellow_down',
+                          'Red_up',
+                          'Red_down'),
     PRIMARY KEY (id),
     FOREIGN KEY (reader_id) REFERENCES User(id) ON DELETE CASCADE,
     FOREIGN KEY (patient_id) REFERENCES Patient(id) ON DELETE CASCADE
