@@ -31,28 +31,19 @@ public class UserController {
 
     @GetMapping(path="/api/users")
     public @ResponseBody Iterable<User> getAllUser() {
-
-        User newUser = new User();
-        newUser.setUsername("test");
-        newUser.setPassword("test123");
-        userRepository.save(newUser);
-
         return userRepository.findAll();
     }
 
     @GetMapping("/api/login")
     @ResponseStatus(HttpStatus.OK)
-    public User logIn(@RequestParam String username,
-                      @RequestParam String password) {
-
+    public @ResponseBody User logIn(@RequestParam String username,
+                                    @RequestParam String password) {
         User account = userRepository.findUserByUsernameAndPassword(username, password);
-
         return account;
     }
 
     @GetMapping(path="/api/users/{id}")
-    public @ResponseBody
-    Optional<User> getUserById(@PathVariable(value = "id") String referrer_id){
+    public @ResponseBody Optional<User> getUserById(@PathVariable(value = "id") String referrer_id){
         return userRepository.findById(referrer_id);
     }
 }

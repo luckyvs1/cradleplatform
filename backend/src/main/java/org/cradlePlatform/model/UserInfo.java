@@ -23,18 +23,22 @@ public class UserInfo {
 
     @NotBlank
     @Size(max = 32)
-    private String at_a_station_no;
+    @Column(name = "at_a_station_no")
+    private String attestationNumber;
 
     @NotBlank
     @Size(max = 32)
-    private String first_name;
+    @Column(name = "first_name")
+    private String firstName;
 
     @NotBlank
     @Size(max = 32)
-    private String last_name;
+    @Column(name = "last_name")
+    private String lastName;
 
     @NotNull
-    private Date dob;
+    @Column(name = "dob")
+    private Date dateOfBirth;
 
     @NotBlank
     @Size(max = 32)
@@ -54,68 +58,68 @@ public class UserInfo {
         return id;
     }
 
-    public String getAtAStationNo() {
-        return at_a_station_no;
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getAttestationNumber() {
+        return attestationNumber;
+    }
+
+    public void setAttestationNumber(String attestationNumber) {
+        this.attestationNumber = attestationNumber;
     }
 
     public String getFirstName() {
-        return first_name;
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
     public String getLastName() {
-        return last_name;
+        return lastName;
     }
 
-    public Date getDOB() {
-        return dob;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public Date getDateOfBirth() {
+        return dateOfBirth;
+    }
+
+    public void setDateOfBirth(Date dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
     }
 
     public String getCountry() {
         return country;
     }
 
-    public String getPhone() {
-        return phone;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public RoleType getRole() {
-        return role;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public void setAtAStationNo(String at_a_station_no) {
-        this.at_a_station_no = at_a_station_no;
-    }
-
-    public void setFirstName(String first_name) {
-        this.first_name = first_name;
-    }
-
-    public void setLastName(String last_name) {
-        this.last_name = last_name;
-    }
-
-    public void setDob(Date dob) {
-        this.dob = dob;
-    }
-
     public void setCountry(String country) {
         this.country = country;
+    }
+
+    public String getPhone() {
+        return phone;
     }
 
     public void setPhone(String phone) {
         this.phone = phone;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public RoleType getRole() {
+        return role;
     }
 
     public void setRole(RoleType role) {

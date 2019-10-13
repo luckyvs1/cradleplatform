@@ -22,31 +22,38 @@ public class ReadingEntity {
 
     @NotBlank
     @Size(max = 32)
+    @Column(name = "reader_id")
     private String readerID;
 
     @NotBlank
     @Size(max = 32)
+    @Column(name = "patient_id")
     private String patientID;
 
     @NotNull
     private Timestamp timestamp;
 
+    private ArrayList<String> symptoms;
+
+    @Column(name = "other_symptoms")
+    private String otherSymptoms;
+
     @NotNull
+    @Column(name = "systolic_bp")
     private int systolicBloodPressure;
 
     @NotNull
+    @Column(name = "diastolic_bp")
     private int diastolicBloodPressure;
 
     @NotNull
+    @Column(name = "pulse_rate")
     private int pulseRate;
 
     private String notes;
 
+    @Column(name = "need_followup")
     private Boolean needFollowUp;
-
-    private ArrayList<String> symptoms;
-
-    private String otherSymptoms;
 
     public int getId() {
         return id;

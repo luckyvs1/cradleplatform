@@ -21,9 +21,11 @@ public class ReferralEntity {
 
     @NotBlank
     @Size(max = 32)
+    @Column(name = "referrer_id")
     private String referrerID;
 
     @NotBlank
+    @Column(name = "reading_id")
     private String readingID;
 
     @NotNull

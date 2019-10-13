@@ -20,6 +20,7 @@ public class Patient {
 
     @NotBlank
     @Size(max = 32)
+    @Column(name = "village_no")
     private String villageNo;
 
     @NotBlank
@@ -35,8 +36,10 @@ public class Patient {
     private boolean pregnant;
 
     @Enumerated(EnumType.STRING)
+    @Column(name = "gestation_age_unit")
     private GestationalAgeTimeUnit gestationAgeUnit;
 
+    @Column(name = "gestation_age")
     private int gestationAge;
 
     public String getId() {

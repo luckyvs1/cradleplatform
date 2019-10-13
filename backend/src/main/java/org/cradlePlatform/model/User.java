@@ -8,13 +8,13 @@ package org.cradlePlatform.model;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "User", schema = "schema")
+@Table(name = "User", schema = "schemas")
 public class User implements Serializable {
 
     @Id
@@ -23,11 +23,11 @@ public class User implements Serializable {
     @NotNull
     private String id;
 
-    @NotEmpty(message = "Enter Username")
+    @NotBlank
     @Size(min = 6, max = 16)
     private String username;
 
-    @NotEmpty(message = "Enter Password")
+    @NotBlank
     @Size(min = 8, max = 32)
     private String password;
 
