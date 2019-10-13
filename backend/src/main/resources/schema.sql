@@ -55,7 +55,7 @@ CREATE TABLE Patient (
     sex                 ENUM('F', 'M', 'Other'),
     age                 INTEGER         NOT NULL,
     pregnant            BOOLEAN,
-    gestation_start_date DATE           NOT NULL,
+    gestational_start_date DATE           NOT NULL,
     gestational_age_unit  ENUM('week', 'month', 'none'),
     current_gestational_age       INTEGER,
     CHECK (
@@ -138,7 +138,7 @@ CREATE TABLE Reading (
     region          VARCHAR(32) NOT NULL,
     OCR_enabled     BOOLEAN         NOT NULL,
     upload_images   BOOLEAN         NOT NULL,
-    reading_analysis  SET('Green',
+    reading_analysis  ENUM('Green',
                           'Yellow_up',
                           'Yellow_down',
                           'Red_up',
