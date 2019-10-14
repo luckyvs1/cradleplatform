@@ -20,6 +20,19 @@ export default {
             axios.get(`http://${host}:${port}/VHT/${data}/patients/${data}`, {data}).then(res => console.log(res))
         }
     },
+    admin:{
+        addNewAdmin: data => {
+            axios.post(`http://${host}:${port}/admin?id=${data.id}` , {data})
+        },
+        getAllAdmins : axios.get(`http://${host}:${port}/admin`)
+    },
+
+    drug:{
+        getAllDrugHistory:data=> axios.get(`http://${host}:${port}/api/drugHistories` , {data}),
+        getDrugHistoryById:data=> axios.get(`http://${host}:${port}/api/drugHistories/${data.patientid}` , {data}),
+        addDrgHistory:data=> axios.post(`http://${host}:${port}/api/drugHistories?${data}`, {data}),
+    },
+
 
     reading:{
         mockReading: data =>{
@@ -39,8 +52,12 @@ export default {
         }
     },
     followUp: {
+        getAllFollowUps:data=> axios.get(`http://${host}:${port}/api/followUps` , {data}),
+        getFollowUpByPatientId:data=> axios.get(`http://${host}:${port}/api/followUps/${data.patientId}` , {data}),
+        getLastFollowUpByPatientId:data=> axios.get(`http://${host}:${port}/api/followUps/latest/${data.patentId}` , {data}),
+        addFollowUp:data=> axios.post(`http://${host}:${port}/api/followUps?${data}` , {data}),
         mockFollowUp:data =>{
-            axios.get(`http://${host}:${port}/VHT/{vhtId}/patients/{patientId}/followup`, {}).then(res => console.log(res))
+            axios.get(`http://${host}:${port}/VHT/${data.vhtid}/patients/${data.patientid}/followup`, {data})
         }
     }
 
