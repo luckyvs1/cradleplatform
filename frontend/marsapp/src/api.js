@@ -10,19 +10,14 @@ const port = "8080";
 
 export default {
     user: {
-        hello: () => {
-            axios.get(`http://${host}:${port}/hello`).then(res => console.log(res))
-        },
-
-        login: credential => axios.post(`http://${host}:${port}/login`, {credential}).then((res => res.data.user))
-,
+        login: credential => axios.get(`http://${host}:${port}/api/login?username=${credential.username}&password=${credential.password}`, {credential})
     },
     patient: {
         mockPatients : data =>{
             axios.get(`http://${host}:${port}/VHT/1/patients`, {}).then(res => console.log(res))
         },
         mockPatient: data => {
-            axios.get(`http://${host}:${port}/VHT/{1}/patients/{1}`, {}).then(res => console.log(res))
+            axios.get(`http://${host}:${port}/VHT/${data}/patients/${data}`, {data}).then(res => console.log(res))
         }
     },
 
