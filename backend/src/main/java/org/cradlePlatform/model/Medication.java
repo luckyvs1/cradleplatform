@@ -20,7 +20,7 @@ public class Medication {
     private int id;
 
     @Column(name="drug_history_id", nullable=false)
-    private int drugHistoryID;
+    private int drugHistoryId;
 
     @Column(name="drug_name", length=32, nullable=false)
     @Size(max = 32)
@@ -37,7 +37,7 @@ public class Medication {
     private Date endDate;
 
     public Medication() {
-        this.drugHistoryID = -1;
+        this.drugHistoryId = -1;
         this.drugName = "";
         this.dosage = "";
         this.startDate = new Date();
@@ -48,12 +48,12 @@ public class Medication {
         return id;
     }
 
-    public int getDrugHistoryID() {
-        return drugHistoryID;
+    public int getDrugHistoryId() {
+        return drugHistoryId;
     }
 
-    public void setDrugHistoryID(int drugHistoryID) {
-        this.drugHistoryID = drugHistoryID;
+    public void setDrugHistoryId(int drugHistoryId) {
+        this.drugHistoryId = drugHistoryId;
     }
 
     public String getDrugName() {

@@ -33,7 +33,7 @@ public class MedicationController {
     @GetMapping(path="/api/medications/{drugHistoryId}")
     public @ResponseBody
     Iterable<Medication> getParentDrugHistoryById(@PathVariable(value = "drugHistoryId") int drugHistoryId){
-        return medicationRepository.findByDrugHistoryID(drugHistoryId);
+        return medicationRepository.findByDrugHistoryId(drugHistoryId);
     }
 
     // POST mappings
@@ -41,7 +41,7 @@ public class MedicationController {
     @PostMapping(path="/api/medications")
     public @ResponseBody String addNewMedication (@RequestBody Medication med) {
         Medication newMedication = new Medication();
-        newMedication.setDrugHistoryID(med.getDrugHistoryID());
+        newMedication.setDrugHistoryId(med.getDrugHistoryId());
         newMedication.setDrugName(med.getDrugName());
         newMedication.setDosage(med.getDosage());
         newMedication.setStartDate(med.getStartDate());

@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface MedicationRepository extends CrudRepository<Medication, Integer> {
-	Iterable<Medication> findByDrugHistoryID(int drugHistoryId);
+	Iterable<Medication> findByDrugHistoryId(int drugHistoryId);
 }
