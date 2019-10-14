@@ -15,6 +15,7 @@ import {
     Button,
     Form
 } from 'react-bootstrap';
+import InlineError from "../messages/InlineError";
 
 class AddPatientForm extends React.Component {
     // functions
@@ -22,7 +23,7 @@ class AddPatientForm extends React.Component {
         data:{
            patient_id: "",
            initials: "",
-           age: ""
+           age: "",
            isPregnant: "",
            gest_age: ""},
         isLoading: false,
@@ -30,11 +31,12 @@ class AddPatientForm extends React.Component {
     };
     //save whatever we already have in data and then change the data
     //when an (universal for string type/text field) event happens
-    onChange = e => this.setState({data: {...this.state.data, [e.target.name: e.target.value]} });
+    onChange = e => this.setState({data: {...this.state.data, [e.target.name]: e.target.value} });
 
-    pregnantChange = e => this.setState({isPregnant: event.target.value});
+    pregnantChange = e => this.setState({isPregnant: e.target.value});
 
-    onSubmit = () => {
+    onSubmit = (event) => {
+        event.preventDefault();
         const errors = this.validate(this.state.data);
         this.setState({errors}); //if there are returned errors, display them
     };
@@ -50,7 +52,7 @@ class AddPatientForm extends React.Component {
         if(!data.isPregnant) errors.gest_age = "Please choose one of the options";
 
         if(!data.patient_id) errors.patient_id = "Can't be blank";
-        if(!Validator.isInt(data.patient_id) errors.age = "Not a valid ID (ID has to be a number)";
+        if(!Validator.isInt(data.patient_id)) errors.age = "Not a valid ID (ID has to be a number)";
 
         if(!data.initials) errors.initials = "Can't be blank";
         if(!Validator.isAlpha(data.initials))
@@ -59,7 +61,7 @@ class AddPatientForm extends React.Component {
     }
 
     render() {
-        const { data } = this.state;
+        const { data, errors } = this.state;
         return (
             <div>
                 <TopNavigation authenticated={true}></TopNavigation>
@@ -82,10 +84,7 @@ class AddPatientForm extends React.Component {
                                         placeholder="Patient ID"
                                         value={data.patient_id}
                                         onChange={this.onChange}/>
-                                    {/*error handling*/}
-                                    {/* <Form.Text className="text-muted">
-                                        {errors.email && <InlineError text={errors.email} />}
-                                    </Form.Text> */}
+                                    {errors.patient_id && <InlineError text={errors.patient_id} />}
                                 </Form.Group>
                             </Col>
                             <Col>
@@ -98,10 +97,7 @@ class AddPatientForm extends React.Component {
                                         placeholder="Initials"
                                         value={data.initials}
                                         onChange={this.onChange}/>
-                                    {/*error handling*/}
-                                    {/* <Form.Text className="text-muted">
-                                        {errors.email && <InlineError text={errors.email} />}
-                                    </Form.Text> */}
+                                    {errors.initials && <InlineError text={errors.initials} />}
                                 </Form.Group>
                             </Col>
                         </Row>
@@ -116,10 +112,7 @@ class AddPatientForm extends React.Component {
                                         placeholder="Age"
                                         value={data.age}
                                         onChange={this.onChange}/>
-                                    {/*error handling*/}
-                                    {/* <Form.Text className="text-muted">
-                                        {errors.email && <InlineError text={errors.email} />}
-                                    </Form.Text> */}
+                                    {errors.age && <InlineError text={errors.age} />}
                                 </Form.Group>
                             </Col>
                             <Col>
@@ -129,10 +122,7 @@ class AddPatientForm extends React.Component {
                                         <option value={"true"}>Yes</option>
                                         <option value={"false"}>No</option>
                                     </Form.Control>
-                                    {/* enable his for error handling */}
-                                    {/* <Form.Text className="text-muted">
-                                        {errors.email && <InlineError text={errors.email} />}
-                                    </Form.Text> */}
+                                    {errors.isPregnant && <InlineError text={errors.isPregnant} />}
                                 </Form.Group>
                             </Col>
                             <Col>
@@ -140,23 +130,18 @@ class AddPatientForm extends React.Component {
                                     <Form.Label>Gestational Age</Form.Label>
                                     <Form.Control
                                         type="number"
-                                        id="age"
-                                        name="age"
+                                        id="gest_age"
+                                        name="gest_age"
                                         placeholder="Age"
                                         value={data.gest_age}
                                         onChange={this.onChange}/>
-                                    {/* enable his for error handling */}
-                                    {/* <Form.Text className="text-muted">
-                                        {errors.email && <InlineError text={errors.email} />}
-                                    </Form.Text> */}
+                                    {errors.gest_age && <InlineError text={errors.gest_age} />}
                                 </Form.Group>
                             </Col>
                         </Row>
                         <Row>
                             <Col>
-                                <Button variant="success" type="submit">
-                                    Create
-                                </Button>
+                                <Button primary type="submit">Create</Button>
                             </Col>
                         </Row>
                     </Form>
