@@ -13,36 +13,40 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Date;
 import java.util.Optional;
 
-@Controller
+@RestController
 public class MedicationController {
     @Autowired
     private MedicationRepository medicationRepository;
 
-    @PostMapping(path="/medication")
-    public @ResponseBody String addNewMedication (@RequestParam int drugHistoryId,
-                                                  @RequestParam String drugName,
-                                                  @RequestParam String dosage,
-                                                  @RequestParam Date startDate,
-                                                  @RequestParam Date endDate){
-        Medication newMedication = new Medication();
-        newMedication.setDrugHistoryID(drugHistoryId);
-        newMedication.setDrugName(drugName);
-        newMedication.setDosage(dosage);
-        newMedication.setStartDate(startDate);
-        newMedication.setEndDate(endDate);
-        medicationRepository.save(newMedication);
-        return "Saved Medication";
-    }
+    // GET mappings
 
-    @GetMapping(path="/medication")
+    @GetMapping(path="/api/medications")
     public @ResponseBody Iterable<Medication> getAllMedication(){
-        //This returns a JSON or XML with the medication
         return medicationRepository.findAll();
     }
 
-    @GetMapping(path="/medication/{id}")
+    /**
+     * Get all Medications associated with a DrugHistory by DrugHistoryId
+     * @param drugHistoryId
+     * @return
+     */
+    @GetMapping(path="/api/medications/{drugHistoryId}")
     public @ResponseBody
-    Optional<Medication> getPatientById(@PathVariable(value = "id") String drugHistoryId){
-        return medicationRepository.findById(drugHistoryId);
+    Iterable<Medication> getParentDrugHistoryById(@PathVariable(value = "drugHistoryId") int drugHistoryId){
+        return medicationRepository.findByDrugHistoryID(drugHistoryId);
+    }
+
+    // POST mappings
+
+    @PostMapping(path="/api/medications")
+    public @ResponseBody String addNewMedication (@RequestBody Medication med) {
+        Medication newMedication = new Medication();
+        newMedication.setDrugHistoryID(med.getDrugHistoryID());
+        newMedication.setDrugName(med.getDrugName());
+        newMedication.setDosage(med.getDosage());
+        newMedication.setStartDate(med.getStartDate());
+        newMedication.setEndDate(med.getEndDate());
+        medicationRepository.save(newMedication);
+        return "Saved Medication";
     }
 }
