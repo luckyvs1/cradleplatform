@@ -59,7 +59,18 @@ export default {
         mockFollowUp:data =>{
             axios.get(`http://${host}:${port}/VHT/${data.vhtid}/patients/${data.patientid}/followup`, {data})
         }
-    }
+    },
+    healthCareWorker:{
+        getAllHealthWorkers:data=> axios.get(`http://${host}:${port}/api/healthWorkers` , {data}),
+        getHealthWorkerById:data=> axios.get(`http://${host}:${port}/api/healthWorkers/${data.id}` , {data}),
+        addNewHealthWorker:data=> axios.post(`http://${host}:${port}/api/healthWorkers?${data}` , {data}),
+
+    },
+    medicalHistory:{
+        getAllMedicalHistories:data=> axios.get(`http://${host}:${port}/api/medicalHistories` , {data}),
+        getLastMedicalHistoryByPatientId:data=> axios.get(`http://${host}:${port}/api/medicalHistories/${data.id}` , {data}),
+        addMedicalHistory:data=> axios.post(`http://${host}:${port}/api/medicalHistories?${data}` , {data}),
+    },
 
 
 
