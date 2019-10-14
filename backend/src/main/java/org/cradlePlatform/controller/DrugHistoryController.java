@@ -21,23 +21,14 @@ public class DrugHistoryController {
     // GET mappings
 
     /**
-     * Retrieve all DrugHistories from the DB.
-     * @return 200: a JSON of DrugHistory objects or empty JSON if none.
-     */
-    @GetMapping(path="/api/drugHistories")
-    public @ResponseBody Iterable<DrugHistory> getAllDrugHistory() {
-        return drugHistoryRepository.findAll();
-    }
-
-    /**
-     * Retrieve a single DrugHistory from the DB by its corresponding patientID.
-     * @param patientID patientId of patient the DrugHistory corresponds to
+     * Retrieve all DrugHistories from the DB for a corresponding patientID.
+     * @param patientId patientId to get DrugHistories for
      * @return 200: Success
      */
-    @GetMapping(path="/api/drugHistories/{patientId}")
+    @GetMapping(path="/api/drugHistories")
     public @ResponseBody
-    Optional<DrugHistory> getDrugHistoryById(@PathVariable(value = "patientId") String patientID) {
-        return drugHistoryRepository.findByPatientId(patientID);
+    Iterable<DrugHistory> getDrugHistoriesByPatientId(@RequestParam String patientId) {
+        return drugHistoryRepository.findByPatientId(patientId);
     }
 
     // POST mappings
