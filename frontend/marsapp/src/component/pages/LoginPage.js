@@ -23,6 +23,7 @@ class LoginPage extends React.Component {
             .then(res => {
                 if(res.data.id == "22"){
                     auth.login(()=>{
+                        localStorage.loginToken = auth.authenticated;
                         this.props.history.push("/homePage");
                     })
                     console.log(res.data)

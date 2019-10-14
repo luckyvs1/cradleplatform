@@ -3,6 +3,9 @@ class Auth {
         this.authenticated = false;
     }
 
+    setAtuh(){
+        this.authenticated=true;
+    }
     login(cb) {
         this.authenticated = true;
         cb();

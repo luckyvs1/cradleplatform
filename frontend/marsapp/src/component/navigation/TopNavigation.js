@@ -14,7 +14,7 @@ import {
     Nav,
     Navbar,
     NavDropdown,
-    Container
+    Container, Button
 } from 'react-bootstrap';
 
 const bottomMarginStyle = {
@@ -39,6 +39,9 @@ class TopNavigation extends React.Component {
         } else if (width === 0) {
             document.getElementsByClassName("sidebar-wrapper")[0].setAttribute("style", `width:${width} px !important;`)
         }
+    }
+    handleClick(e){
+        localStorage.removeItem("loginToken");
     }
 
     render() {
@@ -74,7 +77,7 @@ class TopNavigation extends React.Component {
                                     <i className="fas fa-graduation-cap"></i> Learning Materials
                                 </NavDropdown.Item>
                                 <NavDropdown.Divider/>
-                                <NavDropdown.Item as={Link} to="/">
+                                <NavDropdown.Item as={Link} to="/" onClick={this.handleClick}>
                                     <i className="fas fa-sign-out-alt"></i> Logout
                                 </NavDropdown.Item>
                             </NavDropdown>
