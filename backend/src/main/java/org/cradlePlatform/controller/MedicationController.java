@@ -20,19 +20,14 @@ public class MedicationController {
 
     // GET mappings
 
-    @GetMapping(path="/api/medications")
-    public @ResponseBody Iterable<Medication> getAllMedication(){
-        return medicationRepository.findAll();
-    }
-
     /**
      * Get all Medications associated with a DrugHistory by DrugHistoryId
      * @param drugHistoryId
      * @return
      */
-    @GetMapping(path="/api/medications/{drugHistoryId}")
+    @GetMapping(path="/api/medications")
     public @ResponseBody
-    Iterable<Medication> getParentDrugHistoryById(@PathVariable(value = "drugHistoryId") int drugHistoryId){
+    Iterable<Medication> getParentDrugHistoryById(@RequestParam int drugHistoryId) {
         return medicationRepository.findByDrugHistoryId(drugHistoryId);
     }
 
