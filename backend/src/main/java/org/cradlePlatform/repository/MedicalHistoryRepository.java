@@ -8,5 +8,6 @@ import java.util.Optional;
 
 @Repository
 public interface MedicalHistoryRepository extends CrudRepository<MedicalHistory, Integer> {
-	Optional<MedicalHistory> findTopByPatientIdOrderByIdDesc(String patientId);
+	Iterable<MedicalHistory> findTopByPatientIdOrderByIdDesc(String patientId);
+	Iterable<MedicalHistory> findAllByPatientId(String patientId);
 }
