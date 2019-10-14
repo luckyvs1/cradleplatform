@@ -11,9 +11,13 @@ import AddPatientForm from "../../forms/AddPatientForm";
 
 class AddPatient extends React.Component {
 
+    submit = (data) => {
+        console.log(data);
+    }
+
     render() {
         return (
-            <AddPatientForm></AddPatientForm>
+            <AddPatientForm submit = {this.submit}></AddPatientForm>
         );
     }
 }

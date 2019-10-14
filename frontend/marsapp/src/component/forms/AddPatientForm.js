@@ -7,7 +7,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import TopNavigation from "../navigation/TopNavigation";
-import Validator from 'validator';
+import Validator from "validator";
+import PropTypes from "prop-types"
 import {
     Container,
     Row,
@@ -19,26 +20,33 @@ import InlineError from "../messages/InlineError";
 
 class AddPatientForm extends React.Component {
     // functions
-    state = {
-        data:{
-           patient_id: "",
-           initials: "",
-           age: "",
-           isPregnant: "",
-           gest_age: ""},
-        isLoading: false,
-        errors: {}
-    };
-    //save whatever we already have in data and then change the data
-    //when an (universal for string type/text field) event happens
-    onChange = e => this.setState({data: {...this.state.data, [e.target.name]: e.target.value} });
+    constructor(props){
+        super(props);
+        this.state = {
+            data:{
+               patient_id: "",
+               initials: "",
+               age: "",
+               isPregnant: "Yes",
+               gest_age: ""},
+            isLoading: false,
+            errors: {}
+        };
+        this.onChange = this.onChange.bind(this);
+        this.onSubmit = this.onSubmit.bind(this);
+    }
 
-    pregnantChange = e => this.setState({isPregnant: e.target.value});
+    //save whatever we already have in data and then change the data
+    //when an event happens
+    onChange = e => this.setState({data: {...this.state.data, [e.target.name]: e.target.value} });
 
     onSubmit = (event) => {
         event.preventDefault();
         const errors = this.validate(this.state.data);
-        this.setState({errors}); //if there are returned errors, display them
+        this.setState({errors}); //if there are errors returned, display them
+        if(Object.keys(errors).length === 0){ //if not
+            this.props.submit(this.state.data);
+        }
     };
 
     validate = (data) => {
@@ -49,10 +57,10 @@ class AddPatientForm extends React.Component {
         if(!data.gest_age) errors.gest_age = "Can't be blank";
         if(!Validator.isInt(data.gest_age)) errors.gest_age = "Not a valid gestational age";
 
-        if(!data.isPregnant) errors.gest_age = "Please choose one of the options";
+        if(!data.isPregnant) errors.isPregnant = "Please choose one of the options";
 
         if(!data.patient_id) errors.patient_id = "Can't be blank";
-        if(!Validator.isInt(data.patient_id)) errors.age = "Not a valid ID (ID has to be a number)";
+        if(!Validator.isInt(data.patient_id)) errors.patient_id = "Not a valid ID (ID has to be a number)";
 
         if(!data.initials) errors.initials = "Can't be blank";
         if(!Validator.isAlpha(data.initials))
@@ -118,7 +126,7 @@ class AddPatientForm extends React.Component {
                             <Col>
                                 <Form.Group>
                                     <Form.Label>Pregnant</Form.Label>
-                                    <Form.Control as="select" onChange={this.pregnantChange} value={data.isPregnant}>
+                                    <Form.Control as="select" name="isPregnant" onChange={this.onChange} value={data.isPregnant}>
                                         <option value={"true"}>Yes</option>
                                         <option value={"false"}>No</option>
                                     </Form.Control>
@@ -150,5 +158,9 @@ class AddPatientForm extends React.Component {
         );
     }
 }
+
+AddPatientForm.propTypes = {
+    submit: PropTypes.func.isRequired
+};
 
 export default AddPatientForm;
