@@ -4,11 +4,10 @@
  */
 package org.cradlePlatform.controller;
 
-import java.sql.Time;
 import java.sql.Timestamp;
 import java.util.Optional;
 
-import org.cradlePlatform.model.ReferralEntity;
+import org.cradlePlatform.model.Referral;
 import org.cradlePlatform.repository.ReferralRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -22,21 +21,21 @@ public class ReferralController {
     public @ResponseBody String addAReferral(@RequestParam int referrerId,
                                              @RequestParam String readingId,
                                              @RequestParam Timestamp timestamp){
-        ReferralEntity newReferral = new ReferralEntity();
+        Referral newReferral = new Referral();
         newReferral.setId(referrerId);
-        newReferral.setReadingID(readingId);
+        newReferral.setReadingId(readingId);
         newReferral.setTimestamp(timestamp);
         return "Saved Referral";
     }
 
     @GetMapping(path="/api/referrals")
-    public @ResponseBody Iterable<ReferralEntity> getAllReferral() {
+    public @ResponseBody Iterable<Referral> getAllReferral() {
         return referralRepository.findAll();
     }
 
     @GetMapping(path="/api/referrals/{id}")
     public @ResponseBody
-    Optional<ReferralEntity> getReferralById(@PathVariable(value = "id") String referrerId){
+    Optional<Referral> getReferralById(@PathVariable(value = "id") String referrerId){
         return referralRepository.findById(referrerId);
     }
 }

@@ -36,10 +36,15 @@ public class UserController {
 
     @GetMapping("/api/login")
     @ResponseStatus(HttpStatus.OK)
-    public @ResponseBody User logIn(@RequestParam String username,
-                                    @RequestParam String password) {
+    public @ResponseBody Boolean logIn(@RequestParam String username,
+                                       @RequestParam String password) {
         User account = userRepository.findUserByUsernameAndPassword(username, password);
-        return account;
+
+        if (account != null) {
+            return true;
+        }
+
+        return false;
     }
 
     @GetMapping(path="/api/users/{id}")

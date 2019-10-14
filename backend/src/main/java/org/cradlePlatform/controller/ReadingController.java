@@ -10,13 +10,10 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Optional;
-import java.util.Set;
 
-import org.cradlePlatform.model.ReadingEntity;
+import org.cradlePlatform.model.Reading;
 import org.cradlePlatform.repository.ReadingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.cdi.Eager;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -36,13 +33,15 @@ public class ReadingController {
                                             @RequestParam int pulseRate,
                                             @RequestParam String notes,
                                             @RequestParam boolean needFollowup){
-        ReadingEntity newReading = new ReadingEntity();
-        newReading.setPatientID(patientId);
-        newReading.setReaderID(readerId);
+        Reading newReading = new Reading();
+        newReading.setReaderId(readerId);
+        newReading.setPatientId(patientId);
         newReading.setTimestamp(timestamp);
+        newReading.setSymptoms(symptoms);
         newReading.setOtherSymptoms(otherSymptoms);
         newReading.setSystolicBloodPressure(systolicBp);
         newReading.setDiastolicBloodPressure(diastolicBp);
+        newReading.setPulseRate(pulseRate);
         newReading.setNotes(notes);
         newReading.setNeedFollowUp(needFollowup);
         readingRepository.save(newReading);
@@ -51,13 +50,13 @@ public class ReadingController {
     }
 
     @GetMapping(path="/api/readings")
-    public @ResponseBody Iterable<ReadingEntity> getAllReadings() {
+    public @ResponseBody Iterable<Reading> getAllReadings() {
         return readingRepository.findAll();
     }
 
     @GetMapping(path="/api/readings/{id}")
     public @ResponseBody
-    Optional<ReadingEntity> getReferralById(@PathVariable(value = "id") String referrerId){
+    Optional<Reading> getReferralById(@PathVariable(value = "id") String referrerId){
         return readingRepository.findById(referrerId);
     }
 }
