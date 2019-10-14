@@ -130,12 +130,4 @@ public class Patient {
         this.gestationAge = gestationAge;
     }
 
-    public boolean checkPregnantConditions() {
-        if (pregnant && gestationAge > 0) {
-            return true;
-        } else if (!pregnant && gestationAge == 0){
-            return true;
-        }
-        return false;
-    }
 }

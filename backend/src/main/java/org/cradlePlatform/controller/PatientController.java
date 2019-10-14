@@ -31,33 +31,38 @@ public class PatientController {
         return patientRepository.findAll();
     }
 
+    /**
+     * Get data for patient with matching patient id
+     * @param patientId
+     * @return
+     */
     @GetMapping(path="/api/patients/{id}")
     public @ResponseBody
     Optional<Patient> getPatientById(@PathVariable(value = "id") String patientId) {
         return patientRepository.findById(patientId);
     }
 
-
     // POST mappings
 
-
-    @GetMapping(path="/api/eya")
-    public @ResponseBody String addNewPatient (@RequestBody String villageNo ){
+    /**
+     * Create a new patient
+     * @param patient
+     * @return
+     */
+    @PostMapping(path="/api/patients")
+    public @ResponseBody String addNewPatient (@RequestBody Patient patient){
         Patient newPatient = new Patient();
-        newPatient.setVillageNo("123");
+        newPatient.setVillageNo(patient.getVillageNo());
+        newPatient.setAge(patient.getAge());
+        newPatient.setGestationAge(patient.getGestationAge());
+        newPatient.setGestationAgeUnit(patient.getGestationAgeUnit());
+        newPatient.setInitials(patient.getInitials());
+        newPatient.setPregnant(patient.isPregnant());
+        newPatient.setVillageNo(patient.getVillageNo());
+        newPatient.setSex(patient.getSex());
         patientRepository.save(newPatient);
-        return villageNo;
-//        return villageNo;
-//        newPatient.setId(patient.getId());
-//        newPatient.setAge(patient.getAge());
-//        newPatient.setGestationAge(patient.getGestationAge());
-//        newPatient.setGestationAgeUnit(patient.getGestationAgeUnit());
-//        newPatient.setInitials(patient.getInitials());
-//        newPatient.setPregnant(patient.isPregnant());
-//        newPatient.setVillageNo(patient.getVillageNo());
-//        newPatient.setSex(patient.getSex());
+        return "Saved Patient";
 
-        // patientRepository.save(newPatient);
     }
 
     /**
