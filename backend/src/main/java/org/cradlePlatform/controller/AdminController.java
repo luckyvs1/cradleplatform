@@ -6,26 +6,54 @@ package org.cradlePlatform.controller;
 import org.cradlePlatform.model.Admin;
 import org.cradlePlatform.repository.AdminRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Optional;
 
-@Controller
+
+@RestController
 public class AdminController {
     @Autowired
     private AdminRepository adminRepository;
 
-    @PostMapping(path="/admin")
-    public @ResponseBody String addNewAdmin (@RequestParam String id){
-        Admin newAdmin = new Admin();
-        newAdmin.setId(id);
+    // GET mappings
+
+    /**
+     * Retrieve all Admins from the DB.
+     * @return 200: a JSON of Admin ids or empty JSON otherwise
+     */
+    @GetMapping(path="/api/admins")
+    public @ResponseBody Iterable<Admin> getAllAdmins() {
+        return adminRepository.findAll();
+    }
+
+    /**
+     * Retrieve the Admin from the DB whose id matches the given id.
+     * @param id User/Admin id to find Admin by
+     * @return 200: a JSON with an Admin id if a matching Admin exists, or 'null' otherwise
+     */
+    @GetMapping(path="/api/admins/{id}")
+    public @ResponseBody
+    Optional<Admin> getAdminById(@PathVariable(value = "id") String id) {
+        return adminRepository.findById(id);
+    }
+
+    // POST mappings
+
+    /**
+     * Create a new Admin in the DB.
+     * Admin must be created from an existing User id in the DB.
+     * @param admin Admin object with id string that should match an existing User in DB.
+     * @return 201: New Admin was saved in DB successfully.
+     */
+    @PostMapping(path="/api/admins")
+    @ResponseStatus(code = HttpStatus.CREATED)
+    public @ResponseBody String addNewAdmin (@RequestBody Admin admin){
+        Admin newAdmin = new Admin(admin.getId());
         adminRepository.save(newAdmin);
         return "Saved Admin";
     }
 
-    @GetMapping(path="/admin")
-    public @ResponseBody Iterable<Admin> getAllAdmins(){
-        //This returns a JSON or XML with the users
-        return adminRepository.findAll();
-    }
+
 }

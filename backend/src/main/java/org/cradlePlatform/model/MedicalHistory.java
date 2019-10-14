@@ -13,18 +13,23 @@ import javax.validation.constraints.Size;
 public class MedicalHistory {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id", nullable=false, unique=true)
-    @NotEmpty(message = "ID Can't Be Empty")
     private int id;
 
-    @Column(name="patient_id", length=32, nullable=false)
+    @Column(name="patient_id", nullable=false)
     @NotEmpty(message = "Patient ID Can't Be Empty")
     @Size(max = 32)
-    private String patientID;
+    private String patientId;
 
     @Column(name="history")
-    private String MedicalHistoryText;
+    private String medicalHistoryText;
+
+
+    public MedicalHistory() {
+        this.patientId = "";
+        this.medicalHistoryText = "";
+    }
 
     public int getId() {
         return id;
@@ -34,19 +39,19 @@ public class MedicalHistory {
         this.id = id;
     }
 
-    public String getPatientID() {
-        return patientID;
+    public String getPatientId() {
+        return patientId;
     }
 
-    public void setPatientID(String patientID) {
-        this.patientID = patientID;
+    public void setPatientId(String patientId) {
+        this.patientId = patientId;
     }
 
     public String getMedicalHistoryText() {
-        return MedicalHistoryText;
+        return medicalHistoryText;
     }
 
     public void setMedicalHistoryText(String medicalHistoryText) {
-        MedicalHistoryText = medicalHistoryText;
+        this.medicalHistoryText = medicalHistoryText;
     }
 }

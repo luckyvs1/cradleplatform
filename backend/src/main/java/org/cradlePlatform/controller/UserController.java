@@ -12,7 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import java.util.Optional;
 
-@Controller
+@RestController
 public class UserController {
     @Autowired
     private UserRepository userRepository;
@@ -31,6 +31,7 @@ public class UserController {
 
     @GetMapping(path="/api/users")
     public @ResponseBody Iterable<User> getAllUser() {
+
         return userRepository.findAll();
     }
 
@@ -46,4 +47,19 @@ public class UserController {
     public @ResponseBody Optional<User> getUserById(@PathVariable(value = "id") String referrer_id){
         return userRepository.findById(referrer_id);
     }
+
+    // POST mappings
+
+    @PostMapping(path="/api/users")
+    public @ResponseBody String addUser(@RequestBody User user){
+        User newUser = new User();
+        newUser.setId(user.getId());
+        newUser.setUsername(user.getUsername());
+        newUser.setPassword(user.getPassword());
+
+        userRepository.save(newUser);
+
+        return "Saved New User";
+    }
+
 }
