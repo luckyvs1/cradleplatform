@@ -20,48 +20,27 @@ public class PatientController {
     @Autowired
     private PatientRepository patientRepository;
 
-    /**
-     * GET mappings (get and return patient data)
-     */
+    // GET mappings
 
     /**
-     * Return a JSON or XML
+     * Get data for all patients
      * @return
      */
     @GetMapping(path="/api/patients")
-    public @ResponseBody Iterable<Patient> getAllPatients(){
-        //this returns a JSON or XML with the patients
+    public @ResponseBody Iterable<Patient> getAllPatients() {
         return patientRepository.findAll();
     }
 
-    @GetMapping(path="/api/patient/{id}")
+    @GetMapping(path="/api/patients/{id}")
     public @ResponseBody
-    Optional<Patient> getPatientById(@PathVariable(value = "id") String patientId){
+    Optional<Patient> getPatientById(@PathVariable(value = "id") String patientId) {
         return patientRepository.findById(patientId);
     }
 
-    /**
-     * POST mappings (upload and save patient data)
-     */
 
-    @GetMapping(path="/api/poop")
-    public @ResponseBody String afaf ()
-    {
-        return "hi";
-    }
+    // POST mappings
 
-    /**
-     * Add a new patient to the db via data sent in request body.
-     * @param id
-     * @param villageNo
-     * @param initials
-     * @param sex
-     * @param age
-     * @param pregnant
-     * @param gestationAgeUnit
-     * @param gestationAge
-     * @return
-     */
+
     @GetMapping(path="/api/eya")
     public @ResponseBody String addNewPatient (@RequestBody String villageNo ){
         Patient newPatient = new Patient();
@@ -80,11 +59,6 @@ public class PatientController {
 
         // patientRepository.save(newPatient);
     }
-//
-//    @PostMapping(path="/api/poop")
-//    public @ResponseBody String afad (@RequestParam String id) {
-//        return id;
-//    }
 
     /**
      * Returns mock data of multiple patients for testing purposes.
