@@ -11,6 +11,8 @@ import TopNavigation from "../navigation/TopNavigation";
 import styled from 'styled-components';
 import api from "../../api";
 import auth from "../../actions/auth"
+import {connect} from "react-redux";
+import {USER_LOGGED_IN} from "../../types";
 
 const TopMarginStyle = styled.div`
   margin-top: 40px;
@@ -22,16 +24,20 @@ class LoginPage extends React.Component {
         api.user.login(data)
             .then(res => {
                 if(res.data.id == "22"){
-                    auth.login(()=>{
-                        localStorage.loginToken = auth.authenticated;
-                        this.props.history.push("/homePage");
-                    })
+                    this.props.updateLogIn(res.data.id );
+
+                    // auth.login(()=>{
+                    //     localStorage.loginToken = auth.authenticated;
+                    //     this.props.history.push("/homePage");
+                    // })
                     console.log(res.data)
                 }else{
                     // pop up cannot log in
 
                 }
             })
+
+
     };
 
 
@@ -47,13 +53,16 @@ class LoginPage extends React.Component {
     }
 }
 
+const mapStateToProps = (state, ownProps) =>{
+    return {
+        // post:state.posts
+    }
+}
+const mapDispatchToProps = (dispatch) =>{
+    return {
+        // function name
+        updateLogIn: (id) => {dispatch({type:USER_LOGGED_IN , id:id})}
+    }
+}
 
-LoginPage.propTypes = {
-    history: PropTypes.shape({
-        push: PropTypes.func.isRequired
-    }).isRequired,
-    login: PropTypes.func.isRequired,
-};
-
-
-export default (LoginPage);
+export default connect(mapStateToProps, mapDispatchToProps)(LoginPage);
