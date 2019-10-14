@@ -39,6 +39,11 @@ export default {
 
 
     reading:{
+
+        getAllReferral:data=> axios.get(`http://${host}:${port}/api/referrals` , {data}),
+        getReferralById:data=> axios.get(`http://${host}:${port}/api/referrals/${data.id}` , {data}),
+        addAReferral:data=> axios.post(`http://${host}:${port}/api/readings?${data}` , {data}),
+
         mockReading: data =>{
             axios.get(`http://${host}:${port}/VHT/{vhtId}/patients/{patientId}/reading` , {}).then(res => console.log(res))
         },
@@ -49,6 +54,11 @@ export default {
             axios.post(`http://${host}:${port}/api/sync` , {}).then(res => console.log(res))
         },
 
+    },
+    referral:{
+        getAllDrugHistory:data=> axios.get(`http://${host}:${port}/api/drugHistories` , {data}),
+        getDrugHistoryById:data=> axios.get(`http://${host}:${port}/api/drugHistories/${data.patientid}` , {data}),
+        addDrgHistory:data=> axios.post(`http://${host}:${port}/api/drugHistories?${data}`, {data}),
     },
     medication:{
         mockMedication:data =>{
