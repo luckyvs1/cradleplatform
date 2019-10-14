@@ -3,6 +3,7 @@ import json
 
 # insert into Patient values ("1", "2", "AC", "F", "30", True, "month", "6");
 # insert into Drug_History values (1, "1", "history stuff");
+# insert into Medical_History values (1, "1", "my medical history");
 
 header = {'content-type': 'application/json'}
 hellourl = 'http://localhost:8080/api/poop'
@@ -10,11 +11,12 @@ adminurl = 'http://localhost:8080/api/admins/2c9180ghjddd836db256a9016db259f42e0
 userurl = 'http://localhost:8080/api/users'
 paturl = 'http://localhost:8080/api/patients'
 dhurl = 'http://localhost:8080/api/drugHistories'
-dhparamurl = 'http://localhost:8080/api/drugHistory/test2'
+dhparamurl = 'http://localhost:8080/api/drugHistories'
 followupurl = 'http://localhost:8080/api/followUp/3'
 hwurl = 'http://localhost:8080/api/healthWorkers/'
-mhurl = 'http://localhost:8080/api/medicalHistories/1'
-medurl = 'http://localhost:8080/api/medications'
+mhurl = 'http://localhost:8080/api/medicalHistories?patientId=1&latest=true'
+medurl = 'http://localhost:8080/api/medications?drugHistoryId=1'
+fuurl = 'http://localhost:8080/api/followUps?patientId=1&latest=true'
 mhdata = {
     "patientId": "1",
     "medicalHistoryText": "gfhgfhfghffssss",
@@ -26,6 +28,14 @@ meddata = {
     "dosage": "once a day as needed",
     "startDate": "2019-09-26",
     "endDate": "2019-09-30"
+}
+fudata = {
+    "patientId": "1",
+    "followUpNotes": "notes",
+    "required": True,
+    "frequency": "once a month",
+    "diagnosis": "coolness",
+    "treatment": "check up"
 }
 # admindata = {
     #     "id": "2c91808fvhjfhj36db256a9016db259f42e0000",
@@ -51,6 +61,22 @@ meddata = {
     #     "username": "afaf",
     #     "password": "babab"
     # }
+
+
+# resp = requests.get(hellourl, headers=header)
+# resp = requests.get(adminurl, data=json.dumps(admindata), headers=header)
+# resp = requests.post(userurl, data=json.dumps(userdata), headers=header)
+# resp = requests.post(dhurl, data=json.dumps(dhdata), headers=header)
+# resp = requests.get(dhparamurl, headers=header)
+# resp = requests.get(followupurl, data=json.dumps(fudata), headers=header)
+# resp = requests.get(hwurl, data=json.dumps(hwdata), headers=header)
+# resp = requests.get(mhurl, data=json.dumps(mhdata), headers=header)
+# resp = requests.get(paturl, data=json.dumps(dhdata), headers=header)
+resp = requests.get(medurl, headers=header)
+# resp = requests.get(fuurl, data=json.dumps(fudata), headers=header)
+print(resp)
+print(resp.status_code)
+print(resp.text)
 
 
 # url = 'http://localhost:8080/api/readings'
@@ -94,17 +120,3 @@ meddata = {
 #             }
 #             ]
 #        }
-
-# resp = requests.get(hellourl, headers=header)
-# resp = requests.get(adminurl, data=json.dumps(admindata), headers=header)
-# resp = requests.post(userurl, data=json.dumps(userdata), headers=header)
-# resp = requests.post(dhurl, data=json.dumps(dhdata), headers=header)
-# resp = requests.get(dhparamurl, data=json.dumps(dhdata), headers=header)
-# resp = requests.get(followupurl, data=json.dumps(fudata), headers=header)
-# resp = requests.get(hwurl, data=json.dumps(hwdata), headers=header)
-# resp = requests.get(mhurl, data=json.dumps(mhdata), headers=header)
-# resp = requests.get(paturl, data=json.dumps(dhdata), headers=header)
-resp = requests.post(medurl, data=json.dumps(meddata), headers=header)
-print(resp)
-print(resp.status_code)
-print(resp.text)
