@@ -13,6 +13,10 @@ export default {
         login: credential => axios.get(`http://${host}:${port}/api/login?username=${credential.username}&password=${credential.password}`, {credential})
     },
     patient: {
+        getAllPatients: data => axios.get(`http://${host}:${port}/api/patients`, {data}),
+        getPatientById :data =>  axios.get(`http://${host}:${port}/api/patients/${data.id}` , {data}),
+        // addNewPatient : data => axios.get(`http://${host}:${port}`    TO BE DONE
+
         mockPatients : data =>{
             axios.get(`http://${host}:${port}/VHT/1/patients`, {}).then(res => console.log(res))
         },
@@ -70,6 +74,9 @@ export default {
         getAllMedicalHistories:data=> axios.get(`http://${host}:${port}/api/medicalHistories` , {data}),
         getLastMedicalHistoryByPatientId:data=> axios.get(`http://${host}:${port}/api/medicalHistories/${data.id}` , {data}),
         addMedicalHistory:data=> axios.post(`http://${host}:${port}/api/medicalHistories?${data}` , {data}),
+        getAllMedication:data=> axios.get(`http://${host}:${port}/api/medication` , {data}),
+        getPatientById:data=> axios.get(`http://${host}:${port}/api/medication/${data.id}` , {data}),
+        addNewMedication:data=> axios.post(`http://${host}:${port}/api/medication?${data}` , {data}),
     },
 
 
