@@ -22,6 +22,7 @@ public class DrugHistoryController {
 
     /**
      * Retrieve all DrugHistories from the DB for a corresponding patientID.
+     * e.g. /api/drugHistories?patientId=123
      * @param patientId patientId to get DrugHistories for
      * @return 200: Success
      */
