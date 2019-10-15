@@ -11,7 +11,7 @@ import javax.validation.constraints.Size;
 import java.util.Date;
 
 @Entity
-@Table(name = "Medication")
+@Table(name = "Medication", schema = "schemas")
 public class Medication {
 
     @Id

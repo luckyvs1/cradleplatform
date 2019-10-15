@@ -8,28 +8,27 @@ package org.cradlePlatform.model;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "User", schema = "schema")
+@Table(name = "User", schema = "schemas")
 public class User implements Serializable {
 
     @Id
     @GeneratedValue(generator="system-uuid")
     @GenericGenerator(name="system-uuid", strategy = "uuid")
-    @Column(name="id", nullable=false)
+    @NotNull
     private String id;
 
-    @Column(name="username", nullable=false)
-    @NotEmpty(message = "Enter Username")
-    @Size(max = 16)
+    @NotBlank
+    @Size(min = 6, max = 16)
     private String username;
 
-    @Column(name="password", nullable=false)
-    @NotEmpty(message = "Enter Password")
-    @Size(max = 32)
+    @NotBlank
+    @Size(min = 8, max = 32)
     private String password;
 
     public String getId() {
@@ -59,7 +58,7 @@ public class User implements Serializable {
     @Override
     public String toString() {
         return String.format(
-                "Customer[id=%d, username='%s', password='%s']",
+                "Customer[id=%s, username='%s', password='%s']",
                 id, username, password);
     }
 }

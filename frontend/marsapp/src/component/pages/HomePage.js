@@ -15,6 +15,7 @@ import {
     Col,
     Table
 } from 'react-bootstrap';
+import api from "../../api";
 
 class FloatingMenuItem extends React.Component {
 
@@ -61,8 +62,8 @@ const rows = [
 class HomePage extends React.Component {
     state = { activeItem: 'bio' }
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
 
         this.state = {
             toggled: false
@@ -71,8 +72,15 @@ class HomePage extends React.Component {
 
     toggleMenu() {
         this.setState({ toggled: !this.state.toggled });
+
     }
 
+    componentDidMount() {
+        // let c = {vhtid:1 , patientid:1}
+        // api.followUp.mockFollowUp(c).then(res =>{
+            // console.log(res);
+        // })
+    }
 
     useStyles = makeStyles(theme => ({
         root: {
