@@ -169,6 +169,6 @@ CREATE TABLE Monitor (
     patient_id     VARCHAR (32)    NOT NULL,
     UNIQUE (VHT_id, patient_id),
     PRIMARY KEY (VHT_id, patient_id),
-    FOREIGN KEY (VHT_id) REFERENCES VHT(id),
-    FOREIGN KEY (patient_id) REFERENCES Patient(id)
+    FOREIGN KEY (VHT_id) REFERENCES VHT(id) ON DELETE CASCADE,
+    FOREIGN KEY (patient_id) REFERENCES Patient(id) ON DELETE CASCADE
 );
