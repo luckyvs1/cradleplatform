@@ -20,71 +20,50 @@ public class PatientController {
     @Autowired
     private PatientRepository patientRepository;
 
-    /**
-     * GET mappings (get and return patient data)
-     */
+    // GET mappings
 
     /**
-     * Return a JSON or XML
+     * Get data for all patients
      * @return
      */
     @GetMapping(path="/api/patients")
-    public @ResponseBody Iterable<Patient> getAllPatients(){
-        //this returns a JSON or XML with the patients
+    public @ResponseBody Iterable<Patient> getAllPatients() {
         return patientRepository.findAll();
     }
 
-    @GetMapping(path="/api/patient/{id}")
+    /**
+     * Get data for patient with matching patient id
+     * @param patientId
+     * @return
+     */
+    @GetMapping(path="/api/patients/{id}")
     public @ResponseBody
-    Optional<Patient> getPatientById(@PathVariable(value = "id") String patientId){
+    Optional<Patient> getPatientById(@PathVariable(value = "id") String patientId) {
         return patientRepository.findById(patientId);
     }
 
-    /**
-     * POST mappings (upload and save patient data)
-     */
-
-    @GetMapping(path="/api/poop")
-    public @ResponseBody String afaf ()
-    {
-        return "hi";
-    }
+    // POST mappings
 
     /**
-     * Add a new patient to the db via data sent in request body.
-     * @param id
-     * @param villageNo
-     * @param initials
-     * @param sex
-     * @param age
-     * @param pregnant
-     * @param gestationAgeUnit
-     * @param gestationAge
+     * Create a new patient
+     * @param patient
      * @return
      */
-    @GetMapping(path="/api/eya")
-    public @ResponseBody String addNewPatient (@RequestBody String villageNo ){
+    @PostMapping(path="/api/patients")
+    public @ResponseBody String addNewPatient (@RequestBody Patient patient){
         Patient newPatient = new Patient();
-        newPatient.setVillageNo("123");
+        newPatient.setVillageNo(patient.getVillageNo());
+        newPatient.setAge(patient.getAge());
+        newPatient.setGestationAge(patient.getGestationAge());
+        newPatient.setGestationAgeUnit(patient.getGestationAgeUnit());
+        newPatient.setInitials(patient.getInitials());
+        newPatient.setPregnant(patient.isPregnant());
+        newPatient.setVillageNo(patient.getVillageNo());
+        newPatient.setSex(patient.getSex());
         patientRepository.save(newPatient);
-        return villageNo;
-//        return villageNo;
-//        newPatient.setId(patient.getId());
-//        newPatient.setAge(patient.getAge());
-//        newPatient.setGestationAge(patient.getGestationAge());
-//        newPatient.setGestationAgeUnit(patient.getGestationAgeUnit());
-//        newPatient.setInitials(patient.getInitials());
-//        newPatient.setPregnant(patient.isPregnant());
-//        newPatient.setVillageNo(patient.getVillageNo());
-//        newPatient.setSex(patient.getSex());
+        return "Saved Patient";
 
-        // patientRepository.save(newPatient);
     }
-//
-//    @PostMapping(path="/api/poop")
-//    public @ResponseBody String afad (@RequestParam String id) {
-//        return id;
-//    }
 
     /**
      * Returns mock data of multiple patients for testing purposes.

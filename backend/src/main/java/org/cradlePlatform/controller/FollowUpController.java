@@ -20,32 +20,20 @@ public class FollowUpController {
     // GET mappings
 
     /**
-     * Retrieve all FollowUps from the DB.
-     * @return 200: a JSON of FollowUps or empty JSON if none.
-     */
-    @GetMapping(path="/api/followUps")
-    public @ResponseBody Iterable<FollowUp> getAllFollowUps() {
-        return followUpRepository.findAll();
-    }
-
-    /**
      * Retrieve FollowUps for a particular patient from the DB by patientId.
+     * if latest=true, returns only the latest record, otherwise returns all
+     * /api/followUps?patientId=123&latest=true
      * @return 200: JSON of followups
      */
-    @GetMapping(path="/api/followUps/{patientId}")
+    @GetMapping(path="/api/followUps")
     public @ResponseBody
-    Iterable<FollowUp> getFollowUpByPatientId(@PathVariable(value = "patientId") String patientId) {
-        return followUpRepository.findByPatientId(patientId);
-    }
-
-    /**
-     * Retrieve the last FollowUp for a particular patient from the DB by patientId.
-     * @return 200: a FollowUp or null if none
-     */
-    @GetMapping(path="/api/followUps/latest/{patientId}")
-    public @ResponseBody
-    Optional<FollowUp> getLastFollowUpByPatientId(@PathVariable(value = "patientId") String patientId) {
-        return followUpRepository.findTopByPatientIdOrderByIdDesc(patientId);
+    Iterable<FollowUp> getFollowUpByPatientId(@RequestParam String patientId,
+                                              @RequestParam(value = "latest", required = false) boolean latest) {
+        if (latest) {
+            return followUpRepository.findTopByPatientIdOrderByIdDesc(patientId);
+        } else {
+            return followUpRepository.findByPatientId(patientId);
+        }
     }
 
     // POST mappings

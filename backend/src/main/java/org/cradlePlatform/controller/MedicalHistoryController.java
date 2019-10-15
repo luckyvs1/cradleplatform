@@ -18,20 +18,21 @@ public class MedicalHistoryController {
 
     // GET mappings
 
-    @GetMapping(path="/api/medicalHistories")
-    public @ResponseBody Iterable<MedicalHistory> getAllMedicalHistories() {
-        return medicalHistoryRepository.findAll();
-    }
-
     /**
-     * Get the latest MedicalHistory of a patient from the DB by their patientId
+     * Get all MedicalHistories or the latest of a patient from the DB by their patientId
      * @param patientId patientId of patient to get MedicalHistory for
-     * @return 200: patient's last MedicalHistory or null if none
+     * @return 200: JSON of patient's MedicalHistory(ies)
      */
-    @GetMapping(path="/api/medicalHistories/{patientId}")
+    @GetMapping(path="/api/medicalHistories")
     public @ResponseBody
-    Optional<MedicalHistory> getLastMedicalHistoryByPatientId(@PathVariable(value = "patientId") String patientId) {
-        return medicalHistoryRepository.findTopByPatientIdOrderByIdDesc(patientId);
+    Iterable<MedicalHistory> getMedicalHistoryByPatientId(@RequestParam String patientId,
+                                                          @RequestParam(value = "latest", required = false) boolean latest) {
+        if (latest) {
+            return medicalHistoryRepository.findTopByPatientIdOrderByIdDesc(patientId);
+        } else {
+            return medicalHistoryRepository.findAllByPatientId(patientId);
+        }
+
     }
 
     // POST mappings

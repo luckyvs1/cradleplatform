@@ -15,45 +15,45 @@ import java.util.Date;
 public class Medication {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id", nullable=false, unique=true)
-    @NotEmpty(message = "ID Can't Be Empty")
     private int id;
 
     @Column(name="drug_history_id", nullable=false)
-    @NotEmpty(message = "History ID Can't Be Empty")
-    private int drugHistoryID;
+    private int drugHistoryId;
 
     @Column(name="drug_name", length=32, nullable=false)
-    @NotEmpty(message = "Drug Name Can't Be Empty")
     @Size(max = 32)
     private String drugName;
 
     @Column(name="dosage", length=32, nullable=false)
-    @NotEmpty(message = "Dosage Can't Be Empty")
     @Size(max = 32)
     private String dosage;
 
     @Column(name="start_date", nullable=false)
-    @NotEmpty(message = "Start Date Can't Be Empty")
     private Date startDate;
 
+    @Column(name="end_date", nullable=false)
     private Date endDate;
+
+    public Medication() {
+        this.drugHistoryId = -1;
+        this.drugName = "";
+        this.dosage = "";
+        this.startDate = new Date();
+        this.endDate = new Date();
+    }
 
     public int getId() {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public int getDrugHistoryId() {
+        return drugHistoryId;
     }
 
-    public int getDrugHistoryID() {
-        return drugHistoryID;
-    }
-
-    public void setDrugHistoryID(int drugHistoryID) {
-        this.drugHistoryID = drugHistoryID;
+    public void setDrugHistoryId(int drugHistoryId) {
+        this.drugHistoryId = drugHistoryId;
     }
 
     public String getDrugName() {
