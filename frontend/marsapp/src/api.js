@@ -56,7 +56,7 @@ export default {
     },
     referral:{
         getAllReferral:data=> axios.get(`http://${host}:${port}/api/referrals` ),
-        getReferralById:data=> axios.get(`http://${host}:${port}/api/referrals?referrerId=${data.id}`),
+        getReferralById:data=> axios.get(`http://${host}:${port}/api/referrals?referrerId=${data.referrerId}`),
         createReferral:data=> axios.post(`http://${host}:${port}/api/referrals` , {data}),
     },
     medication:{
