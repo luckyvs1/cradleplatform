@@ -24,11 +24,11 @@ class AddPatientForm extends React.Component {
         super(props);
         this.state = {
             data:{
-               patient_id: "",
+               id: "",
                initials: "",
                age: "",
-               isPregnant: "Yes",
-               gest_age: ""},
+               pregnant: "Yes",
+               gestationAge: ""},
             isLoading: false,
             errors: {}
         };
@@ -54,13 +54,13 @@ class AddPatientForm extends React.Component {
         if(!data.age) errors.age = "Can't be blank";
         if(!Validator.isInt(data.age)) errors.age = "Not a valid age";
 
-        if(!data.gest_age) errors.gest_age = "Can't be blank";
-        if(!Validator.isInt(data.gest_age)) errors.gest_age = "Not a valid gestational age";
+        if(!data.gestationAge) errors.gestationAge = "Can't be blank";
+        if(!Validator.isInt(data.gestationAge)) errors.gestationAge = "Not a valid gestational age";
 
-        if(!data.isPregnant) errors.isPregnant = "Please choose one of the options";
+        if(!data.pregnant) errors.pregnant = "Please choose one of the options";
 
-        if(!data.patient_id) errors.patient_id = "Can't be blank";
-        if(!Validator.isInt(data.patient_id)) errors.patient_id = "Not a valid ID (ID has to be a number)";
+        if(!data.id) errors.id = "Can't be blank";
+        if(!Validator.isInt(data.id)) errors.id = "Not a valid ID (ID has to be a number)";
 
         if(!data.initials) errors.initials = "Can't be blank";
         if(!Validator.isAlpha(data.initials))
@@ -87,12 +87,12 @@ class AddPatientForm extends React.Component {
                                     <Form.Label>Patient ID</Form.Label>
                                     <Form.Control
                                         type="text"
-                                        id="patient_id"
-                                        name="patient_id"
+                                        id="id"
+                                        name="id"
                                         placeholder="Patient ID"
-                                        value={data.patient_id}
+                                        value={data.id}
                                         onChange={this.onChange}/>
-                                    {errors.patient_id && <InlineError text={errors.patient_id} />}
+                                    {errors.id && <InlineError text={errors.id} />}
                                 </Form.Group>
                             </Col>
                             <Col>
@@ -126,11 +126,11 @@ class AddPatientForm extends React.Component {
                             <Col>
                                 <Form.Group>
                                     <Form.Label>Pregnant</Form.Label>
-                                    <Form.Control as="select" name="isPregnant" onChange={this.onChange} value={data.isPregnant}>
+                                    <Form.Control as="select" name="pregnant" onChange={this.onChange} value={data.pregnant}>
                                         <option value={"true"}>Yes</option>
                                         <option value={"false"}>No</option>
                                     </Form.Control>
-                                    {errors.isPregnant && <InlineError text={errors.isPregnant} />}
+                                    {errors.pregnant && <InlineError text={errors.pregnant} />}
                                 </Form.Group>
                             </Col>
                             <Col>
@@ -138,12 +138,12 @@ class AddPatientForm extends React.Component {
                                     <Form.Label>Gestational Age</Form.Label>
                                     <Form.Control
                                         type="number"
-                                        id="gest_age"
-                                        name="gest_age"
+                                        id="gestationAge"
+                                        name="gestationAge"
                                         placeholder="Age"
-                                        value={data.gest_age}
+                                        value={data.gestationAge}
                                         onChange={this.onChange}/>
-                                    {errors.gest_age && <InlineError text={errors.gest_age} />}
+                                    {errors.gestationAge && <InlineError text={errors.gestationAge} />}
                                 </Form.Group>
                             </Col>
                         </Row>
