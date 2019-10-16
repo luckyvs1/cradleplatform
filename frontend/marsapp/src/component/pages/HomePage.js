@@ -76,10 +76,16 @@ class HomePage extends React.Component {
     }
 
     componentDidMount() {
-        // let c = {vhtid:1 , patientid:1}
-        // api.followUp.mockFollowUp(c).then(res =>{
-            // console.log(res);
-        // })
+        console.log("api calling")
+        api.referral.getAllReferral(null).then(res =>{
+            // fetching all referral
+            console.log("All referral", res);
+        })
+
+        api.followUp.getAllFollowUps(null).then(res => {
+            // fetching all follow up
+            console.log("All follow up", res);
+        })
     }
 
     useStyles = makeStyles(theme => ({
