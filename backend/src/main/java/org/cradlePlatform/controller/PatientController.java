@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Optional;
 
 @RestController
+@CrossOrigin(origins = { "http://localhost:3000"})
 public class PatientController {
     @Autowired
     private PatientRepository patientRepository;
@@ -27,7 +28,6 @@ public class PatientController {
      * @return
      */
     @GetMapping(path="/api/patients")
-    @CrossOrigin(origins = "http://localhost:3000")
     public @ResponseBody Iterable<Patient> getAllPatients() {
         return patientRepository.findAll();
     }
@@ -38,7 +38,6 @@ public class PatientController {
      * @return
      */
     @GetMapping(path="/api/patients/{id}")
-    @CrossOrigin(origins = "http://localhost:3000")
     public @ResponseBody
     Optional<Patient> getPatientById(@PathVariable(value = "id") String patientId) {
         return patientRepository.findById(patientId);
@@ -52,7 +51,6 @@ public class PatientController {
      * @return
      */
     @PostMapping(path="/api/patients")
-    @CrossOrigin(origins = "http://localhost:3000")
     public @ResponseBody String addNewPatient (@RequestBody Patient patient){
         Patient newPatient = new Patient();
         newPatient.setVillageNo(patient.getVillageNo());

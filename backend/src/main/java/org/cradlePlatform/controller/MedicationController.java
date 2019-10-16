@@ -14,6 +14,7 @@ import java.util.Date;
 import java.util.Optional;
 
 @RestController
+@CrossOrigin(origins = { "http://localhost:3000"})
 public class MedicationController {
     @Autowired
     private MedicationRepository medicationRepository;

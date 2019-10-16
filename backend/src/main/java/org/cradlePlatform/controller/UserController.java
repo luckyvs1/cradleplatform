@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Optional;
 
 @RestController
+@CrossOrigin(origins = { "http://localhost:3000"})
 public class UserController {
     @Autowired
     private UserRepository userRepository;
@@ -48,18 +49,18 @@ public class UserController {
         return userRepository.findById(referrer_id);
     }
 
-    // POST mappings
-
-    @PostMapping(path="/api/users")
-    public @ResponseBody String addUser(@RequestBody User user){
-        User newUser = new User();
-        newUser.setId(user.getId());
-        newUser.setUsername(user.getUsername());
-        newUser.setPassword(user.getPassword());
-
-        userRepository.save(newUser);
-
-        return "Saved New User";
-    }
+//    // POST mappings
+//
+//    @PostMapping(path="/api/users")
+//    public @ResponseBody String addUser(@RequestBody User user){
+//        User newUser = new User();
+//        newUser.setId(user.getId());
+//        newUser.setUsername(user.getUsername());
+//        newUser.setPassword(user.getPassword());
+//
+//        userRepository.save(newUser);
+//
+//        return "Saved New User";
+//    }
 
 }
