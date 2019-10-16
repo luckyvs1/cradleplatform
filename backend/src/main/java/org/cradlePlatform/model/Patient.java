@@ -8,6 +8,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.Date;
 
 @Entity
 @Table(name = "Patient", schema = "schemas")
@@ -18,20 +19,43 @@ public class Patient {
     @Size(max = 32)
     private String id;
 
+    @Size(max = 32)
+    @Column(name = "attestation_no")
+    private String attesttationNo;
+
+    @Size(max = 32)
+    @Column(name = "first_name")
+    private String firstName;
+
+    @Size(max = 32)
+    @Column(name = "last_name")
+    private String lastName;
+
     @NotBlank
     @Size(max = 32)
     @Column(name = "village_no")
     private String villageNo;
 
     @NotBlank
+    @Size(max = 32)
+    @Column(name = "zone_no")
+    private String zoneNo;
+
+    @NotBlank
     @Size(max = 4)
+    @Column(name = "initials")
     private String initials;
 
     @Enumerated(EnumType.STRING)
     private Sex sex;
 
+    @Column(name = "age")
     @NotNull
     private int age;
+
+    @Column(name = "dob")
+    @Temporal(TemporalType.DATE)
+    private Date dob;
 
     private boolean pregnant;
 

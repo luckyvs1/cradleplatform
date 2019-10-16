@@ -25,8 +25,6 @@ class AddPatient extends React.Component {
             gestationAge:"1"
         }
 
-
-
         api.patient.createPatient(JSON.stringify(test)).then(res=>{
             console.log("created patient" , res);
 
