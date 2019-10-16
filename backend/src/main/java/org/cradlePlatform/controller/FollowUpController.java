@@ -10,8 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
-
-
+@CrossOrigin(origins = { "http://localhost:3000"})
 @RestController
 public class FollowUpController {
     @Autowired
