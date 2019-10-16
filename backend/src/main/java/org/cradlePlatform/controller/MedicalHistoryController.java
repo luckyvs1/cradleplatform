@@ -10,7 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
-
+@CrossOrigin(origins = { "http://localhost:3000"})
 @Controller
 public class MedicalHistoryController {
     @Autowired
