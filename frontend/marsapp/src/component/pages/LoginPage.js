@@ -26,10 +26,10 @@ class LoginPage extends React.Component {
                 if(res.data.id == "22"){
                     this.props.updateLogIn(res.data.id );
 
-                    // auth.login(()=>{
-                    //     localStorage.loginToken = auth.authenticated;
-                    //     this.props.history.push("/homePage");
-                    // })
+                    auth.login(()=>{
+                        localStorage.loginToken = auth.authenticated;
+                        this.props.history.push("/homePage");
+                    })
                     console.log(res.data)
                 }else{
                     // pop up cannot log in
