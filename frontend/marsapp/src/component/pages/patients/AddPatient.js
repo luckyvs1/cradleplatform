@@ -14,7 +14,7 @@ class AddPatient extends React.Component {
     render() {
         return (
             <AddPatientForm></AddPatientForm>
-        );
+    );
     }
 }
 
