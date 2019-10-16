@@ -92,7 +92,7 @@ public class Patient {
                    GestationalAgeTimeUnit gestationAgeUnit,
                    int currentGestationAge) {
         setId(id);
-        setAttesstionalNo(attestationNo);
+        setAttestationNo(attestationNo);
         setFirstName(firstName);
         setLastName(lastName);
         setVillageNo(villageNo);
