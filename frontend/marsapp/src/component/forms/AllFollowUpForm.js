@@ -14,6 +14,7 @@ import {
     Col,
     Table
 } from 'react-bootstrap';
+import api from "../../api"
 
 function createData(name, calories, fat, carbs, protein) {
     return {name, calories, fat, carbs, protein};
@@ -48,9 +49,16 @@ class AllFollowUpForm extends React.Component {
 
     }));
 
+    componentDidMount() {
+        console.log("api calling")
+              api.followUp.getAllFollowUps(null).then(res => {
+            // fetching all follow up
+            console.log("All follow up", res);
+        })
+    }
+
 
     render() {
-
         return (
             <div>
                 <TopNavigation authenticated={true}></TopNavigation>
