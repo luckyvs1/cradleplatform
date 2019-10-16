@@ -35,7 +35,7 @@ export default {
         getAllPatients: data => axios.get(`http://${host}:${port}/api/patients`),
         getPatientById :data =>  axios.get(`http://${host}:${port}/api/patients/${data.id}`),
         getPatientsForVHT :data =>  axios.get(`http://${host}:${port}/api/vht/${data.vhtId}/patients`),
-        createPatient :data =>  axios.psot(`http://${host}:${port}/api/patients` , {data}),
+        createPatient :data =>  axios.post(`http://${host}:${port}/api/patients` , {data}),
 
         mockPatients : data => axios.get(`http://${host}:${port}/VHT/1/patients`, {}).then(res => console.log(res)),
         mockPatient: data => axios.get(`http://${host}:${port}/VHT/${data}/patients/${data}`, {data}).then(res => console.log(res))
