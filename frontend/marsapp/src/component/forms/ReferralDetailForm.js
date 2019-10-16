@@ -15,12 +15,22 @@ import {
     Tabs,
     Tab
 } from 'react-bootstrap';
+import api from "../../api"
 
 class ReferralDetailForm extends React.Component {
     // functions
     // states
     // submit
     // validate
+
+    componentDidMount() {
+        console.log("api calling")
+        let data = {referrerId:1}
+        api.referral.getReferralById(data).then(res => {
+            // fetching all follow up
+            console.log("All referral", res);
+        })
+    }
 
     render() {
 
