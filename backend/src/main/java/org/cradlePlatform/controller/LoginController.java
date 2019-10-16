@@ -10,7 +10,7 @@ import org.cradlePlatform.model.LoginRequest;
 import org.cradlePlatform.model.User;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-
+@CrossOrigin(origins = { "http://localhost:3000"})
 @RestController
 public class LoginController {
 
