@@ -16,12 +16,13 @@ public class Patient {
 
     @Id
     @NotBlank
+    @Column(name="id", unique=true)
     @Size(max = 32)
     private String id;
 
     @Size(max = 32)
     @Column(name = "attestation_no")
-    private String attesttationNo;
+    private String attestationNo;
 
     @Size(max = 32)
     @Column(name = "first_name")
@@ -68,27 +69,41 @@ public class Patient {
     @Column(name = "gestation_age_unit")
     private GestationalAgeTimeUnit gestationAgeUnit;
 
+    @NotBlank
     @Column(name = "current_gestational_age")
-    private int currentGestationAge;
+    private int currentGestationalAge;
 
     public Patient() {
 
     }
 
     public Patient(String id,
+                   String attestationNo,
+                   String firstName,
+                   String lastName,
                    String villageNo,
+                   String zoneNo,
                    String initials,
-                   int gestationAge,
-                   GestationalAgeTimeUnit gestationAgeUnit,
                    Sex sex,
-                   boolean pregnant) {
+                   int age,
+                   Date dob,
+                   boolean pregnant,
+                   Date gestationalStartDate,
+                   GestationalAgeTimeUnit gestationAgeUnit,
+                   int currentGestationAge) {
         setId(id);
+        setAttesstionalNo(attestationNo);
+        setFirstName(firstName);
+        setLastName(lastName);
         setVillageNo(villageNo);
         setInitials(initials);
-        setGestationAge(gestationAge);
-        setGestationAgeUnit(gestationAgeUnit);
         setSex(sex);
+        setAge(age);
+        setDob(dob);
         setPregnant(pregnant);
+        setGestationalStartDate(gestationalStartDate);
+        setGestationAgeUnit(gestationAgeUnit);
+        setCurrentGestationalAge(currentGestationalAge);
     }
 
     public String getId() {
@@ -99,12 +114,44 @@ public class Patient {
         this.id = id;
     }
 
+    public String getAttestationNo() {
+        return attestationNo;
+    }
+
+    public void setAttestationNo(String attestationNo) {
+        this.attestationNo = attestationNo;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
     public String getVillageNo() {
         return villageNo;
     }
 
     public void setVillageNo(String villageNo) {
         this.villageNo = villageNo;
+    }
+
+    public String getZoneNo() {
+        return zoneNo;
+    }
+
+    public void setZoneNo(String zoneNo) {
+        this.zoneNo = zoneNo;
     }
 
     public String getInitials() {
@@ -131,12 +178,28 @@ public class Patient {
         this.age = age;
     }
 
+    public Date getDob() {
+        return dob;
+    }
+
+    public void setDob(Date dob) {
+        this.dob = dob;
+    }
+
     public boolean isPregnant() {
         return pregnant;
     }
 
     public void setPregnant(boolean pregnant) {
         this.pregnant = pregnant;
+    }
+
+    public Date getGestationalStartDate() {
+        return gestationalStartDate;
+    }
+
+    public void setGestationalStartDate(Date gestationalStartDate) {
+        this.gestationalStartDate = gestationalStartDate;
     }
 
     public GestationalAgeTimeUnit getGestationAgeUnit() {
@@ -147,11 +210,11 @@ public class Patient {
         this.gestationAgeUnit = gestationAgeUnit;
     }
 
-    public int getGestationAge() {
-        return gestationAge;
+    public int getCurrentGestationalAge() {
+        return currentGestationalAge;
     }
 
-    public void setGestationAge(int gestationAge) {
-        this.gestationAge = gestationAge;
+    public void setCurrentGestationalAge(int currentGestationalAge) {
+        this.currentGestationalAge = currentGestationalAge;
     }
 }
