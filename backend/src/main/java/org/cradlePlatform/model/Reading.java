@@ -55,6 +55,59 @@ public class Reading {
 	@Column(name = "need_followup")
 	private Boolean needFollowUp;
 
+	@NotBlank
+	@Size(max = 32)
+	@Column(name = "app_version")
+	private String appVersion;
+
+	@NotNull
+	@Column(name = "date_last_saved")
+	private Timestamp dateLastSaved;
+
+	@NotNull
+	@Column(name = "date_recheck_vitals_needed")
+	private Timestamp recheckVitalsDate;
+
+	@NotBlank
+	@Size(max = 32)
+	@Column(name = "device_info")
+	private String deviceInformation;
+
+	@Enumerated
+	private GestationalAgeTimeUnit gestationalAgeTimeUnit;
+
+	private int gestationalAge;
+
+	@NotBlank
+	@Size(max = 16)
+	@Column(name = "manually_changed_OCR_results")
+	private String manuallyChangedOcrResults;
+
+	@NotNull
+	@Size(max = 128)
+	@Column(name = "path_to_photo")
+	private String photoPath;
+
+	@NotNull
+	@Column(name = "total_OCR_seconds")
+	private float totalOcrSeconds;
+
+	@NotBlank
+	@Size(max = 32)
+	private String region;
+
+	@NotNull
+	@Column(name = "OCR_enabled")
+	private boolean OcrEnabled;
+
+	@NotNull
+	@Column(name = "upload_images")
+	private boolean uploadImages;
+
+	@Enumerated
+	@Column(name = "reading_analysis")
+	private VitalsTrafficLight vitalsTrafficLight;
+
 	public int getId() {
 		return Id;
 	}
@@ -141,5 +194,109 @@ public class Reading {
 
 	public void setNeedFollowUp(Boolean needFollowUp) {
 		this.needFollowUp = needFollowUp;
+	}
+
+	public String getAppVersion() {
+		return appVersion;
+	}
+
+	public void setAppVersion(String appVersion) {
+		this.appVersion = appVersion;
+	}
+
+	public Timestamp getDateLastSaved() {
+		return dateLastSaved;
+	}
+
+	public void setDateLastSaved(Timestamp dateLastSaved) {
+		this.dateLastSaved = dateLastSaved;
+	}
+
+	public Timestamp getRecheckVitalsDate() {
+		return recheckVitalsDate;
+	}
+
+	public void setRecheckVitalsDate(Timestamp recheckVitalsDate) {
+		this.recheckVitalsDate = recheckVitalsDate;
+	}
+
+	public String getDeviceInformation() {
+		return deviceInformation;
+	}
+
+	public void setDeviceInformation(String deviceInformation) {
+		this.deviceInformation = deviceInformation;
+	}
+
+	public GestationalAgeTimeUnit getGestationalAgeTimeUnit() {
+		return gestationalAgeTimeUnit;
+	}
+
+	public void setGestationalAgeTimeUnit(GestationalAgeTimeUnit gestationalAgeTimeUnit) {
+		this.gestationalAgeTimeUnit = gestationalAgeTimeUnit;
+	}
+
+	public int getGestationalAge() {
+		return gestationalAge;
+	}
+
+	public void setGestationalAge(int gestationalAge) {
+		this.gestationalAge = gestationalAge;
+	}
+
+	public String getManuallyChangedOcrResults() {
+		return manuallyChangedOcrResults;
+	}
+
+	public void setManuallyChangedOcrResults(String manuallyChangedOcrResults) {
+		this.manuallyChangedOcrResults = manuallyChangedOcrResults;
+	}
+
+	public String getPhotoPath() {
+		return photoPath;
+	}
+
+	public void setPhotoPath(String photoPath) {
+		this.photoPath = photoPath;
+	}
+
+	public float getTotalOcrSeconds() {
+		return totalOcrSeconds;
+	}
+
+	public void setTotalOcrSeconds(float totalOcrSeconds) {
+		this.totalOcrSeconds = totalOcrSeconds;
+	}
+
+	public String getRegion() {
+		return region;
+	}
+
+	public void setRegion(String region) {
+		this.region = region;
+	}
+
+	public boolean isOcrEnabled() {
+		return OcrEnabled;
+	}
+
+	public void setOcrEnabled(boolean ocrEnabled) {
+		OcrEnabled = ocrEnabled;
+	}
+
+	public boolean isUploadImages() {
+		return uploadImages;
+	}
+
+	public void setUploadImages(boolean uploadImages) {
+		this.uploadImages = uploadImages;
+	}
+
+	public VitalsTrafficLight getVitalsTrafficLight() {
+		return vitalsTrafficLight;
+	}
+
+	public void setVitalsTrafficLight(VitalsTrafficLight vitalsTrafficLight) {
+		this.vitalsTrafficLight = vitalsTrafficLight;
 	}
 }
