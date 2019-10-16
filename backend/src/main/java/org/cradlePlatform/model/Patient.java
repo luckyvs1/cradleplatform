@@ -8,7 +8,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.util.Date;
+import java.sql.Date;
 
 @Entity
 @Table(name = "Patient", schema = "schemas")
@@ -57,14 +57,19 @@ public class Patient {
     @Temporal(TemporalType.DATE)
     private Date dob;
 
+    @Column(name = "pregnant")
     private boolean pregnant;
+
+    @Column(name = "gestational_start_date")
+    @Temporal(TemporalType.DATE)
+    private Date gestationalStartDate;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "gestation_age_unit")
     private GestationalAgeTimeUnit gestationAgeUnit;
 
-    @Column(name = "gestation_age")
-    private int gestationAge;
+    @Column(name = "current_gestational_age")
+    private int currentGestationAge;
 
     public Patient() {
 
