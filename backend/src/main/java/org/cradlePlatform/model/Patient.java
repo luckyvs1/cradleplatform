@@ -54,7 +54,6 @@ public class Patient {
     private Sex sex;
 
     @Column(name = "age")
-    @NotNull
     private int age;
 
     @Column(name = "dob")
