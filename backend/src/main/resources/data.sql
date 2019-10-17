@@ -30,8 +30,20 @@
 
     INSERT INTO Drug_History (id,patient_id,history)
     VALUES (22, "22", "bad history");
+
+    INSERT INTO Monitor (VHT_id,patient_id)
+    VALUES ();
+
+    INSERT INTO Referral (id,referrer_id,patient_id,reading_id,timestamp,health_facility,notes_reason,notes_action)
+    VALUES ();
+
+    INSERT INTO Reading (id,reader_id,patient_id,timestamp,symptoms,other_symptoms,systolic_bp,diastolic_bp,pulse_rate,notes,need_followup,app_version,date_last_saved,date_recheck_vitals_needed,device_info,gestational_age_unit,gestational_age,manually_changed_OCR_results,path_to_photo,total_OCR_seconds,region,OCR_enabled,upload_images,reading_analysis)
+    VALUES ();
+
+    INSERT INTO Medical_History(id ,patient_id,history )
+    VALUES ();
+
+    INSERT INTO Medication (id,drug_history_id,drug_name,dosage,start_date,end_date)
+    VALUES ();
  */
-
-
-
 
