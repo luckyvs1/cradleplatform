@@ -8,13 +8,13 @@ import React, {Component} from "react";
 import {Link} from "react-router-dom";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
-import * as actions from "../../actions/auth";
+import auth from "../../actions/auth"
 
 import {
     Nav,
     Navbar,
     NavDropdown,
-    Container
+    Container, Button
 } from 'react-bootstrap';
 
 const bottomMarginStyle = {
@@ -39,10 +39,9 @@ class TopNavigation extends React.Component {
         } else if (width === 0) {
             document.getElementsByClassName("sidebar-wrapper")[0].setAttribute("style", `width:${width} px !important;`)
         }
-        console.log();
-
-        // console.log(object);
-        // document.getElementById("mySidenav").style.width = "250px";
+    }
+    handleClick(e){
+        localStorage.removeItem("loginToken");
     }
 
     render() {
@@ -78,7 +77,7 @@ class TopNavigation extends React.Component {
                                     <i className="fas fa-graduation-cap"></i> Learning Materials
                                 </NavDropdown.Item>
                                 <NavDropdown.Divider/>
-                                <NavDropdown.Item as={Link} to="/">
+                                <NavDropdown.Item as={Link} to="/" onClick={this.handleClick}>
                                     <i className="fas fa-sign-out-alt"></i> Logout
                                 </NavDropdown.Item>
                             </NavDropdown>
@@ -147,6 +146,6 @@ function mapStateToProps(state) {
     };
 }
 
-export default connect(mapStateToProps, {logout: actions.logout})(
+export default connect(mapStateToProps, {})(
     TopNavigation
 );

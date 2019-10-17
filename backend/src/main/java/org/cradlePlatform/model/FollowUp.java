@@ -10,19 +10,18 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
 @Entity
-@Table(name = "FollowUp")
+@Table(name = "FollowUp", schema = "schemas")
 public class FollowUp {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id", nullable=false, unique=true)
-    @NotEmpty(message = "ID Can't Be Empty")
     private int id;
 
     @Column(name="patient_id", length=32, nullable=false)
     @NotEmpty(message = "Patient ID Can't Be Empty")
     @Size(max = 32)
-    private String patientID;
+    private String patientId;
 
     @Column(name="notes")
     private String followUpNotes;
@@ -39,6 +38,15 @@ public class FollowUp {
     @Column(name="treatment")
     private String treatment;
 
+    public FollowUp() {
+        this.patientId = "";
+        this.followUpNotes = "";
+        this.required = false;
+        this.frequency = "";
+        this.diagnosis = "";
+        this.treatment = "";
+    }
+
     public int getId() {
         return id;
     }
@@ -47,12 +55,12 @@ public class FollowUp {
         this.id = id;
     }
 
-    public String getPatientID() {
-        return patientID;
+    public String getPatientId() {
+        return patientId;
     }
 
-    public void setPatientID(String patientID) {
-        this.patientID = patientID;
+    public void setPatientId(String patientId) {
+        this.patientId = patientId;
     }
 
     public String getFollowUpNotes() {

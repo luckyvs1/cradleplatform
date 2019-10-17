@@ -6,40 +6,45 @@
 package org.cradlePlatform.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.Date;
 
 @Entity
-@Table(name = "User_Info")
+@Table(name = "User_Info", schema = "schemas")
 public class UserInfo {
 
     @Id
-
-    @NotEmpty(message = "ID Can't Be Empty")
+    @NotBlank
     @Size(max = 32)
     private String id;
 
-    @NotEmpty(message = "Station Number Can't Be Empty")
+    @NotBlank
     @Size(max = 32)
-    private String at_a_station_no;
+    @Column(name = "at_a_station_no")
+    private String attestationNumber;
 
-    @NotEmpty(message = "First Name Can't Be Empty")
+    @NotBlank
     @Size(max = 32)
-    private String first_name;
+    @Column(name = "first_name")
+    private String firstName;
 
-    @NotEmpty(message = "Last Name Can't Be Empty")
+    @NotBlank
     @Size(max = 32)
-    private String last_name;
+    @Column(name = "last_name")
+    private String lastName;
 
-    @NotEmpty(message = "Date of Birth Can't Be Empty")
-    private Date dob;
+    @NotNull
+    @Column(name = "dob")
+    private Date dateOfBirth;
 
-    @NotEmpty(message = "Country Can't Be Empty")
+    @NotBlank
     @Size(max = 32)
     private String country;
 
-    @NotEmpty(message = "Phone Number Can't Be Empty")
+    @NotBlank
     @Size(max = 16)
     private String phone;
 
@@ -53,68 +58,68 @@ public class UserInfo {
         return id;
     }
 
-    public String getAtAStationNo() {
-        return at_a_station_no;
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getAttestationNumber() {
+        return attestationNumber;
+    }
+
+    public void setAttestationNumber(String attestationNumber) {
+        this.attestationNumber = attestationNumber;
     }
 
     public String getFirstName() {
-        return first_name;
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
     public String getLastName() {
-        return last_name;
+        return lastName;
     }
 
-    public Date getDOB() {
-        return dob;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public Date getDateOfBirth() {
+        return dateOfBirth;
+    }
+
+    public void setDateOfBirth(Date dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
     }
 
     public String getCountry() {
         return country;
     }
 
-    public String getPhone() {
-        return phone;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public RoleType getRole() {
-        return role;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public void setAtAStationNo(String at_a_station_no) {
-        this.at_a_station_no = at_a_station_no;
-    }
-
-    public void setFirstName(String first_name) {
-        this.first_name = first_name;
-    }
-
-    public void setLastName(String last_name) {
-        this.last_name = last_name;
-    }
-
-    public void setDob(Date dob) {
-        this.dob = dob;
-    }
-
     public void setCountry(String country) {
         this.country = country;
+    }
+
+    public String getPhone() {
+        return phone;
     }
 
     public void setPhone(String phone) {
         this.phone = phone;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public RoleType getRole() {
+        return role;
     }
 
     public void setRole(RoleType role) {

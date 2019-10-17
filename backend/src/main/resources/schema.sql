@@ -2,8 +2,6 @@
     For creating tables in database
  */
 
-/*DROP TABLE IF EXISTS User;*/
-
 CREATE TABLE User (
     id          VARCHAR (32)    NOT NULL,
     username    VARCHAR (16)    NOT NULL,
@@ -11,10 +9,9 @@ CREATE TABLE User (
     PRIMARY KEY (id)
 );
 
-/*INSERT INTO User(id, username, password) VALUES('123345456', 'estUser', 'IAmPassword');*/
-
 CREATE TABLE User_Info (
     id                  VARCHAR (32)    NOT NULL,
+    at_a_station_no     VARCHAR (32)    NOT NULL,
     first_name          VARCHAR (32)    NOT NULL,
     last_name           VARCHAR (32)    NOT NULL,
     dob                 DATE            NOT NULL,

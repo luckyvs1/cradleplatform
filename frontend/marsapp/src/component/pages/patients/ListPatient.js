@@ -6,7 +6,6 @@
 
 import React from "react";
 import {connect} from "react-redux";
-import {testAPICALL} from "../../../actions/auth";
 import ListPatientForm from "../../forms/ListPatientForm";
     
 class ListPatient extends React.Component {
@@ -17,4 +16,4 @@ class ListPatient extends React.Component {
     }
 }
 
-export default connect(null,{testAPICALL})(ListPatient);
+export default connect(null,{})(ListPatient);

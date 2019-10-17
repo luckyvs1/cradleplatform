@@ -8,7 +8,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 
 @Entity
-@Table(name = "Admin")
+@Table(name = "Admin", schema = "schemas")
 public class Admin {
 
     @Id
@@ -17,6 +17,10 @@ public class Admin {
     private String id;
 
     public Admin() {
+        this.id = "";
+    }
+
+    public Admin(String id) {
         this.id = id;
     }
 

@@ -13,12 +13,22 @@ import {
     Button,
     Container
 } from 'react-bootstrap';
+import api from "../../api"
 
 class FollowUpDetailForm extends React.Component {
     // funcitons
     // states
     // submit
     // validate
+
+    componentDidMount() {
+        console.log("api calling")
+        api.followUp.getFollowUpByPatientId({patientId:1}).then(res => {
+            // fetching all follow up
+            console.log("by patient id", res);
+        })
+    }
+
 
     render() {
         const alertOptions = [

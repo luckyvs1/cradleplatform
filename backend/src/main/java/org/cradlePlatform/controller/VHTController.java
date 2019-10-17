@@ -11,12 +11,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 @CrossOrigin(origins = { "http://localhost:3000"})
 @Controller
-@RequestMapping(path="/vht") //This means URL's start with /vht (after Application path)
+@RequestMapping(path="/api/vhts") //This means URL's start with /vht (after Application path)
 public class VHTController {
     @Autowired
     private VHTRepository vhtRepository;
 
-    @PostMapping(path="/vht")
+    @PostMapping(path="/api/vhts")
     public @ResponseBody String addNewVHT (@RequestParam String id) {
         VHT newVHT = new VHT();
         newVHT.setId(id);
@@ -24,7 +24,7 @@ public class VHTController {
         return "Saved VHT";
     }
 
-    @GetMapping(path="/vht")
+    @GetMapping(path="/api/vhts")
     public @ResponseBody Iterable<VHT> getAllVHTs() {
         //This returns a JSON or XML with the users
         return vhtRepository.findAll();

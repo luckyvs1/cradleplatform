@@ -6,7 +6,6 @@
 
 import React from "react";
 import {connect} from "react-redux";
-import {testAPICALL} from "../../../actions/auth";
 
 import ListUserForm from "../../forms/ListUserForm";
 
@@ -18,4 +17,4 @@ class ListUser extends React.Component {
     }
 }
 
-export default connect(null,{testAPICALL})(ListUser);
+export default connect(null,{})(ListUser);
