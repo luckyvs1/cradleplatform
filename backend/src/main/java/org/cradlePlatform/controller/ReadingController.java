@@ -22,7 +22,7 @@ public class ReadingController {
 
     @PostMapping(path="/api/readings")
     @ResponseStatus(code = HttpStatus.CREATED)
-    public @ResponseBody String addAReading(@RequestBody Reading reading){
+    public String addAReading(@RequestBody Reading reading){
         Reading newReading = new Reading();
         newReading.setReaderId(reading.getReaderId());
         newReading.setPatientId(reading.getPatientId());
@@ -55,13 +55,12 @@ public class ReadingController {
     }
 
     @GetMapping(path="/api/readings")
-    public @ResponseBody Iterable<Reading> getAllReadings() {
+    public Iterable<Reading> getAllReadings() {
         return readingRepository.findAll();
     }
 
     @GetMapping(path="/api/readings/{id}")
-    public @ResponseBody
-    Optional<Reading> getReferralById(@PathVariable(value = "id") String referrerId){
+    public Optional<Reading> getReferralById(@PathVariable(value = "id") String referrerId){
         return readingRepository.findById(referrerId);
     }
 }
