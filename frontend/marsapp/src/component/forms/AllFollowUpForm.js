@@ -16,20 +16,32 @@ import {
 } from 'react-bootstrap';
 import api from "../../api"
 
-function createData(name, calories, fat, carbs, protein) {
-    return {name, calories, fat, carbs, protein};
+function createData(patientId, diagnosis, followUpNotes, treatment, frequency) {
+    return {patientId, diagnosis, followUpNotes, treatment, frequency};
 }
 
-const rows = [
-    createData('111555666', 'Alex', 'thomas', 'Once a week', 'Ongoing'),
-    createData('222555444', 'Bob', 'theo', 'Once a month', 'Ongoing'),
-    createData('111222333', 'fanny', 'theresha', 'Once a week', 'Ongoing'),
-    createData('111222888', 'hanny', 'Brian', 'Once a week', 'Ended'),
-    createData('444555666', 'janny', 'Katy', 'Once a week', 'Ended'),
-];
+
+
 
 
 class AllFollowUpForm extends React.Component {
+
+
+    constructor(props){
+        super(props);
+        this.state = {
+            data:{
+                diagnosis: "",
+                followUpNotes: "",
+                frequency: "",
+                id: null,
+                patientId: "",
+                required: true,
+                treatment: "",
+            },
+        };
+    }
+
 
     useStyles = makeStyles(theme => ({
         root: {
@@ -49,16 +61,25 @@ class AllFollowUpForm extends React.Component {
 
     }));
 
+
+
     componentDidMount() {
         console.log("api calling")
               api.followUp.getAllFollowUps(null).then(res => {
             // fetching all follow up
-            console.log("All follow up", res);
+                  const data = res.data[0];
+                  this.setState({data})
+            console.log("All follow up", this.state.data);
         })
     }
 
 
     render() {
+        const { data } = this.state;
+        const  rows = [
+            createData(data.patientId, data.diagnosis, data.followUpNotes, data.treatment, data.frequency),
+        ];
+
         return (
             <div>
                 <TopNavigation authenticated={true}></TopNavigation>
@@ -75,24 +96,24 @@ class AllFollowUpForm extends React.Component {
                                 <thead>
                                     <tr>
                                         <th>Patient ID</th>
-                                        <th>Patient Name</th>
-                                        <th>Location</th>
-                                        <th>Status</th>
+                                        <th>Diagnosis</th>
+                                        <th>Follow Up Notes</th>
+                                        <th>Treatment</th>
                                         <th>Frequency</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     {rows.map(row => (
-                                        <tr key={row.name} component={Link} to={"/followUpDetail"}>
+                                        <tr key={row.patientId} component={Link} to={"/followUpDetail"}>
                                             <th scope="row">
                                                 <Link to="followUpDetail">
-                                                    {row.name}
+                                                    {row.patientId}
                                                 </Link>
                                             </th>
-                                            <td>{row.calories}</td>
-                                            <td>{row.fat}</td>
-                                            <td>{row.protein}</td>
-                                            <td>{row.carbs}</td>
+                                            <td>{row.diagnosis}</td>
+                                            <td>{row.followUpNotes}</td>
+                                            <td>{row.treatment}</td>
+                                            <td>{row.frequency}</td>
                                         </tr>
                                     ))}
                                 </tbody>

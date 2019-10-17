@@ -23,7 +23,7 @@ class LoginPage extends React.Component {
       submit = data => {
         api.user.login(data)
             .then(res => {
-                if(res.data.id == "22"){
+                if(res.data.id == "1"){
                     this.props.updateLogIn(res.data.id );
 
                     auth.login(()=>{
