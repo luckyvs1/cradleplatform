@@ -9,14 +9,16 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.Date;
-
+import java.lang.Exception;
+import java.text.SimpleDateFormat;
 @Entity
 @Table(name = "Patient", schema = "schemas")
 public class Patient {
 
     @Id
-    @NotBlank
-    @Column(name="id", unique=true)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name="id", unique=true, nullable = false)
     @Size(max = 32)
     private String id;
 
@@ -70,7 +72,7 @@ public class Patient {
     @Column(name = "gestation_age_unit")
     private GestationalAgeTimeUnit gestationAgeUnit;
 
-    @NotBlank
+    @NotNull
     @Column(name = "current_gestational_age")
     private int currentGestationalAge;
 
@@ -187,8 +189,8 @@ public class Patient {
         //example of a dob: "2019-12-01"
         try {
             this.dob = new SimpleDateFormat("yyyy-MM-dd").parse(dob);
-        }catch{
-            console.log("Can't convert date of birth");
+        }catch(Exception e){
+            System.out.println(e.toString());
         }
     }
 
