@@ -47,6 +47,7 @@ public class Patient {
     @Column(name = "initials")
     private String initials;
 
+    @Column(name = "sex")
     @Enumerated(EnumType.STRING)
     private Sex sex;
 
@@ -86,7 +87,7 @@ public class Patient {
                    String initials,
                    Sex sex,
                    int age,
-                   Date dob,
+                   String dob,
                    boolean pregnant,
                    Date gestationalStartDate,
                    GestationalAgeTimeUnit gestationAgeUnit,
@@ -182,8 +183,13 @@ public class Patient {
         return dob;
     }
 
-    public void setDob(Date dob) {
-        this.dob = dob;
+    public void setDob(String dob) {
+        //example of a dob: "2019-12-01"
+        try {
+            this.dob = new SimpleDateFormat("yyyy-MM-dd").parse(dob);
+        }catch{
+            console.log("Can't convert date of birth");
+        }
     }
 
     public boolean isPregnant() {
