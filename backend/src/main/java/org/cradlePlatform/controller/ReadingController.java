@@ -14,36 +14,44 @@ import java.util.Optional;
 import org.cradlePlatform.model.Reading;
 import org.cradlePlatform.repository.ReadingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+
 @CrossOrigin(origins = { "http://localhost:3000"})
 @RestController
-
 public class ReadingController {
     @Autowired
     private ReadingRepository readingRepository;
 
     @PostMapping(path="/api/readings")
-    public @ResponseBody String addAReading(@RequestParam String readerId,
-                                            @RequestParam String patientId,
-                                            @RequestParam Timestamp timestamp,
-                                            @RequestParam ArrayList<String> symptoms,
-                                            @RequestParam String otherSymptoms,
-                                            @RequestParam int systolicBp,
-                                            @RequestParam int diastolicBp,
-                                            @RequestParam int pulseRate,
-                                            @RequestParam String notes,
-                                            @RequestParam boolean needFollowup){
+    @ResponseStatus(code = HttpStatus.CREATED)
+    public @ResponseBody String addAReading(@RequestBody Reading reading){
         Reading newReading = new Reading();
-        newReading.setReaderId(readerId);
-        newReading.setPatientId(patientId);
-        newReading.setTimestamp(timestamp);
-        newReading.setSymptoms(symptoms);
-        newReading.setOtherSymptoms(otherSymptoms);
-        newReading.setSystolicBloodPressure(systolicBp);
-        newReading.setDiastolicBloodPressure(diastolicBp);
-        newReading.setPulseRate(pulseRate);
-        newReading.setNotes(notes);
-        newReading.setNeedFollowUp(needFollowup);
+        newReading.setReaderId(reading.getReaderId());
+        newReading.setPatientId(reading.getPatientId());
+        newReading.setTimestamp(reading.getTimestamp());
+        newReading.setSymptoms(reading.getSymptoms());
+        newReading.setOtherSymptoms(reading.getOtherSymptoms());
+        newReading.setSystolicBloodPressure(reading.getSystolicBloodPressure());
+        newReading.setDiastolicBloodPressure(reading.getDiastolicBloodPressure());
+        newReading.setPulseRate(reading.getPulseRate());
+        newReading.setNotes(reading.getNotes());
+        newReading.setNeedFollowUp(reading.getNeedFollowUp());
+        newReading.setNeedFollowUp(reading.getNeedFollowUp());
+        newReading.setAppVersion(reading.getAppVersion());
+        newReading.setDateLastSaved(reading.getDateLastSaved());
+        newReading.setRecheckVitalsDate(reading.getRecheckVitalsDate());
+        newReading.setDeviceInformation(reading.getDeviceInformation());
+        newReading.setGestationalAgeTimeUnit(reading.getGestationalAgeTimeUnit());
+        newReading.setGestationalAge(reading.getGestationalAge());
+        newReading.setManuallyChangedOcrResults(reading.getManuallyChangedOcrResults());
+        newReading.setPhotoPath(reading.getPhotoPath());
+        newReading.setTotalOcrSeconds(reading.getTotalOcrSeconds());
+        newReading.setRegion(reading.getRegion());
+        newReading.setOcrEnabled(reading.getOcrEnabled());
+        newReading.setUploadImages(reading.getUploadImages());
+        newReading.setVitalsTrafficLight(reading.getVitalsTrafficLight());
+
         readingRepository.save(newReading);
 
         return "Saved Reading";

@@ -6,11 +6,11 @@ package org.cradlePlatform.controller;
 
 import java.sql.Timestamp;
 import java.util.Optional;
-
 import org.cradlePlatform.model.Referral;
 import org.cradlePlatform.repository.ReferralRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
 @CrossOrigin(origins = { "http://localhost:3000"})
 @RestController
 public class ReferralController {
@@ -18,13 +18,18 @@ public class ReferralController {
     private ReferralRepository referralRepository;
 
     @PostMapping(path="/api/referrals")
-    public @ResponseBody String addAReferral(@RequestParam int referrerId,
-                                             @RequestParam String readingId,
-                                             @RequestParam Timestamp timestamp){
+    public @ResponseBody String addAReferral(@RequestBody Referral referral){
         Referral newReferral = new Referral();
-        newReferral.setId(referrerId);
-        newReferral.setReadingId(readingId);
-        newReferral.setTimestamp(timestamp);
+        newReferral.setId(referral.getId());
+        newReferral.setReferrerId(referral.getReferrerId());
+        newReferral.setPatientId(referral.getPatientId());
+        newReferral.setTimestamp(referral.getTimestamp());
+        newReferral.setHealthFacility(referral.getHealthFacility());
+        newReferral.setNotesReason(referral.getNotesReason());
+        newReferral.setNotesAction(referral.getNotesAction());
+
+        referralRepository.save(newReferral);
+
         return "Saved Referral";
     }
 

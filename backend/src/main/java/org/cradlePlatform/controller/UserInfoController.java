@@ -21,7 +21,7 @@ public class UserInfoController {
 
     @PostMapping(path="/api/user-information")
     @ResponseStatus(code = HttpStatus.CREATED)
-    public String addUserInfo(@RequestBody UserInfo userInfo) throws ParseException {
+    public String addUserInfo(@RequestBody UserInfo userInfo){
         UserInfo newUserInfo = new UserInfo();
         newUserInfo.setId(userInfo.getId());
         newUserInfo.setAttestationNumber(userInfo.getAttestationNumber());

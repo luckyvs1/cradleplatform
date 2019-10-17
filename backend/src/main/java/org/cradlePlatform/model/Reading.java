@@ -10,7 +10,6 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.Set;
 
 @Entity
 @Table(name = "Reading", schema = "schemas")
@@ -18,7 +17,7 @@ public class Reading {
 
 	@Id
 	@GeneratedValue
-	private int Id;
+	private int id;
 
 	@NotBlank
 	@Size(max = 32)
@@ -109,11 +108,11 @@ public class Reading {
 	private VitalsTrafficLight vitalsTrafficLight;
 
 	public int getId() {
-		return Id;
+		return id;
 	}
 
 	public void setId(int id) {
-		Id = id;
+		this.id = id;
 	}
 
 	public String getReaderId() {
@@ -276,7 +275,7 @@ public class Reading {
 		this.region = region;
 	}
 
-	public boolean isOcrEnabled() {
+	public boolean getOcrEnabled() {
 		return OcrEnabled;
 	}
 
@@ -284,7 +283,7 @@ public class Reading {
 		OcrEnabled = ocrEnabled;
 	}
 
-	public boolean isUploadImages() {
+	public boolean getUploadImages() {
 		return uploadImages;
 	}
 
