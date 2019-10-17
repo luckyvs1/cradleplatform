@@ -21,8 +21,18 @@
     VALUES ("1" , "1" , "farrra" ,"ferrero" ,"1998-6-6","iran","6044402037","noway@noway.com" ,"Admin");
 
 
- */
+    INSERT INTO Admin (id)
+    VALUES ("1");
 
+    INSERT INTO Healthworker(id)
+    VALUES ("11");
+
+    INSERT INTO VHT (id)
+    VALUES ("111");
+
+    INSERT INTO Drug_History (id,patient_id,history)
+    VALUES (22, "22", "bad history");
+ */
 
 
 
