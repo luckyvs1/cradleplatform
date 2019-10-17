@@ -6,11 +6,8 @@
  */
 package org.cradlePlatform.controller;
 
-import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Optional;
 
+import java.util.Optional;
 import org.cradlePlatform.model.Reading;
 import org.cradlePlatform.repository.ReadingRepository;
 import org.springframework.beans.factory.annotation.Autowired;

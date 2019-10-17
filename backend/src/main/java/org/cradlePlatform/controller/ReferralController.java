@@ -4,7 +4,6 @@
  */
 package org.cradlePlatform.controller;
 
-import java.sql.Timestamp;
 import java.util.Optional;
 import org.cradlePlatform.model.Referral;
 import org.cradlePlatform.repository.ReferralRepository;
