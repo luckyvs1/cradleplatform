@@ -57,6 +57,9 @@ public class PatientController {
         newPatient.setLastName(patient.getLastName());
         newPatient.setVillageNo(patient.getVillageNo());
         newPatient.setZoneNo(patient.getZoneNo());
+        newPatient.setHouseholdNo(patient.getHouseholdNo());
+        newPatient.setBlockNo(patient.getBlockNo());
+        newPatient.setTankNo(patient.getTankNo());
         newPatient.setInitials(patient.getInitials());
         newPatient.setSex(patient.getSex());
         newPatient.setAge(patient.getAge());
