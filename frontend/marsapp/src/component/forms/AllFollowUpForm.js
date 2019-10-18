@@ -21,16 +21,13 @@ function createData(patientId, diagnosis, followUpNotes, treatment, frequency) {
 }
 
 
-
-
-
 class AllFollowUpForm extends React.Component {
 
 
-    constructor(props){
+    constructor(props) {
         super(props);
         this.state = {
-            data:{
+            data: [{
                 diagnosis: "",
                 followUpNotes: "",
                 frequency: "",
@@ -38,7 +35,7 @@ class AllFollowUpForm extends React.Component {
                 patientId: "",
                 required: true,
                 treatment: "",
-            },
+            }],
         };
     }
 
@@ -62,23 +59,25 @@ class AllFollowUpForm extends React.Component {
     }));
 
 
-
     componentDidMount() {
         console.log("api calling")
-              api.followUp.getAllFollowUps(null).then(res => {
+        api.followUp.getAllFollowUps(null).then(res => {
             // fetching all follow up
-                  const data = res.data[0];
-                  this.setState({data})
+            const data = res.data;
+            console.log(res.data);
+            console.log(data);
+            this.setState({data})
             console.log("All follow up", this.state.data);
         })
     }
 
+    clickedRow(e) {
+
+
+    }
 
     render() {
-        const { data } = this.state;
-        const  rows = [
-            createData(data.patientId, data.diagnosis, data.followUpNotes, data.treatment, data.frequency),
-        ];
+        const {data} = this.state;
 
         return (
             <div>
@@ -94,28 +93,25 @@ class AllFollowUpForm extends React.Component {
                         <Col>
                             <Table bordered hover size="sm">
                                 <thead>
-                                    <tr>
-                                        <th>Patient ID</th>
-                                        <th>Diagnosis</th>
-                                        <th>Follow Up Notes</th>
-                                        <th>Treatment</th>
-                                        <th>Frequency</th>
-                                    </tr>
+                                <tr>
+                                    <th>Patient ID</th>
+                                    <th>Diagnosis</th>
+                                    <th>Follow Up Notes</th>
+                                    <th>Treatment</th>
+                                    <th>Frequency</th>
+                                </tr>
                                 </thead>
                                 <tbody>
-                                    {rows.map(row => (
-                                        <tr key={row.patientId} component={Link} to={"/followUpDetail"}>
-                                            <th scope="row">
-                                                <Link to="followUpDetail">
-                                                    {row.patientId}
-                                                </Link>
-                                            </th>
-                                            <td>{row.diagnosis}</td>
-                                            <td>{row.followUpNotes}</td>
-                                            <td>{row.treatment}</td>
-                                            <td>{row.frequency}</td>
-                                        </tr>
-                                    ))}
+                                {this.state.data.map(row => (
+                                    <tr key={row.patientId} class='clickable-row'
+                                        onClick={() => this.clickedRow(row.patientId)}>
+                                        <td> {row.patientId}</td>
+                                        <td>{row.diagnosis}</td>
+                                        <td>{row.followUpNotes}</td>
+                                        <td>{row.treatment}</td>
+                                        <td>{row.frequency}</td>
+                                    </tr>
+                                ))}
                                 </tbody>
                             </Table>
                         </Col>
