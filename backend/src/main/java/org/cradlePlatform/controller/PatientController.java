@@ -63,6 +63,7 @@ public class PatientController {
         newPatient.setInitials(patient.getInitials());
         newPatient.setSex(patient.getSex());
         newPatient.setAge(patient.getAge());
+        newPatient.setDob(patient.getDob());
         newPatient.setPregnant(patient.isPregnant());
         newPatient.setGestationalStartDate(patient.getGestationalStartDate());
         newPatient.setGestationAgeUnit(patient.getGestationAgeUnit());
