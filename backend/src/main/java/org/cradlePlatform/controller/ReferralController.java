@@ -8,15 +8,17 @@ import java.util.Optional;
 import org.cradlePlatform.model.Referral;
 import org.cradlePlatform.repository.ReferralRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-@CrossOrigin(origins = { "http://localhost:3000"})
+@CrossOrigin(origins = {"http://localhost:3000"})
 @RestController
 public class ReferralController {
     @Autowired
     private ReferralRepository referralRepository;
 
     @PostMapping(path="/api/referrals")
+    @ResponseStatus(code = HttpStatus.CREATED)
     public String addAReferral(@RequestBody Referral referral){
         Referral newReferral = new Referral();
         newReferral.setId(referral.getId());
