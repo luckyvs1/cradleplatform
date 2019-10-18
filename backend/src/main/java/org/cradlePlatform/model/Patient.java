@@ -44,6 +44,18 @@ public class Patient {
     @Column(name = "zone_no")
     private String zoneNo;
 
+    @Column(name="household_no", length=32)
+    @Size(max = 32)
+    private String householdNo;
+
+    @Column(name="block_no", length=32)
+    @Size(max = 32)
+    private String blockNo;
+
+    @Column(name="tank_no", length=32)
+    @Size(max = 32)
+    private String tankNo;
+
     @NotBlank
     @Size(max = 4)
     @Column(name = "initials")
@@ -85,6 +97,9 @@ public class Patient {
                    String lastName,
                    String villageNo,
                    String zoneNo,
+                   String householdNo,
+                   String blockNo,
+                   String tankNo,
                    String initials,
                    Sex sex,
                    int age,
@@ -98,6 +113,10 @@ public class Patient {
         setFirstName(firstName);
         setLastName(lastName);
         setVillageNo(villageNo);
+        setZoneNo(zoneNo);
+        setHouseholdNo(householdNo);
+        setBlockNo(blockNo);
+        setTankNo(tankNo);
         setInitials(initials);
         setSex(sex);
         setAge(age);
@@ -155,6 +174,18 @@ public class Patient {
     public void setZoneNo(String zoneNo) {
         this.zoneNo = zoneNo;
     }
+
+    public String getHouseholdNo() { return householdNo; }
+
+    public void setHouseholdNo(String householdNo) { this.householdNo = householdNo; }
+
+    public String getBlockNo() { return blockNo; }
+
+    public void setBlockNo(String blockNo) { this.blockNo = blockNo; }
+
+    public String getTankNo() { return tankNo; }
+
+    public void setTankNo(String tankNo) { this.tankNo = tankNo; }
 
     public String getInitials() {
         return initials;
