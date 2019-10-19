@@ -9,8 +9,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.Date;
-import java.lang.Exception;
-import java.text.SimpleDateFormat;
+
 @Entity
 @Table(name = "Patient")
 public class Patient {
@@ -32,14 +31,14 @@ public class Patient {
     @Column(name = "last_name")
     private String lastName;
 
-    @NotBlank
+    @NotBlank(message = "Village Number Can't Be Empty")
     @Size(max = 32)
-    @Column(name = "village_no")
+    @Column(name = "village_no", length=32, nullable=false)
     private String villageNo;
 
-    @NotBlank
+    @NotBlank(message = "Zone Number Can't Be Empty")
     @Size(max = 32)
-    @Column(name = "zone_no")
+    @Column(name = "zone_no", length=32, nullable=false)
     private String zoneNo;
 
     @Column(name="household_no", length=32)
@@ -54,9 +53,9 @@ public class Patient {
     @Size(max = 32)
     private String tankNo;
 
-    @NotBlank
+    @NotBlank(message = "Initials Can't Be Empty")
     @Size(max = 4)
-    @Column(name = "initials")
+    @Column(name = "initials", length=4, nullable=false)
     private String initials;
 
     @Column(name = "sex")
@@ -213,12 +212,6 @@ public class Patient {
     }
 
     public void setDob(Date dob) {
-//        //example of a dob: "2019-12-01"
-//        try {
-//            this.dob = new SimpleDateFormat("yyyy-MM-dd").parse(dob);
-//        }catch(Exception e){
-//            System.out.println(e.toString());
-//        }
         this.dob = dob;
     }
 
