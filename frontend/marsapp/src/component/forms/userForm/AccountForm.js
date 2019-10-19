@@ -15,7 +15,7 @@ import {
 } from 'react-bootstrap';
 import PropTypes from "prop-types";
 import Popup from "reactjs-popup";
-import api from "../../api"
+import api from "../../../api"
 
 const Modal = () => (
 

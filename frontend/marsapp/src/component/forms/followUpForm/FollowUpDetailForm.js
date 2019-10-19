@@ -13,9 +13,8 @@ import {
     Button,
     Container
 } from 'react-bootstrap';
-import api from "../../api"
+import api from "../../../api"
 import {connect} from "react-redux";
-
 
 class FollowUpDetailForm extends React.Component {
 
