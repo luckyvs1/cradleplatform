@@ -7,6 +7,7 @@ package org.cradlePlatform.controller;
 import org.cradlePlatform.model.Medication;
 import org.cradlePlatform.repository.MedicationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -31,6 +32,7 @@ public class MedicationController {
     // POST mappings
 
     @PostMapping(path="/api/medications")
+    @ResponseStatus(code = HttpStatus.CREATED)
     public String addNewMedication (@RequestBody Medication med) {
         Medication newMedication = new Medication();
         newMedication.setDrugHistoryId(med.getDrugHistoryId());
