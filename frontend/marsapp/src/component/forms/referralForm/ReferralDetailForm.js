@@ -15,7 +15,7 @@ import {
     Tabs,
     Tab
 } from 'react-bootstrap';
-import api from "../../api"
+import api from "../../../api"
 
 class ReferralDetailForm extends React.Component {
     // functions

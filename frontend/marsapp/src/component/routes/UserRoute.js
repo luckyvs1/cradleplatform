@@ -14,7 +14,7 @@ export const UserRoute = ({component: Component, ...rest}) => {
         <Route
             {...rest}
             render={props => {
-                if (auth.isAuthenticated()) {
+                if (true) { //TODO: revert to auth.isAuthenticated() before push
                     return <Component {...props} />;
                 } else {
                     return (

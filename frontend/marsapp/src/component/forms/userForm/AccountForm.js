@@ -13,7 +13,7 @@ import {
     Button,
     Form
 } from 'react-bootstrap';
-import api from "../../api"
+import api from "../../../api"
 
 class AccountForm extends React.Component {
     componentDidMount() {

@@ -14,7 +14,7 @@ import {
     Col,
     Table
 } from 'react-bootstrap';
-import api from "../../api"
+import api from "../../../api"
 
 function createData(name, calories, fat, carbs, protein) {
     return {name, calories, fat, carbs, protein};

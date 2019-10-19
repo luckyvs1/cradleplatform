@@ -20,22 +20,22 @@ import {
     Table,
     Button
 } from 'react-bootstrap';
-import api from "../../api"
+import api from "../../../api"
 
-function createData(name, calories, fat, carbs, protein) {
-    return {name, calories, fat, carbs, protein};
+function createData(pid, pname, referrer, assignee, dateof, status) {
+    return {pid, pname, referrer, assignee, dateof, status};
 }
 
 const rows = [
-    createData('111555666', 'Alex', 'thomas', new Date().toDateString()),
-    createData('222555444', 'Bob', 'theo', new Date().toDateString()),
-    createData('111222333', 'fanny', 'theresha', new Date().toDateString()),
-    createData('111222888', 'hanny', 'Brian', new Date().toDateString()),
-    createData('444555666', 'janny', 'Katy', new Date().toDateString()),
+    createData('111555666', 'Alex', 'thomas', 'None', new Date().toDateString(), 'Require response'),
+    createData('222555444', 'Bob', 'theo', 'None', new Date().toDateString(), 'Require response'),
+    createData('111222333', 'fanny', 'theresha', 'Jenny Hess', new Date().toDateString(), 'Require response'),
+    createData('111222888', 'hanny', 'Brian', 'None', new Date().toDateString(), 'Require response'),
+    createData('444555666', 'janny', 'Katy', 'Elliot Fu', new Date().toDateString(), 'Done'),
 ];
 
 class ReferralForm extends React.Component {
-    state = {activeItem: 'bio'}
+    state = {activeItem: 'bio'};
 
     constructor() {
         super();
@@ -46,7 +46,7 @@ class ReferralForm extends React.Component {
     }
 
     componentDidMount() {
-        console.log("api calling")
+        console.log("api calling");
         api.referral.getAllReferral(null).then(res => {
             console.log("All referral", res);
         })
@@ -58,7 +58,7 @@ class ReferralForm extends React.Component {
 
     handleItemClick = (e, {name}) => {
         this.setState({activeItem: name})
-    }
+    };
     useStyles = makeStyles(theme => ({
         root: {
             width: '100%',
@@ -93,23 +93,8 @@ class ReferralForm extends React.Component {
                 key: 'Stevie Feliciano',
                 text: 'Stevie Feliciano',
                 value: 'Stevie Feliciano',
-            },
-            {
-                key: 'Christian',
-                text: 'Christian',
-                value: 'Christian',
-            },
-            {
-                key: 'Matt',
-                text: 'Matt',
-                value: 'Matt',
-            },
-            {
-                key: 'Justen Kitsune',
-                text: 'Justen Kitsune',
-                value: 'Justen Kitsune',
-            },
-        ]
+            }
+        ];
 
 
         return (
@@ -129,34 +114,6 @@ class ReferralForm extends React.Component {
                                 </Col>
                             </Row>
                             <hr></hr>
-                        </Col>
-                    </Row>
-                    <Row>
-                        <Col>
-                            <Table bordered hover size="sm">
-                                <thead>
-                                    <tr>
-                                        <th>Patient ID</th>
-                                        <th>Patient Name</th>
-                                        <th>Referred By</th>
-                                        <th>Referral Date</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {rows.map(row => (
-                                        <tr key={row.name} component={Link} to={"/followUpDetail"}>
-                                            <th scope="row">
-                                                <Link to="referralDetail">
-                                                    {row.name}
-                                                </Link>
-                                            </th>
-                                            <td>{row.calories}</td>
-                                            <td>{row.fat}</td>
-                                            <td>{row.carbs}</td>
-                                        </tr>
-                                    ))}
-                                </tbody>
-                            </Table>
                         </Col>
                     </Row>
                     <Row>
@@ -192,6 +149,34 @@ class ReferralForm extends React.Component {
                                     </Form.Field>
                                 </Form.Group>
                             </Form>
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col>
+                            <Table bordered hover size="sm">
+                                <thead>
+                                    <tr>
+                                        <th>Patient ID</th>
+                                        <th>Patient Name</th>
+                                        <th>Referred By</th>
+                                        <th>Assigned to</th>
+                                        <th>Referral Date</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {rows.map(row => (
+                                        <tr key={row.pid}>
+                                            <td scope="row">{row.pid}</td>
+                                            <td>{row.pname}</td>
+                                            <td>{row.referrer}</td>
+                                            <td>{row.assignee}</td>
+                                            <td>{row.dateof}</td>
+                                            <td>{row.status}</td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </Table>
                         </Col>
                     </Row>
                 </Container>
