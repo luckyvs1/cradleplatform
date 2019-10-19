@@ -14,6 +14,8 @@ import {
     Container
 } from 'react-bootstrap';
 import api from "../../api"
+import {connect} from "react-redux";
+
 
 class FollowUpDetailForm extends React.Component {
     // funcitons
@@ -21,9 +23,9 @@ class FollowUpDetailForm extends React.Component {
     // submit
     // validate
 
+
     componentDidMount() {
-        console.log("api calling")
-        api.followUp.getFollowUpByPatientId({patientId:1}).then(res => {
+        api.followUp.getFollowUpByPatientId({patientId: 1}).then(res => {
             // fetching all follow up
             console.log("by patient id", res);
         })
@@ -31,6 +33,7 @@ class FollowUpDetailForm extends React.Component {
 
 
     render() {
+
         const alertOptions = [
             {
                 key: 'No Alert',
@@ -67,7 +70,7 @@ class FollowUpDetailForm extends React.Component {
                                     type="text"
                                     id="patient"
                                     name="patient"
-                                    value={'0123456'} />
+                                    value={'0123456'}/>
                                 {/*error handling*/}
                                 {/* <Form.Text className="text-muted">
                                     {errors.email && <InlineError text={errors.email} />}
@@ -83,7 +86,7 @@ class FollowUpDetailForm extends React.Component {
                                     type="text"
                                     id="location"
                                     name="location"
-                                    value={'0123456'} />
+                                    value={'0123456'}/>
                                 {/*error handling*/}
                                 {/* <Form.Text className="text-muted">
                                     {errors.email && <InlineError text={errors.email} />}
@@ -99,7 +102,7 @@ class FollowUpDetailForm extends React.Component {
                                     type="text"
                                     id="status"
                                     name="status"
-                                    value={'0123456'} />
+                                    value={'0123456'}/>
                                 {/*error handling*/}
                                 {/* <Form.Text className="text-muted">
                                     {errors.email && <InlineError text={errors.email} />}
@@ -115,7 +118,7 @@ class FollowUpDetailForm extends React.Component {
                                     type="text"
                                     id="frequency"
                                     name="frequency"
-                                    value={'0123456'} />
+                                    value={'0123456'}/>
                                 {/*error handling*/}
                                 {/* <Form.Text className="text-muted">
                                     {errors.email && <InlineError text={errors.email} />}
@@ -141,7 +144,7 @@ class FollowUpDetailForm extends React.Component {
                                 <Form.Control
                                     type="date"
                                     id="end_date"
-                                    name="end_date" />
+                                    name="end_date"/>
                                 {/*error handling*/}
                                 {/* <Form.Text className="text-muted">
                                     {errors.email && <InlineError text={errors.email} />}
@@ -178,4 +181,15 @@ class FollowUpDetailForm extends React.Component {
     }
 }
 
-export default FollowUpDetailForm;
+const mapStateToProps = (state, ownProps) => {
+    return {
+        patientId: state.posts
+    }
+}
+const mapDispatchToProps = (dispatch) => {
+    return {
+        // function name
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(FollowUpDetailForm);

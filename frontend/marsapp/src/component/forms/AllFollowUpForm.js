@@ -8,12 +8,14 @@ import React from "react";
 import {makeStyles} from "@material-ui/core";
 import {Link} from "react-router-dom";
 import TopNavigation from "../navigation/TopNavigation";
+import PropTypes from "prop-types";
 import {
     Container,
     Row,
     Col,
     Table
 } from 'react-bootstrap';
+import {connect} from "react-redux";
 import api from "../../api"
 
 function createData(patientId, diagnosis, followUpNotes, treatment, frequency) {
@@ -37,6 +39,7 @@ class AllFollowUpForm extends React.Component {
                 treatment: "",
             }],
         };
+
     }
 
 
@@ -71,10 +74,15 @@ class AllFollowUpForm extends React.Component {
         })
     }
 
-    clickedRow(e) {
 
-
-    }
+    submit = event => {
+        console.log("data to be sent", event)
+        if (event) {
+            this.props.updatePatientFollowUp(event);
+            this.props
+                .submit(event)
+        }
+    };
 
     render() {
         const {data} = this.state;
@@ -104,7 +112,7 @@ class AllFollowUpForm extends React.Component {
                                 <tbody>
                                 {this.state.data.map(row => (
                                     <tr key={row.patientId} class='clickable-row'
-                                        onClick={() => this.clickedRow(row.patientId)}>
+                                        onClick={() => this.submit(row.patientId)}>
                                         <td> {row.patientId}</td>
                                         <td>{row.diagnosis}</td>
                                         <td>{row.followUpNotes}</td>
@@ -122,4 +130,24 @@ class AllFollowUpForm extends React.Component {
     }
 }
 
-export default AllFollowUpForm;
+
+const mapStateToProps = (state, ownProps) => {
+    return {
+
+        // post:state.posts
+    }
+}
+const mapDispatchToProps = (dispatch) => {
+    return {
+        // function name
+        updatePatientFollowUp: (data) => {
+            dispatch({type: "patientFollowUp", data: data})
+        }
+    }
+}
+AllFollowUpForm.propTypes = {
+    submit: PropTypes.func.isRequired
+};
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(AllFollowUpForm);
