@@ -59,6 +59,6 @@ public class FollowUpController {
         newFollowUp.setDiagnosis(followUp.getDiagnosis());
         newFollowUp.setTreatment(followUp.getTreatment());
         followUpRepository.save(newFollowUp);
-        return "Saved FollowUp";
+        return "Saved Follow Up";
     }
 }
