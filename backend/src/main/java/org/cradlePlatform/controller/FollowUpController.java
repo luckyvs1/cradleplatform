@@ -23,10 +23,10 @@ public class FollowUpController {
     /**
      * Retrieve FollowUps for a particular patient from the DB by patientId.
      * if latest=true, returns only the latest record, otherwise returns all
-     * /api/followUps?patientId=123&latest=true
+     * /api/patients/followUps?patientId=123&latest=true
      * @return 200: JSON of followups
      */
-    @GetMapping(path="/api/followUps")
+    @GetMapping(path="/api/patients/followUps")
     public Iterable<FollowUp> getFollowUpByPatientId(@RequestParam String patientId,
                                               @RequestParam(value = "latest", required = false) boolean latest) {
         if (latest) {
