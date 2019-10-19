@@ -23,23 +23,22 @@ mhdata = {
     "testText": "heyall"
 }
 patdata = {
-    "id": "1",
-    "attestation_no": "5",
-    "first_name" : "Lou",
-    "last_name" : "Lee",
-    "village_no" : "45",
-    "zone_no" : "100",
-    "household_no" : "401",
-    "block_no" : "201",
-    "tank_no" : "301",
+    "attestationNo": "5",
+    "firstName" : "Lou",
+    "lastName" : "Lee",
+    "villageNo" : "45",
+    "zoneNo" : "100",
+    "householdNo" : "401",
+    "blockNo" : "201",
+    "tankNo" : "301",
     "initials" : "LL",
     "sex" : "F",
     "age" : 23,
     "dob" : "2019-10-16",
     "pregnant" : 1,
-    "gestational_start_date" : "2019-09-28",
-    "gestational_age_unit" : "week",
-    "current_gestational_age" : 3
+    "gestationalStartDate" : "2019-09-28",
+    "gestationAgeUnit" : "week",
+    "currentGestationalAge" : 3
 }
 meddata = {
     "drugHistoryID": "1",
