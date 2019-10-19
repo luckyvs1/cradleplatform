@@ -18,11 +18,6 @@ import {connect} from "react-redux";
 
 
 class FollowUpDetailForm extends React.Component {
-    // funcitons
-    // states
-    // submit
-    // validate
-
 
     componentDidMount() {
         api.followUp.getFollowUpByPatientId({patientId: this.props.posts.posts}).then(res => {

@@ -18,13 +18,26 @@ import {
 import {connect} from "react-redux";
 import api from "../../api"
 
-function createData(patientId, diagnosis, followUpNotes, treatment, frequency) {
-    return {patientId, diagnosis, followUpNotes, treatment, frequency};
-}
-
 
 class AllFollowUpForm extends React.Component {
 
+
+    useStyles = makeStyles(theme => ({
+        root: {
+            width: '100%',
+            marginTop: theme.spacing(2),
+        },
+        table: {
+            minWidth: 650,
+        },
+        tableWrapper: {
+            overflowX: 'auto',
+        },
+        uiHeader: {
+            textAlign: 'center',
+        }
+
+    }));
 
     constructor(props) {
         super(props);
@@ -43,34 +56,12 @@ class AllFollowUpForm extends React.Component {
     }
 
 
-    useStyles = makeStyles(theme => ({
-        root: {
-            width: '100%',
-            marginTop: theme.spacing(2),
-
-        },
-        table: {
-            minWidth: 650,
-        },
-        tableWrapper: {
-            overflowX: 'auto',
-        },
-        uiHeader: {
-            textAlign: 'center',
-        }
-
-    }));
-
 
     componentDidMount() {
-        console.log("api calling")
         api.followUp.getAllFollowUps(null).then(res => {
             // fetching all follow up
             const data = res.data;
-            console.log(res.data);
-            console.log(data);
             this.setState({data})
-            console.log("All follow up", this.state.data);
         })
     }
 
@@ -79,14 +70,12 @@ class AllFollowUpForm extends React.Component {
         console.log("data to be sent", event)
         if (event) {
             this.props.updatePatientFollowUp(event);
-            this.props
-                .submit(event)
+            this.props.submit(event)
         }
     };
 
     render() {
         const {data} = this.state;
-        console.log("by patient id", this.props)
         return (
             <div>
                 <TopNavigation authenticated={true}></TopNavigation>
@@ -111,8 +100,8 @@ class AllFollowUpForm extends React.Component {
                                 </thead>
                                 <tbody>
                                 {this.state.data.map(row => (
-                                    <tr key={row.patientId} class='clickable-row'
-                                        onClick={() => this.submit(row.patientId)}>
+                                    <tr key={row.id} class='clickable-row'
+                                        onClick={() => this.submit(row.id)}>
                                         <td> {row.patientId}</td>
                                         <td>{row.diagnosis}</td>
                                         <td>{row.followUpNotes}</td>
@@ -133,7 +122,6 @@ class AllFollowUpForm extends React.Component {
 
 const mapStateToProps = (state, ownProps) => {
     return {
-
         posts:state.posts
     }
 }
