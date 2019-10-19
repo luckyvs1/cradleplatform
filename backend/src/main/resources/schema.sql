@@ -45,7 +45,7 @@ CREATE TABLE VHT (
 );
 
 CREATE TABLE Patient (
-    id                  VARCHAR (32)    NOT NULL,
+    id                  INTEGER   AUTO_INCREMENT,
     attestation_no      VARCHAR (32),
     first_name          VARCHAR (32),
     last_name           VARCHAR (32),
