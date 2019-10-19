@@ -22,12 +22,19 @@ class ReferralDetailForm extends React.Component {
     // states
     // submit
     // validate
+    constructor(props) {
+        super(props);
+        console.dir(props);
+        this.state = {
+            pid:
+        }
+    }
 
     componentDidMount() {
         let data = {referrerId:1}
         api.referral.getReferralById(data).then(res => {
             console.log("All referral", res);
-        })
+        });
     }
 
     render() {
@@ -39,7 +46,8 @@ class ReferralDetailForm extends React.Component {
                     <Row>
                         <Col>
                             <h1>Referral Information</h1>
-                            <hr></hr>
+                            <h2></h2>
+                            <hr>{this.state.pid}</hr>
                         </Col>
                     </Row>
                     <Tabs id="controlled-tab-example">
