@@ -50,23 +50,16 @@ public class PatientController {
      * @return
      */
     @PostMapping(path="/api/patients")
-    @ResponseStatus(code = HttpStatus.CREATED)
-    public @ResponseBody String addNewPatient(@RequestBody Patient patient){
+    public @ResponseBody String addNewPatient (@RequestBody Patient patient){
         Patient newPatient = new Patient();
-//        newPatient.setId(patient.getId());
-//        newPatient.setAttestationNo(patient.getAttestationNo());
-//        newPatient.setFirstName(patient.getFirstName());
-//        newPatient.setLastName(patient.getLastName());
-//        newPatient.setVillageNo(patient.getVillageNo());
-//        newPatient.setZoneNo(patient.getZoneNo());
-//        newPatient.setInitials(patient.getInitials());
-//        newPatient.setSex(patient.getSex());
-//        newPatient.setAge(patient.getAge());
-//        newPatient.setDob(patient.getDob());
-//        newPatient.setPregnant(patient.isPregnant());
-//        newPatient.setGestationalAgeStartDate(patient.getGestationalAgeStartDate());
-//        newPatient.setGestationAge(patient.getGestationAge());
-//        newPatient.setGestationAgeUnit(patient.getGestationAgeUnit());
+        newPatient.setVillageNo(patient.getVillageNo());
+        newPatient.setAge(patient.getAge());
+        newPatient.setGestationAge(patient.getGestationAge());
+        newPatient.setGestationAgeUnit(patient.getGestationAgeUnit());
+        newPatient.setInitials(patient.getInitials());
+        newPatient.setPregnant(patient.isPregnant());
+        newPatient.setVillageNo(patient.getVillageNo());
+        newPatient.setSex(patient.getSex());
         patientRepository.save(newPatient);
         return "Saved Patient";
 
