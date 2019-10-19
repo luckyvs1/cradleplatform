@@ -66,7 +66,6 @@ CREATE TABLE Patient (
             (pregnant IS TRUE AND current_gestational_age IS NOT NULL) OR
             (pregnant IS FALSE AND current_gestational_age = 0)
         ),
-
     CHECK (
             (attestation_no IS NOT NULL) OR
             (first_name IS NOT NULL AND last_name IS NOT NULL)

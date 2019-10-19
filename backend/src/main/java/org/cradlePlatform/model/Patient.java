@@ -32,10 +32,12 @@ public class Patient {
     @Column(name = "last_name")
     private String lastName;
 
+    @NotBlank
     @Size(max = 32)
     @Column(name = "village_no")
     private String villageNo;
 
+    @NotBlank
     @Size(max = 32)
     @Column(name = "zone_no")
     private String zoneNo;
@@ -52,6 +54,7 @@ public class Patient {
     @Size(max = 32)
     private String tankNo;
 
+    @NotBlank
     @Size(max = 4)
     @Column(name = "initials")
     private String initials;
@@ -70,6 +73,7 @@ public class Patient {
     @Column(name = "pregnant")
     private boolean pregnant;
 
+    @NotNull
     @Column(name = "gestational_start_date")
     @Temporal(TemporalType.DATE)
     private Date gestationalStartDate;
@@ -78,6 +82,7 @@ public class Patient {
     @Column(name = "gestational_age_unit")
     private GestationalAgeTimeUnit gestationAgeUnit;
 
+    @NotNull
     @Column(name = "current_gestational_age")
     private int currentGestationalAge;
 
@@ -85,57 +90,39 @@ public class Patient {
 
     }
 
-    public Patient(String attestationNo, String firstName, String lastName, String villageNo, String zoneNo, String householdNo, String blockNo, String tankNo, String initials, Sex sex, int age, Date dob, boolean pregnant, Date gestationalStartDate, GestationalAgeTimeUnit gestationAgeUnit, int currentGestationalAge) {
-        this.attestationNo = attestationNo;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.villageNo = villageNo;
-        this.zoneNo = zoneNo;
-        this.householdNo = householdNo;
-        this.blockNo = blockNo;
-        this.tankNo = tankNo;
-        this.initials = initials;
-        this.sex = sex;
-        this.age = age;
-        this.dob = dob;
-        this.pregnant = pregnant;
-        this.gestationalStartDate = gestationalStartDate;
-        this.gestationAgeUnit = gestationAgeUnit;
-        this.currentGestationalAge = currentGestationalAge;
+    public Patient(String attestationNo,
+                   String firstName,
+                   String lastName,
+                   String villageNo,
+                   String zoneNo,
+                   String householdNo,
+                   String blockNo,
+                   String tankNo,
+                   String initials,
+                   Sex sex,
+                   int age,
+                   Date dob,
+                   boolean pregnant,
+                   Date gestationalStartDate,
+                   GestationalAgeTimeUnit gestationAgeUnit,
+                   int currentGestationAge) {
+        setAttestationNo(attestationNo);
+        setFirstName(firstName);
+        setLastName(lastName);
+        setVillageNo(villageNo);
+        setZoneNo(zoneNo);
+        setHouseholdNo(householdNo);
+        setBlockNo(blockNo);
+        setTankNo(tankNo);
+        setInitials(initials);
+        setSex(sex);
+        setAge(age);
+        setDob(dob);
+        setPregnant(pregnant);
+        setGestationalStartDate(gestationalStartDate);
+        setGestationAgeUnit(gestationAgeUnit);
+        setCurrentGestationalAge(currentGestationalAge);
     }
-    //    public Patient(String attestationNo,
-//                   String firstName,
-//                   String lastName,
-//                   String villageNo,
-//                   String zoneNo,
-//                   String householdNo,
-//                   String blockNo,
-//                   String tankNo,
-//                   String initials,
-//                   Sex sex,
-//                   int age,
-//                   Date dob,
-//                   boolean pregnant,
-//                   Date gestationalStartDate,
-//                   GestationalAgeTimeUnit gestationAgeUnit,
-//                   int currentGestationAge) {
-//        setAttestationNo(attestationNo);
-//        setFirstName(firstName);
-//        setLastName(lastName);
-//        setVillageNo(villageNo);
-//        setZoneNo(zoneNo);
-//        setHouseholdNo(householdNo);
-//        setBlockNo(blockNo);
-//        setTankNo(tankNo);
-//        setInitials(initials);
-//        setSex(sex);
-//        setAge(age);
-//        setDob(dob);
-//        setPregnant(pregnant);
-//        setGestationalStartDate(gestationalStartDate);
-//        setGestationAgeUnit(gestationAgeUnit);
-//        setCurrentGestationalAge(currentGestationalAge);
-//    }
 
     public int getId() {
         return id;
