@@ -16,6 +16,27 @@ import {
 import api from "../../../api"
 
 class AccountForm extends React.Component {
+
+    constructor (props) {
+        super(props)
+        this.state={
+            data:{
+                id:"1",
+                at_a_station_no:"1",
+                first_name:"potatoe",
+                last_name:"Potatata",
+                dob:"2019-10-10",
+                country:"Uganda",
+                phone:"604-440-2037",
+                email:"pp@gmail.com",
+                role:"admin",
+            }
+        }
+    }
+    nameChange(name){
+        this.state.data.first_name = name
+    }
+
     componentDidMount() {
         api.userInfo.getUserInfoById({userId:1}).then(res => {
             console.log("user info" , res);
@@ -23,7 +44,7 @@ class AccountForm extends React.Component {
     }
 
     render() {
-
+        console.log(this.state.data)
         return (
             <div>
                 <TopNavigation authenticated={true}></TopNavigation>
@@ -43,7 +64,8 @@ class AccountForm extends React.Component {
                                         type="text"
                                         id="username"
                                         name="username"
-                                        placeholder="Username" />
+                                        placeholder="Username"
+                                    />
                                     {/*error handling*/}
                                     {/* <Form.Text className="text-muted">
                                         {errors.email && <InlineError text={errors.email} />}
@@ -59,7 +81,10 @@ class AccountForm extends React.Component {
                                         type="text"
                                         id="last_name"
                                         name="last_name"
-                                        placeholder="First Name" />
+                                        placeholder="First Name"
+                                        value={this.state.data.first_name}
+                                        onChange={this.nameChange}
+                                    />
                                     {/*error handling*/}
                                     {/* <Form.Text className="text-muted">
                                         {errors.email && <InlineError text={errors.email} />}
@@ -73,7 +98,9 @@ class AccountForm extends React.Component {
                                         type="text"
                                         id="last_name"
                                         name="last_name"
-                                        placeholder="Last Name" />
+                                        placeholder="Last Name"
+                                        value={this.state.data.last_name}
+                                    />
                                     {/*error handling*/}
                                     {/* <Form.Text className="text-muted">
                                         {errors.email && <InlineError text={errors.email} />}
@@ -89,7 +116,9 @@ class AccountForm extends React.Component {
                                         type="email"
                                         id="email"
                                         name="email"
-                                        placeholder="Email Addresss" />
+                                        placeholder="Email Addresss"
+                                        value={this.state.data.email}
+                                    />
                                     {/*error handling*/}
                                     {/* <Form.Text className="text-muted">
                                         {errors.email && <InlineError text={errors.email} />}
@@ -103,7 +132,9 @@ class AccountForm extends React.Component {
                                         type="text"
                                         id="phone"
                                         name="phone"
-                                        placeholder="Phone Number" />
+                                        placeholder="Phone Number"
+                                        value={this.state.data.phone}
+                                    />
                                     {/*error handling*/}
                                     {/* <Form.Text className="text-muted">
                                         {errors.email && <InlineError text={errors.email} />}
@@ -120,7 +151,9 @@ class AccountForm extends React.Component {
                                         type="text"
                                         id="role"
                                         name="role"
-                                        placeholder="Role" />
+                                        placeholder="Role"
+                                        value={this.state.data.role}
+                                    />
                                     {/*error handling*/}
                                     {/* <Form.Text className="text-muted">
                                         {errors.email && <InlineError text={errors.email} />}
@@ -134,7 +167,9 @@ class AccountForm extends React.Component {
                                         type="text"
                                         id="at_station_number"
                                         name="at_station_number"
-                                        placeholder="At a station number" />
+                                        placeholder="At a station number"
+                                        value={this.state.data.at_a_station_no}
+                                    />
                                     {/*error handling*/}
                                     {/* <Form.Text className="text-muted">
                                         {errors.email && <InlineError text={errors.email} />}
