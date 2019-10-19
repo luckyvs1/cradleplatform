@@ -13,6 +13,8 @@ import {
     Button,
     Form
 } from 'react-bootstrap';
+import PropTypes from "prop-types";
+
 import api from "../../api"
 
 class AccountForm extends React.Component {
@@ -43,9 +45,18 @@ class AccountForm extends React.Component {
     }
 
     handleChange(event) {
-        console.log(event)
-        this.setState({data: event.target.value});
+        this.setState({
+            data: {...this.state.data, [event.target.name]: event.target.value}
+        });
     }
+
+    submit = event => {
+        console.log("data to be sent", event)
+        if (event) {
+            this.props.submit(event)
+        }
+    };
+
 
     render() {
         console.log(this.state.data)
@@ -194,7 +205,7 @@ class AccountForm extends React.Component {
                         </Row>
                         <Row>
                             <Col>
-                                <Button variant="success" s>
+                                <Button variant="success" onClick={() => this.submit(this.state.data)}>
                                     Create
                                 </Button>
                             </Col>
