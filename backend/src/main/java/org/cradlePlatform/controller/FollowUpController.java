@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Optional;
+
 
 @CrossOrigin(origins = { "http://localhost:3000"})
 @RestController
@@ -32,6 +34,11 @@ public class FollowUpController {
         } else {
             return followUpRepository.findByPatientId(patientId);
         }
+    }
+
+    @GetMapping(path="/api/followUps")
+    public Optional<FollowUp> getFollowUpByFollowUpId(@RequestParam int followUpId) {
+        return followUpRepository.findById(followUpId);
     }
 
     // POST mappings
