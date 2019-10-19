@@ -29,17 +29,14 @@ class LoginPage extends React.Component {
                     auth.login(()=>{
                         localStorage.loginToken = auth.authenticated;
                         this.props.history.push("/homePage");
-                    })
+                    });
                     console.log(res.data)
                 }else{
                     // pop up cannot log in
 
                 }
             })
-
-
     };
-
 
     render() {
         return (

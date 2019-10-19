@@ -6,3 +6,4 @@
     INSERT INTO User (id, username, password) VALUES ('2', 'vhtuser', 'password123!');
     INSERT INTO User (id, username, password) VALUES ('3', 'healthworkeruser', 'password123!');
  */
+ INSERT INTO User (id, username, password) VALUES ('22', 'test', 'test');

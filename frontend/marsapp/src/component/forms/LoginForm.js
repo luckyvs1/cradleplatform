@@ -123,7 +123,6 @@ class LoginForm extends React.Component {
                             </Row>
                             <Row>
                                 <Col>
-                                    <a href="/signup">Sign up?</a>
                                     <a href="/homePage">Go Home</a>
                                 </Col>
                             </Row>
