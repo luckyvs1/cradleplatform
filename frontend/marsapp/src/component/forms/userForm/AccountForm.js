@@ -32,15 +32,18 @@ class AccountForm extends React.Component {
                 role:"admin",
             }
         }
-    }
-    nameChange(name){
-        this.state.data.first_name = name
+        this.handleChange = this.handleChange.bind(this);
     }
 
     componentDidMount() {
         api.userInfo.getUserInfoById({userId:1}).then(res => {
             console.log("user info" , res);
         })
+    }
+
+    handleChange(event) {
+        console.log(event)
+        this.setState({data: event.target.value});
     }
 
     render() {
@@ -65,6 +68,8 @@ class AccountForm extends React.Component {
                                         id="username"
                                         name="username"
                                         placeholder="Username"
+                                        onChange={this.handleChange}
+
                                     />
                                     {/*error handling*/}
                                     {/* <Form.Text className="text-muted">
@@ -83,7 +88,7 @@ class AccountForm extends React.Component {
                                         name="last_name"
                                         placeholder="First Name"
                                         value={this.state.data.first_name}
-                                        onChange={this.nameChange}
+                                        onChange={this.handleChange}
                                     />
                                     {/*error handling*/}
                                     {/* <Form.Text className="text-muted">
@@ -100,6 +105,8 @@ class AccountForm extends React.Component {
                                         name="last_name"
                                         placeholder="Last Name"
                                         value={this.state.data.last_name}
+                                        onChange={this.handleChange}
+
                                     />
                                     {/*error handling*/}
                                     {/* <Form.Text className="text-muted">
@@ -118,6 +125,8 @@ class AccountForm extends React.Component {
                                         name="email"
                                         placeholder="Email Addresss"
                                         value={this.state.data.email}
+                                        onChange={this.handleChange}
+
                                     />
                                     {/*error handling*/}
                                     {/* <Form.Text className="text-muted">
@@ -134,6 +143,8 @@ class AccountForm extends React.Component {
                                         name="phone"
                                         placeholder="Phone Number"
                                         value={this.state.data.phone}
+                                        onChange={this.handleChange}
+
                                     />
                                     {/*error handling*/}
                                     {/* <Form.Text className="text-muted">
@@ -153,6 +164,8 @@ class AccountForm extends React.Component {
                                         name="role"
                                         placeholder="Role"
                                         value={this.state.data.role}
+                                        onChange={this.handleChange}
+
                                     />
                                     {/*error handling*/}
                                     {/* <Form.Text className="text-muted">
@@ -169,6 +182,7 @@ class AccountForm extends React.Component {
                                         name="at_station_number"
                                         placeholder="At a station number"
                                         value={this.state.data.at_a_station_no}
+                                        onChange={this.handleChange}
                                     />
                                     {/*error handling*/}
                                     {/* <Form.Text className="text-muted">
@@ -179,7 +193,7 @@ class AccountForm extends React.Component {
                         </Row>
                         <Row>
                             <Col>
-                                <Button variant="success">
+                                <Button variant="success" s>
                                     Create
                                 </Button>
                             </Col>
@@ -189,6 +203,10 @@ class AccountForm extends React.Component {
             </div>
         );
     }
+}
+
+AccountForm.propTypes = {
+    submit: PropTypes.func.isRequired
 }
 
 export default AccountForm;
