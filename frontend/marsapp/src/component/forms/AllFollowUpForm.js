@@ -86,7 +86,7 @@ class AllFollowUpForm extends React.Component {
 
     render() {
         const {data} = this.state;
-
+        console.log("by patient id", this.props)
         return (
             <div>
                 <TopNavigation authenticated={true}></TopNavigation>
@@ -134,7 +134,7 @@ class AllFollowUpForm extends React.Component {
 const mapStateToProps = (state, ownProps) => {
     return {
 
-        // post:state.posts
+        posts:state.posts
     }
 }
 const mapDispatchToProps = (dispatch) => {

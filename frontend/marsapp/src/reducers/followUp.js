@@ -7,16 +7,18 @@
 
 const initState = {
     //holds the data loging info? user info
-    posts:[{
-        patientId:null
-    }]
+    data:[
+        {patientId:''}
+    ]
 }
 
-export default function followUp(state = initState, action = {}) {
+const followUp = (state = initState, action ) => {
     switch (action.type) {
         case "patientFollowUp":
             let data = action
             // alter data
+            console.log("reducer" , action)
+
             console.log("patient follow up" , data.data)
             console.log("patient follow up" , state.posts)
 
@@ -33,3 +35,4 @@ export default function followUp(state = initState, action = {}) {
             return state;
     }
 }
+export default followUp;

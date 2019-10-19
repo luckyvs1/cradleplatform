@@ -25,7 +25,7 @@ class FollowUpDetailForm extends React.Component {
 
 
     componentDidMount() {
-        api.followUp.getFollowUpByPatientId({patientId: 1}).then(res => {
+        api.followUp.getFollowUpByPatientId({patientId: this.props.posts.posts}).then(res => {
             // fetching all follow up
             console.log("by patient id", res);
         })
@@ -52,7 +52,9 @@ class FollowUpDetailForm extends React.Component {
             }
         ];
 
+
         return (
+
             <div>
                 <TopNavigation authenticated={true}></TopNavigation>
                 <Container>
@@ -181,9 +183,9 @@ class FollowUpDetailForm extends React.Component {
     }
 }
 
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = (state) => {
     return {
-        patientId: state.posts
+        posts: state.followUp
     }
 }
 const mapDispatchToProps = (dispatch) => {
