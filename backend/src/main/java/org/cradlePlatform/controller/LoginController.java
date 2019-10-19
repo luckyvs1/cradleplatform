@@ -5,7 +5,6 @@
  */
 package org.cradlePlatform.controller;
 
-import java.util.HashMap;
 import org.cradlePlatform.model.User;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -19,18 +18,13 @@ public class LoginController {
 		return "Hello Mars!\n";
 	}
 
-	@PostMapping("/login")
+	@PostMapping("/api/login")
 	@ResponseStatus(HttpStatus.OK)
-	public User logIn(@RequestBody LoginRequest user) {
-		boolean isVerified = DBService.verifyUsernamePassword(user.getUsername(), user.getPassword());
-		if (isVerified) {
-//			User account = DBService.loadUserFromDb(user.getUsername(), user.getPassword());
-			User account = new User();
-			return account;
-		}
-		System.out.println("Username or password is incorrect, try again");
-		// TODO: Throw exception?
-		return null;
+	public User logIn(@RequestBody User user) {
+		// TODO: Implement log in
+		User account = new User();
+		return account;
+
 	}
 
 }
