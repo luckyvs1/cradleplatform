@@ -6,18 +6,18 @@
 
 import React from "react";
 import {connect} from "react-redux";
-import {makeStyles} from "@material-ui/core";
+import { makeStyles } from "@material-ui/core";
 import {
     Form,
-    Dropdown
+    Dropdown,
+    Table
 } from 'semantic-ui-react'
-import {Link} from "react-router-dom";
+import {Link, withRouter} from "react-router-dom";
 import TopNavigation from "../../navigation/TopNavigation";
 import {
     Container,
     Row,
     Col,
-    Table,
     Button
 } from 'react-bootstrap';
 import api from "../../../api"
@@ -57,9 +57,11 @@ class ReferralForm extends React.Component {
         this.setState({toggled: !this.state.toggled});
     }
 
-    handleItemClick = (e, {name}) => {
-        this.setState({activeItem: name})
+    handleItemClick = (e) => {
+        this.props.history.push('/referralDetail');
+
     };
+
     useStyles = makeStyles(theme => ({
         root: {
             width: '100%',
@@ -96,7 +98,6 @@ class ReferralForm extends React.Component {
                 value: 'Stevie Feliciano',
             }
         ];
-
 
         return (
             <div>
@@ -155,28 +156,28 @@ class ReferralForm extends React.Component {
                     <Row>
                         <Col>
                             <Table bordered hover size="sm">
-                                <thead>
-                                    <tr>
-                                        <th>Patient ID</th>
-                                        <th>Patient Name</th>
-                                        <th>Referred By</th>
-                                        <th>Assigned to</th>
-                                        <th>Referral Date</th>
-                                        <th>Status</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
+                                <Table.Header>
+                                    <Table.Row>
+                                        <Table.HeaderCell >Patient ID</Table.HeaderCell>
+                                        <Table.HeaderCell >Patient Name</Table.HeaderCell>
+                                        <Table.HeaderCell >Referred By</Table.HeaderCell>
+                                        <Table.HeaderCell >Assigned to</Table.HeaderCell>
+                                        <Table.HeaderCell >Referral Date</Table.HeaderCell>
+                                        <Table.HeaderCell >Status</Table.HeaderCell>
+                                    </Table.Row>
+                                </Table.Header>
+                                <Table.Body>
                                     {rows.map(row => (
-                                        <tr key={row.pid}>
-                                            <td scope="row">{row.pid}</td>
-                                            <td>{row.pname}</td>
-                                            <td>{row.referrer}</td>
-                                            <td>{row.assignee}</td>
-                                            <td>{row.dateof}</td>
-                                            <td>{row.status}</td>
-                                        </tr>
+                                        <Table.Row key={row.pid} onClick={this.handleItemClick.bind(this)}>
+                                            <Table.Cell >{row.pid}</Table.Cell>
+                                            <Table.Cell >{row.pname}</Table.Cell>
+                                            <Table.Cell >{row.referrer}</Table.Cell>
+                                            <Table.Cell >{row.assignee}</Table.Cell>
+                                            <Table.Cell >{row.dateof}</Table.Cell>
+                                            <Table.Cell >{row.status}</Table.Cell>
+                                        </Table.Row>
                                     ))}
-                                </tbody>
+                                </Table.Body>
                             </Table>
                         </Col>
                     </Row>
@@ -187,4 +188,5 @@ class ReferralForm extends React.Component {
     }
 }
 
-export default connect(null,)(ReferralForm);
+//export default connect(null,)(ReferralForm);
+export default withRouter(ReferralForm);
