@@ -24,7 +24,7 @@ public class AdminController {
      * @return 200: a JSON of Admin ids or empty JSON otherwise
      */
     @GetMapping(path="/api/admins")
-    public @ResponseBody Iterable<Admin> getAllAdmins() {
+    public Iterable<Admin> getAllAdmins() {
         return adminRepository.findAll();
     }
 
@@ -34,8 +34,7 @@ public class AdminController {
      * @return 200: a JSON with an Admin id if a matching Admin exists, or 'null' otherwise
      */
     @GetMapping(path="/api/admins/{id}")
-    public @ResponseBody
-    Optional<Admin> getAdminById(@PathVariable(value = "id") String id) {
+    public Optional<Admin> getAdminById(@PathVariable(value = "id") String id) {
         return adminRepository.findById(id);
     }
 
@@ -49,7 +48,7 @@ public class AdminController {
      */
     @PostMapping(path="/api/admins")
     @ResponseStatus(code = HttpStatus.CREATED)
-    public @ResponseBody String addNewAdmin (@RequestBody Admin admin){
+    public String addNewAdmin (@RequestBody Admin admin){
         Admin newAdmin = new Admin(admin.getId());
         adminRepository.save(newAdmin);
         return "Saved Admin";

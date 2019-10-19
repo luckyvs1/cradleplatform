@@ -9,11 +9,10 @@ import org.cradlePlatform.model.DrugHistory;
 import org.cradlePlatform.repository.DrugHistoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import java.util.Optional;
+
 @CrossOrigin(origins = { "http://localhost:3000"})
-@Controller
+@RestController
 public class DrugHistoryController {
     @Autowired
     private DrugHistoryRepository drugHistoryRepository;
@@ -27,8 +26,7 @@ public class DrugHistoryController {
      * @return 200: Success
      */
     @GetMapping(path="/api/drugHistories")
-    public @ResponseBody
-    Iterable<DrugHistory> getDrugHistoriesByPatientId(@RequestParam String patientId) {
+    public Iterable<DrugHistory> getDrugHistoriesByPatientId(@RequestParam String patientId) {
         return drugHistoryRepository.findByPatientId(patientId);
     }
 
@@ -41,7 +39,7 @@ public class DrugHistoryController {
 	 */
     @PostMapping(path="/api/drugHistories")
     @ResponseStatus(code = HttpStatus.CREATED)
-    public @ResponseBody String addDrugHistory (@RequestBody DrugHistory dh) {
+    public String addDrugHistory (@RequestBody DrugHistory dh) {
         DrugHistory newDrugHistory = new DrugHistory();
         newDrugHistory.setPatientId(dh.getPatientId());
         newDrugHistory.setHistoryText(dh.getHistoryText());

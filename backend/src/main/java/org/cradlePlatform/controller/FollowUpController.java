@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Optional;
 
 @CrossOrigin(origins = { "http://localhost:3000"})
 @RestController
@@ -26,8 +25,7 @@ public class FollowUpController {
      * @return 200: JSON of followups
      */
     @GetMapping(path="/api/followUps")
-    public @ResponseBody
-    Iterable<FollowUp> getFollowUpByPatientId(@RequestParam String patientId,
+    public Iterable<FollowUp> getFollowUpByPatientId(@RequestParam String patientId,
                                               @RequestParam(value = "latest", required = false) boolean latest) {
         if (latest) {
             return followUpRepository.findTopByPatientIdOrderByIdDesc(patientId);
@@ -45,7 +43,7 @@ public class FollowUpController {
      */
     @PostMapping(path="/api/followUps")
     @ResponseStatus(code = HttpStatus.CREATED)
-    public @ResponseBody String addFollowUp(@RequestBody FollowUp followUp) {
+    public String addFollowUp(@RequestBody FollowUp followUp) {
         FollowUp newFollowUp = new FollowUp();
         newFollowUp.setPatientId(followUp.getPatientId());
         newFollowUp.setFollowUpNotes(followUp.getFollowUpNotes());

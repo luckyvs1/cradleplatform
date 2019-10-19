@@ -9,9 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import java.util.Optional;
+
 @CrossOrigin(origins = { "http://localhost:3000"})
-@Controller
+@RestController
 public class MedicalHistoryController {
     @Autowired
     private MedicalHistoryRepository medicalHistoryRepository;
@@ -24,8 +24,7 @@ public class MedicalHistoryController {
      * @return 200: JSON of patient's MedicalHistory(ies)
      */
     @GetMapping(path="/api/medicalHistories")
-    public @ResponseBody
-    Iterable<MedicalHistory> getMedicalHistoryByPatientId(@RequestParam String patientId,
+    public Iterable<MedicalHistory> getMedicalHistoryByPatientId(@RequestParam String patientId,
                                                           @RequestParam(value = "latest", required = false) boolean latest) {
         if (latest) {
             return medicalHistoryRepository.findTopByPatientIdOrderByIdDesc(patientId);
@@ -39,7 +38,7 @@ public class MedicalHistoryController {
 
     @PostMapping(path="/api/medicalHistories")
     @ResponseStatus(code = HttpStatus.CREATED)
-    public @ResponseBody String addMedicalHistory (@RequestBody MedicalHistory mh) {
+    public String addMedicalHistory (@RequestBody MedicalHistory mh) {
         MedicalHistory newMedicalHistory = new MedicalHistory();
         newMedicalHistory.setPatientId(mh.getPatientId());
         newMedicalHistory.setMedicalHistoryText(mh.getMedicalHistoryText());

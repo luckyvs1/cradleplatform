@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 @CrossOrigin(origins = { "http://localhost:3000"})
-@Controller
+@RestController
 public class HealthWorkerController {
     @Autowired
     private HealthWorkerRepository healthWorkerRepository;
@@ -21,14 +21,13 @@ public class HealthWorkerController {
     // GET mappings
 
     @GetMapping(path="/api/healthWorkers")
-    public @ResponseBody Iterable<HealthWorker> getAllHealthWorkers(){
+    public Iterable<HealthWorker> getAllHealthWorkers(){
         //This returns a JSON or XML with the users
         return healthWorkerRepository.findAll();
     }
 
     @GetMapping(path="/api/healthWorkers/{id}")
-    public @ResponseBody
-    Optional<HealthWorker> getHealthWorkerById(@PathVariable(value = "id") String healthWorkerId){
+    public Optional<HealthWorker> getHealthWorkerById(@PathVariable(value = "id") String healthWorkerId){
         return healthWorkerRepository.findById(healthWorkerId);
     }
 
@@ -36,7 +35,7 @@ public class HealthWorkerController {
 
     @PostMapping(path="/api/healthWorkers")
     @ResponseStatus(code = HttpStatus.CREATED)
-    public @ResponseBody String addNewHealthWorker(@RequestBody HealthWorker hw){
+    public String addNewHealthWorker(@RequestBody HealthWorker hw){
         HealthWorker newHealthWorker = new HealthWorker();
         newHealthWorker.setId(hw.getId());
         healthWorkerRepository.save(newHealthWorker);
