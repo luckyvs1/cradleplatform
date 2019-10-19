@@ -16,6 +16,7 @@ import {
     Tab
 } from 'react-bootstrap';
 import api from "../../../api"
+import {withRouter} from "react-router-dom";
 
 class ReferralDetailForm extends React.Component {
     // functions
@@ -24,9 +25,10 @@ class ReferralDetailForm extends React.Component {
     // validate
     constructor(props) {
         super(props);
+        console.dir("props");
         console.dir(props);
         this.state = {
-            pid:
+            pid: this.props.location.state.pid
         }
     }
 
@@ -47,7 +49,7 @@ class ReferralDetailForm extends React.Component {
                         <Col>
                             <h1>Referral Information</h1>
                             <h2></h2>
-                            <hr>{this.state.pid}</hr>
+                            <hr3>pid = {this.state.pid}</hr3>
                         </Col>
                     </Row>
                     <Tabs id="controlled-tab-example">
@@ -793,4 +795,4 @@ class ReferralDetailForm extends React.Component {
     }
 }
 
-export default ReferralDetailForm;
+export default withRouter(ReferralDetailForm);
