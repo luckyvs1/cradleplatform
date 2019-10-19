@@ -12,7 +12,10 @@ import {
     Dropdown,
     Table
 } from 'semantic-ui-react'
-import {Link, withRouter} from "react-router-dom";
+import {
+    Link,
+    withRouter
+} from "react-router-dom";
 import TopNavigation from "../../navigation/TopNavigation";
 import {
     Container,
@@ -57,8 +60,12 @@ class ReferralForm extends React.Component {
         this.setState({toggled: !this.state.toggled});
     }
 
-    handleItemClick = (e) => {
-        this.props.history.push('/referralDetail');
+    handleItemClick = (row) => {
+        this.props.history.push({
+            pathname: '/referralDetail',
+            state: { pid: row.pid }
+        });
+
 
     };
 
@@ -168,7 +175,7 @@ class ReferralForm extends React.Component {
                                 </Table.Header>
                                 <Table.Body>
                                     {rows.map(row => (
-                                        <Table.Row key={row.pid} onClick={this.handleItemClick.bind(this)}>
+                                        <Table.Row key={row.pid} onClick={() => this.handleItemClick(row)}>
                                             <Table.Cell >{row.pid}</Table.Cell>
                                             <Table.Cell >{row.pname}</Table.Cell>
                                             <Table.Cell >{row.referrer}</Table.Cell>
