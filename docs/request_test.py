@@ -12,7 +12,7 @@ userurl = 'http://localhost:8080/api/users'
 paturl = 'http://localhost:8080/api/patients'
 dhurl = 'http://localhost:8080/api/drugHistories'
 dhparamurl = 'http://localhost:8080/api/drugHistories'
-followupurl = 'http://localhost:8080/api/followUp/3'
+followupurl = 'http://localhost:8080/api/followUps?followUpId=1
 hwurl = 'http://localhost:8080/api/healthWorkers/'
 mhurl = 'http://localhost:8080/api/medicalHistories?patientId=1&latest=true'
 medurl = 'http://localhost:8080/api/medications?drugHistoryId=1'
