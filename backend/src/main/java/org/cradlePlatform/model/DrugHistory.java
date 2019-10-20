@@ -23,7 +23,7 @@ public class DrugHistory {
 
     @Column(name="patient_id", nullable=false, unique=false)
     @Positive(message = "Patient ID Can't Be Empty or Zero")
-    private Integer patientId;
+    private int patientId;
 
     @Column(name="history")
     private String historyText;
@@ -45,11 +45,11 @@ public class DrugHistory {
         this.historyText = historyText;
     }
 
-    public Integer getPatientId() {
+    public int getPatientId() {
         return patientId;
     }
 
-    public void setPatientId(Integer patientId) {
+    public void setPatientId(int patientId) {
         this.patientId = patientId;
     }
 }
