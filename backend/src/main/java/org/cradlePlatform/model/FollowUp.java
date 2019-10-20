@@ -7,6 +7,7 @@ package org.cradlePlatform.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Positive;
 import javax.validation.constraints.Size;
 
 @Entity
@@ -19,9 +20,8 @@ public class FollowUp {
     private int id;
 
     @Column(name="patient_id", length=32, nullable=false)
-    @NotEmpty(message = "Patient ID Can't Be Empty")
-    @Size(max = 32)
-    private String patientId;
+    @Positive(message = "Patient ID Can't Be Empty or Zero")
+    private int patientId;
 
     @Column(name="notes")
     private String followUpNotes;
@@ -45,11 +45,11 @@ public class FollowUp {
         return id;
     }
 
-    public String getPatientId() {
+    public int getPatientId() {
         return patientId;
     }
 
-    public void setPatientId(String patientId) {
+    public void setPatientId(int patientId) {
         this.patientId = patientId;
     }
 

@@ -24,7 +24,7 @@ public class MedicalHistoryController {
      * @return 200: JSON of patient's MedicalHistory(ies)
      */
     @GetMapping(path="/api/medicalHistories")
-    public Iterable<MedicalHistory> getMedicalHistoryByPatientId(@RequestParam String patientId,
+    public Iterable<MedicalHistory> getMedicalHistoryByPatientId(@RequestParam int patientId,
                                                           @RequestParam(value = "latest", required = false) boolean latest) {
         if (latest) {
             return medicalHistoryRepository.findTopByPatientIdOrderByIdDesc(patientId);
