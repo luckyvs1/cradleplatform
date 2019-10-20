@@ -61,10 +61,10 @@ CREATE TABLE Patient (
     pregnant            BOOLEAN,
     gestational_start_date DATE,
     gestational_age_unit  ENUM('week', 'month', 'none'),
-    current_gestational_age       INTEGER   NOT NULL,
+    current_gestational_age       INTEGER,
     CHECK (
             (pregnant IS TRUE AND current_gestational_age IS NOT NULL) OR
-            (pregnant IS FALSE AND current_gestational_age = 0)
+            (pregnant IS FALSE AND (current_gestational_age = 0 OR current_gestational_age IS NULL))
         ),
     CHECK (
             (attestation_no IS NOT NULL) OR

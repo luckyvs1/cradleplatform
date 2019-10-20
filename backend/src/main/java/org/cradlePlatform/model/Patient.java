@@ -72,7 +72,6 @@ public class Patient {
     @Column(name = "pregnant")
     private boolean pregnant;
 
-    @NotNull
     @Column(name = "gestational_start_date")
     @Temporal(TemporalType.DATE)
     private Date gestationalStartDate;
@@ -81,7 +80,6 @@ public class Patient {
     @Column(name = "gestational_age_unit")
     private GestationalAgeTimeUnit gestationAgeUnit;
 
-    @NotNull
     @Column(name = "current_gestational_age")
     private int currentGestationalAge;
 

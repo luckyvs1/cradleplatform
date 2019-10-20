@@ -4,16 +4,14 @@
  */
 package org.cradlePlatform.controller;
 
-import org.cradlePlatform.model.GestationalAgeTimeUnit;
 import org.cradlePlatform.model.Patient;
-import org.cradlePlatform.model.Sex;
 import org.cradlePlatform.repository.PatientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
+
 @CrossOrigin(origins = { "http://localhost:3000"})
 @RestController
 public class PatientController {
@@ -50,6 +48,7 @@ public class PatientController {
      * @return
      */
     @PostMapping(path="/api/patients")
+    @ResponseStatus(code = HttpStatus.CREATED)
     public @ResponseBody String addNewPatient (@RequestBody Patient patient){
         Patient newPatient = new Patient();
         newPatient.setAttestationNo(patient.getAttestationNo());
