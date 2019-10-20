@@ -22,6 +22,24 @@ mhdata = {
     "medicalHistoryText": "gfhgfhfghffssss",
     "testText": "heyall"
 }
+patdata = {
+    "attestationNo": "5",
+    "firstName" : "Lou",
+    "lastName" : "Lee",
+    "villageNo" : "45",
+    "zoneNo" : "100",
+    "householdNo" : "401",
+    "blockNo" : "201",
+    "tankNo" : "301",
+    "initials" : "LL",
+    "sex" : "F",
+    "age" : 23,
+    "dob" : "2019-10-16",
+    "pregnant" : 1,
+    "gestationalStartDate" : "2019-09-28",
+    "gestationAgeUnit" : "week",
+    "currentGestationalAge" : 3
+}
 meddata = {
     "drugHistoryID": "1",
     "drugName": "cannabis",
@@ -72,7 +90,8 @@ fudata = {
 # resp = requests.get(hwurl, data=json.dumps(hwdata), headers=header)
 # resp = requests.get(mhurl, data=json.dumps(mhdata), headers=header)
 # resp = requests.get(paturl, data=json.dumps(dhdata), headers=header)
-resp = requests.get(medurl, headers=header)
+#resp = requests.get(medurl, headers=header)
+resp = requests.post(paturl, data=json.dumps(patdata), headers=header)
 # resp = requests.get(fuurl, data=json.dumps(fudata), headers=header)
 print(resp)
 print(resp.status_code)

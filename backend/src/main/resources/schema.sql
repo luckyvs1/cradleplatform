@@ -45,7 +45,7 @@ CREATE TABLE VHT (
 );
 
 CREATE TABLE Patient (
-    id                  VARCHAR (32)    NOT NULL,
+    id                  INTEGER   AUTO_INCREMENT,
     attestation_no      VARCHAR (32),
     first_name          VARCHAR (32),
     last_name           VARCHAR (32),
@@ -59,14 +59,13 @@ CREATE TABLE Patient (
     age                 INTEGER,
     dob                 DATE,
     pregnant            BOOLEAN,
-    gestational_start_date DATE           NOT NULL,
+    gestational_start_date DATE,
     gestational_age_unit  ENUM('week', 'month', 'none'),
     current_gestational_age       INTEGER   NOT NULL,
     CHECK (
             (pregnant IS TRUE AND current_gestational_age IS NOT NULL) OR
             (pregnant IS FALSE AND current_gestational_age = 0)
         ),
-
     CHECK (
             (attestation_no IS NOT NULL) OR
             (first_name IS NOT NULL AND last_name IS NOT NULL)
