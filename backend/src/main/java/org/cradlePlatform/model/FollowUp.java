@@ -39,12 +39,6 @@ public class FollowUp {
     private String treatment;
 
     public FollowUp() {
-        this.patientId = "";
-        this.followUpNotes = "";
-        this.required = false;
-        this.frequency = "";
-        this.diagnosis = "";
-        this.treatment = "";
     }
 
     public int getId() {
