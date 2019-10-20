@@ -19,7 +19,7 @@ public class MedicalHistory {
     private int id;
 
     @Column(name="patient_id", nullable=false)
-    @Positive(message = "Patient ID Can't Be Empty or Zero")
+    @Positive(message = "Patient ID must be a positive non-zero integer and not empty")
     private int patientId;
 
     @Column(name="history")
