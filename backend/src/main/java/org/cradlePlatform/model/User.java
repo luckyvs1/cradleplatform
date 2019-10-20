@@ -19,7 +19,7 @@ public class User implements Serializable {
 
     @Id
     @GeneratedValue(generator="system-uuid")
-    @GenericGenerator(name="system-uuid", strategy = "uuid")
+    @GenericGenerator(name="system-uuid", strategy = "uuid2")
     @NotNull
     private String id;
 
@@ -58,7 +58,7 @@ public class User implements Serializable {
     @Override
     public String toString() {
         return String.format(
-                "Customer[id=%s, username='%s', password='%s']",
+                "{id: %s, username: '%s', password: '%s'}",
                 id, username, password);
     }
 }

@@ -27,7 +27,7 @@ public class UserInfoController {
         newUserInfo.setLastName(userInfo.getLastName());
         newUserInfo.setDateOfBirth(userInfo.getDateOfBirth());
         newUserInfo.setCountry(userInfo.getCountry());
-        newUserInfo.setPhone(userInfo.getPhone());
+        newUserInfo.setPhoneNumber(userInfo.getPhoneNumber());
         newUserInfo.setEmail(userInfo.getEmail());
         newUserInfo.setRole(userInfo.getRole());
 

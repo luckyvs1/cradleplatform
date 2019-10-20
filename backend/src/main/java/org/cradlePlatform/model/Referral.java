@@ -9,6 +9,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 
 @Entity
 @Table(name = "Referral", schema = "schemas")
@@ -106,6 +107,15 @@ public class Referral {
 
 	public void setNotesAction(String notesAction) {
 		this.notesAction = notesAction;
+	}
+
+	@Override
+	public String toString() {
+		return String.format(
+				"{id: %s, referrerId: '%s', patientId: '%s', readingId: '%s', timestamp: '%s'," +
+						" healthFacility: '%s', notesReason: '%s', notesAction: '%s'}",
+				id, referrerId, patientId, readingId,  new SimpleDateFormat("dd-MM-yyyy HH:mm:ss").format(timestamp),
+				healthFacility, notesReason, notesAction);
 	}
 }
 

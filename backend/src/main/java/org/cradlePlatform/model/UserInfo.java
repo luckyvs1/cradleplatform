@@ -7,9 +7,9 @@ package org.cradlePlatform.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Entity
@@ -46,7 +46,8 @@ public class UserInfo {
 
     @NotBlank
     @Size(max = 16)
-    private String phone;
+    @Column(name = "phone")
+    private String phoneNumber;
 
     @Size(max = 32)
     private String email;
@@ -102,12 +103,12 @@ public class UserInfo {
         this.country = country;
     }
 
-    public String getPhone() {
-        return phone;
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 
-    public void setPhone(String phone) {
-        this.phone = phone;
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
     public String getEmail() {
@@ -124,5 +125,14 @@ public class UserInfo {
 
     public void setRole(RoleType role) {
         this.role = role;
+    }
+
+    @Override
+    public String toString() {
+        return String.format(
+                "{id: %s, attestationNumber: '%s', firstName: '%s', lastName: '%s', dateOfBirth: '%s', " +
+                        "country: '%s', phoneNumber: '%s', email: '%s', RoleType: '%s'}",
+                id, attestationNumber, firstName, lastName, new SimpleDateFormat("yyyy-MM-dd").format(dateOfBirth),
+                country, phoneNumber, email, role);
     }
 }

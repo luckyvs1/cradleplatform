@@ -9,6 +9,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 @Entity
@@ -97,7 +98,7 @@ public class Reading {
 
 	@NotNull
 	@Column(name = "OCR_enabled")
-	private boolean OcrEnabled;
+	private boolean ocrEnabled;
 
 	@NotNull
 	@Column(name = "upload_images")
@@ -276,11 +277,11 @@ public class Reading {
 	}
 
 	public boolean getOcrEnabled() {
-		return OcrEnabled;
+		return ocrEnabled;
 	}
 
 	public void setOcrEnabled(boolean ocrEnabled) {
-		OcrEnabled = ocrEnabled;
+		this.ocrEnabled = ocrEnabled;
 	}
 
 	public boolean getUploadImages() {
@@ -297,5 +298,22 @@ public class Reading {
 
 	public void setVitalsTrafficLight(VitalsTrafficLight vitalsTrafficLight) {
 		this.vitalsTrafficLight = vitalsTrafficLight;
+	}
+
+	@Override
+	public String toString() {
+		return String.format(
+				"{id: %s, readerId: '%s', patientId: '%s', timestamp: '%s', symptoms: '%s', " +
+						"otherSymptoms: '%s', systolicBloodPressure: '%s', diastolicBloodPressure: '%s', " +
+						"pulseRate: '%s', notes: '%s', needFollowUp: '%s', appVersion: '%s', " +
+						"dateLastSaved: '%s', recheckVitalsDate: '%s', deviceInformation: '%s', " +
+						"gestationalAgeTimeUnit: '%s', gestationalAge: '%s', manuallyChangedOcrResults: '%s', " +
+						"photoPath: '%s', totalOcrSeconds: '%s', region: '%s', OcrEnabled: '%s', " +
+						"uploadImages: '%s', vitalsTrafficLight: '%s',}",
+				id, readerId, patientId, new SimpleDateFormat("dd-MM-yyyy HH:mm:ss").format(timestamp),
+				symptoms, otherSymptoms, systolicBloodPressure, diastolicBloodPressure, pulseRate, notes,
+				needFollowUp, appVersion, dateLastSaved, recheckVitalsDate, deviceInformation,
+				gestationalAgeTimeUnit, gestationalAge, manuallyChangedOcrResults, photoPath, totalOcrSeconds,
+				region, ocrEnabled, uploadImages, uploadImages, vitalsTrafficLight);
 	}
 }
