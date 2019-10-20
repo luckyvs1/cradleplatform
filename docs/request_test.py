@@ -41,7 +41,7 @@ patdata = {
     "currentGestationalAge" : 3
 }
 meddata = {
-    "drugHistoryID": "1",
+    "drugHistoryId": "1",
     "drugName": "cannabis",
     "dosage": "once a day as needed",
     "startDate": "2019-09-26",
@@ -50,7 +50,7 @@ meddata = {
 fudata = {
     "patientId": "1",
     "followUpNotes": "notes",
-    "required": True,
+    "required": true,
     "frequency": "once a month",
     "diagnosis": "coolness",
     "treatment": "check up"
