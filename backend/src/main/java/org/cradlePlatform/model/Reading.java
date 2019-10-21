@@ -10,7 +10,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
+
 
 @Entity
 @Table(name = "Reading", schema = "schemas")
@@ -34,7 +34,7 @@ public class Reading {
 	@NotNull
 	private Timestamp timestamp;
 
-	private ArrayList<String> symptoms;
+	private String symptoms;
 
 	@Column(name = "other_symptoms")
 	private String otherSymptoms;
@@ -75,8 +75,10 @@ public class Reading {
 	private String deviceInformation;
 
 	@Enumerated
+    @Column(name = "gestational_age_unit")
 	private GestationalAgeTimeUnit gestationalAgeTimeUnit;
 
+    @Column(name = "gestational_age")
 	private int gestationalAge;
 
 	@NotBlank
@@ -105,7 +107,7 @@ public class Reading {
 	@Column(name = "upload_images")
 	private boolean uploadImages;
 
-	@Enumerated
+	@Enumerated(EnumType.STRING)
 	@Column(name = "reading_analysis")
 	private VitalsTrafficLight vitalsTrafficLight;
 
@@ -137,11 +139,11 @@ public class Reading {
 		this.timestamp = timestamp;
 	}
 
-	public ArrayList<String> getSymptoms() {
+	public String getSymptoms() {
 		return symptoms;
 	}
 
-	public void setSymptoms(ArrayList<String> symptoms) {
+	public void setSymptoms(String symptoms) {
 		this.symptoms = symptoms;
 	}
 
