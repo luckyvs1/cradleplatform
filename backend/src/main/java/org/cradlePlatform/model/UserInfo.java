@@ -23,11 +23,6 @@ public class UserInfo {
 
     @NotBlank
     @Size(max = 32)
-    @Column(name = "at_a_station_no")
-    private String attestationNumber;
-
-    @NotBlank
-    @Size(max = 32)
     @Column(name = "first_name")
     private String firstName;
 
@@ -61,14 +56,6 @@ public class UserInfo {
 
     public void setId(String id) {
         this.id = id;
-    }
-
-    public String getAttestationNumber() {
-        return attestationNumber;
-    }
-
-    public void setAttestationNumber(String attestationNumber) {
-        this.attestationNumber = attestationNumber;
     }
 
     public String getFirstName() {
@@ -130,9 +117,9 @@ public class UserInfo {
     @Override
     public String toString() {
         return String.format(
-                "{id: %s, attestationNumber: '%s', firstName: '%s', lastName: '%s', dateOfBirth: '%s', " +
+                "{id: %s, firstName: '%s', lastName: '%s', dateOfBirth: '%s', " +
                         "country: '%s', phoneNumber: '%s', email: '%s', RoleType: '%s'}",
-                id, attestationNumber, firstName, lastName, new SimpleDateFormat("yyyy-MM-dd").format(dateOfBirth),
+                id, firstName, lastName, new SimpleDateFormat("yyyy-MM-dd").format(dateOfBirth),
                 country, phoneNumber, email, role);
     }
 }

@@ -19,11 +19,10 @@ public class UserController {
     private UserRepository userRepository;
 
     @PostMapping(path="/api/users")
-    public @ResponseBody String addUser(@RequestParam String username,
-                                        @RequestParam String password){
+    public @ResponseBody String addUser(@RequestBody User user){
         User newUser = new User();
-        newUser.setUsername(username);
-        newUser.setPassword(password);
+        newUser.setUsername(user.getUsername());
+        newUser.setPassword(user.getPassword());
 
         userRepository.save(newUser);
 

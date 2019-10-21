@@ -19,7 +19,7 @@ public class User implements Serializable {
 
     @Id
     @GeneratedValue(generator="system-uuid")
-    @GenericGenerator(name="system-uuid", strategy = "uuid2")
+    @GenericGenerator(name="system-uuid", strategy = "uuid")
     @NotNull
     private String id;
 

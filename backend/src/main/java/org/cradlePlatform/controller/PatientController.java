@@ -4,57 +4,65 @@
  */
 package org.cradlePlatform.controller;
 
-import org.cradlePlatform.model.GestationalAgeTimeUnit;
 import org.cradlePlatform.model.Patient;
-import org.cradlePlatform.model.Sex;
 import org.cradlePlatform.repository.PatientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
+
 @CrossOrigin(origins = { "http://localhost:3000"})
-@Controller
+@RestController
 public class PatientController {
     @Autowired
     private PatientRepository patientRepository;
 
+    // POST mappings
+
+    /**
+     * Create a new patient
+     * @param patient
+     * @return
+     */
     @PostMapping(path="/api/patients")
-    public @ResponseBody String addNewPatient (@RequestParam String id,
-                                               @RequestParam String villageNo,
-                                               @RequestParam String initials,
-                                               @RequestParam Sex sex,
-                                               @RequestParam int age,
-                                               @RequestParam boolean pregnant,
-                                               @RequestParam GestationalAgeTimeUnit gestationAgeUnit,
-                                               @RequestParam int gestation_age){
+    public String addNewPatient (@RequestBody Patient patient){
         Patient newPatient = new Patient();
-        newPatient.setId(id);
-        newPatient.setVillageNo(villageNo);
-        newPatient.setInitials(initials);
-        newPatient.setSex(sex);
-        newPatient.setAge(age);
-        newPatient.setPregnant(pregnant);
-        newPatient.setGestationAgeUnit(gestationAgeUnit);
-        newPatient.setGestationAge(gestation_age);
-
+        newPatient.setAttestationNo(patient.getAttestationNo());
+        newPatient.setFirstName(patient.getFirstName());
+        newPatient.setLastName(patient.getLastName());
+        newPatient.setVillageNo(patient.getVillageNo());
+        newPatient.setZoneNo(patient.getZoneNo());
+        newPatient.setHouseholdNo(patient.getHouseholdNo());
+        newPatient.setInitials(patient.getInitials());
+        newPatient.setSex(patient.getSex());
+        newPatient.setAge(patient.getAge());
+        newPatient.setDob(patient.getDob());
+        newPatient.setPregnant(patient.isPregnant());
+        newPatient.setGestationalStartDate(patient.getGestationalStartDate());
+        newPatient.setCurrentGestationalAge(patient.getCurrentGestationalAge());
         patientRepository.save(newPatient);
-
         return "Saved Patient";
     }
 
+    // GET mappings
+
+    /**
+     * Get data for all patients
+     * @return
+     */
     @GetMapping(path="/api/patients")
-    public @ResponseBody Iterable<Patient> getAllPatients(){
+    public Iterable<Patient> getAllPatients() {
         return patientRepository.findAll();
     }
 
-    @GetMapping(path="/api/patients/{id:\\d+}")
-    public @ResponseBody Optional<Patient> getPatientById(@PathVariable(value = "id") String patientId){
+    /**
+     * Get data for patient with matching patient id
+     * @param patientId
+     * @return
+     */
+    @GetMapping(path="/api/patients/{id}")
+    public Optional<Patient> getPatientById(@PathVariable(value = "id") String patientId) {
         return patientRepository.findById(patientId);
     }
-
-    @GetMapping(path="/api/patients/{initials}")
-    public @ResponseBody Patient getPatientByInitials(@PathVariable(value = "initials") String initials){
-        return patientRepository.findByInitials(initials);
-    }
 }
+

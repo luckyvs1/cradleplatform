@@ -4,8 +4,11 @@
  */
 package org.cradlePlatform.controller;
 
+import org.cradlePlatform.model.RoleType;
 import org.cradlePlatform.model.UserInfo;
+import org.cradlePlatform.model.VHT;
 import org.cradlePlatform.repository.UserInfoRepository;
+import org.cradlePlatform.repository.VHTRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -17,12 +20,14 @@ public class UserInfoController {
     @Autowired
     private UserInfoRepository userInfoRepository;
 
+    @Autowired
+    private VHTRepository vhtRepository;
+
     @PostMapping(path="/api/user-information")
     @ResponseStatus(code = HttpStatus.CREATED)
     public String addUserInfo(@RequestBody UserInfo userInfo){
         UserInfo newUserInfo = new UserInfo();
         newUserInfo.setId(userInfo.getId());
-        newUserInfo.setAttestationNumber(userInfo.getAttestationNumber());
         newUserInfo.setFirstName(userInfo.getFirstName());
         newUserInfo.setLastName(userInfo.getLastName());
         newUserInfo.setDateOfBirth(userInfo.getDateOfBirth());
@@ -32,6 +37,12 @@ public class UserInfoController {
         newUserInfo.setRole(userInfo.getRole());
 
         userInfoRepository.save(newUserInfo);
+
+        if (userInfo.getRole() == RoleType.VHT) {
+            VHT vht = new VHT();
+            vht.setId(userInfo.getId());
+            vhtRepository.save(vht);
+        }
 
         return "Saved User Information";
     }
