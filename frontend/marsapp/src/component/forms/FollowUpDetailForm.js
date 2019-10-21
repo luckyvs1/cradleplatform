@@ -19,10 +19,29 @@ import {connect} from "react-redux";
 
 class FollowUpDetailForm extends React.Component {
 
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            data: [{
+                diagnosis: "",
+                followUpNotes: "",
+                frequency: "",
+                id: null,
+                patientId: "",
+                required: true,
+                treatment: "",
+            }],
+        };
+
+    }
+
     componentDidMount() {
         api.followUp.getFollowUpByFollowUpId({followUpId: 22}).then(res => {
             // fetching all follow up
-            console.log("by patient id", res);
+            console.log("by patient id", res);  const data = res.data;
+            this.setState({data})
+
         })
     }
 
@@ -46,7 +65,7 @@ class FollowUpDetailForm extends React.Component {
                 value: 'Once a month',
             }
         ];
-
+        console.log("state data", this.state)
 
         return (
 
@@ -62,12 +81,12 @@ class FollowUpDetailForm extends React.Component {
                     <Row>
                         <Col>
                             <Form.Group>
-                                <Form.Label>Patient</Form.Label>
+                                <Form.Label>Patient Id</Form.Label>
                                 <Form.Control
                                     type="text"
                                     id="patient"
-                                    name="patient"
-                                    value={'0123456'}/>
+                                    name="patientId"
+                                    value={this.state.data.patientId}/>
                                 {/*error handling*/}
                                 {/* <Form.Text className="text-muted">
                                     {errors.email && <InlineError text={errors.email} />}
@@ -78,12 +97,12 @@ class FollowUpDetailForm extends React.Component {
                     <Row>
                         <Col>
                             <Form.Group>
-                                <Form.Label>Location</Form.Label>
+                                <Form.Label>Follow Up Note:</Form.Label>
                                 <Form.Control
                                     type="text"
-                                    id="location"
-                                    name="location"
-                                    value={'0123456'}/>
+                                    id="followUpNotes"
+                                    name="followUpNotes"
+                                    value={this.state.data.followUpNotes}/>
                                 {/*error handling*/}
                                 {/* <Form.Text className="text-muted">
                                     {errors.email && <InlineError text={errors.email} />}
@@ -94,12 +113,28 @@ class FollowUpDetailForm extends React.Component {
                     <Row>
                         <Col>
                             <Form.Group>
-                                <Form.Label>Status</Form.Label>
+                                <Form.Label>Diagnosis</Form.Label>
                                 <Form.Control
                                     type="text"
-                                    id="status"
-                                    name="status"
-                                    value={'0123456'}/>
+                                    id="diagnosis"
+                                    name="diagnosis"
+                                    value={this.state.data.diagnosis}/>
+                                {/*error handling*/}
+                                {/* <Form.Text className="text-muted">
+                                    {errors.email && <InlineError text={errors.email} />}
+                                </Form.Text> */}
+                            </Form.Group>
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col>
+                            <Form.Group>
+                                <Form.Label>Treatment</Form.Label>
+                                <Form.Control
+                                    type="text"
+                                    id="treatment"
+                                    name="treatment"
+                                    value={this.state.data.treatment}/>
                                 {/*error handling*/}
                                 {/* <Form.Text className="text-muted">
                                     {errors.email && <InlineError text={errors.email} />}
@@ -115,7 +150,7 @@ class FollowUpDetailForm extends React.Component {
                                     type="text"
                                     id="frequency"
                                     name="frequency"
-                                    value={'0123456'}/>
+                                    value={this.state.data.frequency}/>
                                 {/*error handling*/}
                                 {/* <Form.Text className="text-muted">
                                     {errors.email && <InlineError text={errors.email} />}
