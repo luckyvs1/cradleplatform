@@ -14,7 +14,7 @@ import javax.validation.constraints.Size;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "User", schema = "schemas")
+@Table(name = "User")
 public class User implements Serializable {
 
     @Id

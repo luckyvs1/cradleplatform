@@ -13,7 +13,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Entity
-@Table(name = "Referral", schema = "schemas")
+@Table(name = "Referral")
 public class Referral {
 
 	@Id

@@ -9,7 +9,7 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 @Entity
-@Table(name = "VHT", schema = "schemas")
+@Table(name = "VHT")
 public class VHT {
 
     @Id
