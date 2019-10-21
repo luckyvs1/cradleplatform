@@ -23,14 +23,15 @@ class LoginPage extends React.Component {
       submit = data => {
         api.user.login(data)
             .then(res => {
-                if(res.data.id == "1"){
-                    this.props.updateLogIn(res.data.id );
+                if(res){
+                    let accessToken = "nGzv3JORFQXG3x21KW1a"
+                    this.props.updateLogIn(accessToken);
 
                     auth.login(()=>{
                         localStorage.loginToken = auth.authenticated;
                         this.props.history.push("/homePage");
                     })
-                    console.log(res.data)
+                    console.log("LOG IN" ,res.data)
                 }else{
                     // pop up cannot log in
 
