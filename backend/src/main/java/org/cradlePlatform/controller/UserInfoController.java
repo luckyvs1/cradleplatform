@@ -22,7 +22,6 @@ public class UserInfoController {
     public String addUserInfo(@RequestBody UserInfo userInfo){
         UserInfo newUserInfo = new UserInfo();
         newUserInfo.setId(userInfo.getId());
-        newUserInfo.setAttestationNumber(userInfo.getAttestationNumber());
         newUserInfo.setFirstName(userInfo.getFirstName());
         newUserInfo.setLastName(userInfo.getLastName());
         newUserInfo.setDateOfBirth(userInfo.getDateOfBirth());
