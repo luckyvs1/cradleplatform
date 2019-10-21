@@ -5,18 +5,21 @@
 package org.cradlePlatform.model;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "Admin", schema = "schemas")
 public class Admin {
 
     @Id
-    @Column(name="id", nullable=false, unique=true)
-    @NotEmpty(message = "ID can't be empty")
+    @Column(name="id")
+    @NotBlank(message = "ID can't be empty")
     private String id;
 
     public Admin() {
+    }
+
+    public Admin(String id) {
         this.id = id;
     }
 

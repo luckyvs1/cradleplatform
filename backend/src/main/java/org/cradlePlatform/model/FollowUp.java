@@ -14,15 +14,12 @@ import javax.validation.constraints.Size;
 public class FollowUp {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id", nullable=false, unique=true)
-    @NotEmpty(message = "ID Can't Be Empty")
     private int id;
 
     @Column(name="patient_id", length=32, nullable=false)
-    @NotEmpty(message = "Patient ID Can't Be Empty")
-    @Size(max = 32)
-    private String patientID;
+    private int patientId;
 
     @Column(name="notes")
     private String followUpNotes;
@@ -39,20 +36,19 @@ public class FollowUp {
     @Column(name="treatment")
     private String treatment;
 
+    public FollowUp() {
+    }
+
     public int getId() {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public int getPatientId() {
+        return patientId;
     }
 
-    public String getPatientID() {
-        return patientID;
-    }
-
-    public void setPatientID(String patientID) {
-        this.patientID = patientID;
+    public void setPatientId(int patientId) {
+        this.patientId = patientId;
     }
 
     public String getFollowUpNotes() {

@@ -45,7 +45,7 @@ CREATE TABLE VHT (
 );
 
 CREATE TABLE Patient (
-    id                  VARCHAR (32)    NOT NULL,
+    id                  INTEGER   AUTO_INCREMENT,
     attestation_no      VARCHAR (32),
     first_name          VARCHAR (32),
     last_name           VARCHAR (32),
@@ -59,14 +59,13 @@ CREATE TABLE Patient (
     age                 INTEGER,
     dob                 DATE,
     pregnant            BOOLEAN,
-    gestational_start_date DATE           NOT NULL,
+    gestational_start_date DATE,
     gestational_age_unit  ENUM('week', 'month', 'none'),
-    current_gestational_age       INTEGER   NOT NULL,
+    current_gestational_age       INTEGER,
     CHECK (
             (pregnant IS TRUE AND current_gestational_age IS NOT NULL) OR
             (pregnant IS FALSE AND current_gestational_age = 0)
         ),
-
     CHECK (
             (attestation_no IS NOT NULL) OR
             (first_name IS NOT NULL AND last_name IS NOT NULL)
@@ -76,7 +75,7 @@ CREATE TABLE Patient (
 
 CREATE TABLE Drug_History (
     id          INTEGER     NOT NULL AUTO_INCREMENT,
-    patient_id  VARCHAR(32) NOT NULL,
+    patient_id  INTEGER NOT NULL,
     history     TEXT,
     PRIMARY KEY (id),
     FOREIGN KEY (patient_id) REFERENCES Patient(id) ON DELETE CASCADE
@@ -95,7 +94,7 @@ CREATE TABLE Medication (
 
 CREATE TABLE Medical_History (
     id          INTEGER     NOT NULL AUTO_INCREMENT,
-    patient_id  VARCHAR(32) NOT NULL,
+    patient_id  INTEGER NOT NULL,
     history     TEXT,
     PRIMARY KEY (id),
     FOREIGN KEY (patient_id) REFERENCES Patient(id) ON DELETE CASCADE
@@ -103,7 +102,7 @@ CREATE TABLE Medical_History (
 
 CREATE TABLE FollowUp (
     id          INTEGER     NOT NULL AUTO_INCREMENT,
-    patient_id  VARCHAR(32) NOT NULL,
+    patient_id  INTEGER NOT NULL,
     notes       TEXT,
     required    BOOLEAN,
     frequency   TEXT,
@@ -116,7 +115,7 @@ CREATE TABLE FollowUp (
 CREATE TABLE Reading (
     id              INTEGER         NOT NULL AUTO_INCREMENT,
     reader_id       VARCHAR (32)    NOT NULL,
-    patient_id      VARCHAR (32)    NOT NULL,
+    patient_id      INTEGER    NOT NULL,
     timestamp       TIMESTAMP       NOT NULL,
     symptoms        SET('No Symptoms',
                         'Headache',
@@ -156,7 +155,7 @@ CREATE TABLE Reading (
 CREATE TABLE Referral (
     id          INTEGER         NOT NULL AUTO_INCREMENT,
     referrer_id VARCHAR (32)    NOT NULL,
-    patient_id  VARCHAR (32)    NOT NULL,
+    patient_id  INTEGER    NOT NULL,
     reading_id  INTEGER         NOT NULL,
     timestamp   TIMESTAMP       NOT NULL,
     health_facility VARCHAR (32) NOT NULL,
@@ -170,7 +169,7 @@ CREATE TABLE Referral (
 
 CREATE TABLE Monitor (
     VHT_id         VARCHAR (32)    NOT NULL,
-    patient_id     VARCHAR (32)    NOT NULL,
+    patient_id     INTEGER    NOT NULL,
     UNIQUE (VHT_id, patient_id),
     PRIMARY KEY (VHT_id, patient_id),
     FOREIGN KEY (VHT_id) REFERENCES VHT(id) ON DELETE CASCADE,
