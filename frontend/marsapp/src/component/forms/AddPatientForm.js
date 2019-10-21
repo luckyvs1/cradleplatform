@@ -50,14 +50,13 @@ class AddPatientForm extends React.Component {
     onChange = e => this.setState({data: {...this.state.data, [e.target.name]: e.target.value} });
     onChangeDob = date => {
         this.setState({
-            dob: moment(date, 'MM-dd-yyyy')
-        }, () => console.log(this.state.dob));
+            data: {dob: date}
+        }, () => console.log(this.state.data.dob));
     };
     onChangeDateGest = date => {
         this.setState({
-            gestational_start_date: moment(date, 'MM-dd-yyyy')
-        });
-        console.log(date);
+            data: {gestational_start_date: date}
+        }, () => console.log(this.state.data.gestational_start_date));
     };
     onSubmit = (event) => {
     /**
