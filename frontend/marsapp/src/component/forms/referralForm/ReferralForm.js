@@ -30,11 +30,11 @@ function createData(rid, pid, pname, referrer, assignee, dateof, status) {
 }
 
 const rows = [
-    createData('111555666', '111555666', 'Alex', 'thomas', 'None', new Date().toDateString(), 'Require response'),
-    createData('111555666', '222555444', 'Bob', 'theo', 'None', new Date().toDateString(), 'Require response'),
-    createData('111555666', '111222333', 'fanny', 'theresha', 'Jenny Hess', new Date().toDateString(), 'Require response'),
-    createData('111555666', '111222888', 'hanny', 'Brian', 'None', new Date().toDateString(), 'Require response'),
-    createData('111555666', '444555666', 'janny', 'Katy', 'Elliot Fu', new Date().toDateString(), 'Done'),
+    createData('111555666', '111555666', 'AS', 'thomas', 'None', new Date().toDateString(), 'Require response'),
+    createData('111555666', '222555444', 'QW', 'theo', 'None', new Date().toDateString(), 'Require response'),
+    createData('111555666', '111222333', 'DW', 'theresha', 'Jenny Hess', new Date().toDateString(), 'Require response'),
+    createData('111555666', '111222888', 'GF', 'Brian', 'None', new Date().toDateString(), 'Require response'),
+    createData('111555666', '444555666', 'VV', 'Katy', 'Elliot Fu', new Date().toDateString(), 'Done'),
 ];
 
 class ReferralForm extends React.Component {
@@ -63,7 +63,10 @@ class ReferralForm extends React.Component {
     handleItemClick = (row) => {
         this.props.history.push({
             pathname: '/referralDetail',
-            state: { rid: row.rid }
+            state: {
+                rid: row.rid,
+                initials: row.pname
+            }
         });
     };
 
@@ -160,11 +163,11 @@ class ReferralForm extends React.Component {
                     </Row>
                     <Row>
                         <Col>
-                            <Table bordered hover size="sm">
+                            <Table bordered hover size="small">
                                 <Table.Header>
                                     <Table.Row>
                                         <Table.HeaderCell >Patient ID</Table.HeaderCell>
-                                        <Table.HeaderCell >Patient Name</Table.HeaderCell>
+                                        <Table.HeaderCell >Patient Initials</Table.HeaderCell>
                                         <Table.HeaderCell >Referred By</Table.HeaderCell>
                                         <Table.HeaderCell >Assigned to</Table.HeaderCell>
                                         <Table.HeaderCell >Referral Date</Table.HeaderCell>
