@@ -4,7 +4,10 @@ import org.cradlePlatform.model.MedicalHistory;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
-@Repository
-public interface MedicalHistoryRepository extends CrudRepository<MedicalHistory, String> {
+import java.util.Optional;
 
+@Repository
+public interface MedicalHistoryRepository extends CrudRepository<MedicalHistory, Integer> {
+	Iterable<MedicalHistory> findTopByPatientIdOrderByIdDesc(int patientId);
+	Iterable<MedicalHistory> findAllByPatientId(int patientId);
 }
