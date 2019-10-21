@@ -26,10 +26,9 @@ public class Reading {
 	@Column(name = "reader_id")
 	private String readerId;
 
-	@NotBlank
 	@Size(max = 32)
 	@Column(name = "patient_id")
-	private String patientId;
+	private int patientId;
 
 	@NotNull
 	private Timestamp timestamp;
@@ -123,11 +122,11 @@ public class Reading {
 		this.readerId = readerId;
 	}
 
-	public String getPatientId() {
+	public int getPatientId() {
 		return patientId;
 	}
 
-	public void setPatientId(String patientId) {
+	public void setPatientId(int patientId) {
 		this.patientId = patientId;
 	}
 

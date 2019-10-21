@@ -26,10 +26,9 @@ public class Referral {
 	@Column(name = "referrer_id")
 	private String referrerId;
 
-	@NotBlank
 	@Size(max = 32)
 	@Column(name = "patient_id")
-	private String patientId;
+	private int patientId;
 
 	@Column(name = "reading_id")
 	private int readingId;
@@ -60,11 +59,11 @@ public class Referral {
 		this.referrerId = referrerId;
 	}
 
-	public String getPatientId() {
+	public int getPatientId() {
 		return patientId;
 	}
 
-	public void setPatientId(String patientId) {
+	public void setPatientId(int patientId) {
 		this.patientId = patientId;
 	}
 
