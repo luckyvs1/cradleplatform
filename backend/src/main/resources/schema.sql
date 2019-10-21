@@ -56,7 +56,7 @@ CREATE TABLE Patient (
     dob                 DATE,
     pregnant            BOOLEAN,
     gestational_start_date DATE,
-    gestational_age_unit  ENUM('week', 'month', 'none'),
+    gestational_age_unit  ENUM('weeks', 'months', 'none'),
     current_gestational_age       INTEGER,
     CHECK (
             (pregnant IS TRUE AND current_gestational_age IS NOT NULL) OR
