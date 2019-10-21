@@ -113,10 +113,6 @@ public class Reading {
 		return id;
 	}
 
-	public void setId(int id) {
-		this.id = id;
-	}
-
 	public String getReaderId() {
 		return readerId;
 	}
