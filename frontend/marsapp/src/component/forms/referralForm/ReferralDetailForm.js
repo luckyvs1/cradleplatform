@@ -28,13 +28,13 @@ class ReferralDetailForm extends React.Component {
         console.dir("props");
         console.dir(props);
         this.state = {
-            pid: this.props.location.state.pid
+            rid: this.props.location.state.rid
         }
     }
 
     componentDidMount() {
-        console.log("api calling")
-        let data = {referrerId:1}
+        console.log("api calling");
+        let data = this.state.rid;
         api.referral.getReferralById(data).then(res => {
             // fetching all follow up
             console.log("All referral", res);
@@ -50,8 +50,9 @@ class ReferralDetailForm extends React.Component {
                     <Row>
                         <Col>
                             <h1>Referral Information</h1>
-                            <h2></h2>
-                            <hr3>pid = {this.state.pid}</hr3>
+                            {/*TODO: For testing, remove pid before demo*/}
+                            <h2>rid = {this.state.rid}</h2>
+                            <hr></hr>
                         </Col>
                     </Row>
                     <Tabs id="controlled-tab-example">
