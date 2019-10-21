@@ -8,6 +8,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import moment from 'moment';
 import TopNavigation from "../navigation/TopNavigation";
 import {
     Container,
@@ -43,18 +44,18 @@ class AddPatientForm extends React.Component {
                 errors: {}
             };
             this.onChange = this.onChange.bind(this);
+            this.onChangeDateGest = this.onChangeDateGest.bind(this);
             this.onSubmit = this.onSubmit.bind(this);
         }
     onChange = e => this.setState({data: {...this.state.data, [e.target.name]: e.target.value} });
     onChangeDob = date => {
         this.setState({
-            dob: date
-        });
-        console.log(date);
+            dob: moment(date, 'MM-dd-yyyy')
+        }, () => console.log(this.state.dob));
     };
     onChangeDateGest = date => {
         this.setState({
-            gestational_start_date: date
+            gestational_start_date: moment(date, 'MM-dd-yyyy')
         });
         console.log(date);
     };
@@ -128,9 +129,10 @@ class AddPatientForm extends React.Component {
                                         <Form.Label>Date of Birth</Form.Label>
                                         <DatePicker
                                             value={data.dob}
+                                            selected={data.dob}
                                             id="dob"
                                             name="dob"
-                                            dateFormat="MM/DD/YYYY"
+                                            dateFormat="MM-dd-yyyy"
                                             onChange={this.onChangeDob}
                                         />
                                     </Form.Group>
@@ -149,9 +151,10 @@ class AddPatientForm extends React.Component {
                                         <Form.Label>Gestational Start Date</Form.Label>
                                         <DatePicker
                                             value={data.gestational_start_date}
+                                            selected={data.gestational_start_date}
                                             id="gestational_start_date"
                                             name="gestational_start_date"
-                                            dateFormat="MM/DD/YYYY"
+                                            dateFormat="MM-dd-yyyy"
                                             onChange={this.onChangeDateGest}
                                         />
                                     </Form.Group>
