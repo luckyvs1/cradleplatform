@@ -17,6 +17,7 @@ import {
     Form,
     Table
 } from 'react-bootstrap';
+import {withRouter} from "react-router-dom";
 
 const statusGreen = {
     backgroundColor: "green"
@@ -30,11 +31,21 @@ const statusRed = {
     backgroundColor: "red"
 };
 
-export default class PatientDetailForm extends React.Component {
+class PatientDetailForm extends React.Component {
     // functions
     // states
     // submit
     // validate
+
+    constructor(props) {
+        super(props);
+        console.dir("props");
+        console.dir(props);
+        this.state = {
+            pid: this.props.location.state.pid,
+            initial: this.props.location.state.initial
+        }
+    }
 
     render() {
         return (
@@ -51,8 +62,8 @@ export default class PatientDetailForm extends React.Component {
                         <Col md={2}>
                             <strong>Patient ID:</strong>
                         </Col>
-                        <Col md={4}>                            
-                            0123456
+                        <Col md={4}>
+                            {this.state.pid}
                         </Col>
                     </Row>
                     <Row>
@@ -60,7 +71,7 @@ export default class PatientDetailForm extends React.Component {
                             <strong>Initials:</strong>
                         </Col>
                         <Col md={4}>
-                            AS
+                            {this.state.initial}
                         </Col>
                     </Row>
                     <Row>
@@ -261,3 +272,5 @@ export default class PatientDetailForm extends React.Component {
         );
     }
 }
+
+export default withRouter(PatientDetailForm);
