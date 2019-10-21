@@ -25,16 +25,16 @@ import {
 } from 'react-bootstrap';
 import api from "../../../api"
 
-function createData(pid, pname, referrer, assignee, dateof, status) {
-    return {pid, pname, referrer, assignee, dateof, status};
+function createData(rid, pid, pname, referrer, assignee, dateof, status) {
+    return {rid, pid, pname, referrer, assignee, dateof, status};
 }
 
 const rows = [
-    createData('111555666', 'Alex', 'thomas', 'None', new Date().toDateString(), 'Require response'),
-    createData('222555444', 'Bob', 'theo', 'None', new Date().toDateString(), 'Require response'),
-    createData('111222333', 'fanny', 'theresha', 'Jenny Hess', new Date().toDateString(), 'Require response'),
-    createData('111222888', 'hanny', 'Brian', 'None', new Date().toDateString(), 'Require response'),
-    createData('444555666', 'janny', 'Katy', 'Elliot Fu', new Date().toDateString(), 'Done'),
+    createData('111555666', '111555666', 'Alex', 'thomas', 'None', new Date().toDateString(), 'Require response'),
+    createData('111555666', '222555444', 'Bob', 'theo', 'None', new Date().toDateString(), 'Require response'),
+    createData('111555666', '111222333', 'fanny', 'theresha', 'Jenny Hess', new Date().toDateString(), 'Require response'),
+    createData('111555666', '111222888', 'hanny', 'Brian', 'None', new Date().toDateString(), 'Require response'),
+    createData('111555666', '444555666', 'janny', 'Katy', 'Elliot Fu', new Date().toDateString(), 'Done'),
 ];
 
 class ReferralForm extends React.Component {
@@ -62,10 +62,8 @@ class ReferralForm extends React.Component {
     handleItemClick = (row) => {
         this.props.history.push({
             pathname: '/referralDetail',
-            state: { pid: row.pid }
+            state: { rid: row.rid }
         });
-
-
     };
 
     useStyles = makeStyles(theme => ({
@@ -127,7 +125,7 @@ class ReferralForm extends React.Component {
                     <Row>
                         <Col>
                             <Form size={'small'}>
-                                <Form.Group grouped width={'equal'}>
+                                <Form.Group widths={'equal'}>
                                     <Form.Field>
                                         <label>Assign To:</label>
                                         <Dropdown
