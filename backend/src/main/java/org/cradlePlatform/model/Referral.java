@@ -16,7 +16,7 @@ import java.text.SimpleDateFormat;
 public class Referral {
 
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@NotNull
 	private int id;
 
