@@ -4,6 +4,7 @@ import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.util.Objects;
 
 public class MonitorId implements Serializable {
 
@@ -23,8 +24,6 @@ public class MonitorId implements Serializable {
     }
 
     public MonitorId(){
-        vhtId = "";
-        patientId = "";
     }
 
     public String getVhtId() {
@@ -50,14 +49,14 @@ public class MonitorId implements Serializable {
 
         MonitorId that = (MonitorId) o;
 
-        if (!vhtId.equals(that.patientId)) return false;
+        if (!vhtId.equals(that.patientId)) {
+            return false;
+        }
         return vhtId.equals(that.patientId);
     }
 
     @Override
     public int hashCode() {
-        int result = vhtId.hashCode();
-        result = 31 * result + patientId.hashCode();
-        return result;
+        return Objects.hash(vhtId, patientId);
     }
 }

@@ -2,7 +2,6 @@ package org.cradlePlatform.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
-import java.io.Serializable;
 
 @Entity
 @IdClass(MonitorId.class)

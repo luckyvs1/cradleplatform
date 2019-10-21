@@ -9,7 +9,6 @@ import org.cradlePlatform.model.VHT;
 import org.cradlePlatform.repository.MonitorRepository;
 import org.cradlePlatform.repository.VHTRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 @CrossOrigin(origins = {"http://localhost:3000"})
@@ -29,9 +28,15 @@ public class VHTController {
         return "Saved VHT";
     }
 
-    @GetMapping(path = "/api/vhts/{id}/patients")
+    @GetMapping(path="/api/vhts/{id}/patients")
     public Iterable<Patient> getPatientsByVhtId(@PathVariable(value = "id") String id) {
         return monitorRepository.getPatientsByVhtId(id);
+    }
+
+    @GetMapping(path="/api/vhts/{vhtId}/patients/{patientId}")
+    public Patient getPatientByVhtIdAndPatientId(@PathVariable(value = "vhtId") String vhtId,
+                                                 @PathVariable(value = "patientId") String patientId) {
+        return monitorRepository.getPatientByVhtIdAndPatientId(vhtId, patientId);
     }
 
     @GetMapping(path="/api/vhts")
