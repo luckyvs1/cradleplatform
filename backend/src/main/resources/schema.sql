@@ -130,7 +130,7 @@ CREATE TABLE Reading (
     date_last_saved TIMESTAMP       NOT NULL,
     date_recheck_vitals_needed TIMESTAMP    NOT NULL,
     device_info     VARCHAR(32)     NOT NULL,
-    gestational_age_unit  ENUM('week', 'month', 'none'),
+    gestational_age_unit  ENUM('weeks', 'months', 'none'),
     gestational_age INTEGER,
     manually_changed_OCR_results VARCHAR(16)   NOT NULL,
     path_to_photo   VARCHAR(128)    NOT NULL,
