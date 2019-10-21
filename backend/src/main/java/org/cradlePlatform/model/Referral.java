@@ -10,6 +10,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 
 @Entity
 @Table(name = "Referral", schema = "schemas")
@@ -34,15 +35,17 @@ public class Referral {
 	private int readingId;
 
 	@NotNull
-	private Timestamp timestamp;
+	private Timestamp timestamp = new Timestamp(new Date().getTime());
 
 	@NotBlank
 	@Size(max = 32)
 	@Column(name = "health_facility")
 	private String healthFacility;
 
+	@Column(name = "notes_reason")
 	private String notesReason;
 
+	@Column(name = "notes_action")
 	private String notesAction;
 
 	public int getId() {

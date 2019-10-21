@@ -32,6 +32,7 @@ public class UserInfo {
     private String lastName;
 
     @NotNull
+    @Temporal(TemporalType.DATE)
     @Column(name = "dob")
     private Date dateOfBirth;
 
