@@ -17,7 +17,8 @@ import java.util.ArrayList;
 public class Reading {
 
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@NotNull
 	private int id;
 
 	@NotBlank
