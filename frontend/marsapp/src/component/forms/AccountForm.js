@@ -14,33 +14,175 @@ import {
     Form
 } from 'react-bootstrap';
 import PropTypes from "prop-types";
-
+import Popup from "reactjs-popup";
 import api from "../../api"
+
+const Modal = () => (
+
+
+    <Popup
+        trigger={<Button variant="success" onClick={() => this.submit(this.state.data)}>
+            Create
+        </Button>}
+        modal
+        closeOnDocumentClick
+    >
+        <Container className={"text-left"}>
+            <Form>
+                <Row>
+                    <Col>
+                        <Form.Group>
+                            <Form.Label>Username</Form.Label>
+                            <Form.Control
+                                type="text"
+                                id="username"
+                                name="username"
+                                placeholder="Username"
+                            />
+                            {/*error handling*/}
+                            {/* <Form.Text className="text-muted">
+                                        {errors.email && <InlineError text={errors.email} />}
+                                    </Form.Text> */}
+                        </Form.Group>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col>
+                        <Form.Group>
+                            <Form.Label>First Name</Form.Label>
+                            <Form.Control
+                                type="text"
+                                id="last_name"
+                                name="last_name"
+                                placeholder="First Name"
+                            />
+                            {/*error handling*/}
+                            {/* <Form.Text className="text-muted">
+                                        {errors.email && <InlineError text={errors.email} />}
+                                    </Form.Text> */}
+                        </Form.Group>
+                    </Col>
+                    <Col>
+                        <Form.Group>
+                            <Form.Label>Last Name</Form.Label>
+                            <Form.Control
+                                type="text"
+                                id="last_name"
+                                name="last_name"
+                                placeholder="Last Name"
+
+                            />
+                            {/*error handling*/}
+                            {/* <Form.Text className="text-muted">
+                                        {errors.email && <InlineError text={errors.email} />}
+                                    </Form.Text> */}
+                        </Form.Group>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col>
+                        <Form.Group>
+                            <Form.Label>Email</Form.Label>
+                            <Form.Control
+                                type="email"
+                                id="email"
+                                name="email"
+                                placeholder="Email Addresss"
+
+                            />
+                            {/*error handling*/}
+                            {/* <Form.Text className="text-muted">
+                                        {errors.email && <InlineError text={errors.email} />}
+                                    </Form.Text> */}
+                        </Form.Group>
+                    </Col>
+                    <Col>
+                        <Form.Group>
+                            <Form.Label>Phone Number</Form.Label>
+                            <Form.Control
+                                type="text"
+                                id="phone"
+                                name="phone"
+                                placeholder="Phone Number"
+
+                            />
+                            {/*error handling*/}
+                            {/* <Form.Text className="text-muted">
+                                        {errors.email && <InlineError text={errors.email} />}
+                                    </Form.Text> */}
+                        </Form.Group>
+                    </Col>
+                </Row>
+                <hr></hr>
+                <Row>
+                    <Col>
+                        <Form.Group>
+                            <Form.Label>Role</Form.Label>
+                            <Form.Control
+                                type="text"
+                                id="role"
+                                name="role"
+                                placeholder="Role"
+
+                            />
+                            {/*error handling*/}
+                            {/* <Form.Text className="text-muted">
+                                        {errors.email && <InlineError text={errors.email} />}
+                                    </Form.Text> */}
+                        </Form.Group>
+                    </Col>
+                    <Col>
+                        <Form.Group>
+                            <Form.Label>At a station number</Form.Label>
+                            <Form.Control
+                                type="text"
+                                id="at_station_number"
+                                name="at_station_number"
+                                placeholder="At a station number"
+                            />
+                            {/*error handling*/}
+                            {/* <Form.Text className="text-muted">
+                                        {errors.email && <InlineError text={errors.email} />}
+                                    </Form.Text> */}
+                        </Form.Group>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col className={"text-right"}>
+                        <Modal/>
+                    </Col>
+                </Row>
+            </Form>
+
+        </Container>
+
+    </Popup>
+);
 
 class AccountForm extends React.Component {
 
-    constructor (props) {
+    constructor(props) {
         super(props)
-        this.state={
-            data:{
-                id:"1",
-                at_a_station_no:"1",
-                first_name:"potatoe",
-                last_name:"Potatata",
-                dob:"2019-10-10",
-                country:"Uganda",
-                phone:"604-440-2037",
-                email:"pp@gmail.com",
-                role:"admin",
+        this.state = {
+            data: {
+                id: "1",
+                at_a_station_no: "1",
+                first_name: "potatoe",
+                last_name: "Potatata",
+                dob: "2019-10-10",
+                country: "Uganda",
+                phone: "604-440-2037",
+                email: "pp@gmail.com",
+                role: "admin",
             }
         }
         this.handleChange = this.handleChange.bind(this);
     }
 
     componentDidMount() {
-        api.userInfo.getUserInfoById({userId:1}).then(res => {
+        api.userInfo.getUserInfoById({userId: 1}).then(res => {
             // get user information
-            console.log("user info" , res);
+            console.log("user info", res);
         })
     }
 
@@ -204,10 +346,8 @@ class AccountForm extends React.Component {
                             </Col>
                         </Row>
                         <Row>
-                            <Col>
-                                <Button variant="success" onClick={() => this.submit(this.state.data)}>
-                                    Create
-                                </Button>
+                            <Col className={"text-right"}>
+                                <Modal/>
                             </Col>
                         </Row>
                     </Form>
