@@ -52,6 +52,7 @@ public class UserController {
     // POST mappings
 
     @PostMapping(path="/api/users")
+    @ResponseStatus(code = HttpStatus.CREATED)
     public @ResponseBody String addUser(@RequestBody User user){
         User newUser = new User();
         newUser.setId(user.getId());

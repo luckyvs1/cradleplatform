@@ -21,24 +21,18 @@ public class DrugHistory {
     private int id;
 
     @Column(name="patient_id", nullable=false, unique=false)
-    @NotEmpty(message = "Patient ID Can't Be Empty")
-    @Size(max = 32)
-    private String patientId;
+    private int patientId;
 
     @Column(name="history")
     private String historyText;
 
     public DrugHistory() {
-        this.patientId = "";
+        this.patientId = -1;
         this.historyText = "";
     }
 
     public int getId() {
         return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getHistoryText() {
@@ -49,11 +43,11 @@ public class DrugHistory {
         this.historyText = historyText;
     }
 
-    public String getPatientId() {
+    public int getPatientId() {
         return patientId;
     }
 
-    public void setPatientId(String patientId) {
+    public void setPatientId(int patientId) {
         this.patientId = patientId;
     }
 }

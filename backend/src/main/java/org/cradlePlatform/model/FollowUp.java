@@ -19,9 +19,7 @@ public class FollowUp {
     private int id;
 
     @Column(name="patient_id", length=32, nullable=false)
-    @NotEmpty(message = "Patient ID Can't Be Empty")
-    @Size(max = 32)
-    private String patientId;
+    private int patientId;
 
     @Column(name="notes")
     private String followUpNotes;
@@ -39,27 +37,17 @@ public class FollowUp {
     private String treatment;
 
     public FollowUp() {
-        this.patientId = "";
-        this.followUpNotes = "";
-        this.required = false;
-        this.frequency = "";
-        this.diagnosis = "";
-        this.treatment = "";
     }
 
     public int getId() {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getPatientId() {
+    public int getPatientId() {
         return patientId;
     }
 
-    public void setPatientId(String patientId) {
+    public void setPatientId(int patientId) {
         this.patientId = patientId;
     }
 
