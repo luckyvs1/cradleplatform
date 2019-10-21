@@ -20,7 +20,7 @@ import {connect} from "react-redux";
 class FollowUpDetailForm extends React.Component {
 
     componentDidMount() {
-        api.followUp.getFollowUpByPatientId({patientId: this.props.posts.posts}).then(res => {
+        api.followUp.getFollowUpByFollowUpId({followUpId: 22}).then(res => {
             // fetching all follow up
             console.log("by patient id", res);
         })
