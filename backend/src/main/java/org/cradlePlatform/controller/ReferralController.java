@@ -24,6 +24,7 @@ public class ReferralController {
         newReferral.setReferrerId(referral.getReferrerId());
         newReferral.setPatientId(referral.getPatientId());
         newReferral.setReadingId(referral.getReadingId());
+        newReferral.setTimestamp(referral.getTimestamp());
         newReferral.setHealthFacility(referral.getHealthFacility());
         newReferral.setNotesReason(referral.getNotesReason());
         newReferral.setNotesAction(referral.getNotesAction());

@@ -35,7 +35,7 @@ public class Referral {
 	private int readingId;
 
 	@NotNull
-	private Timestamp timestamp = new Timestamp(new Date().getTime());
+	private Timestamp timestamp;
 
 	@NotBlank
 	@Size(max = 32)
