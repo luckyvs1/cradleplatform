@@ -66,7 +66,7 @@ class ListPatientForm extends React.Component {
                     </Row>
                     <Row>
                         <Col>
-                            <Table bordered hover size="sm">
+                            <Table bordered hover size="small">
                                 <Table.Header>
                                     <Table.Row>
                                         <Table.HeaderCell width={1}></Table.HeaderCell>
