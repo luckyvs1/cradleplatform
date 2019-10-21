@@ -28,7 +28,8 @@ class ReferralDetailForm extends React.Component {
         console.dir("props");
         console.dir(props);
         this.state = {
-            rid: this.props.location.state.rid
+            rid: this.props.location.state.rid,
+            initials: this.props.location.state.initials
         }
     }
 
@@ -50,8 +51,6 @@ class ReferralDetailForm extends React.Component {
                     <Row>
                         <Col>
                             <h1>Referral Information</h1>
-                            {/*TODO: For testing, remove pid before demo*/}
-                            <h2>rid = {this.state.rid}</h2>
                             <hr></hr>
                         </Col>
                     </Row>
@@ -68,7 +67,7 @@ class ReferralDetailForm extends React.Component {
                                                     type="text"
                                                     id="patient"
                                                     name="patient"
-                                                    value={'0123456'} />
+                                                    value={this.state.rid} />
                                                 {/*error handling*/}
                                                 {/* <Form.Text className="text-muted">
                                                 {errors.email && <InlineError text={errors.email} />}
@@ -82,7 +81,7 @@ class ReferralDetailForm extends React.Component {
                                                     type="text"
                                                     id="initials"
                                                     name="initials"
-                                                    value={'AS'} />
+                                                    value={this.state.initials} />
                                                 {/*error handling*/}
                                                 {/* <Form.Text className="text-muted">
                                                 {errors.email && <InlineError text={errors.email} />}
