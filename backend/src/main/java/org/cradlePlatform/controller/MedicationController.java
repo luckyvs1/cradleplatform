@@ -7,42 +7,40 @@ package org.cradlePlatform.controller;
 import org.cradlePlatform.model.Medication;
 import org.cradlePlatform.repository.MedicationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Date;
-import java.util.Optional;
+
 @CrossOrigin(origins = { "http://localhost:3000"})
-@Controller
+@RestController
 public class MedicationController {
     @Autowired
     private MedicationRepository medicationRepository;
 
-    @PostMapping(path="/medication")
-    public @ResponseBody String addNewMedication (@RequestParam int drugHistoryId,
-                                                  @RequestParam String drugName,
-                                                  @RequestParam String dosage,
-                                                  @RequestParam Date startDate,
-                                                  @RequestParam Date endDate){
+    // GET mappings
+
+    /**
+     * Get all Medications associated with a DrugHistory by DrugHistoryId
+     * @param drugHistoryId
+     * @return
+     */
+    @GetMapping(path="/api/medications")
+    public Iterable<Medication> getParentDrugHistoryById(@RequestParam int drugHistoryId) {
+        return medicationRepository.findByDrugHistoryId(drugHistoryId);
+    }
+
+    // POST mappings
+
+    @PostMapping(path="/api/medications")
+    @ResponseStatus(code = HttpStatus.CREATED)
+    public String addNewMedication (@RequestBody Medication med) {
         Medication newMedication = new Medication();
-        newMedication.setDrugHistoryID(drugHistoryId);
-        newMedication.setDrugName(drugName);
-        newMedication.setDosage(dosage);
-        newMedication.setStartDate(startDate);
-        newMedication.setEndDate(endDate);
+        newMedication.setDrugHistoryId(med.getDrugHistoryId());
+        newMedication.setDrugName(med.getDrugName());
+        newMedication.setDosage(med.getDosage());
+        newMedication.setStartDate(med.getStartDate());
+        newMedication.setEndDate(med.getEndDate());
         medicationRepository.save(newMedication);
         return "Saved Medication";
-    }
-
-    @GetMapping(path="/medication")
-    public @ResponseBody Iterable<Medication> getAllMedication(){
-        //This returns a JSON or XML with the medication
-        return medicationRepository.findAll();
-    }
-
-    @GetMapping(path="/medication/{id}")
-    public @ResponseBody
-    Optional<Medication> getPatientById(@PathVariable(value = "id") String drugHistoryId){
-        return medicationRepository.findById(drugHistoryId);
     }
 }

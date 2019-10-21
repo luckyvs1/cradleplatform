@@ -5,41 +5,45 @@
 package org.cradlePlatform.model;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
 @Entity
-@Table(name = "Patient", schema = "schemas")
+@Table(name = "Patient")
 public class Patient {
 
     @Id
-    @NotBlank
+    @Column(name="id", length=32, nullable=false, unique=true)
+    @NotEmpty(message = "ID Can't Be Empty")
     @Size(max = 32)
     private String id;
 
-    @NotBlank
+    @Column(name="village_no", length=32, nullable=false)
+    @NotEmpty(message = "Village Number Can't Be Empty")
     @Size(max = 32)
-    @Column(name = "village_no")
     private String villageNo;
 
-    @NotBlank
+    @Column(name="initials", length=4, nullable=false)
+    @NotEmpty(message = "Initials Can't Be Empty")
     @Size(max = 4)
     private String initials;
 
+    @Column(name="sex")
     @Enumerated(EnumType.STRING)
     private Sex sex;
 
-    @NotNull
+    @Column(name="age", nullable=false)
+    @NotEmpty(message = "Age Can't Be Empty")
     private int age;
 
+    @Column(name="pregnant")
     private boolean pregnant;
 
+    @Column(name="gestation_age_unit")
     @Enumerated(EnumType.STRING)
-    @Column(name = "gestation_age_unit")
     private GestationalAgeTimeUnit gestationAgeUnit;
 
-    @Column(name = "gestation_age")
+    @Column(name="gestation_age")
     private int gestationAge;
 
     public Patient() {
@@ -125,4 +129,5 @@ public class Patient {
     public void setGestationAge(int gestationAge) {
         this.gestationAge = gestationAge;
     }
+
 }
