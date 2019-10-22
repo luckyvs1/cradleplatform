@@ -68,7 +68,7 @@ public class Reading {
 	@Column(name = "device_info")
 	private String deviceInformation;
 
-	@Enumerated
+	@Enumerated(EnumType.STRING)
     @Column(name = "gestational_age_unit")
 	private GestationalAgeTimeUnit gestationalAgeTimeUnit;
 
