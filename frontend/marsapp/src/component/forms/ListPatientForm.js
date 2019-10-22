@@ -13,11 +13,12 @@ import {
     Col,
     Table,
     Image,
-    Button
+    Button,
+    Form,
+    FormControl
 } from 'react-bootstrap';
 import {withRouter} from "react-router-dom";
 import _ from 'lodash';
-import { Search } from 'semantic-ui-react';
 
 function createData(pid, initial, img) {
     return {pid, initial, img};
@@ -47,6 +48,8 @@ class ListPatientForm extends React.Component {
             data: [],
             searchValue: ''
         };
+
+        this.searchInput = React.createRef();
     }
 
     componentDidMount() {
@@ -56,17 +59,15 @@ class ListPatientForm extends React.Component {
         this.setState(initialState);
     }
 
-    handleResultSelect = (e, { result }) => this.setState({
-        searchValue: result.initial
-    });
-
-    handleSearchChange = (e, { value }) => {
+    handleSearchChange = () => {
         this.setState({
             isLoading: true,
-            searchValue: value
+            searchValue: this.searchInput.current.value
         });
 
         setTimeout(() => {
+            console.log(this.state);
+
             if (this.state.searchValue.length < 1) {
                 return this.setState(initialState);
             }
@@ -118,14 +119,15 @@ class ListPatientForm extends React.Component {
                     </Row>
                     <Row>
                         <Col className="text-right">
-                            <Search
-                                open={false}
-                                loading={isLoading}
-                                onResultSelect={this.handleResultSelect}
-                                onSearchChange={_.debounce(this.handleSearchChange, 500, {
-                                    leading: true,
-                                })}
-                            />
+                            <Form inline>
+                                <FormControl
+                                    ref={this.searchInput}
+                                    type="text"
+                                    placeholder="Search"
+                                    className="mr-sm-2"
+                                    onChange={() => this.handleSearchChange()}
+                                />
+                            </Form>
                         </Col>
                     </Row>
                     <Row>
