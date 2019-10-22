@@ -8,13 +8,34 @@ import React from "react";
 import {Link} from "react-router-dom";
 import TopNavigation from "../navigation/TopNavigation";
 import {
+    Table
+} from 'semantic-ui-react'
+
+import {
     Container,
     Row,
     Col,
-    Table,
     Image,
     Button
 } from 'react-bootstrap';
+import {withRouter} from "react-router-dom";
+import _ from 'lodash';
+import { Search } from 'semantic-ui-react';
+
+function createData(pid, initial, img) {
+    return {pid, initial, img};
+}
+
+const rows = [
+    createData('111555666', 'AD', 'https://react.semantic-ui.com/images/avatar/small/helen.jpg'),
+    createData('222555444', 'WE', 'https://react.semantic-ui.com/images/avatar/small/daniel.jpg'),
+];
+
+const initialState = {
+    isLoading: false,
+    data: rows,
+    searchValue: ''
+};
 
 class ListPatientForm extends React.Component {
     // functions
@@ -22,7 +43,62 @@ class ListPatientForm extends React.Component {
     // submit
     // validate
 
+    constructor(props) {
+        super(props);
+        this.state = {
+            isLoading: false,
+            data: [],
+            searchValue: ''
+        };
+    }
+
+    componentDidMount() {
+        // TODO: Use api to get data.
+        // TODO: Store all api data in 'row'
+        // Temporary:
+        this.setState(initialState);
+    }
+
+    handleResultSelect = (e, { result }) => this.setState({
+        searchValue: result.initial
+    });
+
+    handleSearchChange = (e, { value }) => {
+        this.setState({
+            isLoading: true,
+            searchValue: value
+        });
+
+        setTimeout(() => {
+            if (this.state.searchValue.length < 1) {
+                return this.setState(initialState);
+            }
+
+            const re = new RegExp(_.escapeRegExp(this.state.searchValue), 'i');
+            const match = (result) => re.test(result.initial);
+
+            this.setState({
+                isLoading: false,
+                data: _.filter(rows, match),
+            });
+
+        }, 300);
+        console.log(this.state);
+    };
+
+    handleItemClick = (row) => {
+        this.props.history.push({
+            pathname: '/patientDetail',
+            state: {
+                pid: row.pid,
+                initial: row.initial
+            }
+        });
+    };
+
     render() {
+        const { isLoading, searchValue, data } = this.state;
+
         return (
             <div>
                 <TopNavigation authenticated={true}></TopNavigation>
@@ -43,36 +119,37 @@ class ListPatientForm extends React.Component {
                         </Col>
                     </Row>
                     <Row>
+                        <Search
+                            loading={isLoading}
+                            onResultSelect={this.handleResultSelect}
+                            onSearchChange={_.debounce(this.handleSearchChange, 500, {
+                                leading: true,
+                            })}
+                            results={data}
+                            value={searchValue}
+                        />
+                    </Row>
+                    <Row>
                         <Col>
-                            <Table bordered hover size="sm">
-                                <thead>
-                                    <tr>
-                                        <th width="10"></th>
-                                        <th>Name</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>
-                                            <Image src="https://react.semantic-ui.com/images/avatar/small/helen.jpg" rounded />
-                                        </td>
-                                        <td>
-                                            <Link to="patientDetail">
-                                                Test 1
-                                            </Link>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <Image src="https://react.semantic-ui.com/images/avatar/small/daniel.jpg" rounded />
-                                        </td>
-                                        <td>
-                                            <Link to="patientDetail">
-                                                Test 2
-                                            </Link>
-                                        </td>
-                                    </tr>
-                                </tbody>
+                            <Table bordered hover size="small">
+                                <Table.Header>
+                                    <Table.Row>
+                                        <Table.HeaderCell width={1}></Table.HeaderCell>
+                                        <Table.HeaderCell>Initial</Table.HeaderCell>
+                                    </Table.Row>
+                                </Table.Header>
+                                <Table.Body>
+                                    {this.state.data.map(row => (
+                                        <Table.Row key={row.pid} class='clickable-row' onClick={() => this.handleItemClick(row)}>
+                                            <Table.Cell>
+                                                <Image src={row.img} rounded />
+                                            </Table.Cell>
+                                            <Table.Cell>
+                                                {row.initial}
+                                            </Table.Cell>
+                                        </Table.Row>
+                                    ))}
+                                </Table.Body>
                             </Table>
                         </Col>
                     </Row>
@@ -82,4 +159,5 @@ class ListPatientForm extends React.Component {
     }
 }
 
-export default ListPatientForm;
+//export default ListPatientForm;
+export default withRouter(ListPatientForm);
