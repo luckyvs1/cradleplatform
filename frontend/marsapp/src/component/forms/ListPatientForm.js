@@ -136,7 +136,7 @@ class ListPatientForm extends React.Component {
                             <Table hover size="sm">
                                 <thead>
                                     <tr>
-                                        <th>Patient ID</th>
+                                        <th width="200">Patient ID</th>
                                         <th>Initials</th>
                                     </tr>
                                 </thead>
