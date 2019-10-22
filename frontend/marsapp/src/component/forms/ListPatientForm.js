@@ -75,15 +75,16 @@ class ListPatientForm extends React.Component {
             }
 
             const re = new RegExp(_.escapeRegExp(this.state.searchValue), 'i');
-            const match = (result) => re.test(result.initial);
+            const matchId = (result) => re.test(result.pid);
+            const matchInitial = (result) => re.test(result.initial);
+            const dataId = _.filter(rows, matchId);
+            const dataInitial = _.filter(rows, matchInitial);
 
             this.setState({
                 isLoading: false,
-                data: _.filter(rows, match),
+                data: _.merge(dataId, dataInitial)
             });
-
         }, 300);
-        console.log(this.state);
     };
 
     handleItemClick = (row) => {
@@ -136,6 +137,7 @@ class ListPatientForm extends React.Component {
                                     <Table.Row>
                                         <Table.HeaderCell width={1}></Table.HeaderCell>
                                         <Table.HeaderCell>Initial</Table.HeaderCell>
+                                        <Table.HeaderCell>Id</Table.HeaderCell>
                                     </Table.Row>
                                 </Table.Header>
                                 <Table.Body>
@@ -146,6 +148,9 @@ class ListPatientForm extends React.Component {
                                             </Table.Cell>
                                             <Table.Cell>
                                                 {row.initial}
+                                            </Table.Cell>
+                                            <Table.Cell>
+                                                {row.pid}
                                             </Table.Cell>
                                         </Table.Row>
                                     ))}
