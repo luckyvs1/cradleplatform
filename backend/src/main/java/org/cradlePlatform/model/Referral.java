@@ -9,13 +9,15 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 @Entity
-@Table(name = "Referral", schema = "schemas")
+@Table(name = "Referral")
 public class Referral {
 
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@NotNull
 	private int id;
 
@@ -24,10 +26,8 @@ public class Referral {
 	@Column(name = "referrer_id")
 	private String referrerId;
 
-	@NotBlank
-	@Size(max = 32)
 	@Column(name = "patient_id")
-	private String patientId;
+	private int patientId;
 
 	@Column(name = "reading_id")
 	private int readingId;
@@ -40,16 +40,14 @@ public class Referral {
 	@Column(name = "health_facility")
 	private String healthFacility;
 
+	@Column(name = "notes_reason")
 	private String notesReason;
 
+	@Column(name = "notes_action")
 	private String notesAction;
 
 	public int getId() {
 		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
 	}
 
 	public String getReferrerId() {
@@ -60,11 +58,11 @@ public class Referral {
 		this.referrerId = referrerId;
 	}
 
-	public String getPatientId() {
+	public int getPatientId() {
 		return patientId;
 	}
 
-	public void setPatientId(String patientId) {
+	public void setPatientId(int patientId) {
 		this.patientId = patientId;
 	}
 
@@ -106,6 +104,15 @@ public class Referral {
 
 	public void setNotesAction(String notesAction) {
 		this.notesAction = notesAction;
+	}
+
+	@Override
+	public String toString() {
+		return String.format(
+				"{id: %s, referrerId: '%s', patientId: '%s', readingId: '%s', timestamp: '%s'," +
+						" healthFacility: '%s', notesReason: '%s', notesAction: '%s'}",
+				id, referrerId, patientId, readingId,  new SimpleDateFormat("dd-MM-yyyy HH:mm:ss").format(timestamp),
+				healthFacility, notesReason, notesAction);
 	}
 }
 

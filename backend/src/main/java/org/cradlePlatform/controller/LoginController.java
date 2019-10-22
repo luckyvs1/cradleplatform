@@ -23,6 +23,8 @@ public class LoginController {
 	public User logIn(@RequestBody User user) {
 		// TODO: Implement log in
 		User account = new User();
+		account.setUsername("Testuser");
+		account.setPassword("Testpass");
 		return account;
 
 	}

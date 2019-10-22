@@ -23,11 +23,11 @@ public class FollowUpController {
     /**
      * Retrieve FollowUps for a particular patient from the DB by patientId.
      * if latest=true, returns only the latest record, otherwise returns all
-     * /api/followUps?patientId=123&latest=true
+     * /api/patients/followUps?patientId=123&latest=true
      * @return 200: JSON of followups
      */
-    @GetMapping(path="/api/followUps")
-    public Iterable<FollowUp> getFollowUpByPatientId(@RequestParam String patientId,
+    @GetMapping(path="/api/patients/followUps")
+    public Iterable<FollowUp> getFollowUpByPatientId(@RequestParam int patientId,
                                               @RequestParam(value = "latest", required = false) boolean latest) {
         if (latest) {
             return followUpRepository.findTopByPatientIdOrderByIdDesc(patientId);
@@ -59,6 +59,6 @@ public class FollowUpController {
         newFollowUp.setDiagnosis(followUp.getDiagnosis());
         newFollowUp.setTreatment(followUp.getTreatment());
         followUpRepository.save(newFollowUp);
-        return "Saved FollowUp";
+        return "Saved Follow Up";
     }
 }

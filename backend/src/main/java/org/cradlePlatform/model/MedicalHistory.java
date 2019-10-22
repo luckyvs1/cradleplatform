@@ -9,7 +9,7 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
 @Entity
-@Table(name = "Medical_History", schema = "schemas")
+@Table(name = "Medical_History")
 public class MedicalHistory {
 
     @Id
@@ -18,16 +18,14 @@ public class MedicalHistory {
     private int id;
 
     @Column(name="patient_id", nullable=false)
-    @NotEmpty(message = "Patient ID Can't Be Empty")
-    @Size(max = 32)
-    private String patientId;
+    private int patientId;
 
     @Column(name="history")
     private String medicalHistoryText;
 
 
     public MedicalHistory() {
-        this.patientId = "";
+        this.patientId = -1;
         this.medicalHistoryText = "";
     }
 
@@ -35,15 +33,11 @@ public class MedicalHistory {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getPatientId() {
+    public int getPatientId() {
         return patientId;
     }
 
-    public void setPatientId(String patientId) {
+    public void setPatientId(int patientId) {
         this.patientId = patientId;
     }
 

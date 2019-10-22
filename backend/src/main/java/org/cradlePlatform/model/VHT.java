@@ -9,7 +9,7 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 @Entity
-@Table(name = "VHT", schema = "schemas")
+@Table(name = "VHT")
 public class VHT {
 
     @Id
@@ -22,5 +22,11 @@ public class VHT {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    @Override
+    public String toString() {
+        return String.format(
+                "{id: %s}", id);
     }
 }

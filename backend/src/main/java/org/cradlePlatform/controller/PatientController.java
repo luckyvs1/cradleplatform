@@ -4,16 +4,14 @@
  */
 package org.cradlePlatform.controller;
 
-import org.cradlePlatform.model.GestationalAgeTimeUnit;
 import org.cradlePlatform.model.Patient;
-import org.cradlePlatform.model.Sex;
 import org.cradlePlatform.repository.PatientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
+
 @CrossOrigin(origins = { "http://localhost:3000"})
 @RestController
 public class PatientController {
@@ -38,7 +36,7 @@ public class PatientController {
      */
     @GetMapping(path="/api/patients/{id}")
     public @ResponseBody
-    Optional<Patient> getPatientById(@PathVariable(value = "id") String patientId) {
+    Optional<Patient> getPatientById(@PathVariable(value = "id") int patientId) {
         return patientRepository.findById(patientId);
     }
 
@@ -50,18 +48,26 @@ public class PatientController {
      * @return
      */
     @PostMapping(path="/api/patients")
+    @ResponseStatus(code = HttpStatus.CREATED)
     public @ResponseBody String addNewPatient (@RequestBody Patient patient){
         Patient newPatient = new Patient();
+        newPatient.setAttestationNo(patient.getAttestationNo());
+        newPatient.setFirstName(patient.getFirstName());
+        newPatient.setLastName(patient.getLastName());
         newPatient.setVillageNo(patient.getVillageNo());
-        newPatient.setAge(patient.getAge());
-        newPatient.setGestationAge(patient.getGestationAge());
-        newPatient.setGestationAgeUnit(patient.getGestationAgeUnit());
+        newPatient.setZoneNo(patient.getZoneNo());
+        newPatient.setHouseholdNo(patient.getHouseholdNo());
+        newPatient.setBlockNo(patient.getBlockNo());
+        newPatient.setTankNo(patient.getTankNo());
         newPatient.setInitials(patient.getInitials());
-        newPatient.setPregnant(patient.isPregnant());
-        newPatient.setVillageNo(patient.getVillageNo());
         newPatient.setSex(patient.getSex());
+        newPatient.setAge(patient.getAge());
+        newPatient.setDob(patient.getDob());
+        newPatient.setPregnant(patient.isPregnant());
+        newPatient.setGestationalStartDate(patient.getGestationalStartDate());
+        newPatient.setGestationAgeUnit(patient.getGestationAgeUnit());
+        newPatient.setCurrentGestationalAge(patient.getCurrentGestationalAge());
         patientRepository.save(newPatient);
         return "Saved Patient";
-
     }
 }

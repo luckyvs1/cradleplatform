@@ -60,8 +60,8 @@ public class ReadingController {
     }
 
     @GetMapping(path="/api/readings/{id}")
-    public Optional<Reading> getReferralById(@PathVariable(value = "id") String referrerId){
-        return readingRepository.findById(referrerId);
+    public Optional<Reading> getReadingsById(@PathVariable(value = "id") String readingsId){
+        return readingRepository.findById(readingsId);
     }
 }
 

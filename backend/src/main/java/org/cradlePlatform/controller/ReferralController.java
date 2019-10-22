@@ -21,9 +21,9 @@ public class ReferralController {
     @ResponseStatus(code = HttpStatus.CREATED)
     public String addAReferral(@RequestBody Referral referral){
         Referral newReferral = new Referral();
-        newReferral.setId(referral.getId());
         newReferral.setReferrerId(referral.getReferrerId());
         newReferral.setPatientId(referral.getPatientId());
+        newReferral.setReadingId(referral.getReadingId());
         newReferral.setTimestamp(referral.getTimestamp());
         newReferral.setHealthFacility(referral.getHealthFacility());
         newReferral.setNotesReason(referral.getNotesReason());

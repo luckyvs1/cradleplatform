@@ -9,14 +9,15 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.sql.Timestamp;
-import java.util.ArrayList;
+import java.text.SimpleDateFormat;
+
 
 @Entity
-@Table(name = "Reading", schema = "schemas")
+@Table(name = "Reading")
 public class Reading {
 
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 
 	@NotBlank
@@ -24,28 +25,23 @@ public class Reading {
 	@Column(name = "reader_id")
 	private String readerId;
 
-	@NotBlank
-	@Size(max = 32)
 	@Column(name = "patient_id")
-	private String patientId;
+	private int patientId;
 
 	@NotNull
 	private Timestamp timestamp;
 
-	private ArrayList<String> symptoms;
+	private String symptoms;
 
 	@Column(name = "other_symptoms")
 	private String otherSymptoms;
 
-	@NotNull
 	@Column(name = "systolic_bp")
 	private int systolicBloodPressure;
 
-	@NotNull
 	@Column(name = "diastolic_bp")
 	private int diastolicBloodPressure;
 
-	@NotNull
 	@Column(name = "pulse_rate")
 	private int pulseRate;
 
@@ -73,8 +69,10 @@ public class Reading {
 	private String deviceInformation;
 
 	@Enumerated
+    @Column(name = "gestational_age_unit")
 	private GestationalAgeTimeUnit gestationalAgeTimeUnit;
 
+    @Column(name = "gestational_age")
 	private int gestationalAge;
 
 	@NotBlank
@@ -97,22 +95,18 @@ public class Reading {
 
 	@NotNull
 	@Column(name = "OCR_enabled")
-	private boolean OcrEnabled;
+	private boolean ocrEnabled;
 
 	@NotNull
 	@Column(name = "upload_images")
 	private boolean uploadImages;
 
-	@Enumerated
+	@Enumerated(EnumType.STRING)
 	@Column(name = "reading_analysis")
 	private VitalsTrafficLight vitalsTrafficLight;
 
 	public int getId() {
 		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
 	}
 
 	public String getReaderId() {
@@ -123,11 +117,11 @@ public class Reading {
 		this.readerId = readerId;
 	}
 
-	public String getPatientId() {
+	public int getPatientId() {
 		return patientId;
 	}
 
-	public void setPatientId(String patientId) {
+	public void setPatientId(int patientId) {
 		this.patientId = patientId;
 	}
 
@@ -139,11 +133,11 @@ public class Reading {
 		this.timestamp = timestamp;
 	}
 
-	public ArrayList<String> getSymptoms() {
+	public String getSymptoms() {
 		return symptoms;
 	}
 
-	public void setSymptoms(ArrayList<String> symptoms) {
+	public void setSymptoms(String symptoms) {
 		this.symptoms = symptoms;
 	}
 
@@ -276,11 +270,11 @@ public class Reading {
 	}
 
 	public boolean getOcrEnabled() {
-		return OcrEnabled;
+		return ocrEnabled;
 	}
 
 	public void setOcrEnabled(boolean ocrEnabled) {
-		OcrEnabled = ocrEnabled;
+		this.ocrEnabled = ocrEnabled;
 	}
 
 	public boolean getUploadImages() {
@@ -297,5 +291,22 @@ public class Reading {
 
 	public void setVitalsTrafficLight(VitalsTrafficLight vitalsTrafficLight) {
 		this.vitalsTrafficLight = vitalsTrafficLight;
+	}
+
+	@Override
+	public String toString() {
+		return String.format(
+				"{id: %s, readerId: '%s', patientId: '%s', timestamp: '%s', symptoms: '%s', " +
+						"otherSymptoms: '%s', systolicBloodPressure: '%s', diastolicBloodPressure: '%s', " +
+						"pulseRate: '%s', notes: '%s', needFollowUp: '%s', appVersion: '%s', " +
+						"dateLastSaved: '%s', recheckVitalsDate: '%s', deviceInformation: '%s', " +
+						"gestationalAgeTimeUnit: '%s', gestationalAge: '%s', manuallyChangedOcrResults: '%s', " +
+						"photoPath: '%s', totalOcrSeconds: '%s', region: '%s', OcrEnabled: '%s', " +
+						"uploadImages: '%s', vitalsTrafficLight: '%s',}",
+				id, readerId, patientId, new SimpleDateFormat("dd-MM-yyyy HH:mm:ss").format(timestamp),
+				symptoms, otherSymptoms, systolicBloodPressure, diastolicBloodPressure, pulseRate, notes,
+				needFollowUp, appVersion, dateLastSaved, recheckVitalsDate, deviceInformation,
+				gestationalAgeTimeUnit, gestationalAge, manuallyChangedOcrResults, photoPath, totalOcrSeconds,
+				region, ocrEnabled, uploadImages, uploadImages, vitalsTrafficLight);
 	}
 }

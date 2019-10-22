@@ -80,6 +80,23 @@ First, cd into `${root}/backend` of project directory
     - To run the spring boot application, run: `java -jar build/libs/cradlePlatform-0.0.1-SNAPSHOT.jar` 
     - You should see the spring boot application launching
     - Visit `http://localhost:8080` to view the app
+    
+### --- Backend Server (local development with setup script)
+1. cd into `${root}/backend` of project directory
+2. execute the backend and database start up script `./build_and_run_backend_and_database.sh`
+    - If an error occurs `docker: Error response from daemon: Cannot link to a non running container: /marssql AS /marsserver/db_host.`
+    - Run `docker restart marssql`
+    - Then re-run the script and check to ensure both `marssql` and `marsserver` are running when you run `docker ps`
+3. update the database for marssql
+    - `docker exec -it marssql bin/bash`
+    - run `mysql -u root -p` in the new terminal and when prompted use the password `pass`
+        - if a login error occurs `ERROR 1045 (28000): Access denied for user 'root'@'localhost' (using password: YES)`
+        - exit back to the terminal and try restarting the marssql using `docker restart marssql` then redo the above steps to login
+    - after logging in execute `use marsdb;` in the mysql command line to use the `marsdb` database
+    - can check the tables are loaded using `show tables;`
+4. to debug the server and get logs from the running application can use
+    - `docker logs -f marsserver` to get real time server logs
+    - `docker logs -f marssql` to get real time database logs
 
 ##### --- NOTE
 If running outside of Docker have this line uncommented: 

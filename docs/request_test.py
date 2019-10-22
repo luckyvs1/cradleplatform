@@ -12,7 +12,7 @@ userurl = 'http://localhost:8080/api/users'
 paturl = 'http://localhost:8080/api/patients'
 dhurl = 'http://localhost:8080/api/drugHistories'
 dhparamurl = 'http://localhost:8080/api/drugHistories'
-followupurl = 'http://localhost:8080/api/followUp/3'
+followupurl = 'http://localhost:8080/api/followUps?followUpId=1'
 hwurl = 'http://localhost:8080/api/healthWorkers/'
 mhurl = 'http://localhost:8080/api/medicalHistories?patientId=1&latest=true'
 medurl = 'http://localhost:8080/api/medications?drugHistoryId=1'
@@ -22,8 +22,26 @@ mhdata = {
     "medicalHistoryText": "gfhgfhfghffssss",
     "testText": "heyall"
 }
+patdata = {
+    "attestationNo": "5",
+    "firstName" : "Lou",
+    "lastName" : "Lee",
+    "villageNo" : "45",
+    "zoneNo" : "100",
+    "householdNo" : "401",
+    "blockNo" : "201",
+    "tankNo" : "301",
+    "initials" : "LL",
+    "sex" : "F",
+    "age" : 23,
+    "dob" : "2019-10-16",
+    "pregnant" : 1,
+    "gestationalStartDate" : "2019-09-28",
+    "gestationAgeUnit" : "week",
+    "currentGestationalAge" : 3
+}
 meddata = {
-    "drugHistoryID": "1",
+    "drugHistoryId": "1",
     "drugName": "cannabis",
     "dosage": "once a day as needed",
     "startDate": "2019-09-26",
@@ -32,7 +50,7 @@ meddata = {
 fudata = {
     "patientId": "1",
     "followUpNotes": "notes",
-    "required": True,
+    "required": true,
     "frequency": "once a month",
     "diagnosis": "coolness",
     "treatment": "check up"
@@ -72,7 +90,8 @@ fudata = {
 # resp = requests.get(hwurl, data=json.dumps(hwdata), headers=header)
 # resp = requests.get(mhurl, data=json.dumps(mhdata), headers=header)
 # resp = requests.get(paturl, data=json.dumps(dhdata), headers=header)
-resp = requests.get(medurl, headers=header)
+#resp = requests.get(medurl, headers=header)
+resp = requests.post(paturl, data=json.dumps(patdata), headers=header)
 # resp = requests.get(fuurl, data=json.dumps(fudata), headers=header)
 print(resp)
 print(resp.status_code)

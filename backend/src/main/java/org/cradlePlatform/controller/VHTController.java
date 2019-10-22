@@ -11,7 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 @CrossOrigin(origins = { "http://localhost:3000"})
 @Controller
-@RequestMapping(path="/api/vhts") //This means URL's start with /vht (after Application path)
+@RequestMapping(path="/api/vhts")
 public class VHTController {
     @Autowired
     private VHTRepository vhtRepository;
