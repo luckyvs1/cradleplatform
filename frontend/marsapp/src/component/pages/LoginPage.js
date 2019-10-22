@@ -11,6 +11,7 @@ import TopNavigation from "../navigation/TopNavigation";
 import styled from 'styled-components';
 import api from "../../api";
 import auth from "../../actions/auth"
+import AdminRoute from "../../actions/authAdmin"
 import {connect} from "react-redux";
 import {USER_LOGGED_IN} from "../../types";
 
@@ -21,22 +22,36 @@ const TopMarginStyle = styled.div`
 class LoginPage extends React.Component {
 
       submit = data => {
-        api.user.login(data)
-            .then(res => {
-                if(res){
-                    let accessToken = "nGzv3JORFQXG3x21KW1a"
-                    this.props.updateLogIn(accessToken);
+          let accessToken = "nGzv3JORFQXG3x21KW1a"
+          this.props.updateLogIn(accessToken);
 
-                    auth.login(()=>{
-                        localStorage.loginToken = auth.authenticated;
-                        this.props.history.push("/homePage");
-                    })
-                    console.log("LOG IN" ,res.data)
-                }else{
-                    // pop up cannot log in
+          // auth.login(()=>{
+          //     localStorage.loginToken = auth.authenticated;
+          //     this.props.history.push("/homePage");
+          // })
+          AdminRoute.login(()=>{
+              localStorage.loginToken = AdminRoute.authenticated;
+              this.props.history.push("/homePage");
+          })
 
-                }
-            })
+
+          // console.log("LOG IN" ,res.data)
+        // api.user.login(data)
+        //     .then(res => {
+        //         if(res){
+        //             let accessToken = "nGzv3JORFQXG3x21KW1a"
+        //             this.props.updateLogIn(accessToken);
+        //
+        //             auth.login(()=>{
+        //                 localStorage.loginToken = auth.authenticated;
+        //                 this.props.history.push("/homePage");
+        //             })
+        //             console.log("LOG IN" ,res.data)
+        //         }else{
+        //             // pop up cannot log in
+        //
+        //         }
+        //     })
 
 
     };
