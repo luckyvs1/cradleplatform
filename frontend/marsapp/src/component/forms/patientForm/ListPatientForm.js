@@ -75,7 +75,7 @@ class ListPatientForm extends React.Component {
                                 </Table.Header>
                                 <Table.Body>
                                     {rows.map(row => (
-                                        <Table.Row key={row.pid} onClick={() => this.handleItemClick(row)}>
+                                        <Table.Row key={row.pid} class='clickable-row' onClick={() => this.handleItemClick(row)}>
                                             <Table.Cell>
                                                 <Image src={row.img} rounded />
                                             </Table.Cell>
