@@ -25,14 +25,14 @@ class LoginPage extends React.Component {
           let accessToken = "nGzv3JORFQXG3x21KW1a"
           this.props.updateLogIn(accessToken);
 
-          // auth.login(()=>{
-          //     localStorage.loginToken = auth.authenticated;
-          //     this.props.history.push("/homePage");
-          // })
-          AdminRoute.login(()=>{
-              localStorage.loginToken = AdminRoute.authenticated;
+          auth.login(()=>{
+              localStorage.loginToken = auth.authenticated;
               this.props.history.push("/homePage");
           })
+          // AdminRoute.login(()=>{
+          //     localStorage.loginToken = AdminRoute.authenticated;
+          //     this.props.history.push("/homePage");
+          // })
 
 
           // console.log("LOG IN" ,res.data)

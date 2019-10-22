@@ -26,14 +26,12 @@ class AccountForm extends React.Component {
         this.state = {
             data: {
                 id: "1",
-                at_a_station_no: "1",
-                first_name: "potatoe",
-                last_name: "Potatata",
-                dob: "2019-10-10",
-                country: "Uganda",
-                phone: "604-440-2037",
-                email: "pp@gmail.com",
-                role: "admin",
+                firstName: "",
+                lastName: "",
+                dateOfBirth: "",
+                country: "",
+                phoneNumber: "",
+                role: "",
             }
         }
         this.handleChange = this.handleChange.bind(this);
@@ -42,7 +40,9 @@ class AccountForm extends React.Component {
     componentDidMount() {
         api.userInfo.getUserInfoById({userId: 1}).then(res => {
             // get user information
-            console.log("user info", res);
+            let data  = res.data;
+            this.setState({data})
+            console.log("user info", this.state);
         })
     }
 
@@ -99,10 +99,10 @@ class AccountForm extends React.Component {
                                     <Form.Label>First Name</Form.Label>
                                     <Form.Control
                                         type="text"
-                                        id="last_name"
-                                        name="last_name"
+                                        id="firstName"
+                                        name="firstName"
                                         placeholder="First Name"
-                                        value={this.state.data.first_name}
+                                        value={this.state.data.firstName}
                                         onChange={this.handleChange}
                                     />
                                     {/*error handling*/}
@@ -116,10 +116,10 @@ class AccountForm extends React.Component {
                                     <Form.Label>Last Name</Form.Label>
                                     <Form.Control
                                         type="text"
-                                        id="last_name"
-                                        name="last_name"
+                                        id="lastName"
+                                        name="lastName"
                                         placeholder="Last Name"
-                                        value={this.state.data.last_name}
+                                        value={this.state.data.lastName}
                                         onChange={this.handleChange}
 
                                     />
@@ -133,31 +133,13 @@ class AccountForm extends React.Component {
                         <Row>
                             <Col>
                                 <Form.Group>
-                                    <Form.Label>Email</Form.Label>
-                                    <Form.Control
-                                        type="email"
-                                        id="email"
-                                        name="email"
-                                        placeholder="Email Addresss"
-                                        value={this.state.data.email}
-                                        onChange={this.handleChange}
-
-                                    />
-                                    {/*error handling*/}
-                                    {/* <Form.Text className="text-muted">
-                                        {errors.email && <InlineError text={errors.email} />}
-                                    </Form.Text> */}
-                                </Form.Group>
-                            </Col>
-                            <Col>
-                                <Form.Group>
                                     <Form.Label>Phone Number</Form.Label>
                                     <Form.Control
                                         type="text"
-                                        id="phone"
-                                        name="phone"
+                                        id="phoneNumber"
+                                        name="phoneNumber"
                                         placeholder="Phone Number"
-                                        value={this.state.data.phone}
+                                        value={this.state.data.phoneNumber}
                                         onChange={this.handleChange}
 
                                     />
@@ -188,23 +170,7 @@ class AccountForm extends React.Component {
                                     </Form.Text> */}
                                 </Form.Group>
                             </Col>
-                            <Col>
-                                <Form.Group>
-                                    <Form.Label>At a station number</Form.Label>
-                                    <Form.Control
-                                        type="text"
-                                        id="at_station_number"
-                                        name="at_station_number"
-                                        placeholder="At a station number"
-                                        value={this.state.data.at_a_station_no}
-                                        onChange={this.handleChange}
-                                    />
-                                    {/*error handling*/}
-                                    {/* <Form.Text className="text-muted">
-                                        {errors.email && <InlineError text={errors.email} />}
-                                    </Form.Text> */}
-                                </Form.Group>
-                            </Col>
+
                         </Row>
                         <Row>
                             <Col className={"text-right"}>
