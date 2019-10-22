@@ -18,7 +18,6 @@ import {connect} from "react-redux";
 
 class FollowUpDetailForm extends React.Component {
 
-
     constructor(props) {
         super(props);
         this.state = {
@@ -216,11 +215,12 @@ const mapStateToProps = (state) => {
     return {
         posts: state.followUp
     }
-}
+};
+
 const mapDispatchToProps = (dispatch) => {
     return {
         // function name
     }
-}
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(FollowUpDetailForm);

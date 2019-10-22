@@ -16,17 +16,20 @@ import {
     Table
 } from 'react-bootstrap';
 import api from "../../api";
-import { MDBContainer } from "mdbreact";
+// import { MDBContainer } from "mdbreact";
 import { Line } from "react-chartjs-2";
+
+const mdbreact = require('mdbreact');
+const { MDBContainer } = mdbreact;
 
 class FloatingMenuItem extends React.Component {
 
     handleClick() {
         this.props.action();
-    }yarn
+    }
 
     render() {
-        console.log(this.props.icon)
+        console.log(this.props.icon);
         // let buttonStyle = {
         //     backgroundImage: `url(${this.props.icon})`
         // }
@@ -126,7 +129,7 @@ class ChartsPage extends React.Component {
 
 
 class HomePage extends React.Component {
-    state = { activeItem: 'bio' }
+    state = { activeItem: 'bio' };
 
     constructor(props) {
         super(props);
@@ -142,7 +145,7 @@ class HomePage extends React.Component {
     }
 
     componentDidMount() {
-        console.log("api calling")
+        console.log("api calling");
         api.referral.getAllReferral(null).then(res =>{
             // fetching all referral
             console.log("All referral", res);
