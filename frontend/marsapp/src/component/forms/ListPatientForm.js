@@ -120,15 +120,17 @@ class ListPatientForm extends React.Component {
                         </Col>
                     </Row>
                     <Row>
-                        <Search
-                            loading={isLoading}
-                            onResultSelect={this.handleResultSelect}
-                            onSearchChange={_.debounce(this.handleSearchChange, 500, {
-                                leading: true,
-                            })}
-                            results={data}
-                            value={searchValue}
-                        />
+                        <Col className="text-right">
+                            <Search
+                                loading={isLoading}
+                                onResultSelect={this.handleResultSelect}
+                                onSearchChange={_.debounce(this.handleSearchChange, 500, {
+                                    leading: true,
+                                })}
+                                results={data}
+                                value={searchValue}
+                            />
+                        </Col>
                     </Row>
                     <Row>
                         <Col>
