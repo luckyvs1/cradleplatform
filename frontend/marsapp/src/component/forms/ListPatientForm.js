@@ -120,7 +120,7 @@ class ListPatientForm extends React.Component {
                     <Row>
                         <Col className="text-right">
                             <Form className="float-right" inline>
-                                <i className="fas fa-bars"></i>
+                                <i className="fas fa-search"></i>
                                 <FormControl
                                     ref={this.searchInput}
                                     type="text"
