@@ -34,7 +34,6 @@ public class ReadingController {
         newReading.setPulseRate(reading.getPulseRate());
         newReading.setNotes(reading.getNotes());
         newReading.setNeedFollowUp(reading.getNeedFollowUp());
-        newReading.setNeedFollowUp(reading.getNeedFollowUp());
         newReading.setAppVersion(reading.getAppVersion());
         newReading.setDateLastSaved(reading.getDateLastSaved());
         newReading.setRecheckVitalsDate(reading.getRecheckVitalsDate());
@@ -60,8 +59,8 @@ public class ReadingController {
     }
 
     @GetMapping(path="/api/readings/{id}")
-    public Optional<Reading> getReadingsById(@PathVariable(value = "id") String readingsId){
-        return readingRepository.findById(readingsId);
+    public Optional<Reading> getReadingsById(@PathVariable(value = "id") int readingId){
+        return readingRepository.findById(readingId);
     }
 }
 

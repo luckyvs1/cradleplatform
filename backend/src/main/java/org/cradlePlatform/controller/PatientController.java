@@ -5,7 +5,9 @@
 package org.cradlePlatform.controller;
 
 import org.cradlePlatform.model.Patient;
+import org.cradlePlatform.model.Reading;
 import org.cradlePlatform.repository.PatientRepository;
+import org.cradlePlatform.repository.ReadingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -17,6 +19,9 @@ import java.util.Optional;
 public class PatientController {
     @Autowired
     private PatientRepository patientRepository;
+
+    @Autowired
+    private ReadingRepository readingRepository;
 
     // GET mappings
 
@@ -38,6 +43,17 @@ public class PatientController {
     public @ResponseBody
     Optional<Patient> getPatientById(@PathVariable(value = "id") int patientId) {
         return patientRepository.findById(patientId);
+    }
+
+    @GetMapping(path="/api/patients/{id}/readings")
+    public @ResponseBody
+    Iterable<Reading> getReadingByPatientId(@PathVariable(value = "id") int patientId,
+                                            @RequestParam(value = "latest", required = false) boolean latest){
+        if (latest) {
+            return  readingRepository.findTopByPatientIdOrderByIdDesc(patientId);
+        } else {
+            return readingRepository.findReadingByPatientId(patientId);
+        }
     }
 
     // POST mappings

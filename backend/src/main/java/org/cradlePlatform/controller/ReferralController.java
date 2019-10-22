@@ -40,8 +40,8 @@ public class ReferralController {
     }
 
     @GetMapping(path="/api/referrals/{id}")
-    public Optional<Referral> getReferralById(@PathVariable(value = "id") String referrerId){
-        return referralRepository.findById(referrerId);
+    public Optional<Referral> getReferralById(@PathVariable(value = "id") int referralId){
+        return referralRepository.findById(referralId);
     }
 }
 

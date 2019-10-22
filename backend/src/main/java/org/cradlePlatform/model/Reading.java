@@ -296,13 +296,13 @@ public class Reading {
 	@Override
 	public String toString() {
 		return String.format(
-				"{id: %s, readerId: '%s', patientId: '%s', timestamp: '%s', symptoms: '%s', " +
+				"{id: '%s', readerId: '%s', patientId: '%s', timestamp: '%s', symptoms: '%s', " +
 						"otherSymptoms: '%s', systolicBloodPressure: '%s', diastolicBloodPressure: '%s', " +
 						"pulseRate: '%s', notes: '%s', needFollowUp: '%s', appVersion: '%s', " +
 						"dateLastSaved: '%s', recheckVitalsDate: '%s', deviceInformation: '%s', " +
 						"gestationalAgeTimeUnit: '%s', gestationalAge: '%s', manuallyChangedOcrResults: '%s', " +
 						"photoPath: '%s', totalOcrSeconds: '%s', region: '%s', OcrEnabled: '%s', " +
-						"uploadImages: '%s', vitalsTrafficLight: '%s',}",
+						"uploadImages: '%s', vitalsTrafficLight: '%s'}",
 				id, readerId, patientId, new SimpleDateFormat("dd-MM-yyyy HH:mm:ss").format(timestamp),
 				symptoms, otherSymptoms, systolicBloodPressure, diastolicBloodPressure, pulseRate, notes,
 				needFollowUp, appVersion, dateLastSaved, recheckVitalsDate, deviceInformation,
