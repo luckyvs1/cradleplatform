@@ -51,7 +51,11 @@ class ReferralForm extends React.Component {
     componentDidMount() {
         console.log("api calling");
         api.referral.getAllReferral(null).then(res => {
-            console.log("All referral", res);
+            // fetching all follow up
+            console.log("All referral: ", res);
+
+            const data = res.data;
+            this.setState({data})
         })
     }
 
@@ -175,7 +179,7 @@ class ReferralForm extends React.Component {
                                 </Table.Header>
                                 <Table.Body>
                                     {rows.map(row => (
-                                        <Table.Row key={row.pid} onClick={() => this.handleItemClick(row)}>
+                                        <Table.Row key={row.pid}  class='clickable-row' onClick={() => this.handleItemClick(row)}>
                                             <Table.Cell >{row.pid}</Table.Cell>
                                             <Table.Cell >{row.pname}</Table.Cell>
                                             <Table.Cell >{row.referrer}</Table.Cell>
