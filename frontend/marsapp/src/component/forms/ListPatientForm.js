@@ -8,13 +8,10 @@ import React from "react";
 import {Link} from "react-router-dom";
 import TopNavigation from "../navigation/TopNavigation";
 import {
-    Table
-} from 'semantic-ui-react'
-
-import {
     Container,
     Row,
     Col,
+    Table,
     Image,
     Button
 } from 'react-bootstrap';
@@ -133,29 +130,29 @@ class ListPatientForm extends React.Component {
                     </Row>
                     <Row>
                         <Col>
-                            <Table bordered hover size="small">
-                                <Table.Header>
-                                    <Table.Row>
-                                        <Table.HeaderCell width={1}></Table.HeaderCell>
-                                        <Table.HeaderCell>Initial</Table.HeaderCell>
-                                        <Table.HeaderCell>Id</Table.HeaderCell>
-                                    </Table.Row>
-                                </Table.Header>
-                                <Table.Body>
+                            <Table hover size="sm">
+                                <thead>
+                                    <tr>
+                                        <th width="10"></th>
+                                        <th>Initial</th>
+                                        <th>Id</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
                                     {this.state.data.map(row => (
-                                        <Table.Row key={row.pid} class='clickable-row' onClick={() => this.handleItemClick(row)}>
-                                            <Table.Cell>
+                                        <tr key={row.pid} class='clickable-row' onClick={() => this.handleItemClick(row)}>
+                                            <td>
                                                 <Image src={row.img} rounded />
-                                            </Table.Cell>
-                                            <Table.Cell>
+                                            </td>
+                                            <td>
                                                 {row.initial}
-                                            </Table.Cell>
-                                            <Table.Cell>
+                                            </td>
+                                            <td>
                                                 {row.pid}
-                                            </Table.Cell>
-                                        </Table.Row>
+                                            </td>
+                                        </tr>
                                     ))}
-                                </Table.Body>
+                                </tbody>
                             </Table>
                         </Col>
                     </Row>
