@@ -9,7 +9,7 @@ import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "Healthworker", schema = "schemas")
+@Table(name = "Healthworker")
 public class HealthWorker implements Serializable {
 
     @Id
