@@ -65,15 +65,7 @@ class ListUserForm extends React.Component {
                                                     </Link>                                                
                                                 </Col>
                                                 <Col className="text-right">
-                                                    <Dropdown as={ButtonGroup}>
-                                                        <Button variant="warning" size="sm">Edit</Button>
-
-                                                        <Dropdown.Toggle split variant="warning" id="dropdown-split-basic" />
-
-                                                        <Dropdown.Menu>
-                                                            <Dropdown.Item href="#/action-1">Delete</Dropdown.Item>
-                                                        </Dropdown.Menu>
-                                                    </Dropdown>
+                                                        <Button variant="warning" size="sm" >Edit</Button>
                                                 </Col>
                                             </Row>
                                         </td>
@@ -83,9 +75,18 @@ class ListUserForm extends React.Component {
                                             <Image src="https://react.semantic-ui.com/images/avatar/small/daniel.jpg" rounded />
                                         </td>
                                         <td>
-                                            <Link to="patientDetail">
-                                                Test 2
-                                            </Link>
+                                            <Row>
+                                                <Col>
+                                                    <Link to="patientDetail">
+                                                        <strong>James Corden</strong> <br/>
+                                                        corndog@gmail.com <br/>
+                                                        Admin
+                                                    </Link>
+                                                </Col>
+                                                <Col className="text-right">
+                                                    <Button variant="warning" size="sm" >Edit</Button>
+                                                </Col>
+                                            </Row>
                                         </td>
                                     </tr>
                                 </tbody>
