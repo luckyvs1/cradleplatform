@@ -11,7 +11,13 @@
     VALUES ("22","1234","bob","builder","1", "1","BB",'M', 22, "2019-1-1",true,"2019-1-1","week",1);
 
     INSERT INTO FollowUp (id,patient_id,notes,required,frequency,diagnosis,treatment)
-    VALUES (22,"22","Hello Im broken" ,true,"once a month","advil  every half an hour","trx 778");
+    VALUES (21,"22","Hello Im broken" ,true,"once a month","advil  every half an hour","trx 778"),
+     (23,"22","Hello Im broken 2" ,true,"once a month 1","advil  every half an hour2","trx 7782"),
+     (24,"22","Hello Im broken 3" ,true,"once a month 1","advil  every half an hour3","trx 7783"),
+     (25,"22","Hello Im broken 4" ,true,"once a month 2","advil  every half an hour4","trx 774"),
+     (26,"22","Hello Im broken 5" ,true,"once a month 3","advil  every half an hour5","trx 7785"),
+     (27,"22","Hello Im broken 6" ,true,"once a month 4","advil  every half an hour6","trx 7786");
+
 
     INSERT INTO User (id, username,password)
     VALUES ("1","faraz","coolguy");

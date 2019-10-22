@@ -26,8 +26,11 @@ const Modal = () => (
         </Button>}
         modal
         closeOnDocumentClick
-    >
+    >{close => (
         <Container className={"text-left"}>
+            <a className="close" onClick={close}>
+                &times;
+            </a>
             <Form>
                 <Row>
                     <Col>
@@ -82,15 +85,40 @@ const Modal = () => (
 
                 <Row>
                     <Col className={"text-right"}>
-                        <Modal/>
+                        <Button
+                            className="button"
+                            onClick={() => {
+                                console.log("modal closed ");
+                                close();
+                            }}
+                        >
+                            close modal
+                        </Button>
+                        <Button
+                            className="button"
+                            onClick={() => {
+                                let data = {
+                                    id:"1",
+                                    username:"test",
+                                    password:"test",
+                                }
+                                api.user.createUser(data).then(res =>{
+                                    console.log(res);
+                                })
+                            }}
+                        >
+                           Submit
+                        </Button>
                     </Col>
                 </Row>
             </Form>
 
         </Container>
-
+        )}
     </Popup>
 );
+
+
 
 class AccountForm extends React.Component {
 
@@ -135,6 +163,7 @@ class AccountForm extends React.Component {
 
     render() {
         console.log(this.state.data)
+
         return (
             <div>
                 <TopNavigation authenticated={true}></TopNavigation>
@@ -280,13 +309,14 @@ class AccountForm extends React.Component {
                         </Row>
                         <Row>
                             <Col className={"text-right"}>
-                                <Modal/>
+                                <Modal></Modal>
                             </Col>
                         </Row>
                     </Form>
                 </Container>
             </div>
         );
+
     }
 }
 
