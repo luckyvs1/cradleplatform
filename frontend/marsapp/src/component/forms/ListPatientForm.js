@@ -122,13 +122,12 @@ class ListPatientForm extends React.Component {
                     <Row>
                         <Col className="text-right">
                             <Search
+                                open={false}
                                 loading={isLoading}
                                 onResultSelect={this.handleResultSelect}
                                 onSearchChange={_.debounce(this.handleSearchChange, 500, {
                                     leading: true,
                                 })}
-                                results={data}
-                                value={searchValue}
                             />
                         </Col>
                     </Row>
