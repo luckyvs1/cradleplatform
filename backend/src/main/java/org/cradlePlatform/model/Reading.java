@@ -18,7 +18,6 @@ public class Reading {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@NotNull
 	private int id;
 
 	@NotBlank
@@ -26,7 +25,6 @@ public class Reading {
 	@Column(name = "reader_id")
 	private String readerId;
 
-	@Size(max = 32)
 	@Column(name = "patient_id")
 	private int patientId;
 
@@ -38,15 +36,12 @@ public class Reading {
 	@Column(name = "other_symptoms")
 	private String otherSymptoms;
 
-	@NotNull
 	@Column(name = "systolic_bp")
 	private int systolicBloodPressure;
 
-	@NotNull
 	@Column(name = "diastolic_bp")
 	private int diastolicBloodPressure;
 
-	@NotNull
 	@Column(name = "pulse_rate")
 	private int pulseRate;
 

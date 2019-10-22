@@ -26,7 +26,6 @@ public class Referral {
 	@Column(name = "referrer_id")
 	private String referrerId;
 
-	@Size(max = 32)
 	@Column(name = "patient_id")
 	private int patientId;
 
