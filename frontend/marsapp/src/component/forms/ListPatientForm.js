@@ -20,13 +20,13 @@ import {
 import {withRouter} from "react-router-dom";
 import _ from 'lodash';
 
-function createData(pid, initial, img) {
-    return {pid, initial, img};
+function createData(pid, initial) {
+    return {pid, initial};
 }
 
 const rows = [
-    createData('111555666', 'AD', 'https://react.semantic-ui.com/images/avatar/small/helen.jpg'),
-    createData('222555444', 'WE', 'https://react.semantic-ui.com/images/avatar/small/daniel.jpg'),
+    createData('111555666', 'AD'),
+    createData('222555444', 'WE'),
 ];
 
 const initialState = {
@@ -119,11 +119,12 @@ class ListPatientForm extends React.Component {
                     </Row>
                     <Row>
                         <Col className="text-right">
-                            <Form inline>
+                            <Form className="float-right" inline>
+                                <i className="fas fa-bars"></i>
                                 <FormControl
                                     ref={this.searchInput}
                                     type="text"
-                                    placeholder="Search"
+                                    placeholder="Search..."
                                     className="mr-sm-2"
                                     onChange={() => this.handleSearchChange()}
                                 />
@@ -135,23 +136,15 @@ class ListPatientForm extends React.Component {
                             <Table hover size="sm">
                                 <thead>
                                     <tr>
-                                        <th width="10"></th>
-                                        <th>Initial</th>
-                                        <th>Id</th>
+                                        <th>Patient ID</th>
+                                        <th>Initials</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     {this.state.data.map(row => (
                                         <tr key={row.pid} class='clickable-row' onClick={() => this.handleItemClick(row)}>
-                                            <td>
-                                                <Image src={row.img} rounded />
-                                            </td>
-                                            <td>
-                                                {row.initial}
-                                            </td>
-                                            <td>
-                                                {row.pid}
-                                            </td>
+                                            <td>{row.pid}</td>
+                                            <td>{row.initial}</td>
                                         </tr>
                                     ))}
                                 </tbody>
