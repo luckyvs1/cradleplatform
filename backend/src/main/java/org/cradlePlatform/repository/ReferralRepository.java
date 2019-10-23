@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ReferralRepository extends CrudRepository<Referral, Integer> {
+	Iterable<Referral> findByHealthFacility(String healthFacility);
 }

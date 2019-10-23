@@ -43,6 +43,11 @@ public class ReferralController {
     public Optional<Referral> getReferralById(@PathVariable(value = "id") int referralId){
         return referralRepository.findById(referralId);
     }
+
+    @GetMapping(path="/api/health-centre/{health-centre}/referrals")
+    public Iterable<Referral> getReferralsByHealthCentre(@PathVariable(value = "health-centre") String healthCentre) {
+        return referralRepository.findByHealthFacility(healthCentre);
+    }
 }
 
 
