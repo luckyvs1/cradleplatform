@@ -27,7 +27,7 @@ public class FollowUpController {
      * @return 200: JSON of followups
      */
     @GetMapping(path="/api/patients/followUps")
-    public Iterable<FollowUp> getFollowUpByPatientId(@RequestParam String patientId,
+    public Iterable<FollowUp> getFollowUpByPatientId(@RequestParam int patientId,
                                               @RequestParam(value = "latest", required = false) boolean latest) {
         if (latest) {
             return followUpRepository.findTopByPatientIdOrderByIdDesc(patientId);
