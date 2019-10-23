@@ -18,9 +18,9 @@ export default {
     },
     user: {
         login: credential => axios.get(`http://${host}:${port}/api/login?username=${credential.username}&password=${credential.password}`, {credential}),
-        getAllUsers:data=> axios.get(`http://${host}:${port}/api/users`),
+        getAllUsers:data=> axios.get(`http://${host}:${port}/api/users/`),
         getUserById:data=> axios.get(`http://${host}:${port}/api/users/${data.userId}`),
-        createUser:data=> axios.post(`http://${host}:${port}/api/users`, {data}),
+        createUser:(username , password) => axios.post(`http://${host}:${port}/api/users`, {username, password}),
     },
     vht:{
         getAllVHT: data => axios.get(`http://${host}:${port}/api/vht`),

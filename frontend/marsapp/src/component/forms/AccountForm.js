@@ -4,7 +4,7 @@
  *  Contains the contents and functionality of the Account page.
  */
 
-import React, {useState} from "react";
+import React  from "react";
 import TopNavigation from "../navigation/TopNavigation";
 import {
     Container,
