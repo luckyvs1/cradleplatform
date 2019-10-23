@@ -4,40 +4,44 @@
  */
 package org.cradlePlatform.controller;
 
-import java.sql.Time;
-import java.sql.Timestamp;
 import java.util.Optional;
-
-import org.cradlePlatform.model.ReferralEntity;
+import org.cradlePlatform.model.Referral;
 import org.cradlePlatform.repository.ReferralRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-@CrossOrigin(origins = { "http://localhost:3000"})
+
+@CrossOrigin(origins = {"http://localhost:3000"})
 @RestController
 public class ReferralController {
     @Autowired
     private ReferralRepository referralRepository;
 
-    @PostMapping(path="/referral")
-    public @ResponseBody String addAReferral(@RequestParam int referrerId,
-                                             @RequestParam String readingId,
-                                             @RequestParam Timestamp timestamp){
-        ReferralEntity newReferral = new ReferralEntity();
-        newReferral.setId(referrerId);
-        newReferral.setReadingID(readingId);
-        newReferral.setTimestamp(timestamp);
+    @PostMapping(path="/api/referrals")
+    @ResponseStatus(code = HttpStatus.CREATED)
+    public String addAReferral(@RequestBody Referral referral){
+        Referral newReferral = new Referral();
+        newReferral.setReferrerId(referral.getReferrerId());
+        newReferral.setPatientId(referral.getPatientId());
+        newReferral.setReadingId(referral.getReadingId());
+        newReferral.setTimestamp(referral.getTimestamp());
+        newReferral.setHealthFacility(referral.getHealthFacility());
+        newReferral.setNotesReason(referral.getNotesReason());
+        newReferral.setNotesAction(referral.getNotesAction());
+
+        referralRepository.save(newReferral);
+
         return "Saved Referral";
     }
 
-    @GetMapping(path="/referral")
-    public @ResponseBody Iterable<ReferralEntity> getAllReferral() {
+    @GetMapping(path="/api/referrals")
+    public Iterable<Referral> getAllReferral() {
         return referralRepository.findAll();
     }
 
-    @GetMapping(path="/referral/{id}")
-    public @ResponseBody
-    Optional<ReferralEntity> getReferralById(@PathVariable(value = "id") String referrerId){
-        return referralRepository.findById(referrerId);
+    @GetMapping(path="/api/referrals/{id}")
+    public Optional<Referral> getReferralById(@PathVariable(value = "id") int referralId){
+        return referralRepository.findById(referralId);
     }
 }
 
