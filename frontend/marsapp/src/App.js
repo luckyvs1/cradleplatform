@@ -35,7 +35,7 @@ const App = ({location, isAuthenticated}) => (
     <div className="ui-toolbar">
         {isAuthenticated && <TopNavigation/>}
         <Route location={location} path="/" exact component={LoginPage}/>
-        <AdminRoute
+        <UserRoute
             location={location} path="/homePage" exact component={HomePage}/>
         <UserRoute
             location={location}

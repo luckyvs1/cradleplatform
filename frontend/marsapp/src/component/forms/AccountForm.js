@@ -15,7 +15,7 @@ import {
 } from 'react-bootstrap';
 import PropTypes from "prop-types";
 import api from "../../api"
-import Modal from "../utils/popUp"
+import {popUp} from "../utils/popUp"
 
 
 
@@ -174,7 +174,7 @@ class AccountForm extends React.Component {
                         </Row>
                         <Row>
                             <Col className={"text-right"}>
-                                <Modal></Modal>
+                                <popUp></popUp>
                             </Col>
                         </Row>
                     </Form>
