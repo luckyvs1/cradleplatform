@@ -34,7 +34,8 @@ class AccountForm extends React.Component {
                 country: "",
                 phoneNumber: "",
                 role: "",
-            }
+            },
+            username:""
         }
         this.handleChange = this.handleChange.bind(this);
     }
@@ -45,7 +46,12 @@ class AccountForm extends React.Component {
             let data  = res.data;
             this.setState({data})
             console.log("user info", this.state);
+
         })
+        api.user.getUserById(this.state.data.id).then(user=>{
+            this.setState({username:user.data.username})
+        })
+
     }
 
     handleChange(event) {
@@ -86,8 +92,8 @@ class AccountForm extends React.Component {
                                         id="username"
                                         name="username"
                                         placeholder="Username"
+                                        value={this.state.username}
                                         onChange={this.handleChange}
-
                                     />
                                     {/*error handling*/}
                                     {/* <Form.Text className="text-muted">
