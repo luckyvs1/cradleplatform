@@ -6,51 +6,61 @@
  */
 package org.cradlePlatform.controller;
 
-import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.Date;
+
+import java.util.Optional;
 import org.cradlePlatform.model.Reading;
-import org.cradlePlatform.model.ReadingEntity;
 import org.cradlePlatform.repository.ReadingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.cdi.Eager;
-import org.springframework.stereotype.Controller;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-@CrossOrigin(origins = { "http://localhost:3000"})
-@RestController
 
+@CrossOrigin(origins = {"http://localhost:3000"})
+@RestController
 public class ReadingController {
     @Autowired
     private ReadingRepository readingRepository;
 
-    @PostMapping(path="/reading")
-    public @ResponseBody String addAReading(@RequestParam String readerId,
-                                            @RequestParam String patientId,
-                                            @RequestParam Timestamp timestamp,
-                                            @RequestParam ArrayList<String> symptoms,
-                                            @RequestParam String otherSymptoms,
-                                            @RequestParam int systolicBp,
-                                            @RequestParam int diastolicBp,
-                                            @RequestParam int pulseRate,
-                                            @RequestParam String notes,
-                                            @RequestParam boolean needFollowup){
-        ReadingEntity newReading = new ReadingEntity();
-        newReading.setPatientID(patientId);
-        newReading.setReaderID(readerId);
-        newReading.setTimestamp(timestamp);
-        newReading.setOtherSymptoms(otherSymptoms);
-        newReading.setSystolicBloodPressure(systolicBp);
-        newReading.setDiastolicBloodPressure(diastolicBp);
-        newReading.setNotes(notes);
-        newReading.setNeedFollowUp(needFollowup);
+    @PostMapping(path="/api/readings")
+    @ResponseStatus(code = HttpStatus.CREATED)
+    public String addAReading(@RequestBody Reading reading){
+        Reading newReading = new Reading();
+        newReading.setReaderId(reading.getReaderId());
+        newReading.setPatientId(reading.getPatientId());
+        newReading.setTimestamp(reading.getTimestamp());
+        newReading.setSymptoms(reading.getSymptoms());
+        newReading.setOtherSymptoms(reading.getOtherSymptoms());
+        newReading.setSystolicBloodPressure(reading.getSystolicBloodPressure());
+        newReading.setDiastolicBloodPressure(reading.getDiastolicBloodPressure());
+        newReading.setPulseRate(reading.getPulseRate());
+        newReading.setNotes(reading.getNotes());
+        newReading.setNeedFollowUp(reading.getNeedFollowUp());
+        newReading.setAppVersion(reading.getAppVersion());
+        newReading.setDateLastSaved(reading.getDateLastSaved());
+        newReading.setRecheckVitalsDate(reading.getRecheckVitalsDate());
+        newReading.setDeviceInformation(reading.getDeviceInformation());
+        newReading.setGestationalAgeTimeUnit(reading.getGestationalAgeTimeUnit());
+        newReading.setGestationalAge(reading.getGestationalAge());
+        newReading.setManuallyChangedOcrResults(reading.getManuallyChangedOcrResults());
+        newReading.setPhotoPath(reading.getPhotoPath());
+        newReading.setTotalOcrSeconds(reading.getTotalOcrSeconds());
+        newReading.setRegion(reading.getRegion());
+        newReading.setOcrEnabled(reading.getOcrEnabled());
+        newReading.setUploadImages(reading.getUploadImages());
+        newReading.setVitalsTrafficLight(reading.getVitalsTrafficLight());
+
         readingRepository.save(newReading);
 
         return "Saved Reading";
     }
 
-    @GetMapping(path="/readings")
-    public @ResponseBody Iterable<ReadingEntity> getAllReadings() {
+    @GetMapping(path="/api/readings")
+    public Iterable<Reading> getAllReadings() {
         return readingRepository.findAll();
+    }
+
+    @GetMapping(path="/api/readings/{id}")
+    public Optional<Reading> getReadingsById(@PathVariable(value = "id") int readingId){
+        return readingRepository.findById(readingId);
     }
 }
 

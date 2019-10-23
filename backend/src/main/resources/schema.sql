@@ -2,16 +2,12 @@
     For creating tables in database
  */
 
-/*DROP TABLE IF EXISTS User;*/
-
 CREATE TABLE User (
     id          VARCHAR (32)    NOT NULL,
     username    VARCHAR (16)    NOT NULL,
     password    VARCHAR (32)    NOT NULL,
     PRIMARY KEY (id)
 );
-
-/*INSERT INTO User(id, username, password) VALUES('123345456', 'estUser', 'IAmPassword');*/
 
 CREATE TABLE User_Info (
     id                  VARCHAR (32)    NOT NULL,
@@ -60,7 +56,7 @@ CREATE TABLE Patient (
     dob                 DATE,
     pregnant            BOOLEAN,
     gestational_start_date DATE,
-    gestational_age_unit  ENUM('week', 'month', 'none'),
+    gestational_age_unit  ENUM('weeks', 'months', 'none'),
     current_gestational_age       INTEGER,
     CHECK (
             (pregnant IS TRUE AND current_gestational_age IS NOT NULL) OR
@@ -134,7 +130,7 @@ CREATE TABLE Reading (
     date_last_saved TIMESTAMP       NOT NULL,
     date_recheck_vitals_needed TIMESTAMP    NOT NULL,
     device_info     VARCHAR(32)     NOT NULL,
-    gestational_age_unit  ENUM('week', 'month', 'none'),
+    gestational_age_unit  ENUM('weeks', 'months', 'none'),
     gestational_age INTEGER,
     manually_changed_OCR_results VARCHAR(16)   NOT NULL,
     path_to_photo   VARCHAR(128)    NOT NULL,
