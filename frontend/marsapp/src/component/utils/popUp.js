@@ -1,38 +1,25 @@
-import {Button, Col, Container, Form, Row} from "react-bootstrap";
+import {Button, Col, Container, Form, Modal, Row} from "react-bootstrap";
 import api from "../../api";
-import React from "react";
-import Popup from "reactjs-popup";
-
-export class popUp extends React.Component {
+import React, {useState} from "react";
 
 
-    onChange = e => {
+export default function RegularPopUp() {
+    const [show, setShow] = useState(false);
 
-        console.log(e);
-    }
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
 
-    state = {
-        data: {
-            username: '',
-            password: '',
-            confirm_password: '',
-        }
-    };
+    return (
+        <>
+            <Button variant="primary" onClick={handleShow}>
+                Create Account
+            </Button>
 
-    render() {
-
-        return (
-            <Popup
-                trigger={<Button variant="success" onClick={() => this.submit(this.state.data)}>
-                    Create
-                </Button>}
-                modal
-                closeOnDocumentClick
-            >{close => (
-                <Container className={"text-left"}>
-                    <a className="close" onClick={close}>
-                        &times;
-                    </a>
+            <Modal show={show} onHide={handleClose} animation={false}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Create Account</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
                     <Form>
                         <Row>
                             <Col>
@@ -83,32 +70,20 @@ export class popUp extends React.Component {
                                 </Form.Group>
                             </Col>
                         </Row>
-
-                        <Row>
-                            <Col className={"text-right"}>
-                                <Button
-                                    className="button"
-                                    onClick={() => {
-                                        let data = {
-                                            id: "1",
-                                            username: "test",
-                                            password: "test",
-                                        }
-
-                                        api.user.createUser(data).then(res => {
-                                            console.log(res);
-                                        })
-                                    }}
-                                >
-                                    Submit
-                                </Button>
-                            </Col>
-                        </Row>
                     </Form>
 
-                </Container>
-            )}
-            </Popup>
-        )
-    }
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={handleClose}>
+                        Close
+                    </Button>
+                    <Button variant="primary" onClick={handleClose}>
+                        Save Changes
+                    </Button>
+                </Modal.Footer>
+            </Modal>
+        </>
+    );
 }
+
+

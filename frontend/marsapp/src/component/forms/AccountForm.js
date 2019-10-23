@@ -4,18 +4,20 @@
  *  Contains the contents and functionality of the Account page.
  */
 
-import React from "react";
+import React, {useState} from "react";
 import TopNavigation from "../navigation/TopNavigation";
 import {
     Container,
     Row,
     Col,
     Button,
-    Form
+    Form,
+    Modal
 } from 'react-bootstrap';
 import PropTypes from "prop-types";
 import api from "../../api"
-import {popUp} from "../utils/popUp"
+import RegularPopUp from "../utils/popUp"
+
 
 
 
@@ -62,6 +64,7 @@ class AccountForm extends React.Component {
 
     render() {
         console.log(this.state.data)
+
 
         return (
             <div>
@@ -174,7 +177,7 @@ class AccountForm extends React.Component {
                         </Row>
                         <Row>
                             <Col className={"text-right"}>
-                                <popUp></popUp>
+                              <RegularPopUp></RegularPopUp>
                             </Col>
                         </Row>
                     </Form>
