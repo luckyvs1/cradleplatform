@@ -29,6 +29,7 @@ export default {
     },
     userInfo:{
         getUserInfoById:data=> axios.get(`http://${host}:${port}/api/user-information/${data.userId}`),
+        getAllUserInfo:data=> axios.get(`http://${host}:${port}/api/user-information`),
         createUserInformation:data=> axios.post(`http://${host}:${port}/api/user-information` , {data}),
     },
     patient: {
