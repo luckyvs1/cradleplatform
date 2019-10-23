@@ -6,8 +6,22 @@ import React, {useState} from "react";
 export default function RegularPopUp() {
     const [show, setShow] = useState(false);
 
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
+
+    const handleClose = () => {
+        setShow(false)
+    }
+    const handleShow = () => {
+        let data = {
+            id: "1",
+            username: "tt",
+            password: "ff"
+        }
+        api.user.createUser(data).then(result => {
+            console.log(result);
+        })
+
+        setShow(true);
+    }
 
     return (
         <>
