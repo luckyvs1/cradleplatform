@@ -11,7 +11,6 @@ CREATE TABLE User (
 
 CREATE TABLE User_Info (
     id                  VARCHAR (32)    NOT NULL,
-    at_a_station_no     VARCHAR (32)    NOT NULL,
     first_name          VARCHAR (32)    NOT NULL,
     last_name           VARCHAR (32)    NOT NULL,
     dob                 DATE            NOT NULL,
