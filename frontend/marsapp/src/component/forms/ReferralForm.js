@@ -48,7 +48,6 @@ class ReferralForm extends React.Component {
     componentDidMount() {
         console.log("api calling")
         api.referral.getAllReferral(null).then(res => {
-            // fetching all follow up
             console.log("All referral", res);
         })
     }

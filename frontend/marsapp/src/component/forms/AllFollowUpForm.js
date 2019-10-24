@@ -50,9 +50,7 @@ class AllFollowUpForm extends React.Component {
     }));
 
     componentDidMount() {
-        console.log("api calling")
               api.followUp.getAllFollowUps(null).then(res => {
-            // fetching all follow up
             console.log("All follow up", res);
         })
     }

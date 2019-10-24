@@ -24,7 +24,6 @@ class FloatingMenuItem extends React.Component {
     }
 
     render() {
-        console.log(this.props.icon)
         // let buttonStyle = {
         //     backgroundImage: `url(${this.props.icon})`
         // }
@@ -76,14 +75,11 @@ class HomePage extends React.Component {
     }
 
     componentDidMount() {
-        console.log("api calling")
         api.referral.getAllReferral(null).then(res =>{
-            // fetching all referral
             console.log("All referral", res);
         })
 
         api.followUp.getAllFollowUps(null).then(res => {
-            // fetching all follow up
             console.log("All follow up", res);
         })
     }

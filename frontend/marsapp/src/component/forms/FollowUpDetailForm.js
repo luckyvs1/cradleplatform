@@ -22,9 +22,7 @@ class FollowUpDetailForm extends React.Component {
     // validate
 
     componentDidMount() {
-        console.log("api calling")
         api.followUp.getFollowUpByPatientId({patientId:1}).then(res => {
-            // fetching all follow up
             console.log("by patient id", res);
         })
     }
