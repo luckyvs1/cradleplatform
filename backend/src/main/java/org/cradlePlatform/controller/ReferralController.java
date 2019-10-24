@@ -35,7 +35,10 @@ public class ReferralController {
     }
 
     @GetMapping(path="/api/referrals")
-    public Iterable<Referral> getAllReferral() {
+    public Iterable<Referral> getAllReferral(@RequestParam(value = "referrerId", required = false) String referrerId) {
+        if (referrerId != null) {
+            return referralRepository.findByReferrerId(referrerId);
+        }
         return referralRepository.findAll();
     }
 
