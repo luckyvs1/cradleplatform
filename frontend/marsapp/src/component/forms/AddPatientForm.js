@@ -47,6 +47,7 @@ class AddPatientForm extends React.Component {
             this.onChangeDateGest = this.onChangeDateGest.bind(this);
             this.onSubmit = this.onSubmit.bind(this);
         }
+
     onChange = e => this.setState({data: {...this.state.data, [e.target.name]: e.target.value} });
     onChangeDob = date => {
         this.setState({
@@ -129,9 +130,11 @@ class AddPatientForm extends React.Component {
                                         <DatePicker
                                             value={data.dob}
                                             selected={data.dob}
+                                            showYearDropdown
+                                            dropdownMode="select"
                                             id="dob"
                                             name="dob"
-                                            dateFormat="MM-dd-yyyy"
+                                            dateFormat="yyyy-MM-dd"
                                             onChange={this.onChangeDob}
                                         />
                                     </Form.Group>
@@ -153,7 +156,9 @@ class AddPatientForm extends React.Component {
                                             selected={data.gestational_start_date}
                                             id="gestational_start_date"
                                             name="gestational_start_date"
-                                            dateFormat="MM-dd-yyyy"
+                                            showYearDropdown
+                                            dropdownMode="select"
+                                            dateFormat="yyyy-MM-dd"
                                             onChange={this.onChangeDateGest}
                                         />
                                     </Form.Group>
