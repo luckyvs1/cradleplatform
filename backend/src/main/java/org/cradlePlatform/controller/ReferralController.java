@@ -35,13 +35,21 @@ public class ReferralController {
     }
 
     @GetMapping(path="/api/referrals")
-    public Iterable<Referral> getAllReferral() {
+    public Iterable<Referral> getAllReferral(@RequestParam(value = "referrerId", required = false) String referrerId) {
+        if (referrerId != null) {
+            return referralRepository.findByReferrerId(referrerId);
+        }
         return referralRepository.findAll();
     }
 
     @GetMapping(path="/api/referrals/{id}")
     public Optional<Referral> getReferralById(@PathVariable(value = "id") int referralId){
         return referralRepository.findById(referralId);
+    }
+
+    @GetMapping(path="/api/health-centre/{health-centre}/referrals")
+    public Iterable<Referral> getReferralsByHealthCentre(@PathVariable(value = "health-centre") String healthCentre) {
+        return referralRepository.findByHealthFacility(healthCentre);
     }
 }
 
