@@ -1,7 +1,8 @@
 import requests
 import json
 
-# insert into Patient values ("1", "2", "AC", "F", "30", True, "month", "6");
+# insert into User values ("1", "user1", "pass");
+# insert into Patient values (1, "1234", "Mary", "Sue", "village0", "zone0", "house0", "block0", "tank0", "MS", "F", 26, "1993-01-05", True, "2019-06-01", "months", 3);
 # insert into Drug_History values (1, "1", "history stuff");
 # insert into Medical_History values (1, "1", "my medical history");
 
@@ -16,7 +17,9 @@ followupurl = 'http://localhost:8080/api/followUps?followUpId=1'
 hwurl = 'http://localhost:8080/api/healthWorkers/'
 mhurl = 'http://localhost:8080/api/medicalHistories?patientId=1&latest=true'
 medurl = 'http://localhost:8080/api/medications?drugHistoryId=1'
-fuurl = 'http://localhost:8080/api/followUps?patientId=1&latest=true'
+fuurl = 'http://localhost:8080/api/followUps'
+readingurl = "http://localhost:8080/api/readings"
+hcrefurl = "http://localhost:8080/api/health-centre/healthfacility21/referrals"
 mhdata = {
     "patientId": "1",
     "medicalHistoryText": "gfhgfhfghffssss",
@@ -50,11 +53,66 @@ meddata = {
 fudata = {
     "patientId": "1",
     "followUpNotes": "notes",
-    "required": true,
+    "required": True,
     "frequency": "once a month",
     "diagnosis": "coolness",
-    "treatment": "check up"
+    "treatment": "check up bupbup"
 }
+readingdata =  {
+    "readings": [
+        {
+            "readerId": "1",
+            "patientId": 1,
+            "timestamp": "2019-01-01",
+            "symptoms": "Feverish,Unwell",
+            "otherSymptoms": "",
+            "systolicBloodPressure": 80,
+            "diastolicBloodPressure": 110,
+            "pulseRate": 80,
+            "notes": "some notes",
+            "needFollowUp": False,
+            "appVersion": "CRADLE1.0",
+            "dateLastSaved": "2019-08-17T12:00.000Z",
+            "recheckVitalsDate": "2019-08-17",
+            "deviceInformation": "device stuff",
+            "gestationalAgeTimeUnit": "months",
+            "gestationalAge": 5,
+            "manuallyChangedOcrResults": False,
+            "photoPath": "/photos",
+            "totalOcrSeconds": 0.1,
+            "region": "myregion",
+            "ocrEnabled": True,
+            "uploadImages": False,
+            "vitalsTrafficLight": "Green"
+        },
+        {
+            "readerId": "1",
+            "patientId": 2,
+            "timestamp": "2019-01-01",
+            "symptoms": "Headache,Unwell",
+            "otherSymptoms": "",
+            "systolicBloodPressure": 80,
+            "diastolicBloodPressure": 110,
+            "pulseRate": 80,
+            "notes": "some notes",
+            "needFollowUp": False,
+            "appVersion": "CRADLE1.0",
+            "dateLastSaved": "2019-08-17T12:00.000Z",
+            "recheckVitalsDate": "2019-08-17",
+            "deviceInformation": "device stuff",
+            "gestationalAgeTimeUnit": "months",
+            "gestationalAge": 5,
+            "manuallyChangedOcrResults": False,
+            "photoPath": "/photos",
+            "totalOcrSeconds": 0.1,
+            "region": "myregion",
+            "ocrEnabled": True,
+            "uploadImages": False,
+            "vitalsTrafficLight": "Green"
+        }
+    ]
+}
+
 # admindata = {
     #     "id": "2c91808fvhjfhj36db256a9016db259f42e0000",
     # }
@@ -91,8 +149,11 @@ fudata = {
 # resp = requests.get(mhurl, data=json.dumps(mhdata), headers=header)
 # resp = requests.get(paturl, data=json.dumps(dhdata), headers=header)
 #resp = requests.get(medurl, headers=header)
-resp = requests.post(paturl, data=json.dumps(patdata), headers=header)
+# resp = requests.post(paturl, data=json.dumps(patdata), headers=header)
 # resp = requests.get(fuurl, data=json.dumps(fudata), headers=header)
+# resp = requests.post(readingurl, data=json.dumps(readingdata), headers=header)
+resp = requests.get(hcrefurl, headers=header)
+
 print(resp)
 print(resp.status_code)
 print(resp.text)
