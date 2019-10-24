@@ -70,13 +70,6 @@ class TopNavigation extends React.Component {
                                 <NavDropdown.Item as={Link} to="account">
                                     <i className="fas fa-user-alt"></i> Account
                                 </NavDropdown.Item>
-                                <NavDropdown.Item as={Link} to="listUser">
-                                    <i className="fas fa-users-cog"></i> Users
-                                </NavDropdown.Item>
-                                <NavDropdown.Divider/>
-                                <NavDropdown.Item as={Link} to="help">
-                                    <i className="fas fa-graduation-cap"></i> Learning Materials
-                                </NavDropdown.Item>
                                 <NavDropdown.Divider/>
                                 <NavDropdown.Item as={Link} to="/">
                                     <i className="fas fa-sign-out-alt"></i> Logout
@@ -85,12 +78,10 @@ class TopNavigation extends React.Component {
                         </Nav>
                     </Container>
                     <Container>
-
                         <div id="wrapper">
                             <aside className="sidebar-wrapper">
                                 <div className="sidebar-brand" id={"sidebar-brand"}>
                                     <h2>Menu</h2>
-
                                 </div>
                                 <div className="sidebar-nav">
                                     <ul>
@@ -103,22 +94,22 @@ class TopNavigation extends React.Component {
                                         <Nav.Link as={Link} to="referral">
                                             <i className="fas fa-redo"></i> Referrals
                                         </Nav.Link>
-                                        <NavDropdown title={<span><i className="fas fa-users"></i> Patients</span>}
-                                                     id="collasible-nav-dropdown">
-                                            <NavDropdown.Item as={Link} to="listPatient">All Patients</NavDropdown.Item>
-                                            <NavDropdown.Item as={Link} to="patientDetail" href="#action/3.2">Find
-                                                Patient</NavDropdown.Item>
-                                            <NavDropdown.Divider/>
-                                            <NavDropdown.Item as={Link} to="addPatient">Add Patient</NavDropdown.Item>
-                                        </NavDropdown>
+                                        <Nav.Link as={Link} to="listPatient">
+                                            <i className="fas fa-users"></i> Patients
+                                        </Nav.Link>
+                                        {/*TODO: Only show Users tab to Admins*/}
+                                        <Nav.Link as={Link} to="listUser">
+                                            <i className="fas fa-users-cog"></i> Users
+                                        </Nav.Link>
+                                        <Nav.Link as={Link} to="help">
+                                            <i className="fas fa-graduation-cap"></i> Learning Materials
+                                        </Nav.Link>
                                     </ul>
-
                                 </div>
                             </aside>
                         </div>
                     </Container>
                 </Navbar>
-
             )
         }
         return (
@@ -126,10 +117,7 @@ class TopNavigation extends React.Component {
                 <Container>
                     <Navbar.Brand href="/">Cradle Platform</Navbar.Brand>
                 </Container>
-
             </Navbar>
-
-
         )
     }
 }
