@@ -55,15 +55,14 @@ class ListUserForm extends React.Component {
                 <TopNavigation authenticated={true}></TopNavigation>
                 <Container>
                     <Row className="mb-4">
-
-                                <Col>
-                                    <h1>All Users</h1>
-                                </Col>
-                                <Col className="text-right">
-                                    <Button variant="primary" size="sm" as={Link} to="account">
-                                        Add User
-                                    </Button>
-                                </Col>
+                        <Col>
+                            <h1>All Users</h1>
+                        </Col>
+                        <Col className="text-right">
+                            <Button variant="primary" size="sm" as={Link} to="account">
+                                Add User
+                            </Button>
+                        </Col>
 
                     </Row>
                     <Row>
