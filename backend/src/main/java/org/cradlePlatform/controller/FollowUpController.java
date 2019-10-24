@@ -36,9 +36,14 @@ public class FollowUpController {
         }
     }
 
+    @GetMapping(path="/api/followUps/{id}")
+    public Optional<FollowUp> getFollowUpById(@PathVariable(value = "id") int id) {
+        return followUpRepository.findById(id);
+    }
+
     @GetMapping(path="/api/followUps")
-    public Optional<FollowUp> getFollowUpByFollowUpId(@RequestParam int followUpId) {
-        return followUpRepository.findById(followUpId);
+    public Iterable<FollowUp> getAllFollowUps() {
+        return followUpRepository.findAll();
     }
 
     // POST mappings

@@ -105,6 +105,8 @@ public class Reading {
 	@Column(name = "reading_analysis")
 	private VitalsTrafficLight vitalsTrafficLight;
 
+	public Reading() {}
+
 	public int getId() {
 		return id;
 	}
