@@ -20,22 +20,26 @@ const TopMarginStyle = styled.div`
 
 class LoginPage extends React.Component {
 
+
+
+      // commented out all while we wait for login api
       submit = data => {
-        api.user.login(data)
-            .then(res => {
-                if(res.data.id == "22"){
-                    this.props.updateLogIn(res.data.id );
+        // api.user.login(data)
+        //     .then(res => {
+        //         console.log(res)
+        //         if(data){
+        //             this.props.updateLogIn(res.data.id );
 
                     auth.login(()=>{
                         localStorage.loginToken = auth.authenticated;
                         this.props.history.push("/homePage");
                     })
-                    console.log(res.data)
-                }else{
+                    // console.log(res.data)
+                // }else{
                     // pop up cannot log in
 
-                }
-            })
+                // }
+            // })
 
 
     };
