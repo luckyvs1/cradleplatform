@@ -103,6 +103,9 @@ class TopNavigation extends React.Component {
                                         <Nav.Link as={Link} to="referral">
                                             <i className="fas fa-redo"></i> Referrals
                                         </Nav.Link>
+                                        <Nav.Link as={Link} to="addReadingDetail">
+                                            <i className="fas fa-notes-medical"></i> Readings
+                                        </Nav.Link>
                                         <NavDropdown title={<span><i className="fas fa-users"></i> Patients</span>}
                                                      id="collasible-nav-dropdown">
                                             <NavDropdown.Item as={Link} to="listPatient">All Patients</NavDropdown.Item>
