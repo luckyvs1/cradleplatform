@@ -171,3 +171,27 @@ CREATE TABLE Monitor (
     FOREIGN KEY (VHT_id) REFERENCES VHT(id) ON DELETE CASCADE,
     FOREIGN KEY (patient_id) REFERENCES Patient(id) ON DELETE CASCADE
 );
+
+--Insert test data
+
+insert into User values ("1", "user1", "pass");
+insert into Patient values (1,
+                            "1234",
+                            "Mary",
+                            "Sue",
+                            "village0",
+                            "zone0",
+                            "house0",
+                            "block0",
+                            "tank0",
+                            "MS",
+                            "F",
+                            26,
+                            "1993-01-05",
+                            True,
+                            "2019-06-01",
+                            "months",
+                            3);
+insert into Referral values (1, "1", 1, 1, "2019-01-01", "healthfacility1", "notes", "notes2");
+insert into Drug_History values (1, "1", "history stuff");
+insert into Medical_History values (1, "1", "my medical history");
