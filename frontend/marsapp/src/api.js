@@ -59,7 +59,8 @@ export default {
     followUp: {
         getAllFollowUps:data=> axios.get(`http://${host}:${port}/api/followUps`),
         getFollowUpByPatientId:data=> axios.get(`http://${host}:${port}/api/followUps?patientId=${data.patientId}`),
-        getLastFollowUpByPatientId:data=> axios.get(`http://${host}:${port}/api/followUps?patientId=${data.patientId}&latest=${true}`),
+        getFollowUpByFollowUpId:data=> axios.get(`http://${host}:${port}/api/followUps/${data.followUpId}`),
+        getLastFollowUpByPatientId:data=> axios.get(`http://${host}:${port}/api/followUps/patientId=${data.patientId}&latest=${true}`),
         addFollowUp:data=> axios.post(`http://${host}:${port}/api/followUps` , {data}),
 
     },
