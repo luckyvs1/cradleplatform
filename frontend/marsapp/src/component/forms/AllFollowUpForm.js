@@ -39,14 +39,12 @@ class AllFollowUpForm extends React.Component {
 
     componentDidMount() {
         api.followUp.getAllFollowUps(null).then(res => {
-            // fetching all follow up
             const data = res.data;
             this.setState({data})
         })
     }
 
     submit = event => {
-        console.log("data to be sent", event)
         if (event) {
             this.props.updatePatientFollowUp(event);
             this.props.submit(event)

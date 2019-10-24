@@ -29,7 +29,7 @@ class FollowUpDetailForm extends React.Component {
                 frequency: "",
                 id: null,
                 patientId: null,
-                required: true,
+                required: null,
                 treatment: "",
             },
         };
@@ -37,17 +37,15 @@ class FollowUpDetailForm extends React.Component {
     }
 
     componentDidMount() {
-        console.log(this.props);
         api.followUp.getFollowUpByFollowUpId({followUpId:this.props.posts.posts }).then(res => {
-            console.log("by patient id", res);  const data = res.data;
+            const data = res.data;
             this.setState({data})
-
         })
     }
 
 
     render() {
-
+        // TODO link logic of the drop down
         const alertOptions = [
             {
                 key: 'No Alert',
@@ -65,10 +63,8 @@ class FollowUpDetailForm extends React.Component {
                 value: 'Once a month',
             }
         ];
-        console.log("state data", this.state)
 
         return (
-
             <div>
                 <TopNavigation authenticated={true}></TopNavigation>
                 <Container>
