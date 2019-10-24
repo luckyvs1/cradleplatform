@@ -8,8 +8,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import Validator from "validator";
-import moment from 'moment';
+import PropTypes from "prop-types";
 import TopNavigation from "../navigation/TopNavigation";
 import {
     Container,
@@ -74,6 +73,7 @@ class AddPatientForm extends React.Component {
         if(!data.village_no) errors.village_no = emptyWarning;
         if(!data.zone_no) errors.zone_no = emptyWarning;
         if(!data.initials) errors.initials = emptyWarning;
+        return errors;
     }
     render() {
         const { data, errors } = this.state;
