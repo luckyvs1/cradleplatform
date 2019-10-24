@@ -23,22 +23,22 @@ class FollowUpDetailForm extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            data: [{
+            data: {
                 diagnosis: "",
                 followUpNotes: "",
                 frequency: "",
                 id: null,
-                patientId: "",
+                patientId: null,
                 required: true,
                 treatment: "",
-            }],
+            },
         };
 
     }
 
     componentDidMount() {
-        api.followUp.getFollowUpByFollowUpId({followUpId: 22}).then(res => {
-            // fetching all follow up
+        console.log(this.props);
+        api.followUp.getFollowUpByFollowUpId({followUpId:this.props.posts.posts }).then(res => {
             console.log("by patient id", res);  const data = res.data;
             this.setState({data})
 
@@ -86,7 +86,7 @@ class FollowUpDetailForm extends React.Component {
                                     type="text"
                                     id="patient"
                                     name="patientId"
-                                    value={this.state.data.patientId}/>
+                                    value={this.state.data.id}/>
                                 {/*error handling*/}
                                 {/* <Form.Text className="text-muted">
                                     {errors.email && <InlineError text={errors.email} />}
@@ -201,10 +201,8 @@ class FollowUpDetailForm extends React.Component {
                         </Col>
                     </Row>
                     <Row>
-                        <Col>
+                        <Col  className={"text-right"}>
                             <Button variant="warning">Edit</Button>
-                            &nbsp;
-                            <Button variant="success">Mark as Done</Button>
                         </Col>
                     </Row>
                 </Container>

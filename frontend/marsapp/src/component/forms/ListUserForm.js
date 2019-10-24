@@ -18,7 +18,6 @@ import {
     ButtonGroup
 } from 'react-bootstrap';
 import api from "../../api"
-import logo from "../../res/logo.jpg"
 
 
 class ListUserForm extends React.Component {
