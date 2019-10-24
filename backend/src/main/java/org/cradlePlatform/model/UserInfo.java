@@ -13,7 +13,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Entity
-@Table(name = "User_Info", schema = "schemas")
+@Table(name = "User_Info")
 public class UserInfo {
 
     @Id
@@ -32,6 +32,7 @@ public class UserInfo {
     private String lastName;
 
     @NotNull
+    @Temporal(TemporalType.DATE)
     @Column(name = "dob")
     private Date dateOfBirth;
 

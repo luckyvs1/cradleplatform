@@ -14,7 +14,7 @@ import javax.validation.constraints.Size;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "User", schema = "schemas")
+@Table(name = "User")
 public class User implements Serializable {
 
     @Id
@@ -53,12 +53,5 @@ public class User implements Serializable {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    @Override
-    public String toString() {
-        return String.format(
-                "{id: %s, username: '%s', password: '%s'}",
-                id, username, password);
     }
 }

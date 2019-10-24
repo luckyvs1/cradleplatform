@@ -20,14 +20,16 @@ class LoginForm extends React.Component {
     //state updates as user types
     state = {
         data: {
-            email: '',
+            username: '',
             password: ''
         },
         loading: false,
         errors: {}
     };
 
+
     // recieves event and update data
+
     onChange = e =>
         this.setState({
             data: {...this.state.data, [e.target.name]: e.target.value}
@@ -41,21 +43,19 @@ class LoginForm extends React.Component {
         event.preventDefault();
         const errors = this.validate(this.state.data);
         this.setState({errors});
+
         if (Object.keys(errors).length === 0) {
             this.setState({loading: true});
             this.props
                 .submit(this.state.data)
-                .catch(err =>
-                    this.setState({errors: err.response.data.errors, loading: false})
-                );
         }
     };
 
 
     validate = data => {
         const errors = {};
-        if (!Validator.isEmail(data.email)) {
-            errors.email = "Invalid email";
+        if (!data.username) {
+            errors.username = "Invalid username";
         }
         if (!data.password) {
             errors.password = "Can't be blank";
@@ -82,17 +82,16 @@ class LoginForm extends React.Component {
                             <Row>
                                 <Col>
                                     <Form.Group>
-                                        <Form.Label>Email</Form.Label>
-                                        <Form.Control 
-                                            type="email" 
-                                            id="email" 
-                                            name="email" 
-                                            placeholder="example@example.com" 
-                                            onChange={this.onChange} 
-                                            value={data.email}/>
+                                        <Form.Label>Username</Form.Label>
+                                        <Form.Control
+                                            id="email"
+                                            name="username"
+                                            placeholder="test"
+                                            onChange={this.onChange}
+                                            value={data.username}/>
                                         <Form.Text className="text-muted">
                                             {/*error handling*/}
-                                            {errors.email && <InlineError text={errors.email} />}
+                                            {errors.username && <InlineError text={errors.username}/>}
                                         </Form.Text>
                                     </Form.Group>
                                 </Col>
@@ -101,16 +100,16 @@ class LoginForm extends React.Component {
                                 <Col>
                                     <Form.Group>
                                         <Form.Label>Password</Form.Label>
-                                        <Form.Control 
-                                            type="password" 
-                                            id="password" 
-                                            name="password" 
-                                            placeholder="Make it secure" 
-                                            onChange={this.onChange} 
+                                        <Form.Control
+                                            type="password"
+                                            id="password"
+                                            name="password"
+                                            placeholder="Make it secure"
+                                            onChange={this.onChange}
                                             value={data.password}/>
                                         <Form.Text className="text-muted">
                                             {/*error handling*/}
-                                            {errors.password && <InlineError text={errors.password} />}
+                                            {errors.password && <InlineError text={errors.password}/>}
                                         </Form.Text>
                                     </Form.Group>
                                 </Col>
@@ -128,7 +127,7 @@ class LoginForm extends React.Component {
                                     <a href="/homePage">Go Home</a>
                                 </Col>
                             </Row>
-                        </Form>                    
+                        </Form>
                     </Col>
                     <Col md={4}></Col>
                 </Row>

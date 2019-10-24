@@ -9,46 +9,73 @@ const host = "localhost";
 const port = "8080";
 
 export default {
-    user: {
-        hello: () => {
-            axios.get(`http://${host}:${port}/hello`).then(res => console.log(res))
+    admin:{
+        getAdminById: data => {
+            axios.get(`http://${host}:${port}/api/admins/${data.id}`)
         },
-
-        login: credential => axios.post(`http://${host}:${port}/login`, {credential}).then((res => res.data.user))
-,
+        createAdmin:data => axios.post(`http://${host}:${port}/api/admins` , {data}),
+        getAllAdmins : axios.get(`http://${host}:${port}/api/admins`)
+    },
+    user: {
+        login: credential => axios.get(`http://${host}:${port}/api/login?username=${credential.username}&password=${credential.password}`, {credential}),
+        getAllUsers:data=> axios.get(`http://${host}:${port}/api/users`),
+        getUserById:data=> axios.get(`http://${host}:${port}/api/users/${data.userId}`),
+        createUser:data=> axios.post(`http://${host}:${port}/api/users`, {data}),
+    },
+    vht:{
+        getAllVHT: data => axios.get(`http://${host}:${port}/api/vht`),
+        getVHTById: data => axios.get(`http://${host}:${port}/api/vht/${data.vhtId}`),
+        createVHT: data => axios.post(`http://${host}:${port}/api/vht` , {data})
+    },
+    userInfo:{
+        getUserInfoById:data=> axios.get(`http://${host}:${port}/api/user-information/${data.userId}`),
+        createUserInformation:data=> axios.post(`http://${host}:${port}/api/user-information` , {data}),
     },
     patient: {
-        mockPatients : data =>{
-            axios.get(`http://${host}:${port}/VHT/1/patients`, {}).then(res => console.log(res))
-        },
-        mockPatient: data => {
-            axios.get(`http://${host}:${port}/VHT/{1}/patients/{1}`, {}).then(res => console.log(res))
-        }
+        getAllPatients: data => axios.get(`http://${host}:${port}/api/patients`),
+        getPatientById :data =>  axios.get(`http://${host}:${port}/api/patients/${data.id}`),
+        getPatientsForVHT :data =>  axios.get(`http://${host}:${port}/api/vht/${data.vhtId}/patients`),
+        createPatient :data =>  axios.post(`http://${host}:${port}/api/patients` , {data}),
     },
-
+    drug:{
+        getAllDrugHistory:data=> axios.get(`http://${host}:${port}/api/drugHistories` , {data}),
+        getDrugHistoryById:data=> axios.get(`http://${host}:${port}/api/drugHistories?${data.patientid}`),
+        addDrugHistory:data=> axios.post(`http://${host}:${port}/api/drugHistories`, {data}),
+    },
     reading:{
-        mockReading: data =>{
-            axios.get(`http://${host}:${port}/VHT/{vhtId}/patients/{patientId}/reading` , {}).then(res => console.log(res))
-        },
-        uploadReading: data =>{
-            axios.post(`http://${host}:${port}/api/readings` , {}).then(res => console.log(res))
-        },
-        uploadSyncData: data =>{
-            axios.post(`http://${host}:${port}/api/sync` , {}).then(res => console.log(res))
-        },
+        addAReferral:data=> axios.post(`http://${host}:${port}/api/readings` , {data}),
+        getReadingForPat:data=> axios.post(`http://${host}:${port}/api/patients/patientId=${data.patientId}/readings?latest=${data.latest}`),
 
+        uploadReading: data =>axios.post(`http://${host}:${port}/api/readings` , {}).then(res => console.log(res)),
+
+    },
+    referral:{
+        getAllReferral:data=> axios.get(`http://${host}:${port}/api/referrals` ),
+        getReferralById:data=> axios.get(`http://${host}:${port}/api/referrals?referrerId=${data.referrerId}`),
+        createReferral:data=> axios.post(`http://${host}:${port}/api/referrals` , {data}),
     },
     medication:{
-        mockMedication:data =>{
-            axios.get(`http://${host}:${port}/VHT/{vhtId}/patients/{patientId}/medication`,{}).then(res => console.log(res))
-        }
     },
     followUp: {
-        mockFollowUp:data =>{
-            axios.get(`http://${host}:${port}/VHT/{vhtId}/patients/{patientId}/followup`, {}).then(res => console.log(res))
-        }
-    }
+        getAllFollowUps:data=> axios.get(`http://${host}:${port}/api/followUps`),
+        getFollowUpByPatientId:data=> axios.get(`http://${host}:${port}/api/patients/followUps?patientId=${data.patientId}`),
+        getFollowUpByFollowUpId:data=> axios.get(`http://${host}:${port}/api/followUps/${data.followUpId}`),
+        getLastFollowUpByPatientId:data=> axios.get(`http://${host}:${port}/api/patients/followUps/patientId=${data.patientId}&latest=${true}`),
+        addFollowUp:data=> axios.post(`http://${host}:${port}/api/followUps` , {data}),
 
+    },
+    healthCareWorker:{
+        getAllHealthWorkers:data=> axios.get(`http://${host}:${port}/api/healthWorkers`),
+        getHealthWorkerById:data=> axios.get(`http://${host}:${port}/api/healthWorkers/${data.id}`),
+        addNewHealthWorker:data=> axios.post(`http://${host}:${port}/api/healthWorkers` , {data}),
+    },
+    medicalHistory:{
+        getAllMedicalHistories:data=> axios.get(`http://${host}:${port}/api/medicalHistories`),
+        getLastMedicalHistoryByPatientId:data=> axios.get(`http://${host}:${port}/api/medicalHistories?patientId=${data.id}&latest=${data.latest}`),
+        addMedicalHistory:data=> axios.post(`http://${host}:${port}/api/medicalHistories` , {data}),
 
-
+        getAllMedication:data=> axios.get(`http://${host}:${port}/api/medications`),
+        getMedicationForDrugHist:data=> axios.get(`http://${host}:${port}/api/medications?drugHistoryId=${data.id}`),
+        addNewMedication:data=> axios.post(`http://${host}:${port}/api/medications?` , {data}),
+    },
 };

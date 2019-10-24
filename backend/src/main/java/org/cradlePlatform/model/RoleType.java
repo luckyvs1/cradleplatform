@@ -1,7 +1,7 @@
 package org.cradlePlatform.model;
 
 public enum RoleType {
-    ADMIN,
-    HEALTHWORKER,
+    Admin,
+    Healthworker,
     VHT
 }

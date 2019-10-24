@@ -1,6 +1,8 @@
+/**
+ * The Patient class represents a patient and their personal information.
+ * A Patient's info will be stored on and fetched from the database.
+ */
 package org.cradlePlatform.model;
-
-import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -13,10 +15,9 @@ import java.util.Date;
 public class Patient {
 
     @Id
-    @GeneratedValue(generator="system-uuid")
-    @GenericGenerator(name="system-uuid", strategy = "uuid")
-    @Column(name = "id")
-    private String id;
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @Column(name="id", unique=true, nullable = false)
+    private int id;
 
     @Size(max = 32)
     @Column(name = "attestation_no")
@@ -32,29 +33,29 @@ public class Patient {
 
     @NotBlank(message = "Village Number Can't Be Empty")
     @Size(max = 32)
-    @Column(name = "village_no")
+    @Column(name = "village_no", length=32, nullable=false)
     private String villageNo;
 
     @NotBlank(message = "Zone Number Can't Be Empty")
     @Size(max = 32)
-    @Column(name = "zone_no")
+    @Column(name = "zone_no", length=32, nullable=false)
     private String zoneNo;
 
-    @Column(name="household_no")
+    @Column(name="household_no", length=32)
     @Size(max = 32)
     private String householdNo;
 
-    @Column(name="block_no")
+    @Column(name="block_no", length=32)
     @Size(max = 32)
     private String blockNo;
 
-    @Column(name="tank_no")
+    @Column(name="tank_no", length=32)
     @Size(max = 32)
     private String tankNo;
 
     @NotBlank(message = "Initials Can't Be Empty")
     @Size(max = 4)
-    @Column(name = "initials")
+    @Column(name = "initials", length=4, nullable=false)
     private String initials;
 
     @Column(name = "sex")
@@ -79,11 +80,48 @@ public class Patient {
     @Column(name = "gestational_age_unit")
     private GestationalAgeTimeUnit gestationAgeUnit;
 
-    @NotNull
     @Column(name = "current_gestational_age")
     private int currentGestationalAge;
 
-    public String getId() {
+    public Patient() {
+
+    }
+
+    public Patient(String attestationNo,
+                   String firstName,
+                   String lastName,
+                   String villageNo,
+                   String zoneNo,
+                   String householdNo,
+                   String blockNo,
+                   String tankNo,
+                   String initials,
+                   Sex sex,
+                   int age,
+                   Date dob,
+                   boolean pregnant,
+                   Date gestationalStartDate,
+                   GestationalAgeTimeUnit gestationAgeUnit,
+                   int currentGestationAge) {
+        setAttestationNo(attestationNo);
+        setFirstName(firstName);
+        setLastName(lastName);
+        setVillageNo(villageNo);
+        setZoneNo(zoneNo);
+        setHouseholdNo(householdNo);
+        setBlockNo(blockNo);
+        setTankNo(tankNo);
+        setInitials(initials);
+        setSex(sex);
+        setAge(age);
+        setDob(dob);
+        setPregnant(pregnant);
+        setGestationalStartDate(gestationalStartDate);
+        setGestationAgeUnit(gestationAgeUnit);
+        setCurrentGestationalAge(currentGestationalAge);
+    }
+
+    public int getId() {
         return id;
     }
 

@@ -9,44 +9,43 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
 @Entity
-@Table(name = "Medical_History", schema = "schemas")
+@Table(name = "Medical_History")
 public class MedicalHistory {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id", nullable=false, unique=true)
-    @NotEmpty(message = "ID Can't Be Empty")
     private int id;
 
-    @Column(name="patient_id", length=32, nullable=false)
-    @NotEmpty(message = "Patient ID Can't Be Empty")
-    @Size(max = 32)
-    private String patientID;
+    @Column(name="patient_id", nullable=false)
+    private int patientId;
 
     @Column(name="history")
-    private String MedicalHistoryText;
+    private String medicalHistoryText;
+
+
+    public MedicalHistory() {
+        this.patientId = -1;
+        this.medicalHistoryText = "";
+    }
 
     public int getId() {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public int getPatientId() {
+        return patientId;
     }
 
-    public String getPatientID() {
-        return patientID;
-    }
-
-    public void setPatientID(String patientID) {
-        this.patientID = patientID;
+    public void setPatientId(int patientId) {
+        this.patientId = patientId;
     }
 
     public String getMedicalHistoryText() {
-        return MedicalHistoryText;
+        return medicalHistoryText;
     }
 
     public void setMedicalHistoryText(String medicalHistoryText) {
-        MedicalHistoryText = medicalHistoryText;
+        this.medicalHistoryText = medicalHistoryText;
     }
 }

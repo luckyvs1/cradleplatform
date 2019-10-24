@@ -21,9 +21,9 @@ public class ReferralController {
     @ResponseStatus(code = HttpStatus.CREATED)
     public String addAReferral(@RequestBody Referral referral){
         Referral newReferral = new Referral();
-        newReferral.setId(referral.getId());
         newReferral.setReferrerId(referral.getReferrerId());
         newReferral.setPatientId(referral.getPatientId());
+        newReferral.setReadingId(referral.getReadingId());
         newReferral.setTimestamp(referral.getTimestamp());
         newReferral.setHealthFacility(referral.getHealthFacility());
         newReferral.setNotesReason(referral.getNotesReason());
@@ -35,13 +35,21 @@ public class ReferralController {
     }
 
     @GetMapping(path="/api/referrals")
-    public Iterable<Referral> getAllReferral() {
+    public Iterable<Referral> getAllReferral(@RequestParam(value = "referrerId", required = false) String referrerId) {
+        if (referrerId != null) {
+            return referralRepository.findByReferrerId(referrerId);
+        }
         return referralRepository.findAll();
     }
 
     @GetMapping(path="/api/referrals/{id}")
-    public Optional<Referral> getReferralById(@PathVariable(value = "id") String referrerId){
-        return referralRepository.findById(referrerId);
+    public Optional<Referral> getReferralById(@PathVariable(value = "id") int referralId){
+        return referralRepository.findById(referralId);
+    }
+
+    @GetMapping(path="/api/health-centre/{health-centre}/referrals")
+    public Iterable<Referral> getReferralsByHealthCentre(@PathVariable(value = "health-centre") String healthCentre) {
+        return referralRepository.findByHealthFacility(healthCentre);
     }
 }
 
