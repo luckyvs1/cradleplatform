@@ -8,6 +8,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import Validator from "validator";
 import moment from 'moment';
 import TopNavigation from "../navigation/TopNavigation";
 import {
@@ -17,7 +18,7 @@ import {
     Button,
     Form
 } from 'react-bootstrap';
-
+import InlineError from "../messages/InlineError";
 
 class AddPatientForm extends React.Component {
     constructor(props){
@@ -60,15 +61,20 @@ class AddPatientForm extends React.Component {
         }, () => console.log(this.state.data.gestational_start_date));
     };
     onSubmit = (event) => {
-    /**
         event.preventDefault();
         const errors = this.validate(this.state.data);
         this.setState({errors}); //if there are errors returned, display them
         if(Object.keys(errors).length === 0){ //if not
             this.props.submit(this.state.data);
         }
-        */
     };
+    validate = (data) => {
+        const errors = {};
+        var emptyWarning = "Can't be blank";
+        if(!data.village_no) errors.village_no = emptyWarning;
+        if(!data.zone_no) errors.zone_no = emptyWarning;
+        if(!data.initials) errors.initials = emptyWarning;
+    }
     render() {
         const { data, errors } = this.state;
         return (
@@ -81,7 +87,7 @@ class AddPatientForm extends React.Component {
                             <hr></hr>
                         </Col>
                     </Row>
-                    <Form>
+                    <Form onSubmit={this.onSubmit}>
                         <Row>
                             <Col>
                                 <Form.Row>
@@ -114,6 +120,7 @@ class AddPatientForm extends React.Component {
                                             placeholder="Enter here..."
                                             value={data.initials}
                                             onChange={this.onChange}/>
+                                            {errors.initials && <InlineError text={errors.initials}/>}
                                     </Form.Group>
                                 </Form.Row>
                                 <Form.Row>
@@ -137,6 +144,17 @@ class AddPatientForm extends React.Component {
                                             dateFormat="yyyy-MM-dd"
                                             onChange={this.onChangeDob}
                                         />
+                                    </Form.Group>
+                                    <Form.Group as={Col}>
+                                        <Form.Label>Age</Form.Label>
+                                        <Form.Control
+                                            type="text"
+                                            id="age"
+                                            name="age"
+                                            placeholder="Enter here..."
+                                            value={data.age}
+                                            onChange={this.onChange}/>
+                                            {errors.age && <InlineError text={errors.age}/>}
                                     </Form.Group>
                                 </Form.Row>
                             </Col>
@@ -181,6 +199,7 @@ class AddPatientForm extends React.Component {
                                             placeholder="Enter here..."
                                             value={data.current_gestational_age}
                                             onChange={this.onChange}/>
+                                            {errors.current_gestational_age && <InlineError text={errors.current_gestational_age}/>}
                                     </Form.Group>
                                 </Form.Row>
                             </Col>
@@ -206,6 +225,7 @@ class AddPatientForm extends React.Component {
                                         placeholder="Enter here..."
                                         value={data.village_no}
                                         onChange={this.onChange}/>
+                                        {errors.village_no && <InlineError text={errors.village_no}/>}
                                 </Form.Group>
                                 <Form.Group as={Col}>
                                     <Form.Label>Zone #</Form.Label>
@@ -216,6 +236,7 @@ class AddPatientForm extends React.Component {
                                         placeholder="Enter here..."
                                         value={data.zone_no}
                                         onChange={this.onChange}/>
+                                        {errors.zone_no && <InlineError text={errors.zone_no}/>}
                                 </Form.Group>
                             </Form.Row>
                             <Form.Row>
@@ -259,5 +280,8 @@ class AddPatientForm extends React.Component {
         );
     }
 }
+AddPatientForm.propTypes = {
+    submit: PropTypes.func.isRequired
+};
 
 export default AddPatientForm;
