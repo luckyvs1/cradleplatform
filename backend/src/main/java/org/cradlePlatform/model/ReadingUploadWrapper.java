@@ -5,24 +5,14 @@ import java.util.Arrays;
 
 public class ReadingUploadWrapper {
 	ArrayList<Reading> readings;
-	String username;
-	String password;
 
-	public ReadingUploadWrapper(Reading[] readings, String username, String password) {
-		this.username = username;
-		this.password = password;
+	public ReadingUploadWrapper() {}
+
+	public ReadingUploadWrapper(Reading[] readings) {
 		this.readings = new ArrayList<Reading>(Arrays.asList(readings));
 	}
 
-	public ArrayList<Reading> getReading() {
+	public ArrayList<Reading> getReadings() {
 		return readings;
-	}
-
-	public String getUsername() {
-		return username;
-	}
-
-	public String getPassword() {
-		return password;
 	}
 }
