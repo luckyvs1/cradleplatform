@@ -16,7 +16,7 @@ export default function user(state = initState, action = {}) {
         case USER_LOGGED_IN:
             let newId = action.id
             // alter data
-            console.log("USER LOGGERD IN" , newId)
+            console.log("USER LOGGED IN" , newId)
             return {
                 //spread the states in case of having multiple things inside of initState
                 ...state,
