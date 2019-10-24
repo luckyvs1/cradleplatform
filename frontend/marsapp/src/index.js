@@ -9,11 +9,15 @@ import { composeWithDevTools } from "redux-devtools-extension";
 import App from "./App";
 import registerServiceWorker from "./registerServiceWorker";
 import rootReducer from "./rootReducer";
-
+import auth from "./actions/auth"
 const store = createStore(
     rootReducer,
     composeWithDevTools(applyMiddleware(thunk))
 );
+
+if(localStorage.loginToken){
+    auth.setAuth();
+}
 
 ReactDOM.render(
     <BrowserRouter>

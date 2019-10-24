@@ -1,41 +1,24 @@
-/**
- * File: auth.js
- * Summary:
- *  Handles authentication when a user logs in.
- *  Handles logging out as well.
- */
+class Auth {
+    constructor() {
+        this.authenticated = false;
+    }
 
-import {USER_LOGGED_IN, USER_LOGGED_OUT} from "../types";
-import api from "../api";
+    setAuth(){
+        this.authenticated=true;
+    }
+    login(cb) {
+        this.authenticated = true;
+        cb();
+    }
 
-export const userLoggedIn = user => ({
-    type: USER_LOGGED_IN,
-    user
-});
+    logout(cb) {
+        this.authenticated = false;
+        cb();
+    }
 
-export const userLoggedOut = () => ({
-    type: USER_LOGGED_OUT
-});
+    isAuthenticated() {
+        return this.authenticated;
+    }
+}
 
-export const login = credentials => dispatch => {
-    console.log(credentials)
-    api.user.hello()
-    // api.user.login(credentials).then(user => dispatch(userLoggedIn(user)))
-    // api.user.mockPatients().then(user => dispatch(userLoggedIn(user)))
-};
-
-// api.user.login().then(user => {
-//     });
-
-export const logout = () => dispatch => {
-    console.log("update information (signup)");
-};
-
-export const confirm = token => dispatch => console.log("update information (confirm)");
-
-export const resetPasswordRequest = ({email}) => () => console.log("update information (reset)");
-
-export const validateToken = token => () => console.log("update information (validate)");
-
-export const testAPICALL = data => () => console.log("update information (reset)");
-api.user.hello();
+export default new Auth();
