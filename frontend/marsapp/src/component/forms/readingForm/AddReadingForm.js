@@ -230,13 +230,13 @@ class AddReadingForm extends React.Component {
                             <Col>
                                 <Form.Label>Symptoms</Form.Label><br></br>
                                 <Button variant="outline-primary" size="sm">No Symptoms</Button>&nbsp;
-                                    <Button variant="outline-primary" size="sm">Headache</Button>&nbsp;
-                                    <Button variant="outline-primary" size="sm">Bleeding</Button>&nbsp;
-                                    <Button variant="outline-primary" size="sm">Blurred Vision</Button>&nbsp;
-                                    <Button variant="outline-primary" size="sm">Feverish</Button>&nbsp;
-                                    <Button variant="outline-primary" size="sm">Adbdominal pain</Button>&nbsp;
-                                    <Button variant="outline-primary" size="sm">Unwell</Button>&nbsp;
-                                </Col>
+                                <Button variant="outline-primary" size="sm">Headache</Button>&nbsp;
+                                <Button variant="outline-primary" size="sm">Bleeding</Button>&nbsp;
+                                <Button variant="outline-primary" size="sm">Blurred Vision</Button>&nbsp;
+                                <Button variant="outline-primary" size="sm">Feverish</Button>&nbsp;
+                                <Button variant="outline-primary" size="sm">Adbdominal pain</Button>&nbsp;
+                                <Button variant="outline-primary" size="sm">Unwell</Button>&nbsp;
+                            </Col>
                         </Row>
                         <Row>
                             <Col>
