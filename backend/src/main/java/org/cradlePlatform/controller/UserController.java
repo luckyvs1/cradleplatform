@@ -11,7 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import java.util.Optional;
 
-@CrossOrigin(origins = { "http://localhost:3000"})
+@CrossOrigin(origins = {"http://localhost:3000"})
 @RestController
 public class UserController {
     @Autowired
@@ -19,7 +19,7 @@ public class UserController {
 
     // GET mappings
 
-    @GetMapping(path="/api/users/")
+    @GetMapping(path="/api/users")
     public @ResponseBody Iterable<User> getAllUser() {
         return userRepository.findAll();
     }
