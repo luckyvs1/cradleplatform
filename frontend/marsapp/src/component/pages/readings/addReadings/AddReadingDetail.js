@@ -9,10 +9,14 @@ import {connect} from "react-redux";
 import AddReadingForm from "../../../forms/readingForm/AddReadingForm";
 
 class AddReadingDetail extends React.Component {
+    submit = (data) => {
+        console.log(data);
+
+    }
 
     render() {
         return (
-            <AddReadingForm></AddReadingForm>
+            <AddReadingForm submit = {this.submit}></AddReadingForm>
         );
     }
 }

@@ -6,6 +6,7 @@
 
 import React from "react";
 import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
 import TopNavigation from "../../navigation/TopNavigation";
 import {
     Container,
@@ -33,9 +34,25 @@ class AddReadingForm extends React.Component {
             errors: {}
         };
         this.onChange = this.onChange.bind(this);
+        this.onSubmit = this.onSubmit.bind(this);
     }
-    onChange = e => this.setState({data: {...this.state.data, [e.target.name]: e.target.value}});
+    onChange = event => this.setState({data: {...this.state.data, [event.target.name]: event.target.value}});
+    onSubmit = (event) => {
+        event.preventDefault();
+        const err = this.validate(this.state.data);
+        this.setState({err});
+        if(Object.keys(err).length === 0){
+            this.props.submit(this.state.data);
+        }
+    };
+    validate = (data) => {
+        const err = {};
+        var emptyFieldsWarning = "This field cannot be blank";
+        if(!data.id) err.id = emptyFieldsWarning;
+        return err;
+    }
     render() {
+        const{data, err} = this.state;
         return (
             <div>
                 <TopNavigation authenticated={true}></TopNavigation>
@@ -198,5 +215,9 @@ class AddReadingForm extends React.Component {
         );
     }
 }
+
+AddReadingForm.propTypes = {
+    submit: PropTypes.func.isRequired
+};
 
 export default AddReadingForm;
