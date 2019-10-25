@@ -16,7 +16,25 @@ import {
 } from 'react-bootstrap';
 
 class AddReadingForm extends React.Component {
-
+    constructor(props){
+        super(props);
+        this.state = {
+            data:{
+                id: "",
+                initials: "",
+                age: "",
+                pregnant: "No",
+                gestational_age: "none",
+                systolic_bp: "",
+                diastolic_bp: "",
+                pulse_rate: "",
+                notes: ""},
+            isLoading: false,
+            errors: {}
+        };
+        this.onChange = this.onChange.bind(this);
+    }
+    onChange = e => this.setState({data: {...this.state.data, [e.target.name]: e.target.value}});
     render() {
         return (
             <div>
