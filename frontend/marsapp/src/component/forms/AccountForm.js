@@ -42,13 +42,17 @@ class AccountForm extends React.Component {
     }
 
     componentDidMount() {
-        // needs to be updated based on the logged in user
-        console.log("this.state.data.id", this.state.data.id)
-        api.userInfo.getUserInfoById({userId: 1}).then(res => {
+        let loggedInUser  = localStorage.getItem('loginUserId')
+        if (!loggedInUser){
+            //in case no idea has been added to browser storage hot fix for now
+            loggedInUser = 1;
+        }
+
+        api.userInfo.getUserInfoById({userId: loggedInUser}).then(res => {
             let data  = res.data;
             this.setState({data})
         })
-        api.user.getUserById(1).then(user=>{
+        api.user.getUserById(loggedInUser).then(user=>{
             this.setState({username:user.data.username})
         })
     }
