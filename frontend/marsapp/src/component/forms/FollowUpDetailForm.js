@@ -37,7 +37,7 @@ class FollowUpDetailForm extends React.Component {
     }
 
     componentDidMount() {
-        api.followUp.getFollowUpByFollowUpId({followUpId:this.props.posts.posts }).then(res => {
+        api.followUp.getFollowUpByFollowUpId({followUpId:this.props.posts.data }).then(res => {
             const data = res.data;
             this.setState({data})
         })

@@ -17,6 +17,7 @@ import {
 import PropTypes from "prop-types";
 import api from "../../api"
 import RegularPopUp from "../utils/popUp"
+import {connect} from "react-redux";
 
 
 
@@ -27,7 +28,7 @@ class AccountForm extends React.Component {
         super(props)
         this.state = {
             data: {
-                id: "1",
+                id: "",
                 firstName: "",
                 lastName: "",
                 dateOfBirth: "",
@@ -41,17 +42,15 @@ class AccountForm extends React.Component {
     }
 
     componentDidMount() {
+        // needs to be updated based on the logged in user
+        console.log("this.state.data.id", this.state.data.id)
         api.userInfo.getUserInfoById({userId: 1}).then(res => {
-            // get user information
             let data  = res.data;
             this.setState({data})
-            console.log("user info", this.state);
-
         })
-        api.user.getUserById(this.state.data.id).then(user=>{
+        api.user.getUserById(1).then(user=>{
             this.setState({username:user.data.username})
         })
-
     }
 
     handleChange(event) {
@@ -61,7 +60,6 @@ class AccountForm extends React.Component {
     }
 
     submit = event => {
-        console.log("data to be sent", event)
         if (event) {
             this.props.submit(event)
         }
@@ -69,7 +67,7 @@ class AccountForm extends React.Component {
 
 
     render() {
-        console.log(this.state.data)
+        console.log(this.props)
 
 
         return (
@@ -194,8 +192,21 @@ class AccountForm extends React.Component {
     }
 }
 
+const mapStateToProps = (state) => {
+    return {
+        posts: state.user
+    }
+}
+const mapDispatchToProps = (dispatch) => {
+    return {
+        // function name
+    }
+}
+
+
+
 AccountForm.propTypes = {
     submit: PropTypes.func.isRequired
 }
 
-export default AccountForm;
+export default connect(mapStateToProps, mapDispatchToProps)(AccountForm);

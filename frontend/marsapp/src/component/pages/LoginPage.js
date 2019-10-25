@@ -77,7 +77,7 @@ const mapStateToProps = (state, ownProps) =>{
 const mapDispatchToProps = (dispatch) =>{
     return {
         // function name
-        updateLogIn: (id) => {dispatch({type:USER_LOGGED_IN , id:id})}
+        updateLogIn: (id) => {dispatch({type:"USER_LOOGED_IN" , id:id})}
     }
 }
 

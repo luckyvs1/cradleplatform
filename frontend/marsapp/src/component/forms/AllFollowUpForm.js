@@ -53,6 +53,7 @@ class AllFollowUpForm extends React.Component {
 
     render() {
         const {data} = this.state;
+        console.log("FOLLOW UP DETAIL")
         return (
             <div>
                 <TopNavigation authenticated={true}></TopNavigation>
@@ -99,7 +100,7 @@ class AllFollowUpForm extends React.Component {
 
 const mapStateToProps = (state, ownProps) => {
     return {
-        posts: state.posts
+        userid: state.data
     }
 };
 const mapDispatchToProps = (dispatch) => {
