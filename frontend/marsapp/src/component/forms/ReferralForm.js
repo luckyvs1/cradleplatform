@@ -20,6 +20,7 @@ import {
     Table,
     Button
 } from 'react-bootstrap';
+import api from "../../api"
 
 function createData(name, calories, fat, carbs, protein) {
     return {name, calories, fat, carbs, protein};
@@ -42,6 +43,13 @@ class ReferralForm extends React.Component {
         this.state = {
             toggled: false
         }
+    }
+
+    componentDidMount() {
+        console.log("api calling")
+        api.referral.getAllReferral(null).then(res => {
+            console.log("All referral", res);
+        })
     }
 
     toggleMenu() {

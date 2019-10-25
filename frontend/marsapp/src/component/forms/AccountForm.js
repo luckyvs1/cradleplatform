@@ -13,8 +13,15 @@ import {
     Button,
     Form
 } from 'react-bootstrap';
+import api from "../../api"
 
 class AccountForm extends React.Component {
+    componentDidMount() {
+        api.userInfo.getUserInfoById({userId:1}).then(res => {
+            console.log("user info" , res);
+        })
+    }
+
     render() {
 
         return (

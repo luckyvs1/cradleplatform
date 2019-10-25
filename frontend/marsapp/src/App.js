@@ -4,18 +4,15 @@
  */
 
 import React from "react";
-import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { Route } from "react-router-dom";
+import {Route} from "react-router-dom";
 import HomePage from "./component/pages/HomePage";
 import LoginPage from "./component/pages/LoginPage";
 import DashboardPage from "./component/pages/DashboardPage";
 import SignupPage from "./component/pages/SignupPage";
-import ConfirmationPage from "./component/pages/ConfirmationPage";
 import ForgotPasswordPage from "./component/pages/ForgotPasswordPage";
 import ResetPasswordPage from "./component/pages/ResetPasswordPage";
-import UserRoute from "./component/routes/UserRoute";
-import GuestRoute from "./component/routes/GuestRoute";
+import {UserRoute} from "./component/routes/UserRoute";
 import TopNavigation from "./component/navigation/TopNavigation";
 import PatientDetail from "./component/pages/upload/PatientDetail";
 import './App.css';
@@ -32,103 +29,98 @@ import AllFollowUp from "./component/pages/followUp/AllFollowUp";
 import FollowUpDetail from "./component/pages/followUp/FollowUpDetail";
 import ListUser from "./component/pages/users/ListUser"
 
-const App = ({ location, isAuthenticated }) => (
+const App = ({location, isAuthenticated}) => (
 
     <div className="ui-toolbar">
-        {isAuthenticated && <TopNavigation />}
-        <Route location={location} path="/" exact component={LoginPage} />
-        <Route
-            location={location}
-            path="/confirmation/:token"
-            exact
-            component={ConfirmationPage}
-        />
-        <GuestRoute location={location} path="/homePage" exact component={HomePage} />
-        <GuestRoute
+        {isAuthenticated && <TopNavigation/>}
+        <Route location={location} path="/" exact component={LoginPage}/>
+        <UserRoute
+            location={location} path="/homePage" exact component={HomePage}/>
+        <UserRoute
             location={location}
             path="/signup"
             exact
             component={SignupPage}
         />
-        <GuestRoute
+        <UserRoute
             location={location}
             path="/addReadingDetail"
             exact
             component={AddReadingDetail}
         />
-        <GuestRoute
+        <UserRoute
             location={location}
             path="/readings"
             exact
             component={Readings}
         />
-        <GuestRoute
+        <UserRoute
             location={location}
             path="/listPatient"
             exact
             component={ListPatient}
         />
-        <GuestRoute
+        <UserRoute
             location={location}
             path="/help"
             exact
             component={Help}
         />
-        <GuestRoute
+        <UserRoute
             location={location}
             path="/referral"
             exact
             component={Referral}
         />
-        <GuestRoute
+        <UserRoute
             location={location}
             path="/referralDetail"
             exact
             component={ReferralDetail}
         />
-        <GuestRoute
+        <UserRoute
             location={location}
             path="/createReferral"
             exact
             component={CreateReferral}
         />
-        <GuestRoute
+        <UserRoute
             location={location}
             path="/patientDetail"
             exact
             component={PatientDetail}
         />
-        <GuestRoute
+        <UserRoute
             location={location}
             path="/allFollowUp"
             exact
             component={AllFollowUp}
         />
-            <GuestRoute
-                location={location}
-                path="/followUpDetail"
-                exact
-                component={FollowUpDetail}
-            />
-        <GuestRoute
+        <UserRoute
+            location={location}
+            path="/followUpDetail"
+            exact
+            component={FollowUpDetail}
+        />
+        <UserRoute
             location={location}
             path="/account"
             exact
             component={Account}
         />
-        <GuestRoute
+        <UserRoute
             location={location}
             path="/addPatient"
             exact
             component={AddPatient}
         />
-        <GuestRoute
+        <UserRoute
             location={location}
             path="/forgot_password"
             exact
             component={ForgotPasswordPage}
         />
-        <GuestRoute
+        <UserRoute
             location={location}
             path="/reset_password/:token"
             exact
@@ -140,7 +132,7 @@ const App = ({ location, isAuthenticated }) => (
             exact
             component={DashboardPage}
         />
-        <GuestRoute
+        <UserRoute
             location={location}
             path="/listUser"
             exact
@@ -156,10 +148,5 @@ App.propTypes = {
     isAuthenticated: PropTypes.bool.isRequired
 };
 
-function mapStateToProps(state) {
-    return {
-        isAuthenticated: !!state.user.email
-    };
-}
 
-export default connect(mapStateToProps)(App);
+export default (App);

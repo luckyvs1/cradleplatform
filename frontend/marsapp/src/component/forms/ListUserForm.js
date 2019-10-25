@@ -17,9 +17,16 @@ import {
     Dropdown,
     ButtonGroup
 } from 'react-bootstrap';
+import api from "../../api"
+
 
 class ListUserForm extends React.Component {
 
+    componentDidMount() {
+        api.user.getAllUsers(null).then(res => {
+            console.log("all user info" , res);
+        })
+    }
     render() {
         return (
             <div>
