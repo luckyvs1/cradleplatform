@@ -10,7 +10,7 @@ import {connect} from "react-redux";
 import AddPatientForm from "../../forms/AddPatientForm";
 
 class AddPatient extends React.Component {
-    submit = (date) => {
+    submit = (data) => {
         console.log(data);
         //TODO: add api stuff here
     }

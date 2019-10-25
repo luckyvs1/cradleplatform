@@ -10,6 +10,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import PropTypes from "prop-types";
 import TopNavigation from "../navigation/TopNavigation";
+import moment from "moment";
 import {
     Container,
     Row,
@@ -51,13 +52,13 @@ class AddPatientForm extends React.Component {
     onChange = e => this.setState({data: {...this.state.data, [e.target.name]: e.target.value} });
     onChangeDob = date => {
         this.setState({
-            data: {dob: date}
-        }, () => console.log(this.state.data.dob));
+            data: {...this.state.data, dob: date}
+        }, () => console.log(this.state.data));
     };
     onChangeDateGest = date => {
         this.setState({
-            data: {gestational_start_date: date}
-        }, () => console.log(this.state.data.gestational_start_date));
+            data: {...this.state.data, gestational_start_date: date}
+        }, () => console.log(this.state.data));
     };
     onSubmit = (event) => {
         event.preventDefault();
@@ -135,7 +136,7 @@ class AddPatientForm extends React.Component {
                                     <Form.Group as={Col}>
                                         <Form.Label>Date of Birth</Form.Label>
                                         <DatePicker
-                                            value={data.dob}
+                                            value={moment(data.dob).format('YYYY-MM-DD')}
                                             selected={data.dob}
                                             showYearDropdown
                                             dropdownMode="select"
