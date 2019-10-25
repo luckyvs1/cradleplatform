@@ -6,7 +6,7 @@
 import React from "react";
 import VHT from "../../actions/authVHT"
 
-import {Route, Redirect} from "react-router-dom";
+import {Redirect, Route} from "react-router-dom";
 
 
 export const VHTRoute = ({component: Component, ...rest}) => {

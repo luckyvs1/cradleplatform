@@ -7,14 +7,7 @@
 import React from "react";
 import {Link} from "react-router-dom";
 import TopNavigation from "../navigation/TopNavigation";
-import {
-    Container,
-    Row,
-    Col,
-    Table,
-    Image,
-    Button
-} from 'react-bootstrap';
+import {Button, Col, Container, Image, Row, Table} from 'react-bootstrap';
 
 class ListPatientForm extends React.Component {
     // functions

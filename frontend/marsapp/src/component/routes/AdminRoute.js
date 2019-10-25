@@ -6,7 +6,7 @@
 import React from "react";
 import AuthAdmin from "../../actions/authAdmin"
 
-import {Route, Redirect} from "react-router-dom";
+import {Redirect, Route} from "react-router-dom";
 
 
 export const AdminRoute = ({component: Component, ...rest}) => {

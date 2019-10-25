@@ -6,13 +6,7 @@
 
 import React from "react";
 import TopNavigation from "../navigation/TopNavigation";
-import {
-    Row,
-    Col,
-    Form,
-    Button,
-    Container
-} from 'react-bootstrap';
+import {Button, Col, Container, Form, Row} from 'react-bootstrap';
 import api from "../../api"
 import {connect} from "react-redux";
 

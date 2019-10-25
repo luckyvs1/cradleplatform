@@ -6,7 +6,7 @@
 import React from "react";
 import HCW from "../../actions/authHCW"
 
-import {Route, Redirect} from "react-router-dom";
+import {Redirect, Route} from "react-router-dom";
 
 
 export const HCWRoute = ({component: Component, ...rest}) => {

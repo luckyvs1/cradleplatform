@@ -4,18 +4,12 @@
  * TODO: Now have HeaderMenu which does the same thing; consider which to use or if to merge the two files
  */
 
-import React, {Component} from "react";
+import React from "react";
 import {Link} from "react-router-dom";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
-import auth from "../../actions/auth"
 
-import {
-    Nav,
-    Navbar,
-    NavDropdown,
-    Container, Button
-} from 'react-bootstrap';
+import {Container, Nav, Navbar, NavDropdown} from 'react-bootstrap';
 
 const bottomMarginStyle = {
     marginBottom: '40px',

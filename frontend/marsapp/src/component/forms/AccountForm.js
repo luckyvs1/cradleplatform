@@ -6,12 +6,7 @@
 
 import React from "react";
 import TopNavigation from "../navigation/TopNavigation";
-import {
-    Container,
-    Row,
-    Col,
-    Form,
-} from 'react-bootstrap';
+import {Col, Container, Form, Row,} from 'react-bootstrap';
 import PropTypes from "prop-types";
 import api from "../../api"
 import RegularPopUp from "../utils/popUp"

@@ -6,18 +6,12 @@
  */
 
 import React from "react";
-import { Link } from "react-router-dom";
-import { makeStyles } from '@material-ui/core/styles';
+import {Link} from "react-router-dom";
 import TopNavigation from "../navigation/TopNavigation";
-import {
-    Container,
-    Row,
-    Col,
-    Table
-} from 'react-bootstrap';
+import {Col, Container, Row, Table} from 'react-bootstrap';
 import api from "../../api";
-import { MDBContainer } from "mdbreact";
-import { Line } from "react-chartjs-2";
+import {MDBContainer} from "mdbreact";
+import {Line} from "react-chartjs-2";
 
 class FloatingMenuItem extends React.Component {
 

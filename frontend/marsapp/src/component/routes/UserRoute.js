@@ -6,7 +6,7 @@
 import React from "react";
 import auth from "../../actions/auth"
 
-import {Route, Redirect} from "react-router-dom";
+import {Redirect, Route} from "react-router-dom";
 
 
 export const UserRoute = ({component: Component, ...rest}) => {
