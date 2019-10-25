@@ -21,15 +21,30 @@ class AddReadingForm extends React.Component {
         super(props);
         this.state = {
             data:{
-                id: "",
-                initials: "",
-                age: "",
-                pregnant: "No",
-                gestational_age: "none",
-                systolic_bp: "",
-                diastolic_bp: "",
-                pulse_rate: "",
-                notes: ""},
+                id: 0,
+                reader_id: "",
+                patient_id: 0,
+                timestamp: "",
+                symptoms: "",
+                other_symptoms: "",
+                systolic_bp: 0,
+                diastolic_bp: 0,
+                pulse_rate: 0,
+                notes: "",
+                need_followup: false,
+                app_version: "",
+                date_last_saved: "",
+                date_recheck_vitals_needed: "",
+                device_info: "",
+                gestational_age_unit: "none",
+                gestational_age: 0,
+                manually_changes_OCR_results: "",
+                path_to_photo: "",
+                total_OCR_seconds: 0.0,
+                region: "",
+                OCR_enabled: false,
+                upload_images: false,
+                reading_analysis: "Green"},
             isLoading: false,
             errors: {}
         };
@@ -46,13 +61,14 @@ class AddReadingForm extends React.Component {
         }
     };
     validate = (data) => {
-        const err = {};
+        const errors = {};
         var emptyFieldsWarning = "This field cannot be blank";
-        if(!data.id) err.id = emptyFieldsWarning;
-        return err;
+        if(!data.patient_id) errors.patient_id = emptyFieldsWarning;
+        if(!data.reader_id) errors.reader_id = emptyFieldsWarning;
+        return errors;
     }
     render() {
-        const{data, err} = this.state;
+        const{ data, errors } = this.state;
         return (
             <div>
                 <TopNavigation authenticated={true}></TopNavigation>
@@ -81,7 +97,7 @@ class AddReadingForm extends React.Component {
                             </Col>
                             <Col>
                                 <Form.Group>
-                                    <Form.Label>Initials</Form.Label>
+                                    <Form.Label>Reader ID</Form.Label>
                                     <Form.Control
                                         type="text"
                                         id="initials"
@@ -95,21 +111,7 @@ class AddReadingForm extends React.Component {
                             </Col>
                         </Row>
                         <Row>
-                            <Col md={4}>
-                                <Form.Group>
-                                    <Form.Label>Age</Form.Label>
-                                    <Form.Control
-                                        type="number"
-                                        id="age"
-                                        name="age"
-                                        placeholder="Age" />
-                                    {/*error handling*/}
-                                    {/* <Form.Text className="text-muted">
-                                        {errors.email && <InlineError text={errors.email} />}
-                                    </Form.Text> */}
-                                </Form.Group>
-                            </Col>
-                            <Col md={4}>
+                            <Col>
                                 <Form.Group>
                                     <Form.Label>Pregnant</Form.Label>
                                     <Form.Control as="select">
@@ -122,7 +124,7 @@ class AddReadingForm extends React.Component {
                                     </Form.Text> */}
                                 </Form.Group>
                             </Col>
-                            <Col md={4}>
+                            <Col>
                                 <Form.Group>
                                     <Form.Label>Needs Follow-up</Form.Label>
                                     <Form.Control as="select">
@@ -135,6 +137,8 @@ class AddReadingForm extends React.Component {
                                     </Form.Text> */}
                                 </Form.Group>
                             </Col>
+                        </Row>
+                        <Row>
                             <Col md={4}>
                                 <Form.Group>
                                     <Form.Label>Systolic Blood Pressure</Form.Label>
@@ -224,7 +228,7 @@ class AddReadingForm extends React.Component {
                         </Row>
                         <Row className="mb-2">
                             <Col>
-                                <Form.Label>Symptoms</Form.Label>
+                                <Form.Label>Symptoms</Form.Label><br></br>
                                 <Button variant="outline-primary" size="sm">No Symptoms</Button>&nbsp;
                                     <Button variant="outline-primary" size="sm">Headache</Button>&nbsp;
                                     <Button variant="outline-primary" size="sm">Bleeding</Button>&nbsp;
