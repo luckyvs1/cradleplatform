@@ -138,12 +138,12 @@ class AddReadingForm extends React.Component {
                             </Col>
                             <Col md={4}>
                                 <Form.Group>
-                                    <Form.Label>Blood Pressure</Form.Label>
+                                    <Form.Label>Systolic Blood Pressure</Form.Label>
                                     <Form.Control
                                         type="number"
-                                        id="blood_pressure"
-                                        name="blood_pressure"
-                                        placeholder="Blood Pressure" />
+                                        id="systolic_bp"
+                                        name="systolic_bp"
+                                        placeholder="Systolic Blood Pressure" />
                                     {/* enable his for error handling */}
                                     {/* <Form.Text className="text-muted">
                                         {errors.email && <InlineError text={errors.email} />}
@@ -152,12 +152,12 @@ class AddReadingForm extends React.Component {
                             </Col>
                             <Col md={4}>
                                 <Form.Group>
-                                    <Form.Label>DP</Form.Label>
+                                    <Form.Label>Diastolic Blood Pressure</Form.Label>
                                     <Form.Control
                                         type="number"
-                                        id="dp"
-                                        name="dp"
-                                        placeholder="DP" />
+                                        id="diastolic_bp"
+                                        name="distolic_bp"
+                                        placeholder="Diastolic Blood Pressure" />
                                     {/* enable his for error handling */}
                                     {/* <Form.Text className="text-muted">
                                         {errors.email && <InlineError text={errors.email} />}
@@ -182,11 +182,11 @@ class AddReadingForm extends React.Component {
                         <Row>
                             <Col>
                                 <Form.Group>
-                                    <Form.Label>Other Symptoms</Form.Label>
+                                    <Form.Label>Notes</Form.Label>
                                     <Form.Control
                                         as="textarea"
                                         rows="3"
-                                        placeholder="Additional Symptoms" />
+                                        placeholder="Notes" />
                                 </Form.Group>
                             </Col>
                         </Row>
