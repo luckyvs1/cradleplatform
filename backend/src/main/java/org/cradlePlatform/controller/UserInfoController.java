@@ -4,54 +4,44 @@
  */
 package org.cradlePlatform.controller;
 
-import org.cradlePlatform.model.RoleType;
 import org.cradlePlatform.model.UserInfo;
 import org.cradlePlatform.repository.UserInfoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Date;
 import java.util.Optional;
-@CrossOrigin(origins = { "http://localhost:3000"})
+
+@CrossOrigin(origins = {"http://localhost:3000"})
 @RestController
 public class UserInfoController {
     @Autowired
     private UserInfoRepository userInfoRepository;
 
-    @PostMapping(path="userInfo")
-    public @ResponseBody String addUserInfo(@RequestParam String id,
-                                            @RequestParam String atAStationNo,
-                                            @RequestParam String firstName,
-                                            @RequestParam String lastName,
-                                            @RequestParam Date DOB,
-                                            @RequestParam String country,
-                                            @RequestParam String phone,
-                                            @RequestParam String email,
-                                            @RequestParam RoleType role){
+    @PostMapping(path="/api/user-information")
+    @ResponseStatus(code = HttpStatus.CREATED)
+    public String addUserInfo(@RequestBody UserInfo userInfo){
         UserInfo newUserInfo = new UserInfo();
-        newUserInfo.setId(id);
-        newUserInfo.setAtAStationNo(atAStationNo);
-        newUserInfo.setFirstName(firstName);
-        newUserInfo.setLastName(lastName);
-        newUserInfo.setDob(DOB);
-        newUserInfo.setCountry(country);
-        newUserInfo.setPhone(phone);
-        newUserInfo.setEmail(email);
-        newUserInfo.setRole(role);
+        newUserInfo.setId(userInfo.getId());
+        newUserInfo.setFirstName(userInfo.getFirstName());
+        newUserInfo.setLastName(userInfo.getLastName());
+        newUserInfo.setDateOfBirth(userInfo.getDateOfBirth());
+        newUserInfo.setCountry(userInfo.getCountry());
+        newUserInfo.setPhoneNumber(userInfo.getPhoneNumber());
+        newUserInfo.setEmail(userInfo.getEmail());
+        newUserInfo.setRole(userInfo.getRole());
 
         userInfoRepository.save(newUserInfo);
 
-        return "Saved user Info";
+        return "Saved User Information";
     }
 
-    @GetMapping(path="/userInfo")
-    public @ResponseBody Iterable<UserInfo> getAllUserInfo(){
+    @GetMapping(path="/api/user-information")
+    public Iterable<UserInfo> getAllUserInfo(){
         return userInfoRepository.findAll();
     }
 
-    @GetMapping(path="/userInfo/{id}")
-    public @ResponseBody
-    Optional<UserInfo> getUserInfoById(@PathVariable(value = "id") String userId){
+    @GetMapping(path="/api/user-information/{id}")
+    public Optional<UserInfo> getUserInfoById(@PathVariable(value = "id") String userId){
         return userInfoRepository.findById(userId);
     }
 }
