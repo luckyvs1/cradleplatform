@@ -4,22 +4,18 @@
  *  Contains the contents and functionality of the Account page.
  */
 
-import React  from "react";
+import React from "react";
 import TopNavigation from "../navigation/TopNavigation";
 import {
     Container,
     Row,
     Col,
-    Button,
     Form,
-    Modal
 } from 'react-bootstrap';
 import PropTypes from "prop-types";
 import api from "../../api"
 import RegularPopUp from "../utils/popUp"
 import {connect} from "react-redux";
-
-
 
 
 class AccountForm extends React.Component {
@@ -36,24 +32,24 @@ class AccountForm extends React.Component {
                 phoneNumber: "",
                 role: "",
             },
-            username:""
+            username: ""
         }
         this.handleChange = this.handleChange.bind(this);
     }
 
     componentDidMount() {
-        let loggedInUser  = localStorage.getItem('loginUserId')
-        if (!loggedInUser){
+        let loggedInUser = localStorage.getItem('loginUserId')
+        if (!loggedInUser) {
             //in case no idea has been added to browser storage hot fix for now
             loggedInUser = 1;
         }
 
         api.userInfo.getUserInfoById({userId: loggedInUser}).then(res => {
-            let data  = res.data;
+            let data = res.data;
             this.setState({data})
         })
-        api.user.getUserById(loggedInUser).then(user=>{
-            this.setState({username:user.data.username})
+        api.user.getUserById(loggedInUser).then(user => {
+            this.setState({username: user.data.username})
         })
     }
 
@@ -185,7 +181,7 @@ class AccountForm extends React.Component {
                         </Row>
                         <Row>
                             <Col className={"text-right"}>
-                              <RegularPopUp></RegularPopUp>
+                                <RegularPopUp></RegularPopUp>
                             </Col>
                         </Row>
                     </Form>
@@ -206,7 +202,6 @@ const mapDispatchToProps = (dispatch) => {
         // function name
     }
 }
-
 
 
 AccountForm.propTypes = {

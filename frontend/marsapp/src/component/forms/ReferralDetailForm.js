@@ -24,7 +24,6 @@ class ReferralDetailForm extends React.Component {
     // validate
 
     componentDidMount() {
-        console.log("api calling")
         let data = {referrerId:1}
         api.referral.getReferralById(data).then(res => {
             // fetching all follow up

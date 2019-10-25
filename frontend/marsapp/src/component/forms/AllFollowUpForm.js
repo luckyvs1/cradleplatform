@@ -53,7 +53,6 @@ class AllFollowUpForm extends React.Component {
 
     render() {
         const {data} = this.state;
-        console.log("FOLLOW UP DETAIL")
         return (
             <div>
                 <TopNavigation authenticated={true}></TopNavigation>

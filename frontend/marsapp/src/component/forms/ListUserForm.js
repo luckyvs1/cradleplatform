@@ -42,7 +42,6 @@ class ListUserForm extends React.Component {
     componentDidMount() {
         api.userInfo.getAllUserInfo(null).then(res => {
             // get user information
-            console.log("all user info", res);
             const data = res.data;
             this.setState({data})
         })

@@ -37,7 +37,7 @@ class FollowUpDetailForm extends React.Component {
     }
 
     componentDidMount() {
-        api.followUp.getFollowUpByFollowUpId({followUpId:this.props.posts.data }).then(res => {
+        api.followUp.getFollowUpByFollowUpId({followUpId: this.props.posts.data}).then(res => {
             const data = res.data;
             this.setState({data})
         })
@@ -197,7 +197,7 @@ class FollowUpDetailForm extends React.Component {
                         </Col>
                     </Row>
                     <Row>
-                        <Col  className={"text-right"}>
+                        <Col className={"text-right"}>
                             <Button variant="warning">Edit</Button>
                         </Col>
                     </Row>
