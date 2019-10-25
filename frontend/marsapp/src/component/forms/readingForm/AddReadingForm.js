@@ -124,12 +124,11 @@ class AddReadingForm extends React.Component {
                             </Col>
                             <Col md={4}>
                                 <Form.Group>
-                                    <Form.Label>Gestational Age</Form.Label>
-                                    <Form.Control
-                                        type="number"
-                                        id="age"
-                                        name="age"
-                                        placeholder="Age" />
+                                    <Form.Label>Needs Follow-up</Form.Label>
+                                    <Form.Control as="select">
+                                        <option value={'true'}>Yes</option>
+                                        <option value={'False'}>No</option>
+                                    </Form.Control>
                                     {/* enable his for error handling */}
                                     {/* <Form.Text className="text-muted">
                                         {errors.email && <InlineError text={errors.email} />}
@@ -180,6 +179,73 @@ class AddReadingForm extends React.Component {
                             </Col>
                         </Row>
                         <Row>
+                            <Col md={4}>
+                                <Form.Group>
+                                    <Form.Label>Gestational Age</Form.Label>
+                                    <Form.Control
+                                        type="number"
+                                        id="age"
+                                        name="age"
+                                        placeholder="Age" />
+                                    {/* enable his for error handling */}
+                                    {/* <Form.Text className="text-muted">
+                                        {errors.email && <InlineError text={errors.email} />}
+                                    </Form.Text> */}
+                                </Form.Group>
+                            </Col>
+                            <Col md={4}>
+                                <Form.Group>
+                                    <Form.Label>Gestational Age Unit</Form.Label>
+                                    <Form.Control as="select">
+                                        <option value={'Weeks'}>Weeks</option>
+                                        <option value={'Months'}>Months</option>
+                                        <option value={'None'}>None</option>
+                                    </Form.Control>
+                                    {/* enable his for error handling */}
+                                    {/* <Form.Text className="text-muted">
+                                        {errors.email && <InlineError text={errors.email} />}
+                                    </Form.Text> */}
+                                </Form.Group>
+                            </Col>
+                            <Col>
+                                <Form.Group>
+                                    <Form.Label>Region</Form.Label>
+                                    <Form.Control
+                                        type="text"
+                                        id="region"
+                                        name="region"
+                                        placeholder="Region" />
+                                    {/*error handling*/}
+                                    {/* <Form.Text className="text-muted">
+                                        {errors.email && <InlineError text={errors.email} />}
+                                    </Form.Text> */}
+                                </Form.Group>
+                            </Col>
+                        </Row>
+                        <Row className="mb-2">
+                            <Col>
+                                <Form.Label>Symptoms</Form.Label>
+                                <Button variant="outline-primary" size="sm">No Symptoms</Button>&nbsp;
+                                    <Button variant="outline-primary" size="sm">Headache</Button>&nbsp;
+                                    <Button variant="outline-primary" size="sm">Bleeding</Button>&nbsp;
+                                    <Button variant="outline-primary" size="sm">Blurred Vision</Button>&nbsp;
+                                    <Button variant="outline-primary" size="sm">Feverish</Button>&nbsp;
+                                    <Button variant="outline-primary" size="sm">Adbdominal pain</Button>&nbsp;
+                                    <Button variant="outline-primary" size="sm">Unwell</Button>&nbsp;
+                                </Col>
+                        </Row>
+                        <Row>
+                            <Col>
+                                <Form.Group>
+                                    <Form.Label>Additional Symptoms</Form.Label>
+                                    <Form.Control
+                                        as="textarea"
+                                        rows="3"
+                                        placeholder="additional_symptoms" />
+                                </Form.Group>
+                            </Col>
+                        </Row>
+                        <Row>
                             <Col>
                                 <Form.Group>
                                     <Form.Label>Notes</Form.Label>
@@ -189,17 +255,6 @@ class AddReadingForm extends React.Component {
                                         placeholder="Notes" />
                                 </Form.Group>
                             </Col>
-                        </Row>
-                        <Row className="mb-2">
-                            <Col>
-                                <Button variant="outline-primary" size="sm">No Symptoms</Button>&nbsp;
-                                    <Button variant="outline-primary" size="sm">Headache</Button>&nbsp;
-                                    <Button variant="outline-primary" size="sm">Bleeding</Button>&nbsp;
-                                    <Button variant="outline-primary" size="sm">Blurred Vision</Button>&nbsp;
-                                    <Button variant="outline-primary" size="sm">Feverish</Button>&nbsp;
-                                    <Button variant="outline-primary" size="sm">Adbdominal pain</Button>&nbsp;
-                                    <Button variant="outline-primary" size="sm">Unwell</Button>&nbsp;
-                                </Col>
                         </Row>
                         <Row>
                             <Col>

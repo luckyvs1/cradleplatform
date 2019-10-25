@@ -11,8 +11,8 @@ import AddReadingForm from "../../../forms/readingForm/AddReadingForm";
 class AddReadingDetail extends React.Component {
     submit = (data) => {
         console.log(data);
-
     }
+
 
     render() {
         return (
