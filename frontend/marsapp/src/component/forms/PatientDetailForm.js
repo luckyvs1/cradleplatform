@@ -35,7 +35,37 @@ export default class PatientDetailForm extends React.Component {
     // states
     // submit
     // validate
-
+    constructor(props) {
+        super(props);
+        this.state = {
+            data: [{
+                id: 0,
+                reader_id: "",
+                patient_id: "",
+                timestamp: "",
+                symptoms: "",
+                other_symptoms: "",
+                systolic_bp: 0,
+                diastolic_bp: 0,
+                pulse_rate: 0,
+                notes: "",
+                need_followup: false,
+                app_version: "",
+                date_last_saved: "",
+                date_recheck_vitals_needed: "",
+                device_info: "",
+                gestational_age_unit: "none",
+                gestational_age: 0,
+                manually_changes_OCR_results: "",
+                path_to_photo: "",
+                total_OCR_seconds: 0.0,
+                region: "",
+                OCR_enabled: false,
+                upload_images: false,
+                reading_analysis: "Green",
+            }],
+        };
+    }
     render() {
         return (
             <div>
