@@ -6,6 +6,7 @@ CREATE TABLE User (
     id          VARCHAR (32)    NOT NULL,
     username    VARCHAR (16)    NOT NULL,
     password    VARCHAR (32)    NOT NULL,
+    UNIQUE (username),
     PRIMARY KEY (id)
 );
 
@@ -66,6 +67,7 @@ CREATE TABLE Patient (
             (attestation_no IS NOT NULL) OR
             (first_name IS NOT NULL AND last_name IS NOT NULL)
         ),
+    UNIQUE (attestation_no),
     PRIMARY KEY (id)
 );
 
@@ -172,7 +174,9 @@ CREATE TABLE Monitor (
     FOREIGN KEY (patient_id) REFERENCES Patient(id) ON DELETE CASCADE
 );
 
---Insert test data
+/*
+    Insert test data
+ */
 
 insert into User values ("1", "user1", "pass");
 insert into Patient values (1,
