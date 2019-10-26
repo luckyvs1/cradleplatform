@@ -3,31 +3,21 @@ import api from "../../api";
 import React, {useState} from "react";
 
 
-export default function DialogEditUser () {
+export default function DialogEditUser (data , {handleClick}) {
 
 
     const [show, setShow] = useState(false);
-    let data = {
-        id: "",
-        firstName: "",
-        lastName: "",
-        dateOfBirth: "",
-        country: "",
-        phoneNumber: "",
-        email: "",
-        role: "",
-    }
 
     const handleClose = () => {
         setShow(false)
     }
     const handleShow = () => {
 
-
         setShow(true);
     }
 
     return (
+
         <>
             <Button variant="primary" onClick={handleShow}>
                 Edit </Button>
@@ -46,7 +36,7 @@ export default function DialogEditUser () {
                                         type="text"
                                         id="firstName"
                                         name="firstName"
-                                        value={data.firstName}
+                                        value={data.value[0].firstName}
                                     />
                                     {/*error handling*/}
                                     {/* <Form.Text className="text-muted">
@@ -61,7 +51,7 @@ export default function DialogEditUser () {
                                         type="text"
                                         id="lastName"
                                         name="lastName"
-                                        // value={this.data.lastName}
+                                        value={data.value[0].lastName}
                                     />
                                     {/*error handling*/}
                                     {/* <Form.Text className="text-muted">
@@ -79,8 +69,7 @@ export default function DialogEditUser () {
                                         type="text"
                                         id="role"
                                         name="role"
-                                        // value={this.data.role}
-
+                                        value={data.value[0].role}
                                     />
                                     {/*error handling*/}
                                     {/* <Form.Text className="text-muted">
@@ -95,7 +84,7 @@ export default function DialogEditUser () {
                                         type="text"
                                         id="country"
                                         name="country"
-                                        // value={this.data.country}
+                                        value={data.value[0].country}
                                     />
                                     {/*error handling*/}
                                     {/* <Form.Text className="text-muted">
@@ -113,8 +102,7 @@ export default function DialogEditUser () {
                                         type="text"
                                         id="email"
                                         name="email"
-                                        // value={this.data.email}
-
+                                        value={data.value[0].email}
                                     />
                                     {/*error handling*/}
                                     {/* <Form.Text className="text-muted">
@@ -129,7 +117,7 @@ export default function DialogEditUser () {
                                         type="text"
                                         id="phoneNumber"
                                         name="phoneNumber"
-                                        // value={this.data.phoneNumber}
+                                        value={data.value[0].phoneNumber}
                                     />
                                     {/*error handling*/}
                                     {/* <Form.Text className="text-muted">
@@ -145,7 +133,7 @@ export default function DialogEditUser () {
                     <Button variant="secondary" onClick={handleClose}>
                         Close
                     </Button>
-                    <Button variant="primary" onClick={handleClose}>
+                    <Button variant="primary" onClick={handleShow}>
                         Save Changes
                     </Button>
                 </Modal.Footer>

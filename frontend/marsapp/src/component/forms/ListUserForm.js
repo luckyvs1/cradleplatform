@@ -40,6 +40,7 @@ class ListUserForm extends React.Component {
     }
 
     render() {
+
         return (
             <div>
                 <TopNavigation authenticated={true}></TopNavigation>
@@ -72,7 +73,7 @@ class ListUserForm extends React.Component {
                                                     </Link>
                                                 </Col>
                                                 <Col className="text-right">
-                                                    <DialogEditUser></DialogEditUser>
+                                                    <DialogEditUser value={this.state.data}></DialogEditUser>
                                                 </Col>
                                             </Row>
                                         </td>
