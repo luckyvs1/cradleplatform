@@ -40,10 +40,10 @@ const rows = [
 class ReferralForm extends React.Component {
     state = {activeItem: 'bio'};
 
-    constructor() {
-        super();
-
+    constructor(props) {
+        super(props);
         this.state = {
+            data: [],
             toggled: false
         }
     }
@@ -52,10 +52,49 @@ class ReferralForm extends React.Component {
         console.log("api calling");
         api.referral.getAllReferral(null).then(res => {
             // fetching all follow up
-            console.log("All referral: ", res);
+            console.log("All referral: ", res.data);
 
             const data = res.data;
-            this.setState({data})
+
+            /*
+            Sample return value
+            healthFacility: "healthfacility1"
+            id: 1
+            notesAction: "notes2"
+            notesReason: "notes"
+            patientId: 1
+            readingId: 1
+            referrerId: "1"
+            timestamp: "2019-01-01T00:00:00.000+0000"
+
+            Need
+            rid, pid, pname, referrer, assignee, dateof, status
+             */
+
+            //declare newState array size?
+            let newState = [];
+
+            for (let i = 0; i < data.length; i++) {
+                // query patient name
+                // query referrer name
+                // query assignee?
+                // query status?
+
+                const theDate =  new Date(data[i].timestamp).toDateString();
+                let row = {
+                    rid: data[i].id,
+                    pid: data[i].patientId,
+                    pname: "",
+                    referrer: "",
+                    assignee: "",
+                    dateof: theDate,
+                    status: "",
+                };
+
+                newState.push(row);
+            }
+            this.setState({data: newState});
+            console.log(this.state);
         })
     }
 
@@ -178,7 +217,7 @@ class ReferralForm extends React.Component {
                                     </Table.Row>
                                 </Table.Header>
                                 <Table.Body>
-                                    {rows.map(row => (
+                                    {this.state.data.map(row => (
                                         <Table.Row key={row.pid}  class='clickable-row' onClick={() => this.handleItemClick(row)}>
                                             <Table.Cell >{row.pid}</Table.Cell>
                                             <Table.Cell >{row.pname}</Table.Cell>

@@ -10,6 +10,7 @@
     "create-react-app": "^3.1.2",
     "gravatar-url": "^3.0.1",
     "jwt-decode": "^2.2.0",
+    "lodash": "latest",
     "mdbreact": "^4.21.1",
     "normalize": "^0.3.1",
     "normalizr": "^3.4.1",
@@ -25,8 +26,7 @@
     "redux-thunk": "^2.3.0",
     "reselect": "^4.0.0",
     "semantic-ui-css": "^2.4.1",
-    "tesseract.js": "^1.0.19",
-    "lodash": "latest"
+    "tesseract.js": "^1.0.19"
   },
   "scripts": {
     "start": "react-scripts start",
