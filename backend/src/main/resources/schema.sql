@@ -195,4 +195,5 @@ insert into Patient values (1,
 insert into Referral values (1, "1", 1, 1, "2019-01-01", "healthfacility1", "notes", "notes2");
 insert into Drug_History values (1, "1", "history stuff");
 insert into Medical_History values (1, "1", "my medical history");
+insert into Monitor values ("1", 1);
 insert into FollowUp values(1, 2, "This patient is not doing very well", TRUE, "Not sure", "To be determined", "To be determined");
