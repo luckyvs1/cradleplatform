@@ -63,6 +63,9 @@ class TopNavigation extends React.Component {
                                 <NavDropdown.Item as={Link} to="account">
                                     <i className="fas fa-user-alt"></i> Account
                                 </NavDropdown.Item>
+                                <NavDropdown.Item as={Link} to="help">
+                                    <i className="fas fa-graduation-cap"></i> Learning Materials
+                                </NavDropdown.Item>
                                 <NavDropdown.Divider/>
                                 <NavDropdown.Item as={Link} to="/" onClick={this.handleClick}>
                                     <i className="fas fa-sign-out-alt"></i> Logout
@@ -93,9 +96,6 @@ class TopNavigation extends React.Component {
                                         {/*TODO: Only show Users tab to Admins*/}
                                         <Nav.Link as={Link} to="listUser">
                                             <i className="fas fa-users-cog"></i> Users
-                                        </Nav.Link>
-                                        <Nav.Link as={Link} to="help">
-                                            <i className="fas fa-graduation-cap"></i> Learning Materials
                                         </Nav.Link>
                                     </ul>
                                 </div>
