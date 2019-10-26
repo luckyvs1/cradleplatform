@@ -12,28 +12,13 @@ import {
     Row,
     Col,
     Table,
-    Image,
     Button,
     Form,
     FormControl
 } from 'react-bootstrap';
 import {withRouter} from "react-router-dom";
 import _ from 'lodash';
-
-function createData(pid, initial) {
-    return {pid, initial};
-}
-
-const rows = [
-    createData('111555666', 'AD'),
-    createData('222555444', 'WE'),
-];
-
-const initialState = {
-    isLoading: false,
-    data: rows,
-    searchValue: ''
-};
+import api from "../../../api";
 
 class ListPatientForm extends React.Component {
     // functions
@@ -46,6 +31,7 @@ class ListPatientForm extends React.Component {
         this.state = {
             isLoading: false,
             data: [],
+            filteredData: [],
             searchValue: ''
         };
 
@@ -56,7 +42,34 @@ class ListPatientForm extends React.Component {
         // TODO: Use api to get data.
         // TODO: Store all api data in 'row'
         // Temporary:
-        this.setState(initialState);
+        this.setState({
+            isLoading: false,
+            filteredData: this.state.data,
+            searchValue: ''
+        });
+
+        api.patient.getAllPatients(null).then(async res => {
+            // fetching all follow up
+            const data = res.data;
+            let newState = [];
+
+            for (let i = 0; i < data.length; i++) {
+                let row = {
+                    pid: data[i].id,
+                    initial: data[i].initials
+                };
+                newState.push(row);
+            }
+            this.setState({
+                data: newState,
+                filteredData: newState,
+            });
+        });
+
+        this.setState({
+            isLoading: false,
+            searchValue: ''
+        });
     }
 
     handleSearchChange = () => {
@@ -69,9 +82,14 @@ class ListPatientForm extends React.Component {
             console.log(this.state);
 
             if (this.state.searchValue.length < 1) {
-                return this.setState(initialState);
+                return this.setState({
+                    isLoading: false,
+                    searchValue: '',
+                    filteredData: this.state.data
+                });
             }
 
+            const rows = this.state.data;
             const re = new RegExp(_.escapeRegExp(this.state.searchValue), 'i');
             const matchId = (result) => re.test(result.pid);
             const matchInitial = (result) => re.test(result.initial);
@@ -80,7 +98,7 @@ class ListPatientForm extends React.Component {
 
             this.setState({
                 isLoading: false,
-                data: _.merge(dataId, dataInitial)
+                filteredData: _.merge(dataId, dataInitial)
             });
         }, 300);
     };
@@ -96,7 +114,7 @@ class ListPatientForm extends React.Component {
     };
 
     render() {
-        const { isLoading, searchValue, data } = this.state;
+        const { isLoading, searchValue, filteredData } = this.state;
 
         return (
             <div>
@@ -141,7 +159,7 @@ class ListPatientForm extends React.Component {
                                 </tr>
                                 </thead>
                                 <tbody>
-                                {this.state.data.map(row => (
+                                {this.state.filteredData.map(row => (
                                     <tr key={row.pid} class='clickable-row' onClick={() => this.handleItemClick(row)}>
                                         <td>{row.pid}</td>
                                         <td>{row.initial}</td>

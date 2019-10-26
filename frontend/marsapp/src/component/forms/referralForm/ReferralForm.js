@@ -25,18 +25,6 @@ import {
 } from 'react-bootstrap';
 import api from "../../../api"
 
-function createData(rid, pid, pname, referrer, assignee, dateof, status) {
-    return {rid, pid, pname, referrer, assignee, dateof, status};
-}
-
-const rows = [
-    createData('111555666', '111555666', 'AS', 'thomas', 'None', new Date().toDateString(), 'Require response'),
-    createData('111555666', '222555444', 'QW', 'theo', 'None', new Date().toDateString(), 'Require response'),
-    createData('111555666', '111222333', 'DW', 'theresha', 'Jenny Hess', new Date().toDateString(), 'Require response'),
-    createData('111555666', '111222888', 'GF', 'Brian', 'None', new Date().toDateString(), 'Require response'),
-    createData('111555666', '444555666', 'VV', 'Katy', 'Elliot Fu', new Date().toDateString(), 'Done'),
-];
-
 class ReferralForm extends React.Component {
     state = {activeItem: 'bio'};
 
@@ -48,44 +36,41 @@ class ReferralForm extends React.Component {
         }
     }
 
-    componentDidMount() {
+    // TODO: see if there's another method without async, or determine how to handle the wait
+    async componentDidMount() {
         console.log("api calling");
-        api.referral.getAllReferral(null).then(res => {
+        api.referral.getAllReferral(null).then(async res => {
             // fetching all follow up
-            console.log("All referral: ", res.data);
-
             const data = res.data;
 
-            /*
-            Sample return value
-            healthFacility: "healthfacility1"
-            id: 1
-            notesAction: "notes2"
-            notesReason: "notes"
-            patientId: 1
-            readingId: 1
-            referrerId: "1"
-            timestamp: "2019-01-01T00:00:00.000+0000"
-
-            Need
-            rid, pid, pname, referrer, assignee, dateof, status
-             */
-
-            //declare newState array size?
             let newState = [];
 
             for (let i = 0; i < data.length; i++) {
                 // query patient name
-                // query referrer name
-                // query assignee?
-                // query status?
+                // TODO: Find a nicer way to use the api, or change the api's requested parameter
+                let getDataParam = {
+                    id: data[i].patientId
+                };
+                const thePatient = await api.patient.getPatientById(getDataParam).then(res => {
+                    return res.data.initials;
+                });
 
+                // query referrer name
+                getDataParam = {
+                    userId: data[i].referrerId
+                };
+                const theReferrer = await api.userInfo.getUserInfoById(getDataParam).then(res => {
+                    const name = res.data.firstName + " " + res.data.lastName;
+                    return name;
+                });
+
+                // TODO: Handle assignee and status when db schema updates
                 const theDate =  new Date(data[i].timestamp).toDateString();
                 let row = {
                     rid: data[i].id,
                     pid: data[i].patientId,
-                    pname: "",
-                    referrer: "",
+                    pname: thePatient,
+                    referrer: theReferrer,
                     assignee: "",
                     dateof: theDate,
                     status: "",
@@ -94,7 +79,6 @@ class ReferralForm extends React.Component {
                 newState.push(row);
             }
             this.setState({data: newState});
-            console.log(this.state);
         })
     }
 
