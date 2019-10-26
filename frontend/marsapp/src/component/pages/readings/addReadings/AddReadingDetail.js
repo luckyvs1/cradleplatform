@@ -7,12 +7,12 @@
 import React from "react";
 import {connect} from "react-redux";
 import AddReadingForm from "../../../forms/readingForm/AddReadingForm";
+import api from "../../../api"
 
 class AddReadingDetail extends React.Component {
     submit = (data) => {
         console.log(data);
     }
-
 
     render() {
         return (
