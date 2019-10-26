@@ -15,36 +15,36 @@ import {
     Button,
     Form
 } from 'react-bootstrap';
+import api from "../../../api"
 
 class AddReadingForm extends React.Component {
     constructor(props){
         super(props);
         this.state = {
             data:{
-                id: 0,
-                reader_id: "",
-                patient_id: 0,
-                timestamp: "",
-                symptoms: "",
-                other_symptoms: "",
-                systolic_bp: 0,
-                diastolic_bp: 0,
-                pulse_rate: 0,
-                notes: "",
-                need_followup: false,
-                app_version: "",
-                date_last_saved: "",
-                date_recheck_vitals_needed: "",
-                device_info: "",
-                gestational_age_unit: "none",
-                gestational_age: 0,
-                manually_changes_OCR_results: "",
-                path_to_photo: "",
-                total_OCR_seconds: 0.0,
-                region: "",
-                OCR_enabled: false,
-                upload_images: false,
-                reading_analysis: "Green"},
+                readerId: 1,
+                patientId: 1,
+                timestamp: "2019-09-08",
+                symptoms: "No symptoms",
+                otherSymptoms: "No other symptoms",
+                systolicBloodPressure: 0,
+                diastolicBloodPressure: 0,
+                pulseRate: 0,
+                notes: "No notes",
+                needFollowUp: false,
+                appVersion: "3",
+                dateLastSaved: "2019-10-03",
+                recheckVitalsDate: "2019-11-10",
+                deviceInformation: "Unknown",
+                gestationalAgeTimeUnit: "none",
+                gestationalAge: 3,
+                manuallyChangedOcrResults: "No",
+                photoPath: "Unavailable",
+                totalOcrSeconds: 0.0,
+                region: "Unknown",
+                ocrEnabled: false,
+                uploadImages: false,
+                vitalsTrafficLight: "Green"},
             isLoading: false,
             errors: {}
         };
@@ -53,13 +53,20 @@ class AddReadingForm extends React.Component {
     }
     onChange = event => this.setState({data: {...this.state.data, [event.target.name]: event.target.value}});
     onSubmit = (event) => {
+        console.log('HERE');
+        api.reading.addAReading(this.state.data)
+            .then(response => {
+                console.log(response);
+            });
         event.preventDefault();
         const err = this.validate(this.state.data);
-        this.setState({err});
-        if(Object.keys(err).length === 0){
-            this.props.submit(this.state.data);
+        this.setState({ err });
+        if (Object.keys(err).length === 0) {
+            // this.props.submit(this.state.data);
+            console.log('submitted');
         }
     };
+
     validate = (data) => {
         const errors = {};
         var emptyFieldsWarning = "This field cannot be blank";
@@ -67,6 +74,7 @@ class AddReadingForm extends React.Component {
         if(!data.reader_id) errors.reader_id = emptyFieldsWarning;
         return errors;
     }
+
     render() {
         const{ data, errors } = this.state;
         return (
@@ -79,7 +87,7 @@ class AddReadingForm extends React.Component {
                             <hr></hr>
                         </Col>
                     </Row>
-                    <Form>
+                    <Form onSubmit={this.onSubmit}>
                         <Row>
                             <Col>
                                 <Form.Group>
@@ -262,7 +270,7 @@ class AddReadingForm extends React.Component {
                         </Row>
                         <Row>
                             <Col>
-                                <Button variant="success" as={Link} to="patientDetail">
+                                <Button variant="success" type="submit">
                                     Create
                                 </Button>
                             </Col>

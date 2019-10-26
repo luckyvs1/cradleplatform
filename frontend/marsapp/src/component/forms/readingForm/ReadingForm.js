@@ -7,21 +7,13 @@
 import React from "react";
 import TopNavigation from "../../navigation/TopNavigation";
 import {
-    Container,
-    Row,
-    Col,
+    Container
 } from 'react-bootstrap';
 import {
-    Button,
     Checkbox,
     Form,
-    Input,
-    Radio,
-    Select,
-    TextArea,
-} from 'semantic-ui-react'
-import {connect} from "react-redux";
-import api from "../../../api"
+    Input
+} from 'semantic-ui-react';
 
 class ReadingForm extends React.Component {
     constructor(props){
