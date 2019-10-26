@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import java.util.Optional;
+import org.springframework.http.ResponseEntity;
 
 @CrossOrigin(origins = { "http://localhost:3000"})
 @RestController
@@ -42,13 +43,18 @@ public class UserController {
     }
 
     @PostMapping(path="/api/users/login")
-    @ResponseStatus(code = HttpStatus.CREATED)
-    public @ResponseBody String authenticateUser(@RequestBody User user){
+    @ResponseStatus(code = HttpStatus.OK)
+    public @ResponseBody ResponseEntity<String> authenticateUser(@RequestBody User user){
         boolean isValid = false;
         String password = user.getPassword();
         String username = user.getUsername();
         isValid = userService.authenticateUser(username, password);
-        return "Authenticated User " + String.valueOf(isValid);
+
+        if (isValid) {
+            return new ResponseEntity<String>("Authenticated User " + String.valueOf(isValid), HttpStatus.OK);
+        } else {
+            return new ResponseEntity<String>("Authenticated User " + String.valueOf(isValid), HttpStatus.UNAUTHORIZED);
+        }
     }
 
 }
