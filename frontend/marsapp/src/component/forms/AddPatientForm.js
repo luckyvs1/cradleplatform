@@ -5,7 +5,6 @@
  */
 
 import React from "react";
-import { Link } from "react-router-dom";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import PropTypes from "prop-types";
@@ -25,22 +24,22 @@ class AddPatientForm extends React.Component {
             super(props);
             this.state = {
                 data:{
-                   attestation_no : "",
-                   first_name: "",
-                   last_name: "",
-                   village_no : "",
-                   zone_no : "",
-                   household_no : "",
-                   block_no : "",
-                   tank_no : "",
+                   attestationNo : "",
+                   firstName: "",
+                   lastName: "",
+                   villageNo : "",
+                   zoneNo : "",
+                   householdNo : "",
+                   blockNo : "",
+                   tankNo : "",
                    initials : "",
                    sex: "Other",
                    age: 0,
-                   dob: new Date(),
-                   pregnant: "No",
-                   gestational_start_date: new Date(),
-                   gestational_age_unit: "none",
-                   current_gestational_age: 0},
+                   dob: null,
+                   pregnant: false,
+                   gestationalStartDate: null,
+                   gestationAgeUnit: "none",
+                   currentGestationalAge: 0},
                 isLoading: false,
                 errors: {}
             };
@@ -50,16 +49,15 @@ class AddPatientForm extends React.Component {
         }
 
     onChange = e => this.setState({data: {...this.state.data, [e.target.name]: e.target.value} });
-    onChangeDob = date => {
+    onChangeDob = date =>
         this.setState({
             data: {...this.state.data, dob: date}
-        }, () => console.log(this.state.data));
-    };
-    onChangeDateGest = date => {
+        });
+    onChangeDateGest = date =>
         this.setState({
-            data: {...this.state.data, gestational_start_date: date}
-        }, () => console.log(this.state.data));
-    };
+            data: {...this.state.data, gestationalStartDate: date}
+        });
+
     onSubmit = (event) => {
         event.preventDefault();
         const errors = this.validate(this.state.data);
@@ -71,8 +69,8 @@ class AddPatientForm extends React.Component {
     validate = (data) => {
         const errors = {};
         var emptyWarning = "Can't be blank";
-        if(!data.village_no) errors.village_no = emptyWarning;
-        if(!data.zone_no) errors.zone_no = emptyWarning;
+        if(!data.villageNo) errors.villageNo = emptyWarning;
+        if(!data.zoneNo) errors.zoneNo = emptyWarning;
         if(!data.initials) errors.initials = emptyWarning;
         return errors;
     }
@@ -96,20 +94,20 @@ class AddPatientForm extends React.Component {
                                         <Form.Label>First Name</Form.Label>
                                         <Form.Control
                                             type="text"
-                                            id="first_name"
-                                            name="first_name"
+                                            id="firstName"
+                                            name="firstName"
                                             placeholder="Enter here..."
-                                            value={data.first_name}
+                                            value={data.firstName}
                                             onChange={this.onChange}/>
                                     </Form.Group>
                                     <Form.Group as={Col}>
                                         <Form.Label>Last Name</Form.Label>
                                         <Form.Control
                                             type="text"
-                                            id="last_name"
-                                            name="last_name"
+                                            id="lastName"
+                                            name="lastName"
                                             placeholder="Enter here..."
-                                            value={data.last_name}
+                                            value={data.lastName}
                                             onChange={this.onChange}/>
                                     </Form.Group>
                                     <Form.Group as={Col}>
@@ -136,7 +134,7 @@ class AddPatientForm extends React.Component {
                                     <Form.Group as={Col}>
                                         <Form.Label>Date of Birth</Form.Label>
                                         <DatePicker
-                                            value={moment(data.dob).format('YYYY-MM-DD')}
+                                            value={data.dob}
                                             selected={data.dob}
                                             showYearDropdown
                                             dropdownMode="select"
@@ -164,17 +162,17 @@ class AddPatientForm extends React.Component {
                                     <Form.Group as={Col}>
                                         <Form.Label>Pregnant?</Form.Label>
                                         <Form.Control as="select" id="pregnant" name="pregnant" onChange={this.onChange} value={data.pregnant}>
-                                            <option value={"true"}>Yes</option>
                                             <option value={"false"}>No</option>
+                                            <option value={"true"}>Yes</option>
                                         </Form.Control>
                                     </Form.Group>
                                     <Form.Group as={Col}>
                                         <Form.Label>Gestational Start Date</Form.Label>
                                         <DatePicker
-                                            value={data.gestational_start_date}
-                                            selected={data.gestational_start_date}
-                                            id="gestational_start_date"
-                                            name="gestational_start_date"
+                                            value={data.gestationalStartDate}
+                                            selected={data.gestationalStartDate}
+                                            id="gestationalStartDate"
+                                            name="gestationalStartDate"
                                             showYearDropdown
                                             dropdownMode="select"
                                             dateFormat="yyyy-MM-dd"
@@ -185,7 +183,7 @@ class AddPatientForm extends React.Component {
                                 <Form.Row>
                                     <Form.Group as={Col}>
                                         <Form.Label>Gestational Age Unit</Form.Label>
-                                        <Form.Control as="select" id="gestational_age_unit" name="gestational_age_unit" onChange={this.onChange} value={data.gestational_age_unit}>
+                                        <Form.Control as="select" id="gestationAgeUnit" name="gestationAgeUnit" onChange={this.onChange} value={data.gestationAgeUnit}>
                                             <option value={"none"}>None</option>
                                             <option value={"week"}>Week</option>
                                             <option value={"month"}>Month</option>
@@ -195,12 +193,12 @@ class AddPatientForm extends React.Component {
                                         <Form.Label>Current Gestational Age</Form.Label>
                                         <Form.Control
                                             type="text"
-                                            id="current_gestational_age"
-                                            name="current_gestational_age"
+                                            id="currentGestationalAge"
+                                            name="currentGestationalAge"
                                             placeholder="Enter here..."
-                                            value={data.current_gestational_age}
+                                            value={data.currentGestationalAge}
                                             onChange={this.onChange}/>
-                                            {errors.current_gestational_age && <InlineError text={errors.current_gestational_age}/>}
+                                            {errors.currentGestationalAge && <InlineError text={errors.currentGestationalAge}/>}
                                     </Form.Group>
                                 </Form.Row>
                             </Col>
@@ -211,33 +209,33 @@ class AddPatientForm extends React.Component {
                                     <Form.Label>Attestation #</Form.Label>
                                     <Form.Control
                                         type="text"
-                                        id="attestation_no"
-                                        name="attestation_no"
+                                        id="attestationNo"
+                                        name="attestationNo"
                                         placeholder="Enter here..."
-                                        value={data.attestation_no}
+                                        value={data.attestationNo}
                                         onChange={this.onChange}/>
                                 </Form.Group>
                                 <Form.Group as={Col}>
                                     <Form.Label>Village #</Form.Label>
                                     <Form.Control
                                         type="text"
-                                        id="village_no"
-                                        name="village_no"
+                                        id="villageNo"
+                                        name="villageNo"
                                         placeholder="Enter here..."
-                                        value={data.village_no}
+                                        value={data.villageNo}
                                         onChange={this.onChange}/>
-                                        {errors.village_no && <InlineError text={errors.village_no}/>}
+                                        {errors.villageNo && <InlineError text={errors.villageNo}/>}
                                 </Form.Group>
                                 <Form.Group as={Col}>
                                     <Form.Label>Zone #</Form.Label>
                                     <Form.Control
                                         type="text"
-                                        id="zone_no"
-                                        name="zone_no"
+                                        id="zoneNo"
+                                        name="zoneNo"
                                         placeholder="Enter here..."
-                                        value={data.zone_no}
+                                        value={data.zoneNo}
                                         onChange={this.onChange}/>
-                                        {errors.zone_no && <InlineError text={errors.zone_no}/>}
+                                        {errors.zoneNo && <InlineError text={errors.zoneNo}/>}
                                 </Form.Group>
                             </Form.Row>
                             <Form.Row>
@@ -245,30 +243,30 @@ class AddPatientForm extends React.Component {
                                     <Form.Label>Household #</Form.Label>
                                     <Form.Control
                                         type="text"
-                                        id="household_no"
-                                        name="household_no"
+                                        id="householdNo"
+                                        name="householdNo"
                                         placeholder="Enter here..."
-                                        value={data.household_no}
+                                        value={data.householdNo}
                                         onChange={this.onChange}/>
                                 </Form.Group>
                                 <Form.Group as={Col}>
                                     <Form.Label>Block #</Form.Label>
                                     <Form.Control
                                         type="text"
-                                        id="block_no"
-                                        name="block_no"
+                                        id="blockNo"
+                                        name="blockNo"
                                         placeholder="Enter here..."
-                                        value={data.block_no}
+                                        value={data.blockNo}
                                         onChange={this.onChange}/>
                                 </Form.Group>
                                 <Form.Group as={Col}>
                                     <Form.Label>Tank #</Form.Label>
                                     <Form.Control
                                         type="text"
-                                        id="tank_no"
-                                        name="tank_no"
+                                        id="tankNo"
+                                        name="tankNo"
                                         placeholder="Enter here..."
-                                        value={data.tank_no}
+                                        value={data.tankNo}
                                         onChange={this.onChange}/>
                                 </Form.Group>
                             </Form.Row>
