@@ -2,6 +2,7 @@ package org.cradlePlatform.repository;
 
 import org.cradlePlatform.model.Monitor;
 import org.cradlePlatform.model.Patient;
+import org.cradlePlatform.model.Reading;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
@@ -20,5 +21,13 @@ public interface MonitorRepository extends CrudRepository<Monitor, String> {
             "ON p.id = m.patientId " +
             "WHERE m.vhtId = :vhtId AND m.patientId = :patientId")
     Patient getPatientByVhtIdAndPatientId(@Param("vhtId") String vhtId, @Param("patientId") String patientId);
+
+    @Query( "SELECT r " +
+            "FROM Reading r " +
+            "WHERE r.patientId = ( " +
+            "SELECT p " +
+            "FROM  Patient p INNER JOIN Monitor m ON p.id = m.patientId " +
+            "WHERE m.vhtId = :vhtId AND m.patientId = :patientId)")
+    Iterable<Reading> findReadingByVhtIdAndPatientId(@Param("vhtId") String vhtId, @Param("patientId") String patientId);
 }
 

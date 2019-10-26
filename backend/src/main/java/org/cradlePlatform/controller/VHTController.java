@@ -5,6 +5,7 @@
 package org.cradlePlatform.controller;
 
 import org.cradlePlatform.model.Patient;
+import org.cradlePlatform.model.Reading;
 import org.cradlePlatform.model.VHT;
 import org.cradlePlatform.repository.MonitorRepository;
 import org.cradlePlatform.repository.VHTRepository;
@@ -38,6 +39,12 @@ public class VHTController {
     public Patient getPatientByVhtIdAndPatientId(@PathVariable(value = "vhtId") String vhtId,
                                                  @PathVariable(value = "patientId") String patientId) {
         return monitorRepository.getPatientByVhtIdAndPatientId(vhtId, patientId);
+    }
+
+    @GetMapping(path="/api/vhts/{vhtId}/patients/{patientId}/readings")
+    public Iterable<Reading> getReadingByVhtIdAndPatientId(@PathVariable(value = "vhtId") String vhtId,
+                                                           @PathVariable(value = "patientId") String patientId) {
+        return monitorRepository.findReadingByVhtIdAndPatientId(vhtId, patientId);
     }
 
     @GetMapping(path="/api/vhts")
