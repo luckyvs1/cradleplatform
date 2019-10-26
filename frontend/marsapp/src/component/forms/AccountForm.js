@@ -9,8 +9,8 @@ import TopNavigation from "../navigation/TopNavigation";
 import {Col, Container, Form, Row,} from 'react-bootstrap';
 import PropTypes from "prop-types";
 import api from "../../api"
-import RegularPopUp from "../utils/popUp"
 import {connect} from "react-redux";
+import DialogCreateAccount from "../utils/dialogCreateAccount"
 
 
 class AccountForm extends React.Component {
@@ -176,7 +176,7 @@ class AccountForm extends React.Component {
                         </Row>
                         <Row>
                             <Col className={"text-right"}>
-                                <RegularPopUp></RegularPopUp>
+                                <DialogCreateAccount></DialogCreateAccount>
                             </Col>
                         </Row>
                     </Form>

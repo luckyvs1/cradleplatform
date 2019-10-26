@@ -28,7 +28,7 @@ export default {
         createVHT: data => axios.post(`http://${host}:${port}/api/vht` , {data})
     },
     userInfo:{
-        getUserInfoById:data=> axios.get(`http://${host}:${port}/api/user-information/${data.userId}`),
+        getUserInfoById:data=> axios.get(`http://${host}:${port}/api/user-information/${data}`),
         getAllUserInfo:data=> axios.get(`http://${host}:${port}/api/user-information`),
         createUserInformation:data=> axios.post(`http://${host}:${port}/api/user-information` , {data}),
     },

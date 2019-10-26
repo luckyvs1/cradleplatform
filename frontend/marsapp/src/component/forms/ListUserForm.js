@@ -9,6 +9,7 @@ import {Link} from "react-router-dom";
 import TopNavigation from "../navigation/TopNavigation";
 import {Button, Col, Container, Row, Table} from 'react-bootstrap';
 import api from "../../api"
+import DialogEditUser from "../utils/dialogEditUser";
 
 
 class ListUserForm extends React.Component {
@@ -34,6 +35,7 @@ class ListUserForm extends React.Component {
         api.userInfo.getAllUserInfo(null).then(res => {
             // get user information
             const data = res.data;
+            console.log("HALOOOOOOOOOOO" , data);
             this.setState({data})
         })
     }
@@ -52,7 +54,6 @@ class ListUserForm extends React.Component {
                                 Add User
                             </Button>
                         </Col>
-
                     </Row>
                     <Row>
                         <Col>
@@ -64,14 +65,14 @@ class ListUserForm extends React.Component {
                                         <td>
                                             <Row>
                                                 <Col>
-                                                    <Link to="patientDetail">
+                                                    <Link>
                                                         <strong>{row.firstName}</strong> <br/>
                                                         {row.phone} <br/>
                                                         {row.role}
                                                     </Link>
                                                 </Col>
                                                 <Col className="text-right">
-                                                    <Button variant="warning" size="sm">Edit</Button>
+                                                    <DialogEditUser></DialogEditUser>
                                                 </Col>
                                             </Row>
                                         </td>
