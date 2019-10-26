@@ -6,6 +6,7 @@ package org.cradlePlatform.controller;
 
 import org.cradlePlatform.model.User;
 import org.cradlePlatform.repository.UserRepository;
+import org.cradlePlatform.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -17,6 +18,9 @@ public class UserController {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private UserService userService;
+
     // GET mappings
 
     @GetMapping(path="/api/users/")
@@ -26,21 +30,22 @@ public class UserController {
 
     @GetMapping(path="/api/users/{id}")
     public @ResponseBody
-    Optional<User> getUserById(@PathVariable(value = "id") String referrer_id){
-        return userRepository.findById(referrer_id);
+    Optional<User> getUserById(@PathVariable(value = "id") String user_id){
+        return userRepository.findById(user_id);
     }
 
     // POST mappings
-
     @PostMapping(path="/api/users")
     @ResponseStatus(code = HttpStatus.CREATED)
     public @ResponseBody String addUser(@RequestBody User user){
-        User newUser = new User();
-        newUser.setId(user.getId());
-        newUser.setUsername(user.getUsername());
-        newUser.setPassword(user.getPassword());
+//        User newUser = new User();
+//        newUser.setId(user.getId());
+//        newUser.setUsername(user.getUsername());
+//        newUser.setPassword(user.getPassword());
+//
+//        userRepository.save(newUser);
 
-        userRepository.save(newUser);
+        userService.saveUser(user);
 
         return "Saved New User";
     }

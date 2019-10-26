@@ -5,7 +5,7 @@
 CREATE TABLE User (
     id          VARCHAR (32)    NOT NULL,
     username    VARCHAR (16)    NOT NULL,
-    password    VARCHAR (32)    NOT NULL,
+    password    VARCHAR (128)    NOT NULL,
     UNIQUE (username),
     PRIMARY KEY (id)
 );
