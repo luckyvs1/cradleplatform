@@ -136,12 +136,10 @@ class HomePage extends React.Component {
 
     componentDidMount() {
         api.referral.getAllReferral(null).then(res =>{
-            // fetching all referral
             console.log("All referral", res);
         })
 
         api.followUp.getAllFollowUps(null).then(res => {
-            // fetching all follow up
             console.log("All follow up", res);
         })
     }

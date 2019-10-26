@@ -16,7 +16,7 @@ const store = createStore(
 );
 
 if(localStorage.loginToken){
-    auth.setAtuh();
+    auth.setAuth();
 }
 
 ReactDOM.render(

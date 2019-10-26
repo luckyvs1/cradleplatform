@@ -18,7 +18,6 @@ class ReferralDetailForm extends React.Component {
     componentDidMount() {
         let data = {referrerId:1}
         api.referral.getReferralById(data).then(res => {
-            // fetching all follow up
             console.log("All referral", res);
         })
     }
