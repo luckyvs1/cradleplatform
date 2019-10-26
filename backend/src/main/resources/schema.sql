@@ -178,7 +178,41 @@ CREATE TABLE Monitor (
     Insert test data
 */
 
-insert into User values ("1", "user1", "pass");
+insert into User values ("1", "VHT_user", "password123");
+insert into User values ("2", "HealthWorker", "password123");
+insert into User values ("3", "Admin_user", "password123");
+
+insert into User_Info values ("1",
+                              "Bob",
+                              "Smith",
+                              "1980-01-01",
+                              "Uganda",
+                              "077-241-8761",
+                              "vht@healthclinic.com",
+                              'VHT');
+
+insert into User_Info values ("2",
+                              "Sally",
+                              "Jane",
+                              "1985-01-01",
+                              "Uganda",
+                              "077-241-8762",
+                              "worker@healthclinic.com",
+                              'Healthworker');
+
+insert into User_Info values ("3",
+                              "Mary",
+                              "Anne",
+                              "1975-01-01",
+                              "Uganda",
+                              "077-241-8763",
+                              "admin@healthclinic.com",
+                              'Admin');
+
+insert into VHT values ("1");
+insert into Healthworker values ("2");
+insert into Admin values ("3");
+
 insert into Patient values (1,
                             "1234",
                             "Mary",
@@ -196,6 +230,42 @@ insert into Patient values (1,
                             "2019-06-01",
                             "months",
                             3);
+
+insert into Reading values (1,
+                            "1",
+                            1,
+                            "2019-10-24",
+                            ('Bleeding'),
+                            "Confusion",
+                            118,
+                            78,
+                            180,
+                            "Good vitals",
+                            False,
+                            "CradlePlatform1.0",
+                            "2019-10-24",
+                            "2019-10-26",
+                            "Google Pixel",
+                            "months",
+                            3,
+                            "4",
+                            "/photos",
+                            3.14,
+                            "Northern Uganda",
+                            True,
+                            True,
+                            'Green');
+
+insert into FollowUp values (1,
+                            1,
+                            "Vitals to be rechecked",
+                             True,
+                             "Once a month",
+                             "High blood pressure",
+                             "Take medicine as prescribed");
+
 insert into Referral values (1, "1", 1, 1, "2019-01-01", "healthfacility1", "notes", "notes2");
 insert into Drug_History values (1, "1", "history stuff");
+insert into Medication values (1, 1, "Advil", "15mg per day", "2019-10-23", "2019-10-24");
 insert into Medical_History values (1, "1", "my medical history");
+insert into Monitor values ("1", 1);
