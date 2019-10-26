@@ -39,7 +39,7 @@ class AccountForm extends React.Component {
             loggedInUser = 1;
         }
 
-        api.userInfo.getUserInfoById({userId: loggedInUser}).then(res => {
+        api.userInfo.getUserInfoById(loggedInUser).then(res => {
             let data = res.data;
             this.setState({data})
         })
