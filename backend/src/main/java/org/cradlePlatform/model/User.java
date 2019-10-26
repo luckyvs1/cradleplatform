@@ -28,7 +28,7 @@ public class User implements Serializable {
     private String username;
 
     @NotBlank
-    //@Size(min = 8, max = 32)
+    @Size(max = 60)
     private String password;
 
     public String getId() {
