@@ -205,4 +205,8 @@ class AccountForm extends React.Component {
     }
 }
 
+AccountForm.propTypes = {
+    submit: PropTypes.func.isRequired
+}
+
 export default AccountForm;
