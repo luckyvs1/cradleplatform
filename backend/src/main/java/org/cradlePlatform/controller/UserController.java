@@ -22,7 +22,6 @@ public class UserController {
     private UserService userService;
 
     // GET mappings
-
     @GetMapping(path="/api/users/")
     public @ResponseBody Iterable<User> getAllUser() {
         return userRepository.findAll();
@@ -38,16 +37,18 @@ public class UserController {
     @PostMapping(path="/api/users")
     @ResponseStatus(code = HttpStatus.CREATED)
     public @ResponseBody String addUser(@RequestBody User user){
-//        User newUser = new User();
-//        newUser.setId(user.getId());
-//        newUser.setUsername(user.getUsername());
-//        newUser.setPassword(user.getPassword());
-//
-//        userRepository.save(newUser);
-
         userService.saveUser(user);
-
         return "Saved New User";
+    }
+
+    @PostMapping(path="/api/users/login")
+    @ResponseStatus(code = HttpStatus.CREATED)
+    public @ResponseBody String authenticateUser(@RequestBody User user){
+        boolean isValid = false;
+        String password = user.getPassword();
+        String username = user.getUsername();
+        isValid = userService.authenticateUser(username, password);
+        return "Authenticated User " + String.valueOf(isValid);
     }
 
 }

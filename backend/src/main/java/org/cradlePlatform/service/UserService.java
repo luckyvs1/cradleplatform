@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.cradlePlatform.repository.UserRepository;
 import org.cradlePlatform.model.User;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import java.util.Optional;
 
 @Service
 public class UserService {
@@ -20,5 +21,21 @@ public class UserService {
         user.setPassword(bCryptPasswordEncoder.encode(newUser.getPassword()));
         // user.setRole(newUser.getRole());
         return userRepository.save(user);
+    }
+
+//    public Optional<User> authenticateUser (String username) {
+//        return userRepository.findUserByUsername(username);
+//    }
+
+    public boolean authenticateUser (String username, String password) {
+       boolean isValidCredentials = false;
+       User user = new User();
+            user = userRepository.findUserByUsername(username);
+
+       if (user != null) {
+           isValidCredentials = bCryptPasswordEncoder.matches(password, user.getPassword());;
+       }
+
+        return isValidCredentials;
     }
 }
