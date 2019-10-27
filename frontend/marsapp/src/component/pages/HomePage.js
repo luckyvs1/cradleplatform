@@ -10,8 +10,8 @@ import {Link} from "react-router-dom";
 import TopNavigation from "../navigation/TopNavigation";
 import {Col, Container, Row, Table} from 'react-bootstrap';
 import api from "../../api";
-//import {MDBContainer} from "mdbreact";
-//import {Line} from "react-chartjs-2";
+import {MDBContainer} from "mdbreact";
+import {Line} from "react-chartjs-2";
 import ReferralListTable from "../utils/ReferralListTable";
 import FollowUpListTable from "../utils/FollowUpListTable"
 
@@ -19,7 +19,7 @@ class FloatingMenuItem extends React.Component {
 
     handleClick() {
         this.props.action();
-    }yarn
+    }
 
     render() {
         // let buttonStyle = {
@@ -109,14 +109,14 @@ class ChartsPage extends React.Component {
         }
     };
 
-    // render() {
-    //     return (
-    //         <MDBContainer>
-    //             <h3 className="mt-3">Line chart</h3>
-    //             <Line data={this.state.dataLine} options={{ responsive: true }} />
-    //         </MDBContainer>
-    //     );
-    // }
+    render() {
+        return (
+            <MDBContainer>
+                <h3 className="mt-3">Line chart</h3>
+                <Line data={this.state.dataLine} options={{ responsive: true }} />
+            </MDBContainer>
+        );
+    }
 }
 
 
@@ -199,7 +199,7 @@ class HomePage extends React.Component {
                     </Row>
                 </Container>
                 <Container>
-                   {/*<ChartsPage></ChartsPage>*/}
+                   <ChartsPage></ChartsPage>
                 </Container>
             </div>
 
