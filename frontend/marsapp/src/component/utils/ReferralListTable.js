@@ -1,11 +1,11 @@
+/*
+    Shows the table of all referrals
+ */
+
 import React from "react";
-import {
-    withRouter
-} from "react-router-dom";
-import {
-    Table
-} from 'react-bootstrap';
-import api from "../../api"
+import {withRouter} from "react-router-dom";
+import {Table} from 'react-bootstrap';
+import api from "../../api";
 
 class ReferralListTable extends React.Component{
     constructor(props) {

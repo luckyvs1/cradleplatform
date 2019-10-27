@@ -34,13 +34,6 @@ class AllFollowUpForm extends React.Component {
         };
     }
 
-    submit = event => {
-        if (event) {
-            this.props.updatePatientFollowUp(event);
-            this.props.submit(event)
-        }
-    };
-
     render() {
         return (
             <div>
@@ -64,21 +57,4 @@ class AllFollowUpForm extends React.Component {
 }
 
 
-const mapStateToProps = (state, ownProps) => {
-    return {
-        userid: state.data
-    }
-};
-const mapDispatchToProps = (dispatch) => {
-    return {
-        updatePatientFollowUp: (data) => {
-            dispatch({type: "patientFollowUp", data: data})
-        }
-    }
-};
-AllFollowUpForm.propTypes = {
-    submit: PropTypes.func.isRequired
-};
-
-
-export default connect(mapStateToProps, mapDispatchToProps)(AllFollowUpForm);
+export default connect(null,)(AllFollowUpForm);

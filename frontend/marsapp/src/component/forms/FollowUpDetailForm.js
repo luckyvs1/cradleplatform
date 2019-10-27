@@ -5,6 +5,7 @@
  */
 
 import React from "react";
+import {withRouter} from "react-router-dom";
 import TopNavigation from "../navigation/TopNavigation";
 import {Button, Col, Container, Form, Row} from 'react-bootstrap';
 import api from "../../api"
@@ -31,10 +32,12 @@ class FollowUpDetailForm extends React.Component {
     }
 
     componentDidMount() {
-        api.followUp.getFollowUpByFollowUpId({followUpId: this.props.posts.data}).then(res => {
+        console.log(this.props.location.state);
+        // api.followUp.getFollowUpByFollowUpId({followUpId: this.props.posts.data}).then(res => {
+        api.followUp.getFollowUpByFollowUpId({followUpId: this.props.location.state.id}).then(res => {
             const data = res.data;
             this.setState({data})
-        })
+        });
     }
 
 
@@ -212,4 +215,5 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(FollowUpDetailForm);
+//export default connect(mapStateToProps, mapDispatchToProps)(FollowUpDetailForm);
+export default withRouter(FollowUpDetailForm);

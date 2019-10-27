@@ -117,7 +117,7 @@ class LoginForm extends React.Component {
                             </Row>
                             <Row>
                                 <Col>
-                                    <a href="/homePage">Go Home</a>
+                                    {/*<a href="/homePage">Go Home</a>*/}
                                 </Col>
                             </Row>
                         </Form>

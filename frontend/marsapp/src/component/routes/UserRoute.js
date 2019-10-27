@@ -4,7 +4,7 @@
  */
 
 import React from "react";
-import auth from "../../actions/auth"
+import auth from "../../actions/auth";
 
 import {Redirect, Route} from "react-router-dom";
 
