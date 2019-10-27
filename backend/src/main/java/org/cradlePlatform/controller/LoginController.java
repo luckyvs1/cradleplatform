@@ -8,7 +8,7 @@ package org.cradlePlatform.controller;
 import org.cradlePlatform.model.User;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-@CrossOrigin(origins = {"http://cmpt373.csil.sfu.ca:8044"})
+
 @RestController
 public class LoginController {
 
