@@ -6,14 +6,7 @@
 
 import React from "react";
 import TopNavigation from "../navigation/TopNavigation";
-import {
-    Container,
-    Row,
-    Col,
-    Tab,
-    Tabs,
-    Table
-} from 'react-bootstrap';
+import {Col, Container, Row, Tab, Table, Tabs} from 'react-bootstrap';
 
 class HelpForm extends React.Component {
 
@@ -30,15 +23,15 @@ class HelpForm extends React.Component {
                     </Row>
                     <Row>
                         <Col>
-                            <Tabs>
+                            <Tabs >
                                 <Tab eventKey="help_video_1" title="Help Video 1">
                                     <Table bordered hover size="sm">
-                                        <iframe title="Video 1" width="1280" height="720" src="https://www.youtube.com/embed/1lCbhtBQr0Q" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                        <iframe title="Video 1" width="1280" height="700" src="https://www.youtube.com/embed/1lCbhtBQr0Q" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                                     </Table>
                                 </Tab>
                                 <Tab eventKey="help_video_2" title="Help Video 2">
                                     <Table bordered hover size="sm">
-                                        <iframe title="Video 2" width="1280" height="720" src="https://www.youtube.com/embed/AMlBuC60LUQ" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                        <iframe title="Video 2" width="1280" height="700" src="https://www.youtube.com/embed/AMlBuC60LUQ" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                                     </Table>
                                 </Tab>
                             </Tabs>
