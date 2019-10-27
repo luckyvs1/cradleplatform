@@ -16,12 +16,9 @@ import {
     Table
 } from 'react-bootstrap';
 import {connect} from "react-redux";
-import api from "../../api"
-
+import FollowUpListTable from "../utils/FollowUpListTable"
 
 class AllFollowUpForm extends React.Component {
-
-
     constructor(props) {
         super(props);
         this.state = {
@@ -37,13 +34,6 @@ class AllFollowUpForm extends React.Component {
         };
     }
 
-    componentDidMount() {
-        api.followUp.getAllFollowUps(null).then(res => {
-            const data = res.data;
-            this.setState({data})
-        })
-    }
-
     submit = event => {
         if (event) {
             this.props.updatePatientFollowUp(event);
@@ -52,7 +42,6 @@ class AllFollowUpForm extends React.Component {
     };
 
     render() {
-        const {data} = this.state;
         return (
             <div>
                 <TopNavigation authenticated={true}></TopNavigation>
@@ -65,29 +54,7 @@ class AllFollowUpForm extends React.Component {
                     </Row>
                     <Row>
                         <Col>
-                            <Table bordered hover size="sm">
-                                <thead>
-                                <tr>
-                                    <th>Patient ID</th>
-                                    <th>Diagnosis</th>
-                                    <th>Follow Up Notes</th>
-                                    <th>Treatment</th>
-                                    <th>Frequency</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                {this.state.data.map(row => (
-                                    <tr key={row.id} class='clickable-row'
-                                        onClick={() => this.submit(row.id)}>
-                                        <td> {row.patientId}</td>
-                                        <td>{row.diagnosis}</td>
-                                        <td>{row.followUpNotes}</td>
-                                        <td>{row.treatment}</td>
-                                        <td>{row.frequency}</td>
-                                    </tr>
-                                ))}
-                                </tbody>
-                            </Table>
+                            <FollowUpListTable />
                         </Col>
                     </Row>
                 </Container>
