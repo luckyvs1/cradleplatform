@@ -23,18 +23,24 @@ public class UserService {
         return userRepository.save(user);
     }
 
-//    public Optional<User> authenticateUser (String username) {
-//        return userRepository.findUserByUsername(username);
-//    }
+    public String getResponseToken (String userId) {
+        return String.format("{" +
+                "\"access_token\":\"2YomnFZEjfjklsadjkwpAA\"," +
+                "\"token_type\":\"bearer\"," +
+                "\"expires_in\":3600," +
+                "\"refresh_token\":\"nGzv3JORFQXG3x21KW1a\"," +
+                "   \"id\":\"%s\"" +
+                "}", userId);
+    }
 
     public boolean authenticateUser (String username, String password) {
-       boolean isValidCredentials = false;
-       User user = new User();
-            user = userRepository.findUserByUsername(username);
+        boolean isValidCredentials = false;
+        User user = new User();
+        user = userRepository.findUserByUsername(username);
 
-       if (user != null) {
-           isValidCredentials = bCryptPasswordEncoder.matches(password, user.getPassword());;
-       }
+        if (user != null) {
+            isValidCredentials = bCryptPasswordEncoder.matches(password, user.getPassword());;
+        }
 
         return isValidCredentials;
     }
