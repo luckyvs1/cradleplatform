@@ -192,8 +192,13 @@ insert into Patient values (1,
                             "2019-06-01",
                             "months",
                             3);
+insert into Reading values (1, "1", 1, "2019-01-01", "Feverish,Unwell", "Other symptoms", 80, 110, 85,
+    "notes", True, "appversion 1.0", "2019-01-01", "2019-01-01", "deviceinfo", "months", 6,
+    "manually", "path/to/photo", 0.52, "SFU", True, False, "Yellow_down");
 insert into Referral values (1, "1", 1, 1, "2019-01-01", "healthfacility1", "notes", "notes2");
 insert into Drug_History values (1, "1", "history stuff");
 insert into Medical_History values (1, "1", "my medical history");
+insert into VHT values ("1");
 insert into Monitor values ("1", 1);
-insert into FollowUp values(1, 2, "This patient is not doing very well", TRUE, "Not sure", "To be determined", "To be determined");
+insert into FollowUp values(1, 1, "This patient is not doing very well", TRUE, "Not sure", "To be determined", "To be determined");
+
