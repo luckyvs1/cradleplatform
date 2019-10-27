@@ -30,7 +30,8 @@ export default {
     userInfo:{
         getUserInfoById:data=> axios.get(`http://${host}:${port}/api/user-information/${data}`),
         getAllUserInfo:data=> axios.get(`http://${host}:${port}/api/user-information`),
-        createUserInfo:(data, header) => axios.post(`http://${host}:${port}/api/user-information/`, data, header)
+        createUserInfo:(data, header) => axios.post(`http://${host}:${port}/api/user-information/`, data, header),
+        updateUserInfo:(data, header) => axios.put(`http://${host}:${port}/api/user-information/${data.id}`, data, header)
     },
     patient: {
         getAllPatients: data => axios.get(`http://${host}:${port}/api/patients`),

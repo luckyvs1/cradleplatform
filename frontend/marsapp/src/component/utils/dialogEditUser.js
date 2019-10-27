@@ -1,23 +1,32 @@
+/*
+    Edit Dialog for Users
+    This will edit the UserInfo of the user
+ */
+
 import {Button, Col, Form, Modal, Row} from "react-bootstrap";
 import api from "../../api";
 import React, {useState} from "react";
 
 
 export default function DialogEditUser (data , {handleClick}) {
-
-
     const [show, setShow] = useState(false);
 
     const handleClose = () => {
         setShow(false)
-    }
-    const handleShow = () => {
+    };
 
+    const handleShow = () => {
         setShow(true);
-    }
+        console.log("saved?");
+
+        api.userInfo.updateUserInfo(data)
+    };
+
+    let onChange = e => {
+        console.log(data);
+    };
 
     return (
-
         <>
             <Button variant="primary" onClick={handleShow}>
                 Edit </Button>
@@ -36,7 +45,8 @@ export default function DialogEditUser (data , {handleClick}) {
                                         type="text"
                                         id="firstName"
                                         name="firstName"
-                                        value={data.value[0].firstName}
+                                        value={data.value.firstName}
+                                        onChange={onChange}
                                     />
                                     {/*error handling*/}
                                     {/* <Form.Text className="text-muted">
@@ -51,7 +61,8 @@ export default function DialogEditUser (data , {handleClick}) {
                                         type="text"
                                         id="lastName"
                                         name="lastName"
-                                        value={data.value[0].lastName}
+                                        value={data.value.lastName}
+                                        onChange={onChange}
                                     />
                                     {/*error handling*/}
                                     {/* <Form.Text className="text-muted">
@@ -69,7 +80,8 @@ export default function DialogEditUser (data , {handleClick}) {
                                         type="text"
                                         id="role"
                                         name="role"
-                                        value={data.value[0].role}
+                                        value={data.value.role}
+                                        onChange={onChange}
                                     />
                                     {/*error handling*/}
                                     {/* <Form.Text className="text-muted">
@@ -84,7 +96,8 @@ export default function DialogEditUser (data , {handleClick}) {
                                         type="text"
                                         id="country"
                                         name="country"
-                                        value={data.value[0].country}
+                                        value={data.value.country}
+                                        onChange={onChange}
                                     />
                                     {/*error handling*/}
                                     {/* <Form.Text className="text-muted">
@@ -102,7 +115,8 @@ export default function DialogEditUser (data , {handleClick}) {
                                         type="text"
                                         id="email"
                                         name="email"
-                                        value={data.value[0].email}
+                                        value={data.value.email}
+                                        onChange={onChange}
                                     />
                                     {/*error handling*/}
                                     {/* <Form.Text className="text-muted">
@@ -117,7 +131,8 @@ export default function DialogEditUser (data , {handleClick}) {
                                         type="text"
                                         id="phoneNumber"
                                         name="phoneNumber"
-                                        value={data.value[0].phoneNumber}
+                                        value={data.value.phoneNumber}
+                                        onChange={onChange}
                                     />
                                     {/*error handling*/}
                                     {/* <Form.Text className="text-muted">
