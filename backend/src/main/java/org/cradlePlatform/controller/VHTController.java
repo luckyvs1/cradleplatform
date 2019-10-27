@@ -11,6 +11,7 @@ import org.cradlePlatform.model.VHT;
 import org.cradlePlatform.repository.MonitorRepository;
 import org.cradlePlatform.repository.VHTRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 @CrossOrigin(origins = {"http://localhost:3000"})
@@ -23,6 +24,7 @@ public class VHTController {
     private MonitorRepository monitorRepository;
 
     @PostMapping(path="/api/vhts")
+    @ResponseStatus(code = HttpStatus.CREATED)
     public String addNewVHT (@RequestParam String id) {
         VHT newVHT = new VHT();
         newVHT.setId(id);
