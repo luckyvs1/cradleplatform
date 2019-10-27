@@ -50,8 +50,7 @@ public class UserController {
         isValid = userService.authenticateUser(username, password);
 
         if (isValid) {
-            User validUser = new User();
-            validUser = userRepository.findUserByUsername(username);
+            User validUser = userRepository.findUserByUsername(username);
             String userId = validUser.getId();
 
             return new ResponseEntity<String>(userService.getResponseToken(userId), HttpStatus.OK);
