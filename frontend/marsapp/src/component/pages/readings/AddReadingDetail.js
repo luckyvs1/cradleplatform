@@ -6,7 +6,7 @@
 
 import React from "react";
 import {connect} from "react-redux";
-import AddReadingForm from "../../../forms/readingForm/AddReadingForm";
+import AddReadingForm from "../../forms/readingForm/AddReadingForm";
 
 class AddReadingDetail extends React.Component {
     submit = (data) => {

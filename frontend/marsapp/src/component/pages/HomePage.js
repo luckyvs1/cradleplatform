@@ -12,12 +12,14 @@ import {Col, Container, Row, Table} from 'react-bootstrap';
 import api from "../../api";
 import {MDBContainer} from "mdbreact";
 import {Line} from "react-chartjs-2";
+import ReferralListTable from "../utils/ReferralListTable";
+import FollowUpListTable from "../utils/FollowUpListTable";
 
 class FloatingMenuItem extends React.Component {
 
     handleClick() {
         this.props.action();
-    }yarn
+    }
 
     render() {
         // let buttonStyle = {
@@ -40,21 +42,6 @@ class FloatingMenuItem extends React.Component {
         </div>;
     }
 }
-
-
-function createData(name, calories, fat, carbs, protein) {
-    return { name, calories, fat, carbs, protein };
-}
-
-const rows = [
-    createData('111555666', 'Alex', 'thomas', new Date().toDateString()),
-    createData('222555444', 'Bob', 'theo', new Date().toDateString()),
-    createData('111222333', 'fanny', 'theresha', new Date().toDateString()),
-    createData('111222888', 'hanny', 'Brian', new Date().toDateString()),
-    createData('444555666', 'janny', 'Katy', new Date().toDateString()),
-];
-
-
 
 class ChartsPage extends React.Component {
     state = {
@@ -119,12 +106,14 @@ class ChartsPage extends React.Component {
 
 
 class HomePage extends React.Component {
-    state = { activeItem: 'bio' }
+    state = { activeItem: 'bio' };
 
     constructor(props) {
         super(props);
 
         this.state = {
+            referralData: [],
+            followUpData: [],
             toggled: false
         }
     }
@@ -137,11 +126,11 @@ class HomePage extends React.Component {
     componentDidMount() {
         api.referral.getAllReferral(null).then(res =>{
             console.log("All referral", res);
-        })
+        });
 
         api.followUp.getAllFollowUps(null).then(res => {
             console.log("All follow up", res);
-        })
+        });
     }
 
     render() {
@@ -175,30 +164,7 @@ class HomePage extends React.Component {
                             </Row>
                             <Row>
                                 <Col>
-                                    <Table bordered hover size="sm">
-                                        <thead>
-                                            <tr>
-                                                <th>Patient ID</th>
-                                                <th>Name</th>
-                                                <th>Referred By</th>
-                                                <th>Referral Date</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            {rows.map(row => (
-                                                <tr key={row.name}>
-                                                    <th scope="row">
-                                                        <Link to="referralDetail">
-                                                            {row.name}
-                                                        </Link>
-                                                    </th>
-                                                    <td>{row.calories}</td>
-                                                    <td>{row.fat}</td>
-                                                    <td>{row.carbs}</td>
-                                                </tr>
-                                            ))}
-                                        </tbody>
-                                    </Table>
+                                    <ReferralListTable />
                                 </Col>
                             </Row>
                         </Col>
@@ -211,30 +177,7 @@ class HomePage extends React.Component {
                             </Row>
                             <Row>
                                 <Col>
-                                    <Table bordered hover size="sm">
-                                        <thead>
-                                            <tr>
-                                                <th>Patient ID</th>
-                                                <th>Name</th>
-                                                <th>Location</th>
-                                                <th>Follow-up Date</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            {rows.map(row => (
-                                                <tr key={row.name}>
-                                                    <th scope="row">
-                                                        <Link to="referralDetail">
-                                                            {row.name}
-                                                        </Link>
-                                                    </th>
-                                                    <td>{row.calories}</td>
-                                                    <td>{row.fat}</td>
-                                                    <td>{row.carbs}</td>
-                                                </tr>
-                                            ))}
-                                        </tbody>
-                                    </Table>
+                                    <FollowUpListTable />
                                 </Col>
                             </Row>
                         </Col>

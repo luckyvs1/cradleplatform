@@ -30,7 +30,6 @@ class ListUserForm extends React.Component {
 
     }
 
-
     componentDidMount() {
         api.userInfo.getAllUserInfo(null).then(res => {
             // get user information
@@ -50,7 +49,7 @@ class ListUserForm extends React.Component {
                             <h1>All Users</h1>
                         </Col>
                         <Col className="text-right">
-                            <Button variant="primary" size="sm" as={Link} to="account">
+                            <Button variant="primary" size="sm" as={Link} to="addUser">
                                 Add User
                             </Button>
                         </Col>
@@ -61,19 +60,18 @@ class ListUserForm extends React.Component {
                             <Table hover size="sm">
                                 <tbody>
                                 {this.state.data.map(row => (
-                                    <tr key={row.id} class='clickable-row'
-                                    >
+                                    <tr key={row.id} class='clickable-row'>
                                         <td>
                                             <Row>
                                                 <Col>
                                                     <Link>
-                                                        <strong>{row.firstName}</strong> <br/>
+                                                        <strong>{row.firstName} {row.lastName}</strong> <br/>
                                                         {row.phone} <br/>
                                                         {row.role}
                                                     </Link>
                                                 </Col>
                                                 <Col className="text-right">
-                                                    <DialogEditUser value={this.state.data}></DialogEditUser>
+                                                    <DialogEditUser value={row}></DialogEditUser>
                                                 </Col>
                                             </Row>
                                         </td>

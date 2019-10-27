@@ -8,22 +8,45 @@ import React from "react";
 import TopNavigation from "../navigation/TopNavigation";
 import {Button, Col, Container, Form, Row, Tab, Tabs} from 'react-bootstrap';
 import api from "../../api"
+import {withRouter} from "react-router-dom";
 
 class ReferralDetailForm extends React.Component {
     // functions
     // states
     // submit
     // validate
+    constructor(props) {
+        super(props);
+        console.dir("props");
+        console.dir(props);
+        this.state = {
+            data: {
+                healthFacility: "",
+                id: 0,
+                notesAction: "",
+                notesReason: "",
+                patientId: 0,
+                readingId: 0,
+                referrerId: "",
+                timestamp: null
+            },
+            initials: this.props.location.state.initials
+        }
+    }
 
     componentDidMount() {
-        let data = {referrerId:1}
+        let data =  this.props.location.state;
         api.referral.getReferralById(data).then(res => {
-            console.log("All referral", res);
-        })
+            const data = res.data[0];
+            this.setState({data});
+            console.log("state", this.state);
+
+            // TODO: Get rest of information, such as patient data
+        });
     }
 
     render() {
-
+        const {data} = this.state;
         return (
             <div>
                 <TopNavigation authenticated={true}></TopNavigation>
@@ -47,7 +70,7 @@ class ReferralDetailForm extends React.Component {
                                                     type="text"
                                                     id="patient"
                                                     name="patient"
-                                                    value={'0123456'} />
+                                                    value={data.patientId} />
                                                 {/*error handling*/}
                                                 {/* <Form.Text className="text-muted">
                                                 {errors.email && <InlineError text={errors.email} />}
@@ -61,7 +84,7 @@ class ReferralDetailForm extends React.Component {
                                                     type="text"
                                                     id="initials"
                                                     name="initials"
-                                                    value={'AS'} />
+                                                    value={this.state.initials} />
                                                 {/*error handling*/}
                                                 {/* <Form.Text className="text-muted">
                                                 {errors.email && <InlineError text={errors.email} />}
@@ -777,4 +800,4 @@ class ReferralDetailForm extends React.Component {
     }
 }
 
-export default ReferralDetailForm;
+export default withRouter(ReferralDetailForm);
