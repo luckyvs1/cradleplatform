@@ -4,8 +4,9 @@
  *  Contains the contents and functionality of the List of Referrals page.
  */
 
+// TODO: Handle assignee filter, status filter, and sort by,
+
 import React from "react";
-import {connect} from "react-redux";
 import { makeStyles } from "@material-ui/core";
 import {
     Form,
@@ -32,6 +33,57 @@ class ReferralForm extends React.Component {
         super(props);
         this.state = {
             data: [],
+            assignedTo: [
+                {
+                    key: 'none',
+                    text: ' ',
+                    value: 'none',
+                },
+                {
+                    key: 'Jenny Hess',
+                    text: 'Jenny Hess',
+                    value: 'Jenny Hess',
+                },
+                {
+                    key: 'Elliot Fu',
+                    text: 'Elliot Fu',
+                    value: 'Elliot Fu',
+                },
+                {
+                    key: 'Stevie Feliciano',
+                    text: 'Stevie Feliciano',
+                    value: 'Stevie Feliciano',
+                }
+            ],
+            status: [
+                {
+                    key: 'none',
+                    text: ' ',
+                    value: 'none',
+                },
+                {
+                    key: 'done',
+                    text: 'done',
+                    value: 'done',
+                },
+                {
+                    key: 'requires response',
+                    text: 'requires response',
+                    value: 'requires response',
+                }
+            ],
+            sortBy: [
+                {
+                    key: 'datecreated',
+                    text: 'date created',
+                    value: 'datecreated',
+                },
+                {
+                    key: 'patient',
+                    text: 'patient initials',
+                    value: 'patient',
+                }
+            ],
             toggled: false
         }
     }
@@ -118,24 +170,6 @@ class ReferralForm extends React.Component {
     }));
 
     render() {
-        const friendOptions = [
-            {
-                key: 'Jenny Hess',
-                text: 'Jenny Hess',
-                value: 'Jenny Hess',
-            },
-            {
-                key: 'Elliot Fu',
-                text: 'Elliot Fu',
-                value: 'Elliot Fu',
-            },
-            {
-                key: 'Stevie Feliciano',
-                text: 'Stevie Feliciano',
-                value: 'Stevie Feliciano',
-            }
-        ];
-
         return (
             <div>
                 <TopNavigation authenticated={true}></TopNavigation>
@@ -165,7 +199,7 @@ class ReferralForm extends React.Component {
                                             placeholder='Select Assignee'
                                             fluid
                                             selection
-                                            options={friendOptions}
+                                            options={this.state.assignedTo}
                                         />
                                     </Form.Field>
                                     <Form.Field>
@@ -174,7 +208,7 @@ class ReferralForm extends React.Component {
                                             placeholder='Select Status'
                                             fluid
                                             selection
-                                            options={friendOptions}
+                                            options={this.state.status}
                                         />
                                     </Form.Field>
                                     <Form.Field>
@@ -183,7 +217,7 @@ class ReferralForm extends React.Component {
                                             placeholder='Select Sort By'
                                             fluid
                                             selection
-                                            options={friendOptions}
+                                            options={this.state.sortBy}
                                         />
                                     </Form.Field>
                                 </Form.Group>
