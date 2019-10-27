@@ -80,7 +80,7 @@ class AddUsersForm extends React.Component {
 
         const config = {
             headers: {
-                accept : "application/json"
+                "Accept" : "application/json"
             }
         };
 
