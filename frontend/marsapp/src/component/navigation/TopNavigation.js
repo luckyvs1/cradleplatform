@@ -93,6 +93,9 @@ class TopNavigation extends React.Component {
                                         <Nav.Link as={Link} to="listPatient">
                                             <i className="fas fa-users"></i> Patients
                                         </Nav.Link>
+                                        <Nav.Link as={Link} to="addReadingDetail">
+                                            <i className="fas fa-users"></i> Readings
+                                        </Nav.Link>
                                         {/*TODO: Only show Users tab to Admins*/}
                                         <Nav.Link as={Link} to="listUser">
                                             <i className="fas fa-users-cog"></i> Users

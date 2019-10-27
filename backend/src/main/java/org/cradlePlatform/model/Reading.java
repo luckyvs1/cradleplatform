@@ -4,12 +4,15 @@
  */
 package org.cradlePlatform.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 
 
 @Entity
@@ -60,8 +63,9 @@ public class Reading {
 	private Timestamp dateLastSaved;
 
 	@NotNull
+	@JsonFormat(pattern="yyyy-MM-dd")
 	@Column(name = "date_recheck_vitals_needed")
-	private Timestamp recheckVitalsDate;
+	private Date recheckVitalsDate;
 
 	@NotBlank
 	@Size(max = 32)
@@ -207,7 +211,7 @@ public class Reading {
 		this.dateLastSaved = dateLastSaved;
 	}
 
-	public Timestamp getRecheckVitalsDate() {
+	public Date getRecheckVitalsDate() {
 		return recheckVitalsDate;
 	}
 
@@ -293,22 +297,5 @@ public class Reading {
 
 	public void setVitalsTrafficLight(VitalsTrafficLight vitalsTrafficLight) {
 		this.vitalsTrafficLight = vitalsTrafficLight;
-	}
-
-	@Override
-	public String toString() {
-		return String.format(
-				"{id: '%s', readerId: '%s', patientId: '%s', timestamp: '%s', symptoms: '%s', " +
-						"otherSymptoms: '%s', systolicBloodPressure: '%s', diastolicBloodPressure: '%s', " +
-						"pulseRate: '%s', notes: '%s', needFollowUp: '%s', appVersion: '%s', " +
-						"dateLastSaved: '%s', recheckVitalsDate: '%s', deviceInformation: '%s', " +
-						"gestationalAgeTimeUnit: '%s', gestationalAge: '%s', manuallyChangedOcrResults: '%s', " +
-						"photoPath: '%s', totalOcrSeconds: '%s', region: '%s', OcrEnabled: '%s', " +
-						"uploadImages: '%s', vitalsTrafficLight: '%s'}",
-				id, readerId, patientId, new SimpleDateFormat("dd-MM-yyyy HH:mm:ss").format(timestamp),
-				symptoms, otherSymptoms, systolicBloodPressure, diastolicBloodPressure, pulseRate, notes,
-				needFollowUp, appVersion, dateLastSaved, recheckVitalsDate, deviceInformation,
-				gestationalAgeTimeUnit, gestationalAge, manuallyChangedOcrResults, photoPath, totalOcrSeconds,
-				region, ocrEnabled, uploadImages, uploadImages, vitalsTrafficLight);
 	}
 }

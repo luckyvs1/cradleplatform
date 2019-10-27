@@ -28,6 +28,46 @@ export default class PatientDetailForm extends React.Component {
     // states
     // submit
     // validate
+    constructor(props) {
+        super(props);
+        this.state = {
+            data: [{
+                id: 0,
+                reader_id: "",
+                patient_id: "",
+                timestamp: "",
+                symptoms: "",
+                other_symptoms: "",
+                systolic_bp: 0,
+                diastolic_bp: 0,
+                pulse_rate: 0,
+                notes: "",
+                need_followup: false,
+                app_version: "",
+                date_last_saved: "",
+                date_recheck_vitals_needed: "",
+                device_info: "",
+                gestational_age_unit: "none",
+                gestational_age: 0,
+                manually_changes_OCR_results: "",
+                path_to_photo: "",
+                total_OCR_seconds: 0.0,
+                region: "",
+                OCR_enabled: false,
+                upload_images: false,
+                reading_analysis: "Green",
+            }],
+        };
+    }
+
+    componentDidMount(){
+        //api.followUp.getFollowUpByFollowUpId({followUpId: 22}).then(res => {
+        //api.reading.getReadingsById({readingId: 32}).then (res => {
+        api.reading.getReadingForPat({followUpId: 32}).then(res => {
+            console.log("by reading id", res); const data = res.data;
+            this.setState({data})
+        })
+    }
 
     render() {
         return (
@@ -80,16 +120,18 @@ export default class PatientDetailForm extends React.Component {
                                         <td className="text-center" style={statusGreen}>
                                             <strong>-</strong>
                                         </td>
-                                        <td>2019/03/13</td>
                                         <td>
-                                            <b>BP/DP:</b> 120/80 <br/>
-                                            <b>Heart Rate (bpm):</b> 60
+                                            {this.state.data.timestamp}
+                                        </td>
+                                        <td>
+                                            <b>BP/DP:</b> {this.state.data.systolic_bp} / {this.state.data.diastolic_bp}<br/>
+                                            <b>Heart Rate (bpm):</b> {this.state.data.pulse_rate}
                                         </td>
                                         <td>
                                             <b>Pregnant:</b> Yes<br />
-                                            <b>Gestational Age:</b> 5 Months
+                                            <b>Gestational Age:</b> {this.state.data.gestational_age} {this.state.data.gestational_age_unit}
                                         </td>
-                                        <td><b>Symptoms:</b> ...</td>
+                                        <td><b>Symptoms:</b> {this.state.data.symptoms}</td>
                                     </tr>
                                     <tr>
                                         <td className="text-center" style={statusYellow}>
@@ -254,3 +296,20 @@ export default class PatientDetailForm extends React.Component {
         );
     }
 }
+
+const mapStateToProps = (state, ownProps) => {
+    return {
+        userid: state.data
+    }
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        updateReadings: (data) => {
+            dispatch({type: "readings", data: data})
+        }
+    }
+};
+
+
+

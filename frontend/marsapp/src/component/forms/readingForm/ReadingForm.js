@@ -11,6 +11,22 @@ import {Checkbox, Form, Input,} from 'semantic-ui-react'
 
 
 class ReadingForm extends React.Component {
+    constructor(props){
+        super(props);
+        this.state = {
+            data: [{
+                patientId: "",
+                initials: "",
+                age: "",
+                pregnant: "Yes",
+                gestationalAge: "",
+                bloodPressure: "",
+                DP: "",
+                heartRate: "",
+                otherInformation: "",
+            }],
+        };
+    }
     render() {
         return (
             <div>
@@ -45,7 +61,6 @@ class ReadingForm extends React.Component {
                             />
                         </Form.Group>
                     </Form>
-
                 </Container>
             </div>
         );
