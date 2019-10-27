@@ -61,8 +61,8 @@ class AddPatientForm extends React.Component {
     onSubmit = (event) => {
         event.preventDefault();
         const errors = this.validate(this.state.data);
-        this.setState({errors}); //if there are errors returned, display them
-        if(Object.keys(errors).length === 0){ //if not
+        this.setState({errors}); 
+        if(Object.keys(errors).length === 0){ 
             this.props.submit(this.state.data);
         }
     };
