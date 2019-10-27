@@ -42,6 +42,7 @@ class ReferralForm extends React.Component {
         api.referral.getAllReferral(null).then(async res => {
             // fetching all follow up
             const data = res.data;
+            console.log("ddd", data);
 
             let newState = [];
 
@@ -56,16 +57,17 @@ class ReferralForm extends React.Component {
                 });
 
                 // query referrer name
-                getDataParam = {
-                    userId: data[i].referrerId
-                };
-                const theReferrer = await api.userInfo.getUserInfoById(getDataParam).then(res => {
-                    const name = res.data.firstName + " " + res.data.lastName;
-                    return name;
+                const theReferrer = await api.userInfo.getUserInfoById(data[i].referrerId).then(res => {
+                    return res.data.firstName + " " + res.data.lastName;
                 });
 
                 // TODO: Handle assignee and status when db schema updates
                 const theDate =  new Date(data[i].timestamp).toDateString();
+
+                console.log("dp", thePatient);
+                console.log("dr", theReferrer);
+                console.log("dd", theDate);
+
                 let row = {
                     rid: data[i].id,
                     pid: data[i].patientId,
@@ -79,6 +81,7 @@ class ReferralForm extends React.Component {
                 newState.push(row);
             }
             this.setState({data: newState});
+            console.log("state:", this.state);
         })
     }
 
