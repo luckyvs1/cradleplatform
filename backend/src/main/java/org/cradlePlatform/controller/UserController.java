@@ -1,6 +1,5 @@
 /**
  * UserController handles the common functions available to all User types.
- * Does not handle account log-in or log-out.
  */
 package org.cradlePlatform.controller;
 
@@ -57,7 +56,7 @@ public class UserController {
 
             return new ResponseEntity<String>(userService.getResponseToken(userId), HttpStatus.OK);
         } else {
-            return new ResponseEntity<String>("Authenticated User " + String.valueOf(isValid), HttpStatus.UNAUTHORIZED);
+            return new ResponseEntity<String>("Unauthorized User", HttpStatus.UNAUTHORIZED);
         }
     }
 

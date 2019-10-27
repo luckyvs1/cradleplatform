@@ -1,3 +1,8 @@
+/**
+ * UserService handles the common helpers required to encrpyt and de-crypt passwords
+ * and hand back a valid token on successful authorization.
+ */
+
 package org.cradlePlatform.service;
 
 import org.springframework.stereotype.Service;
@@ -5,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.cradlePlatform.repository.UserRepository;
 import org.cradlePlatform.model.User;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import java.util.Optional;
 
 @Service
 public class UserService {
@@ -19,10 +23,14 @@ public class UserService {
         User user = new User();
         user.setUsername(newUser.getUsername());
         user.setPassword(bCryptPasswordEncoder.encode(newUser.getPassword()));
-        // user.setRole(newUser.getRole());
         return userRepository.save(user);
     }
 
+    /*
+        TODO: getResponseToken is mocked to
+        provide a sample response with requested format
+        but with valid userId
+     */
     public String getResponseToken (String userId) {
         return String.format("{" +
                 "\"access_token\":\"2YomnFZEjfjklsadjkwpAA\"," +
