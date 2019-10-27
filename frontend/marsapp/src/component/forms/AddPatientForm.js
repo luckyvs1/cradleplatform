@@ -184,8 +184,8 @@ class AddPatientForm extends React.Component {
                                         <Form.Label>Gestational Age Unit</Form.Label>
                                         <Form.Control as="select" id="gestationAgeUnit" name="gestationAgeUnit" onChange={this.onChange} value={data.gestationAgeUnit}>
                                             <option value={"none"}>None</option>
-                                            <option value={"week"}>Week</option>
-                                            <option value={"month"}>Month</option>
+                                            <option value={"weeks"}>Weeks</option>
+                                            <option value={"months"}>Months</option>
                                         </Form.Control>
                                     </Form.Group>
                                     <Form.Group as={Col}>

@@ -8,6 +8,8 @@ import React from "react";
 import {Link} from "react-router-dom";
 import TopNavigation from "../../navigation/TopNavigation";
 import {Button, Col, Container, Form, Row} from 'react-bootstrap';
+import api from "../../../api";
+import PropTypes from "prop-types";
 
 class AddReadingForm extends React.Component {
     constructor(props){
@@ -201,9 +203,9 @@ class AddReadingForm extends React.Component {
                                 <Form.Group>
                                     <Form.Label>Gestational Age Unit</Form.Label>
                                     <Form.Control as="select">
-                                        <option value={'Weeks'}>Weeks</option>
-                                        <option value={'Months'}>Months</option>
-                                        <option value={'None'}>None</option>
+                                        <option value={'weeks'}>Weeks</option>
+                                        <option value={'months'}>Months</option>
+                                        <option value={'none'}>None</option>
                                     </Form.Control>
                                     {/* enable his for error handling */}
                                     {/* <Form.Text className="text-muted">
