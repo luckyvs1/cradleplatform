@@ -10,10 +10,16 @@ import AllFollowUpForm from "../../forms/AllFollowUpForm";
 
 class AllFollowUp extends React.Component {
 
+    submit=data =>{
+        this.props.history.push("/followUpDetail");
+    }
+
+
+
     render() {
         return (
             <div>
-                <AllFollowUpForm></AllFollowUpForm>
+                <AllFollowUpForm submit={this.submit}></AllFollowUpForm>
             </div>
         );
     }

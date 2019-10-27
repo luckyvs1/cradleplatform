@@ -7,7 +7,9 @@
 import { combineReducers } from "redux";
 
 import user from "./reducers/user";
+import followUp from "./reducers/followUp"
 
 export default combineReducers({
     user,
+    followUp,
 });

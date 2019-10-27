@@ -6,15 +6,7 @@
 
 import React from "react";
 import TopNavigation from "../navigation/TopNavigation";
-import {
-    Row,
-    Col,
-    Form,
-    Button,
-    Container,
-    Tabs,
-    Tab
-} from 'react-bootstrap';
+import {Button, Col, Container, Form, Row, Tab, Tabs} from 'react-bootstrap';
 import api from "../../api"
 
 class ReferralDetailForm extends React.Component {

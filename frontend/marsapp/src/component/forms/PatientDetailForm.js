@@ -9,16 +9,7 @@ import Tabs from "react-bootstrap/Tabs";
 import Tab from "react-bootstrap/Tab";
 import {Link} from "react-router-dom";
 import TopNavigation from "../navigation/TopNavigation";
-import {
-    Container,
-    Row,
-    Col,
-    Button,
-    Form,
-    Table
-} from 'react-bootstrap';
-import api from "../../api"
-import { connect } from "react-redux";
+import {Button, Col, Container, Form, Row, Table} from 'react-bootstrap';
 
 const statusGreen = {
     backgroundColor: "green"

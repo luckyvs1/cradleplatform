@@ -6,14 +6,9 @@
 
 import React from "react";
 import TopNavigation from "../../navigation/TopNavigation";
-import {
-    Container
-} from 'react-bootstrap';
-import {
-    Checkbox,
-    Form,
-    Input
-} from 'semantic-ui-react';
+import {Container,} from 'react-bootstrap';
+import {Checkbox, Form, Input,} from 'semantic-ui-react'
+
 
 class ReadingForm extends React.Component {
     constructor(props){

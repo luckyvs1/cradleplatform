@@ -5,17 +5,9 @@
  */
 
 import React from "react";
-import { Link } from "react-router-dom";
-import PropTypes from "prop-types";
+import {Link} from "react-router-dom";
 import TopNavigation from "../../navigation/TopNavigation";
-import {
-    Container,
-    Row,
-    Col,
-    Button,
-    Form
-} from 'react-bootstrap';
-import api from "../../../api"
+import {Button, Col, Container, Form, Row} from 'react-bootstrap';
 
 class AddReadingForm extends React.Component {
     constructor(props){
