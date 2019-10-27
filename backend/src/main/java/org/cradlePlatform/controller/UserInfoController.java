@@ -4,9 +4,9 @@
  */
 package org.cradlePlatform.controller;
 
-import org.cradlePlatform.model.RoleType;
-import org.cradlePlatform.model.UserInfo;
-import org.cradlePlatform.model.VHT;
+import org.cradlePlatform.model.*;
+import org.cradlePlatform.repository.AdminRepository;
+import org.cradlePlatform.repository.HealthWorkerRepository;
 import org.cradlePlatform.repository.UserInfoRepository;
 import org.cradlePlatform.repository.VHTRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +19,12 @@ import java.util.Optional;
 public class UserInfoController {
     @Autowired
     private UserInfoRepository userInfoRepository;
+
+    @Autowired
+    private AdminRepository adminRepository;
+
+    @Autowired
+    private HealthWorkerRepository healthWorkerRepository;
 
     @Autowired
     private VHTRepository vhtRepository;
@@ -38,7 +44,15 @@ public class UserInfoController {
 
         userInfoRepository.save(newUserInfo);
 
-        if (userInfo.getRole() == RoleType.VHT) {
+        if (userInfo.getRole() == RoleType.Admin) {
+            Admin admin = new Admin();
+            admin.setId(userInfo.getId());
+            adminRepository.save(admin);
+        } else if (userInfo.getRole() == RoleType.Healthworker) {
+            HealthWorker healthWorker = new HealthWorker();
+            healthWorker.setId(userInfo.getId());
+            healthWorkerRepository.save(healthWorker);
+        }else if (userInfo.getRole() == RoleType.VHT) {
             VHT vht = new VHT();
             vht.setId(userInfo.getId());
             vhtRepository.save(vht);

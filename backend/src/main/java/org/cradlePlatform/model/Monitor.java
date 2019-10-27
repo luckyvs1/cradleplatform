@@ -5,7 +5,7 @@ import javax.validation.constraints.NotBlank;
 
 @Entity
 @IdClass(MonitorId.class)
-@Table(name = "Monitor", schema = "schemas")
+@Table(name = "Monitor")
 public class Monitor{
 
     @Id
@@ -16,9 +16,9 @@ public class Monitor{
     @Id
     @NotBlank
     @Column(name = "patient_id")
-    private String patientId;
+    private int patientId;
 
-    public Monitor(String vhtId, String patientId) {
+    public Monitor(String vhtId, int patientId) {
         this.vhtId = vhtId;
         this.patientId = patientId;
     }
@@ -35,11 +35,11 @@ public class Monitor{
         this.vhtId = vhtId;
     }
 
-    public String getPatientId() {
+    public int getPatientId() {
         return patientId;
     }
 
-    public void setPatientId(String patientId) {
+    public void setPatientId(int patientId) {
         this.patientId = patientId;
     }
 }
