@@ -6,23 +6,27 @@
 
 import React from "react";
 import TopNavigation from "../../navigation/TopNavigation";
-import {
-    Container,
-    Row,
-    Col,
-} from 'react-bootstrap';
-import {
-    Button,
-    Checkbox,
-    Form,
-    Input,
-    Radio,
-    Select,
-    TextArea,
-} from 'semantic-ui-react'
+import {Container,} from 'react-bootstrap';
+import {Checkbox, Form, Input,} from 'semantic-ui-react'
 
 
 class ReadingForm extends React.Component {
+    constructor(props){
+        super(props);
+        this.state = {
+            data: [{
+                patientId: "",
+                initials: "",
+                age: "",
+                pregnant: "Yes",
+                gestationalAge: "",
+                bloodPressure: "",
+                DP: "",
+                heartRate: "",
+                otherInformation: "",
+            }],
+        };
+    }
     render() {
         return (
             <div>
@@ -57,7 +61,6 @@ class ReadingForm extends React.Component {
                             />
                         </Form.Group>
                     </Form>
-
                 </Container>
             </div>
         );

@@ -7,11 +7,7 @@
 
 import React from "react";
 import PropTypes from "prop-types";
-import {
-    Button,
-    Form,
-    Grid
-} from 'semantic-ui-react'
+import {Button, Form, Grid} from 'semantic-ui-react'
 import isEmail from "validator/lib/isEmail";
 import InlineError from "../messages/InlineError";
 

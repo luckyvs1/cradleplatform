@@ -4,23 +4,23 @@
  */
 
 import React from "react";
-import auth from "../../actions/auth"
+import AuthAdmin from "../../actions/authAdmin"
 
 import {Redirect, Route} from "react-router-dom";
 
 
-export const UserRoute = ({component: Component, ...rest}) => {
+export const AdminRoute = ({component: Component, ...rest}) => {
     return (
         <Route
             {...rest}
             render={props => {
-                if (auth.isAuthenticated()) {
+                if (AuthAdmin.isAuthenticated()) {
                     return <Component {...props} />;
                 } else {
                     return (
                         <Redirect
                             to={{
-                                pathname: "/",
+                                pathname: "/homePage",
                                 state: {
                                     from: props.location
                                 }

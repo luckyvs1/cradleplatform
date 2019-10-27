@@ -7,19 +7,10 @@
 import React from "react";
 import {connect} from "react-redux";
 import {makeStyles} from "@material-ui/core";
-import {
-    Form,
-    Dropdown
-} from 'semantic-ui-react'
+import {Dropdown, Form} from 'semantic-ui-react'
 import {Link} from "react-router-dom";
 import TopNavigation from "../navigation/TopNavigation";
-import {
-    Container,
-    Row,
-    Col,
-    Table,
-    Button
-} from 'react-bootstrap';
+import {Button, Col, Container, Row, Table} from 'react-bootstrap';
 import api from "../../api"
 
 function createData(name, calories, fat, carbs, protein) {
@@ -46,7 +37,6 @@ class ReferralForm extends React.Component {
     }
 
     componentDidMount() {
-        console.log("api calling")
         api.referral.getAllReferral(null).then(res => {
             console.log("All referral", res);
         })

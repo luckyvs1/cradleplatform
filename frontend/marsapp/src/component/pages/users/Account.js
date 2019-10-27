@@ -7,12 +7,17 @@
 import React from "react";
 import {connect} from "react-redux";
 import AccountForm from "../../forms/AccountForm";
-
 class Account extends React.Component {
+
+    submit = data => {
+        // for future use
+        console.log(data);
+    }
+
 
     render() {
         return (
-            <AccountForm></AccountForm>
+            <AccountForm submit={this.submit}></AccountForm>
         );
     }
 }

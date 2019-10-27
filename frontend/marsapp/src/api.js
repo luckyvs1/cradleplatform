@@ -18,9 +18,9 @@ export default {
     },
     user: {
         login: credential => axios.get(`http://${host}:${port}/api/login?username=${credential.username}&password=${credential.password}`, {credential}),
-        getAllUsers:data=> axios.get(`http://${host}:${port}/api/users`),
-        getUserById:data=> axios.get(`http://${host}:${port}/api/users/${data.userId}`),
-        createUser:data=> axios.post(`http://${host}:${port}/api/users`, {data}),
+        getAllUsers:data=> axios.get(`http://${host}:${port}/api/users/`),
+        getUserById:data=> axios.get(`http://${host}:${port}/api/users/${data}`),
+        createUser:(username , password) => axios.post(`http://${host}:${port}/api/users`, {username, password}),
     },
     vht:{
         getAllVHT: data => axios.get(`http://${host}:${port}/api/vht`),
@@ -28,7 +28,8 @@ export default {
         createVHT: data => axios.post(`http://${host}:${port}/api/vht` , {data})
     },
     userInfo:{
-        getUserInfoById:data=> axios.get(`http://${host}:${port}/api/user-information/${data.userId}`),
+        getUserInfoById:data=> axios.get(`http://${host}:${port}/api/user-information/${data}`),
+        getAllUserInfo:data=> axios.get(`http://${host}:${port}/api/user-information`),
         createUserInformation:data=> axios.post(`http://${host}:${port}/api/user-information` , {data}),
     },
     patient: {
@@ -48,6 +49,7 @@ export default {
     },
     reading:{
         addAReferral:data=> axios.post(`http://${host}:${port}/api/readings` , {data}),
+        addAReading: data => axios.post(`http://${host}:${port}/api/readings`, data),
         getReadingForPat:data=> axios.post(`http://${host}:${port}/api/patients/patientId=${data.patientId}/readings?latest=${data.latest}`),
 
         uploadReading: data =>axios.post(`http://${host}:${port}/api/readings` , {}).then(res => console.log(res)),

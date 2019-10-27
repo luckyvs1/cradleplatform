@@ -4,29 +4,28 @@
  *  Help with easier fetching data from api
  */
 
-import {USER_LOGGED_OUT} from "../types";
 
 const initState = {
     //holds the data loging info? user info
-    userid:{userid:''}
+    data:[
+        {patientId:''}
+    ]
 }
 
-const user = (state = initState, action ) => {
-    switch ("USER_LOOGED_IN") {
-        case "USER_LOOGED_IN":
-            let newId = action.id
-            // alter data
+const followUp = (state = initState, action ) => {
+    switch (action.type) {
+        case "patientFollowUp":
+            let data = action
             return {
                 //spread the states in case of having multiple things inside of initState
                 ...state,
 
-                // override the data you want
-                userid: newId
+                data: data.data
             };
-        case USER_LOGGED_OUT:
-            return {};
+
+
         default:
             return state;
     }
 }
-export default user;
+export default followUp;

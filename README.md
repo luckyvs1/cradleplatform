@@ -48,6 +48,8 @@ It will be able to communicate with the current Cradle Capture App in order to s
               |   |   └──org.cradlePlatform
               |   |              ├──controller   # All controller classes
               |   |              └──model        # All model classes
+              |   |              └──repository   # All repository classes
+              |   |              └──service      # All service classes
               |   └──resources           # SQL/database files (schema,...)
               └──test                    # Contains all unit test files
 
