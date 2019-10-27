@@ -21,9 +21,7 @@ import {
 } from 'react-bootstrap';
 import InlineError from "../messages/InlineError";
 import api from "../../api"
-import {
-    withRouter
-} from "react-router-dom";
+import {withRouter} from "react-router-dom";
 
 class AddUsersForm extends React.Component {
     constructor(props){
