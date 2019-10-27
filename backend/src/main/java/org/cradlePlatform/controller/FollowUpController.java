@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Optional;
 
 
-@CrossOrigin(origins = {"http://localhost:3000"})
+@CrossOrigin(origins = {"http://cmpt373.csil.sfu.ca:8084"})
 @RestController
 public class FollowUpController {
     @Autowired
