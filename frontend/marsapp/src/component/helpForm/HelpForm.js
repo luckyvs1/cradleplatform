@@ -6,14 +6,7 @@
 
 import React from "react";
 import TopNavigation from "../navigation/TopNavigation";
-import {
-    Container,
-    Row,
-    Col,
-    Tab,
-    Tabs,
-    Table
-} from 'react-bootstrap';
+import {Col, Container, Row, Tab, Table, Tabs} from 'react-bootstrap';
 
 class HelpForm extends React.Component {
 

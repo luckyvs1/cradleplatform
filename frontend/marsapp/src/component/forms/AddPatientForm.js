@@ -5,15 +5,9 @@
  */
 
 import React from "react";
-import { Link } from "react-router-dom";
+import {Link} from "react-router-dom";
 import TopNavigation from "../navigation/TopNavigation";
-import {
-    Container,
-    Row,
-    Col,
-    Button,
-    Form
-} from 'react-bootstrap';
+import {Button, Col, Container, Form, Row} from 'react-bootstrap';
 
 class AddPatientForm extends React.Component {
     // funcitons

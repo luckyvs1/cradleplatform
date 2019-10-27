@@ -9,15 +9,7 @@ import Tabs from "react-bootstrap/Tabs";
 import Tab from "react-bootstrap/Tab";
 import {Link} from "react-router-dom";
 import TopNavigation from "../navigation/TopNavigation";
-import {
-    Container,
-    Row,
-    Col,
-    Button,
-    Form,
-    Table
-} from 'react-bootstrap';
-import {withRouter} from "react-router-dom";
+import {Button, Col, Container, Form, Row, Table} from 'react-bootstrap';
 
 const statusGreen = {
     backgroundColor: "green"
@@ -31,21 +23,11 @@ const statusRed = {
     backgroundColor: "red"
 };
 
-class PatientDetailForm extends React.Component {
+export default class PatientDetailForm extends React.Component {
     // functions
     // states
     // submit
     // validate
-
-    constructor(props) {
-        super(props);
-        console.dir("props");
-        console.dir(props);
-        this.state = {
-            pid: this.props.location.state.pid,
-            initial: this.props.location.state.initial
-        }
-    }
 
     render() {
         return (
@@ -62,8 +44,8 @@ class PatientDetailForm extends React.Component {
                         <Col md={2}>
                             <strong>Patient ID:</strong>
                         </Col>
-                        <Col md={4}>
-                            {this.state.pid}
+                        <Col md={4}>                            
+                            0123456
                         </Col>
                     </Row>
                     <Row>
@@ -71,7 +53,7 @@ class PatientDetailForm extends React.Component {
                             <strong>Initials:</strong>
                         </Col>
                         <Col md={4}>
-                            {this.state.initial}
+                            AS
                         </Col>
                     </Row>
                     <Row>
@@ -272,5 +254,3 @@ class PatientDetailForm extends React.Component {
         );
     }
 }
-
-export default withRouter(PatientDetailForm);

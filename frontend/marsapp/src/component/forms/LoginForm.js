@@ -6,14 +6,8 @@
 
 import React from "react";
 import PropTypes from "prop-types";
-import Validator from "validator";
 import InlineError from "../messages/InlineError";
-import {
-    Row,
-    Col,
-    Form,
-    Button
-} from 'react-bootstrap';
+import {Button, Col, Form, Row} from 'react-bootstrap';
 import "../../App.css"
 
 class LoginForm extends React.Component {

@@ -4,25 +4,24 @@
  *  Help with easier fetching data from api
  */
 
-import { USER_LOGGED_IN, USER_LOGGED_OUT } from "../types";
+import {USER_LOGGED_OUT} from "../types";
 
 const initState = {
     //holds the data loging info? user info
-    posts:[{userid:null}]
+    userid:{userid:''}
 }
 
-export default function user(state = initState, action = {}) {
-    switch (action.type) {
-        case USER_LOGGED_IN:
+const user = (state = initState, action ) => {
+    switch ("USER_LOOGED_IN") {
+        case "USER_LOOGED_IN":
             let newId = action.id
             // alter data
-            console.log("USER LOGGED IN" , newId)
             return {
                 //spread the states in case of having multiple things inside of initState
                 ...state,
 
                 // override the data you want
-                posts: newId
+                userid: newId
             };
         case USER_LOGGED_OUT:
             return {};
@@ -30,3 +29,4 @@ export default function user(state = initState, action = {}) {
             return state;
     }
 }
+export default user;

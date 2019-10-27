@@ -6,49 +6,65 @@
 
 import React from "react";
 import TopNavigation from "../navigation/TopNavigation";
-import {
-    Container,
-    Row,
-    Col,
-    Button,
-    Form
-} from 'react-bootstrap';
+import {Col, Container, Form, Row,} from 'react-bootstrap';
+import PropTypes from "prop-types";
 import api from "../../api"
-import PropTypes from 'prop-types';
+import {connect} from "react-redux";
+import DialogCreateAccount from "../utils/dialogCreateAccount"
+
 
 class AccountForm extends React.Component {
 
-    constructor (props) {
+    constructor(props) {
         super(props)
-        this.state={
-            data:{
-                id:"1",
-                at_a_station_no:"1",
-                first_name:"potatoe",
-                last_name:"Potatata",
-                dob:"2019-10-10",
-                country:"Uganda",
-                phone:"604-440-2037",
-                email:"pp@gmail.com",
-                role:"admin",
-            }
+        this.state = {
+            data: {
+                id: "",
+                firstName: "",
+                lastName: "",
+                dateOfBirth: "",
+                country: "",
+                phoneNumber: "",
+                role: "",
+            },
+            username: ""
         }
         this.handleChange = this.handleChange.bind(this);
     }
 
     componentDidMount() {
-        api.userInfo.getUserInfoById({userId:1}).then(res => {
-            console.log("user info" , res);
+        let loggedInUser = localStorage.getItem('loginUserId')
+        if (!loggedInUser) {
+            //in case no idea has been added to browser storage hot fix for now
+            loggedInUser = 1;
+        }
+
+        api.userInfo.getUserInfoById(loggedInUser).then(res => {
+            let data = res.data;
+            this.setState({data})
+        })
+        api.user.getUserById(loggedInUser).then(user => {
+            this.setState({username: user.data.username})
         })
     }
 
     handleChange(event) {
-        console.log(event)
-        this.setState({data: event.target.value});
+        this.setState({
+            data: {...this.state.data, [event.target.name]: event.target.value}
+        });
     }
 
+    submit = event => {
+        if (event) {
+            this.props.submit(event)
+        }
+    };
+
+
     render() {
-        console.log(this.state.data)
+        console.log(this.props)
+
+
         return (
             <div>
                 <TopNavigation authenticated={true}></TopNavigation>
@@ -69,8 +85,8 @@ class AccountForm extends React.Component {
                                         id="username"
                                         name="username"
                                         placeholder="Username"
+                                        value={this.state.username}
                                         onChange={this.handleChange}
-
                                     />
                                     {/*error handling*/}
                                     {/* <Form.Text className="text-muted">
@@ -85,10 +101,10 @@ class AccountForm extends React.Component {
                                     <Form.Label>First Name</Form.Label>
                                     <Form.Control
                                         type="text"
-                                        id="last_name"
-                                        name="last_name"
+                                        id="firstName"
+                                        name="firstName"
                                         placeholder="First Name"
-                                        value={this.state.data.first_name}
+                                        value={this.state.data.firstName}
                                         onChange={this.handleChange}
                                     />
                                     {/*error handling*/}
@@ -102,10 +118,10 @@ class AccountForm extends React.Component {
                                     <Form.Label>Last Name</Form.Label>
                                     <Form.Control
                                         type="text"
-                                        id="last_name"
-                                        name="last_name"
+                                        id="lastName"
+                                        name="lastName"
                                         placeholder="Last Name"
-                                        value={this.state.data.last_name}
+                                        value={this.state.data.lastName}
                                         onChange={this.handleChange}
 
                                     />
@@ -119,31 +135,13 @@ class AccountForm extends React.Component {
                         <Row>
                             <Col>
                                 <Form.Group>
-                                    <Form.Label>Email</Form.Label>
-                                    <Form.Control
-                                        type="email"
-                                        id="email"
-                                        name="email"
-                                        placeholder="Email Addresss"
-                                        value={this.state.data.email}
-                                        onChange={this.handleChange}
-
-                                    />
-                                    {/*error handling*/}
-                                    {/* <Form.Text className="text-muted">
-                                        {errors.email && <InlineError text={errors.email} />}
-                                    </Form.Text> */}
-                                </Form.Group>
-                            </Col>
-                            <Col>
-                                <Form.Group>
                                     <Form.Label>Phone Number</Form.Label>
                                     <Form.Control
                                         type="text"
-                                        id="phone"
-                                        name="phone"
+                                        id="phoneNumber"
+                                        name="phoneNumber"
                                         placeholder="Phone Number"
-                                        value={this.state.data.phone}
+                                        value={this.state.data.phoneNumber}
                                         onChange={this.handleChange}
 
                                     />
@@ -174,40 +172,35 @@ class AccountForm extends React.Component {
                                     </Form.Text> */}
                                 </Form.Group>
                             </Col>
-                            <Col>
-                                <Form.Group>
-                                    <Form.Label>At a station number</Form.Label>
-                                    <Form.Control
-                                        type="text"
-                                        id="at_station_number"
-                                        name="at_station_number"
-                                        placeholder="At a station number"
-                                        value={this.state.data.at_a_station_no}
-                                        onChange={this.handleChange}
-                                    />
-                                    {/*error handling*/}
-                                    {/* <Form.Text className="text-muted">
-                                        {errors.email && <InlineError text={errors.email} />}
-                                    </Form.Text> */}
-                                </Form.Group>
-                            </Col>
+
                         </Row>
                         <Row>
-                            <Col>
-                                <Button variant="success" s>
-                                    Create
-                                </Button>
+                            <Col className={"text-right"}>
+                                <DialogCreateAccount></DialogCreateAccount>
                             </Col>
                         </Row>
                     </Form>
                 </Container>
             </div>
         );
+
     }
 }
+
+const mapStateToProps = (state) => {
+    return {
+        posts: state.user
+    }
+}
+const mapDispatchToProps = (dispatch) => {
+    return {
+        // function name
+    }
+}
+
 
 AccountForm.propTypes = {
     submit: PropTypes.func.isRequired
 }
 
-export default AccountForm;
+export default connect(mapStateToProps, mapDispatchToProps)(AccountForm);

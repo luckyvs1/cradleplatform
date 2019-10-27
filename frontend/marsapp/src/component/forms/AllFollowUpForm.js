@@ -22,23 +22,6 @@ import api from "../../api"
 class AllFollowUpForm extends React.Component {
 
 
-    useStyles = makeStyles(theme => ({
-        root: {
-            width: '100%',
-            marginTop: theme.spacing(2),
-        },
-        table: {
-            minWidth: 650,
-        },
-        tableWrapper: {
-            overflowX: 'auto',
-        },
-        uiHeader: {
-            textAlign: 'center',
-        }
-
-    }));
-
     constructor(props) {
         super(props);
         this.state = {
@@ -48,7 +31,7 @@ class AllFollowUpForm extends React.Component {
                 frequency: "",
                 id: null,
                 patientId: "",
-                required: true,
+                required: null,
                 treatment: "",
             }],
         };
@@ -56,12 +39,12 @@ class AllFollowUpForm extends React.Component {
 
     componentDidMount() {
         api.followUp.getAllFollowUps(null).then(res => {
-            console.log("All follow up", res);
+            const data = res.data;
+            this.setState({data})
         })
     }
 
     submit = event => {
-        console.log("data to be sent", event);
         if (event) {
             this.props.updatePatientFollowUp(event);
             this.props.submit(event)
@@ -116,19 +99,16 @@ class AllFollowUpForm extends React.Component {
 
 const mapStateToProps = (state, ownProps) => {
     return {
-        posts:state.posts
+        userid: state.data
     }
 };
-
 const mapDispatchToProps = (dispatch) => {
     return {
-        // function name
         updatePatientFollowUp: (data) => {
             dispatch({type: "patientFollowUp", data: data})
         }
     }
 };
-
 AllFollowUpForm.propTypes = {
     submit: PropTypes.func.isRequired
 };

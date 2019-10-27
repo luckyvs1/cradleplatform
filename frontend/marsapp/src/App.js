@@ -13,6 +13,7 @@ import SignupPage from "./component/pages/SignupPage";
 import ForgotPasswordPage from "./component/pages/ForgotPasswordPage";
 import ResetPasswordPage from "./component/pages/ResetPasswordPage";
 import {UserRoute} from "./component/routes/UserRoute";
+import {AdminRoute} from "./component/routes/AdminRoute";
 import TopNavigation from "./component/navigation/TopNavigation";
 import PatientDetail from "./component/pages/patients/PatientDetail";
 import './App.css';

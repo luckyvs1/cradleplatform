@@ -16,18 +16,11 @@ const followUp = (state = initState, action ) => {
     switch (action.type) {
         case "patientFollowUp":
             let data = action
-            // alter data
-            console.log("reducer" , action)
-
-            console.log("patient follow up" , data.data)
-            console.log("patient follow up" , state.posts)
-
             return {
                 //spread the states in case of having multiple things inside of initState
                 ...state,
 
-                // override the data you want
-                posts: data.data
+                data: data.data
             };
 
 
