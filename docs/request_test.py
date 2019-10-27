@@ -20,6 +20,7 @@ medurl = 'http://localhost:8080/api/medications?drugHistoryId=1'
 fuurl = 'http://localhost:8080/api/followUps'
 readingurl = "http://localhost:8080/api/readings"
 hcrefurl = "http://localhost:8080/api/health-centre/healthfacility21/referrals"
+medbypatienturl = "http://localhost:8080/api/patients/1/medications"
 mhdata = {
     "patientId": "1",
     "medicalHistoryText": "gfhgfhfghffssss",
@@ -45,7 +46,7 @@ patdata = {
 }
 meddata = {
     "drugHistoryId": "1",
-    "drugName": "cannabis",
+    "drugName": "tylenol",
     "dosage": "once a day as needed",
     "startDate": "2019-09-26",
     "endDate": "2019-09-30"
@@ -148,11 +149,12 @@ readingdata =  {
 # resp = requests.get(hwurl, data=json.dumps(hwdata), headers=header)
 # resp = requests.get(mhurl, data=json.dumps(mhdata), headers=header)
 # resp = requests.get(paturl, data=json.dumps(dhdata), headers=header)
-#resp = requests.get(medurl, headers=header)
+# resp = requests.post(medurl, data=json.dumps(meddata), headers=header)
 # resp = requests.post(paturl, data=json.dumps(patdata), headers=header)
 # resp = requests.get(fuurl, data=json.dumps(fudata), headers=header)
 # resp = requests.post(readingurl, data=json.dumps(readingdata), headers=header)
-resp = requests.get(hcrefurl, headers=header)
+# resp = requests.get(hcrefurl, headers=header)
+resp = requests.get(medbypatienturl, headers=header)
 
 print(resp)
 print(resp.status_code)
