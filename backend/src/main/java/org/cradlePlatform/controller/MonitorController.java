@@ -5,7 +5,7 @@ import org.cradlePlatform.repository.MonitorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-@CrossOrigin(origins = {"http://cmpt373.csil.sfu.ca:8084"})
+@CrossOrigin(origins = {"http://cmpt373.csil.sfu.ca:8044"})
 @RestController
 public class MonitorController {
     @Autowired
