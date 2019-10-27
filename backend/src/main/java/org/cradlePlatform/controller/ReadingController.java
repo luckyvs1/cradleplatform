@@ -23,35 +23,9 @@ public class ReadingController {
 
     @PostMapping(path="/api/readings")
     @ResponseStatus(code = HttpStatus.CREATED)
-    public String addReadings(@RequestBody ReadingUploadWrapper readings){
-        for (Reading reading : readings.getReadings()) {
-            Reading newReading = new Reading();
-            newReading.setReaderId(reading.getReaderId());
-            newReading.setPatientId(reading.getPatientId());
-            newReading.setTimestamp(reading.getTimestamp());
-            newReading.setSymptoms(reading.getSymptoms());
-            newReading.setOtherSymptoms(reading.getOtherSymptoms());
-            newReading.setSystolicBloodPressure(reading.getSystolicBloodPressure());
-            newReading.setDiastolicBloodPressure(reading.getDiastolicBloodPressure());
-            newReading.setPulseRate(reading.getPulseRate());
-            newReading.setNotes(reading.getNotes());
-            newReading.setNeedFollowUp(reading.getNeedFollowUp());
-            newReading.setAppVersion(reading.getAppVersion());
-            newReading.setDateLastSaved(reading.getDateLastSaved());
-            newReading.setRecheckVitalsDate(reading.getRecheckVitalsDate());
-            newReading.setDeviceInformation(reading.getDeviceInformation());
-            newReading.setGestationalAgeTimeUnit(reading.getGestationalAgeTimeUnit());
-            newReading.setGestationalAge(reading.getGestationalAge());
-            newReading.setManuallyChangedOcrResults(reading.getManuallyChangedOcrResults());
-            newReading.setPhotoPath(reading.getPhotoPath());
-            newReading.setTotalOcrSeconds(reading.getTotalOcrSeconds());
-            newReading.setRegion(reading.getRegion());
-            newReading.setOcrEnabled(reading.getOcrEnabled());
-            newReading.setUploadImages(reading.getUploadImages());
-            newReading.setVitalsTrafficLight(reading.getVitalsTrafficLight());
+    public String addReadings(@RequestBody Reading reading){
 
-            readingRepository.save(newReading);
-        }
+        readingRepository.save(reading);
 
         return "Saved Reading";
     }

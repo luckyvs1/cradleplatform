@@ -5,7 +5,7 @@
 CREATE TABLE User (
     id          VARCHAR (32)    NOT NULL,
     username    VARCHAR (16)    NOT NULL,
-    password    VARCHAR (32)    NOT NULL,
+    password    VARCHAR (60)    NOT NULL,
     UNIQUE (username),
     PRIMARY KEY (id)
 );
@@ -265,7 +265,7 @@ insert into FollowUp values (1,
                              "Take medicine as prescribed");
 
 insert into Referral values (1, "1", 1, 1, "2019-01-01", "healthfacility1", "notes", "notes2");
-insert into Drug_History values (1, "1", "history stuff");
+insert into Drug_History values (1, 1, "history stuff");
 insert into Medication values (1, 1, "Advil", "15mg per day", "2019-10-23", "2019-10-24");
-insert into Medical_History values (1, "1", "my medical history");
+insert into Medical_History values (1, 1, "my medical history");
 insert into Monitor values ("1", 1);
