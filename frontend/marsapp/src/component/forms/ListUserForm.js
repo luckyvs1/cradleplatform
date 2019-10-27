@@ -50,7 +50,7 @@ class ListUserForm extends React.Component {
                             <h1>All Users</h1>
                         </Col>
                         <Col className="text-right">
-                            <Button variant="primary" size="sm" as={Link} to="account">
+                            <Button variant="primary" size="sm" as={Link} to="addUser">
                                 Add User
                             </Button>
                         </Col>

@@ -29,6 +29,7 @@ import Account from "./component/pages/users/Account";
 import AllFollowUp from "./component/pages/followUp/AllFollowUp";
 import FollowUpDetail from "./component/pages/followUp/FollowUpDetail";
 import ListUser from "./component/pages/users/ListUser"
+import AddUsers from "./component/pages/users/AddUsers"
 
 const App = ({location, isAuthenticated}) => (
 
@@ -138,6 +139,12 @@ const App = ({location, isAuthenticated}) => (
             path="/listUser"
             exact
             component={ListUser}
+        />
+        <UserRoute
+            location={location}
+            path="/addUser"
+            exact
+            component={AddUsers}
         />
     </div>
 );

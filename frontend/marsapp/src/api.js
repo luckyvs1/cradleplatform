@@ -20,7 +20,7 @@ export default {
         login: credential => axios.get(`http://${host}:${port}/api/login?username=${credential.username}&password=${credential.password}`, {credential}),
         getAllUsers:data=> axios.get(`http://${host}:${port}/api/users/`),
         getUserById:data=> axios.get(`http://${host}:${port}/api/users/${data}`),
-        createUser:(username , password) => axios.post(`http://${host}:${port}/api/users`, {username, password}),
+        createUser:(data, header) => axios.post(`http://${host}:${port}/api/users/`, data, header)
     },
     vht:{
         getAllVHT: data => axios.get(`http://${host}:${port}/api/vht`),
@@ -30,7 +30,7 @@ export default {
     userInfo:{
         getUserInfoById:data=> axios.get(`http://${host}:${port}/api/user-information/${data}`),
         getAllUserInfo:data=> axios.get(`http://${host}:${port}/api/user-information`),
-        createUserInformation:data=> axios.post(`http://${host}:${port}/api/user-information` , {data}),
+        createUserInfo:(data, header) => axios.post(`http://${host}:${port}/api/user-information/`, data, header)
     },
     patient: {
         getAllPatients: data => axios.get(`http://${host}:${port}/api/patients`),
