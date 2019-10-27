@@ -15,10 +15,6 @@ class AddPatient extends React.Component {
         //The reason that I copy each data field into the formattedData was because I couldn't format the dates (dob and gestationalStartDate)
         //into SQL DATE format directly without crashing the app. Will try to figure this out for the next iteration (refactoring)
         var formattedData = {
-           headers:{
-            'Accept': "application/json",
-            'Content-Type': "application/json"
-           },
            attestationNo : data.attestationNo,
            firstName: data.firstName,
            lastName: data.lastName,

@@ -35,7 +35,11 @@ export default {
         getAllPatients: data => axios.get(`http://${host}:${port}/api/patients`),
         getPatientById :data =>  axios.get(`http://${host}:${port}/api/patients/${data.id}`),
         getPatientsForVHT :data =>  axios.get(`http://${host}:${port}/api/vht/${data.vhtId}/patients`),
-        createPatient :data =>  axios.post(`http://${host}:${port}/api/patients` , data),
+        createPatient :data =>  axios.post(`http://${host}:${port}/api/patients` , data,
+            {
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8'
+            }}),
     },
     drug:{
         getAllDrugHistory:data=> axios.get(`http://${host}:${port}/api/drugHistories` , {data}),
