@@ -5,9 +5,8 @@
 
 import axios from "axios/dist/axios"
 
-const host = "localhost";
-const port = "8080";
-
+const host = "cmpt373.csil.sfu.ca";
+const port = "8084";
 export default {
     admin:{
         getAdminById: data => {
