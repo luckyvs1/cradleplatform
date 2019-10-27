@@ -12,7 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
-@CrossOrigin(origins = {"http://localhost:3000"})
+@CrossOrigin(origins = {"http://cmpt373.csil.sfu.ca:8044"})
 @RestController
 public class HealthWorkerController {
     @Autowired
