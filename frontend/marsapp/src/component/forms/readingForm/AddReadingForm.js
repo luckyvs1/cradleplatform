@@ -240,10 +240,14 @@ class AddReadingForm extends React.Component {
                             <Col md={4}>
                                 <Form.Group>
                                     <Form.Label>Gestational Age Unit</Form.Label>
-                                    <Form.Control as="select">
-                                        <option value={'Weeks'}>Weeks</option>
-                                        <option value={'Months'}>Months</option>
-                                        <option value={'None'}>None</option>
+                                    <Form.Control as="select"
+                                        name="gestationalAgeTimeUnit"
+                                        id="gestationalAgeTimeUnit"
+                                        onChange={this.onChange}
+                                        value={data.gestationalAgeTimeUnit}>
+                                        <option value={'weeks'}>Weeks</option>
+                                        <option value={'months'}>Months</option>
+                                        <option value={'none'}>None</option>
                                     </Form.Control>
                                     {/* enable his for error handling */}
                                     {/* <Form.Text className="text-muted">
@@ -270,7 +274,23 @@ class AddReadingForm extends React.Component {
                         </Row>
                         <Row className="mb-2">
                             <Col>
-                                <Form.Label>Symptoms</Form.Label><br></br>
+                            <Form.Group>
+                                <Form.Label>Symptoms</Form.Label>
+                                <Form.Control as="select"
+                                    name="symptoms"
+                                    id="symptoms"
+                                    onChange={this.onChange}
+                                    value={data.symptoms}>
+                                    <option value={'No Symptoms'}>No Sympotoms</option>
+                                    <option value={'Headache'}>Headache</option>
+                                    <option value={'Bleeding'}>Bleeding</option>
+                                    <option value={'Blurred Vision'}>Blurred Vision</option>
+                                    <option value={'Feverish'}>Feverish</option>
+                                    <option value={'Abdominal pain'}>Abdominal Pain</option>
+                                    <option value={'Unwell'}>Unwell</option>
+                                </Form.Control>
+                            </Form.Group>
+                            {/*  <Form.Label>Symptoms</Form.Label><br></br>
                                 <Button variant="outline-primary" size="sm">No Symptoms</Button>&nbsp;
                                 <Button variant="outline-primary" size="sm">Headache</Button>&nbsp;
                                 <Button variant="outline-primary" size="sm">Bleeding</Button>&nbsp;
@@ -278,6 +298,7 @@ class AddReadingForm extends React.Component {
                                 <Button variant="outline-primary" size="sm">Feverish</Button>&nbsp;
                                 <Button variant="outline-primary" size="sm">Adbdominal pain</Button>&nbsp;
                                 <Button variant="outline-primary" size="sm">Unwell</Button>&nbsp;
+                            */}
                             </Col>
                         </Row>
                         <Row>
