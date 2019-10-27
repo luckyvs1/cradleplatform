@@ -22,7 +22,7 @@ public class UserController {
     private UserService userService;
 
     // GET mappings
-    @GetMapping(path="/api/users/")
+    @GetMapping(path="/api/users")
     public @ResponseBody Iterable<User> getAllUser() {
         return userRepository.findAll();
     }
