@@ -5,7 +5,7 @@
  */
 
 import React from "react";
-import TopNavigation from "../../navigation/TopNavigation";
+import TopNavigation from "../navigation/TopNavigation";
 import {
     Row,
     Col,
@@ -13,7 +13,7 @@ import {
     Button,
     Container
 } from 'react-bootstrap';
-import api from "../../../api"
+import api from "../../api"
 
 class FollowUpDetailForm extends React.Component {
     // funcitons

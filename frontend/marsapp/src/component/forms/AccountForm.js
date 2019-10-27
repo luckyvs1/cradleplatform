@@ -5,7 +5,7 @@
  */
 
 import React from "react";
-import TopNavigation from "../../navigation/TopNavigation";
+import TopNavigation from "../navigation/TopNavigation";
 import {
     Container,
     Row,
@@ -13,7 +13,8 @@ import {
     Button,
     Form
 } from 'react-bootstrap';
-import api from "../../../api"
+import api from "../../api"
+import PropTypes from 'prop-types';
 
 class AccountForm extends React.Component {
 

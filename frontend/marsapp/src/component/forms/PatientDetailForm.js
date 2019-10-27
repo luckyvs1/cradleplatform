@@ -8,7 +8,7 @@ import React from "react";
 import Tabs from "react-bootstrap/Tabs";
 import Tab from "react-bootstrap/Tab";
 import {Link} from "react-router-dom";
-import TopNavigation from "../../navigation/TopNavigation";
+import TopNavigation from "../navigation/TopNavigation";
 import {
     Container,
     Row,

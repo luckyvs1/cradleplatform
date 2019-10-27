@@ -7,7 +7,7 @@
 import React from "react";
 import {makeStyles} from "@material-ui/core";
 import {Link} from "react-router-dom";
-import TopNavigation from "../../navigation/TopNavigation";
+import TopNavigation from "../navigation/TopNavigation";
 import PropTypes from "prop-types";
 import {
     Container,
@@ -16,7 +16,7 @@ import {
     Table
 } from 'react-bootstrap';
 import {connect} from "react-redux";
-import api from "../../../api"
+import api from "../../api"
 
 
 class AllFollowUpForm extends React.Component {

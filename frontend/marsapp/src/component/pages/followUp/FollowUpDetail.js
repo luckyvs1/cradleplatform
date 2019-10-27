@@ -7,7 +7,7 @@
 
 import React from "react";
 import {connect} from "react-redux";
-import FollowUpDetailForm from "../../forms/followUpForm/FollowUpDetailForm";
+import FollowUpDetailForm from "../../forms/FollowUpDetailForm";
 
 class FollowUpDetail extends React.Component {
 

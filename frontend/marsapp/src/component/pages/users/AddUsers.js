@@ -6,9 +6,9 @@
 
 import React from "react";
 import {connect} from "react-redux";
-import AllFollowUpForm from "../../forms/followUpForm/AllFollowUpForm";
-import ReferralDetailForm from "../../forms/referralForm/ReferralDetailForm";
-import AddUsersForm from "../../forms/userForm/AddUsersForm";
+import AllFollowUpForm from "../../forms/AllFollowUpForm";
+import ReferralDetailForm from "../../forms/ReferralDetailForm";
+import AddUsersForm from "../../forms/AddUsersForm";
 
 class AddUsers extends React.Component {
 

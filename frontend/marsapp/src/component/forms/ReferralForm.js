@@ -16,14 +16,14 @@ import {
     Link,
     withRouter
 } from "react-router-dom";
-import TopNavigation from "../../navigation/TopNavigation";
+import TopNavigation from "../navigation/TopNavigation";
 import {
     Container,
     Row,
     Col,
     Button
 } from 'react-bootstrap';
-import api from "../../../api"
+import api from "../../api"
 
 class ReferralForm extends React.Component {
     state = {activeItem: 'bio'};

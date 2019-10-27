@@ -6,7 +6,7 @@
 
 import React from "react";
 import { Link } from "react-router-dom";
-import TopNavigation from "../../navigation/TopNavigation";
+import TopNavigation from "../navigation/TopNavigation";
 import {
     Container,
     Row,
@@ -17,16 +17,87 @@ import {
     Dropdown,
     ButtonGroup
 } from 'react-bootstrap';
-import api from "../../../api"
+import api from "../../api"
+import _ from "lodash";
 
 
 class ListUserForm extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            isLoading: false,
+            data: [],
+            filteredData: [],
+            searchValue: ''
+        };
+
+        this.searchInput = React.createRef();
+    }
 
     componentDidMount() {
-        api.user.getAllUsers(null).then(res => {
-            console.log("all user info" , res);
-        })
+        this.setState({
+            isLoading: false,
+            filteredData: this.state.data,
+            searchValue: ''
+        });
+
+        api.patient.getAllPatients(null).then(async res => {
+            // fetching all follow up
+            const data = res.data;
+            let newState = [];
+
+            for (let i = 0; i < data.length; i++) {
+                let row = {
+                    pid: data[i].id,
+                    initial: data[i].initials
+                };
+                newState.push(row);
+            }
+            this.setState({
+                data: newState,
+                filteredData: newState,
+            });
+        });
+
+        this.setState({
+            isLoading: false,
+            searchValue: ''
+        });
     }
+
+    handleSearchChange = () => {
+        this.setState({
+            isLoading: true,
+            searchValue: this.searchInput.current.value
+        });
+
+        setTimeout(() => {
+            console.log(this.state);
+
+            if (this.state.searchValue.length < 1) {
+                return this.setState({
+                    isLoading: false,
+                    searchValue: '',
+                    filteredData: this.state.data
+                });
+            }
+
+            const rows = this.state.data;
+            const re = new RegExp(_.escapeRegExp(this.state.searchValue), 'i');
+            const matchFirstName = (result) => re.test(result.firstName);
+            const matchLastName = (result) => re.test(result.lastName);
+            const matchEmail = (result) => re.test(result.email);
+            const dataFirstName = _.filter(rows, matchFirstName);
+            const dataLastName = _.filter(rows, matchLastName);
+            const dataEmail = _.filter(rows, matchEmail);
+
+            this.setState({
+                isLoading: false,
+                filteredData: _.merge(dataFirstName, dataLastName, dataEmail)
+            });
+        }, 300);
+    };
+
     render() {
         return (
             <div>

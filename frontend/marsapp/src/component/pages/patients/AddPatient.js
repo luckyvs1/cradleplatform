@@ -7,7 +7,7 @@
 
 import React from "react";
 import {connect} from "react-redux";
-import AddPatientForm from "../../forms/patientForm/AddPatientForm";
+import AddPatientForm from "../../forms/AddPatientForm";
 
 class AddPatient extends React.Component {
 

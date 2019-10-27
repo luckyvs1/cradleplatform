@@ -7,7 +7,7 @@
 
 import React from "react";
 import {connect} from "react-redux";
-import HelpForm from "../../forms/helpForm/HelpForm";
+import HelpForm from "../../helpForm/HelpForm";
 
 class Help extends React.Component {
 

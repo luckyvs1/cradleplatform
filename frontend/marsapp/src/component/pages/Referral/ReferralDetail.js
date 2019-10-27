@@ -6,7 +6,7 @@
 
 import React from "react";
 import {connect} from "react-redux";
-import ReferralDetailForm from "../../forms/referralForm/ReferralDetailForm";
+import ReferralDetailForm from "../../forms/ReferralDetailForm";
 
 class ReferralDetail extends React.Component {
 

@@ -6,7 +6,7 @@
 
 import React from "react";
 import {Link} from "react-router-dom";
-import TopNavigation from "../../navigation/TopNavigation";
+import TopNavigation from "../navigation/TopNavigation";
 import {
     Container,
     Row,
@@ -18,7 +18,7 @@ import {
 } from 'react-bootstrap';
 import {withRouter} from "react-router-dom";
 import _ from 'lodash';
-import api from "../../../api";
+import api from "../../api";
 
 class ListPatientForm extends React.Component {
     // functions
@@ -39,9 +39,6 @@ class ListPatientForm extends React.Component {
     }
 
     componentDidMount() {
-        // TODO: Use api to get data.
-        // TODO: Store all api data in 'row'
-        // Temporary:
         this.setState({
             isLoading: false,
             filteredData: this.state.data,

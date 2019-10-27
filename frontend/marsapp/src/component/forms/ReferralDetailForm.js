@@ -5,7 +5,7 @@
  */
 
 import React from "react";
-import TopNavigation from "../../navigation/TopNavigation";
+import TopNavigation from "../navigation/TopNavigation";
 import {
     Row,
     Col,
@@ -15,7 +15,7 @@ import {
     Tabs,
     Tab
 } from 'react-bootstrap';
-import api from "../../../api"
+import api from "../../api"
 import {withRouter} from "react-router-dom";
 
 class ReferralDetailForm extends React.Component {
