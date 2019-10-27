@@ -9,15 +9,7 @@
 import React from "react";
 import Tabs from "react-bootstrap/Tabs";
 import Tab from "react-bootstrap/Tab";
-import {
-    Button,
-    Checkbox,
-    Form,
-    Input,
-    Radio,
-    Select,
-    TextArea,
-} from 'semantic-ui-react'
+import {Checkbox, Form, Input, Select, TextArea,} from 'semantic-ui-react'
 
 
 const options = [

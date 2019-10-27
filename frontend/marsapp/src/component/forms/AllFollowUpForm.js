@@ -8,55 +8,51 @@ import React from "react";
 import {makeStyles} from "@material-ui/core";
 import {Link} from "react-router-dom";
 import TopNavigation from "../navigation/TopNavigation";
+import PropTypes from "prop-types";
 import {
     Container,
     Row,
     Col,
     Table
 } from 'react-bootstrap';
+import {connect} from "react-redux";
 import api from "../../api"
-
-function createData(name, calories, fat, carbs, protein) {
-    return {name, calories, fat, carbs, protein};
-}
-
-const rows = [
-    createData('111555666', 'Alex', 'thomas', 'Once a week', 'Ongoing'),
-    createData('222555444', 'Bob', 'theo', 'Once a month', 'Ongoing'),
-    createData('111222333', 'fanny', 'theresha', 'Once a week', 'Ongoing'),
-    createData('111222888', 'hanny', 'Brian', 'Once a week', 'Ended'),
-    createData('444555666', 'janny', 'Katy', 'Once a week', 'Ended'),
-];
 
 
 class AllFollowUpForm extends React.Component {
 
-    useStyles = makeStyles(theme => ({
-        root: {
-            width: '100%',
-            marginTop: theme.spacing(2),
 
-        },
-        table: {
-            minWidth: 650,
-        },
-        tableWrapper: {
-            overflowX: 'auto',
-        },
-        uiHeader: {
-            textAlign: 'center',
-        }
-
-    }));
+    constructor(props) {
+        super(props);
+        this.state = {
+            data: [{
+                diagnosis: "",
+                followUpNotes: "",
+                frequency: "",
+                id: null,
+                patientId: "",
+                required: null,
+                treatment: "",
+            }],
+        };
+    }
 
     componentDidMount() {
-              api.followUp.getAllFollowUps(null).then(res => {
-            console.log("All follow up", res);
+        api.followUp.getAllFollowUps(null).then(res => {
+            const data = res.data;
+            this.setState({data})
         })
     }
 
+    submit = event => {
+        if (event) {
+            this.props.updatePatientFollowUp(event);
+            this.props.submit(event)
+        }
+    };
 
     render() {
+        const {data} = this.state;
         return (
             <div>
                 <TopNavigation authenticated={true}></TopNavigation>
@@ -71,28 +67,25 @@ class AllFollowUpForm extends React.Component {
                         <Col>
                             <Table bordered hover size="sm">
                                 <thead>
-                                    <tr>
-                                        <th>Patient ID</th>
-                                        <th>Patient Name</th>
-                                        <th>Location</th>
-                                        <th>Status</th>
-                                        <th>Frequency</th>
-                                    </tr>
+                                <tr>
+                                    <th>Patient ID</th>
+                                    <th>Diagnosis</th>
+                                    <th>Follow Up Notes</th>
+                                    <th>Treatment</th>
+                                    <th>Frequency</th>
+                                </tr>
                                 </thead>
                                 <tbody>
-                                    {rows.map(row => (
-                                        <tr key={row.name} component={Link} to={"/followUpDetail"}>
-                                            <th scope="row">
-                                                <Link to="followUpDetail">
-                                                    {row.name}
-                                                </Link>
-                                            </th>
-                                            <td>{row.calories}</td>
-                                            <td>{row.fat}</td>
-                                            <td>{row.protein}</td>
-                                            <td>{row.carbs}</td>
-                                        </tr>
-                                    ))}
+                                {this.state.data.map(row => (
+                                    <tr key={row.id} class='clickable-row'
+                                        onClick={() => this.submit(row.id)}>
+                                        <td> {row.patientId}</td>
+                                        <td>{row.diagnosis}</td>
+                                        <td>{row.followUpNotes}</td>
+                                        <td>{row.treatment}</td>
+                                        <td>{row.frequency}</td>
+                                    </tr>
+                                ))}
                                 </tbody>
                             </Table>
                         </Col>
@@ -103,4 +96,22 @@ class AllFollowUpForm extends React.Component {
     }
 }
 
-export default AllFollowUpForm;
+
+const mapStateToProps = (state, ownProps) => {
+    return {
+        userid: state.data
+    }
+};
+const mapDispatchToProps = (dispatch) => {
+    return {
+        updatePatientFollowUp: (data) => {
+            dispatch({type: "patientFollowUp", data: data})
+        }
+    }
+};
+AllFollowUpForm.propTypes = {
+    submit: PropTypes.func.isRequired
+};
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(AllFollowUpForm);
