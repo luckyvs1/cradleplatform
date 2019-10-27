@@ -20,22 +20,33 @@ class ReferralDetailForm extends React.Component {
         console.dir("props");
         console.dir(props);
         this.state = {
-            rid: this.props.location.state.rid,
+            data: {
+                healthFacility: "",
+                id: 0,
+                notesAction: "",
+                notesReason: "",
+                patientId: 0,
+                readingId: 0,
+                referrerId: "",
+                timestamp: null
+            },
             initials: this.props.location.state.initials
         }
     }
 
     componentDidMount() {
-        console.log("api calling");
-        let data = this.state.rid;
+        let data =  this.props.location.state;
         api.referral.getReferralById(data).then(res => {
-            // fetching all follow up
-            console.log("All referral", res);
+            const data = res.data[0];
+            this.setState({data});
+            console.log("state", this.state);
+
+            // TODO: Get rest of information, such as patient data
         });
     }
 
     render() {
-
+        const {data} = this.state;
         return (
             <div>
                 <TopNavigation authenticated={true}></TopNavigation>
@@ -59,7 +70,7 @@ class ReferralDetailForm extends React.Component {
                                                     type="text"
                                                     id="patient"
                                                     name="patient"
-                                                    value={this.state.rid} />
+                                                    value={data.patientId} />
                                                 {/*error handling*/}
                                                 {/* <Form.Text className="text-muted">
                                                 {errors.email && <InlineError text={errors.email} />}

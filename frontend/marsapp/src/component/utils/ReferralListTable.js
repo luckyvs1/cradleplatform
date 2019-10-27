@@ -42,7 +42,7 @@ class ReferralListTable extends React.Component{
                 const theDate =  new Date(data[i].timestamp).toDateString();
 
                 let row = {
-                    rid: data[i].id,
+                    id: data[i].id,
                     pid: data[i].patientId,
                     pname: thePatient,
                     referrer: theReferrer,
@@ -62,8 +62,8 @@ class ReferralListTable extends React.Component{
         this.props.history.push({
             pathname: '/referralDetail',
             state: {
-                rid: row.rid,
-                initials: row.pname
+                referrerId: row.id,
+                initials: row.pname // TODO, remove later when data is obtained in referralDetails page
             }
         });
     };
@@ -84,7 +84,7 @@ class ReferralListTable extends React.Component{
                     </thead>
                     <tbody>
                         {this.state.data.map(row => (
-                            <tr key={row.pid}  class='clickable-row' onClick={() => this.handleItemClick(row)}>
+                            <tr key={row.id}  class='clickable-row' onClick={() => this.handleItemClick(row)}>
                                 <td>{row.pid}</td>
                                 <td>{row.pname}</td>
                                 <td>{row.referrer}</td>
