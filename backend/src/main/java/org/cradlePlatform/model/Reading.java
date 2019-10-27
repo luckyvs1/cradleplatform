@@ -63,9 +63,8 @@ public class Reading {
 	private Timestamp dateLastSaved;
 
 	@NotNull
-	@JsonFormat(pattern="yyyy-MM-dd")
 	@Column(name = "date_recheck_vitals_needed")
-	private Date recheckVitalsDate;
+	private Timestamp recheckVitalsDate;
 
 	@NotBlank
 	@Size(max = 32)
