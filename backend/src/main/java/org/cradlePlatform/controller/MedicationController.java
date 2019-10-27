@@ -11,7 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 
-@CrossOrigin(origins = { "http://localhost:3000"})
+@CrossOrigin(origins = {"http://localhost:3000"})
 @RestController
 public class MedicationController {
     @Autowired
@@ -22,11 +22,21 @@ public class MedicationController {
     /**
      * Get all Medications associated with a DrugHistory by DrugHistoryId
      * @param drugHistoryId
-     * @return
+     * @return Array of Medications
      */
     @GetMapping(path="/api/medications")
     public Iterable<Medication> getParentDrugHistoryById(@RequestParam int drugHistoryId) {
         return medicationRepository.findByDrugHistoryId(drugHistoryId);
+    }
+
+    /**
+     * Get all Medications associated with a Patient
+     * @param patientId
+     * @return Array of Medications
+     */
+    @GetMapping(path="/api/patients/{patientId}/medications")
+    public Iterable<Medication> getMedicationsByPatient(@PathVariable(value = "patientId") int patientId) {
+        return medicationRepository.findMedicationsByDrugHistoryAndPatientId(patientId);
     }
 
     // POST mappings

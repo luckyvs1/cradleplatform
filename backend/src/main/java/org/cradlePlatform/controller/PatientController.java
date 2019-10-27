@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
-@CrossOrigin(origins = { "http://localhost:3000"})
+@CrossOrigin(origins = {"http://localhost:3000"})
 @RestController
 public class PatientController {
     @Autowired
@@ -66,7 +66,7 @@ public class PatientController {
     @PostMapping(path="/api/patients")
     @ResponseStatus(code = HttpStatus.CREATED)
     public @ResponseBody String addNewPatient (@RequestBody Patient patient){
-        Patient newPatient = new Patient();
+        /*Patient newPatient = new Patient();
         newPatient.setAttestationNo(patient.getAttestationNo());
         newPatient.setFirstName(patient.getFirstName());
         newPatient.setLastName(patient.getLastName());
@@ -84,6 +84,8 @@ public class PatientController {
         newPatient.setGestationAgeUnit(patient.getGestationAgeUnit());
         newPatient.setCurrentGestationalAge(patient.getCurrentGestationalAge());
         patientRepository.save(newPatient);
+         */
+        patientRepository.save(patient);
         return "Saved Patient";
     }
 }
