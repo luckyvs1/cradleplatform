@@ -16,9 +16,9 @@ public class MonitorId implements Serializable {
     @Id
     @NotNull
     @Column(name = "patient_id")
-    private String patientId;
+    private int patientId;
 
-    public MonitorId(String vhtId, String patientId) {
+    public MonitorId(String vhtId, int patientId) {
         this.vhtId = vhtId;
         this.patientId = patientId;
     }
@@ -34,11 +34,11 @@ public class MonitorId implements Serializable {
         this.vhtId = vhtId;
     }
 
-    public String getPatientId() {
+    public int getPatientId() {
         return patientId;
     }
 
-    public void setPatientId(String patientId) {
+    public void setPatientId(int patientId) {
         this.patientId = patientId;
     }
 
