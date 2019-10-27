@@ -14,7 +14,6 @@ public class Monitor{
     private String vhtId;
 
     @Id
-    @NotBlank
     @Column(name = "patient_id")
     private int patientId;
 

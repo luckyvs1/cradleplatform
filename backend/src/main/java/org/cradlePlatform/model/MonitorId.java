@@ -14,7 +14,6 @@ public class MonitorId implements Serializable {
     private String vhtId;
 
     @Id
-    @NotNull
     @Column(name = "patient_id")
     private int patientId;
 
