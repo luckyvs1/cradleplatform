@@ -4,9 +4,6 @@
  *  Contains the contents and functionality of the AddUser page.
  */
 
-// TODO: Determine how to handle UserInfo, as the controllers don't permit uploading it alongside User.
-// TODO: Currently commented out functional aspects
-
 import React from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -32,6 +29,7 @@ class AddUsersForm extends React.Component {
                 password: "",   // required
             },
             userInfoData: {
+                id: "",
                 firstName: "",
                 lastName: "",
                 dateOfBirth: null,
@@ -73,7 +71,7 @@ class AddUsersForm extends React.Component {
         }
     });
 
-    onSubmit = (event) => {
+    onSubmit = async (event) => {
         // TODO: Add a success message or toast when user is created
 
         const config = {
@@ -86,20 +84,22 @@ class AddUsersForm extends React.Component {
         const errors = this.validate(this.state);
         this.setState({errors}); //if there are errors returned, display them
         if(Object.keys(errors).length === 0){ //if no errors
-            //this.props.submitUser(this.state.userData);
-            //this.props.submitUserInfo(this.state.userInfoData);
-            api.user.createUser(this.state.userData, config)
+            const newUserId = await api.user.createUser(this.state.userData, config)
+                .catch(error => {
+                console.log("createUser ", error.message);
+            });
+            this.state.userInfoData.id = newUserId.data;
+            console.log("id", newUserId);
+            console.log("data", newUserId.data);
+            api.userInfo.createUserInfo(this.state.userInfoData, config)
                 .then(
                     this.props.history.push({
                         pathname: '/listUser'
                     })
                 )
                 .catch(error => {
-                console.log("1 ", error.message);
-            });
-            // api.userInfo.createUserInfo(this.state.userInfoData, config).catch(error => {
-            //     console.log("2 ", error.message);
-            // });
+                    console.log("createUserInfo ", error.message);
+                });
         }
     };
 
@@ -124,7 +124,7 @@ class AddUsersForm extends React.Component {
         if(state.userData.password !== state.password2) {
             errors.password2 = "Password does not match";
         }
-        // if(!state.userInfoData.role) errors.role = emptyWarning;
+        if(!state.userInfoData.role) errors.role = emptyWarning;
         return errors;
     };
 
@@ -182,88 +182,88 @@ class AddUsersForm extends React.Component {
                                         {errors.password2 && <InlineError text={errors.password2}/>}
                                     </Form.Group>
                                 </Form.Row>
-                                {/*<Form.Row>*/}
-                                {/*    <Form.Group as={Col}>*/}
-                                {/*        <Form.Label>First Name</Form.Label>*/}
-                                {/*        <Form.Control*/}
-                                {/*            type="text"*/}
-                                {/*            id="firstName"*/}
-                                {/*            name="firstName"*/}
-                                {/*            placeholder="Enter here..."*/}
-                                {/*            value={userInfoData.firstName}*/}
-                                {/*            onChange={this.onChangeUserInfo}/>*/}
-                                {/*        {errors.age && <InlineError text={errors.age}/>}*/}
-                                {/*    </Form.Group>*/}
-                                {/*    <Form.Group as={Col}>*/}
-                                {/*        <Form.Label>Last Name</Form.Label>*/}
-                                {/*        <Form.Control*/}
-                                {/*            type="text"*/}
-                                {/*            id="lastName"*/}
-                                {/*            name="lastName"*/}
-                                {/*            placeholder="Enter here..."*/}
-                                {/*            value={userInfoData.lastName}*/}
-                                {/*            onChange={this.onChangeUserInfo}/>*/}
-                                {/*    </Form.Group>*/}
-                                {/*</Form.Row>*/}
-                                {/*<Form.Row>*/}
-                                {/*    <Form.Group as={Col}>*/}
-                                {/*        <Form.Label>E-mail</Form.Label>*/}
-                                {/*        <Form.Control*/}
-                                {/*            type="text"*/}
-                                {/*            id="email"*/}
-                                {/*            name="email"*/}
-                                {/*            placeholder="Enter here..."*/}
-                                {/*            value={userInfoData.email}*/}
-                                {/*            onChange={this.onChangeUserInfo}/>*/}
-                                {/*    </Form.Group>*/}
-                                {/*    <Form.Group as={Col}>*/}
-                                {/*        <Form.Label>Phone Number</Form.Label>*/}
-                                {/*        <Form.Control*/}
-                                {/*            type="text"*/}
-                                {/*            id="phoneNumber"*/}
-                                {/*            name="phoneNumber"*/}
-                                {/*            placeholder="Enter here..."*/}
-                                {/*            value={userInfoData.phoneNumber}*/}
-                                {/*            onChange={this.onChangeUserInfo}/>*/}
-                                {/*    </Form.Group>*/}
-                                {/*</Form.Row>*/}
-                                {/*<Form.Row>*/}
-                                {/*    <Form.Group as={Col}>*/}
-                                {/*        <Form.Label>Country</Form.Label>*/}
-                                {/*        <Form.Control*/}
-                                {/*            type="text"*/}
-                                {/*            id="country"*/}
-                                {/*            name="country"*/}
-                                {/*            placeholder="Enter here..."*/}
-                                {/*            value={userInfoData.country}*/}
-                                {/*            onChange={this.onChangeUserInfo}/>*/}
-                                {/*    </Form.Group>*/}
-                                {/*    <Form.Group as={Col}>*/}
-                                {/*        <Form.Label>Date of Birth </Form.Label> <br/>*/}
-                                {/*        <DatePicker*/}
-                                {/*            value={userInfoData.dateOfBirth}*/}
-                                {/*            selected={userInfoData.dateOfBirth}*/}
-                                {/*            showYearDropdown*/}
-                                {/*            dropdownMode="select"*/}
-                                {/*            id="dateOfBirth"*/}
-                                {/*            name="dateOfBirth"*/}
-                                {/*            dateFormat="yyyy-MM-dd"*/}
-                                {/*            onChange={this.onChangeDob}*/}
-                                {/*        />*/}
-                                {/*    </Form.Group>*/}
-                                {/*</Form.Row>*/}
-                                {/*<Form.Row>*/}
-                                {/*    <Form.Group as={Col}>*/}
-                                {/*        <Form.Label>Role*</Form.Label>*/}
-                                {/*        <Form.Control as="select" id="role" name="role" onChange={this.onChangeUserInfo} value={userInfoData.role}>*/}
-                                {/*            <option value={""}></option>*/}
-                                {/*            <option value={"VHT"}>VHT</option>*/}
-                                {/*            <option value={"Healthworker"}>Healthworker</option>*/}
-                                {/*            <option value={"Admin"}>Admin</option>*/}
-                                {/*        </Form.Control>*/}
-                                {/*        {errors.role && <InlineError text={errors.role}/>}*/}
-                                {/*    </Form.Group>*/}
-                                {/*</Form.Row>*/}
+                                <Form.Row>
+                                    <Form.Group as={Col}>
+                                        <Form.Label>First Name</Form.Label>
+                                        <Form.Control
+                                            type="text"
+                                            id="firstName"
+                                            name="firstName"
+                                            placeholder="Enter here..."
+                                            value={userInfoData.firstName}
+                                            onChange={this.onChangeUserInfo}/>
+                                        {errors.age && <InlineError text={errors.age}/>}
+                                    </Form.Group>
+                                    <Form.Group as={Col}>
+                                        <Form.Label>Last Name</Form.Label>
+                                        <Form.Control
+                                            type="text"
+                                            id="lastName"
+                                            name="lastName"
+                                            placeholder="Enter here..."
+                                            value={userInfoData.lastName}
+                                            onChange={this.onChangeUserInfo}/>
+                                    </Form.Group>
+                                </Form.Row>
+                                <Form.Row>
+                                    <Form.Group as={Col}>
+                                        <Form.Label>E-mail</Form.Label>
+                                        <Form.Control
+                                            type="text"
+                                            id="email"
+                                            name="email"
+                                            placeholder="Enter here..."
+                                            value={userInfoData.email}
+                                            onChange={this.onChangeUserInfo}/>
+                                    </Form.Group>
+                                    <Form.Group as={Col}>
+                                        <Form.Label>Phone Number</Form.Label>
+                                        <Form.Control
+                                            type="text"
+                                            id="phoneNumber"
+                                            name="phoneNumber"
+                                            placeholder="Enter here..."
+                                            value={userInfoData.phoneNumber}
+                                            onChange={this.onChangeUserInfo}/>
+                                    </Form.Group>
+                                </Form.Row>
+                                <Form.Row>
+                                    <Form.Group as={Col}>
+                                        <Form.Label>Country</Form.Label>
+                                        <Form.Control
+                                            type="text"
+                                            id="country"
+                                            name="country"
+                                            placeholder="Enter here..."
+                                            value={userInfoData.country}
+                                            onChange={this.onChangeUserInfo}/>
+                                    </Form.Group>
+                                    <Form.Group as={Col}>
+                                        <Form.Label>Date of Birth </Form.Label> <br/>
+                                        <DatePicker
+                                            value={userInfoData.dateOfBirth}
+                                            selected={userInfoData.dateOfBirth}
+                                            showYearDropdown
+                                            dropdownMode="select"
+                                            id="dateOfBirth"
+                                            name="dateOfBirth"
+                                            dateFormat="yyyy-MM-dd"
+                                            onChange={this.onChangeDob}
+                                        />
+                                    </Form.Group>
+                                </Form.Row>
+                                <Form.Row>
+                                    <Form.Group as={Col}>
+                                        <Form.Label>Role*</Form.Label>
+                                        <Form.Control as="select" id="role" name="role" onChange={this.onChangeUserInfo} value={userInfoData.role}>
+                                            <option value={""}></option>
+                                            <option value={"VHT"}>VHT</option>
+                                            <option value={"Healthworker"}>Healthworker</option>
+                                            <option value={"Admin"}>Admin</option>
+                                        </Form.Control>
+                                        {errors.role && <InlineError text={errors.role}/>}
+                                    </Form.Group>
+                                </Form.Row>
                             </Col>
                         </Row>
                         <Row style={{float: 'right'}}>
