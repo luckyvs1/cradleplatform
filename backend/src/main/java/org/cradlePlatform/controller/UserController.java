@@ -38,7 +38,16 @@ public class UserController {
     @ResponseStatus(code = HttpStatus.CREATED)
     public @ResponseBody String addUser(@RequestBody User user){
         userService.saveUser(user);
-        return "Saved New User";
+        String username = user.getUsername();
+        Optional<User> optionalUser = userRepository.findUserByUsername(username);
+
+        String userId = "No user found";
+        if (optionalUser.isPresent()) {
+            User validUser = optionalUser.get();
+            userId = validUser.getId();
+        }
+
+        return userId;
     }
 
     @PostMapping(path="/api/users/login")
