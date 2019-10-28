@@ -30,6 +30,15 @@ public class ReadingController {
         return "Saved Reading";
     }
 
+    @PostMapping(path="/api/readings-multi")
+    @ResponseStatus(code = HttpStatus.CREATED)
+    public String addReadings(@RequestBody ReadingUploadWrapper readings) {
+        for (Reading reading : readings.getReadings()) {
+            readingRepository.save(reading);
+        }
+        return "Saved readings";
+    }
+
     @GetMapping(path="/api/readings")
     public Iterable<Reading> getAllReadings() {
         return readingRepository.findAll();
