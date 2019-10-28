@@ -11,13 +11,23 @@ import javax.validation.constraints.Size;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import com.fasterxml.jackson.databind.util.StdConverter;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+
+
+class SymptomListToStringConverter extends StdConverter<ArrayList<String>, String> {
+  @Override
+  public String convert(ArrayList<String> value) {
+    return String.join(",", value);
+  }
+}
 
 @Entity
 @Table(name = "Reading", schema = "schemas")
 public class Reading {
 
 	@Id
-	@GeneratedValue
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 
 	@NotBlank
@@ -33,7 +43,9 @@ public class Reading {
 	@NotNull
 	private Timestamp timestamp;
 
-	private ArrayList<String> symptoms;
+	@Column(name = "symptoms")
+  @JsonDeserialize(converter = SymptomListToStringConverter.class)
+	private String symptoms;
 
 	@Column(name = "other_symptoms")
 	private String otherSymptoms;
@@ -69,13 +81,14 @@ public class Reading {
 	private Timestamp recheckVitalsDate;
 
 	@NotBlank
-	@Size(max = 32)
 	@Column(name = "device_info")
 	private String deviceInformation;
 
 	@Enumerated
+	@Column(name = "gestational_age_unit")
 	private GestationalAgeTimeUnit gestationalAgeTimeUnit;
 
+	@Column(name = "gestational_age")
 	private int gestationalAge;
 
 	@NotBlank
@@ -107,6 +120,8 @@ public class Reading {
 	@Enumerated
 	@Column(name = "reading_analysis")
 	private VitalsTrafficLight vitalsTrafficLight;
+
+  public Reading() {}
 
 	public int getId() {
 		return id;
@@ -140,11 +155,11 @@ public class Reading {
 		this.timestamp = timestamp;
 	}
 
-	public ArrayList<String> getSymptoms() {
+	public String getSymptoms() {
 		return symptoms;
 	}
 
-	public void setSymptoms(ArrayList<String> symptoms) {
+	public void setSymptoms(String symptoms) {
 		this.symptoms = symptoms;
 	}
 
