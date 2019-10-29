@@ -14,9 +14,6 @@ import org.springframework.context.annotation.Bean;
 @SpringBootApplication(exclude = { SecurityAutoConfiguration.class})
 public class Application {
 
-	@Autowired
-	private Environment env;
-
 	@Bean
 	public BCryptPasswordEncoder bCryptPasswordEncoder() {
 		return new BCryptPasswordEncoder();
@@ -25,5 +22,4 @@ public class Application {
 	public static void main(String[] args) {
 		SpringApplication.run(Application.class, args);
 	}
-
 }
