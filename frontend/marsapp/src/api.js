@@ -5,8 +5,17 @@
 
 import axios from "axios/dist/axios"
 
-const host = "cmpt373.csil.sfu.ca";
-const port = "8084";
+let host = "";
+let port = "";
+
+if (process.env.NODE_ENV === 'production') {
+    host = "cmpt373.csil.sfu.ca";
+    port = "8084";
+} else {
+    host = "localhost";
+    port = "8080";
+}
+
 export default {
     admin:{
         getAdminById: data => {
