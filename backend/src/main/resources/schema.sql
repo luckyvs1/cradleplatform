@@ -180,7 +180,8 @@ CREATE TABLE Monitor (
 
 insert into User values ('1', 'VHT_user', 'password123');
 insert into User values ('2', 'HealthWorker', 'password123');
-insert into User values ('3', 'Admin_user', '"password123');
+insert into User values ('3', 'Admin_user', 'password123');
+insert into User values ('4', 'justTesting', 'customerTesting');
 
 insert into User_Info values ('1',
                               'Bob',
@@ -207,6 +208,15 @@ insert into User_Info values ('3',
                               'Uganda',
                               '077-241-8763',
                               'admin@healthclinic.com',
+                              'Admin');
+
+insert into User_Info values ('4',
+                              'Test',
+                              'User',
+                              '2019-10-28',
+                              'Uganda',
+                              '077-241-8764',
+                              'admin2@healthclinic.com',
                               'Admin');
 
 insert into VHT values ('1');
