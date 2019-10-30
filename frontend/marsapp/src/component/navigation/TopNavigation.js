@@ -45,7 +45,10 @@ class TopNavigation extends React.Component {
         if (this.props.authenticated) {
             return (
                 <Navbar bg="dark" variant="dark" style={bottomMarginStyle}>
-                    <Container className={"col-sm-5"}>
+                    <Container className={"col-sm-5"} id="menuHeader">
+                        <button className="btn btn-outline-success my-2 my-lg-0" onClick={this._menuToggle}>
+                            <h2>Menu</h2>
+                        </button>
                     </Container>
                     <Container className={"col-sm-5"}>
                         <Navbar.Brand href="/homePage">Cradle Platform {this.props.authenticated}</Navbar.Brand>
@@ -73,20 +76,6 @@ class TopNavigation extends React.Component {
                     <Container>
                         <div id="wrapper">
                             <aside className="sidebar-wrapper">
-                                <div className="sidebar-brand" id={"sidebar-brand"}>
-                                    <div>
-                                        <Row>
-                                            <Col>
-                                                <button className="btn btn-outline-success my-2 my-lg-0" onClick={this._menuToggle}>
-                                                <i className="fas fa-bars"></i>
-                                            </button>
-                                            </Col>
-                                            <Col>
-                                                <h2>Menu</h2>
-                                            </Col>
-                                        </Row>
-                                    </div>
-                                </div>
                                 <div className="sidebar-nav">
                                     <ul>
                                         <Nav.Link as={Link} to="homePage">
