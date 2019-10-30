@@ -45,21 +45,22 @@ class TopNavigation extends React.Component {
         if (this.props.authenticated) {
             return (
                 <Navbar bg="dark" variant="dark" style={bottomMarginStyle}>
-                    <Container className={"col-sm-5"} id="menuHeader">
+                    <Container className={"col-sm-3"} id="menuHeader">
                         <button className="btn btn-outline-success my-2 my-lg-0" onClick={this._menuToggle}>
                             <h2>Menu</h2>
                         </button>
                     </Container>
-                    <Container className={"col-sm-5"}>
+                    <Container className={"col-sm-6"}>
                         <Navbar.Brand href="/homePage">Cradle Platform {this.props.authenticated}</Navbar.Brand>
                     </Container>
-                    <Container className={"col-sm-2"}>
+                    <Container className={"col-sm-3"}>
                         <Nav className={"my-2 my-sm-0"}>
                             <Nav.Link as={Link} to="/homePage">
                                 <i className="fas fa-bell"></i>
                             </Nav.Link>
                             <NavDropdown title={<span><i className="fas fa-cogs"></i></span>}
-                                         id="collasible-nav-dropdown">
+                                         id="collasible-nav-dropdown"
+                                         drop={'left down'}>
                                 <NavDropdown.Item as={Link} to="account">
                                     <i className="fas fa-user-alt"></i> Account
                                 </NavDropdown.Item>
