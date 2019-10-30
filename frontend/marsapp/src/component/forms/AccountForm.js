@@ -6,7 +6,7 @@
 
 import React from "react";
 import TopNavigation from "../navigation/TopNavigation";
-import {Col, Container, Form, Row,} from 'react-bootstrap';
+import {Button, Col, Container, Form, Row,} from 'react-bootstrap';
 import PropTypes from "prop-types";
 import api from "../../api"
 import {connect} from "react-redux";
@@ -55,8 +55,9 @@ class AccountForm extends React.Component {
     }
 
     submit = event => {
+
         if (event) {
-            this.props.submit(event)
+            this.props.submit(this.state.data)
         }
     };
 
@@ -175,10 +176,16 @@ class AccountForm extends React.Component {
 
                         </Row>
                         <Row>
-                            <Col className={"text-right"}>
+                            <Col className={"text-left"}>
                                 <DialogCreateAccount></DialogCreateAccount>
+
                             </Col>
+                            <Col className={"text-right"}>
+                                <Button variant="primary" onClick={this.submit}>Edit </Button>
+                            </Col>
+
                         </Row>
+
                     </Form>
                 </Container>
             </div>
