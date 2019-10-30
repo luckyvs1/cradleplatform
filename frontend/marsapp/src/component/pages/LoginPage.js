@@ -10,6 +10,7 @@ import TopNavigation from "../navigation/TopNavigation";
 import styled from 'styled-components';
 import auth from "../../actions/auth"
 import {connect} from "react-redux";
+import api from "../../api"
 
 const TopMarginStyle = styled.div`
   margin-top: 40px;
@@ -22,34 +23,26 @@ class LoginPage extends React.Component {
         this.props.updateLogIn(accessToken);
 
 
-        auth.login(() => {
-            localStorage.loginToken = accessToken;
-            localStorage.loginUserId = 1; // should be the id of the logged in user
-            this.props.history.push("/homePage");
-        })
-        // AdminRoute.login(()=>{
-        //     localStorage.loginToken = AdminRoute.authenticated;
-        //     this.props.history.push("/homePage");
-        // })
 
 
-        // console.log("LOG IN" ,res.data)
-        // api.user.login(data)
-        //     .then(res => {
-        //         if(res){
-        //             let accessToken = "nGzv3JORFQXG3x21KW1a"
-        //             this.props.updateLogIn(accessToken);
-        //
-        //             auth.login(()=>{
-        //                 localStorage.loginToken = auth.authenticated;
-        //                 this.props.history.push("/homePage");
-        //             })
-        //             console.log("LOG IN" ,res.data)
-        //         }else{
-        //             // pop up cannot log in
-        //
-        //         }
-        //     })
+        console.log("LOG IN" ,data)
+        api.user.login(data)
+            .then(res => {
+                if(res){
+                    console.log(res)
+                    let accessToken = res.data.access_token;
+                    this.props.updateLogIn(accessToken);
+
+                    auth.login(()=>{
+                        localStorage.loginToken = res.data.authenticated;
+                        localStorage.loginUserId = res.data.id; // should be the id of the logged in user
+
+                        this.props.history.push("/homePage");
+                    })
+                    console.log("LOG IN" ,res.data)
+                }else{
+                }
+            })
 
 
     };
