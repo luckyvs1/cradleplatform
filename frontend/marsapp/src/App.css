@@ -648,11 +648,17 @@ li a {
     font-size: 24px!important;
 
 }
+.sidebar-brand button{
+    margin-left: -60px !important;
+    margin-top: -25px !important;
+}
 .sidebar-brand h2 {
     margin: 0;
     font-weight: 600;
     font-size: 24px;
     color: #fff;
+    margin-left: -185px !important;
+    margin-top: -8px !important;
 }
 
 .sidebar-nav {

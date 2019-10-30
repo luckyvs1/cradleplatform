@@ -9,7 +9,7 @@ import {Link} from "react-router-dom";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 
-import {Container, Nav, Navbar, NavDropdown} from 'react-bootstrap';
+import {Container, Nav, Navbar, NavDropdown, Row, Col} from 'react-bootstrap';
 
 const bottomMarginStyle = {
     marginBottom: '40px',
@@ -46,11 +46,6 @@ class TopNavigation extends React.Component {
             return (
                 <Navbar bg="dark" variant="dark" style={bottomMarginStyle}>
                     <Container className={"col-sm-5"}>
-                        <button className="btn btn-outline-success my-2 my-lg-0" onClick={this._menuToggle}>
-                            <i className="fas fa-bars"></i>
-                        </button>
-
-
                     </Container>
                     <Container className={"col-sm-5"}>
                         <Navbar.Brand href="/homePage">Cradle Platform {this.props.authenticated}</Navbar.Brand>
@@ -79,7 +74,18 @@ class TopNavigation extends React.Component {
                         <div id="wrapper">
                             <aside className="sidebar-wrapper">
                                 <div className="sidebar-brand" id={"sidebar-brand"}>
-                                    <h2>Menu</h2>
+                                    <div>
+                                        <Row>
+                                            <Col>
+                                                <button className="btn btn-outline-success my-2 my-lg-0" onClick={this._menuToggle}>
+                                                <i className="fas fa-bars"></i>
+                                            </button>
+                                            </Col>
+                                            <Col>
+                                                <h2>Menu</h2>
+                                            </Col>
+                                        </Row>
+                                    </div>
                                 </div>
                                 <div className="sidebar-nav">
                                     <ul>
