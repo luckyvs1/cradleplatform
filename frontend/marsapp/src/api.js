@@ -7,8 +7,9 @@ import axios from "axios/dist/axios"
 
 let host = "";
 let port = "";
+const PRODUCTION_ENVIRONMENT = "production";
 
-if (process.env.NODE_ENV === 'production') {
+if (process.env.NODE_ENV === PRODUCTION_ENVIRONMENT) {
     host = "cmpt373.csil.sfu.ca";
     port = "8084";
 } else {
