@@ -11,6 +11,7 @@ import {Link} from "react-router-dom";
 import api from "../../api";
 import TopNavigation from "../navigation/TopNavigation";
 import {Button, Col, Container, Form, Row, Table} from 'react-bootstrap';
+import GraphDialog from "../utils/GraphDialog"
 
 const statusGreen = {
     backgroundColor: "green"
@@ -185,7 +186,7 @@ export default class PatientDetailForm extends React.Component {
                                 <Col>
                                     <Button variant="success" size="sm" as={Link} to="addReadingDetail">New Reading</Button>&nbsp;
                                     <Button variant="primary" size="sm">View List</Button>&nbsp;
-                                    <Button variant="primary" size="sm">View Graph</Button>&nbsp;
+                                    <GraphDialog></GraphDialog>
                                 </Col>
                             </Row>
                         </Tab>
