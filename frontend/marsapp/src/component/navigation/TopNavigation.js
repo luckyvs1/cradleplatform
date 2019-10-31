@@ -9,7 +9,7 @@ import {Link} from "react-router-dom";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 
-import {Container, Nav, Navbar, NavDropdown} from 'react-bootstrap';
+import {Container, Nav, Navbar, NavDropdown, Row, Col} from 'react-bootstrap';
 
 const bottomMarginStyle = {
     marginBottom: '40px',
@@ -28,9 +28,9 @@ class TopNavigation extends React.Component {
         e.stopPropagation();
         // var name = (this.refs.cpDev1).value;
         let width = document.getElementsByClassName("sidebar-wrapper")[0].clientWidth;
-        if (width !== 0) {
-            document.getElementsByClassName("sidebar-wrapper")[0].setAttribute("style", `width:0px  !important;`)
-        } else if (width === 0) {
+        if (width === 50) {
+            document.getElementsByClassName("sidebar-wrapper")[0].setAttribute("style", `width:240px  !important;`)
+        } else {
             document.getElementsByClassName("sidebar-wrapper")[0].setAttribute("style", `width:${width} px !important;`)
         }
     }
@@ -43,23 +43,22 @@ class TopNavigation extends React.Component {
         if (this.props.authenticated) {
             return (
                 <Navbar bg="dark" variant="dark" style={bottomMarginStyle}>
-                    <Container className={"col-sm-5"}>
+                    <Container className={"col-sm-3"} id="menuHeader">
                         <button className="btn btn-outline-success my-2 my-lg-0" onClick={this._menuToggle}>
-                            <i className="fas fa-bars"></i>
+                            <h2>Menu</h2>
                         </button>
-
-
                     </Container>
-                    <Container className={"col-sm-5"}>
+                    <Container className={"col-sm-6"}>
                         <Navbar.Brand href="/homePage">Cradle Platform {this.props.authenticated}</Navbar.Brand>
                     </Container>
-                    <Container className={"col-sm-2"}>
+                    <Container className={"col-sm-3"}>
                         <Nav className={"my-2 my-sm-0"}>
                             <Nav.Link as={Link} to="/homePage">
                                 <i className="fas fa-bell"></i>
                             </Nav.Link>
                             <NavDropdown title={<span><i className="fas fa-cogs"></i></span>}
-                                         id="collasible-nav-dropdown">
+                                         id="collasible-nav-dropdown"
+                                         drop={'left down'}>
                                 <NavDropdown.Item as={Link} to="account">
                                     <i className="fas fa-user-alt"></i> Account
                                 </NavDropdown.Item>
@@ -76,9 +75,6 @@ class TopNavigation extends React.Component {
                     <Container>
                         <div id="wrapper">
                             <aside className="sidebar-wrapper">
-                                <div className="sidebar-brand" id={"sidebar-brand"}>
-                                    <h2>Menu</h2>
-                                </div>
                                 <div className="sidebar-nav">
                                     <ul>
                                         <Nav.Link as={Link} to="homePage">

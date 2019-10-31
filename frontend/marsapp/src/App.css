@@ -621,8 +621,8 @@ li a {
     z-index: 1000;
     position: fixed;
     left: 250px;
-    top:0 !important;
-    width: 240px;
+    top:56px !important;
+    width: 50px;
     height: 100%;
     margin-left: -250px;
     overflow-y: auto;
@@ -631,13 +631,16 @@ li a {
     transition: all 0.5s ease;
 }
 
+.sidebar-wrapper:hover{
+    width: 240px !important;
+}
 #wrapper.toggled .sidebar-wrapper {
     width: 250px;
 }
 
 .sidebar-brand {
     position: absolute;
-    top: 0;
+    top: 50px;
     width: 250px;
     text-align: center;
     padding: 20px 0;
@@ -645,11 +648,21 @@ li a {
     font-size: 24px!important;
 
 }
+#menuHeader button{
+    margin-left: -295px !important;
+    margin-top: -5px !important;
+}
+#menuHeader button h2{
+    font-size: 1.5rem !important;
+}
 .sidebar-brand h2 {
     margin: 0;
     font-weight: 600;
     font-size: 24px;
     color: #fff;
+    margin-left: -185px !important;
+    margin-top: -8px !important;
+
 }
 
 .sidebar-nav {
@@ -663,6 +676,8 @@ li a {
 .sidebar-nav > ul {
     text-indent: 10px;
     line-height: 42px;
+    margin-left: -60px !important;
+    margin-top: -75px !important;
 }
 .sidebar-nav > ul > a {
     display: block;
@@ -677,9 +692,10 @@ li a {
     color: #fff !important;
     background: #454b54 !important;
 }
-.sidebar-nav > ul > a i.fa {
+.sidebar-nav > ul > a i.fas {
     font-size: 18px;
-    width: 60px;
+    width: 50px;
+    padding-right: 50px !important;
 }
 .sidebar-nav > ul > div > a {
     font-size: 18px;
@@ -730,6 +746,9 @@ li a {
 }
 
 @media (min-width: 992px) {
+    .container{
+        padding-left: 50px!important;
+    }
     #wrapper {
         padding-left: 250px;
     }
@@ -783,6 +802,7 @@ li a {
 
     sidebar-wrapper {
         width: 60px;
+        padding-right: 50px!important;
     }
 
     #wrapper.toggled #navbar-wrapper {
