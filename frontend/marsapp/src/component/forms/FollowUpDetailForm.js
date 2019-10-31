@@ -9,7 +9,6 @@ import {withRouter} from "react-router-dom";
 import TopNavigation from "../navigation/TopNavigation";
 import {Button, Col, Container, Form, Row} from 'react-bootstrap';
 import api from "../../api"
-import {connect} from "react-redux";
 
 
 class FollowUpDetailForm extends React.Component {
@@ -28,12 +27,23 @@ class FollowUpDetailForm extends React.Component {
                 treatment: "",
             },
         };
-
+        this.handleChange = this.handleChange.bind(this);
     }
 
+    handleChange(event) {
+        this.setState({
+            data: {...this.state.data, [event.target.name]: event.target.value}
+        });
+    }
+
+    submit = event => {
+        if (event) {
+            this.props.submit(this.state.data)
+        }
+    };
+
+
     componentDidMount() {
-        console.log(this.props.location.state);
-        // api.followUp.getFollowUpByFollowUpId({followUpId: this.props.posts.data}).then(res => {
         api.followUp.getFollowUpByFollowUpId({followUpId: this.props.location.state.id}).then(res => {
             const data = res.data;
             this.setState({data});
@@ -79,7 +89,8 @@ class FollowUpDetailForm extends React.Component {
                                     type="text"
                                     id="patient"
                                     name="patientId"
-                                    value={this.state.data.patientId}/>
+                                    value={this.state.data.patientId}
+                                />
                                 {/*error handling*/}
                                 {/* <Form.Text className="text-muted">
                                     {errors.email && <InlineError text={errors.email} />}
@@ -95,7 +106,9 @@ class FollowUpDetailForm extends React.Component {
                                     type="text"
                                     id="followUpNotes"
                                     name="followUpNotes"
-                                    value={this.state.data.followUpNotes}/>
+                                    value={this.state.data.followUpNotes}
+                                    onChange={this.handleChange}
+                                />
                                 {/*error handling*/}
                                 {/* <Form.Text className="text-muted">
                                     {errors.email && <InlineError text={errors.email} />}
@@ -111,7 +124,9 @@ class FollowUpDetailForm extends React.Component {
                                     type="text"
                                     id="diagnosis"
                                     name="diagnosis"
-                                    value={this.state.data.diagnosis}/>
+                                    value={this.state.data.diagnosis}
+                                    onChange={this.handleChange}
+                                />
                                 {/*error handling*/}
                                 {/* <Form.Text className="text-muted">
                                     {errors.email && <InlineError text={errors.email} />}
@@ -127,7 +142,9 @@ class FollowUpDetailForm extends React.Component {
                                     type="text"
                                     id="treatment"
                                     name="treatment"
-                                    value={this.state.data.treatment}/>
+                                    value={this.state.data.treatment}
+                                    onChange={this.handleChange}
+                                />
                                 {/*error handling*/}
                                 {/* <Form.Text className="text-muted">
                                     {errors.email && <InlineError text={errors.email} />}
@@ -143,7 +160,9 @@ class FollowUpDetailForm extends React.Component {
                                     type="text"
                                     id="frequency"
                                     name="frequency"
-                                    value={this.state.data.frequency}/>
+                                    value={this.state.data.frequency}
+                                    onChange={this.handleChange}
+                                />
                                 {/*error handling*/}
                                 {/* <Form.Text className="text-muted">
                                     {errors.email && <InlineError text={errors.email} />}
@@ -195,7 +214,7 @@ class FollowUpDetailForm extends React.Component {
                     </Row>
                     <Row>
                         <Col className={"text-right"}>
-                            <Button variant="warning">Edit</Button>
+                            <Button variant="primary" onClick={this.submit}>Edit</Button>
                         </Col>
                     </Row>
                 </Container>

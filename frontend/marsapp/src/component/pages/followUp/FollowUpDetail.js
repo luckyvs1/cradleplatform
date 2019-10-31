@@ -8,12 +8,17 @@
 import React from "react";
 import {connect} from "react-redux";
 import FollowUpDetailForm from "../../forms/FollowUpDetailForm";
+import api from "../../../api";
 
 class FollowUpDetail extends React.Component {
 
+    submit = data => {
+        console.log("data",data)
+        // api.followUp.addFollowUp()
+    }
     render() {
         return (
-            <FollowUpDetailForm></FollowUpDetailForm>
+            <FollowUpDetailForm submit={this.submit}></FollowUpDetailForm>
         );
     }
 }
