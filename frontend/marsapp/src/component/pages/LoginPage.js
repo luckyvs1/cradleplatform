@@ -19,28 +19,17 @@ const TopMarginStyle = styled.div`
 class LoginPage extends React.Component {
 
     submit = data => {
-        let accessToken = "nGzv3JORFQXG3x21KW1a"
-        this.props.updateLogIn(accessToken);
-
-
-
-
-        console.log("LOG IN" ,data)
         api.user.login(data)
             .then(res => {
-                if(res){
-                    console.log(res)
+                if (res) {
                     let accessToken = res.data.access_token;
                     this.props.updateLogIn(accessToken);
 
-                    auth.login(()=>{
+                    auth.login(() => {
                         localStorage.loginToken = res.data.authenticated;
                         localStorage.loginUserId = res.data.id; // should be the id of the logged in user
-
                         this.props.history.push("/homePage");
                     })
-                    console.log("LOG IN" ,res.data)
-                }else{
                 }
             })
 

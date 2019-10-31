@@ -28,11 +28,9 @@ class TopNavigation extends React.Component {
         e.stopPropagation();
         // var name = (this.refs.cpDev1).value;
         let width = document.getElementsByClassName("sidebar-wrapper")[0].clientWidth;
-        console.log("WIDTH = " ,width)
         if (width === 50) {
             document.getElementsByClassName("sidebar-wrapper")[0].setAttribute("style", `width:240px  !important;`)
-        } else if (width != 50) {
-
+        } else {
             document.getElementsByClassName("sidebar-wrapper")[0].setAttribute("style", `width:${width} px !important;`)
         }
     }
