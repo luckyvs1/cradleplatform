@@ -79,7 +79,7 @@ class FollowUpDetailForm extends React.Component {
                                     type="text"
                                     id="patient"
                                     name="patientId"
-                                    value={this.state.data.id}/>
+                                    value={this.state.data.patientId}/>
                                 {/*error handling*/}
                                 {/* <Form.Text className="text-muted">
                                     {errors.email && <InlineError text={errors.email} />}
