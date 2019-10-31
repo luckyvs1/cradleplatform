@@ -7,17 +7,45 @@
 import React from "react";
 import {connect} from "react-redux";
 import AccountForm from "../../forms/AccountForm";
-class Account extends React.Component {
+import api from "../../../api"
+import ConfirmAlert from "../../utils/ConfirmAlert"
 
-    submit = data => {
-        // for future use
-        console.log(data);
+class Account extends React.Component {
+    state = {
+        isShow: false,
+        message: ""
     }
 
+    submit = data => {
+        api.userInfo.createUserInfo(data).then(res => {
+            if (res.data) {
+                this.onShowAlert(res.data);
+            }
+        });
+    }
+
+    onShowAlert = (message) => {
+        this.setState({
+                isShow: true,
+                message: message
+            },
+            () => {
+                window.setTimeout(() => {
+                    this.setState({
+                        isShow: false,
+                        message: message
+                    })
+                }, 2000)
+            });
+    }
 
     render() {
         return (
-            <AccountForm submit={this.submit}></AccountForm>
+            <div>
+                <AccountForm submit={this.submit}></AccountForm>
+                <ConfirmAlert show={this.state.isShow} message={this.state.message}></ConfirmAlert>
+            </div>
+
         );
     }
 }
