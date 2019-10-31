@@ -890,3 +890,11 @@ li a {
     border-radius: 18px;
     border: 1px solid #cfcece;
 }
+
+
+#success-alert {
+    width:500px !important;
+    top: 40%;
+    left: 35%;
+    z-index: 10000 !important;
+}
