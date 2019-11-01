@@ -145,6 +145,7 @@ CREATE TABLE Reading (
                           'Yellow_down',
                           'Red_up',
                           'Red_down'),
+    diagnosis       TEXT,
     PRIMARY KEY (id),
     FOREIGN KEY (reader_id) REFERENCES User(id) ON DELETE CASCADE,
     FOREIGN KEY (patient_id) REFERENCES Patient(id) ON DELETE CASCADE
@@ -264,7 +265,8 @@ insert into Reading values (1,
                             'Northern Uganda',
                             True,
                             True,
-                            'Green');
+                            'Green',
+                            '');
 
 insert into FollowUp values (2,
                              1,
