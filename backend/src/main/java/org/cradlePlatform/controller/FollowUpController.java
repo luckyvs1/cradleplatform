@@ -65,4 +65,22 @@ public class FollowUpController {
         followUpRepository.save(newFollowUp);
         return "Saved Follow Up";
     }
+
+    /**
+     * Create a new FollowUp in the db.
+     * @param followUp followUp data to store.
+     * @return 201 created successfully.
+     */
+    @PutMapping(path="/api/followUps")
+    @ResponseStatus(code = HttpStatus.OK)
+    public String editFollowUp(@RequestBody FollowUp followUp) {
+        int id = followUp.getId();
+        Optional<FollowUp> fetchedFollowUpOptional = followUpRepository.findById(id);
+        if (fetchedFollowUpOptional.isPresent()) {
+            FollowUp fetchedFollowUp = fetchedFollowUpOptional.get();
+            fetchedFollowUp.updateFollowUp(followUp);
+            followUpRepository.save(fetchedFollowUp);
+        }
+        return "Edited FollowUp #" + id;
+    }
 }
