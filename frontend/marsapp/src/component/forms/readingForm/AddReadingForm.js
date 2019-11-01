@@ -10,7 +10,6 @@ import PropTypes from "prop-types";
 import TopNavigation from "../../navigation/TopNavigation";
 import {Button, Col, Container, Form, Row} from 'react-bootstrap';
 import api from "../../../api";
-import InlineError from "../../messages/InlineError";
 
 class AddReadingForm extends React.Component {
     constructor(props){
@@ -46,14 +45,6 @@ class AddReadingForm extends React.Component {
         this.onChange = this.onChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
     }
-
-    // onChange = (event) => {
-    //     console.log('here');
-    //     data: {
-    //         ...this.state.data,
-    //         [e.target.name]: e.target.value
-    //     }
-    // };
 
     onChange = e =>  {
         this.setState({
@@ -137,28 +128,13 @@ class AddReadingForm extends React.Component {
                                     </Form.Text> */}
                                 </Form.Group>
                             </Col>
-                        </Row>
-                        <Row>
-                            <Col>
-                                <Form.Group>
-                                    <Form.Label>Pregnant</Form.Label>
-                                    <Form.Control as="select">
-                                        <option value={'true'}>Yes</option>
-                                        <option value={'false'}>No</option>
-                                    </Form.Control>
-                                    {/* enable his for error handling */}
-                                    {/* <Form.Text className="text-muted">
-                                        {errors.email && <InlineError text={errors.email} />}
-                                    </Form.Text> */}
-                                </Form.Group>
-                            </Col>
                             <Col>
                                 <Form.Group>
                                     <Form.Label>Needs Follow-up</Form.Label>
-                                    <Form.Control as="select" 
-                                        name="needFollowUp" 
-                                        id="needFollowUp" 
-                                        onChange={this.onChange} 
+                                    <Form.Control as="select"
+                                        name="needFollowUp"
+                                        id="needFollowUp"
+                                        onChange={this.onChange}
                                         value={data.needFollowUp}>
                                         <option value={'true'}>Yes</option>
                                         <option value={'false'}>No</option>
