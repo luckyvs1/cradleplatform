@@ -48,10 +48,10 @@ public class MonitorId implements Serializable {
 
         MonitorId that = (MonitorId) o;
 
-        if (!vhtId.equals(that.patientId)) {
+        if (!vhtId.equals(that.vhtId)) {
             return false;
         }
-        return vhtId.equals(that.patientId);
+        return vhtId.equals(that.vhtId);
     }
 
     @Override
