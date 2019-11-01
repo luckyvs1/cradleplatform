@@ -3,7 +3,7 @@ class AuthAdmin {
         this.authenticated = false;
     }
 
-    setAtuh(){
+    setAuth(){
         this.authenticated=true;
     }
     login(cb) {
