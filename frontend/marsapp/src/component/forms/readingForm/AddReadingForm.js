@@ -331,12 +331,8 @@ class AddReadingForm extends React.Component {
                                 </Form.Group>
                             </Col>
                         </Row>
-                        <Row>
-                            <Col>
-                                <Button variant="success" type="submit">
-                                    Create
-                                </Button>
-                            </Col>
+                        <Row style={{ float: 'right' }}>
+                            <Button primary type="submit" >Create</Button>
                         </Row>
                     </Form>
                 </Container>
