@@ -5,7 +5,7 @@
 package org.cradlePlatform.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-
+import org.cradlePlatform.model.VitalsTrafficLight;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -13,7 +13,6 @@ import javax.validation.constraints.Size;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
 
 @Entity
 @Table(name = "Reading")

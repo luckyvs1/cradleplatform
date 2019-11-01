@@ -21,9 +21,13 @@ public class ReadingController {
     @Autowired
     private ReadingRepository readingRepository;
 
+    @Autowired
+    private org.cradlePlatform.service.ReadingService readingService;
+
     @PostMapping(path="/api/readings")
     @ResponseStatus(code = HttpStatus.CREATED)
     public String addReadings(@RequestBody Reading reading){
+        Boolean trafficLightisValid = readingService.isValidTrafficLight(reading);
         readingRepository.save(reading);
         return "Saved Reading";
     }
@@ -32,6 +36,7 @@ public class ReadingController {
     @ResponseStatus(code = HttpStatus.CREATED)
     public String addReadings(@RequestBody ReadingUploadWrapper readings) {
         for (Reading reading : readings.getReadings()) {
+
             readingRepository.save(reading);
         }
         return "Saved readings";
