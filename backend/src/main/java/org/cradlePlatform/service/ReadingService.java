@@ -7,24 +7,6 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class ReadingService {
-//    Green,
-//    Yellow_up,
-//    Yellow_down,
-//    Red_up,
-//    Red_down;
-
-    // Green
-    //         < 140 systolic and < 90 diastolic and shock index < 0.9
-    // Yellow UP
-    //         >= 140 systolic BP and <= 159 and/or
-    //         diastolic BP >= 90 and <= 109
-    // Yellow DOWN
-    //         shock index >= 0.9 and < 1.7
-    // Red UP
-    //         systolic >= 160 and/or diastolic >= 110
-    // Red DOWN
-    //         shock index >= 1.7
-
     // Break points for determining Green/Yellow/Red Up/Down
     // source: CRADLE VSA Manual (extracted spring 2019)
     private static final int RED_SYSTOLIC = 160;
@@ -41,35 +23,9 @@ public class ReadingService {
     public static final int MAX_HEART_RATE = 200;
     public static final int MIN_HEART_RATE = 40;
 
-//    public boolean isUp() {
-//        return this == vitalsTrafficLight.Yellow_up || this == Red_up;
-//    }
-//    public boolean isDown() {
-//        return this == Yellow_down || this == Red_down;
-//    }
-//    public boolean isGreen() {
-//        return this == Green;
-//    }
-//    public boolean isYellow() {
-//        return this == Yellow_up|| this == Yellow_down;
-//    }
-//    public boolean isRed() {
-//        return this == Red_up || this == Red_down;
-//    }
-
-//    @Autowired
-//    public VitalsTrafficLight vitalsTrafficLight;
-
     // Analysis Functions
     @NotNull
     public static Boolean isValidTrafficLight(Reading reading){
-// TODO: Removed guard since at worst reading values can be 0, but constraint range check in place to guard against that as well
-//        // Guard no currentReading:
-//        if (reading.getSystolicBloodPressure() == null || reading.getDiastolicBloodPressure() == null || reading.getPulseRate() == null) {
-//            // Invalid reading for the server
-//            return None;
-//        }
-
         boolean isValid = false;
 
         int systolicBloodPressure = reading.getSystolicBloodPressure();
@@ -81,20 +37,6 @@ public class ReadingService {
         boolean isBpHigh = (systolicBloodPressure >= YELLOW_SYSTOLIC) || (diastolicBloodPressure >= YELLOW_DIASTOLIC);
         boolean isSevereShock = (shockIndex >= SHOCK_HIGH);
         boolean isShock = (shockIndex >= SHOCK_MEDIUM);
-
-//        // Return analysis based on priority:
-//        Reading validAnalysis = new Reading();
-//        if (isSevereShock) {
-//            validAnalysis.setVitalsTrafficLight(VitalsTrafficLight.Red_down);
-//        } else if (isBpVeryHigh) {
-//            validAnalysis.setVitalsTrafficLight(VitalsTrafficLight.Red_up);
-//        } else if (isShock) {
-//            validAnalysis.setVitalsTrafficLight(VitalsTrafficLight.Yellow_down);
-//        } else if (isBpHigh) {
-//            validAnalysis.setVitalsTrafficLight(VitalsTrafficLight.Yellow_up);
-//        } else {
-//            validAnalysis.setVitalsTrafficLight(VitalsTrafficLight.Green);
-//        }
 
         // Set analysis based on priority:
         VitalsTrafficLight validTrafficLight;
