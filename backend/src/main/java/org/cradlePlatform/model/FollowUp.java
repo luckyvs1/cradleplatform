@@ -39,8 +39,12 @@ public class FollowUp {
     public FollowUp() {
     }
 
+    /**
+     * Update a FollowUp by replacing all fields except id
+     * @param updatedFollowUp
+     */
     public void updateFollowUp(FollowUp updatedFollowUp) {
-        this.setPatientId(updatedFollowUp.getPatientId());
+        // this.setPatientId(updatedFollowUp.getPatientId());
         this.setFollowUpNotes(updatedFollowUp.getFollowUpNotes());
         this.setRequired(updatedFollowUp.getRequired());
         this.setFrequency(updatedFollowUp.getFrequency());
