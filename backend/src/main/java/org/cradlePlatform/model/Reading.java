@@ -39,12 +39,15 @@ public class Reading {
 	@Column(name = "other_symptoms")
 	private String otherSymptoms;
 
+	@Range(min = 10, max = 300)
 	@Column(name = "systolic_bp")
 	private int systolicBloodPressure;
 
+	@Range(min = 10, max = 300)
 	@Column(name = "diastolic_bp")
 	private int diastolicBloodPressure;
 
+	@Range(min = 40, max = 200)
 	@Column(name = "pulse_rate")
 	private int pulseRate;
 
