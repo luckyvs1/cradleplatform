@@ -4,6 +4,7 @@
  */
 package org.cradlePlatform.controller;
 
+import org.cradlePlatform.service.ValidationService;
 import org.cradlePlatform.model.Patient;
 import org.cradlePlatform.model.Reading;
 import org.cradlePlatform.repository.PatientRepository;
@@ -22,6 +23,9 @@ public class PatientController {
 
     @Autowired
     private ReadingRepository readingRepository;
+
+    @Autowired
+    private ValidationService validationService;
 
     // GET mappings
 
@@ -66,6 +70,8 @@ public class PatientController {
     @PostMapping(path="/api/patients")
     @ResponseStatus(code = HttpStatus.CREATED)
     public @ResponseBody String addNewPatient (@RequestBody Patient patient){
+        String validAttestationNo = validationService.getValidAttestationNo(patient);
+        patient.setAttestationNo(validAttestationNo);
         patientRepository.save(patient);
         return "Saved Patient";
     }
