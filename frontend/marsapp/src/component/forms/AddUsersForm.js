@@ -105,7 +105,7 @@ class AddUsersForm extends React.Component {
 
     validate = (state) => {
         const errors = {};
-        const emptyWarning = "Can't be blank";
+        const emptyWarning = "Field cannot be blank";
 
         if(!state.userData.username) {
             errors.username = emptyWarning;
@@ -120,7 +120,9 @@ class AddUsersForm extends React.Component {
         else if(state.userData.password.length < 8 || state.userData.username.password > 32 ) {
             errors.password = "Password needs to be between 8 - 32 characters.";
         }
-
+        if(!state.userData.password2){
+            errors.password2 = emptyWarning;
+        }
         if(state.userData.password !== state.password2) {
             errors.password2 = "Password does not match";
         }
@@ -145,7 +147,7 @@ class AddUsersForm extends React.Component {
                             <Col>
                                 <Form.Row>
                                     <Form.Group as={Col}>
-                                        <Form.Label>Username*</Form.Label>
+                                        <Form.Label>Username</Form.Label>
                                         <Form.Control
                                             type="text"
                                             id="username"
@@ -159,7 +161,7 @@ class AddUsersForm extends React.Component {
                                 <Form.Row>
                                     <Form.Group as={Col}>
                                         {/*TODO: remove and have user create password after validating email or phone number*/}
-                                        <Form.Label>Password*</Form.Label>
+                                        <Form.Label>Password</Form.Label>
                                         <Form.Control
                                             type="password"
                                             id="password"
@@ -171,7 +173,7 @@ class AddUsersForm extends React.Component {
                                     </Form.Group>
                                     <Form.Group as={Col}>
                                         {/*TODO: remove and have user create password after validating email or phone number*/}
-                                        <Form.Label>Re-enter Password*</Form.Label>
+                                        <Form.Label>Re-enter Password</Form.Label>
                                         <Form.Control
                                             type="password"
                                             id="password2"

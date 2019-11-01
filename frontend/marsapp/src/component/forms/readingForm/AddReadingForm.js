@@ -10,6 +10,7 @@ import PropTypes from "prop-types";
 import TopNavigation from "../../navigation/TopNavigation";
 import {Button, Col, Container, Form, Row} from 'react-bootstrap';
 import api from "../../../api";
+import InlineError from "../../messages/InlineError";
 
 class AddReadingForm extends React.Component {
     constructor(props){
@@ -17,7 +18,7 @@ class AddReadingForm extends React.Component {
         this.state = {
             data:{
                 readerId: 1,
-                patientId: 1,
+                patientId: "",
                 timestamp: "2019-09-08",
                 symptoms: "No symptoms",
                 otherSymptoms: "No other symptoms",
@@ -77,9 +78,13 @@ class AddReadingForm extends React.Component {
 
     validate = (data) => {
         const errors = {};
-        var emptyFieldsWarning = "This field cannot be blank";
-        if(!data.patient_id) errors.patient_id = emptyFieldsWarning;
-        if(!data.reader_id) errors.reader_id = emptyFieldsWarning;
+        var emptyFieldsWarning = "Field cannot be blank";
+        if(!data.patient_id) {
+            errors.patient_id = emptyFieldsWarning;
+        }
+        else if(!data.reader_id) {
+            errors.reader_id = emptyFieldsWarning;
+        }
         return errors;
     }
 
@@ -107,6 +112,7 @@ class AddReadingForm extends React.Component {
                                         placeholder="Patient ID" 
                                         value={data.patientId} 
                                         onChange={this.onChange}/>
+                                        {errors.patientId && <InlineError text={errors.patientId}/>}
                                     {/* <Form.Text className="text-muted">
                                         {errors.email && <InlineError text={errors.email} />}
                                     </Form.Text> */}
