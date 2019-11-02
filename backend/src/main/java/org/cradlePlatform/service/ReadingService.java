@@ -9,12 +9,12 @@ import org.springframework.stereotype.Service;
 public class ReadingService {
     // Break points for determining Green/Yellow/Red Up/Down
     // source: CRADLE VSA Manual (extracted spring 2019)
-    private static final int RED_SYSTOLIC = 160;
-    private static final int RED_DIASTOLIC = 110;
-    private static final int YELLOW_SYSTOLIC = 140;
-    private static final int YELLOW_DIASTOLIC = 90;
-    private static final double SHOCK_HIGH = 1.7;
-    private static final double SHOCK_MEDIUM = 0.9;
+    public static final int RED_SYSTOLIC = 160;
+    public static final int RED_DIASTOLIC = 110;
+    public static final int YELLOW_SYSTOLIC = 140;
+    public static final int YELLOW_DIASTOLIC = 90;
+    public static final double SHOCK_HIGH = 1.7;
+    public static final double SHOCK_MEDIUM = 0.9;
 
     public static final int MAX_SYSTOLIC = 300;
     public static final int MIN_SYSTOLIC = 10;
@@ -68,9 +68,12 @@ public class ReadingService {
         return (double) reading.getPulseRate() / (double) reading.getSystolicBloodPressure();
     }
 
+    @NotNull
     public boolean isValidReferralToHealthCentreRecommended(Reading reading) {
-        return (reading.getVitalsTrafficLight() == VitalsTrafficLight.Yellow_up && reading.getNeedFollowUp())
-                || (reading.getVitalsTrafficLight() == VitalsTrafficLight.Red_up && reading.getNeedFollowUp())
-                || (reading.getVitalsTrafficLight() == VitalsTrafficLight.Red_down && reading.getNeedFollowUp());
+        return ((reading.getVitalsTrafficLight() == VitalsTrafficLight.Yellow_up && reading.getNeedFollowUp() == true)
+                || (reading.getVitalsTrafficLight() == VitalsTrafficLight.Red_up && reading.getNeedFollowUp() == true)
+                || (reading.getVitalsTrafficLight() == VitalsTrafficLight.Red_down && reading.getNeedFollowUp() == true)
+                || (reading.getVitalsTrafficLight() == VitalsTrafficLight.Yellow_down && reading.getNeedFollowUp() == false)
+                || (reading.getVitalsTrafficLight() == VitalsTrafficLight.Green && reading.getNeedFollowUp() == false));
     }
 }

@@ -12,6 +12,7 @@ import java.util.Optional;
 import org.cradlePlatform.model.Reading;
 import org.cradlePlatform.model.ReadingUploadWrapper;
 import org.cradlePlatform.repository.ReadingRepository;
+import org.cradlePlatform.service.ReadingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -24,7 +25,7 @@ public class ReadingController {
     private ReadingRepository readingRepository;
 
     @Autowired
-    private org.cradlePlatform.service.ReadingService readingService;
+    private ReadingService readingService;
 
     @PostMapping(path="/api/readings")
     public @ResponseBody ResponseEntity<String> addReadings(@RequestBody Reading reading){
