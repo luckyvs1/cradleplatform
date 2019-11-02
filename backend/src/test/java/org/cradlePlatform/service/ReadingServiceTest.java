@@ -24,7 +24,7 @@ public class ReadingServiceTest {
 
         assertTrue(shockIndex < readingService.SHOCK_MEDIUM);
         assertTrue(readingService.isValidTrafficLight(reading));
-        assertTrue(readingService.isValidReferralToHealthCentreRecommended(reading));
+        assertTrue(readingService.isValidReferralToHealthCentre(reading));
     }
 
     @Test
@@ -36,7 +36,7 @@ public class ReadingServiceTest {
         reading.setVitalsTrafficLight(VitalsTrafficLight.Yellow_up);
         reading.setNeedFollowUp(true);
 
-        assertTrue(readingService.isValidReferralToHealthCentreRecommended(reading));
+        assertTrue(readingService.isValidReferralToHealthCentre(reading));
 
         // Systolic triggers Yellow up
         assertTrue(readingService.isValidTrafficLight(reading));
@@ -65,7 +65,7 @@ public class ReadingServiceTest {
 
         assertTrue(shockIndex >= readingService.SHOCK_MEDIUM);
         assertTrue(readingService.isValidTrafficLight(reading));
-        assertTrue(readingService.isValidReferralToHealthCentreRecommended(reading));
+        assertTrue(readingService.isValidReferralToHealthCentre(reading));
     }
 
     @Test
@@ -77,7 +77,7 @@ public class ReadingServiceTest {
         reading.setVitalsTrafficLight(VitalsTrafficLight.Red_up);
         reading.setNeedFollowUp(true);
 
-        assertTrue(readingService.isValidReferralToHealthCentreRecommended(reading));
+        assertTrue(readingService.isValidReferralToHealthCentre(reading));
 
         // Systolic triggers Red up
         assertTrue(readingService.isValidTrafficLight(reading));
@@ -106,6 +106,6 @@ public class ReadingServiceTest {
 
         assertTrue(shockIndex >= readingService.SHOCK_HIGH);
         assertTrue(readingService.isValidTrafficLight(reading));
-        assertTrue(readingService.isValidReferralToHealthCentreRecommended(reading));
+        assertTrue(readingService.isValidReferralToHealthCentre(reading));
     }
 }

@@ -43,9 +43,14 @@ public class ReadingController {
 
     @PostMapping(path="/api/readings-validate")
     public ResponseEntity<String> validateReading(@RequestBody Reading reading){
-        VitalsTrafficLight vitalsTrafficLight = readingService.getVitalsTrafficLight(reading);
-        Boolean needsFollowUp = readingService.isReferralToHealthCentreRecommended(vitalsTrafficLight);
-        return new ResponseEntity<String>(readingService.getValidationResponse(vitalsTrafficLight, needsFollowUp), HttpStatus.OK);
+
+        if(readingService.isValidReadingValues(reading)) {
+            VitalsTrafficLight vitalsTrafficLight = readingService.getVitalsTrafficLight(reading);
+            Boolean needsFollowUp = readingService.isReferralToHealthCentreRecommended(vitalsTrafficLight);
+            return new ResponseEntity<String>(readingService.getValidationResponse(vitalsTrafficLight, needsFollowUp), HttpStatus.OK);
+        }
+
+        return new ResponseEntity<String>("Invalid Reading", HttpStatus.BAD_REQUEST);
     }
 
     @PostMapping(path="/api/readings-multi")

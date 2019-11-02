@@ -16,6 +16,13 @@ public class ReadingService {
     public static final double SHOCK_HIGH = 1.7;
     public static final double SHOCK_MEDIUM = 0.9;
 
+    public static final int MAX_SYSTOLIC = 300;
+    public static final int MIN_SYSTOLIC = 10;
+    public static final int MAX_DIASTOLIC = 300;
+    public static final int MIN_DIASTOLIC = 10;
+    public static final int MAX_HEART_RATE = 200;
+    public static final int MIN_HEART_RATE = 40;
+
     // Analysis Functions
     @NotNull
     public static Boolean isValidTrafficLight(Reading reading){
@@ -82,6 +89,16 @@ public class ReadingService {
         return ((vitalsTrafficLight == VitalsTrafficLight.Yellow_up)
                 || (vitalsTrafficLight == VitalsTrafficLight.Red_up)
                 || (vitalsTrafficLight == VitalsTrafficLight.Red_down));
+    }
+
+    @NotNull
+    public boolean isValidReadingValues(Reading reading) {
+        return ((reading.getSystolicBloodPressure() >= MIN_SYSTOLIC)
+                && (reading.getSystolicBloodPressure() <= MAX_SYSTOLIC)
+                && (reading.getDiastolicBloodPressure() >= MIN_DIASTOLIC)
+                && (reading.getDiastolicBloodPressure() <= MAX_DIASTOLIC)
+                && (reading.getPulseRate() >= MIN_HEART_RATE)
+                && (reading.getPulseRate() <= MAX_HEART_RATE));
     }
 
     public String getValidationResponse(VitalsTrafficLight vitalsTrafficLight, Boolean followUpRequired) {
