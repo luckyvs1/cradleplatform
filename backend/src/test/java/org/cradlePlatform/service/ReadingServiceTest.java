@@ -5,7 +5,6 @@ import org.junit.Test;
 import org.cradlePlatform.model.Reading;
 import org.cradlePlatform.model.VitalsTrafficLight;
 import org.cradlePlatform.service.ReadingService;
-import org.springframework.beans.factory.annotation.Autowired;
 
 public class ReadingServiceTest {
 
