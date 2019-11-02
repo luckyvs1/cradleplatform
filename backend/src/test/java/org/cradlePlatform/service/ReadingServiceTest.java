@@ -8,15 +8,17 @@ import org.cradlePlatform.service.ReadingService;
 
 public class ReadingServiceTest {
 
-    // Reduce threshold boundary from invalid to valid by subtracting a small offset
-    int MINOR_OFFSET = 5;
+    // Variables used to approximate valid green range
+    public static final int GREEN_SYSTOLIC = 139;
+    public static final int GREEN_DIASTOLIC = 89;
+    int MINOR_OFFSET = 1; // Used to lower shockIndex from equaling SHOCK_MEDIUM to less than SHOCK_MEDIUM
 
     @Test
     public void validGreenAnalysis() {
         Reading reading = new Reading();
         ReadingService readingService = new ReadingService();
-        reading.setSystolicBloodPressure(readingService.YELLOW_SYSTOLIC - MINOR_OFFSET);
-        reading.setDiastolicBloodPressure(readingService.YELLOW_DIASTOLIC - MINOR_OFFSET);
+        reading.setSystolicBloodPressure(GREEN_SYSTOLIC);
+        reading.setDiastolicBloodPressure(GREEN_DIASTOLIC);
         reading.setPulseRate((int)(readingService.SHOCK_MEDIUM * reading.getSystolicBloodPressure() - MINOR_OFFSET));
         reading.setVitalsTrafficLight(VitalsTrafficLight.Green);
         reading.setNeedFollowUp(false);
@@ -42,7 +44,9 @@ public class ReadingServiceTest {
         assertTrue(readingService.isValidTrafficLight(reading));
 
         reading.setDiastolicBloodPressure(readingService.YELLOW_DIASTOLIC);
-        reading.setSystolicBloodPressure(readingService.YELLOW_SYSTOLIC - MINOR_OFFSET);
+
+        // Lower the systolic blood pressure to the Green range
+        reading.setSystolicBloodPressure(GREEN_SYSTOLIC);
 
         // Diastolic triggers Yellow up
         assertTrue(readingService.isValidTrafficLight(reading));
@@ -73,7 +77,7 @@ public class ReadingServiceTest {
         Reading reading = new Reading();
         ReadingService readingService = new ReadingService();
         reading.setSystolicBloodPressure(readingService.RED_SYSTOLIC);
-        reading.setPulseRate((int)(readingService.SHOCK_MEDIUM * reading.getSystolicBloodPressure() - MINOR_OFFSET));
+        reading.setPulseRate((int)(readingService.SHOCK_MEDIUM * reading.getSystolicBloodPressure()));
         reading.setVitalsTrafficLight(VitalsTrafficLight.Red_up);
         reading.setNeedFollowUp(true);
 
@@ -83,7 +87,9 @@ public class ReadingServiceTest {
         assertTrue(readingService.isValidTrafficLight(reading));
 
         reading.setDiastolicBloodPressure(readingService.RED_DIASTOLIC);
-        reading.setSystolicBloodPressure(readingService.RED_SYSTOLIC - MINOR_OFFSET);
+
+        // Lower the systolic blood pressure to yellow range
+        reading.setSystolicBloodPressure(readingService.YELLOW_SYSTOLIC);
 
         // Diastolic triggers Red up
         assertTrue(readingService.isValidTrafficLight(reading));

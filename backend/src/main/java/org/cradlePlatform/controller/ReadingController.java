@@ -7,7 +7,6 @@
 package org.cradlePlatform.controller;
 
 
-import java.util.ArrayList;
 import java.util.Optional;
 import org.cradlePlatform.model.Reading;
 import org.cradlePlatform.model.VitalsTrafficLight;
@@ -55,7 +54,7 @@ public class ReadingController {
 
     @PostMapping(path="/api/readings-multi")
     public ResponseEntity<String> addReadings(@RequestBody ReadingUploadWrapper readings) {
-        ArrayList<Reading> invalidReadings = new ArrayList<>();
+        int counter = 0;
         for (Reading reading : readings.getReadings()) {
 
             Boolean trafficLightIsValid = readingService.isValidTrafficLight(reading);
@@ -64,15 +63,15 @@ public class ReadingController {
             if (trafficLightIsValid && referralValid) {
                 readingRepository.save(reading);
             } else {
-                invalidReadings.add(reading);
+                counter++;
             }
 
         }
 
-        if (invalidReadings.size() == readings.getReadings().size()) {
+        if (counter == readings.getReadings().size()) {
             return new ResponseEntity<String>("No readings were saved", HttpStatus.BAD_REQUEST);
-        } else if (!invalidReadings.isEmpty()) {
-            //TODO: Not all readings were saved due to error - need retry mechanism?
+        } else if (counter > 0) {
+            //TODO: Not all readings were saved due to error
             return new ResponseEntity<String>("Not all readings were saved", HttpStatus.CREATED);
         } else {
             return new ResponseEntity<String>("Saved readings", HttpStatus.CREATED);
