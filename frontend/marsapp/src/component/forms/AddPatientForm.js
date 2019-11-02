@@ -67,7 +67,7 @@ class AddPatientForm extends React.Component {
     };
     validate = (data) => {
         const errors = {};
-        var emptyWarning = "Field cannot be blank";
+        let emptyWarning = "Field cannot be blank";
         if(!data.villageNo) errors.villageNo = emptyWarning;
         if(!data.zoneNo) errors.zoneNo = emptyWarning;
         if(!data.initials) errors.initials = emptyWarning;

@@ -18,7 +18,7 @@ class AddReadingForm extends React.Component {
         this.state = {
             data:{
                 readerId: 1,
-                patientId: "",
+                patientId: 1,
                 timestamp: "2019-09-08",
                 symptoms: "No symptoms",
                 otherSymptoms: "No other symptoms",
@@ -313,8 +313,10 @@ class AddReadingForm extends React.Component {
                                 </Form.Group>
                             </Col>
                         </Row>
-                        <Row style={{ float: 'right' }}>
-                            <Button primary type="submit" >Create</Button>
+                        <Row>
+                            <Col className={"text-right"}>
+                                <Button primary type="submit">Create</Button>
+                            </Col>
                         </Row>
                     </Form>
                 </Container>

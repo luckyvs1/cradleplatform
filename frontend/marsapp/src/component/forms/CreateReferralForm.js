@@ -140,8 +140,10 @@ class CreateReferralForm extends React.Component {
                                         </Form.Group>
                                     </Col>
                                 </Row>
-                                <Row style={{ float: 'right' }}>
-                                    <Button primary type="submit" >Create</Button>
+                                <Row>
+                                    <Col className={"text-right"}>
+                                        <Button primary type="submit">Create</Button>
+                                    </Col>
                                 </Row>
                             </Form>
                         </Col>
