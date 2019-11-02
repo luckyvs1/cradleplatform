@@ -51,4 +51,30 @@ public class ReadingServiceTest {
         // Systolic and Diastolic triggers Yellow up
         assertTrue(readingService.isValidTrafficLight(reading));
     }
+
+    @Test
+    public void validRedUpAnalysis() {
+        Reading reading = new Reading();
+        ReadingService readingService = new ReadingService();
+        reading.setSystolicBloodPressure(readingService.RED_SYSTOLIC);
+        reading.setPulseRate((int)(readingService.SHOCK_MEDIUM * reading.getSystolicBloodPressure() - 5));
+        reading.setVitalsTrafficLight(VitalsTrafficLight.Red_up);
+        reading.setNeedFollowUp(true);
+
+        assertTrue(readingService.isValidReferralToHealthCentreRecommended(reading));
+
+        // Systolic triggers Red up
+        assertTrue(readingService.isValidTrafficLight(reading));
+
+        reading.setDiastolicBloodPressure(readingService.RED_DIASTOLIC);
+        reading.setSystolicBloodPressure(readingService.RED_SYSTOLIC - 5);
+
+        // Diastolic triggers Red up
+        assertTrue(readingService.isValidTrafficLight(reading));
+
+        reading.setSystolicBloodPressure(readingService.RED_SYSTOLIC);
+
+        // Systolic and Diastolic triggers Red up
+        assertTrue(readingService.isValidTrafficLight(reading));
+    }
 }
