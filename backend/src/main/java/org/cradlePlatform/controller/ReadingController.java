@@ -50,7 +50,7 @@ public class ReadingController {
             return new ResponseEntity<String>(readingService.getValidationResponse(vitalsTrafficLight, needsFollowUp), HttpStatus.OK);
         }
 
-        return new ResponseEntity<String>("Invalid Reading", HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<String>("Invalid reading", HttpStatus.BAD_REQUEST);
     }
 
     @PostMapping(path="/api/readings-multi")
