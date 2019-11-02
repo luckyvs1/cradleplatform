@@ -10,6 +10,7 @@ package org.cradlePlatform.controller;
 import java.util.ArrayList;
 import java.util.Optional;
 import org.cradlePlatform.model.Reading;
+import org.cradlePlatform.model.VitalsTrafficLight;
 import org.cradlePlatform.model.ReadingUploadWrapper;
 import org.cradlePlatform.repository.ReadingRepository;
 import org.cradlePlatform.service.ReadingService;
@@ -30,7 +31,7 @@ public class ReadingController {
     @PostMapping(path="/api/readings")
     public ResponseEntity<String> addReading(@RequestBody Reading reading){
         Boolean trafficLightIsValid = readingService.isValidTrafficLight(reading);
-        Boolean referralValid = readingService.isValidReferralToHealthCentreRecommended(reading);
+        Boolean referralValid = readingService.isValidReferralToHealthCentre(reading);
 
         if (trafficLightIsValid && referralValid) {
             readingRepository.save(reading);
@@ -41,15 +42,10 @@ public class ReadingController {
     }
 
     @PostMapping(path="/api/readings-validate")
-    public ResponseEntity<Boolean> validateReading(@RequestBody Reading reading){
-        Boolean trafficLightIsValid = readingService.isValidTrafficLight(reading);
-        Boolean referralValid = readingService.isValidReferralToHealthCentreRecommended(reading);
-
-        if (trafficLightIsValid && referralValid) {
-            return new ResponseEntity<Boolean>(true, HttpStatus.OK);
-        }
-
-        return new ResponseEntity<Boolean>(false, HttpStatus.OK);
+    public ResponseEntity<String> validateReading(@RequestBody Reading reading){
+        VitalsTrafficLight vitalsTrafficLight = readingService.getVitalsTrafficLight(reading);
+        Boolean needsFollowUp = readingService.isReferralToHealthCentreRecommended(vitalsTrafficLight);
+        return new ResponseEntity<String>(readingService.getValidationResponse(vitalsTrafficLight, needsFollowUp), HttpStatus.OK);
     }
 
     @PostMapping(path="/api/readings-multi")
@@ -58,7 +54,7 @@ public class ReadingController {
         for (Reading reading : readings.getReadings()) {
 
             Boolean trafficLightIsValid = readingService.isValidTrafficLight(reading);
-            Boolean referralValid = readingService.isValidReferralToHealthCentreRecommended(reading);
+            Boolean referralValid = readingService.isValidReferralToHealthCentre(reading);
 
             if (trafficLightIsValid && referralValid) {
                 readingRepository.save(reading);
