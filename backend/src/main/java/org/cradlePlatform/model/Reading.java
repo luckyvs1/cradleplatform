@@ -10,6 +10,8 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.Max;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -38,15 +40,18 @@ public class Reading {
 	@Column(name = "other_symptoms")
 	private String otherSymptoms;
 
-	@Range(min = 10, max = 300)
+	@Min(10)
+	@Max(300)
 	@Column(name = "systolic_bp")
 	private int systolicBloodPressure;
 
-	@Range(min = 10, max = 300)
+	@Min(10)
+	@Max(300)
 	@Column(name = "diastolic_bp")
 	private int diastolicBloodPressure;
 
-	@Range(min = 40, max = 200)
+	@Min(40)
+	@Max(200)
 	@Column(name = "pulse_rate")
 	private int pulseRate;
 
