@@ -47,14 +47,6 @@ class AddReadingForm extends React.Component {
         this.onSubmit = this.onSubmit.bind(this);
     }
 
-    // onChange = (event) => {
-    //     console.log('here');
-    //     data: {
-    //         ...this.state.data,
-    //         [e.target.name]: e.target.value
-    //     }
-    // };
-
     onChange = e =>  {
         this.setState({
             data: {
@@ -86,9 +78,13 @@ class AddReadingForm extends React.Component {
 
     validate = (data) => {
         const errors = {};
-        var emptyFieldsWarning = "This field cannot be blank";
-        if(!data.patient_id) errors.patient_id = emptyFieldsWarning;
-        if(!data.reader_id) errors.reader_id = emptyFieldsWarning;
+        var emptyFieldsWarning = "Field cannot be blank";
+        if(!data.patient_id) {
+            errors.patient_id = emptyFieldsWarning;
+        }
+        else if(!data.reader_id) {
+            errors.reader_id = emptyFieldsWarning;
+        }
         return errors;
     }
 
@@ -116,6 +112,7 @@ class AddReadingForm extends React.Component {
                                         placeholder="Patient ID" 
                                         value={data.patientId} 
                                         onChange={this.onChange}/>
+                                        {errors.patientId && <InlineError text={errors.patientId}/>}
                                     {/* <Form.Text className="text-muted">
                                         {errors.email && <InlineError text={errors.email} />}
                                     </Form.Text> */}
@@ -137,28 +134,13 @@ class AddReadingForm extends React.Component {
                                     </Form.Text> */}
                                 </Form.Group>
                             </Col>
-                        </Row>
-                        <Row>
-                            <Col>
-                                <Form.Group>
-                                    <Form.Label>Pregnant</Form.Label>
-                                    <Form.Control as="select">
-                                        <option value={'true'}>Yes</option>
-                                        <option value={'false'}>No</option>
-                                    </Form.Control>
-                                    {/* enable his for error handling */}
-                                    {/* <Form.Text className="text-muted">
-                                        {errors.email && <InlineError text={errors.email} />}
-                                    </Form.Text> */}
-                                </Form.Group>
-                            </Col>
                             <Col>
                                 <Form.Group>
                                     <Form.Label>Needs Follow-up</Form.Label>
-                                    <Form.Control as="select" 
-                                        name="needFollowUp" 
-                                        id="needFollowUp" 
-                                        onChange={this.onChange} 
+                                    <Form.Control as="select"
+                                        name="needFollowUp"
+                                        id="needFollowUp"
+                                        onChange={this.onChange}
                                         value={data.needFollowUp}>
                                         <option value={'true'}>Yes</option>
                                         <option value={'false'}>No</option>
@@ -332,10 +314,8 @@ class AddReadingForm extends React.Component {
                             </Col>
                         </Row>
                         <Row>
-                            <Col>
-                                <Button variant="success" type="submit">
-                                    Create
-                                </Button>
+                            <Col className={"text-right"}>
+                                <Button primary type="submit">Create</Button>
                             </Col>
                         </Row>
                     </Form>

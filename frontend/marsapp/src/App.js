@@ -22,7 +22,6 @@ import ListPatient from "./component/pages/patients/ListPatient";
 import Referral from "./component/pages/Referral/Referral";
 import ReferralDetail from "./component/pages/Referral/ReferralDetail";
 import CreateReferral from "./component/pages/Referral/CreateReferral";
-import Readings from "./component/pages/readings/Readings";
 import AddReadingDetail from "./component/pages/readings/AddReadingDetail";
 import AddPatient from "./component/pages/patients/AddPatient";
 import Account from "./component/pages/users/Account";
@@ -49,12 +48,6 @@ const App = ({location, isAuthenticated}) => (
             path="/addReadingDetail"
             exact
             component={AddReadingDetail}
-        />
-        <UserRoute
-            location={location}
-            path="/readings"
-            exact
-            component={Readings}
         />
         <UserRoute
             location={location}

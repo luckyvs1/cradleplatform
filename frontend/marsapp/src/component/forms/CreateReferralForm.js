@@ -141,10 +141,8 @@ class CreateReferralForm extends React.Component {
                                     </Col>
                                 </Row>
                                 <Row>
-                                    <Col>
-                                        <Button variant="success" as={Link} to="referral">
-                                            Create
-                                        </Button>
+                                    <Col className={"text-right"}>
+                                        <Button primary type="submit">Create</Button>
                                     </Col>
                                 </Row>
                             </Form>
