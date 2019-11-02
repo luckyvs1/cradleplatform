@@ -3,7 +3,7 @@ class AuthVHT {
         this.authenticated = false;
     }
 
-    setAtuh(){
+    setAuth(){
         this.authenticated=true;
     }
     login(cb) {

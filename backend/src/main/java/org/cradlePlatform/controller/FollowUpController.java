@@ -7,6 +7,7 @@ import org.cradlePlatform.model.FollowUp;
 import org.cradlePlatform.repository.FollowUpRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
@@ -64,5 +65,31 @@ public class FollowUpController {
         newFollowUp.setTreatment(followUp.getTreatment());
         followUpRepository.save(newFollowUp);
         return "Saved Follow Up";
+    }
+
+    /**
+     * Edit an existing FollowUp with matching id in the db.
+     * As a sanity check, patientIds must match. (in case request body did not include ID which would give default id 0)
+     * @param followUp followUp data to store.
+     * @return 200 if success, 404 if no matching id, 400 if request patientId does not match FollowUp from db.
+     */
+    @PutMapping(path="/api/followUps")
+    public @ResponseBody ResponseEntity<String> editFollowUp(@RequestBody FollowUp followUp) {
+        int id = followUp.getId();
+        Optional<FollowUp> fetchedFollowUpOptional = followUpRepository.findById(id);
+        if (fetchedFollowUpOptional.isPresent()) {
+            FollowUp fetchedFollowUp = fetchedFollowUpOptional.get();
+            if (fetchedFollowUp.getPatientId() == followUp.getPatientId()) {
+                fetchedFollowUp.updateFollowUp(followUp);
+                followUpRepository.save(fetchedFollowUp);
+                String responseMsg = "Edited FollowUp #" + id;
+                return new ResponseEntity<String>(responseMsg, HttpStatus.OK);
+            } else {
+                String responseMsg = "Invalid request.";
+                return new ResponseEntity<String>(responseMsg, HttpStatus.BAD_REQUEST);
+            }
+        }
+        String responseMsg = "FollowUp with id " + id + " not found";
+        return new ResponseEntity<String>(responseMsg, HttpStatus.NOT_FOUND);
     }
 }
