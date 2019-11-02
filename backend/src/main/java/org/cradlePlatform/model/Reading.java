@@ -6,6 +6,7 @@ package org.cradlePlatform.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import org.cradlePlatform.model.VitalsTrafficLight;
+import org.cradlePlatform.model.GestationalAgeTimeUnit;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
