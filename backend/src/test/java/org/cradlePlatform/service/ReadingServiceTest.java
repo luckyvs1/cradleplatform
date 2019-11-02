@@ -9,18 +9,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 public class ReadingServiceTest {
 
+    // Reduce threshold boundary from invalid to valid by subtracting a small offset
+    int MINOR_OFFSET = 5;
+
     @Test
     public void validGreenAnalysis() {
         Reading reading = new Reading();
         ReadingService readingService = new ReadingService();
-        reading.setSystolicBloodPressure(readingService.YELLOW_SYSTOLIC - 5);
-        reading.setDiastolicBloodPressure(readingService.YELLOW_DIASTOLIC - 5);
-        reading.setPulseRate((int)(readingService.SHOCK_MEDIUM * reading.getSystolicBloodPressure() - 5));
+        reading.setSystolicBloodPressure(readingService.YELLOW_SYSTOLIC - MINOR_OFFSET);
+        reading.setDiastolicBloodPressure(readingService.YELLOW_DIASTOLIC - MINOR_OFFSET);
+        reading.setPulseRate((int)(readingService.SHOCK_MEDIUM * reading.getSystolicBloodPressure() - MINOR_OFFSET));
         reading.setVitalsTrafficLight(VitalsTrafficLight.Green);
         reading.setNeedFollowUp(false);
         double shockIndex = readingService.getShockIndex(reading);
 
-        assertTrue(shockIndex < 0.9);
+        assertTrue(shockIndex < readingService.SHOCK_MEDIUM);
         assertTrue(readingService.isValidTrafficLight(reading));
         assertTrue(readingService.isValidReferralToHealthCentreRecommended(reading));
     }
@@ -30,7 +33,7 @@ public class ReadingServiceTest {
         Reading reading = new Reading();
         ReadingService readingService = new ReadingService();
         reading.setSystolicBloodPressure(readingService.YELLOW_SYSTOLIC);
-        reading.setPulseRate((int)(readingService.SHOCK_MEDIUM * reading.getSystolicBloodPressure() - 5));
+        reading.setPulseRate((int)(readingService.SHOCK_MEDIUM * reading.getSystolicBloodPressure() - MINOR_OFFSET));
         reading.setVitalsTrafficLight(VitalsTrafficLight.Yellow_up);
         reading.setNeedFollowUp(true);
 
@@ -40,7 +43,7 @@ public class ReadingServiceTest {
         assertTrue(readingService.isValidTrafficLight(reading));
 
         reading.setDiastolicBloodPressure(readingService.YELLOW_DIASTOLIC);
-        reading.setSystolicBloodPressure(readingService.YELLOW_SYSTOLIC - 5);
+        reading.setSystolicBloodPressure(readingService.YELLOW_SYSTOLIC - MINOR_OFFSET);
 
         // Diastolic triggers Yellow up
         assertTrue(readingService.isValidTrafficLight(reading));
@@ -61,7 +64,7 @@ public class ReadingServiceTest {
         reading.setNeedFollowUp(false);
         double shockIndex = readingService.getShockIndex(reading);
 
-        assertTrue(shockIndex >= 0.9);
+        assertTrue(shockIndex >= readingService.SHOCK_MEDIUM);
         assertTrue(readingService.isValidTrafficLight(reading));
         assertTrue(readingService.isValidReferralToHealthCentreRecommended(reading));
     }
@@ -71,7 +74,7 @@ public class ReadingServiceTest {
         Reading reading = new Reading();
         ReadingService readingService = new ReadingService();
         reading.setSystolicBloodPressure(readingService.RED_SYSTOLIC);
-        reading.setPulseRate((int)(readingService.SHOCK_MEDIUM * reading.getSystolicBloodPressure() - 5));
+        reading.setPulseRate((int)(readingService.SHOCK_MEDIUM * reading.getSystolicBloodPressure() - MINOR_OFFSET));
         reading.setVitalsTrafficLight(VitalsTrafficLight.Red_up);
         reading.setNeedFollowUp(true);
 
@@ -81,7 +84,7 @@ public class ReadingServiceTest {
         assertTrue(readingService.isValidTrafficLight(reading));
 
         reading.setDiastolicBloodPressure(readingService.RED_DIASTOLIC);
-        reading.setSystolicBloodPressure(readingService.RED_SYSTOLIC - 5);
+        reading.setSystolicBloodPressure(readingService.RED_SYSTOLIC - MINOR_OFFSET);
 
         // Diastolic triggers Red up
         assertTrue(readingService.isValidTrafficLight(reading));
@@ -90,5 +93,20 @@ public class ReadingServiceTest {
 
         // Systolic and Diastolic triggers Red up
         assertTrue(readingService.isValidTrafficLight(reading));
+    }
+
+    @Test
+    public void validRedDownAnalysis() {
+        Reading reading = new Reading();
+        ReadingService readingService = new ReadingService();
+        reading.setSystolicBloodPressure(readingService.RED_SYSTOLIC);
+        reading.setPulseRate((int)(readingService.SHOCK_HIGH * reading.getSystolicBloodPressure()));
+        reading.setVitalsTrafficLight(VitalsTrafficLight.Red_down);
+        reading.setNeedFollowUp(true);
+        double shockIndex = readingService.getShockIndex(reading);
+
+        assertTrue(shockIndex >= readingService.SHOCK_HIGH);
+        assertTrue(readingService.isValidTrafficLight(reading));
+        assertTrue(readingService.isValidReferralToHealthCentreRecommended(reading));
     }
 }
