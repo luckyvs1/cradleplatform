@@ -18,8 +18,7 @@ public class ReadingServiceTest {
         reading.setPulseRate((int)(readingService.SHOCK_MEDIUM * reading.getSystolicBloodPressure() - 5));
         reading.setVitalsTrafficLight(VitalsTrafficLight.Green);
         reading.setNeedFollowUp(false);
-
-        int shockIndex = reading.getPulseRate()/reading.getSystolicBloodPressure();
+        double shockIndex = readingService.getShockIndex(reading);
 
         assertTrue(shockIndex < 0.9);
         assertTrue(readingService.isValidTrafficLight(reading));
@@ -50,6 +49,21 @@ public class ReadingServiceTest {
 
         // Systolic and Diastolic triggers Yellow up
         assertTrue(readingService.isValidTrafficLight(reading));
+    }
+
+    @Test
+    public void validYellowDownAnalysis() {
+        Reading reading = new Reading();
+        ReadingService readingService = new ReadingService();
+        reading.setSystolicBloodPressure(readingService.YELLOW_SYSTOLIC);
+        reading.setPulseRate((int)(readingService.SHOCK_MEDIUM * reading.getSystolicBloodPressure()));
+        reading.setVitalsTrafficLight(VitalsTrafficLight.Yellow_down);
+        reading.setNeedFollowUp(false);
+        double shockIndex = readingService.getShockIndex(reading);
+
+        assertTrue(shockIndex >= 0.9);
+        assertTrue(readingService.isValidTrafficLight(reading));
+        assertTrue(readingService.isValidReferralToHealthCentreRecommended(reading));
     }
 
     @Test

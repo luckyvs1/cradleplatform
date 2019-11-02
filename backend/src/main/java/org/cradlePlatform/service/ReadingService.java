@@ -60,7 +60,7 @@ public class ReadingService {
     }
 
     @NotNull
-    private static double getShockIndex(Reading reading) {
+    public static double getShockIndex(Reading reading) {
         // Div-zero guard:
         if (reading.getSystolicBloodPressure() == 0) {
             return 0;
