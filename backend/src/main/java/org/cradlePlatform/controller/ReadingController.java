@@ -28,20 +28,32 @@ public class ReadingController {
     private ReadingService readingService;
 
     @PostMapping(path="/api/readings")
-    public @ResponseBody ResponseEntity<String> addReadings(@RequestBody Reading reading){
+    public ResponseEntity<String> addReading(@RequestBody Reading reading){
         Boolean trafficLightIsValid = readingService.isValidTrafficLight(reading);
         Boolean referralValid = readingService.isValidReferralToHealthCentreRecommended(reading);
 
         if (trafficLightIsValid && referralValid) {
             readingRepository.save(reading);
-            return new ResponseEntity<String>("Saved Reading", HttpStatus.CREATED);
+            return new ResponseEntity<String>("Saved reading", HttpStatus.CREATED);
         }
 
         return new ResponseEntity<String>("Did not create reading", HttpStatus.BAD_REQUEST);
     }
 
+    @PostMapping(path="/api/readings-validate")
+    public ResponseEntity<Boolean> validateReading(@RequestBody Reading reading){
+        Boolean trafficLightIsValid = readingService.isValidTrafficLight(reading);
+        Boolean referralValid = readingService.isValidReferralToHealthCentreRecommended(reading);
+
+        if (trafficLightIsValid && referralValid) {
+            return new ResponseEntity<Boolean>(true, HttpStatus.OK);
+        }
+
+        return new ResponseEntity<Boolean>(false, HttpStatus.OK);
+    }
+
     @PostMapping(path="/api/readings-multi")
-    public @ResponseBody ResponseEntity<String> addReadings(@RequestBody ReadingUploadWrapper readings) {
+    public ResponseEntity<String> addReadings(@RequestBody ReadingUploadWrapper readings) {
         ArrayList<Reading> invalidReadings = new ArrayList<>();
         for (Reading reading : readings.getReadings()) {
 
@@ -62,7 +74,7 @@ public class ReadingController {
             //TODO: Not all readings were saved due to error - need retry mechanism?
             return new ResponseEntity<String>("Not all readings were saved", HttpStatus.CREATED);
         } else {
-            return new ResponseEntity<String>("Saved Readings", HttpStatus.CREATED);
+            return new ResponseEntity<String>("Saved readings", HttpStatus.CREATED);
         }
     }
 
