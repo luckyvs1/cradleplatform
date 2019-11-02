@@ -24,9 +24,7 @@ public class ReadingController {
     @PostMapping(path="/api/readings")
     @ResponseStatus(code = HttpStatus.CREATED)
     public String addReadings(@RequestBody Reading reading){
-
         readingRepository.save(reading);
-
         return "Saved Reading";
     }
 

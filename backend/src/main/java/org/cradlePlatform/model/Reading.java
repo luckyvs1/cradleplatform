@@ -108,6 +108,9 @@ public class Reading {
 	@Column(name = "reading_analysis")
 	private VitalsTrafficLight vitalsTrafficLight;
 
+	@Column(name = "diagnosis")
+	private String diagnosis;
+
 	public Reading() {}
 
 	public int getId() {
@@ -296,5 +299,13 @@ public class Reading {
 
 	public void setVitalsTrafficLight(VitalsTrafficLight vitalsTrafficLight) {
 		this.vitalsTrafficLight = vitalsTrafficLight;
+	}
+
+	public String getDiagnosis() {
+		return diagnosis;
+	}
+
+	public void setDiagnosis(String diagnosis) {
+		this.diagnosis = diagnosis;
 	}
 }
