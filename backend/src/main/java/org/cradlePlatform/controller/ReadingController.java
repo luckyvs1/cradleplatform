@@ -40,7 +40,7 @@ public class ReadingController {
         return new ResponseEntity<String>("Did not create reading", HttpStatus.BAD_REQUEST);
     }
 
-    @PostMapping(path="/api/readings-validate")
+    @PostMapping(path="/api/readings-process")
     public ResponseEntity<String> validateReading(@RequestBody Reading reading){
 
         if(readingService.isValidReadingValues(reading)) {
