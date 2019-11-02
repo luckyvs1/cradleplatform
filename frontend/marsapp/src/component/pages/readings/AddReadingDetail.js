@@ -19,7 +19,6 @@ class AddReadingDetail extends React.Component {
         message: ""
     }
     submit = data => {
-        console.log(data);
         // api.reading.addAReading(this.state.data)
         //     .then(response => {
         //         console.log(response);

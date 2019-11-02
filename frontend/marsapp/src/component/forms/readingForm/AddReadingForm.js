@@ -5,11 +5,9 @@
  */
 
 import React from "react";
-import {Link} from "react-router-dom";
 import PropTypes from "prop-types";
 import TopNavigation from "../../navigation/TopNavigation";
 import {Button, Col, Container, Form, Row} from 'react-bootstrap';
-import api from "../../../api";
 import InlineError from "../../messages/InlineError";
 
 class AddReadingForm extends React.Component {
