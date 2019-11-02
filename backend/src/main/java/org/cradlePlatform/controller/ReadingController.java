@@ -56,12 +56,14 @@ public class ReadingController {
 
         }
 
-        if (invalidReadings.isEmpty()) {
+        if (invalidReadings.size() == readings.getReadings().size()) {
+            return new ResponseEntity<String>("No readings were saved", HttpStatus.BAD_REQUEST);
+        } else if (!invalidReadings.isEmpty()) {
+            //TODO: Not all readings were saved due to error - need retry mechanism?
+            return new ResponseEntity<String>("Not all readings were saved", HttpStatus.CREATED);
+        } else {
             return new ResponseEntity<String>("Saved Readings", HttpStatus.CREATED);
         }
-
-        //TODO: Not all readings were saved due to error - need retry mechanism?
-        return new ResponseEntity<String>("Not all readings were saved", HttpStatus.CREATED);
     }
 
     @GetMapping(path="/api/readings")
