@@ -24,20 +24,12 @@ public class ReadingService {
     public static final int MIN_HEART_RATE = 40;
 
     // Analysis Functions
-    @NotNull
-    public static Boolean isValidTrafficLight(Reading reading){
-        boolean isValid = false;
+    public static Boolean isValidTrafficLight(@NotNull Reading reading){
         VitalsTrafficLight validTrafficLight = getVitalsTrafficLight(reading);
-
-        if (reading.getVitalsTrafficLight() == validTrafficLight) {
-            isValid = true;
-        }
-
-        return isValid;
+        return (reading.getVitalsTrafficLight() == validTrafficLight);
     }
 
-    @NotNull
-    public static VitalsTrafficLight getVitalsTrafficLight(Reading reading){
+    public static VitalsTrafficLight getVitalsTrafficLight(@NotNull Reading reading){
 
         int systolicBloodPressure = reading.getSystolicBloodPressure();
         int diastolicBloodPressure = reading.getDiastolicBloodPressure();
@@ -66,8 +58,7 @@ public class ReadingService {
         return vitalsTrafficLight;
     }
 
-    @NotNull
-    public static double getShockIndex(Reading reading) {
+    public static double getShockIndex(@NotNull Reading reading) {
         // Div-zero guard:
         if (reading.getSystolicBloodPressure() == 0) {
             return 0;
@@ -75,8 +66,7 @@ public class ReadingService {
         return (double) reading.getPulseRate() / (double) reading.getSystolicBloodPressure();
     }
 
-    @NotNull
-    public boolean isValidReferralToHealthCentre(Reading reading) {
+    public boolean isValidReferralToHealthCentre(@NotNull Reading reading) {
         return ((reading.getVitalsTrafficLight() == VitalsTrafficLight.Yellow_up && reading.getNeedFollowUp() == true)
                 || (reading.getVitalsTrafficLight() == VitalsTrafficLight.Red_up && reading.getNeedFollowUp() == true)
                 || (reading.getVitalsTrafficLight() == VitalsTrafficLight.Red_down && reading.getNeedFollowUp() == true)
@@ -84,15 +74,13 @@ public class ReadingService {
                 || (reading.getVitalsTrafficLight() == VitalsTrafficLight.Green && reading.getNeedFollowUp() == false));
     }
 
-    @NotNull
-    public boolean isReferralToHealthCentreRecommended(VitalsTrafficLight vitalsTrafficLight) {
+    public boolean isReferralToHealthCentreRecommended(@NotNull VitalsTrafficLight vitalsTrafficLight) {
         return ((vitalsTrafficLight == VitalsTrafficLight.Yellow_up)
                 || (vitalsTrafficLight == VitalsTrafficLight.Red_up)
                 || (vitalsTrafficLight == VitalsTrafficLight.Red_down));
     }
 
-    @NotNull
-    public boolean isValidReadingValues(Reading reading) {
+    public boolean isValidReadingValues(@NotNull Reading reading) {
         return ((reading.getSystolicBloodPressure() >= MIN_SYSTOLIC)
                 && (reading.getSystolicBloodPressure() <= MAX_SYSTOLIC)
                 && (reading.getDiastolicBloodPressure() >= MIN_DIASTOLIC)
