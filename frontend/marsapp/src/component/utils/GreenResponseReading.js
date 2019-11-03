@@ -1,15 +1,9 @@
-
 import React, {useState} from "react";
 import {Alert, Button, Col, Row} from "react-bootstrap"
 import {Rectangle, Circle, Ellipse, Line, Polyline, CornerBox, Triangle} from 'react-shapes';
 import {FaArrowAltCircleUp , FaArrowAltCircleDown} from "react-icons/all";
 
-
-
-
 const GreenResponseReading = ({show  , message}) => {
-
-
     return (
         <>
             <Alert id={'reading-response'} show={show} variant="success">
@@ -29,7 +23,6 @@ const GreenResponseReading = ({show  , message}) => {
                 </Row>
                 <hr />
             </Alert>
-
         </>
     );
 }

@@ -1,14 +1,8 @@
-
 import React, {useState} from "react";
 import {Alert, Button, Col, Row} from "react-bootstrap"
 import {Rectangle, Circle, Ellipse, Line, Polyline, CornerBox, Triangle} from 'react-shapes';
-
 import {FaArrowDown, FaArrowUp} from "react-icons/all";
-
-
 const StopSignResponseReading = ({show  , message}) => {
-
-
     return (
         <>
             <Alert id={'reading-response'} show={show} variant="danger">
@@ -28,7 +22,6 @@ const StopSignResponseReading = ({show  , message}) => {
                 </Row>
                 <hr />
             </Alert>
-
         </>
     );
 }
