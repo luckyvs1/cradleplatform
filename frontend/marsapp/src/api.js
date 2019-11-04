@@ -60,6 +60,7 @@ export default {
     reading:{
         addAReferral:data=> axios.post(`http://${host}:${port}/api/readings` , {data}),
         addAReading: data => axios.post(`http://${host}:${port}/api/readings`, data),
+        processReading: data => axios.post(`http://${host}:${port}/api/readings-process`, data),
         getReadingForPat:data=> axios.post(`http://${host}:${port}/api/patients/patientId=${data.patientId}/readings?latest=${data.latest}`),
 
         uploadReading: data =>axios.post(`http://${host}:${port}/api/readings` , {}).then(res => console.log(res)),

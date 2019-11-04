@@ -38,7 +38,6 @@ class AddReadingForm extends React.Component {
                 ocrEnabled: false,
                 uploadImages: false,
                 vitalsTrafficLight: "Green"},
-            isLoading: false,
             errors: {}
         };
         this.onChange = this.onChange.bind(this);
@@ -60,6 +59,7 @@ class AddReadingForm extends React.Component {
     }
 
     submit = event => {
+        console.log("Submit clicked : " , event)
         if (event) {
             this.props.submit(this.state.data)
         }
@@ -304,7 +304,7 @@ class AddReadingForm extends React.Component {
                         </Row>
                         <Row>
                             <Col className={"text-right"}>
-                                <Button primary type="submit" onClick={this.submit}>Create</Button>
+                                <Button primary onClick={this.submit}>Create</Button>
                             </Col>
                         </Row>
                     </Form>
