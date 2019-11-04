@@ -182,7 +182,7 @@ CREATE TABLE Monitor (
 insert into User values ('1', 'VHT_user', 'password123');
 insert into User values ('2', 'HealthWorker', 'password123');
 insert into User values ('3', 'Admin_user', 'password123');
-insert into User values ('4', 'justTesting', 'customerTesting');
+insert into User values ('4', 'customerTesting', 'justTesting');
 
 insert into User_Info values ('1',
                               'Bob',
