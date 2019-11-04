@@ -95,4 +95,12 @@ public class ReadingService {
                 "\"needFollowUp\":\"%b\"" +
                 "}", vitalsTrafficLight, followUpRequired);
     }
+
+    public String getReadingAdvice(VitalsTrafficLight vitalsTrafficLight) {
+        return String.format("{" +
+                "\"analysis\":\"%s\"," +
+                "\"briefAdvice\":\"%s\"," +
+                "\"adviceDetails\":\"%s\"" +
+                "}", vitalsTrafficLight.getAnalysisText(), vitalsTrafficLight.getBriefAdviceText(), vitalsTrafficLight.getAdviceDetailsText());
+    }
 }
