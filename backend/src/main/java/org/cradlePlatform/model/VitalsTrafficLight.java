@@ -16,22 +16,22 @@ public enum VitalsTrafficLight {
 					"developing infection or bleeding. \n The patient needs to be assessed to decide what actions is " +
 					"required. \n If she is well (no bleeding, no signs of infection, feels well) she may have " +
 					"anaemia, dehydration, an irregular heart rhythm or endocrine disease or her blood pressure may be " +
-					"low in pregnancy. Consider undertaking routine checks for these when possible. \n If she is unwell " +
+					"low in pregnancy. \n Consider undertaking routine checks for these when possible. \n If she is unwell " +
 					"e.g. vaginal bleeding, fever, discharge, constant abdominal pain or if she feels unwell e.g. " +
 					"feverish, pale, sweaty, breathless \n * Resuscitate as necessary e.g. keep warm, elevate legs \n " +
 					"* Transfer urgently (preferably within 4 hours) \n * If bleeding, uterine massage after delivery " +
 					"of placenta, control of bleeding e.g. misoprostol, oxytocin, depending on what's available" +
 					"\n * If sepsis, consider starting antibiotics if available"),
 	Red_up("Very raised BP",
-			"Urgent action needed. Transfer to health centre within 4h. Monitor baby.",
+			"Urgent action needed. \n Transfer to health centre within 4h. \n Monitor baby.",
 			"This is very raised BP and indicates urgent action is needed. \n Manage as you would " +
 					"normally e.g. measure urine dipstick, check for signs and symptoms and act accordingly \n Give " +
 					"antihypertensives if available e.g. methyidopa, nifedipine, labetolol \n Consider magnesium " +
 					"sulphate (intramuscular) if available. \n If in the community transfer as soon as possible " +
-					"(preferably within 4 hours) \n Monitor the baby. \n If BP remains uncontrolled and gestation " +
+					"(preferably within 4 hours). \n Monitor the baby. \n If BP remains uncontrolled and gestation " +
 					"appropriate, seek senior advice regarding need to deliver."),
 	Red_down("In sever shock",
-			"Urgent action needed. Get help and assess mother. Immediately transfer to health centre within 1h.",
+			"Urgent action needed. \n Get help and assess mother. \n Immediately transfer to health centre within 1h.",
 			"Community Version \n * Stay calm. Do NOT leave the woman alone \n * Get HELP \n * Assess the " +
 					"mother \n * Is she pale, sweaty, cold, breathing fast, drowsy or confused? \n * Is she unwell e.g. " +
 					"vaginal bleeding, fever, discharge, constant pain? \n Treatment \n * Keep her warm and elevate legs if " +
@@ -46,8 +46,7 @@ public enum VitalsTrafficLight {
 					"* If bleeding transfuse blood, give uterotonics such as IV oxytocin, misoprostil or carboprost \n " +
 					"* Consider operative interventions if appropriate and available \n * If severe infection, keep hydrated, " +
 					"give IV antibiotics");
-
-	// Fields
+	
 	private final String analysisText;
 	private final String briefAdviceText;
 	private final String adviceDetailsText;
