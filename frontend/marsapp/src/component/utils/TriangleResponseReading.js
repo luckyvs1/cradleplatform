@@ -10,6 +10,10 @@ const TriangleResponseReading = ({show, message, isUp}) => {
                 <Alert.Heading>Warning</Alert.Heading>
                 <Row>
                     <Col>
+                        {isUp ?
+                            "Raised Blood Pressure":
+                            "Low Blood Pressure"
+                        }
                         <p>
                             {message}
                         </p>

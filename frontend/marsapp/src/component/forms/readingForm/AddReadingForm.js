@@ -80,6 +80,8 @@ class AddReadingForm extends React.Component {
     }
 
     render() {
+        console.log(this.props.dataFromParent )
+
         const{ data, errors } = this.state;
         return (
             <div>
@@ -100,8 +102,8 @@ class AddReadingForm extends React.Component {
                                         type="number"
                                         id="patientID"
                                         name="patientId"
-                                        placeholder="Patient ID" 
-                                        value={data.patientId} 
+                                        placeholder="Patient ID"
+                                        value={data.patientId}
                                         onChange={this.onChange}/>
                                         {errors.patientId && <InlineError text={errors.patientId}/>}
                                     {/* <Form.Text className="text-muted">
@@ -151,7 +153,7 @@ class AddReadingForm extends React.Component {
                                         type="number"
                                         id="systolicBloodPressure"
                                         name="systolicBloodPressure"
-                                        placeholder="Systolic Blood Pressure" 
+                                        placeholder="Systolic Blood Pressure"
                                         value={data.systolicBloodPressure}
                                         onChange={this.onChange} />
                                     {/* enable his for error handling */}
@@ -302,9 +304,14 @@ class AddReadingForm extends React.Component {
                             </Col>
                         </Row>
                         <Row>
-                            <Col className={"text-right"}>
-                                <Button primary onClick={this.submit}>Process Reading</Button>
-                            </Col>
+
+                            {this.props.dataFromParent?
+                                <Col className={"text-right"}>
+                                    <Button primary onClick={this.submit}>Process Reading</Button>
+                                </Col>
+                                :null
+                            }
+
                         </Row>
                     </Form>
                 </Container>
