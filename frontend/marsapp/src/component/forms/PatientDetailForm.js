@@ -12,6 +12,7 @@ import api from "../../api";
 import TopNavigation from "../navigation/TopNavigation";
 import {Button, Col, Container, Form, Row, Table} from 'react-bootstrap';
 import GraphDialog from "../utils/GraphDialog"
+import {withRouter} from "react-router-dom";
 
 const statusGreen = {
     backgroundColor: "green"
@@ -25,7 +26,7 @@ const statusRed = {
     backgroundColor: "red"
 };
 
-export default class PatientDetailForm extends React.Component {
+class PatientDetailForm extends React.Component {
     // functions
     // states
     // submit
@@ -63,12 +64,17 @@ export default class PatientDetailForm extends React.Component {
     }
 
     componentDidMount(){
-        //api.followUp.getFollowUpByFollowUpId({followUpId: 22}).then(res => {
-        //api.reading.getReadingsById({readingId: 32}).then (res => {
+        const pid = this.props.location.state.pid;
+
+        api.patient.getPatientById({id: pid}).then(res => {
+            console.log("get patient id", res); const data = res.data;
+            this.setState({data})
+        })
+
         api.reading.getReadingForPat({followUpId: 32}).then(res => {
             console.log("by reading id", res); const data = res.data;
             this.setState({data})
-        })
+        });
     }
 
     render() {
@@ -87,7 +93,7 @@ export default class PatientDetailForm extends React.Component {
                             <strong>Patient ID:</strong>
                         </Col>
                         <Col md={4}>                            
-                            0123456
+                            {this.state.data.id}
                         </Col>
                     </Row>
                     <Row>
@@ -95,7 +101,7 @@ export default class PatientDetailForm extends React.Component {
                             <strong>Initials:</strong>
                         </Col>
                         <Col md={4}>
-                            AS
+                            {this.state.data.intials}
                         </Col>
                     </Row>
                     <Row>
@@ -103,7 +109,7 @@ export default class PatientDetailForm extends React.Component {
                             <strong>Sex:</strong>
                         </Col>
                         <Col md={4}>
-                            Female
+                            {this.state.data.sexx}
                         </Col>
                     </Row>
                     <Row className="mb-4">
@@ -111,7 +117,7 @@ export default class PatientDetailForm extends React.Component {
                             <strong>Age:</strong>
                         </Col>
                         <Col md={4}>
-                            33
+                            {this.state.data.age}
                         </Col>
                     </Row>
                     <Tabs id="controlled-tab-example">
@@ -313,5 +319,5 @@ const mapDispatchToProps = (dispatch) => {
     }
 };
 
-
+export default withRouter(PatientDetailForm)
 
