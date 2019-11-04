@@ -271,8 +271,6 @@ class AddReadingForm extends React.Component {
                                 <Button variant="outline-primary" size="sm">Unwell</Button>&nbsp;
                             */}
                             </Col>
-                        </Row>
-                        <Row>
                             <Col>
                                 <Form.Group>
                                     <Form.Label>Additional Symptoms</Form.Label>
@@ -285,9 +283,8 @@ class AddReadingForm extends React.Component {
                                         value={data.otherSymptoms}
                                         onChange={this.onChange} />
                                 </Form.Group>
+
                             </Col>
-                        </Row>
-                        <Row>
                             <Col>
                                 <Form.Group>
                                     <Form.Label>Notes</Form.Label>
@@ -304,7 +301,7 @@ class AddReadingForm extends React.Component {
                         </Row>
                         <Row>
                             <Col className={"text-right"}>
-                                <Button primary onClick={this.submit}>Create</Button>
+                                <Button primary onClick={this.submit}>Process Reading</Button>
                             </Col>
                         </Row>
                     </Form>

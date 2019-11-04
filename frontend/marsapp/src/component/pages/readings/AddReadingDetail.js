@@ -9,40 +9,114 @@ import {connect} from "react-redux";
 import AddReadingForm from "../../forms/readingForm/AddReadingForm";
 import api from "../../../api";
 import GreenResponseReading from "../../utils/GreenResponseReading";
-import {Col} from "react-bootstrap";
+import {Button, Col, Row} from "react-bootstrap";
 import StopSignResponseReading from "../../utils/StopSignResponseReading";
 import TriangleResponseReading from "../../utils/TriangleResponseReading";
+import ConfirmAlert from "../../utils/ConfirmAlert";
+import ErrorAlert from "../../utils/ErrorAlert";
 
 class AddReadingDetail extends React.Component {
     // color => Yellow , Green , Red
     state = {
         isShow: false,
+        isShowError: false,
         message: "",
+        errorMsg: "",
         vitalsTrafficLight: "",
         needFollowUp: "",
         testNo: 0,
-        currentColor: ""
+        currentColor: "",
+        readyToSubmit: false,
+        readingData: {
+            readerId: null,
+            patientId: null,
+            timestamp: "",
+            symptoms: "",
+            otherSymptoms: "",
+            systolicBloodPressure: 0,
+            diastolicBloodPressure: 0,
+            pulseRate: 0,
+            notes: "",
+            needFollowUp: false,
+            appVersion: "",
+            dateLastSaved: "",
+            recheckVitalsDate: "",
+            deviceInformation: "",
+            gestationalAgeTimeUnit: "",
+            gestationalAge: 3,
+            manuallyChangedOcrResults: "",
+            photoPath: "",
+            totalOcrSeconds: 0.0,
+            region: "",
+            ocrEnabled: false,
+            uploadImages: false,
+            vitalsTrafficLight: ""
+        },
     }
+
+
     submit = data => {
+        this.setState({
+            readingData:data
+        })
         api.reading.processReading(data)
             .then(response => {
                 this.setState({
                     vitalsTrafficLight: response.data.vitalsTrafficLight,
                     needFollowUp: response.data.needFollowUp
                 })
-
                 this.processRetest(this.state.testNo, this.state.vitalsTrafficLight);
-                this.onShowAlert()
+                this.setState({
+                    isShow:true
+                })
 
                 console.log("data", response);
-            });
-    }
-    // needed later
-    onShowAlert = () => {
-        this.setState({
-            isShow: true,
+            }).catch(error =>{
+            if(error.response.status == 400){
+                this.onShowAlert(error.response.data)
+            }
         });
     }
+
+
+    onShowAlert = (message) => {
+        console.log(message)
+        this.setState({
+                isShowError: true,
+                errorMsg: message
+            },
+            () => {
+                window.setTimeout(() => {
+                    this.setState({
+                        isShowError: false,
+                        errorMsg: message
+                    })
+                }, 2000)
+            });
+    }
+
+
+    submitReading = data => {
+        console.log(this.state.readingData);
+
+
+        api.reading.addAReading(this.state.readingData).then(response =>{
+
+        })
+
+
+
+        this.setState({
+            isShow: false,
+            message: "",
+            vitalsTrafficLight: "",
+            needFollowUp: "",
+            testNo: 0,
+            currentColor: "",
+            readyToSubmit:false
+        })
+    }
+
 
 
     processRetest = (testNo, color) => {
@@ -53,7 +127,9 @@ class AddReadingDetail extends React.Component {
                 } else {
                     this.setState({
                         message: " Display Advice G",
-                        currentColor: "Green"
+                        currentColor: "",
+                        testNo:0,
+                        readyToSubmit:true,
                     })
                 }
                 break;
@@ -62,13 +138,19 @@ class AddReadingDetail extends React.Component {
                     this.processColorRetestStageOne(color);
                 } else {
                     this.setState({
-                        message: `Display advice for ${this.state.currentColor}`
+                        message: `Display advice for ${this.state.currentColor}`,
+                        currentColor: "",
+                        testNo:0,
+                        readyToSubmit : true,
                     })
                 }
                 break;
             case 2:
                 this.setState({
-                    message: `Display advice for ${color}`
+                    message: `Display advice for ${color}`,
+                    currentColor: "",
+                    testNo:0,
+                    readyToSubmit:true,
                 })
 
                 break;
@@ -156,6 +238,19 @@ class AddReadingDetail extends React.Component {
         return (
             <di>
                 <AddReadingForm submit={this.submit}></AddReadingForm>
+
+                <br/>
+                {this.state.readyToSubmit?
+
+                    <Col className={"text-center"}>
+                        <Button primary onClick={this.submitReading}>Submit Reading</Button>
+                    </Col>
+                    :
+                    null
+                }
+                <br/>
+                <ErrorAlert show={this.state.isShowError} message={this.state.errorMsg}></ErrorAlert>
+
                 {this.state.vitalsTrafficLight == "Green" ?
                     <GreenResponseReading show={this.state.isShow}
                                           message={this.state.message}></GreenResponseReading> :
