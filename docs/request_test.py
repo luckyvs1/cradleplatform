@@ -67,9 +67,9 @@ readingdata =  {
             "timestamp": "2019-01-01",
             "symptoms": "Feverish,Unwell",
             "otherSymptoms": "",
-            "systolicBloodPressure": 80,
-            "diastolicBloodPressure": 110,
-            "pulseRate": 80,
+            "systolicBloodPressure": 135,
+            "diastolicBloodPressure": 85,
+            "pulseRate": 117,
             "notes": "some notes",
             "needFollowUp": False,
             "appVersion": "CRADLE1.0",
@@ -92,11 +92,11 @@ readingdata =  {
             "timestamp": "2019-01-01",
             "symptoms": "Headache,Unwell",
             "otherSymptoms": "",
-            "systolicBloodPressure": 80,
-            "diastolicBloodPressure": 110,
-            "pulseRate": 80,
+            "systolicBloodPressure": 140,
+            "diastolicBloodPressure": 90,
+            "pulseRate": 117,
             "notes": "some notes",
-            "needFollowUp": False,
+            "needFollowUp": True,
             "appVersion": "CRADLE1.0",
             "dateLastSaved": "2019-08-17T12:00.000Z",
             "recheckVitalsDate": "2019-08-17",
@@ -109,7 +109,7 @@ readingdata =  {
             "region": "myregion",
             "ocrEnabled": True,
             "uploadImages": False,
-            "vitalsTrafficLight": "Green"
+            "vitalsTrafficLight": "Yellow_up"
         }
     ]
 }
