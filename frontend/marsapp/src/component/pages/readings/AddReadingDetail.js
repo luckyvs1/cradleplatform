@@ -28,6 +28,10 @@ class AddReadingDetail extends React.Component {
         currentColor: "",
         readyToSubmit: false,
         briefAdvice:"",
+        communityAdvice:"",
+        communityTreatment:"",
+        hospitalAdvice:"",
+        hospitalTreatment:"",
         adviceDetails:"",
         readingData: {
             readerId: 1,
@@ -119,10 +123,15 @@ class AddReadingDetail extends React.Component {
         })
 
         api.reading.getReadingAdvice(this.state.vitalsTrafficLight).then(response=>{
+            console.log(response);
             this.setState({
                 ...this.state,
                 briefAdvice:response.data.briefAdvice,
                 adviceDetails:response.data.adviceDetails,
+                communityAdvice:response.data.communityAdvice,
+                communityTreatment:response.data.communityTreatment,
+                hospitalAdvice:response.data.hospitalAdvice,
+                hospitalTreatment:response.data.hospitalTreatment,
                 isShowAdvice:true,
             })
         })
@@ -301,7 +310,14 @@ class AddReadingDetail extends React.Component {
                     null
                 }
                 <ErrorAlert show={this.state.isShowError} message={this.state.errorMsg}></ErrorAlert>
-                <AdviceBox show={this.state.isShowAdvice} briefAdvice={this.state.briefAdvice} adviceDetails={this.state.adviceDetails}></AdviceBox>
+                <AdviceBox show={this.state.isShowAdvice}
+                           briefAdvice={this.state.briefAdvice}
+                           adviceDetails={this.state.adviceDetails}
+                           communityAdvice ={this.state.communityAdvice }
+                           communityTreatment ={this.state.communityTreatment }
+                           hospitalAdvice ={this.state.hospitalAdvice }
+                           hospitalTreatment ={this.state.hospitalTreatment }
+                ></AdviceBox>
 
                 {this.state.vitalsTrafficLight == "Green" ?
                     <GreenResponseReading show={this.state.isShow}
