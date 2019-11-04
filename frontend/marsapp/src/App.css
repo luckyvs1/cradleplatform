@@ -621,7 +621,7 @@ li a {
     z-index: 1000;
     position: fixed;
     left: 250px;
-    top:56px !important;
+    top:0px !important;
     width: 50px;
     height: 100%;
     margin-left: -250px;
@@ -648,9 +648,13 @@ li a {
     font-size: 24px!important;
 
 }
+#menuHeader{
+    z-index: 1001 !important;
+}
 #menuHeader button{
     margin-left: -295px !important;
     margin-top: -5px !important;
+
 }
 #menuHeader button h2{
     font-size: 1.5rem !important;
@@ -667,7 +671,7 @@ li a {
 
 .sidebar-nav {
     position: absolute;
-    top: 75px;
+    top: 125px;
     width: 250px;
     margin: 0;
     padding: 0;
@@ -710,6 +714,9 @@ li a {
 
 .navbar>.container {
     align-content: center !important;
+}
+.navbar{
+    background-color: white !important;
 }
 #navbar-wrapper {
     width: 100%;
