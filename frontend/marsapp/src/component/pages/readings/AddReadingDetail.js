@@ -110,7 +110,14 @@ class AddReadingDetail extends React.Component {
 
     submitReading = data => {
         console.log(this.state.readingData);
-
+        this.setState({
+            ...this.state,
+            readingData :{
+                ...this.state.readingData,
+                vitalsTrafficLight: this.state.vitalsTrafficLight,
+                needFollowUp: this.state.needFollowUp,
+            }
+        })
 
         api.reading.addAReading(this.state.readingData).then(response => {
 
