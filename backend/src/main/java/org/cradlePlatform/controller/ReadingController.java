@@ -52,6 +52,12 @@ public class ReadingController {
         return new ResponseEntity<String>("Invalid reading", HttpStatus.BAD_REQUEST);
     }
 
+    @ResponseStatus(code = HttpStatus.OK)
+    @GetMapping(path="/api/readings-advice/{vitalsTrafficLight}")
+    public String getReadingAdvice(@PathVariable(value = "vitalsTrafficLight") VitalsTrafficLight vitalsTrafficLight){
+        return readingService.getReadingAdvice(vitalsTrafficLight);
+    }
+
     @PostMapping(path="/api/readings-multi")
     public ResponseEntity<String> addReadings(@RequestBody ReadingUploadWrapper readings) {
         int numInvalidReadings = 0;
