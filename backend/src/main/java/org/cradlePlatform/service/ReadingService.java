@@ -104,12 +104,14 @@ public class ReadingService {
                         "\"analysis\":\"%s\"," +
                         "\"briefAdvice\":\"%s\"," +
                         "\"adviceDetails\":\"%s\"," +
+                        "\"adviceDetailsBullets\":\"%s\"," +
                         "\"communityAdvice\":\"%s\"," +
                         "\"communityTreatment\":\"%s\"," +
                         "\"hospitalAdvice\":\"%s\"," +
                         "\"hospitalTreatment\":\"%s\"" +
                         "}", vitalsTrafficLight.getAnalysisText(), vitalsTrafficLight.getBriefAdviceText(),
-                vitalsTrafficLight.getAdviceDetailsText(), Arrays.toString(vitalsTrafficLight.getCommunityAdviceText()),
+                vitalsTrafficLight.getAdviceDetailsText(), Arrays.toString(vitalsTrafficLight.getAdviceDetailsBulletsText()),
+                Arrays.toString(vitalsTrafficLight.getCommunityAdviceText()),
                 Arrays.toString(vitalsTrafficLight.getCommunityTreatmentText()),
                 Arrays.toString(vitalsTrafficLight.getHospitalAdviceText()),
                 Arrays.toString(vitalsTrafficLight.getHospitalTreatmentText()));
