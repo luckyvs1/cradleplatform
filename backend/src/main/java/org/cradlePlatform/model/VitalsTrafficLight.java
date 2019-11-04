@@ -18,10 +18,10 @@ public enum VitalsTrafficLight {
 					"anaemia, dehydration, an irregular heart rhythm or endocrine disease or her blood pressure may be " +
 					"low in pregnancy.  Consider undertaking routine checks for these when possible.  If she is unwell " +
 					"e.g. vaginal bleeding, fever, discharge, constant abdominal pain or if she feels unwell e.g. " +
-					"feverish, pale, sweaty, breathless  * Resuscitate as necessary e.g. keep warm, elevate legs  " +
-					"* Transfer urgently (preferably within 4 hours)  * If bleeding, uterine massage after delivery " +
-					"of placenta, control of bleeding e.g. misoprostol, oxytocin, depending on what's available" +
-					" * If sepsis, consider starting antibiotics if available"),
+					"feverish, pale, sweaty, breathless", new String[] {"* Resuscitate as necessary e.g. keep warm, elevate legs",
+					"* Transfer urgently (preferably within 4 hours)", "* If bleeding, uterine massage after delivery " +
+					"of placenta, control of bleeding e.g. misoprostol, oxytocin, depending on what's available",
+					"* If sepsis, consider starting antibiotics if available"}),
 	Red_up("Very raised BP",
 			"Urgent action needed.  Transfer to health centre within 4h.  Monitor baby.",
 			"This is very raised BP and indicates urgent action is needed.  Manage as you would " +
@@ -47,6 +47,7 @@ public enum VitalsTrafficLight {
 	private String analysisText;
 	private String briefAdviceText;
 	private String adviceDetailsText;
+	private String[] adviceDetailsBulletsText;
 	private String[] communityAdviceText;
 	private String[] communityTreatmentText;
 	private String[] hospitalAdviceText;
@@ -56,6 +57,13 @@ public enum VitalsTrafficLight {
 		this.analysisText = analysisText;
 		this.briefAdviceText = briefAdviceText;
 		this.adviceDetailsText = adviceDetailsText;
+	}
+
+	VitalsTrafficLight(String analysisText, String briefAdviceText, String adviceDetailsText, String[] adviceDetailsBulletsText) {
+		this.analysisText = analysisText;
+		this.briefAdviceText = briefAdviceText;
+		this.adviceDetailsText = adviceDetailsText;
+		this.adviceDetailsBulletsText = adviceDetailsBulletsText;
 	}
 
 	VitalsTrafficLight(String analysisText, String briefAdviceText, String adviceDetailsText, String[] communityAdviceText, String[] communityTreatmentText, String[] hospitalAdviceText, String[] hospitalTreatmentText) {
@@ -90,6 +98,10 @@ public enum VitalsTrafficLight {
 
 	public String[] getCommunityTreatmentText() {
 		return communityTreatmentText;
+	}
+
+	public String[] getAdviceDetailsBulletsText() {
+		return adviceDetailsBulletsText;
 	}
 
 	public String[] getHospitalTreatmentText() {
