@@ -50,7 +50,8 @@ class AddReadingDetail extends React.Component {
             region: "",
             ocrEnabled: false,
             uploadImages: false,
-            vitalsTrafficLight: ""
+            vitalsTrafficLight: "none",
+            diagnosis: "none"
         },
     }
 

@@ -37,7 +37,9 @@ class AddReadingForm extends React.Component {
                 region: "Unknown",
                 ocrEnabled: false,
                 uploadImages: false,
-                vitalsTrafficLight: "Green"},
+                vitalsTrafficLight: "Green",
+                diagnosis: "none"
+            },
             errors: {}
         };
         this.onChange = this.onChange.bind(this);
