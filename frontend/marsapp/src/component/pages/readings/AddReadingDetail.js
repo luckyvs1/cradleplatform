@@ -28,29 +28,29 @@ class AddReadingDetail extends React.Component {
         currentColor: "",
         readyToSubmit: false,
         readingData: {
-            readerId: null,
-            patientId: null,
-            timestamp: "",
-            symptoms: "",
-            otherSymptoms: "",
+            readerId: 1,
+            patientId: 1,
+            timestamp: "2019-09-08",
+            symptoms: "No symptoms",
+            otherSymptoms: "No other symptoms",
             systolicBloodPressure: 0,
             diastolicBloodPressure: 0,
             pulseRate: 0,
-            notes: "",
+            notes: "No notes",
             needFollowUp: false,
-            appVersion: "",
-            dateLastSaved: "",
-            recheckVitalsDate: "",
-            deviceInformation: "",
-            gestationalAgeTimeUnit: "",
+            appVersion: "3",
+            dateLastSaved: "2019-10-03",
+            recheckVitalsDate: "2019-11-10",
+            deviceInformation: "Unknown",
+            gestationalAgeTimeUnit: "none",
             gestationalAge: 3,
-            manuallyChangedOcrResults: "",
-            photoPath: "",
+            manuallyChangedOcrResults: "No",
+            photoPath: "Unavailable",
             totalOcrSeconds: 0.0,
-            region: "",
+            region: "Unknown",
             ocrEnabled: false,
             uploadImages: false,
-            vitalsTrafficLight: "none",
+            vitalsTrafficLight: "",
             diagnosis: "none"
         },
     }
@@ -58,24 +58,33 @@ class AddReadingDetail extends React.Component {
 
     submit = data => {
         this.setState({
-            readingData:data
+            ...this.state,
+            readingData: data
         })
         api.reading.processReading(data)
             .then(response => {
                 this.setState({
+                    ...this.state,
                     vitalsTrafficLight: response.data.vitalsTrafficLight,
-                    needFollowUp: response.data.needFollowUp
+                    needFollowUp: response.data.needFollowUp,
+                    readingData: {
+                        ...this.state.readingData,
+                        vitalsTrafficLight: response.data.vitalsTrafficLight,
+                        needFollowUp: response.data.needFollowUp
+                    }
                 })
                 this.processRetest(this.state.testNo, this.state.vitalsTrafficLight);
+                console.log("AFTER PROCESS" , this.state.readingData)
                 this.setState({
-                    isShow:true
+                    ...this.state,
+                    isShow: true
                 })
 
                 console.log("data", response);
-            }).catch(error =>{
-            if(error.response.status == 400){
-                this.onShowAlert(error.response.data)
-            }
+            }).catch(error => {
+                if (error.response.status == 400) {
+                    this.onShowAlert(error.response.data)
+                }
         });
     }
 
@@ -83,12 +92,14 @@ class AddReadingDetail extends React.Component {
     onShowAlert = (message) => {
         console.log(message)
         this.setState({
+                ...this.state,
                 isShowError: true,
                 errorMsg: message
             },
             () => {
                 window.setTimeout(() => {
                     this.setState({
+                        ...this.state,
                         isShowError: false,
                         errorMsg: message
                     })
@@ -101,23 +112,22 @@ class AddReadingDetail extends React.Component {
         console.log(this.state.readingData);
 
 
-        api.reading.addAReading(this.state.readingData).then(response =>{
+        api.reading.addAReading(this.state.readingData).then(response => {
 
         })
 
 
-
         this.setState({
+            ...this.state,
             isShow: false,
             message: "",
             vitalsTrafficLight: "",
             needFollowUp: "",
             testNo: 0,
             currentColor: "",
-            readyToSubmit:false
+            readyToSubmit: false
         })
     }
-
 
 
     processRetest = (testNo, color) => {
@@ -127,10 +137,11 @@ class AddReadingDetail extends React.Component {
                     this.processColorRetestStageZero(color);
                 } else {
                     this.setState({
+                        ...this.state,
                         message: " Display Advice G",
                         currentColor: "",
-                        testNo:0,
-                        readyToSubmit:true,
+                        testNo: 0,
+                        readyToSubmit: true,
                     })
                 }
                 break;
@@ -139,19 +150,21 @@ class AddReadingDetail extends React.Component {
                     this.processColorRetestStageOne(color);
                 } else {
                     this.setState({
+                        ...this.state,
                         message: `Display advice for ${this.state.currentColor}`,
                         currentColor: "",
-                        testNo:0,
-                        readyToSubmit : true,
+                        testNo: 0,
+                        readyToSubmit: true,
                     })
                 }
                 break;
             case 2:
                 this.setState({
+                    ...this.state,
                     message: `Display advice for ${color}`,
                     currentColor: "",
-                    testNo:0,
-                    readyToSubmit:true,
+                    testNo: 0,
+                    readyToSubmit: true,
                 })
 
                 break;
@@ -165,6 +178,7 @@ class AddReadingDetail extends React.Component {
                 break;
             case "Yellow_up":
                 this.setState({
+                    ...this.state,
                     message: " Retest After 15m ++++ Yellow FIRST TEST",
                     currentColor: "Yellow",
                     testNo: this.state.testNo + 1
@@ -172,6 +186,7 @@ class AddReadingDetail extends React.Component {
                 break;
             case "Yellow_down":
                 this.setState({
+                    ...this.state,
                     message: " Retest After 15m ++++ Yellow FIRST TEST",
                     currentColor: "Yellow",
                     testNo: this.state.testNo + 1
@@ -179,6 +194,7 @@ class AddReadingDetail extends React.Component {
                 break;
             case "Red_up":
                 this.setState({
+                    ...this.state,
                     message: " Retest immediately +++++  Red FIRST TEST",
                     currentColor: "Red",
                     testNo: this.state.testNo + 1
@@ -186,6 +202,7 @@ class AddReadingDetail extends React.Component {
                 break;
             case "Red_down":
                 this.setState({
+                    ...this.state,
                     message: " Retest immediately +++++  Red FIRST TEST",
                     currentColor: "Red",
                     testNo: this.state.testNo + 1
@@ -199,6 +216,7 @@ class AddReadingDetail extends React.Component {
         switch (color) {
             case "Green":
                 this.setState({
+                    ...this.state,
                     message: " Retest Green  immediately (OR USE UR BRAIN) +++++   SECOND TEST ",
                     currentColor: "Green",
                     testNo: this.state.testNo + 1
@@ -206,6 +224,7 @@ class AddReadingDetail extends React.Component {
                 break;
             case "Yellow_up":
                 this.setState({
+                    ...this.state,
                     message: " Retest  immediately +++++ Yellow SECOND TEST",
                     currentColor: "Yellow",
                     testNo: this.state.testNo + 1
@@ -213,6 +232,7 @@ class AddReadingDetail extends React.Component {
                 break;
             case "Yellow_down":
                 this.setState({
+                    ...this.state,
                     message: " Retest   immediately +++++  Yellow SECOND TEST",
                     currentColor: "Yellow",
                     testNo: this.state.testNo + 1
@@ -220,6 +240,7 @@ class AddReadingDetail extends React.Component {
                 break;
             case "Red_up":
                 this.setState({
+                    ...this.state,
                     message: " Retest immediately +++++ Red SECOND TEST",
                     currentColor: "Red",
                     testNo: this.state.testNo + 1
@@ -227,6 +248,7 @@ class AddReadingDetail extends React.Component {
                 break;
             case "Red_down":
                 this.setState({
+                    ...this.state,
                     message: " Retest immediately +++++ Red SECOND TEST",
                     currentColor: "Red",
                     testNo: this.state.testNo + 1
@@ -241,7 +263,7 @@ class AddReadingDetail extends React.Component {
                 <AddReadingForm submit={this.submit}></AddReadingForm>
 
                 <br/>
-                {this.state.readyToSubmit?
+                {this.state.readyToSubmit ?
 
                     <Col className={"text-center"}>
                         <Button primary onClick={this.submitReading}>Submit Reading</Button>
