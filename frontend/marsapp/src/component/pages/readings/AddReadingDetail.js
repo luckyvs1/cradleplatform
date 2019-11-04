@@ -5,21 +5,21 @@
  */
 
 import React from "react";
-import {connect} from "react-redux";
 import AddReadingForm from "../../forms/readingForm/AddReadingForm";
 import api from "../../../api";
 import GreenResponseReading from "../../utils/GreenResponseReading";
-import {Button, Col, Row} from "react-bootstrap";
+import {Button, Col} from "react-bootstrap";
 import StopSignResponseReading from "../../utils/StopSignResponseReading";
 import TriangleResponseReading from "../../utils/TriangleResponseReading";
-import ConfirmAlert from "../../utils/ConfirmAlert";
 import ErrorAlert from "../../utils/ErrorAlert";
+import AdviceBox from "../../utils/AdviceBox"
 
 class AddReadingDetail extends React.Component {
     // color => Yellow , Green , Red
     state = {
         isShow: false,
         isShowError: false,
+        isShowAdvice:false,
         message: "",
         errorMsg: "",
         vitalsTrafficLight: "",
@@ -27,6 +27,8 @@ class AddReadingDetail extends React.Component {
         testNo: 0,
         currentColor: "",
         readyToSubmit: false,
+        briefAdvice:"",
+        adviceDetails:"",
         readingData: {
             readerId: 1,
             patientId: 1,
@@ -77,7 +79,8 @@ class AddReadingDetail extends React.Component {
                 console.log("AFTER PROCESS" , this.state.readingData)
                 this.setState({
                     ...this.state,
-                    isShow: true
+                    isShow: true,
+                    isShowAdvice:false,
                 })
 
                 console.log("data", response);
@@ -117,6 +120,15 @@ class AddReadingDetail extends React.Component {
                 vitalsTrafficLight: this.state.vitalsTrafficLight,
                 needFollowUp: this.state.needFollowUp,
             }
+        })
+
+        api.reading.getReadingAdvice(this.state.vitalsTrafficLight).then(response=>{
+            this.setState({
+                ...this.state,
+                briefAdvice:response.data.briefAdvice,
+                adviceDetails:response.data.adviceDetails,
+                isShowAdvice:true,
+            })
         })
 
         api.reading.addAReading(this.state.readingData).then(response => {
@@ -292,6 +304,7 @@ class AddReadingDetail extends React.Component {
                 }
                 <br/>
                 <ErrorAlert show={this.state.isShowError} message={this.state.errorMsg}></ErrorAlert>
+                <AdviceBox show={this.state.isShowAdvice} briefAdvice={this.state.briefAdvice} adviceDetails={this.state.adviceDetails}></AdviceBox>
 
                 {this.state.vitalsTrafficLight == "Green" ?
                     <GreenResponseReading show={this.state.isShow}
