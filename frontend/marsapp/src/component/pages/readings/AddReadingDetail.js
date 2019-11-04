@@ -76,14 +76,11 @@ class AddReadingDetail extends React.Component {
                     }
                 })
                 this.processRetest(this.state.testNo, this.state.vitalsTrafficLight);
-                console.log("AFTER PROCESS" , this.state.readingData)
                 this.setState({
                     ...this.state,
                     isShow: true,
                     isShowAdvice:false,
                 })
-
-                console.log("data", response);
             }).catch(error => {
                 if (error.response.status == 400) {
                     this.onShowAlert(error.response.data)
@@ -93,10 +90,10 @@ class AddReadingDetail extends React.Component {
 
 
     onShowAlert = (message) => {
-        console.log(message)
         this.setState({
                 ...this.state,
                 isShowError: true,
+                isShowAdvice:false,
                 errorMsg: message
             },
             () => {
@@ -112,7 +109,6 @@ class AddReadingDetail extends React.Component {
 
 
     submitReading = data => {
-        console.log(this.state.readingData);
         this.setState({
             ...this.state,
             readingData :{
@@ -131,8 +127,10 @@ class AddReadingDetail extends React.Component {
             })
         })
 
-        api.reading.addAReading(this.state.readingData).then(response => {
-
+        api.reading.addAReading(this.state.readingData).catch(error=>{
+            if (error.response.status == 400) {
+                this.onShowAlert(error.response.data)
+            }
         })
 
 
@@ -302,7 +300,6 @@ class AddReadingDetail extends React.Component {
                     :
                     null
                 }
-                <br/>
                 <ErrorAlert show={this.state.isShowError} message={this.state.errorMsg}></ErrorAlert>
                 <AdviceBox show={this.state.isShowAdvice} briefAdvice={this.state.briefAdvice} adviceDetails={this.state.adviceDetails}></AdviceBox>
 
