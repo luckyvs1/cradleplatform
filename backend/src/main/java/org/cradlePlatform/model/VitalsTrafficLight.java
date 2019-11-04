@@ -31,30 +31,41 @@ public enum VitalsTrafficLight {
 					"(preferably within 4 hours).  Monitor the baby.  If BP remains uncontrolled and gestation " +
 					"appropriate, seek senior advice regarding need to deliver."),
 	Red_down("In sever shock",
-			"Urgent action needed.  Get help and assess mother.  Immediately transfer to health centre within 1h.",
-			"Community Version  * Stay calm. Do NOT leave the woman alone  * Get HELP  * Assess the " +
-					"mother  * Is she pale, sweaty, cold, breathing fast, drowsy or confused?  * Is she unwell e.g. " +
-					"vaginal bleeding, fever, discharge, constant pain?  Treatment  * Keep her warm and elevate legs if " +
-					"possible  * Organise immediate transfer (within 1 hour)  * If bleeding, uterine massage after delivery " +
-					"of placenta, give medication to contract uterus if available e.g. misoprostil 600mcg orally  * If sepsis," +
-					" consider starting antibiotics  Hospital Version  * Stay calm. Do NOT leave the woman alone  * Get " +
-					"HELP  * Assess the mother  * Is she pale, sweaty, cold, breathing fast, drowsy or confused? " +
-					"* Is she unwell e.g. vaginal bleeding, fever, discharge, constant pain?  Treatment  * Keep her warm " +
-					"and elevate legs if possible  * Oxygen  * IV fluids give quickly through a large bore cannula e.g. 2 " +
-					"litres in first hour  * Collect blood to test hemoglobin, do an immediate cross-match  * Catheterise " +
-					"the bladder to monitor input/output  * Decide on the cause of shock and manage as you would normally  " +
-					"* If bleeding transfuse blood, give uterotonics such as IV oxytocin, misoprostil or carboprost  " +
-					"* Consider operative interventions if appropriate and available  * If severe infection, keep hydrated, " +
-					"give IV antibiotics");
-	
-	private final String analysisText;
-	private final String briefAdviceText;
-	private final String adviceDetailsText;
+			"Urgent action needed.  Get help and assess mother.  Immediately transfer to health centre within 1h.", "", new String[]
+			{"* Stay calm. Do NOT leave the woman alone", "* Get HELP", "* Assess the " +
+					"mother", "* Is she pale, sweaty, cold, breathing fast, drowsy or confused?", "* Is she unwell e.g. vaginal bleeding, fever, discharge, constant pain?"}, new String[]{"* Keep her warm and elevate legs if " +
+			"possible", "* Organise immediate transfer (within 1 hour)", "* If bleeding, uterine massage after delivery " +
+			"of placenta, give medication to contract uterus if available e.g. misoprostil 600mcg orally", "* If sepsis," +
+			" consider starting antibiotics"}, new String[]
+			{"* Stay calm. Do NOT leave the woman alone", "* Get HELP", "* Assess the mother",
+					"* Is she pale, sweaty, cold, breathing fast, drowsy or confused? ", "* Is she unwell e.g. vaginal bleeding, fever, discharge, constant pain?"}, new String[]
+			{"* Keep her warm and elevate legs if possible", "* Oxygen", "* IV fluids give quickly through a large bore cannula e.g. 2 litres in first hour", "* Collect blood to test hemoglobin, do an immediate cross-match", "* Catheterise the bladder to monitor input/output", "* Decide on the cause of shock and manage as you would normally",
+					"* If bleeding transfuse blood, give uterotonics such as IV oxytocin, misoprostil or carboprost" +
+							"* Consider operative interventions if appropriate and available", "* If severe infection, keep hydrated, " +
+					"give IV antibiotics"});
+
+	private String analysisText;
+	private String briefAdviceText;
+	private String adviceDetailsText;
+	private String[] communityAdviceText;
+	private String[] communityTreatmentText;
+	private String[] hospitalAdviceText;
+	private String[] hospitalTreatmentText;
 
 	VitalsTrafficLight(String analysisText, String briefAdviceText, String adviceDetailsText) {
 		this.analysisText = analysisText;
 		this.briefAdviceText = briefAdviceText;
 		this.adviceDetailsText = adviceDetailsText;
+	}
+
+	VitalsTrafficLight(String analysisText, String briefAdviceText, String adviceDetailsText, String[] communityAdviceText, String[] communityTreatmentText, String[] hospitalAdviceText, String[] hospitalTreatmentText) {
+		this.analysisText = analysisText;
+		this.briefAdviceText = briefAdviceText;
+		this.adviceDetailsText = adviceDetailsText;
+		this.communityAdviceText = communityAdviceText;
+		this.communityTreatmentText = communityTreatmentText;
+		this.hospitalAdviceText = hospitalAdviceText;
+		this.hospitalTreatmentText = hospitalTreatmentText;
 	}
 
 	public String getAnalysisText() {
@@ -69,4 +80,19 @@ public enum VitalsTrafficLight {
 		return adviceDetailsText;
 	}
 
+	public String[] getCommunityAdviceText() {
+		return communityAdviceText;
+	}
+
+	public String[] getHospitalAdviceText() {
+		return hospitalAdviceText;
+	}
+
+	public String[] getCommunityTreatmentText() {
+		return communityTreatmentText;
+	}
+
+	public String[] getHospitalTreatmentText() {
+		return hospitalTreatmentText;
+	}
 }
