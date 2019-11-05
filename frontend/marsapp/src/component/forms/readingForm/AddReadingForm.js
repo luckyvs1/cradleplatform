@@ -7,18 +7,18 @@
 import React from "react";
 import PropTypes from "prop-types";
 import TopNavigation from "../../navigation/TopNavigation";
-import {Button, Col, Container, Form, Row} from 'react-bootstrap';
+import {Button, Col, Container, Form, Row, InputGroup} from 'react-bootstrap';
 import InlineError from "../../messages/InlineError";
 
 class AddReadingForm extends React.Component {
-    constructor(props){
+    constructor(props) {
         super(props);
         this.state = {
-            data:{
+            data: {
                 readerId: 1,
                 patientId: 1,
                 timestamp: "2019-09-08",
-                symptoms: "No symptoms",
+                symptoms: "",
                 otherSymptoms: "No other symptoms",
                 systolicBloodPressure: 0,
                 diastolicBloodPressure: 0,
@@ -40,18 +40,45 @@ class AddReadingForm extends React.Component {
                 vitalsTrafficLight: "Green",
                 diagnosis: "none"
             },
+            checkBox: {
+                blurred: false,
+                feverish: false,
+                abdominal: false,
+                unwell: false,
+                noSymptoms: false,
+                headache: false,
+                bleeding: false,
+            },
             errors: {}
         };
         this.onChange = this.onChange.bind(this);
+        this.handleIsItChecked = this.handleIsItChecked.bind(this);
+
     }
 
-    onChange = e =>  {
-        this.setState({
-            data: {
-                ...this.state.data,
-                [e.target.name]: e.target.value
-            }
-        });
+    handleIsItChecked() {
+
+    }
+
+    onChange = e => {
+        console.log("STATE ", e.target);
+
+        if (e.target.type == "checkbox") {
+            this.setState({
+                checkBox: {
+                    ...this.state.checkBox,
+                    [e.target.name]: e.target.value
+                }
+            })
+        } else {
+            this.setState({
+                data: {
+                    ...this.state.data,
+                    [e.target.name]: e.target.value
+                }
+            });
+        }
+        console.log("STATE ", this.state);
     }
 
     onOptionChange = e => {
@@ -61,7 +88,7 @@ class AddReadingForm extends React.Component {
     }
 
     submit = event => {
-        console.log("Submit clicked : " , event)
+        console.log("Submit clicked : ", event)
         if (event) {
             this.props.submit(this.state.data)
         }
@@ -70,19 +97,18 @@ class AddReadingForm extends React.Component {
     validate = (data) => {
         const errors = {};
         var emptyFieldsWarning = "Field cannot be blank";
-        if(!data.patient_id) {
+        if (!data.patient_id) {
             errors.patient_id = emptyFieldsWarning;
-        }
-        else if(!data.reader_id) {
+        } else if (!data.reader_id) {
             errors.reader_id = emptyFieldsWarning;
         }
         return errors;
     }
 
     render() {
-        console.log(this.props.dataFromParent )
+        console.log(this.props.dataFromParent)
 
-        const{ data, errors } = this.state;
+        const {data, errors} = this.state;
         return (
             <div>
                 <TopNavigation authenticated={true}></TopNavigation>
@@ -105,7 +131,7 @@ class AddReadingForm extends React.Component {
                                         placeholder="Patient ID"
                                         value={data.patientId}
                                         onChange={this.onChange}/>
-                                        {errors.patientId && <InlineError text={errors.patientId}/>}
+                                    {errors.patientId && <InlineError text={errors.patientId}/>}
                                     {/* <Form.Text className="text-muted">
                                         {errors.email && <InlineError text={errors.email} />}
                                     </Form.Text> */}
@@ -120,7 +146,7 @@ class AddReadingForm extends React.Component {
                                         name="readerId"
                                         placeholder="Reader Id"
                                         value={data.readerId}
-                                        onChange={this.onChange} />
+                                        onChange={this.onChange}/>
                                     {/*error handling*/}
                                     {/* <Form.Text className="text-muted">
                                         {errors.email && <InlineError text={errors.email} />}
@@ -131,10 +157,10 @@ class AddReadingForm extends React.Component {
                                 <Form.Group>
                                     <Form.Label>Needs Follow-up</Form.Label>
                                     <Form.Control as="select"
-                                        name="needFollowUp"
-                                        id="needFollowUp"
-                                        onChange={this.onChange}
-                                        value={data.needFollowUp}>
+                                                  name="needFollowUp"
+                                                  id="needFollowUp"
+                                                  onChange={this.onChange}
+                                                  value={data.needFollowUp}>
                                         <option value={'true'}>Yes</option>
                                         <option value={'false'}>No</option>
                                     </Form.Control>
@@ -155,7 +181,7 @@ class AddReadingForm extends React.Component {
                                         name="systolicBloodPressure"
                                         placeholder="Systolic Blood Pressure"
                                         value={data.systolicBloodPressure}
-                                        onChange={this.onChange} />
+                                        onChange={this.onChange}/>
                                     {/* enable his for error handling */}
                                     {/* <Form.Text className="text-muted">
                                         {errors.email && <InlineError text={errors.email} />}
@@ -171,7 +197,7 @@ class AddReadingForm extends React.Component {
                                         name="diastolicBloodPressure"
                                         placeholder="Diastolic Blood Pressure"
                                         value={data.diastolicBloodPressure}
-                                        onChange={this.onChange} />
+                                        onChange={this.onChange}/>
                                     {/* enable his for error handling */}
                                     {/* <Form.Text className="text-muted">
                                         {errors.email && <InlineError text={errors.email} />}
@@ -187,7 +213,7 @@ class AddReadingForm extends React.Component {
                                         name="pulseRate"
                                         placeholder="Heart Rate"
                                         value={data.pulseRate}
-                                        onChange={this.onChange} />
+                                        onChange={this.onChange}/>
                                     {/* enable his for error handling */}
                                     {/* <Form.Text className="text-muted">
                                         {errors.email && <InlineError text={errors.email} />}
@@ -205,7 +231,7 @@ class AddReadingForm extends React.Component {
                                         name="gestationalAge"
                                         placeholder="Age"
                                         value={data.gestationalAge}
-                                        onChange={this.onChange} />
+                                        onChange={this.onChange}/>
                                     {/* enable his for error handling */}
                                     {/* <Form.Text className="text-muted">
                                         {errors.email && <InlineError text={errors.email} />}
@@ -216,10 +242,10 @@ class AddReadingForm extends React.Component {
                                 <Form.Group>
                                     <Form.Label>Gestational Age Unit</Form.Label>
                                     <Form.Control as="select"
-                                        name="gestationalAgeTimeUnit"
-                                        id="gestationalAgeTimeUnit"
-                                        onChange={this.onChange}
-                                        value={data.gestationalAgeTimeUnit}>
+                                                  name="gestationalAgeTimeUnit"
+                                                  id="gestationalAgeTimeUnit"
+                                                  onChange={this.onChange}
+                                                  value={data.gestationalAgeTimeUnit}>
                                         <option value={'weeks'}>Weeks</option>
                                         <option value={'months'}>Months</option>
                                         <option value={'none'}>None</option>
@@ -239,7 +265,7 @@ class AddReadingForm extends React.Component {
                                         name="region"
                                         placeholder="Region"
                                         value={data.region}
-                                        onChange={this.onChange} />
+                                        onChange={this.onChange}/>
                                     {/*error handling*/}
                                     {/* <Form.Text className="text-muted">
                                         {errors.email && <InlineError text={errors.email} />}
@@ -248,33 +274,27 @@ class AddReadingForm extends React.Component {
                             </Col>
                         </Row>
                         <Row className="mb-2">
-                            <Col>
-                            <Form.Group>
-                                <Form.Label>Symptoms</Form.Label>
-                                <Form.Control as="select"
-                                    name="symptoms"
-                                    id="symptoms"
-                                    onChange={this.onChange}
-                                    value={data.symptoms}>
-                                    <option value={'No Symptoms'}>No Sympotoms</option>
-                                    <option value={'Headache'}>Headache</option>
-                                    <option value={'Bleeding'}>Bleeding</option>
-                                    <option value={'Blurred Vision'}>Blurred Vision</option>
-                                    <option value={'Feverish'}>Feverish</option>
-                                    <option value={'Abdominal pain'}>Abdominal Pain</option>
-                                    <option value={'Unwell'}>Unwell</option>
-                                </Form.Control>
-                            </Form.Group>
-                            {/*  <Form.Label>Symptoms</Form.Label><br></br>
-                                <Button variant="outline-primary" size="sm">No Symptoms</Button>&nbsp;
-                                <Button variant="outline-primary" size="sm">Headache</Button>&nbsp;
-                                <Button variant="outline-primary" size="sm">Bleeding</Button>&nbsp;
-                                <Button variant="outline-primary" size="sm">Blurred Vision</Button>&nbsp;
-                                <Button variant="outline-primary" size="sm">Feverish</Button>&nbsp;
-                                <Button variant="outline-primary" size="sm">Adbdominal pain</Button>&nbsp;
-                                <Button variant="outline-primary" size="sm">Unwell</Button>&nbsp;
-                            */}
-                            </Col>
+
+                                    <Col>
+                                        <Form.Label>Symptoms</Form.Label>
+                                    </Col>
+                                    <Col>
+                                        <Form.Control inline size={'sm'} type={"checkbox"} onChange={this.onChange} name={'noSymptoms'}
+                                                      aria-label={"No Symptoms"} checked={this.state.checkBox.noSymptoms}/>
+                                    </Col>
+
+                                    {/*<input type={"checkbox"}  onChange={this.onChange} name={'headache'} aria-label="Headache" checked={this.state.checkBox.headache}/>*/}
+                                    {/*<input type={"checkbox"}  onChange={this.onChange} name={'bleeding'} aria-label="Bleeding" checked={this.state.checkBox.bleeding}/>*/}
+
+                            {/*<Col>*/}
+                            {/*    <Form.Group>*/}
+                            {/*        <Form.Label></Form.Label>*/}
+                            {/*        /!*<input type={"checkbox"}  onChange={this.onChange} name={'blurred'} aria-label="Blurred" checked={this.state.checkBox.blurred}/>*!/*/}
+                            {/*        /!*<input type={"checkbox"}  onChange={this.onChange} name={'feverish'} aria-label="Feverish" checked={this.state.checkBox.feverish}/>*!/*/}
+                            {/*        /!*<input type={"checkbox"}  onChange={this.onChange} name={'abdominal'} aria-label="Adbdominal" checked={this.state.checkBox.abdominal}/>*!/*/}
+                            {/*        /!*<input type={"checkbox"}  onChange={this.onChange} name={'unwell'} aria-label="Unwell" checked={this.state.checkBox.unwell}/>*!/*/}
+                            {/*    </Form.Group>*/}
+                            {/*</Col>*/}
                             <Col>
                                 <Form.Group>
                                     <Form.Label>Additional Symptoms</Form.Label>
@@ -285,7 +305,7 @@ class AddReadingForm extends React.Component {
                                         name="otherSymptoms"
                                         placeholder="additional_symptoms"
                                         value={data.otherSymptoms}
-                                        onChange={this.onChange} />
+                                        onChange={this.onChange}/>
                                 </Form.Group>
 
                             </Col>
@@ -299,17 +319,17 @@ class AddReadingForm extends React.Component {
                                         name="notes"
                                         placeholder="Notes"
                                         value={data.notes}
-                                        onChange={this.onChange} />
+                                        onChange={this.onChange}/>
                                 </Form.Group>
                             </Col>
                         </Row>
                         <Row>
 
-                            {this.props.dataFromParent?
+                            {this.props.dataFromParent ?
                                 <Col className={"text-right"}>
                                     <Button primary onClick={this.submit}>Process Reading</Button>
                                 </Col>
-                                :null
+                                : null
                             }
 
                         </Row>
