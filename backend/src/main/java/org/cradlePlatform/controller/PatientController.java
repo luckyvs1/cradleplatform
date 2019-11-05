@@ -52,7 +52,7 @@ public class PatientController {
         if (latest) {
             return  readingRepository.findTopByPatientIdOrderByIdDesc(patientId);
         } else {
-            return readingRepository.findReadingByPatientId(patientId);
+            return readingRepository.findReadingByPatientIdOrderByIdDesc(patientId);
         }
     }
 
