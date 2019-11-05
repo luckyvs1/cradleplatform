@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-@JsonInclude(JsonInclude.Include.NON_NULL) 	//  ignore all null fields
+@JsonInclude(JsonInclude.Include.NON_NULL) 
 @JsonFormat(shape = JsonFormat.Shape.OBJECT)
 public enum VitalsTrafficLight {
 	Green("Patient is likely healthy",
