@@ -39,7 +39,7 @@ class LoginPage extends React.Component {
             }).catch(error => {
             switch (error.response.status) {
                     case 401:
-                        this.onShowAlert("Username or Password is incorrect...Please try again");
+                        this.onShowAlert("Username or password is incorrect. Please try again.");
                         break
                 }
         })
