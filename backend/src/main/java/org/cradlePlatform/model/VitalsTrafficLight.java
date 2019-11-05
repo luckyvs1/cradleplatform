@@ -41,7 +41,7 @@ public enum VitalsTrafficLight {
 					"(preferably within 4 hours).  Monitor the baby.  If BP remains uncontrolled and gestation " +
 					"appropriate, seek senior advice regarding need to deliver.",
 			"Systolic >= 160 and/or diastolic >= 110"),
-	Red_down("In sever shock",
+	Red_down("In severe shock",
 			"Urgent action needed.  Get help and assess mother.  Immediately transfer to health centre " +
 					"(max 1h).", new String[]{"* Stay calm. Do NOT leave the woman alone", "* Get HELP", "* Assess the " +
 			"mother", "* Is she pale, sweaty, cold, breathing fast, drowsy or confused?", "* Is she unwell e.g. " +
