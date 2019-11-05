@@ -5,11 +5,9 @@
  */
 
 import React from "react";
-import {Link} from "react-router-dom";
 import PropTypes from "prop-types";
 import TopNavigation from "../../navigation/TopNavigation";
 import {Button, Col, Container, Form, Row} from 'react-bootstrap';
-import api from "../../../api";
 import InlineError from "../../messages/InlineError";
 
 class AddReadingForm extends React.Component {
@@ -44,7 +42,6 @@ class AddReadingForm extends React.Component {
             errors: {}
         };
         this.onChange = this.onChange.bind(this);
-        this.onSubmit = this.onSubmit.bind(this);
     }
 
     onChange = e =>  {
@@ -62,17 +59,9 @@ class AddReadingForm extends React.Component {
         });
     }
 
-    onSubmit = (event) => {
-        api.reading.addAReading(this.state.data)
-            .then(response => {
-                console.log(response);
-            });
-        event.preventDefault();
-        const err = this.validate(this.state.data);
-        this.setState({ err });
-        if (Object.keys(err).length === 0) {
-            // this.props.submit(this.state.data);
-            console.log('submitted');
+    submit = event => {
+        if (event) {
+            this.props.submit(this.state.data)
         }
     };
 
@@ -315,7 +304,7 @@ class AddReadingForm extends React.Component {
                         </Row>
                         <Row>
                             <Col className={"text-right"}>
-                                <Button primary type="submit">Create</Button>
+                                <Button primary type="submit" onClick={this.submit}>Create</Button>
                             </Col>
                         </Row>
                     </Form>
