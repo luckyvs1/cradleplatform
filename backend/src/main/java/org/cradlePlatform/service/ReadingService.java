@@ -2,11 +2,9 @@ package org.cradlePlatform.service;
 
 import org.cradlePlatform.model.Reading;
 import org.cradlePlatform.model.VitalsTrafficLight;
-
-import java.util.Arrays;
-import javax.validation.constraints.NotNull;
-
 import org.springframework.stereotype.Service;
+
+import javax.validation.constraints.NotNull;
 
 @Service
 public class ReadingService {
@@ -27,12 +25,12 @@ public class ReadingService {
     public static final int MIN_HEART_RATE = 40;
 
     // Analysis Functions
-    public static Boolean isValidTrafficLight(@NotNull Reading reading) {
+    public static Boolean isValidTrafficLight(@NotNull Reading reading){
         VitalsTrafficLight validTrafficLight = getVitalsTrafficLight(reading);
         return (reading.getVitalsTrafficLight() == validTrafficLight);
     }
 
-    public static VitalsTrafficLight getVitalsTrafficLight(@NotNull Reading reading) {
+    public static VitalsTrafficLight getVitalsTrafficLight(@NotNull Reading reading){
 
         int systolicBloodPressure = reading.getSystolicBloodPressure();
         int diastolicBloodPressure = reading.getDiastolicBloodPressure();
@@ -97,23 +95,5 @@ public class ReadingService {
                 "\"vitalsTrafficLight\":\"%s\"," +
                 "\"needFollowUp\":\"%b\"" +
                 "}", vitalsTrafficLight, followUpRequired);
-    }
-
-    public String getReadingAdvice(VitalsTrafficLight vitalsTrafficLight) {
-        return String.format("{" +
-                        "\"analysis\":\"%s\"," +
-                        "\"briefAdvice\":\"%s\"," +
-                        "\"adviceDetails\":\"%s\"," +
-                        "\"adviceDetailsBullets\":\"%s\"," +
-                        "\"communityAdvice\":\"%s\"," +
-                        "\"communityTreatment\":\"%s\"," +
-                        "\"hospitalAdvice\":\"%s\"," +
-                        "\"hospitalTreatment\":\"%s\"" +
-                        "}", vitalsTrafficLight.getAnalysisText(), vitalsTrafficLight.getBriefAdviceText(),
-                vitalsTrafficLight.getAdviceDetailsText(), Arrays.toString(vitalsTrafficLight.getAdviceDetailsBulletsText()),
-                Arrays.toString(vitalsTrafficLight.getCommunityAdviceText()),
-                Arrays.toString(vitalsTrafficLight.getCommunityTreatmentText()),
-                Arrays.toString(vitalsTrafficLight.getHospitalAdviceText()),
-                Arrays.toString(vitalsTrafficLight.getHospitalTreatmentText()));
     }
 }
