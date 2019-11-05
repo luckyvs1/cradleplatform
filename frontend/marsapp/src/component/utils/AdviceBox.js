@@ -4,7 +4,10 @@ import {Alert, Col, Row} from "react-bootstrap"
 const AdviceBox = ({show  , briefAdvice , adviceDetails ,communityAdvice
                        ,communityTreatment
                        ,hospitalAdvice
-                       ,hospitalTreatment }) => {
+                       ,hospitalTreatment
+                       ,condition
+                       ,advice
+                       ,analysis}) => {
     return (
         <>
             <Alert id={'advice-response'} show={show} variant="info">
@@ -12,23 +15,56 @@ const AdviceBox = ({show  , briefAdvice , adviceDetails ,communityAdvice
                 <Row>
                     <Col>
                         <p>
-                            {briefAdvice}
+                            {briefAdvice?briefAdvice:null}
                         </p>
-                        <p>
-                            {adviceDetails}
-                        </p>
-                        <p>
-                            {communityAdvice}
-                        </p>
-                        <p>
-                            {communityTreatment}
-                        </p>
-                        <p>
-                            {hospitalAdvice}
-                        </p>
-                        <p>
-                            {hospitalTreatment}
-                        </p>
+                        {analysis ?
+                            <p>{"Analysis : \n"}
+                                {analysis}
+                            </p>
+                            :null
+                        }
+                        {advice ?
+                            <p>{"Advice : \n"}
+                                {advice}
+                            </p>
+                            :null
+                        }
+                        {adviceDetails ?
+                            <p>{"Advice Detail : \n"}
+                                {adviceDetails}
+                            </p>
+                            :null
+                        }
+                        {communityAdvice ?
+                            <p>{"Community Advice : \n"}
+                                {communityAdvice}
+                            </p>
+                            :null
+                        }
+                        {communityTreatment ?
+                            <p>{"Community Treatment : \n"}
+                                {communityTreatment}
+                            </p>
+                            :null
+                        }
+                        {hospitalAdvice ?
+                            <p>{"Hospital Advice : \n"}
+                                {hospitalAdvice}
+                            </p>
+                            :null
+                        }
+                        {hospitalTreatment ?
+                            <p>{"Hospital Treatment : \n"}
+                                {hospitalTreatment}
+                            </p>
+                            :null
+                        }
+                        {condition ?
+                            <p>{"Condition : \n"}
+                                {condition}
+                            </p>
+                            :null
+                        }
                     </Col>
                 </Row>
                 <hr />

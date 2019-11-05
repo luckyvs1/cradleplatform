@@ -33,6 +33,9 @@ class AddReadingDetail extends React.Component {
         hospitalAdvice:"",
         hospitalTreatment:"",
         adviceDetailsBullets:"",
+        condition:"",
+        advice:"",
+        analysis:"",
         adviceDetails:"",
         readingData: {
             readerId: 1,
@@ -134,6 +137,9 @@ class AddReadingDetail extends React.Component {
                 hospitalAdvice:response.data.hospitalAdvice,
                 hospitalTreatment:response.data.hospitalTreatment,
                 adviceDetailsBullets:response.data.adviceDetailsBullets,
+                condition:response.data.condition,
+                analysis:response.data.analysis,
+                advice:response.data.advice,
                 isShowAdvice:true,
             })
         })
@@ -320,6 +326,9 @@ class AddReadingDetail extends React.Component {
                            hospitalAdvice ={this.state.hospitalAdvice }
                            hospitalTreatment ={this.state.hospitalTreatment }
                            adviceDetailsBullets ={this.state.adviceDetailsBullets }
+                           condition ={this.state.condition }
+                           advice ={this.state.advice }
+                           analysis ={this.state.analysis }
                 ></AdviceBox>
 
                 {this.state.vitalsTrafficLight == "Green" ?
