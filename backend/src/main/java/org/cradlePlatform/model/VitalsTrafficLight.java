@@ -1,5 +1,12 @@
 package org.cradlePlatform.model;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonGetter;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+@JsonInclude(JsonInclude.Include.NON_NULL) 	//  ignore all null fields
+@JsonFormat(shape = JsonFormat.Shape.OBJECT)
 public enum VitalsTrafficLight {
 	Green("Patient is likely healthy",
 			"Continue normal care",
@@ -31,7 +38,7 @@ public enum VitalsTrafficLight {
 					"(preferably within 4 hours).  Monitor the baby.  If BP remains uncontrolled and gestation " +
 					"appropriate, seek senior advice regarding need to deliver."),
 	Red_down("In sever shock",
-			"Urgent action needed.  Get help and assess mother.  Immediately transfer to health centre within 1h.", "", new String[]
+			"Urgent action needed.  Get help and assess mother.  Immediately transfer to health centre within 1h.", new String[]
 			{"* Stay calm. Do NOT leave the woman alone", "* Get HELP", "* Assess the " +
 					"mother", "* Is she pale, sweaty, cold, breathing fast, drowsy or confused?", "* Is she unwell e.g. vaginal bleeding, fever, discharge, constant pain?"}, new String[]{"* Keep her warm and elevate legs if " +
 			"possible", "* Organise immediate transfer (within 1 hour)", "* If bleeding, uterine massage after delivery " +
@@ -44,13 +51,28 @@ public enum VitalsTrafficLight {
 							"* Consider operative interventions if appropriate and available", "* If severe infection, keep hydrated, " +
 					"give IV antibiotics"});
 
+	@JsonProperty("analysis")
 	private String analysisText;
+
+	@JsonProperty("briefAdvice")
 	private String briefAdviceText;
+
+	@JsonProperty("adviceDetails")
 	private String adviceDetailsText;
+
+	@JsonProperty("adviceDetailsBullets")
 	private String[] adviceDetailsBulletsText;
+
+	@JsonProperty("communityAdvice")
 	private String[] communityAdviceText;
+
+	@JsonProperty("communityTreatment")
 	private String[] communityTreatmentText;
+
+	@JsonProperty("hospitalAdvice")
 	private String[] hospitalAdviceText;
+
+	@JsonProperty("hospitalTreatment")
 	private String[] hospitalTreatmentText;
 
 	VitalsTrafficLight(String analysisText, String briefAdviceText, String adviceDetailsText) {
@@ -66,44 +88,51 @@ public enum VitalsTrafficLight {
 		this.adviceDetailsBulletsText = adviceDetailsBulletsText;
 	}
 
-	VitalsTrafficLight(String analysisText, String briefAdviceText, String adviceDetailsText, String[] communityAdviceText, String[] communityTreatmentText, String[] hospitalAdviceText, String[] hospitalTreatmentText) {
+	VitalsTrafficLight(String analysisText, String briefAdviceText, String[] communityAdviceText, String[] communityTreatmentText, String[] hospitalAdviceText, String[] hospitalTreatmentText) {
 		this.analysisText = analysisText;
 		this.briefAdviceText = briefAdviceText;
-		this.adviceDetailsText = adviceDetailsText;
 		this.communityAdviceText = communityAdviceText;
 		this.communityTreatmentText = communityTreatmentText;
 		this.hospitalAdviceText = hospitalAdviceText;
 		this.hospitalTreatmentText = hospitalTreatmentText;
 	}
 
+	@JsonGetter("analysis")
 	public String getAnalysisText() {
 		return analysisText;
 	}
 
+	@JsonGetter("briefAdvice")
 	public String getBriefAdviceText() {
 		return briefAdviceText;
 	}
 
+	@JsonGetter("adviceDetails")
 	public String getAdviceDetailsText() {
 		return adviceDetailsText;
 	}
 
+	@JsonGetter("communityAdvice")
 	public String[] getCommunityAdviceText() {
 		return communityAdviceText;
 	}
 
+	@JsonGetter("hospitalAdvice")
 	public String[] getHospitalAdviceText() {
 		return hospitalAdviceText;
 	}
 
+	@JsonGetter("communityTreatment")
 	public String[] getCommunityTreatmentText() {
 		return communityTreatmentText;
 	}
 
+	@JsonGetter("adviceDetailsBullets")
 	public String[] getAdviceDetailsBulletsText() {
 		return adviceDetailsBulletsText;
 	}
 
+	@JsonGetter("hospitalTreatment")
 	public String[] getHospitalTreatmentText() {
 		return hospitalTreatmentText;
 	}

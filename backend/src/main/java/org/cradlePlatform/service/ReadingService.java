@@ -2,10 +2,14 @@ package org.cradlePlatform.service;
 
 import org.cradlePlatform.model.Reading;
 import org.cradlePlatform.model.VitalsTrafficLight;
-
-import java.util.Arrays;
+//import java.util.Arrays;
 import javax.validation.constraints.NotNull;
-
+//import org.springframework.boot.json;
+//import com.google.gson.JsonElement;
+//import com.google.gson.JsonObject;
+//import com.google.gson.JsonSerializationContext;
+//import com.google.gson.JsonSerializer;
+//import com.google.gson.JsonParser;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -99,21 +103,26 @@ public class ReadingService {
                 "}", vitalsTrafficLight, followUpRequired);
     }
 
-    public String getReadingAdvice(VitalsTrafficLight vitalsTrafficLight) {
-        return String.format("{" +
-                        "\"analysis\":\"%s\"," +
-                        "\"briefAdvice\":\"%s\"," +
-                        "\"adviceDetails\":\"%s\"," +
-                        "\"adviceDetailsBullets\":\"%s\"," +
-                        "\"communityAdvice\":\"%s\"," +
-                        "\"communityTreatment\":\"%s\"," +
-                        "\"hospitalAdvice\":\"%s\"," +
-                        "\"hospitalTreatment\":\"%s\"" +
-                        "}", vitalsTrafficLight.getAnalysisText(), vitalsTrafficLight.getBriefAdviceText(),
-                vitalsTrafficLight.getAdviceDetailsText(), Arrays.toString(vitalsTrafficLight.getAdviceDetailsBulletsText()),
-                Arrays.toString(vitalsTrafficLight.getCommunityAdviceText()),
-                Arrays.toString(vitalsTrafficLight.getCommunityTreatmentText()),
-                Arrays.toString(vitalsTrafficLight.getHospitalAdviceText()),
-                Arrays.toString(vitalsTrafficLight.getHospitalTreatmentText()));
-    }
+//    public JsonObject getReadingAdvice(VitalsTrafficLight vitalsTrafficLight) {
+//        String response = String.format("{" +
+//                        "\"analysis\":\"%s\"," +
+//                        "\"briefAdvice\":\"%s\"," +
+//                        "\"adviceDetails\":\"%s\"," +
+//                        "\"adviceDetailsBullets\":\"%s\"," +
+//                        "\"communityAdvice\":\"%s\"," +
+//                        "\"communityTreatment\":\"%s\"," +
+//                        "\"hospitalAdvice\":\"%s\"," +
+//                        "\"hospitalTreatment\":\"%s\"" +
+//                        "}", vitalsTrafficLight.getAnalysisText(), vitalsTrafficLight.getBriefAdviceText(),
+//                vitalsTrafficLight.getAdviceDetailsText(), Arrays.toString(vitalsTrafficLight.getAdviceDetailsBulletsText()),
+//                Arrays.toString(vitalsTrafficLight.getCommunityAdviceText()),
+//                Arrays.toString(vitalsTrafficLight.getCommunityTreatmentText()),
+//                Arrays.toString(vitalsTrafficLight.getHospitalAdviceText()),
+//                Arrays.toString(vitalsTrafficLight.getHospitalTreatmentText()));
+//
+//        JsonObject jsonObject = new JsonParser().parse(response).getAsJsonObject();
+////        JSONParser parser = new JSONParser();
+////        JSONObject json = (JSONObject) parser.parse(response);
+//        return jsonObject;
+//    }
 }
