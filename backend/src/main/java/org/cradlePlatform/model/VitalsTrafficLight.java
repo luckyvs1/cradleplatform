@@ -50,7 +50,7 @@ public enum VitalsTrafficLight {
 			"of placenta, give medication to contract uterus if available e.g. misoprostil 600mcg orally", "* If sepsis," +
 			" consider starting antibiotics"}, new String[]
 			{"* Stay calm. Do NOT leave the woman alone", "* Get HELP", "* Assess the mother",
-					"* Is she pale, sweaty, cold, breathing fast, drowsy or confused? ", "* Is she unwell e.g. vaginal " +
+					"* Is she pale, sweaty, cold, breathing fast, drowsy or confused?", "* Is she unwell e.g. vaginal " +
 					"bleeding, fever, discharge, constant pain?"}, new String[]{"* Keep her warm and elevate legs if " +
 			"possible", "* Oxygen", "* IV fluids give quickly through a large bore cannula e.g. 2 litres in first hour",
 			"* Collect blood to test hemoglobin, do an immediate cross-match", "* Catheterise the bladder to monitor " +
