@@ -34,34 +34,6 @@ class PatientDetailForm extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            readingData: [{
-                id: 0,
-                readerId: "",
-                patientId: "",
-                timestamp: "",
-                symptoms: "",
-                otherSymptoms: "",
-                systolicBloodPressure: 0,
-                diastolicBloodPressure: 0,
-                pulseRate: 0,
-                notes: "",
-                needFollowup: false,
-                appVersion: "",
-                dateLastSaved: "",
-                recheckVitalsDate: "",
-                deviceInformation: "",
-                gestationalAgeTimeUnit: "none",
-                gestationalAge: 0,
-                manuallyChangedOcrResults: "",
-                photoPath: "",
-                totalOcrSeconds: 0.0,
-                region: "",
-                ocrEnabled: false,
-                uploadImages: false,
-                vitalsTrafficLight: "Green",
-                timestampTime: "",
-                sexFull: "",
-            }],
             patientData: [{
                 id: 0,
                 attestationNo: "",
@@ -81,6 +53,7 @@ class PatientDetailForm extends React.Component {
                 gestationAgeUnit: null,
                 currentGestationalAge: 0,
             }],
+            readingData: [],
         };
     }
 
@@ -91,27 +64,48 @@ class PatientDetailForm extends React.Component {
             console.log("get patient id", res);
 
             const patientData = res.data;
-            if (patientData.sex == 'F') {
+            if (patientData.sex === 'F') {
                 patientData.sexFull = 'Female';
-            } else if (patientData.sex == 'M') {
+            } else if (patientData.sex === 'M') {
                 patientData.sexFull = 'Male';
             }
 
             this.setState({patientData})
         })
 
-        api.reading.getReadingForPat({patient_id: pid}).then(res => {
+        api.reading.getReadingForPatient({patient_id: pid, latest: false}).then(async res => {
             console.log("get reading id", res);
 
-            const readingData = res.data[0];
-            readingData.timestampTime = new Date(readingData.timestamp).toLocaleTimeString();
-            readingData.timestamp = new Date().toLocaleDateString(undefined, {
-                day:'2-digit',
-                month: '2-digit',
-                year: 'numeric',
-            });
+            const readingData = res.data;
+            let newState = [];
 
-            this.setState({readingData})
+            for (let i = 0; i < readingData.length; i++) {
+                let row = {
+                    id: readingData[i].id,
+                    readerId: readingData[i].readerId,
+                    patientId: readingData[i].patientId,
+                    timestamp: new Date(readingData[i].timestamp).toLocaleDateString(undefined, {
+                        day:'2-digit',
+                        month: '2-digit',
+                        year: 'numeric',
+                    }),
+                    symptoms: readingData[i].symptoms,
+                    otherSymptoms: readingData[i].otherSymptoms,
+                    systolicBloodPressure: readingData[i].systolicBloodPressure,
+                    diastolicBloodPressure: readingData[i].diastolicBloodPressure,
+                    pulseRate: readingData[i].pulseRate,
+                    notes: readingData[i].notes,
+                    needFollowup: readingData[i].needFollowup,
+                    gestationalAgeTimeUnit: readingData[i].gestationalAgeTimeUnit,
+                    gestationalAge: readingData[i].gestationalAge,
+                    timestampTime: new Date(readingData[i].timestamp).toLocaleTimeString(),
+                    sexFull: "",
+                }
+
+                newState.push(row);
+            }
+
+            this.setState({readingData: newState})
         });
     }
 
@@ -162,70 +156,27 @@ class PatientDetailForm extends React.Component {
                         <Tab eventKey="reading_information" title="Reading Information">
                             <Table bordered hover size="sm">
                                 <tbody>
-                                    <tr>
-                                        <td className="text-center" style={statusGreen}>
-                                            <strong>-</strong>
-                                        </td>
-                                        <td>
-                                            {this.state.readingData.timestamp} <br/>
-                                            {this.state.readingData.timestampTime}
-                                        </td>
-                                        <td>
-                                            <b>SYS:</b> {this.state.readingData.systolicBloodPressure}<br/>
-                                            <b>DIA:</b> {this.state.readingData.diastolicBloodPressure}<br/>
-                                            <b>Pulse (bpm):</b> {this.state.readingData.pulseRate}
-                                        </td>
-                                        <td>
-                                            <b>Pregnant:</b> Yes <br/>
-                                            <b>Gestational Age:</b> {this.state.readingData.gestationalAge} {this.state.readingData.gestationalAgeTimeUnit}
-                                        </td>
-                                        <td><b>Symptoms:</b> {this.state.readingData.symptoms}</td>
-                                    </tr>
-                                    <tr>
-                                        <td className="text-center" style={statusYellow}>
-                                            <strong>v</strong>
-                                        </td>
-                                        <td>2019/01/02</td>
-                                        <td>
-                                            <b>BP/DP:</b> 180/80 <br />
-                                            <b>Heart Rate (bpm):</b> 80
+                                    {this.state.readingData.map(row => (
+                                        <tr key={row.id}>
+                                            <td className="text-center" style={statusGreen}>
+                                                <strong>-</strong>
                                             </td>
-                                        <td>
-                                            <b>Pregnant:</b> Yes<br />
-                                            <b>Gestational Age:</b> 3 Months
+                                            <td>
+                                                {row.timestamp} <br/>
+                                                {row.timestampTime}
                                             </td>
-                                        <td><b>Symptoms:</b> ...</td>
-                                    </tr>
-                                    <tr>
-                                        <td className="text-center" style={statusYellow}>
-                                            <strong>v</strong>
-                                        </td>
-                                        <td>2019/01/02</td>
-                                        <td>
-                                            <b>BP/DP:</b> 180/80 <br />
-                                            <b>Heart Rate (bpm):</b> 80
+                                            <td>
+                                                <b>SYS:</b> {row.systolicBloodPressure}<br/>
+                                                <b>DIA:</b> {row.diastolicBloodPressure}<br/>
+                                                <b>Pulse (bpm):</b> {row.pulseRate}
                                             </td>
-                                        <td>
-                                            <b>Pregnant:</b> Yes<br />
-                                            <b>Gestational Age:</b> 3 Months
+                                            <td>
+                                                <b>Pregnant:</b> Yes <br/>
+                                                <b>Gestational Age:</b> {row.gestationalAge} {row.gestationalAgeTimeUnit}
                                             </td>
-                                        <td><b>Symptoms:</b> ...</td>
-                                    </tr>
-                                    <tr>
-                                        <td className="text-center" style={statusRed}>
-                                            <strong>o</strong>
-                                        </td>
-                                        <td>2019/01/02</td>
-                                        <td>
-                                            <b>BP/DP:</b> 180/80 <br />
-                                            <b>Heart Rate (bpm):</b> 80
-                                            </td>
-                                        <td>
-                                            <b>Pregnant:</b> Yes<br />
-                                            <b>Gestational Age:</b> 3 Months
-                                            </td>
-                                        <td><b>Symptoms:</b> ...</td>
-                                    </tr>
+                                            <td><b>Symptoms:</b> {row.symptoms}</td>
+                                        </tr>
+                                    ))}
                                 </tbody>
                             </Table>
                             <Row>
