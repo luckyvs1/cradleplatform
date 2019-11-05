@@ -305,15 +305,11 @@ class AddReadingDetail extends React.Component {
         return (
             <di>
                 <AddReadingForm submit={this.submit} dataFromParent={!this.state.readyToSubmit}></AddReadingForm>
-
                 <br/>
                 {this.state.readyToSubmit ?
-
                     <Col className={"text-center"}>
                         <Button primary onClick={this.submitReading}>Submit Reading</Button>
-                    </Col>
-                    :
-                    null
+                    </Col> : null
                 }
                 <ErrorAlert show={this.state.isShowError} message={this.state.errorMsg}></ErrorAlert>
                 <AdviceBox show={this.state.isShowAdvice}
