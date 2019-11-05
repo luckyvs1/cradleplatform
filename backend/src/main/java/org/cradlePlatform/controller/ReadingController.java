@@ -56,11 +56,11 @@ public class ReadingController {
 
     @GetMapping(path="/api/readings-advice/{vitalsTrafficLight}")
     public ResponseEntity<String> getReadingAdvice(@PathVariable(value = "vitalsTrafficLight") VitalsTrafficLight vitalsTrafficLight){
-        ObjectMapper om = new ObjectMapper();
+        ObjectMapper objectMapper = new ObjectMapper();
         try {
-            String jsonString = om.writeValueAsString(vitalsTrafficLight);
+            String jsonString = objectMapper.writeValueAsString(vitalsTrafficLight);
             return new ResponseEntity<String>(jsonString, HttpStatus.OK);
-        }  catch (JsonProcessingException e) {
+        }  catch (JsonProcessingException error) {
             return new ResponseEntity<String>("Error occurred during JSON parsing", HttpStatus.BAD_REQUEST);
         }
     }

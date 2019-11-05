@@ -65,14 +65,14 @@ public enum VitalsTrafficLight {
 	@JsonProperty("briefAdvice")
 	private String briefAdviceText;
 
-	@JsonProperty("adviceDetails")
-	private String adviceDetailsText;
+	@JsonProperty("advice")
+	private String adviceText;
 
 	@JsonProperty("condition")
 	private String conditionText;
 
-	@JsonProperty("adviceDetailsBullets")
-	private String[] adviceDetailsBulletsText;
+	@JsonProperty("adviceDetails")
+	private String[] adviceDetailsText;
 
 	@JsonProperty("communityAdvice")
 	private String[] communityAdviceText;
@@ -86,18 +86,18 @@ public enum VitalsTrafficLight {
 	@JsonProperty("hospitalTreatment")
 	private String[] hospitalTreatmentText;
 
-	VitalsTrafficLight(String analysisText, String briefAdviceText, String adviceDetailsText, String conditionText) {
+	VitalsTrafficLight(String analysisText, String briefAdviceText, String adviceText, String conditionText) {
 		this.analysisText = analysisText;
 		this.briefAdviceText = briefAdviceText;
-		this.adviceDetailsText = adviceDetailsText;
+		this.adviceText = adviceText;
 		this.conditionText = conditionText;
 	}
 
-	VitalsTrafficLight(String analysisText, String briefAdviceText, String adviceDetailsText, String[] adviceDetailsBulletsText, String conditionText) {
+	VitalsTrafficLight(String analysisText, String briefAdviceText, String adviceText, String[] adviceDetailsText, String conditionText) {
 		this.analysisText = analysisText;
 		this.briefAdviceText = briefAdviceText;
+		this.adviceText = adviceText;
 		this.adviceDetailsText = adviceDetailsText;
-		this.adviceDetailsBulletsText = adviceDetailsBulletsText;
 		this.conditionText = conditionText;
 	}
 
@@ -121,9 +121,9 @@ public enum VitalsTrafficLight {
 		return briefAdviceText;
 	}
 
-	@JsonGetter("adviceDetails")
-	public String getAdviceDetailsText() {
-		return adviceDetailsText;
+	@JsonGetter("advice")
+	public String getAdviceText() {
+		return adviceText;
 	}
 
 	@JsonGetter("communityAdvice")
@@ -141,9 +141,9 @@ public enum VitalsTrafficLight {
 		return communityTreatmentText;
 	}
 
-	@JsonGetter("adviceDetailsBullets")
-	public String[] getAdviceDetailsBulletsText() {
-		return adviceDetailsBulletsText;
+	@JsonGetter("adviceDetails")
+	public String[] getAdviceDetailsText() {
+		return adviceDetailsText;
 	}
 
 	@JsonGetter("hospitalTreatment")
