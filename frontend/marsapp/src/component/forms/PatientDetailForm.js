@@ -270,6 +270,11 @@ export default class PatientDetailForm extends React.Component {
                                     </tr>
                                 </tbody>
                             </Table>
+                            <div style={{float: 'right'}}>
+                                <Button variant="primary" size="sm" as={Link} to="addMedication">
+                                    Add New Medication
+                                </Button>
+                            </div>
                         </Tab>
                         <Tab eventKey="follow_ups" title="Follow Ups">
                             <Table bordered hover size="sm">
