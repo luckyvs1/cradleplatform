@@ -7,7 +7,7 @@ const StopSignResponseReading = ({show, message, isUp}) => {
     return (
         <>
             <Alert id={'reading-response'} show={show} variant="danger">
-                <Alert.Heading>Danger</Alert.Heading>
+                <Alert.Heading>Severe</Alert.Heading>
                 <Row>
                     <Col>
                         <p>
