@@ -19,7 +19,7 @@ class AddReadingDetail extends React.Component {
     state = {
         isShow: false,
         isShowError: false,
-        isShowAdvice:false,
+        isShowAdvice: false,
         message: "",
         errorMsg: "",
         vitalsTrafficLight: "",
@@ -27,16 +27,16 @@ class AddReadingDetail extends React.Component {
         testNo: 0,
         currentColor: "",
         readyToSubmit: false,
-        briefAdvice:"",
-        communityAdvice:"",
-        communityTreatment:"",
-        hospitalAdvice:"",
-        hospitalTreatment:"",
-        adviceDetailsBullets:"",
-        condition:"",
-        advice:"",
-        analysis:"",
-        adviceDetails:"",
+        briefAdvice: "",
+        communityAdvice: "",
+        communityTreatment: "",
+        hospitalAdvice: "",
+        hospitalTreatment: "",
+        adviceDetailsBullets: "",
+        condition: "",
+        advice: "",
+        analysis: "",
+        adviceDetails: "",
         readingData: {
             readerId: 1,
             patientId: 1,
@@ -87,12 +87,12 @@ class AddReadingDetail extends React.Component {
                 this.setState({
                     ...this.state,
                     isShow: true,
-                    isShowAdvice:false,
+                    isShowAdvice: false,
                 })
             }).catch(error => {
-                if (error.response.status == 400) {
-                    this.onShowAlert(error.response.data)
-                }
+            if (error.response.status == 400) {
+                this.onShowAlert(error.response.data)
+            }
         });
     }
 
@@ -101,7 +101,7 @@ class AddReadingDetail extends React.Component {
         this.setState({
                 ...this.state,
                 isShowError: true,
-                isShowAdvice:false,
+                isShowAdvice: false,
                 errorMsg: message
             },
             () => {
@@ -119,32 +119,32 @@ class AddReadingDetail extends React.Component {
     submitReading = data => {
         this.setState({
             ...this.state,
-            readingData :{
+            readingData: {
                 ...this.state.readingData,
                 vitalsTrafficLight: this.state.vitalsTrafficLight,
                 needFollowUp: this.state.needFollowUp,
             }
         })
 
-        api.reading.getReadingAdvice(this.state.vitalsTrafficLight).then(response=>{
+        api.reading.getReadingAdvice(this.state.vitalsTrafficLight).then(response => {
             console.log(response);
             this.setState({
                 ...this.state,
-                briefAdvice:response.data.briefAdvice,
-                adviceDetails:response.data.adviceDetails,
-                communityAdvice:response.data.communityAdvice,
-                communityTreatment:response.data.communityTreatment,
-                hospitalAdvice:response.data.hospitalAdvice,
-                hospitalTreatment:response.data.hospitalTreatment,
-                adviceDetailsBullets:response.data.adviceDetailsBullets,
-                condition:response.data.condition,
-                analysis:response.data.analysis,
-                advice:response.data.advice,
-                isShowAdvice:true,
+                briefAdvice: response.data.briefAdvice,
+                adviceDetails: response.data.adviceDetails,
+                communityAdvice: response.data.communityAdvice,
+                communityTreatment: response.data.communityTreatment,
+                hospitalAdvice: response.data.hospitalAdvice,
+                hospitalTreatment: response.data.hospitalTreatment,
+                adviceDetailsBullets: response.data.adviceDetailsBullets,
+                condition: response.data.condition,
+                analysis: response.data.analysis,
+                advice: response.data.advice,
+                isShowAdvice: true,
             })
         })
 
-        api.reading.addAReading(this.state.readingData).catch(error=>{
+        api.reading.addAReading(this.state.readingData).catch(error => {
             if (error.response.status == 400) {
                 this.onShowAlert(error.response.data)
             }
@@ -160,8 +160,7 @@ class AddReadingDetail extends React.Component {
             testNo: 0,
             currentColor: "",
             readyToSubmit: false,
-            dataFromParent:true
-
+            dataFromParent: true
         })
     }
 
@@ -178,7 +177,7 @@ class AddReadingDetail extends React.Component {
                         currentColor: "",
                         testNo: 0,
                         readyToSubmit: true,
-                        dataFromParent:false,
+                        dataFromParent: false,
                     })
                 }
                 break;
@@ -204,7 +203,6 @@ class AddReadingDetail extends React.Component {
                     testNo: 0,
                     readyToSubmit: true,
                 })
-
                 break;
         }
     }
@@ -306,7 +304,7 @@ class AddReadingDetail extends React.Component {
     render() {
         return (
             <di>
-                <AddReadingForm submit={this.submit}   dataFromParent = {!this.state.readyToSubmit }></AddReadingForm>
+                <AddReadingForm submit={this.submit} dataFromParent={!this.state.readyToSubmit}></AddReadingForm>
 
                 <br/>
                 {this.state.readyToSubmit ?
@@ -321,20 +319,19 @@ class AddReadingDetail extends React.Component {
                 <AdviceBox show={this.state.isShowAdvice}
                            briefAdvice={this.state.briefAdvice}
                            adviceDetails={this.state.adviceDetails}
-                           communityAdvice ={this.state.communityAdvice }
-                           communityTreatment ={this.state.communityTreatment }
-                           hospitalAdvice ={this.state.hospitalAdvice }
-                           hospitalTreatment ={this.state.hospitalTreatment }
-                           adviceDetailsBullets ={this.state.adviceDetailsBullets }
-                           condition ={this.state.condition }
-                           advice ={this.state.advice }
-                           analysis ={this.state.analysis }
+                           communityAdvice={this.state.communityAdvice}
+                           communityTreatment={this.state.communityTreatment}
+                           hospitalAdvice={this.state.hospitalAdvice}
+                           hospitalTreatment={this.state.hospitalTreatment}
+                           adviceDetailsBullets={this.state.adviceDetailsBullets}
+                           condition={this.state.condition}
+                           advice={this.state.advice}
+                           analysis={this.state.analysis}
                 ></AdviceBox>
 
                 {this.state.vitalsTrafficLight == "Green" ?
                     <GreenResponseReading show={this.state.isShow}
-                                          message={this.state.message}></GreenResponseReading> :
-                    null
+                                          message={this.state.message}></GreenResponseReading> : null
                 }
                 {
                     this.state.vitalsTrafficLight == "Yellow_up" ?
@@ -347,7 +344,6 @@ class AddReadingDetail extends React.Component {
                         <TriangleResponseReading show={this.state.isShow}
                                                  message={this.state.message}
                                                  isUp={false}></TriangleResponseReading> : null
-
                 }
                 {
                     this.state.vitalsTrafficLight == "Red_up" ?
@@ -360,7 +356,6 @@ class AddReadingDetail extends React.Component {
                         <StopSignResponseReading show={this.state.isShow}
                                                  message={this.state.message}
                                                  isUp={false}></StopSignResponseReading> : null
-
                 }
             </di>
         );
