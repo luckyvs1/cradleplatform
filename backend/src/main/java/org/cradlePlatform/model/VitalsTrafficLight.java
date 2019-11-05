@@ -36,14 +36,14 @@ public enum VitalsTrafficLight {
 			"Urgent action needed.  Transfer to health centre within 4h.  Monitor baby.",
 			"This is very raised BP and indicates urgent action is needed.  Manage as you would " +
 					"normally e.g. measure urine dipstick, check for signs and symptoms and act accordingly  Give " +
-					"antihypertensives if available e.g. methyidopa, nifedipine, labetolol  Consider magnesium " +
+					"antihypertensives if available e.g. methyldopa, nifedipine, labetolol  Consider magnesium " +
 					"sulphate (intramuscular) if available.  If in the community transfer as soon as possible " +
 					"(preferably within 4 hours).  Monitor the baby.  If BP remains uncontrolled and gestation " +
 					"appropriate, seek senior advice regarding need to deliver.",
 			"Systolic >= 160 and/or diastolic >= 110"),
 	Red_down("In sever shock",
 			"Urgent action needed.  Get help and assess mother.  Immediately transfer to health centre " +
-					"within 1h.", new String[]{"* Stay calm. Do NOT leave the woman alone", "* Get HELP", "* Assess the " +
+					"(max 1h).", new String[]{"* Stay calm. Do NOT leave the woman alone", "* Get HELP", "* Assess the " +
 			"mother", "* Is she pale, sweaty, cold, breathing fast, drowsy or confused?", "* Is she unwell e.g. " +
 			"vaginal bleeding, fever, discharge, constant pain?"}, new String[]{"* Keep her warm and elevate legs if " +
 			"possible", "* Organise immediate transfer (within 1 hour)", "* If bleeding, uterine massage after delivery " +
