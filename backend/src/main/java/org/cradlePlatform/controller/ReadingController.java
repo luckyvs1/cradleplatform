@@ -85,7 +85,7 @@ public class ReadingController {
         if (invalidReadings.size() == readings.getReadings().size()) {
             return new ResponseEntity<String>("No readings were saved", HttpStatus.BAD_REQUEST);
         } else if (!invalidReadings.isEmpty()) {
-            //TODO: Not all readings were saved due to error
+            //Not all readings were saved due to error
             return new ResponseEntity<ArrayList<Reading>>(invalidReadings, HttpStatus.CREATED);
         } else {
             return new ResponseEntity<String>("Saved readings", HttpStatus.CREATED);
