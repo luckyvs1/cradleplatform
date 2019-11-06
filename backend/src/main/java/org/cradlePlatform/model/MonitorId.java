@@ -48,8 +48,8 @@ public class MonitorId implements Serializable {
 
         MonitorId that = (MonitorId) o;
 
-        return Objects.equals(getPatientId(), that.getPatientId()) &&
-                Objects.equals(getVhtId(), that.getVhtId());
+        return (getPatientId() == that.getPatientId()) &&
+                (getVhtId().equals(that.getVhtId()));
     }
 
     @Override
