@@ -35,7 +35,6 @@ public class ValidationService {
             throw new IllegalArgumentException("Attestation number invalid length: " + formattedAttestationNo);
         }
 
-        patient.setAttestationNo(formattedAttestationNo);
-        return patient.getAttestationNo();
+        return formattedAttestationNo;
     }
 }
