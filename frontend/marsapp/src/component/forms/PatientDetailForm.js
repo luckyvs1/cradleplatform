@@ -13,6 +13,9 @@ import TopNavigation from "../navigation/TopNavigation";
 import {Button, Col, Container, Form, Row, Table} from 'react-bootstrap';
 import GraphDialog from "../utils/GraphDialog"
 import {withRouter} from "react-router-dom";
+import ReactTableContainer from "react-table-container";
+import { FaPencilAlt } from 'react-icons/fa';
+
 
 const statusGreen = {
     backgroundColor: "green"
@@ -54,6 +57,7 @@ class PatientDetailForm extends React.Component {
                 currentGestationalAge: 0,
             }],
             readingData: [],
+            drugHistoryData: [],
         };
     }
     handleMedicationSubmit = () => {
@@ -127,65 +131,102 @@ class PatientDetailForm extends React.Component {
                             <hr></hr>
                         </Col>
                     </Row>
-                    <Row>
-                        <Col md={2}>
-                            <strong>Attestation Number:</strong>
-                        </Col>
-                        <Col md={4}>                            
-                            {this.state.patientData.attestationNo}
-                        </Col>
-                    </Row>
-                    <Row>
-                        <Col md={2}>
-                            <strong>Initials:</strong>
-                        </Col>
-                        <Col md={4}>
-                            {this.state.patientData.initials}
-                        </Col>
-                    </Row>
-                    <Row>
-                        <Col md={2}>
-                            <strong>Sex:</strong>
-                        </Col>
-                        <Col md={4}>
-                            {this.state.patientData.sexFull}
-                        </Col>
-                    </Row>
-                    <Row className="mb-4">
-                        <Col md={2}>
-                            <strong>Age:</strong>
-                        </Col>
-                        <Col md={4}>
-                            {this.state.patientData.age}
-                        </Col>
-                    </Row>
                     <Tabs id="controlled-tab-example">
+                        <Tab eventKey="patient_details" title="Patient Information">
+                            <Row>
+                                <Col >
+                                    <strong>Attestation Number:</strong>
+                                </Col>
+                                <Col >
+                                    {this.state.patientData.attestationNo}
+                                </Col>
+                                <Col >
+                                    <strong>Village Number:</strong>
+                                </Col>
+                                <Col >
+                                    {this.state.patientData.villageNo}
+                                </Col>
+                                <Col >
+                                    <strong>Pregnant:</strong>
+                                </Col>
+                                <Col >
+                                    {this.state.patientData.pregnant}
+                                </Col>
+                            </Row>
+                            <Row>
+                                <Col >
+                                    <strong>Initials:</strong>
+                                </Col>
+                                <Col >
+                                    {this.state.patientData.initials}
+                                </Col>
+                                <Col >
+                                    <strong>Zone Number:</strong>
+                                </Col>
+                                <Col >
+                                    {this.state.patientData.zoneNo}
+                                </Col>
+                                <Col >
+                                    <strong>Gestational Start:</strong>
+                                </Col>
+                                <Col >
+                                    {this.state.patientData.gestationalStartDate}
+                                </Col>
+                            </Row>
+                            <Row>
+                                <Col sm={2}>
+                                    <strong>Age:</strong>
+                                </Col>
+                                <Col sm={2}>
+                                    {this.state.patientData.age}
+                                </Col>
+                                <Col sm={2}>
+                                    <strong>Date of Birth:</strong>
+                                </Col>
+                                <Col sm={2}>
+                                    {this.state.patientData.dob}
+                                </Col>
+                            </Row>
+                        </Tab>
                         <Tab eventKey="reading_information" title="Reading Information">
-                            <Table bordered hover size="sm">
-                                <tbody>
-                                    {this.state.readingData.map(row => (
-                                        <tr key={row.id}>
-                                            <td className="text-center" style={statusGreen}>
-                                                <strong>-</strong>
-                                            </td>
-                                            <td>
-                                                {row.timestamp} <br/>
-                                                {row.timestampTime}
-                                            </td>
-                                            <td>
-                                                <b>SYS:</b> {row.systolicBloodPressure}<br/>
-                                                <b>DIA:</b> {row.diastolicBloodPressure}<br/>
-                                                <b>Pulse (bpm):</b> {row.pulseRate}
-                                            </td>
-                                            <td>
-                                                <b>Pregnant:</b> Yes <br/>
-                                                <b>Gestational Age:</b> {row.gestationalAge} {row.gestationalAgeTimeUnit}
-                                            </td>
-                                            <td><b>Symptoms:</b> {row.symptoms}</td>
-                                        </tr>
-                                    ))}
-                                </tbody>
-                            </Table>
+                            <ReactTableContainer className="rtc"
+                                                 width="auto"
+                                                 height="350px"
+                                                 scrollbarStyle={{
+                                                     background: { backgroundColor: "transparent" },
+                                                     backgroundFocus: { backgroundColor: "#f0f0f0" },
+                                                     foreground: { backgroundColor: "#e2e2e2" },
+                                                     foregroundFocus: { backgroundColor: "#acacac" }
+                                                 }}
+                            >
+                                <table className="html-table">
+                                    <thead>
+                                    </thead>
+                                    <tbody>
+                                        {this.state.readingData.map(row => (
+                                            <tr key={row.id}>
+                                                <td className="text-center" style={statusGreen} >
+                                                    <strong>-</strong>
+                                                </td>
+                                                <td>
+                                                    <strong>{row.timestamp}</strong><br/>
+                                                    <strong>{row.timestampTime}</strong>
+                                                </td>
+                                                <td>
+                                                    <b>SYS:</b> {row.systolicBloodPressure}<br/>
+                                                    <b>DIA:</b> {row.diastolicBloodPressure}<br/>
+                                                    <b>Pulse (bpm):</b> {row.pulseRate}
+                                                </td>
+                                                <td>
+                                                    <b>Pregnant:</b> Yes <br/>
+                                                    <b>Gestational Age:</b> {row.gestationalAge} {row.gestationalAgeTimeUnit}
+                                                </td>
+                                                <td><b>Symptoms:</b> {row.symptoms}</td>
+                                            </tr>
+                                        ))}
+                                    </tbody>
+                                </table>
+                            </ReactTableContainer>
                             <Row>
                                 <Col>
                                     <Button variant="success" size="sm" as={Link} to="addReadingDetail">New Reading</Button>&nbsp;
