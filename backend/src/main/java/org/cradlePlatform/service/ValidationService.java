@@ -2,18 +2,41 @@ package org.cradlePlatform.service;
 
 import org.cradlePlatform.model.Patient;
 import org.springframework.stereotype.Service;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.cradlePlatform.repository.PatientRepository;
+import org.springframework.util.StringUtils;
+
+import java.util.Optional;
 
 @Service
 public class ValidationService {
 
-    /* Attestation Number is unique, but design allows it to be empty
-     * MySql UNIQUE constraint does not treat two empty strings as non unique
-     * but allows nulls to be unique if not null not added to the schema field
-     */
+    @Autowired
+    private PatientRepository patientRepository;
+
+    // If attestation number is valid digits of length 11 use the current else use empty string
     public String getValidAttestationNo(Patient patient) {
-        if (patient.getAttestationNo().isBlank()) {
-            patient.setAttestationNo(null);
+        int ATTESTATION_NO_LENGTH = 11;
+        String emptyString = "";
+        String nonDigitsPattern = "[^0-9]+";
+
+        if(patient.getAttestationNo().isBlank()) {
+            patient.setAttestationNo(emptyString);
         }
+
+        String formattedAttestationNo =  StringUtils.trimAllWhitespace(patient.getAttestationNo().replaceAll(nonDigitsPattern, ""));
+
+        if (!formattedAttestationNo.isBlank() && formattedAttestationNo.length() == ATTESTATION_NO_LENGTH) {
+            Optional<Patient> optionalPatient = patientRepository.findUserByAttestationNo(formattedAttestationNo);
+            if (optionalPatient.isPresent()) {
+                throw new IllegalArgumentException("Attestation number already exists: " + formattedAttestationNo);
+            }
+        } else if (!formattedAttestationNo.isBlank() && formattedAttestationNo.length() != ATTESTATION_NO_LENGTH ) {
+            throw new IllegalArgumentException("Attestation number invalid length: " + formattedAttestationNo);
+        } else {
+            patient.setAttestationNo(formattedAttestationNo);
+        }
+
         return patient.getAttestationNo();
     }
 }

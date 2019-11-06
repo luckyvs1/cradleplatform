@@ -12,6 +12,7 @@ import org.cradlePlatform.repository.ReadingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.http.ResponseEntity;
 
 import java.util.Optional;
 
@@ -68,11 +69,15 @@ public class PatientController {
      * @return
      */
     @PostMapping(path="/api/patients")
-    @ResponseStatus(code = HttpStatus.CREATED)
-    public @ResponseBody String addNewPatient (@RequestBody Patient patient){
-        String validAttestationNo = validationService.getValidAttestationNo(patient);
-        patient.setAttestationNo(validAttestationNo);
+    public ResponseEntity<String> addNewPatient (@RequestBody Patient patient){
+        try {
+            String validAttestationNo = validationService.getValidAttestationNo(patient);
+            patient.setAttestationNo(validAttestationNo);
+        } catch (IllegalArgumentException e) {
+            return new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
         patientRepository.save(patient);
-        return "Saved Patient";
+        return new ResponseEntity<String>("Saved patient", HttpStatus.CREATED);
+
     }
 }
