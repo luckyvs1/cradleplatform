@@ -18,7 +18,7 @@ public class ValidationService {
     public String getValidAttestationNo(Patient patient) {
         int ATTESTATION_NO_LENGTH = 11;
         String emptyString = "";
-        String nonDigitsPattern = "[^0-9]+";
+        String nonDigitsPattern = "\\D";
 
         if(patient.getAttestationNo().isBlank()) {
             patient.setAttestationNo(emptyString);
@@ -33,10 +33,9 @@ public class ValidationService {
             }
         } else if (!formattedAttestationNo.isBlank() && formattedAttestationNo.length() != ATTESTATION_NO_LENGTH ) {
             throw new IllegalArgumentException("Attestation number invalid length: " + formattedAttestationNo);
-        } else {
-            patient.setAttestationNo(formattedAttestationNo);
         }
 
+        patient.setAttestationNo(formattedAttestationNo);
         return patient.getAttestationNo();
     }
 }
