@@ -12,6 +12,7 @@ import api from "../../api";
 import TopNavigation from "../navigation/TopNavigation";
 import {Button, Col, Container, Form, Row, Table} from 'react-bootstrap';
 import GraphDialog from "../utils/GraphDialog"
+import {withRouter} from "react-router-dom";
 
 const statusGreen = {
     backgroundColor: "green"
@@ -25,7 +26,7 @@ const statusRed = {
     backgroundColor: "red"
 };
 
-export default class PatientDetailForm extends React.Component {
+class PatientDetailForm extends React.Component {
     // functions
     // states
     // submit
@@ -61,7 +62,14 @@ export default class PatientDetailForm extends React.Component {
             }],
         };
     }
-
+    handleMedicationSubmit = () => {
+        this.props.history.push({
+            pathname: '/addMedication',
+            medication:{
+                pid: this.state.data.patient_id
+            }
+        });
+    };
     componentDidMount(){
         //api.followUp.getFollowUpByFollowUpId({followUpId: 22}).then(res => {
         //api.reading.getReadingsById({readingId: 32}).then (res => {
@@ -271,7 +279,7 @@ export default class PatientDetailForm extends React.Component {
                                 </tbody>
                             </Table>
                             <div style={{float: 'right'}}>
-                                <Button variant="primary" size="sm" as={Link} to="addMedication">
+                                <Button variant="primary" size="sm" onClick={() => this.handleMedicationSubmit()}>
                                     Add New Medication
                                 </Button>
                             </div>
@@ -318,5 +326,5 @@ const mapDispatchToProps = (dispatch) => {
     }
 };
 
-
+export default withRouter(PatientDetailForm);
 

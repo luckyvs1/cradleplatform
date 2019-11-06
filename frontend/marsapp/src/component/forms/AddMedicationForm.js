@@ -16,6 +16,7 @@ import {
     Button,
     Form
 } from 'react-bootstrap';
+import {withRouter} from "react-router-dom";
 import InlineError from "../messages/InlineError";
 
 class AddMedicationForm extends React.Component {
@@ -70,6 +71,11 @@ class AddMedicationForm extends React.Component {
         if(data.start_date == "") errors.start_date = emptyWarning;
         return errors;
     }
+    componentDidMount(){
+        const pid = this.props.location.medication.pid;
+        console.log("Patient pid is " + pid);
+    }
+
     render() {
         const { data, dosage_edit, errors } = this.state;
         return (
@@ -172,4 +178,4 @@ AddMedicationForm.propTypes = {
     submit: PropTypes.func.isRequired
 };
 
-export default AddMedicationForm;
+export default withRouter(AddMedicationForm);
