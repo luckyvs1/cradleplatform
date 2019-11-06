@@ -67,7 +67,6 @@ CREATE TABLE Patient (
             (attestation_no IS NOT NULL) OR
             (first_name IS NOT NULL AND last_name IS NOT NULL)
         ),
-    UNIQUE(attestation_no),
     PRIMARY KEY (id)
 );
 
