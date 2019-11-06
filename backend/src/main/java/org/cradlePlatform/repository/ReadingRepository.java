@@ -11,7 +11,7 @@ public interface ReadingRepository extends CrudRepository<Reading, Integer> {
     Iterable<Reading> findReadingByPatientId(int patientId);
     Iterable<Reading> findTopByPatientIdOrderByIdDesc(int patientId);
 
-    @Query("SELECT R, P.initials, P.age " +
+    @Query("SELECT new org.cradlePlatform.model.ReadingGetWrapper(R, P.initials, P.age) " +
             "FROM Reading R " +
             "INNER JOIN Patient P ON R.patientId = P.id")
     Iterable<ReadingGetWrapper> findReadingsWithInitialsAge();
