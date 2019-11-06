@@ -47,20 +47,27 @@ class AddMedicationForm extends React.Component {
         this.setState({
             data: {...this.state.data, end_date: date}
         });
+
     onSubmit = (event) => {
         event.preventDefault();
-        const errors = this.validate(this.state.data);
+        const errors = this.validate(this.state.data, this.state.dosage_edit);
         this.setState({errors});
+        var dosageText = this.state.dosage_edit.dose + " " + this.state.dosage_edit.unit + " " + this.state.dosage_edit.times_per_day + " times per day";
+        this.state.data.dosage = dosageText;
         if(Object.keys(errors).length === 0){
-            this.props.submit(this.state.data);
+            console.log(this.state.data);
+            console.log(this.state.dosage_edit);
         }
     };
-    validate = (data) => {
+
+    validate = (data, dosage_edit, date_edit) => {
         const errors = {};
         let emptyWarning = "Field cannot be blank";
-        if(!data.villageNo) errors.villageNo = emptyWarning;
-        if(!data.zoneNo) errors.zoneNo = emptyWarning;
-        if(!data.initials) errors.initials = emptyWarning;
+        if(!data.drug_name) errors.drug_name = emptyWarning;
+        if(!dosage_edit.dose) errors.dose = emptyWarning;
+        if(!dosage_edit.unit) errors.unit = emptyWarning;
+        if(!dosage_edit.times_per_day) errors.times_per_day = emptyWarning;
+        if(data.start_date == "") errors.start_date = emptyWarning;
         return errors;
     }
     render() {
@@ -85,6 +92,7 @@ class AddMedicationForm extends React.Component {
                                     placeholder="Enter drug name..."
                                     value={data.drug_name}
                                     onChange={this.onChange}/>
+                                {errors.drug_name && <InlineError text={errors.drug_name}/>}
                         </Form.Group>
                         <Form.Label>Dosage - ex: <u>2</u> <u>tablets</u> <u>3</u> times per day</Form.Label>
                         <Form.Row>
@@ -92,10 +100,12 @@ class AddMedicationForm extends React.Component {
                                 <Form.Control
                                     type="number"
                                     id="dose"
+                                    autofocus="autofocus"
                                     name="dose"
                                     placeholder="Enter dose..."
                                     value={dosage_edit.dose}
                                     onChange={this.onChangeDose}/>
+                                {errors.dose && <InlineError text={errors.dose}/>}
                             </Form.Group>
                             <Form.Group as={Col}>
                                 <Form.Control
@@ -105,21 +115,24 @@ class AddMedicationForm extends React.Component {
                                     placeholder="Enter unit..."
                                     value={dosage_edit.unit}
                                     onChange={this.onChangeDose}/>
+                                {errors.unit && <InlineError text={errors.unit}/>}
                             </Form.Group>
                             <Form.Group as={Col}>
                                 <Form.Control
                                     type="number"
+                                    autofocus="autofocus"
                                     id="times_per_day"
                                     name="times_per_day"
                                     placeholder="How often?"
                                     value={dosage_edit.times_per_day}
                                     onChange={this.onChangeDose}/>
+                                {errors.times_per_day && <InlineError text={errors.times_per_day}/>}
                             </Form.Group>
                             <Form.Label>times per day</Form.Label>
                         </Form.Row>
                         <Form.Row>
                             <Form.Group as={Col} style={{display:'flex', justifyContent: 'center'}}>
-                                <Form.Label>Start Date  </Form.Label>
+                                <Form.Label>Start Date &nbsp; &nbsp;</Form.Label>
                                 <DatePicker
                                     value={data.start_date}
                                     selected={data.start_date}
@@ -130,9 +143,10 @@ class AddMedicationForm extends React.Component {
                                     dateFormat="yyyy-MM-dd"
                                     onChange={this.onChangeStart}
                                 />
+                                {errors.start_date && <InlineError text={errors.start_date}/>}
                             </Form.Group>
                             <Form.Group as={Col}>
-                                <Form.Label>End Date  </Form.Label>
+                                <Form.Label>End Date &nbsp; &nbsp;</Form.Label>
                                 <DatePicker
                                     value={data.end_date}
                                     selected={data.end_date}
