@@ -32,7 +32,7 @@ public class ValidationService {
                 throw new IllegalArgumentException("Attestation number already exists: " + formattedAttestationNo);
             }
         } else if (!formattedAttestationNo.isBlank() && formattedAttestationNo.length() != ATTESTATION_NO_LENGTH ) {
-            throw new IllegalArgumentException("Attestation number invalid length: " + formattedAttestationNo);
+            throw new IllegalArgumentException("Attestation number must be of length eleven: " + formattedAttestationNo);
         }
 
         return formattedAttestationNo;
