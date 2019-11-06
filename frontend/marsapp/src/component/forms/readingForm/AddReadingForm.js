@@ -30,7 +30,7 @@ class AddReadingForm extends React.Component {
                 recheckVitalsDate: "2019-11-10",
                 deviceInformation: "Unknown",
                 gestationalAgeTimeUnit: "none",
-                gestationalAge: 3,
+                gestationalAge: 0,
                 manuallyChangedOcrResults: "No",
                 photoPath: "Unavailable",
                 totalOcrSeconds: 0.0,
@@ -61,12 +61,22 @@ class AddReadingForm extends React.Component {
     }
 
     onChange = e => {
-
+        console.log(e.target.value)
         if(e.target.name == "needFollowUp"){
             this.setState({
                 ...this.state,
                 data:{
+                    ...this.state.data,
                     needFollowUp:e.target.value
+                }
+            })
+        }
+        if(e.target.name == "gestationalAgeTimeUnit"){
+            this.setState({
+                ...this.state,
+                data:{
+                    ...this.state.data,
+                    gestationalAgeTimeUnit:e.target.value
                 }
             })
         }
@@ -88,7 +98,6 @@ class AddReadingForm extends React.Component {
 
             });
         }
-        console.log("STATE ", this.state);
     }
     onPickColor(e){
         console.log('[onPickColor]', e.target)
@@ -101,6 +110,7 @@ class AddReadingForm extends React.Component {
 
     submit = event => {
         console.log("Submit clicked : ", event)
+        console.log("Submit clicked : ", this.state.data)
         if (event) {
             this.props.submit(this.state.data)
         }
