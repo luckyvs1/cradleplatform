@@ -24,7 +24,7 @@ class AddReadingForm extends React.Component {
                 diastolicBloodPressure: 0,
                 pulseRate: 0,
                 notes: "No notes",
-                needFollowUp: false,
+                needFollowUp: null,
                 appVersion: "3",
                 dateLastSaved: "2019-10-03",
                 recheckVitalsDate: "2019-11-10",
@@ -61,10 +61,18 @@ class AddReadingForm extends React.Component {
     }
 
     onChange = e => {
-        console.log("STATE ", e.target);
 
+        if(e.target.name == "needFollowUp"){
+            this.setState({
+                ...this.state,
+                data:{
+                    needFollowUp:e.target.value
+                }
+            })
+        }
         if (e.target.type == "checkbox") {
             this.setState({
+                ...this.state,
                 checkBox: {
                     ...this.state.checkBox,
                     [e.target.name]: e.target.value
@@ -72,15 +80,19 @@ class AddReadingForm extends React.Component {
             })
         } else {
             this.setState({
+                ...this.state,
                 data: {
                     ...this.state.data,
                     [e.target.name]: e.target.value
                 }
+
             });
         }
         console.log("STATE ", this.state);
     }
-
+    onPickColor(e){
+        console.log('[onPickColor]', e.target)
+    }
     onOptionChange = e => {
         this.setState({
             value: e.target.value
@@ -180,6 +192,7 @@ class AddReadingForm extends React.Component {
                                         id="systolicBloodPressure"
                                         name="systolicBloodPressure"
                                         placeholder="Systolic Blood Pressure"
+                                        inputRef={ el => this.inputEl=el }
                                         value={data.systolicBloodPressure}
                                         onChange={this.onChange}/>
                                     {/* enable his for error handling */}
