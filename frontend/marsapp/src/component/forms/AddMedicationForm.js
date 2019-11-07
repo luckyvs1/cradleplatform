@@ -17,6 +17,7 @@ import {
     Form
 } from 'react-bootstrap';
 import {withRouter} from "react-router-dom";
+import api from "../../api";
 import InlineError from "../messages/InlineError";
 
 class AddMedicationForm extends React.Component {
@@ -74,6 +75,10 @@ class AddMedicationForm extends React.Component {
     componentDidMount(){
         const pid = this.props.location.medication.pid;
         console.log("Patient pid is " + pid);
+        api.drug.getDrugHistoryById({patient_id: pid}).then(res => {
+            console.log("Drug History ID for Patient ID " + pid + " is " + res.data[0].id);
+            this.state.data.drug_history_id = res.data[0].id;
+        });
     }
 
     render() {
