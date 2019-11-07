@@ -11,7 +11,7 @@ import {Link} from "react-router-dom";
 import api from "../../api";
 import TopNavigation from "../navigation/TopNavigation";
 import {Button, Col, Container, Form, Row, Table} from 'react-bootstrap';
-import GraphDialog from "../utils/GraphDialog"
+import GraphDialog from "../utils/GraphDialog";
 import {withRouter} from "react-router-dom";
 import ReactTableContainer from "react-table-container";
 import { FaPencilAlt } from 'react-icons/fa';
@@ -64,7 +64,7 @@ class PatientDetailForm extends React.Component {
         this.props.history.push({
             pathname: '/addMedication',
             medication:{
-                pid: this.state.data.patient_id
+                pid: this.state.patientData.id
             }
         });
     };
