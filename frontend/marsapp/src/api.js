@@ -54,7 +54,7 @@ export default {
     },
     drug:{
         getAllDrugHistory:data=> axios.get(`http://${host}:${port}/api/drugHistories` , {data}),
-        getDrugHistoryById:data=> axios.get(`http://${host}:${port}/api/drugHistories?patientId=${data.patient_id}`),
+        getDrugHistoryByPatientId:data=> axios.get(`http://${host}:${port}/api/drugHistories?patientId=${data.patient_id}`),
         addDrugHistory:data=> axios.post(`http://${host}:${port}/api/drugHistories`, {data}),
     },
     reading:{

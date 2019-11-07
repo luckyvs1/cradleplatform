@@ -1,7 +1,7 @@
 /**
- * Class: AddPatientForm
+ * Class: AddMedicationForm
  * Summary:
- *  Contains the contents and functionality of the AddPatient page.
+ *  Contains the contents and functionality of the AddMedicationDetail page.
  */
 
 import React from "react";
@@ -76,7 +76,7 @@ class AddMedicationForm extends React.Component {
     componentDidMount(){
         const pid = this.props.location.medication.pid;
         console.log("Patient pid is " + pid);
-        api.drug.getDrugHistoryById({patient_id: pid}).then(res => {
+        api.drug.getDrugHistoryByPatientId({patient_id: pid}).then(res => {
             console.log("Drug History ID for Patient ID " + pid + " is " + res.data[0].id);
             this.state.data.drug_history_id = res.data[0].id;
         });
