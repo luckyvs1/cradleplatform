@@ -322,16 +322,18 @@ class AddReadingDetail extends React.Component {
         var x = this;
         var {counter} = this.state;
         var {isShowDialog} = this.state;
-        if(isShowDialog){
-                setTimeout(function () {
-                    if (counter > 0) {
-                        x.setState({
-                            ...this.state,
-                            counter: counter - 1000
-                        });
-                    }
-                }, 1000);
+        if (isShowDialog) {
+            setTimeout(function () {
+                if (counter > 0) {
+                    x.setState({
+                        ...this.state,
+                        counter: counter - 1000
+                    });
+                }
+            }, 1000);
         }
+        let seconds = Math.floor((counter / 1000) % 60);
+        let minute  = Math.floor((counter / 1000 / 60));
         return (
             <di>
                 <AddReadingForm submit={this.submit} dataFromParent={!this.state.readyToSubmit}></AddReadingForm>
@@ -389,13 +391,10 @@ class AddReadingDetail extends React.Component {
                     <Modal.Header closeButton>
                         <Modal.Title>Modal heading</Modal.Title>
                     </Modal.Header>
-                    <Modal.Body>Timer : {Math.floor((counter /1000/ 60))} :  { Math.floor((counter/1000) % 60)}</Modal.Body>
+                    <Modal.Body>Timer : {minute} : {seconds}</Modal.Body>
                     <Modal.Footer>
                         <Button variant="secondary" onClick={this.handleClose}>
                             Close
-                        </Button>
-                        <Button variant="primary" onClick={this.handleClose}>
-                            Save Changes
                         </Button>
                     </Modal.Footer>
                 </Modal>
