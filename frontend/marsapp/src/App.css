@@ -939,14 +939,74 @@ li a {
 
 .html-table th,
 .html-table td {
-    padding: 10px 100px 10px 10px;
-    border-bottom: 1px solid #c5c5c5;
-    border-right: 1px solid #c5c5c5;
+    padding: 10px 80px 10px 10px;
+    border-bottom: 1px solid #eaeaea;
+    border-right: 1px solid #eaeaea;
     font-size: 14px;
+    font-family: "Helvetica Neue", sans-serif;
     text-align: left;
 }
 
-.html-table th:last-child,
-.html-table td:last-child {
-    border-right: 0;
+#first {
+    padding: 5px;
+    margin-right: auto;
+    margin-left: auto;
 }
+
+#octagon {
+    width: 50px;
+    height: 50px;
+    background: red;
+    position: relative;
+    margin-left: 3px;
+}
+#octagon:before {
+    content: "";
+    width: 50px;
+    height: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-bottom: 15px solid red;
+    border-left: 15px solid #ffffff;
+    border-right: 15px solid #ffffff;
+}
+#octagon:after {
+    content: "";
+    width: 50px;
+    height: 0;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    border-top: 15px solid red;
+    border-left: 15px solid #ffffff;
+    border-right: 15px solid #ffffff;
+}
+
+#circle {
+    width: 50px;
+    height: 50px;
+    background: green;
+    border-radius: 50%;
+    position: relative;
+    margin-left: 3px;
+}
+
+#triangle{
+    width: 0;
+    height: 0;
+    border-left: 25px solid transparent;
+    border-right: 25px solid transparent;
+    border-bottom: 50px solid yellow;
+    position: relative;
+    margin-left: 3px;
+}
+
+#pat-detail > div.row > div.col > div{
+    padding-right: 50px !important;
+    float: right !important;
+    display: inline-block;
+    text-align: left !important;
+    font-family: "Helvetica Neue", sans-serif;
+}
+
