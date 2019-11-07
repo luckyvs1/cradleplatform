@@ -42,26 +42,23 @@ class AddReadingForm extends React.Component {
             },
             checkBox: {
                 blurred: false,
-                feverish: false,
-                abdominal: false,
-                unwell: false,
-                noSymptoms: false,
-                headache: false,
-                bleeding: false,
+                feverish:false,
+                abdominal:false,
+                unwell:false,
+                noSymptoms:false,
+                headache:false,
+                bleeding:false,
             },
             errors: {}
         };
         this.onChange = this.onChange.bind(this);
-        this.handleIsItChecked = this.handleIsItChecked.bind(this);
-
     }
 
-    handleIsItChecked() {
-
-    }
 
     onChange = e => {
+
         console.log(e.target.value)
+        console.log(e.target)
         if(e.target.name == "needFollowUp"){
             this.setState({
                 ...this.state,
@@ -81,13 +78,18 @@ class AddReadingForm extends React.Component {
             })
         }
         if (e.target.type == "checkbox") {
-            this.setState({
-                ...this.state,
-                checkBox: {
-                    ...this.state.checkBox,
-                    [e.target.name]: e.target.value
-                }
-            })
+            console.log("LOL" ,e.target.value)
+            console.log("LOL" ,e.target.name)
+            if(e.target.value) {
+
+                this.setState({
+                    ...this.state,
+                    checkBox: {
+                        ...this.state.checkBox,
+                        [e.target.name]: e.target.value == "false" ? true: false
+                    }
+                })
+            }
         } else {
             this.setState({
                 ...this.state,
@@ -109,8 +111,11 @@ class AddReadingForm extends React.Component {
     }
 
     submit = event => {
+        this.processCheckBox();
         console.log("Submit clicked : ", event)
         console.log("Submit clicked : ", this.state.data)
+        console.log("Submit clicked : ", this.state)
+        console.log("Submit clicked :", this.state.checkBox)
         if (event) {
             this.props.submit(this.state.data)
         }
@@ -125,6 +130,24 @@ class AddReadingForm extends React.Component {
             errors.reader_id = emptyFieldsWarning;
         }
         return errors;
+    }
+    processCheckBox(){
+        let symptomsString= "";
+        symptomsString += this.state.checkBox.bleeding == true?"Bleeding, " : "";
+        symptomsString += this.state.checkBox.headache == true?"Headache, " : "";
+        symptomsString += this.state.checkBox.noSymptoms == true?"No Symptoms," : "";
+        symptomsString += this.state.checkBox.blurred == true?"Blurred, " : "";
+        symptomsString += this.state.checkBox.feverish == true?"Feverish, " : "";
+        symptomsString += this.state.checkBox.abdominal == true?"Abdominal, " : "";
+        symptomsString += this.state.checkBox.unwell == true?"Unwell, " : "";
+console.log(symptomsString)
+        this.setState({
+            ...this.state,
+            data:{
+                ...this.state.data,
+                symptoms: symptomsString
+            }
+        })
     }
 
     render() {
@@ -298,26 +321,23 @@ class AddReadingForm extends React.Component {
                         </Row>
                         <Row className="mb-2">
 
-                                    <Col>
-                                        <Form.Label>Symptoms</Form.Label>
-                                    </Col>
-                                    <Col>
-                                        <Form.Control inline size={'sm'} type={"checkbox"} onChange={this.onChange} name={'noSymptoms'}
-                                                      aria-label={"No Symptoms"} checked={this.state.checkBox.noSymptoms}/>
-                                    </Col>
-
-                                    {/*<input type={"checkbox"}  onChange={this.onChange} name={'headache'} aria-label="Headache" checked={this.state.checkBox.headache}/>*/}
-                                    {/*<input type={"checkbox"}  onChange={this.onChange} name={'bleeding'} aria-label="Bleeding" checked={this.state.checkBox.bleeding}/>*/}
-
-                            {/*<Col>*/}
-                            {/*    <Form.Group>*/}
-                            {/*        <Form.Label></Form.Label>*/}
-                            {/*        /!*<input type={"checkbox"}  onChange={this.onChange} name={'blurred'} aria-label="Blurred" checked={this.state.checkBox.blurred}/>*!/*/}
-                            {/*        /!*<input type={"checkbox"}  onChange={this.onChange} name={'feverish'} aria-label="Feverish" checked={this.state.checkBox.feverish}/>*!/*/}
-                            {/*        /!*<input type={"checkbox"}  onChange={this.onChange} name={'abdominal'} aria-label="Adbdominal" checked={this.state.checkBox.abdominal}/>*!/*/}
-                            {/*        /!*<input type={"checkbox"}  onChange={this.onChange} name={'unwell'} aria-label="Unwell" checked={this.state.checkBox.unwell}/>*!/*/}
-                            {/*    </Form.Group>*/}
-                            {/*</Col>*/}
+                            <Col>
+                                <Form.Group>
+                                    <Form.Label>Symptoms</Form.Label>
+                                    <Form.Check onChange={this.onChange} name={'noSymptoms'} type="checkbox" label="No Symptoms" value={'false'}/>
+                                    <Form.Check onChange={this.onChange} name={'headache'} type="checkbox" label="Headache" value={this.state.checkBox.headache}/>
+                                    <Form.Check onChange={this.onChange} name={'bleeding'}  type="checkbox" label="Bleeding" value={this.state.checkBox.bleeding}/>
+                                </Form.Group>
+                            </Col>
+                            <Col>
+                                <Form.Group>
+                                    <Form.Label></Form.Label>
+                                    <Form.Check onChange={this.onChange} name={'blurred'}  type="checkbox" label="Blurred" value={this.state.checkBox.blurred}/>
+                                    <Form.Check onChange={this.onChange} name={'feverish'}  type="checkbox" label="Feverish" value={this.state.checkBox.feverish}/>
+                                    <Form.Check onChange={this.onChange} name={'abdominal'}  type="checkbox" label="Adbdominal" value={this.state.checkBox.abdominal}/>
+                                    <Form.Check onChange={this.onChange} name={'unwell'}  type="checkbox" label="Unwell" value={this.state.checkBox.unwell}/>
+                                </Form.Group>
+                            </Col>
                             <Col>
                                 <Form.Group>
                                     <Form.Label>Additional Symptoms</Form.Label>
