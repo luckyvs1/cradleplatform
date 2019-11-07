@@ -8,7 +8,7 @@ import React from "react";
 import AddReadingForm from "../../forms/readingForm/AddReadingForm";
 import api from "../../../api";
 import GreenResponseReading from "../../utils/GreenResponseReading";
-import {Button, Col} from "react-bootstrap";
+import {Button, Col, Modal} from "react-bootstrap";
 import StopSignResponseReading from "../../utils/StopSignResponseReading";
 import TriangleResponseReading from "../../utils/TriangleResponseReading";
 import ErrorAlert from "../../utils/ErrorAlert";
@@ -17,6 +17,8 @@ import AdviceBox from "../../utils/AdviceBox"
 class AddReadingDetail extends React.Component {
     // color => Yellow , Green , Red
     state = {
+        counter: 900000, // ms
+        isShowDialog: false,
         isShow: false,
         isShowError: false,
         isShowAdvice: false,
@@ -165,6 +167,10 @@ class AddReadingDetail extends React.Component {
             dataFromParent: true
         })
     }
+    handleClose = () => this.setState({
+        ...this.state,
+        isShowDialog: false,
+    });
 
 
     processRetest = (testNo, color) => {
@@ -222,11 +228,13 @@ class AddReadingDetail extends React.Component {
                 })
                 break;
             case "Yellow_up":
+                this.setUpTimerValue()
                 this.setState({
                     ...this.state,
                     message: "Please Retest After 15 minutes",
                     currentColor: "Yellow",
-                    testNo: this.state.testNo + 1
+                    testNo: this.state.testNo + 1,
+                    isShowDialog: true
                 })
                 break;
             case "Yellow_down":
@@ -234,7 +242,9 @@ class AddReadingDetail extends React.Component {
                     ...this.state,
                     message: "Please Retest After 15 minutes",
                     currentColor: "Yellow",
-                    testNo: this.state.testNo + 1
+                    testNo: this.state.testNo + 1,
+                    isShowDialog: true
+
                 })
                 break;
             case "Red_up":
@@ -254,6 +264,11 @@ class AddReadingDetail extends React.Component {
                 })
                 break;
         }
+    }
+
+    setUpTimerValue() {
+
+
     }
 
 
@@ -304,6 +319,19 @@ class AddReadingDetail extends React.Component {
     }
 
     render() {
+        var x = this;
+        var {counter} = this.state;
+        var {isShowDialog} = this.state;
+        if(isShowDialog){
+                setTimeout(function () {
+                    if (counter > 0) {
+                        x.setState({
+                            ...this.state,
+                            counter: counter - 1000
+                        });
+                    }
+                }, 1000);
+        }
         return (
             <di>
                 <AddReadingForm submit={this.submit} dataFromParent={!this.state.readyToSubmit}></AddReadingForm>
@@ -355,6 +383,23 @@ class AddReadingDetail extends React.Component {
                                                  message={this.state.message}
                                                  isUp={false}></StopSignResponseReading> : null
                 }
+
+
+                <Modal show={this.state.isShowDialog} onHide={this.handleClose}>
+                    <Modal.Header closeButton>
+                        <Modal.Title>Modal heading</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>Timer : {Math.floor((counter /1000/ 60))} :  { Math.floor((counter/1000) % 60)}</Modal.Body>
+                    <Modal.Footer>
+                        <Button variant="secondary" onClick={this.handleClose}>
+                            Close
+                        </Button>
+                        <Button variant="primary" onClick={this.handleClose}>
+                            Save Changes
+                        </Button>
+                    </Modal.Footer>
+                </Modal>
+
             </di>
         );
     }
