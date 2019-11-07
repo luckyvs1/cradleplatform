@@ -28,8 +28,8 @@ class AddMedicationForm extends React.Component {
                    drug_history_id : 0,
                    drug_name: "",
                    dosage: "",
-                   start_date : "",
-                   end_date : ""
+                   start_date : new Date(),
+                   end_date : null
                 },
                 dosage_edit:{
                     dose: "",
@@ -57,8 +57,9 @@ class AddMedicationForm extends React.Component {
         var dosageText = this.state.dosage_edit.dose + " " + this.state.dosage_edit.unit + " " + this.state.dosage_edit.times_per_day + " times per day";
         this.state.data.dosage = dosageText;
         if(Object.keys(errors).length === 0){
-            console.log(this.state.data);
-            console.log(this.state.dosage_edit);
+            //console.log(this.state.data);
+            //console.log(this.state.dosage_edit);
+            this.props.submit(this.state.data);
         }
     };
 

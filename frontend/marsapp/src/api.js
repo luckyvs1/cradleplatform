@@ -69,6 +69,11 @@ export default {
         createReferral:data=> axios.post(`http://${host}:${port}/api/referrals` , {data}),
     },
     medication:{
+        addAMedication: data => axios.post(`http://${host}:${port}/api/medications`, data,
+            {
+                headers: {
+                    'Content-Type': 'application/json;charset=utf-8'
+                }}),
     },
     followUp: {
         getAllFollowUps:data=> axios.get(`http://${host}:${port}/api/followUps`),
