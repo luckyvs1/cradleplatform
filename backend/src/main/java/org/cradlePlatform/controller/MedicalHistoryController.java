@@ -39,10 +39,7 @@ public class MedicalHistoryController {
     @PostMapping(path="/api/medicalHistories")
     @ResponseStatus(code = HttpStatus.CREATED)
     public String addMedicalHistory (@RequestBody MedicalHistory mh) {
-        MedicalHistory newMedicalHistory = new MedicalHistory();
-        newMedicalHistory.setPatientId(mh.getPatientId());
-        newMedicalHistory.setMedicalHistoryText(mh.getMedicalHistoryText());
-        medicalHistoryRepository.save(newMedicalHistory);
+        medicalHistoryRepository.save(mh);
         return "Saved Medical History";
     }
 }
