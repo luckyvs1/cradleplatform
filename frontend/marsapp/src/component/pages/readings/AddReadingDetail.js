@@ -41,32 +41,33 @@ class AddReadingDetail extends React.Component {
             readerId: 1,
             patientId: 1,
             timestamp: "2019-09-08",
-            symptoms: "No symptoms",
+            symptoms: "",
             otherSymptoms: "No other symptoms",
             systolicBloodPressure: 0,
             diastolicBloodPressure: 0,
             pulseRate: 0,
             notes: "No notes",
-            needFollowUp: false,
+            needFollowUp: null,
             appVersion: "3",
             dateLastSaved: "2019-10-03",
             recheckVitalsDate: "2019-11-10",
             deviceInformation: "Unknown",
             gestationalAgeTimeUnit: "none",
-            gestationalAge: 3,
+            gestationalAge: 0,
             manuallyChangedOcrResults: "No",
             photoPath: "Unavailable",
             totalOcrSeconds: 0.0,
             region: "Unknown",
             ocrEnabled: false,
             uploadImages: false,
-            vitalsTrafficLight: "",
+            vitalsTrafficLight: "Green",
             diagnosis: "none"
         },
     }
 
 
     submit = data => {
+        console.log(data)
         this.setState({
             ...this.state,
             readingData: data

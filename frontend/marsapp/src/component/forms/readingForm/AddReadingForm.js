@@ -78,10 +78,7 @@ class AddReadingForm extends React.Component {
             })
         }
         if (e.target.type == "checkbox") {
-            console.log("LOL" ,e.target.value)
-            console.log("LOL" ,e.target.name)
             if(e.target.value) {
-
                 this.setState({
                     ...this.state,
                     checkBox: {
@@ -100,6 +97,7 @@ class AddReadingForm extends React.Component {
 
             });
         }
+
     }
     onPickColor(e){
         console.log('[onPickColor]', e.target)
@@ -111,13 +109,13 @@ class AddReadingForm extends React.Component {
     }
 
     submit = event => {
-        this.processCheckBox();
+
         console.log("Submit clicked : ", event)
         console.log("Submit clicked : ", this.state.data)
         console.log("Submit clicked : ", this.state)
         console.log("Submit clicked :", this.state.checkBox)
-        if (event) {
-            this.props.submit(this.state.data)
+        if(event){
+            this.processCheckBox()
         }
     };
 
@@ -133,21 +131,27 @@ class AddReadingForm extends React.Component {
     }
     processCheckBox(){
         let symptomsString= "";
-        symptomsString += this.state.checkBox.bleeding == true?"Bleeding, " : "";
-        symptomsString += this.state.checkBox.headache == true?"Headache, " : "";
+        symptomsString += this.state.checkBox.bleeding == true?"Bleeding," : "";
+        symptomsString += this.state.checkBox.headache == true?"Headache," : "";
         symptomsString += this.state.checkBox.noSymptoms == true?"No Symptoms," : "";
-        symptomsString += this.state.checkBox.blurred == true?"Blurred, " : "";
-        symptomsString += this.state.checkBox.feverish == true?"Feverish, " : "";
-        symptomsString += this.state.checkBox.abdominal == true?"Abdominal, " : "";
-        symptomsString += this.state.checkBox.unwell == true?"Unwell, " : "";
-console.log(symptomsString)
+        symptomsString += this.state.checkBox.blurred == true?"Blurred," : "";
+        symptomsString += this.state.checkBox.feverish == true?"Feverish," : "";
+        symptomsString += this.state.checkBox.abdominal == true?"Abdominal," : "";
+        symptomsString += this.state.checkBox.unwell == true?"Unwell," : "";
+        symptomsString = symptomsString.substring(0, symptomsString.length - 1);
+        console.log(symptomsString)
         this.setState({
             ...this.state,
             data:{
                 ...this.state.data,
-                symptoms: symptomsString
+                symptoms: symptomsString.toString()
             }
+        } ,()=>{
+            this.props.submit(this.state.data)
+
         })
+        console.log(this.state.data.symptoms)
+        return true;
     }
 
     render() {
