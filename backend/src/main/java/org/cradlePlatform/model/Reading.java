@@ -4,7 +4,6 @@
  */
 package org.cradlePlatform.model;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import org.cradlePlatform.model.VitalsTrafficLight;
 import org.cradlePlatform.model.GestationalAgeTimeUnit;
 import javax.persistence.*;
@@ -13,7 +12,6 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import org.hibernate.validator.constraints.Range;
 import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Entity

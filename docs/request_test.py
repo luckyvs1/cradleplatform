@@ -18,9 +18,10 @@ hwurl = 'http://localhost:8080/api/healthWorkers/'
 mhurl = 'http://localhost:8080/api/medicalHistories?patientId=1&latest=true'
 medurl = 'http://localhost:8080/api/medications?drugHistoryId=1'
 fuurl = 'http://localhost:8080/api/followUps'
-readingurl = "http://localhost:8080/api/readings"
+readingurl = "http://localhost:8080/api/readings-multi"
 hcrefurl = "http://localhost:8080/api/health-centre/healthfacility21/referrals"
 medbypatienturl = "http://localhost:8080/api/patients/1/medications"
+readingInitialsAgeUrl = "http://localhost:8080/api/patientInfoReadings"
 mhdata = {
     "patientId": "1",
     "medicalHistoryText": "gfhgfhfghffssss",
@@ -52,12 +53,13 @@ meddata = {
     "endDate": "2019-09-30"
 }
 fudata = {
-    "patientId": "1",
-    "followUpNotes": "notes",
+    "id": 2,
+    "patientId": 1,
+    "followUpNotes": 'Vitals to be rechecked',
     "required": True,
-    "frequency": "once a month",
-    "diagnosis": "coolness",
-    "treatment": "check up bupbup"
+    "frequency": "Once a month",
+    "diagnosis": "High blood pressure",
+    "treatment": "NEW AFAFAFAFAF"
 }
 readingdata =  {
     "readings": [
@@ -151,10 +153,11 @@ readingdata =  {
 # resp = requests.get(paturl, data=json.dumps(dhdata), headers=header)
 # resp = requests.post(medurl, data=json.dumps(meddata), headers=header)
 # resp = requests.post(paturl, data=json.dumps(patdata), headers=header)
-# resp = requests.get(fuurl, data=json.dumps(fudata), headers=header)
+# resp = requests.put(fuurl, data=json.dumps(fudata), headers=header)
 # resp = requests.post(readingurl, data=json.dumps(readingdata), headers=header)
 # resp = requests.get(hcrefurl, headers=header)
-resp = requests.get(medbypatienturl, headers=header)
+# resp = requests.get(medbypatienturl, headers=header)
+resp = requests.get(readingInitialsAgeUrl, headers=header)
 
 print(resp)
 print(resp.status_code)

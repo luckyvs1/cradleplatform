@@ -6,11 +6,11 @@
  */
 package org.cradlePlatform.controller;
 
-
 import java.util.Optional;
 import org.cradlePlatform.model.Reading;
 import org.cradlePlatform.model.VitalsTrafficLight;
 import org.cradlePlatform.model.ReadingUploadWrapper;
+import org.cradlePlatform.model.ReadingGetWrapper;
 import org.cradlePlatform.repository.ReadingRepository;
 import org.cradlePlatform.service.ReadingService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -84,8 +84,13 @@ public class ReadingController {
     }
 
     @GetMapping(path="/api/readings/{id}")
-    public Optional<Reading> getReadingsById(@PathVariable(value = "id") int readingId){
+    public Optional<Reading> getReadingsById(@PathVariable(value = "id") int readingId) {
         return readingRepository.findById(readingId);
+    }
+
+    @GetMapping(path="/api/patientInfoReadings")
+    public Iterable<ReadingGetWrapper> getReadingsWIthInitialsAge() {
+        return readingRepository.findReadingsWithInitialsAge();
     }
 }
 
