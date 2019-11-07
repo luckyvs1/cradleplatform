@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ReadingRepository extends CrudRepository<Reading, Integer> {
-    Iterable<Reading> findReadingByPatientId(int patientId);
+    Iterable<Reading> findReadingByPatientIdOrderByIdDesc(int patientId);
     Iterable<Reading> findTopByPatientIdOrderByIdDesc(int patientId);
 
     @Query("SELECT new org.cradlePlatform.model.ReadingGetWrapper(R, P.initials, P.age) " +
