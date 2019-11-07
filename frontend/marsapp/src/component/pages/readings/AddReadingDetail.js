@@ -74,6 +74,7 @@ class AddReadingDetail extends React.Component {
             ...this.state,
             readingData: data
         })
+
         api.reading.processReading(data)
             .then(response => {
                 this.setState({
@@ -167,10 +168,14 @@ class AddReadingDetail extends React.Component {
             dataFromParent: true
         })
     }
-    handleClose = () => this.setState({
-        ...this.state,
-        isShowDialog: false,
-    });
+    handleClose = (counter) => {
+        if(counter == 0){
+            this.setState({
+                ...this.state,
+                isShowDialog: false,
+            });
+        }
+    }
 
 
     processRetest = (testNo, color) => {
@@ -214,7 +219,6 @@ class AddReadingDetail extends React.Component {
                 break;
         }
     }
-
 
     processColorRetestStageZero = (color) => {
         switch (color) {
@@ -333,7 +337,7 @@ class AddReadingDetail extends React.Component {
             }, 1000);
         }
         let seconds = Math.floor((counter / 1000) % 60);
-        let minute  = Math.floor((counter / 1000 / 60));
+        let minute = Math.floor((counter / 1000 / 60));
         return (
             <di>
                 <AddReadingForm submit={this.submit} dataFromParent={!this.state.readyToSubmit}></AddReadingForm>
@@ -387,13 +391,13 @@ class AddReadingDetail extends React.Component {
                 }
 
 
-                <Modal show={this.state.isShowDialog} onHide={this.handleClose}>
+                <Modal show={this.state.isShowDialog} onHide={this.handleClose(counter)}>
                     <Modal.Header closeButton>
-                        <Modal.Title>Modal heading</Modal.Title>
+                        <Modal.Title>Timer</Modal.Title>
                     </Modal.Header>
-                    <Modal.Body>Timer : {minute} : {seconds}</Modal.Body>
+                    <Modal.Body> {minute} : {seconds}</Modal.Body>
                     <Modal.Footer>
-                        <Button variant="secondary" onClick={this.handleClose}>
+                        <Button variant="secondary" onClick={this.handleClose(counter)}>
                             Close
                         </Button>
                     </Modal.Footer>
