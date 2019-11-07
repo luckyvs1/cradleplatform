@@ -49,8 +49,8 @@ class AddReadingDetail extends React.Component {
             notes: "No notes",
             needFollowUp: null,
             appVersion: "3",
-            dateLastSaved: "2019-10-03",
-            recheckVitalsDate: "2019-11-10",
+            dateLastSaved: "",
+            recheckVitalsDate: "",
             deviceInformation: "Unknown",
             gestationalAgeTimeUnit: "none",
             gestationalAge: 0,
@@ -81,7 +81,8 @@ class AddReadingDetail extends React.Component {
                     readingData: {
                         ...this.state.readingData,
                         vitalsTrafficLight: response.data.vitalsTrafficLight,
-                        needFollowUp: response.data.needFollowUp
+                        needFollowUp: response.data.needFollowUp,
+                        recheckVitalsDate: new Date().toDateString()
                     }
                 })
                 this.processRetest(this.state.testNo, this.state.vitalsTrafficLight);
