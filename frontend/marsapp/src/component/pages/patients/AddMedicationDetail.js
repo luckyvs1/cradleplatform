@@ -5,32 +5,22 @@ import AddMedicationForm from "../../forms/AddMedicationForm";
 import api from "../../../api";
 class AddMedicationDetail extends React.Component {
     submit = (data) => {
-        //The reason that I copy each data field into the formattedData was because I couldn't format the dates (dob and gestationalStartDate)
-        //into SQL DATE format directly without crashing the app. Will try to figure this out for the next iteration (refactoring)
-//        var formattedData = {
-//           attestationNo : data.attestationNo,
-//           firstName: data.firstName,
-//           lastName: data.lastName,
-//           villageNo : data.villageNo,
-//           zoneNo : data.zoneNo,
-//           householdNo : data.householdNo,
-//           blockNo : data.blockNo,
-//           tankNo : data.tankNo,
-//           initials : data.initials,
-//           sex: data.sex,
-//           age: data.age,
-//           dob: data.dob,
-//           pregnant: data.pregnant,
-//           gestationalStartDate: data.gestationalStartDate,
-//           gestationAgeUnit: data.gestationAgeUnit,
-//           currentGestationalAge: data.currentGestationalAge
-//        };
-//        console.log(formattedData);
-//        if(formattedData.dob != null)
-//            formattedData.dob = this.formatDate(formattedData.dob);
-//        if(formattedData.gestationalStartDate != null)
-//            formattedData.gestationalStartDate = this.formatDate(formattedData.gestationalStartDate);
-
+        var formattedData = {
+           drugHistoryId: data.drug_history_id,
+           drugName: data.drug_name,
+           dosage: data.dosage,
+           startDate: data.start_date,
+           endDate: data.end_date
+        };
+        console.log(formattedData);
+        if(formattedData.startDate != null)
+            formattedData.startDate = this.formatDate(formattedData.startDate);
+        if(formattedData.endDate != null)
+            formattedData.endDate = this.formatDate(formattedData.endDate);
+        console.log(formattedData);
+        api.medication.addAMedication(JSON.stringify(formattedData)).then(res =>
+            {console.log("added medication", res)}
+        );
     }
 
     formatDate = date =>{
