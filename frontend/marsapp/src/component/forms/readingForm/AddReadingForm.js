@@ -231,7 +231,7 @@ class AddReadingForm extends React.Component {
                             <Row>
                                 <Col md={4}>
                                     <Form.Group>
-                                        <Form.Label>Systolic Blood Pressure</Form.Label>
+                                        <Form.Label>Systolic Blood Pressure (mmHg)</Form.Label>
                                         <Form.Control
                                             type="number"
                                             id="systolicBloodPressure"
@@ -249,13 +249,14 @@ class AddReadingForm extends React.Component {
                                 </Col>
                                 <Col md={4}>
                                     <Form.Group>
-                                        <Form.Label>Diastolic Blood Pressure</Form.Label>
+                                        <Form.Label>Diastolic Blood Pressure (mmHg)</Form.Label>
                                         <Form.Control
                                             type="number"
                                             id="diastolicBloodPressure"
                                             name="diastolicBloodPressure"
                                             placeholder="Diastolic Blood Pressure"
                                             value={data.diastolicBloodPressure}
+                                            isInvalid={data.systolicBloodPressure < 10 || data.systolicBloodPressure > 300 }
                                             onChange={this.onChange}/>
                                         {/* enable his for error handling */}
                                         {/* <Form.Text className="text-muted">
@@ -265,13 +266,14 @@ class AddReadingForm extends React.Component {
                                 </Col>
                                 <Col md={4}>
                                     <Form.Group>
-                                        <Form.Label>Heart Rate</Form.Label>
+                                        <Form.Label>Heart Rate (BPM)</Form.Label>
                                         <Form.Control
                                             type="number"
                                             id="pulseRate"
                                             name="pulseRate"
                                             placeholder="Heart Rate"
                                             value={data.pulseRate}
+                                            isInvalid={data.systolicBloodPressure < 40 || data.systolicBloodPressure > 200 }
                                             onChange={this.onChange}/>
                                         {/* enable his for error handling */}
                                         {/* <Form.Text className="text-muted">
