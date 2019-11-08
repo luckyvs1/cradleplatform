@@ -140,7 +140,6 @@ class AddReadingDetail extends React.Component {
         })
 
         api.reading.getReadingAdvice(this.state.vitalsTrafficLight).then(response => {
-            console.log(response);
             this.setState({
                 ...this.state,
                 briefAdvice: response.data.briefAdvice,
@@ -158,11 +157,10 @@ class AddReadingDetail extends React.Component {
         })
 
         api.reading.addAReading(this.state.readingData).catch(error => {
-            // if (error.response.status == 400) {
-            //     this.onShowAlert(error.response.data)
-            // }
+
         }, () => {
             sessionStorage.removeItem('testNo')
+            localStorage.removeItem('color')
         })
 
 
