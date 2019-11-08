@@ -2,8 +2,15 @@ import React from "react";
 import {connect} from "react-redux";
 import axios from "axios";
 import AddMedicationForm from "../../forms/AddMedicationForm";
+import ErrorAlert from "../../utils/ErrorAlert";
+import ConfirmAlert from "../../utils/ConfirmAlert";
 import api from "../../../api";
 class AddMedicationDetail extends React.Component {
+    state = {
+        isShowError: false,
+        isShowConfirm: false,
+        message: "",
+    }
     submit = (data) => {
         var formattedData = {
            drugHistoryId: data.drug_history_id,
@@ -19,10 +26,29 @@ class AddMedicationDetail extends React.Component {
             formattedData.endDate = this.formatDate(formattedData.endDate);
         console.log(formattedData);
         api.medication.addAMedication(JSON.stringify(formattedData)).then(res =>
-            {console.log("added medication", res)}
-        );
-    }
+            {
+            console.log("added medication", res)
+            this.onShowAlert("Successfully added medication", false, true)
 
+            }).catch(error => {this.onShowAlert(error.response.data)})
+
+    }
+    onShowAlert = (message, error, confirm) => {
+        this.setState({
+            ...this.state,
+            isShowError: error,
+            isShowConfirm: confirm,
+            message: message
+        }, () => {
+            window.setTimeout(() => {
+                this.setState({
+                    ...this.state,
+                    isShowError: false,
+                    isShowConfirm: false
+                })
+            }, 2000)
+        });
+    }
     formatDate = date =>{
         function pad(num){ return ('00'+num).slice(-2) };
         return  date.getUTCFullYear()        + '-' +
@@ -31,7 +57,12 @@ class AddMedicationDetail extends React.Component {
     }
     render() {
         return (
+        <div>
             <AddMedicationForm submit = {this.submit}></AddMedicationForm>
+            <ErrorAlert show={this.state.isShowError} message={this.state.message}></ErrorAlert>
+            <ConfirmAlert show={this.state.isShowConfirm} message={this.state.message}></ConfirmAlert>
+        </div>
+
         );
     }
 }
