@@ -13,7 +13,7 @@ const StopSignResponseReading = ({show, message, isUp}) => {
                         <p>
                             {isUp ?
                                 "Very Raised Blood Pressure" :
-                                "In Sever Shock"
+                                "In Severe Shock"
                             }
                         </p>
                         <p>
