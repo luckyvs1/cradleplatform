@@ -17,6 +17,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.ResponseEntity;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.core.JsonProcessingException;
 
 @CrossOrigin(origins = {"http://cmpt373.csil.sfu.ca:8044", "http://localhost:3000"})
 @RestController
@@ -50,6 +52,17 @@ public class ReadingController {
         }
 
         return new ResponseEntity<String>("Invalid reading", HttpStatus.BAD_REQUEST);
+    }
+
+    @GetMapping(path="/api/readings-advice/{vitalsTrafficLight}")
+    public ResponseEntity<String> getReadingAdvice(@PathVariable(value = "vitalsTrafficLight") VitalsTrafficLight vitalsTrafficLight){
+        ObjectMapper objectMapper = new ObjectMapper();
+        try {
+            String jsonString = objectMapper.writeValueAsString(vitalsTrafficLight);
+            return new ResponseEntity<String>(jsonString, HttpStatus.OK);
+        }  catch (JsonProcessingException error) {
+            return new ResponseEntity<String>("Error occurred during JSON parsing", HttpStatus.BAD_REQUEST);
+        }
     }
 
     @PostMapping(path="/api/readings-multi")

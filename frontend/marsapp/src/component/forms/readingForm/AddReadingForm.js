@@ -7,310 +7,377 @@
 import React from "react";
 import PropTypes from "prop-types";
 import TopNavigation from "../../navigation/TopNavigation";
-import {Button, Col, Container, Form, Row} from 'react-bootstrap';
+import {Button, Col, Container, Form, Jumbotron, Row} from 'react-bootstrap';
 import InlineError from "../../messages/InlineError";
+import moment from "moment";
+
 
 class AddReadingForm extends React.Component {
-    constructor(props){
+    constructor(props) {
         super(props);
+        let date = moment(new Date()).format('YYYY-MM-DDTHH:MM:SSZ');
         this.state = {
-            data:{
+            counter: Number(localStorage.getItem('counter')) == 0 ? 15000 : Number(localStorage.getItem('counter')),
+            data: {
                 readerId: 1,
                 patientId: 1,
-                timestamp: "2019-09-08",
-                symptoms: "No symptoms",
+                timestamp: date,
+                symptoms: "",
                 otherSymptoms: "No other symptoms",
                 systolicBloodPressure: 0,
                 diastolicBloodPressure: 0,
                 pulseRate: 0,
                 notes: "No notes",
-                needFollowUp: false,
+                needFollowUp: null,
                 appVersion: "3",
-                dateLastSaved: "2019-10-03",
-                recheckVitalsDate: "2019-11-10",
+                dateLastSaved: date,
+                recheckVitalsDate: date,
                 deviceInformation: "Unknown",
                 gestationalAgeTimeUnit: "none",
-                gestationalAge: 3,
+                gestationalAge: 0,
                 manuallyChangedOcrResults: "No",
                 photoPath: "Unavailable",
                 totalOcrSeconds: 0.0,
                 region: "Unknown",
                 ocrEnabled: false,
                 uploadImages: false,
-                vitalsTrafficLight: "Green"},
-            isLoading: false,
+                vitalsTrafficLight: "Green",
+                diagnosis: "none"
+            },
+            checkBox: {
+                blurred: false,
+                feverish: false,
+                abdominal: false,
+                unwell: false,
+                noSymptoms: false,
+                headache: false,
+                bleeding: false,
+            },
             errors: {}
         };
         this.onChange = this.onChange.bind(this);
     }
 
-    onChange = e =>  {
-        this.setState({
-            data: {
-                ...this.state.data,
-                [e.target.name]: e.target.value
-            }
-        });
-    }
 
-    onOptionChange = e => {
-        this.setState({
-            value: e.target.value
-        });
+    onChange = e => {
+        if (e.target.name == "needFollowUp") {
+            this.setState({
+                ...this.state,
+                data: {
+                    ...this.state.data,
+                    needFollowUp: e.target.value
+                }
+            })
+        }
+        if (e.target.name == "gestationalAgeTimeUnit") {
+            this.setState({
+                ...this.state,
+                data: {
+                    ...this.state.data,
+                    gestationalAgeTimeUnit: e.target.value
+                }
+            })
+        }
+        if (e.target.type == "checkbox") {
+            if (e.target.value) {
+                this.setState({
+                    ...this.state,
+                    checkBox: {
+                        ...this.state.checkBox,
+                        [e.target.name]: e.target.value == "false" ? true : false
+                    }
+                })
+            }
+        } else {
+            this.setState({
+                ...this.state,
+                data: {
+                    ...this.state.data,
+                    [e.target.name]: e.target.value
+                }
+            });
+        }
     }
 
     submit = event => {
         if (event) {
-            this.props.submit(this.state.data)
+            this.processCheckBox()
         }
     };
+
 
     validate = (data) => {
         const errors = {};
         var emptyFieldsWarning = "Field cannot be blank";
-        if(!data.patient_id) {
+        if (!data.patient_id) {
             errors.patient_id = emptyFieldsWarning;
-        }
-        else if(!data.reader_id) {
+        } else if (!data.reader_id) {
             errors.reader_id = emptyFieldsWarning;
         }
         return errors;
     }
 
+    processCheckBox() {
+        //TODO iterate through some how
+        let symptomsString = "";
+        symptomsString += this.state.checkBox.bleeding == true ? "Bleeding," : "";
+        symptomsString += this.state.checkBox.headache == true ? "Headache," : "";
+        symptomsString += this.state.checkBox.noSymptoms == true ? "No Symptoms," : "";
+        symptomsString += this.state.checkBox.blurred == true ? "Blurred," : "";
+        symptomsString += this.state.checkBox.feverish == true ? "Feverish," : "";
+        symptomsString += this.state.checkBox.abdominal == true ? "Abdominal," : "";
+        symptomsString += this.state.checkBox.unwell == true ? "Unwell," : "";
+        symptomsString = symptomsString.substring(0, symptomsString.length - 1);
+        this.setState({
+            ...this.state,
+            data: {
+                ...this.state.data,
+                symptoms: symptomsString.toString()
+            }
+        }, () => {
+            this.props.submit(this.state.data)
+
+        })
+        return true;
+    }
+
+    reset() {
+        localStorage.removeItem('counter')
+        localStorage.removeItem('isShowTimerDialog')
+    }
+
     render() {
-        const{ data, errors } = this.state;
+        let x = this;
+        let counter = Number(localStorage.getItem('currentTimePlus15')) - Number(new Date().getTime());
+        if (this.props.showDialog) {
+            setTimeout(function () {
+                if (counter > 0) {
+                    x.setState({
+                        ...this.state,
+                        counter: counter - 1000
+                    });
+                } else {
+                    localStorage.removeItem('counter')
+                    localStorage.removeItem('isShowTimerDialog')
+                    window.location.reload(false);
+                }
+            }, 1000);
+            localStorage.setItem('counter', counter.toString())
+        }
+        let seconds = Math.floor((counter / 1000) % 60);
+        let minute = Math.floor((counter / 1000 / 60));
+        const {data, errors} = this.state;
         return (
             <div>
                 <TopNavigation authenticated={true}></TopNavigation>
-                <Container>
-                    <Row>
-                        <Col>
-                            <h1>Add Reading</h1>
-                            <hr></hr>
-                        </Col>
-                    </Row>
-                    <Form onSubmit={this.onSubmit}>
+                {!localStorage.getItem('isShowTimerDialog') ?
+                    <Container>
                         <Row>
                             <Col>
-                                <Form.Group>
-                                    <Form.Label>Patient ID</Form.Label>
-                                    <Form.Control
-                                        type="number"
-                                        id="patientID"
-                                        name="patientId"
-                                        placeholder="Patient ID" 
-                                        value={data.patientId} 
-                                        onChange={this.onChange}/>
+                                <h1>Add Reading</h1>
+                                <hr></hr>
+                            </Col>
+                        </Row>
+                        <Form onSubmit={this.onSubmit}>
+                            <Row>
+                                <Col>
+                                    <Form.Group>
+                                        <Form.Label>Patient ID</Form.Label>
+                                        <Form.Control
+                                            type="number"
+                                            id="patientID"
+                                            name="patientId"
+                                            placeholder="Patient ID"
+                                            value={data.patientId}
+                                            onChange={this.onChange}/>
                                         {errors.patientId && <InlineError text={errors.patientId}/>}
-                                    {/* <Form.Text className="text-muted">
-                                        {errors.email && <InlineError text={errors.email} />}
-                                    </Form.Text> */}
-                                </Form.Group>
-                            </Col>
-                            <Col>
-                                <Form.Group>
-                                    <Form.Label>Reader ID</Form.Label>
-                                    <Form.Control
-                                        type="number"
-                                        id="readerId"
-                                        name="readerId"
-                                        placeholder="Reader Id"
-                                        value={data.readerId}
-                                        onChange={this.onChange} />
-                                    {/*error handling*/}
-                                    {/* <Form.Text className="text-muted">
-                                        {errors.email && <InlineError text={errors.email} />}
-                                    </Form.Text> */}
-                                </Form.Group>
-                            </Col>
-                            <Col>
-                                <Form.Group>
-                                    <Form.Label>Needs Follow-up</Form.Label>
-                                    <Form.Control as="select"
-                                        name="needFollowUp"
-                                        id="needFollowUp"
-                                        onChange={this.onChange}
-                                        value={data.needFollowUp}>
-                                        <option value={'true'}>Yes</option>
-                                        <option value={'false'}>No</option>
-                                    </Form.Control>
-                                    {/* enable his for error handling */}
-                                    {/* <Form.Text className="text-muted">
-                                        {errors.email && <InlineError text={errors.email} />}
-                                    </Form.Text> */}
-                                </Form.Group>
-                            </Col>
-                        </Row>
-                        <Row>
-                            <Col md={4}>
-                                <Form.Group>
-                                    <Form.Label>Systolic Blood Pressure</Form.Label>
-                                    <Form.Control
-                                        type="number"
-                                        id="systolicBloodPressure"
-                                        name="systolicBloodPressure"
-                                        placeholder="Systolic Blood Pressure" 
-                                        value={data.systolicBloodPressure}
-                                        onChange={this.onChange} />
-                                    {/* enable his for error handling */}
-                                    {/* <Form.Text className="text-muted">
-                                        {errors.email && <InlineError text={errors.email} />}
-                                    </Form.Text> */}
-                                </Form.Group>
-                            </Col>
-                            <Col md={4}>
-                                <Form.Group>
-                                    <Form.Label>Diastolic Blood Pressure</Form.Label>
-                                    <Form.Control
-                                        type="number"
-                                        id="diastolicBloodPressure"
-                                        name="diastolicBloodPressure"
-                                        placeholder="Diastolic Blood Pressure"
-                                        value={data.diastolicBloodPressure}
-                                        onChange={this.onChange} />
-                                    {/* enable his for error handling */}
-                                    {/* <Form.Text className="text-muted">
-                                        {errors.email && <InlineError text={errors.email} />}
-                                    </Form.Text> */}
-                                </Form.Group>
-                            </Col>
-                            <Col md={4}>
-                                <Form.Group>
-                                    <Form.Label>Heart Rate</Form.Label>
-                                    <Form.Control
-                                        type="number"
-                                        id="pulseRate"
-                                        name="pulseRate"
-                                        placeholder="Heart Rate"
-                                        value={data.pulseRate}
-                                        onChange={this.onChange} />
-                                    {/* enable his for error handling */}
-                                    {/* <Form.Text className="text-muted">
-                                        {errors.email && <InlineError text={errors.email} />}
-                                    </Form.Text> */}
-                                </Form.Group>
-                            </Col>
-                        </Row>
-                        <Row>
-                            <Col md={4}>
-                                <Form.Group>
-                                    <Form.Label>Gestational Age</Form.Label>
-                                    <Form.Control
-                                        type="number"
-                                        id="gestationalAge"
-                                        name="gestationalAge"
-                                        placeholder="Age"
-                                        value={data.gestationalAge}
-                                        onChange={this.onChange} />
-                                    {/* enable his for error handling */}
-                                    {/* <Form.Text className="text-muted">
-                                        {errors.email && <InlineError text={errors.email} />}
-                                    </Form.Text> */}
-                                </Form.Group>
-                            </Col>
-                            <Col md={4}>
-                                <Form.Group>
-                                    <Form.Label>Gestational Age Unit</Form.Label>
-                                    <Form.Control as="select"
-                                        name="gestationalAgeTimeUnit"
-                                        id="gestationalAgeTimeUnit"
-                                        onChange={this.onChange}
-                                        value={data.gestationalAgeTimeUnit}>
-                                        <option value={'weeks'}>Weeks</option>
-                                        <option value={'months'}>Months</option>
-                                        <option value={'none'}>None</option>
-                                    </Form.Control>
-                                    {/* enable his for error handling */}
-                                    {/* <Form.Text className="text-muted">
-                                        {errors.email && <InlineError text={errors.email} />}
-                                    </Form.Text> */}
-                                </Form.Group>
-                            </Col>
-                            <Col>
-                                <Form.Group>
-                                    <Form.Label>Region</Form.Label>
-                                    <Form.Control
-                                        type="text"
-                                        id="region"
-                                        name="region"
-                                        placeholder="Region"
-                                        value={data.region}
-                                        onChange={this.onChange} />
-                                    {/*error handling*/}
-                                    {/* <Form.Text className="text-muted">
-                                        {errors.email && <InlineError text={errors.email} />}
-                                    </Form.Text> */}
-                                </Form.Group>
-                            </Col>
-                        </Row>
-                        <Row className="mb-2">
-                            <Col>
-                            <Form.Group>
-                                <Form.Label>Symptoms</Form.Label>
-                                <Form.Control as="select"
-                                    name="symptoms"
-                                    id="symptoms"
-                                    onChange={this.onChange}
-                                    value={data.symptoms}>
-                                    <option value={'No Symptoms'}>No Sympotoms</option>
-                                    <option value={'Headache'}>Headache</option>
-                                    <option value={'Bleeding'}>Bleeding</option>
-                                    <option value={'Blurred Vision'}>Blurred Vision</option>
-                                    <option value={'Feverish'}>Feverish</option>
-                                    <option value={'Abdominal pain'}>Abdominal Pain</option>
-                                    <option value={'Unwell'}>Unwell</option>
-                                </Form.Control>
-                            </Form.Group>
-                            {/*  <Form.Label>Symptoms</Form.Label><br></br>
-                                <Button variant="outline-primary" size="sm">No Symptoms</Button>&nbsp;
-                                <Button variant="outline-primary" size="sm">Headache</Button>&nbsp;
-                                <Button variant="outline-primary" size="sm">Bleeding</Button>&nbsp;
-                                <Button variant="outline-primary" size="sm">Blurred Vision</Button>&nbsp;
-                                <Button variant="outline-primary" size="sm">Feverish</Button>&nbsp;
-                                <Button variant="outline-primary" size="sm">Adbdominal pain</Button>&nbsp;
-                                <Button variant="outline-primary" size="sm">Unwell</Button>&nbsp;
-                            */}
-                            </Col>
-                        </Row>
-                        <Row>
-                            <Col>
-                                <Form.Group>
-                                    <Form.Label>Additional Symptoms</Form.Label>
-                                    <Form.Control
-                                        as="textarea"
-                                        rows="3"
-                                        id="otherSymptoms"
-                                        name="otherSymptoms"
-                                        placeholder="additional_symptoms"
-                                        value={data.otherSymptoms}
-                                        onChange={this.onChange} />
-                                </Form.Group>
-                            </Col>
-                        </Row>
-                        <Row>
-                            <Col>
-                                <Form.Group>
-                                    <Form.Label>Notes</Form.Label>
-                                    <Form.Control
-                                        as="textarea"
-                                        rows="3"
-                                        id="notes"
-                                        name="notes"
-                                        placeholder="Notes"
-                                        value={data.notes}
-                                        onChange={this.onChange} />
-                                </Form.Group>
-                            </Col>
-                        </Row>
-                        <Row>
-                            <Col className={"text-right"}>
-                                <Button primary type="submit" onClick={this.submit}>Create</Button>
-                            </Col>
-                        </Row>
-                    </Form>
-                </Container>
-            </div>
+                                    </Form.Group>
+                                </Col>
+                                <Col>
+                                    <Form.Group>
+                                        <Form.Label>Reader ID</Form.Label>
+                                        <Form.Control
+                                            type="number"
+                                            id="readerId"
+                                            name="readerId"
+                                            placeholder="Reader Id"
+                                            value={data.readerId}
+                                            onChange={this.onChange}/>
+                                    </Form.Group>
+                                </Col>
+                                <Col>
+                                    <Form.Group>
+                                        <Form.Label>Needs Follow-up</Form.Label>
+                                        <Form.Control as="select"
+                                                      name="needFollowUp"
+                                                      id="needFollowUp"
+                                                      onChange={this.onChange}
+                                                      value={data.needFollowUp}>
+                                            <option value={'true'}>Yes</option>
+                                            <option value={'false'}>No</option>
+                                        </Form.Control>
+                                    </Form.Group>
+                                </Col>
+                            </Row>
+                            <Row>
+                                <Col md={4}>
+                                    <Form.Group>
+                                        <Form.Label>Systolic Blood Pressure (mmHg)</Form.Label>
+                                        <Form.Control
+                                            type="number"
+                                            id="systolicBloodPressure"
+                                            name="systolicBloodPressure"
+                                            placeholder="Systolic Blood Pressure"
+                                            inputRef={el => this.inputEl = el}
+                                            value={data.systolicBloodPressure}
+                                            isInvalid={data.systolicBloodPressure < 10 || data.systolicBloodPressure > 300}
+                                            onChange={this.onChange}/>
+                                    </Form.Group>
+                                </Col>
+                                <Col md={4}>
+                                    <Form.Group>
+                                        <Form.Label>Diastolic Blood Pressure (mmHg)</Form.Label>
+                                        <Form.Control
+                                            type="number"
+                                            id="diastolicBloodPressure"
+                                            name="diastolicBloodPressure"
+                                            placeholder="Diastolic Blood Pressure"
+                                            value={data.diastolicBloodPressure}
+                                            isInvalid={data.systolicBloodPressure < 10 || data.systolicBloodPressure > 300}
+                                            onChange={this.onChange}/>
+                                    </Form.Group>
+                                </Col>
+                                <Col md={4}>
+                                    <Form.Group>
+                                        <Form.Label>Heart Rate (BPM)</Form.Label>
+                                        <Form.Control
+                                            type="number"
+                                            id="pulseRate"
+                                            name="pulseRate"
+                                            placeholder="Heart Rate"
+                                            value={data.pulseRate}
+                                            isInvalid={data.systolicBloodPressure < 40 || data.systolicBloodPressure > 200}
+                                            onChange={this.onChange}/>
+                                    </Form.Group>
+                                </Col>
+                            </Row>
+                            <Row>
+                                <Col md={4}>
+                                    <Form.Group>
+                                        <Form.Label>Gestational Age</Form.Label>
+                                        <Form.Control
+                                            type="number"
+                                            id="gestationalAge"
+                                            name="gestationalAge"
+                                            placeholder="Age"
+                                            value={data.gestationalAge}
+                                            onChange={this.onChange}/>
+                                    </Form.Group>
+                                </Col>
+                                <Col md={4}>
+                                    <Form.Group>
+                                        <Form.Label>Gestational Age Unit</Form.Label>
+                                        <Form.Control as="select"
+                                                      name="gestationalAgeTimeUnit"
+                                                      id="gestationalAgeTimeUnit"
+                                                      onChange={this.onChange}
+                                                      value={data.gestationalAgeTimeUnit}>
+                                            <option value={'weeks'}>Weeks</option>
+                                            <option value={'months'}>Months</option>
+                                            <option value={'none'}>None</option>
+                                        </Form.Control>
+                                    </Form.Group>
+                                </Col>
+                                <Col>
+                                    <Form.Group>
+                                        <Form.Label>Region</Form.Label>
+                                        <Form.Control
+                                            type="text"
+                                            id="region"
+                                            name="region"
+                                            placeholder="Region"
+                                            value={data.region}
+                                            onChange={this.onChange}/>
+                                    </Form.Group>
+                                </Col>
+                            </Row>
+                            <Row className="mb-2">
+                                <Col>
+                                    <Form.Group>
+                                        <Form.Label>Symptoms</Form.Label>
+                                        <Form.Check onChange={this.onChange} name={'noSymptoms'} type="checkbox"
+                                                    label="No Symptoms" value={'false'}/>
+                                        <Form.Check onChange={this.onChange} name={'headache'} type="checkbox"
+                                                    label="Headache" value={this.state.checkBox.headache}/>
+                                        <Form.Check onChange={this.onChange} name={'bleeding'} type="checkbox"
+                                                    label="Bleeding" value={this.state.checkBox.bleeding}/>
+                                    </Form.Group>
+                                </Col>
+                                <Col>
+                                    <Form.Group>
+                                        <Form.Label></Form.Label>
+                                        <Form.Check onChange={this.onChange} name={'blurred'} type="checkbox"
+                                                    label="Blurred" value={this.state.checkBox.blurred}/>
+                                        <Form.Check onChange={this.onChange} name={'feverish'} type="checkbox"
+                                                    label="Feverish" value={this.state.checkBox.feverish}/>
+                                        <Form.Check onChange={this.onChange} name={'abdominal'} type="checkbox"
+                                                    label="Adbdominal" value={this.state.checkBox.abdominal}/>
+                                        <Form.Check onChange={this.onChange} name={'unwell'} type="checkbox"
+                                                    label="Unwell" value={this.state.checkBox.unwell}/>
+                                    </Form.Group>
+                                </Col>
+                                <Col>
+                                    <Form.Group>
+                                        <Form.Label>Additional Symptoms</Form.Label>
+                                        <Form.Control
+                                            as="textarea"
+                                            rows="3"
+                                            id="otherSymptoms"
+                                            name="otherSymptoms"
+                                            placeholder="additional_symptoms"
+                                            value={data.otherSymptoms}
+                                            onChange={this.onChange}/>
+                                    </Form.Group>
 
+                                </Col>
+                                <Col>
+                                    <Form.Group>
+                                        <Form.Label>Notes</Form.Label>
+                                        <Form.Control
+                                            as="textarea"
+                                            rows="3"
+                                            id="notes"
+                                            name="notes"
+                                            placeholder="Notes"
+                                            value={data.notes}
+                                            onChange={this.onChange}/>
+                                    </Form.Group>
+                                </Col>
+                            </Row>
+                            <Row>
+
+                                {this.props.dataFromParent ?
+                                    <Col className={"text-right"}>
+                                        <Button primary onClick={this.submit}>Process Reading</Button>
+                                    </Col>
+                                    : null
+                                }
+
+                            </Row>
+                        </Form>
+                    </Container>
+                    :
+                    <Jumbotron style={{left: '100px'}} fluid={true} className={'text-center'}>
+                        <h1>Please Wait For</h1>
+                        <h1>
+                            {minute} : {seconds}
+                        </h1>
+                        <p>
+                            <Button variant="primary" onClick={this.reset}>Learn more</Button>
+                        </p>
+                    </Jumbotron>
+                }
+            </div>
         );
     }
 }
