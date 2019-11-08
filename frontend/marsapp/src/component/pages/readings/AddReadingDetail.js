@@ -332,7 +332,7 @@ class AddReadingDetail extends React.Component {
 
     render() {
         return (
-            <di>
+            <div>
                 <AddReadingForm submit={this.submit} dataFromParent={!this.state.readyToSubmit}
                                 showDialog={this.state.isShowDialog}
                 ></AddReadingForm>
@@ -384,7 +384,7 @@ class AddReadingDetail extends React.Component {
                                                  message={this.state.message}
                                                  isUp={false}></StopSignResponseReading> : null
                 }
-            </di>
+            </div>
         );
     }
 }

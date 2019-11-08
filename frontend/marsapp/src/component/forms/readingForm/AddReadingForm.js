@@ -11,13 +11,11 @@ import {Button, Col, Container, Form, Jumbotron, Row} from 'react-bootstrap';
 import InlineError from "../../messages/InlineError";
 import moment from "moment";
 
-var today = new Date();
-var date = new Date().getFullYear() + '-' + (new Date().getMonth()) + '-' + new Date().getDate();
 
 class AddReadingForm extends React.Component {
     constructor(props) {
         super(props);
-        let date = moment(new Date()).format('YYYY-MM-DD');
+        let date = moment(new Date()).format('YYYY-MM-DDTHH:MM:SSZ');
         this.state = {
             counter: Number(localStorage.getItem('counter')) == 0 ? 15000 : Number(localStorage.getItem('counter')),
             data: {
