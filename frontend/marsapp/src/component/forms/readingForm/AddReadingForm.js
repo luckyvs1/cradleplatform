@@ -145,7 +145,7 @@ class AddReadingForm extends React.Component {
 
     render() {
         let x = this;
-        let {counter} = this.state;
+        let counter = Number(localStorage.getItem('currentTimePlus15')) - Number(new Date().getTime());
         if (this.props.showDialog) {
             setTimeout(function () {
                 if (counter > 0) {

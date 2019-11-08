@@ -13,6 +13,7 @@ import StopSignResponseReading from "../../utils/StopSignResponseReading";
 import TriangleResponseReading from "../../utils/TriangleResponseReading";
 import ErrorAlert from "../../utils/ErrorAlert";
 import AdviceBox from "../../utils/AdviceBox"
+import moment from "moment";
 
 class AddReadingDetail extends React.Component {
     // color => Yellow , Green , Red
@@ -234,6 +235,8 @@ class AddReadingDetail extends React.Component {
                     testNo: this.state.testNo + 1,
                     isShowDialog: true
                 })
+                let tt2   = moment(new Date()).add(15, 'm').toDate().getTime();
+                localStorage.setItem('currentTimePlus15' ,tt2.toString() )
                 localStorage.setItem('color', "Yellow")
                 localStorage.setItem('isShowTimerDialog', 'true');
                 localStorage.removeItem('counter')
@@ -247,6 +250,9 @@ class AddReadingDetail extends React.Component {
                     testNo: this.state.testNo + 1,
                     isShowDialog: true
                 })
+                let tt  = moment(new Date()).add(15, 'm').toDate().getTime();
+
+                localStorage.setItem('currentTimePlus15' ,tt.toString() )
                 localStorage.setItem('color', "Yellow")
                 localStorage.setItem('isShowTimerDialog', 'true');
                 localStorage.removeItem('counter')
@@ -326,6 +332,9 @@ class AddReadingDetail extends React.Component {
     }
 
     render() {
+        console.log("Current Time" , localStorage.getItem('currentTimePlus15'))
+        console.log("Current Time" , (Number(localStorage.getItem('currentTimePlus15')) - new Date().getTime()).toString())
+
         return (
             <di>
                 <AddReadingForm submit={this.submit} dataFromParent={!this.state.readyToSubmit}
