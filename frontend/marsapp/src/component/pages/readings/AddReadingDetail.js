@@ -8,7 +8,7 @@ import React from "react";
 import AddReadingForm from "../../forms/readingForm/AddReadingForm";
 import api from "../../../api";
 import GreenResponseReading from "../../utils/GreenResponseReading";
-import {Button, Col, Jumbotron} from "react-bootstrap";
+import {Button, Col} from "react-bootstrap";
 import StopSignResponseReading from "../../utils/StopSignResponseReading";
 import TriangleResponseReading from "../../utils/TriangleResponseReading";
 import ErrorAlert from "../../utils/ErrorAlert";
@@ -85,7 +85,6 @@ class AddReadingDetail extends React.Component {
                         ...this.state.readingData,
                         vitalsTrafficLight: response.data.vitalsTrafficLight,
                         needFollowUp: response.data.needFollowUp,
-                        recheckVitalsDate: new Date().toDateString()
                     }
                 })
                 this.processRetest(Number(sessionStorage.getItem('testNo')), this.state.vitalsTrafficLight);
@@ -235,8 +234,8 @@ class AddReadingDetail extends React.Component {
                     testNo: this.state.testNo + 1,
                     isShowDialog: true
                 })
-                let tt2   = moment(new Date()).add(15, 'm').toDate().getTime();
-                localStorage.setItem('currentTimePlus15' ,tt2.toString() )
+                let tt2 = moment(new Date()).add(15, 'm').toDate().getTime();
+                localStorage.setItem('currentTimePlus15', tt2.toString())
                 localStorage.setItem('color', "Yellow")
                 localStorage.setItem('isShowTimerDialog', 'true');
                 localStorage.removeItem('counter')
@@ -250,9 +249,9 @@ class AddReadingDetail extends React.Component {
                     testNo: this.state.testNo + 1,
                     isShowDialog: true
                 })
-                let tt  = moment(new Date()).add(15, 'm').toDate().getTime();
+                let tt = moment(new Date()).add(15, 'm').toDate().getTime();
 
-                localStorage.setItem('currentTimePlus15' ,tt.toString() )
+                localStorage.setItem('currentTimePlus15', tt.toString())
                 localStorage.setItem('color', "Yellow")
                 localStorage.setItem('isShowTimerDialog', 'true');
                 localStorage.removeItem('counter')

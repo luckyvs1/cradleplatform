@@ -7,18 +7,23 @@
 import React from "react";
 import PropTypes from "prop-types";
 import TopNavigation from "../../navigation/TopNavigation";
-import {Button, Col, Container, Form, Row, InputGroup, Jumbotron} from 'react-bootstrap';
+import {Button, Col, Container, Form, Jumbotron, Row} from 'react-bootstrap';
 import InlineError from "../../messages/InlineError";
+import moment from "moment";
+
+var today = new Date();
+var date = new Date().getFullYear() + '-' + (new Date().getMonth()) + '-' + new Date().getDate();
 
 class AddReadingForm extends React.Component {
     constructor(props) {
         super(props);
+        let date = moment(new Date()).format('YYYY-MM-DD');
         this.state = {
             counter: Number(localStorage.getItem('counter')) == 0 ? 15000 : Number(localStorage.getItem('counter')),
             data: {
                 readerId: 1,
                 patientId: 1,
-                timestamp: new Date(),
+                timestamp: date,
                 symptoms: "",
                 otherSymptoms: "No other symptoms",
                 systolicBloodPressure: 0,
@@ -27,8 +32,8 @@ class AddReadingForm extends React.Component {
                 notes: "No notes",
                 needFollowUp: null,
                 appVersion: "3",
-                dateLastSaved: new Date(),
-                recheckVitalsDate: new Date(),
+                dateLastSaved: date,
+                recheckVitalsDate: date,
                 deviceInformation: "Unknown",
                 gestationalAgeTimeUnit: "none",
                 gestationalAge: 0,
@@ -227,7 +232,7 @@ class AddReadingForm extends React.Component {
                                             placeholder="Systolic Blood Pressure"
                                             inputRef={el => this.inputEl = el}
                                             value={data.systolicBloodPressure}
-                                            isInvalid={data.systolicBloodPressure < 10 || data.systolicBloodPressure > 300 }
+                                            isInvalid={data.systolicBloodPressure < 10 || data.systolicBloodPressure > 300}
                                             onChange={this.onChange}/>
                                     </Form.Group>
                                 </Col>
@@ -240,7 +245,7 @@ class AddReadingForm extends React.Component {
                                             name="diastolicBloodPressure"
                                             placeholder="Diastolic Blood Pressure"
                                             value={data.diastolicBloodPressure}
-                                            isInvalid={data.systolicBloodPressure < 10 || data.systolicBloodPressure > 300 }
+                                            isInvalid={data.systolicBloodPressure < 10 || data.systolicBloodPressure > 300}
                                             onChange={this.onChange}/>
                                     </Form.Group>
                                 </Col>
@@ -253,7 +258,7 @@ class AddReadingForm extends React.Component {
                                             name="pulseRate"
                                             placeholder="Heart Rate"
                                             value={data.pulseRate}
-                                            isInvalid={data.systolicBloodPressure < 40 || data.systolicBloodPressure > 200 }
+                                            isInvalid={data.systolicBloodPressure < 40 || data.systolicBloodPressure > 200}
                                             onChange={this.onChange}/>
                                     </Form.Group>
                                 </Col>
