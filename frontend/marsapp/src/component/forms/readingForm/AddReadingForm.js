@@ -92,10 +92,8 @@ class AddReadingForm extends React.Component {
                     ...this.state.data,
                     [e.target.name]: e.target.value
                 }
-
             });
         }
-
     }
 
     submit = event => {
@@ -117,6 +115,7 @@ class AddReadingForm extends React.Component {
     }
 
     processCheckBox() {
+        //TODO iterate through some how
         let symptomsString = "";
         symptomsString += this.state.checkBox.bleeding == true ? "Bleeding," : "";
         symptomsString += this.state.checkBox.headache == true ? "Headache," : "";
@@ -189,9 +188,6 @@ class AddReadingForm extends React.Component {
                                             value={data.patientId}
                                             onChange={this.onChange}/>
                                         {errors.patientId && <InlineError text={errors.patientId}/>}
-                                        {/* <Form.Text className="text-muted">
-                                        {errors.email && <InlineError text={errors.email} />}
-                                    </Form.Text> */}
                                     </Form.Group>
                                 </Col>
                                 <Col>
@@ -204,10 +200,6 @@ class AddReadingForm extends React.Component {
                                             placeholder="Reader Id"
                                             value={data.readerId}
                                             onChange={this.onChange}/>
-                                        {/*error handling*/}
-                                        {/* <Form.Text className="text-muted">
-                                        {errors.email && <InlineError text={errors.email} />}
-                                    </Form.Text> */}
                                     </Form.Group>
                                 </Col>
                                 <Col>
@@ -221,10 +213,6 @@ class AddReadingForm extends React.Component {
                                             <option value={'true'}>Yes</option>
                                             <option value={'false'}>No</option>
                                         </Form.Control>
-                                        {/* enable his for error handling *p/}
-                                        {/* <Form.Text className="text-muted">
-                                        {errors.email && <InlineError text={errors.email} />}
-                                    </Form.Text> */}
                                     </Form.Group>
                                 </Col>
                             </Row>
@@ -241,10 +229,6 @@ class AddReadingForm extends React.Component {
                                             value={data.systolicBloodPressure}
                                             isInvalid={data.systolicBloodPressure < 10 || data.systolicBloodPressure > 300 }
                                             onChange={this.onChange}/>
-                                        {/* enable his for error handling */}
-                                        {/* <Form.Text className="text-muted">
-                                        {errors.email && <InlineError text={errors.email} />}
-                                    </Form.Text> */}
                                     </Form.Group>
                                 </Col>
                                 <Col md={4}>
@@ -258,10 +242,6 @@ class AddReadingForm extends React.Component {
                                             value={data.diastolicBloodPressure}
                                             isInvalid={data.systolicBloodPressure < 10 || data.systolicBloodPressure > 300 }
                                             onChange={this.onChange}/>
-                                        {/* enable his for error handling */}
-                                        {/* <Form.Text className="text-muted">
-                                        {errors.email && <InlineError text={errors.email} />}
-                                    </Form.Text> */}
                                     </Form.Group>
                                 </Col>
                                 <Col md={4}>
@@ -275,10 +255,6 @@ class AddReadingForm extends React.Component {
                                             value={data.pulseRate}
                                             isInvalid={data.systolicBloodPressure < 40 || data.systolicBloodPressure > 200 }
                                             onChange={this.onChange}/>
-                                        {/* enable his for error handling */}
-                                        {/* <Form.Text className="text-muted">
-                                        {errors.email && <InlineError text={errors.email} />}
-                                    </Form.Text> */}
                                     </Form.Group>
                                 </Col>
                             </Row>
@@ -293,10 +269,6 @@ class AddReadingForm extends React.Component {
                                             placeholder="Age"
                                             value={data.gestationalAge}
                                             onChange={this.onChange}/>
-                                        {/* enable his for error handling */}
-                                        {/* <Form.Text className="text-muted">
-                                        {errors.email && <InlineError text={errors.email} />}
-                                    </Form.Text> */}
                                     </Form.Group>
                                 </Col>
                                 <Col md={4}>
@@ -311,10 +283,6 @@ class AddReadingForm extends React.Component {
                                             <option value={'months'}>Months</option>
                                             <option value={'none'}>None</option>
                                         </Form.Control>
-                                        {/* enable his for error handling */}
-                                        {/* <Form.Text className="text-muted">
-                                        {errors.email && <InlineError text={errors.email} />}
-                                    </Form.Text> */}
                                     </Form.Group>
                                 </Col>
                                 <Col>
@@ -327,15 +295,10 @@ class AddReadingForm extends React.Component {
                                             placeholder="Region"
                                             value={data.region}
                                             onChange={this.onChange}/>
-                                        {/*error handling*/}
-                                        {/* <Form.Text className="text-muted">
-                                        {errors.email && <InlineError text={errors.email} />}
-                                    </Form.Text> */}
                                     </Form.Group>
                                 </Col>
                             </Row>
                             <Row className="mb-2">
-
                                 <Col>
                                     <Form.Group>
                                         <Form.Label>Symptoms</Form.Label>
@@ -412,7 +375,6 @@ class AddReadingForm extends React.Component {
                     </Jumbotron>
                 }
             </div>
-
         );
     }
 }
