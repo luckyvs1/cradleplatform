@@ -13,7 +13,6 @@ import org.cradlePlatform.model.ReadingUploadWrapper;
 import org.cradlePlatform.model.ReadingGetWrapper;
 import org.cradlePlatform.repository.ReadingRepository;
 import org.cradlePlatform.service.ReadingService;
-import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -68,7 +67,7 @@ public class ReadingController {
 
     @PostMapping(path="/api/readings-multi")
     public ResponseEntity<?> addReadings(@RequestBody ReadingUploadWrapper readings) {
-        ArrayList<Reading> invalidReadings = new ArrayList<>();
+        boolean hasInvalidReadings = false;
         for (Reading reading : readings.getReadings()) {
 
             Boolean trafficLightIsValid = readingService.isValidTrafficLight(reading);
@@ -77,16 +76,13 @@ public class ReadingController {
             if (trafficLightIsValid && referralValid) {
                 readingRepository.save(reading);
             } else {
-                invalidReadings.add(reading);
+                hasInvalidReadings = true;
             }
 
         }
 
-        if (invalidReadings.size() == readings.getReadings().size()) {
+        if (hasInvalidReadings) {
             return new ResponseEntity<String>("No readings were saved", HttpStatus.BAD_REQUEST);
-        } else if (!invalidReadings.isEmpty()) {
-            //Not all readings were saved due to error
-            return new ResponseEntity<ArrayList<Reading>>(invalidReadings, HttpStatus.CREATED);
         } else {
             return new ResponseEntity<String>("Saved readings", HttpStatus.CREATED);
         }
