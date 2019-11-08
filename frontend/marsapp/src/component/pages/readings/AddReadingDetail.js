@@ -69,7 +69,6 @@ class AddReadingDetail extends React.Component {
 
 
     submit = data => {
-        console.log(data)
         this.setState({
             ...this.state,
             readingData: data
@@ -87,25 +86,15 @@ class AddReadingDetail extends React.Component {
                         needFollowUp: response.data.needFollowUp,
                         recheckVitalsDate: new Date().toDateString()
                     }
-                }, () => [
-                    // localStorage.setItem('color' , response.data.vitalsTrafficLight)
-                ])
-
-                console.log("PASSED ++>", localStorage.getItem('color'))
-                console.log("PASSED ++>", localStorage.getItem('testNo'))
-
+                })
                 this.processRetest(Number(sessionStorage.getItem('testNo')), this.state.vitalsTrafficLight);
-                console.log("test number", sessionStorage.getItem('testNo'))
-
                 this.setState({
                     ...this.state,
                     isShow: true,
                     isShowAdvice: false,
                 })
             }).catch(error => {
-            // if (error.response.status == 400) {
             this.onShowAlert(error.response.data)
-            // }
         });
     }
 
@@ -179,7 +168,6 @@ class AddReadingDetail extends React.Component {
 
 
     processRetest = (testNo, color) => {
-        console.log("TESTING", testNo)
         switch (testNo) {
             case   0:
                 if (color != "Green") {
@@ -198,8 +186,6 @@ class AddReadingDetail extends React.Component {
                 }
                 break;
             case 1:
-                console.log("TESTING", color)
-                console.log("TESTING", localStorage.getItem('color'))
                 if (!color.includes(localStorage.getItem('color'))) {
                     sessionStorage.setItem('testNo', "2")
                     this.processColorRetestStageOne(color);
@@ -340,8 +326,6 @@ class AddReadingDetail extends React.Component {
     }
 
     render() {
-        console.log("test number RENDER", sessionStorage.getItem('testNo'))
-
         return (
             <di>
                 <AddReadingForm submit={this.submit} dataFromParent={!this.state.readyToSubmit}
@@ -395,7 +379,6 @@ class AddReadingDetail extends React.Component {
                                                  message={this.state.message}
                                                  isUp={false}></StopSignResponseReading> : null
                 }
-
             </di>
         );
     }
