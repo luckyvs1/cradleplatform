@@ -14,6 +14,7 @@ import org.cradlePlatform.model.ReadingGetWrapper;
 import org.cradlePlatform.repository.ReadingRepository;
 import org.cradlePlatform.service.ReadingService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.ResponseEntity;
@@ -26,6 +27,19 @@ public class ReadingController {
 
     @Autowired
     private ReadingService readingService;
+
+    private static String currentSMSReadingBody = "";
+
+    @PostMapping(path="/api/smsreadings")
+    public String smsReadings(@RequestParam String Body){
+        currentSMSReadingBody += Body;
+        currentSMSReadingBody = currentSMSReadingBody.replace("<", "[");
+        currentSMSReadingBody = currentSMSReadingBody.replace(">", "]");
+        currentSMSReadingBody = currentSMSReadingBody.replace("(", "{");
+        currentSMSReadingBody = currentSMSReadingBody.replace(")", "}");
+        return currentSMSReadingBody;
+    }
+
 
     @PostMapping(path="/api/readings")
     public ResponseEntity<String> addReading(@RequestBody Reading reading){
