@@ -17,7 +17,7 @@ import AdviceBox from "../../utils/AdviceBox"
 class AddReadingDetail extends React.Component {
     // color => Yellow , Green , Red
     state = {
-        counter: 30000, // ms
+        counter:  15000, // ms
         isShowDialog: localStorage.getItem('isShowTimerDialog'),
         isShow: false,
         isShowError: false,
@@ -26,7 +26,7 @@ class AddReadingDetail extends React.Component {
         errorMsg: "",
         vitalsTrafficLight: "",
         needFollowUp: "",
-        testNo: 0,
+        testNo: sessionStorage.getItem('testNo')?0: sessionStorage.getItem('testNo'),
         currentColor: "",
         readyToSubmit: false,
         briefAdvice: "",
@@ -88,7 +88,9 @@ class AddReadingDetail extends React.Component {
                         recheckVitalsDate: new Date().toDateString()
                     }
                 })
-                this.processRetest(this.state.testNo, this.state.vitalsTrafficLight);
+                this.processRetest(Number(sessionStorage.getItem('testNo')), this.state.vitalsTrafficLight);
+                console.log("test number", sessionStorage.getItem('testNo'))
+
                 this.setState({
                     ...this.state,
                     isShow: true,
@@ -150,9 +152,11 @@ class AddReadingDetail extends React.Component {
         })
 
         api.reading.addAReading(this.state.readingData).catch(error => {
-            if (error.response.status == 400) {
-                this.onShowAlert(error.response.data)
-            }
+            // if (error.response.status == 400) {
+            //     this.onShowAlert(error.response.data)
+            // }
+        },()=>{
+            sessionStorage.removeItem('testNo')
         })
 
 
@@ -179,6 +183,8 @@ class AddReadingDetail extends React.Component {
     processRetest = (testNo, color) => {
         switch (testNo) {
             case   0:
+                sessionStorage.setItem('testNo', '0')
+
                 if (color != "Green") {
                     this.processColorRetestStageZero(color);
                 } else {
@@ -193,6 +199,7 @@ class AddReadingDetail extends React.Component {
                 }
                 break;
             case 1:
+                sessionStorage.setItem('testNo', '1')
                 if (!color.includes(this.state.currentColor)) {
                     this.processColorRetestStageOne(color);
                 } else {
@@ -202,11 +209,11 @@ class AddReadingDetail extends React.Component {
                         currentColor: "",
                         testNo: 0,
                         readyToSubmit: true,
-
                     })
                 }
                 break;
             case 2:
+                sessionStorage.setItem('testNo', '2')
                 this.setState({
                     ...this.state,
                     message: `Advice Will Be Displayed After Submission`,
@@ -239,7 +246,7 @@ class AddReadingDetail extends React.Component {
                 })
                 localStorage.setItem('isShowTimerDialog', 'true');
                 localStorage.removeItem('counter')
-                localStorage.setItem('counter', '30000');
+                localStorage.setItem('counter', '15000');
 
                 break;
             case "Yellow_down":
@@ -252,8 +259,7 @@ class AddReadingDetail extends React.Component {
                 })
                 localStorage.setItem('isShowTimerDialog', 'true');
                 localStorage.removeItem('counter')
-                localStorage.setItem('counter', '30000');
-
+                localStorage.setItem('counter', '15000');
 
 
                 break;
@@ -323,6 +329,8 @@ class AddReadingDetail extends React.Component {
     }
 
     render() {
+        console.log("test number", sessionStorage.getItem('testNo'))
+
         return (
             <di>
                 <AddReadingForm submit={this.submit} dataFromParent={!this.state.readyToSubmit}

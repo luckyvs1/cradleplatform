@@ -14,7 +14,7 @@ class AddReadingForm extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            counter: Number(localStorage.getItem('counter')) == 0 ? 30000 : Number(localStorage.getItem('counter')),
+            counter: Number(localStorage.getItem('counter')) == 0 ? 15000 : Number(localStorage.getItem('counter')),
             data: {
                 readerId: 1,
                 patientId: 1,
@@ -177,6 +177,10 @@ class AddReadingForm extends React.Component {
                         ...this.state,
                         counter: counter - 1000
                     });
+                } else {
+                    localStorage.removeItem('counter')
+                    localStorage.removeItem('isShowTimerDialog')
+                    window.location.reload(false);
                 }
             }, 1000);
             localStorage.setItem('counter', counter.toString())
@@ -189,7 +193,7 @@ class AddReadingForm extends React.Component {
         return (
             <div>
                 <TopNavigation authenticated={true}></TopNavigation>
-                {!this.props.showDialog ?
+                {!localStorage.getItem('isShowTimerDialog') ?
                     <Container>
                         <Row>
                             <Col>
@@ -420,7 +424,7 @@ class AddReadingForm extends React.Component {
                     </Container>
                     :
                     <Jumbotron style={{left: '100px'}} fluid={true} className={'text-center'}>
-                        <h1>Hello, world!</h1>
+                        <h1>Please Wait For</h1>
                         <p>
                             {minute} : {seconds}
                         </p>
