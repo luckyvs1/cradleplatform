@@ -332,9 +332,6 @@ class AddReadingDetail extends React.Component {
     }
 
     render() {
-        console.log("Current Time" , localStorage.getItem('currentTimePlus15'))
-        console.log("Current Time" , (Number(localStorage.getItem('currentTimePlus15')) - new Date().getTime()).toString())
-
         return (
             <di>
                 <AddReadingForm submit={this.submit} dataFromParent={!this.state.readyToSubmit}
