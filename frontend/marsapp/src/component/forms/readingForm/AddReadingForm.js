@@ -321,7 +321,7 @@ class AddReadingForm extends React.Component {
                                         <Form.Check onChange={this.onChange} name={'feverish'} type="checkbox"
                                                     label="Feverish" value={this.state.checkBox.feverish}/>
                                         <Form.Check onChange={this.onChange} name={'abdominal'} type="checkbox"
-                                                    label="Adbdominal" value={this.state.checkBox.abdominal}/>
+                                                    label="Abdominal" value={this.state.checkBox.abdominal}/>
                                         <Form.Check onChange={this.onChange} name={'unwell'} type="checkbox"
                                                     label="Unwell" value={this.state.checkBox.unwell}/>
                                     </Form.Group>
