@@ -98,7 +98,7 @@ class AddReadingDetail extends React.Component {
                 })
             }).catch(error => {
             // if (error.response.status == 400) {
-            //     this.onShowAlert(error.response.data)
+                this.onShowAlert(error.response.data)
             // }
         });
     }
@@ -172,18 +172,11 @@ class AddReadingDetail extends React.Component {
             dataFromParent: true
         })
     }
-    handleClose = () => {
-        this.setState({
-            ...this.state,
-            isShowDialog: false,
-        });
-    }
 
 
     processRetest = (testNo, color) => {
         switch (testNo) {
             case   0:
-                sessionStorage.setItem('testNo', '0')
 
                 if (color != "Green") {
                     this.processColorRetestStageZero(color);
@@ -196,10 +189,10 @@ class AddReadingDetail extends React.Component {
                         readyToSubmit: true,
                         dataFromParent: false,
                     })
+                    sessionStorage.setItem('testNo', '0')
                 }
                 break;
             case 1:
-                sessionStorage.setItem('testNo', '1')
                 if (!color.includes(this.state.currentColor)) {
                     this.processColorRetestStageOne(color);
                 } else {
@@ -210,6 +203,7 @@ class AddReadingDetail extends React.Component {
                         testNo: 0,
                         readyToSubmit: true,
                     })
+                    sessionStorage.setItem('testNo', '0')
                 }
                 break;
             case 2:
@@ -221,11 +215,14 @@ class AddReadingDetail extends React.Component {
                     testNo: 0,
                     readyToSubmit: true,
                 })
+                sessionStorage.setItem('testNo', '0')
+
                 break;
         }
     }
 
     processColorRetestStageZero = (color) => {
+        sessionStorage.setItem('testNo', '1')
         switch (color) {
             case "Green":
                 this.setState({
@@ -247,7 +244,6 @@ class AddReadingDetail extends React.Component {
                 localStorage.setItem('isShowTimerDialog', 'true');
                 localStorage.removeItem('counter')
                 localStorage.setItem('counter', '15000');
-
                 break;
             case "Yellow_down":
                 this.setState({
@@ -260,8 +256,6 @@ class AddReadingDetail extends React.Component {
                 localStorage.setItem('isShowTimerDialog', 'true');
                 localStorage.removeItem('counter')
                 localStorage.setItem('counter', '15000');
-
-
                 break;
             case "Red_up":
                 this.setState({
@@ -326,6 +320,8 @@ class AddReadingDetail extends React.Component {
                 })
                 break;
         }
+        sessionStorage.setItem('testNo', '2')
+
     }
 
     render() {

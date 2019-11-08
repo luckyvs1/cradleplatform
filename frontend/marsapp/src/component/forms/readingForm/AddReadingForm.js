@@ -57,9 +57,6 @@ class AddReadingForm extends React.Component {
 
 
     onChange = e => {
-
-        console.log(e.target.value)
-        console.log(e.target)
         if (e.target.name == "needFollowUp") {
             this.setState({
                 ...this.state,
@@ -101,22 +98,7 @@ class AddReadingForm extends React.Component {
 
     }
 
-    onPickColor(e) {
-        console.log('[onPickColor]', e.target)
-    }
-
-    onOptionChange = e => {
-        this.setState({
-            value: e.target.value
-        });
-    }
-
     submit = event => {
-
-        console.log("Submit clicked : ", event)
-        console.log("Submit clicked : ", this.state.data)
-        console.log("Submit clicked : ", this.state)
-        console.log("Submit clicked :", this.state.checkBox)
         if (event) {
             this.processCheckBox()
         }
@@ -144,7 +126,6 @@ class AddReadingForm extends React.Component {
         symptomsString += this.state.checkBox.abdominal == true ? "Abdominal," : "";
         symptomsString += this.state.checkBox.unwell == true ? "Unwell," : "";
         symptomsString = symptomsString.substring(0, symptomsString.length - 1);
-        console.log(symptomsString)
         this.setState({
             ...this.state,
             data: {
@@ -155,21 +136,17 @@ class AddReadingForm extends React.Component {
             this.props.submit(this.state.data)
 
         })
-        console.log(this.state.data.symptoms)
         return true;
     }
 
     reset() {
         localStorage.removeItem('counter')
         localStorage.removeItem('isShowTimerDialog')
-
     }
 
     render() {
-        console.log(this.props.dataFromParent)
-
-        var x = this;
-        var {counter} = this.state;
+        let x = this;
+        let {counter} = this.state;
         if (this.props.showDialog) {
             setTimeout(function () {
                 if (counter > 0) {
@@ -188,8 +165,6 @@ class AddReadingForm extends React.Component {
         let seconds = Math.floor((counter / 1000) % 60);
         let minute = Math.floor((counter / 1000 / 60));
         const {data, errors} = this.state;
-        console.log(localStorage.getItem('isShowTimerDialog'))
-        console.log(Number(localStorage.getItem('counter')))
         return (
             <div>
                 <TopNavigation authenticated={true}></TopNavigation>
@@ -246,7 +221,7 @@ class AddReadingForm extends React.Component {
                                             <option value={'true'}>Yes</option>
                                             <option value={'false'}>No</option>
                                         </Form.Control>
-                                        {/* enable his for error handling */}
+                                        {/* enable his for error handling *p/}
                                         {/* <Form.Text className="text-muted">
                                         {errors.email && <InlineError text={errors.email} />}
                                     </Form.Text> */}
@@ -264,6 +239,7 @@ class AddReadingForm extends React.Component {
                                             placeholder="Systolic Blood Pressure"
                                             inputRef={el => this.inputEl = el}
                                             value={data.systolicBloodPressure}
+                                            isInvalid={data.systolicBloodPressure < 10 || data.systolicBloodPressure > 300 }
                                             onChange={this.onChange}/>
                                         {/* enable his for error handling */}
                                         {/* <Form.Text className="text-muted">
@@ -425,9 +401,9 @@ class AddReadingForm extends React.Component {
                     :
                     <Jumbotron style={{left: '100px'}} fluid={true} className={'text-center'}>
                         <h1>Please Wait For</h1>
-                        <p>
+                        <h1>
                             {minute} : {seconds}
-                        </p>
+                        </h1>
                         <p>
                             <Button variant="primary" onClick={this.reset}>Learn more</Button>
                         </p>
