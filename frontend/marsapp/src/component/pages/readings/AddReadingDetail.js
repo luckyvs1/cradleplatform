@@ -17,7 +17,7 @@ import AdviceBox from "../../utils/AdviceBox"
 class AddReadingDetail extends React.Component {
     // color => Yellow , Green , Red
     state = {
-        counter:  15000, // ms
+        counter: 15000, // ms
         isShowDialog: localStorage.getItem('isShowTimerDialog'),
         isShow: false,
         isShowError: false,
@@ -26,7 +26,7 @@ class AddReadingDetail extends React.Component {
         errorMsg: "",
         vitalsTrafficLight: "",
         needFollowUp: "",
-        testNo: sessionStorage.getItem('testNo')?0: sessionStorage.getItem('testNo'),
+        testNo: sessionStorage.getItem('testNo') ? 0 : sessionStorage.getItem('testNo'),
         currentColor: "",
         readyToSubmit: false,
         briefAdvice: "",
@@ -87,7 +87,13 @@ class AddReadingDetail extends React.Component {
                         needFollowUp: response.data.needFollowUp,
                         recheckVitalsDate: new Date().toDateString()
                     }
-                })
+                }, () => [
+                    // localStorage.setItem('color' , response.data.vitalsTrafficLight)
+                ])
+
+                console.log("PASSED ++>", localStorage.getItem('color'))
+                console.log("PASSED ++>", localStorage.getItem('testNo'))
+
                 this.processRetest(Number(sessionStorage.getItem('testNo')), this.state.vitalsTrafficLight);
                 console.log("test number", sessionStorage.getItem('testNo'))
 
@@ -98,7 +104,7 @@ class AddReadingDetail extends React.Component {
                 })
             }).catch(error => {
             // if (error.response.status == 400) {
-                this.onShowAlert(error.response.data)
+            this.onShowAlert(error.response.data)
             // }
         });
     }
@@ -155,7 +161,7 @@ class AddReadingDetail extends React.Component {
             // if (error.response.status == 400) {
             //     this.onShowAlert(error.response.data)
             // }
-        },()=>{
+        }, () => {
             sessionStorage.removeItem('testNo')
         })
 
@@ -175,10 +181,11 @@ class AddReadingDetail extends React.Component {
 
 
     processRetest = (testNo, color) => {
+        console.log("TESTING", testNo)
         switch (testNo) {
             case   0:
-
                 if (color != "Green") {
+                    sessionStorage.setItem('testNo', "1")
                     this.processColorRetestStageZero(color);
                 } else {
                     this.setState({
@@ -193,7 +200,10 @@ class AddReadingDetail extends React.Component {
                 }
                 break;
             case 1:
-                if (!color.includes(this.state.currentColor)) {
+                console.log("TESTING", color)
+                console.log("TESTING", localStorage.getItem('color'))
+                if (!color.includes(localStorage.getItem('color'))) {
+                    sessionStorage.setItem('testNo', "2")
                     this.processColorRetestStageOne(color);
                 } else {
                     this.setState({
@@ -207,7 +217,6 @@ class AddReadingDetail extends React.Component {
                 }
                 break;
             case 2:
-                sessionStorage.setItem('testNo', '2')
                 this.setState({
                     ...this.state,
                     message: `Advice Will Be Displayed After Submission`,
@@ -222,7 +231,6 @@ class AddReadingDetail extends React.Component {
     }
 
     processColorRetestStageZero = (color) => {
-        sessionStorage.setItem('testNo', '1')
         switch (color) {
             case "Green":
                 this.setState({
@@ -232,6 +240,7 @@ class AddReadingDetail extends React.Component {
                     currentColor: "Green",
                     testNo: this.state.testNo + 1
                 })
+                localStorage.setItem('color', "Green")
                 break;
             case "Yellow_up":
                 this.setState({
@@ -241,6 +250,7 @@ class AddReadingDetail extends React.Component {
                     testNo: this.state.testNo + 1,
                     isShowDialog: true
                 })
+                localStorage.setItem('color', "Yellow")
                 localStorage.setItem('isShowTimerDialog', 'true');
                 localStorage.removeItem('counter')
                 localStorage.setItem('counter', '15000');
@@ -253,6 +263,7 @@ class AddReadingDetail extends React.Component {
                     testNo: this.state.testNo + 1,
                     isShowDialog: true
                 })
+                localStorage.setItem('color', "Yellow")
                 localStorage.setItem('isShowTimerDialog', 'true');
                 localStorage.removeItem('counter')
                 localStorage.setItem('counter', '15000');
@@ -264,6 +275,7 @@ class AddReadingDetail extends React.Component {
                     currentColor: "Red",
                     testNo: this.state.testNo + 1
                 })
+                localStorage.setItem('color', "Red")
                 break;
             case "Red_down":
                 this.setState({
@@ -272,6 +284,7 @@ class AddReadingDetail extends React.Component {
                     currentColor: "Red",
                     testNo: this.state.testNo + 1
                 })
+                localStorage.setItem('color', "Red")
                 break;
         }
     }
@@ -286,6 +299,7 @@ class AddReadingDetail extends React.Component {
                     currentColor: "Green",
                     testNo: this.state.testNo + 1
                 })
+                localStorage.setItem('color', "Green")
                 break;
             case "Yellow_up":
                 this.setState({
@@ -294,6 +308,8 @@ class AddReadingDetail extends React.Component {
                     currentColor: "Yellow",
                     testNo: this.state.testNo + 1
                 })
+                localStorage.setItem('color', "Yellow")
+
                 break;
             case "Yellow_down":
                 this.setState({
@@ -302,6 +318,7 @@ class AddReadingDetail extends React.Component {
                     currentColor: "Yellow",
                     testNo: this.state.testNo + 1
                 })
+                localStorage.setItem('color', "Yellow")
                 break;
             case "Red_up":
                 this.setState({
@@ -310,6 +327,7 @@ class AddReadingDetail extends React.Component {
                     currentColor: "Red",
                     testNo: this.state.testNo + 1
                 })
+                localStorage.setItem('color', "Red")
                 break;
             case "Red_down":
                 this.setState({
@@ -318,14 +336,13 @@ class AddReadingDetail extends React.Component {
                     currentColor: "Red",
                     testNo: this.state.testNo + 1
                 })
+                localStorage.setItem('color', "Red")
                 break;
         }
-        sessionStorage.setItem('testNo', '2')
-
     }
 
     render() {
-        console.log("test number", sessionStorage.getItem('testNo'))
+        console.log("test number RENDER", sessionStorage.getItem('testNo'))
 
         return (
             <di>
