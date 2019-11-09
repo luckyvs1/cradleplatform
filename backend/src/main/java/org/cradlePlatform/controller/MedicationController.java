@@ -43,13 +43,7 @@ public class MedicationController {
     @PostMapping(path="/api/medications")
     @ResponseStatus(code = HttpStatus.CREATED)
     public String addNewMedication (@RequestBody Medication med) {
-        Medication newMedication = new Medication();
-        newMedication.setDrugHistoryId(med.getDrugHistoryId());
-        newMedication.setDrugName(med.getDrugName());
-        newMedication.setDosage(med.getDosage());
-        newMedication.setStartDate(med.getStartDate());
-        newMedication.setEndDate(med.getEndDate());
-        medicationRepository.save(newMedication);
+        medicationRepository.save(med);
         return "Saved Medication";
     }
 }

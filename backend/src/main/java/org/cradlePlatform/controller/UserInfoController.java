@@ -33,17 +33,7 @@ public class UserInfoController {
     @PostMapping(path="/api/user-information")
     @ResponseStatus(code = HttpStatus.CREATED)
     public String addUserInfo(@RequestBody UserInfo userInfo){
-        UserInfo newUserInfo = new UserInfo();
-        newUserInfo.setId(userInfo.getId());
-        newUserInfo.setFirstName(userInfo.getFirstName());
-        newUserInfo.setLastName(userInfo.getLastName());
-        newUserInfo.setDateOfBirth(userInfo.getDateOfBirth());
-        newUserInfo.setCountry(userInfo.getCountry());
-        newUserInfo.setPhoneNumber(userInfo.getPhoneNumber());
-        newUserInfo.setEmail(userInfo.getEmail());
-        newUserInfo.setRole(userInfo.getRole());
-
-        userInfoRepository.save(newUserInfo);
+        userInfoRepository.save(userInfo);
 
         if (userInfo.getRole() == RoleType.Admin) {
             Admin admin = new Admin();
