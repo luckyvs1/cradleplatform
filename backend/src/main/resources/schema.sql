@@ -59,15 +59,17 @@ CREATE TABLE Patient (
     gestational_start_date DATE,
     gestational_age_unit  ENUM('weeks', 'months', 'none'),
     current_gestational_age       INTEGER,
-    CHECK (
-            (pregnant IS TRUE AND current_gestational_age > 0 AND gestational_age_unit != 'none') OR
+    CONSTRAINT isPregnant CHECK (
+            (pregnant IS TRUE AND current_gestational_age > 0 AND gestational_age_unit != 'none')
+        ),
+    CONSTRAINT isNotPregnant CHECK (
             (pregnant IS FALSE AND current_gestational_age = 0 AND gestational_age_unit = 'none')
         ),
-    CHECK (
+    CONSTRAINT hasValidAttestationNumberOrName CHECK (
             (attestation_no IS NOT NULL) OR
             (first_name IS NOT NULL AND last_name IS NOT NULL)
         ),
-    UNIQUE (attestation_no),
+    UNIQUE(attestation_no),
     PRIMARY KEY (id)
 );
 
@@ -147,7 +149,7 @@ CREATE TABLE Reading (
                           'Red_up',
                           'Red_down'),
     diagnosis       TEXT,
-    CHECK (
+    CONSTRAINT hasValidGestationalAgeUnits CHECK (
         (gestational_age_unit != 'none' AND gestational_age > 0)
         ),
     PRIMARY KEY (id),
