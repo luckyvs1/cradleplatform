@@ -6,7 +6,13 @@
  */
 package org.cradlePlatform.controller;
 
+import java.lang.reflect.Type;
+import java.sql.Timestamp;
+import java.time.ZonedDateTime;
+import java.util.Date;
 import java.util.Optional;
+
+import com.google.gson.*;
 import org.cradlePlatform.model.Reading;
 import org.cradlePlatform.model.VitalsTrafficLight;
 import org.cradlePlatform.model.ReadingUploadWrapper;
@@ -18,6 +24,8 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.ResponseEntity;
+
+import javax.print.DocFlavor;
 
 @CrossOrigin(origins = {"http://cmpt373.csil.sfu.ca:8044", "http://localhost:3000"})
 @RestController
@@ -37,7 +45,26 @@ public class ReadingController {
         currentSMSReadingBody = currentSMSReadingBody.replace(">", "]");
         currentSMSReadingBody = currentSMSReadingBody.replace("(", "{");
         currentSMSReadingBody = currentSMSReadingBody.replace(")", "}");
-        return currentSMSReadingBody;
+        if(currentSMSReadingBody.endsWith("END0;")) {
+            return saveSMSReading();
+        } else {
+            return "Reading";
+        }
+    }
+
+    private String saveSMSReading() {
+        try {
+            currentSMSReadingBody = currentSMSReadingBody.replace("END0;", "");
+            Gson g = new Gson();
+            Reading p = g.fromJson(currentSMSReadingBody, Reading.class);
+            p.setRecheckVitalsDate(new Timestamp(System.currentTimeMillis()));
+            readingRepository.save(p);
+            currentSMSReadingBody = "";
+            return "Success";
+        }catch (Exception e) {
+            currentSMSReadingBody = "";
+            return "Failed";
+        }
     }
 
 
