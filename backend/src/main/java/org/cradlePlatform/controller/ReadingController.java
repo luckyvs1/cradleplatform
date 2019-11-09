@@ -67,7 +67,6 @@ public class ReadingController {
 
     @PostMapping(path="/api/readings-multi")
     public ResponseEntity<String> addReadings(@RequestBody ReadingUploadWrapper readings) {
-        boolean hasInvalidReadings = true;
         boolean trafficLightIsValid = true;
         boolean referralValid = true;
 
@@ -77,13 +76,12 @@ public class ReadingController {
         }
 
         if(trafficLightIsValid && referralValid) {
-            hasInvalidReadings = false;
             for (Reading reading : readings.getReadings()) {
                 readingRepository.save(reading);
             }
         }
 
-        if (hasInvalidReadings) {
+        if (!(trafficLightIsValid && referralValid)) {
             return new ResponseEntity<String>("No readings were saved", HttpStatus.BAD_REQUEST);
         } else {
             return new ResponseEntity<String>("Saved readings", HttpStatus.CREATED);
