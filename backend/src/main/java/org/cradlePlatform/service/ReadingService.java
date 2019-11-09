@@ -2,8 +2,9 @@ package org.cradlePlatform.service;
 
 import org.cradlePlatform.model.Reading;
 import org.cradlePlatform.model.VitalsTrafficLight;
-import javax.validation.constraints.NotNull;
 import org.springframework.stereotype.Service;
+
+import javax.validation.constraints.NotNull;
 
 @Service
 public class ReadingService {
