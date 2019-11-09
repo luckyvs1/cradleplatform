@@ -35,10 +35,8 @@ public class HealthWorkerController {
 
     @PostMapping(path="/api/healthWorkers")
     @ResponseStatus(code = HttpStatus.CREATED)
-    public String addNewHealthWorker(@RequestBody HealthWorker hw){
-        HealthWorker newHealthWorker = new HealthWorker();
-        newHealthWorker.setId(hw.getId());
-        healthWorkerRepository.save(newHealthWorker);
+    public String addNewHealthWorker(@RequestBody HealthWorker hw) {
+        healthWorkerRepository.save(hw);
         return "Saved Health Worker";
     }
 }
