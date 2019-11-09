@@ -13,28 +13,10 @@ import TopNavigation from "../navigation/TopNavigation";
 import {Button, Col, Container, Form, Row, Table} from 'react-bootstrap';
 import GraphDialog from "../utils/GraphDialog"
 import {withRouter} from "react-router-dom";
-import ReactTableContainer from "react-table-container";
-import GreenResponse from "../utils/GreenResponse";
-import RedResponse from "../utils/RedResponse";
-import TriangleResponseReading from "../utils/YellowResponse";
+import ReadingTable from "./ReadingTable";
 
-const statusGreen = {
-    backgroundColor: "green"
-};
-
-const statusYellow = {
-    backgroundColor: "yellow"
-};
-
-const statusRed = {
-    backgroundColor: "red"
-};
 
 class PatientDetailForm extends React.Component {
-    // functions
-    // states
-    // submit
-    // validate
     constructor(props) {
         super(props);
         this.state = {
@@ -59,7 +41,7 @@ class PatientDetailForm extends React.Component {
                 sexFull: "",
             }],
             readingData: [],
-            drugHistoryData: [],
+            followUpData: [],
         };
     }
 
@@ -80,7 +62,7 @@ class PatientDetailForm extends React.Component {
         })
 
         api.reading.getReadingForPatient({patient_id: pid, latest: false}).then(async res => {
-            console.log("get reading id", res);
+            // console.log("get reading id", res);
 
             const readingData = res.data;
             let newState = [];
@@ -106,12 +88,36 @@ class PatientDetailForm extends React.Component {
                     gestationalAge: readingData[i].gestationalAge,
                     timestampTime: new Date(readingData[i].timestamp).toLocaleTimeString(),
                     vitalsTrafficLight: readingData[i].vitalsTrafficLight,
+                    pregnant: readingData[i].pregnant,
                 }
 
                 newState.push(row);
             }
 
             this.setState({readingData: newState})
+        });
+
+        api.followUp.getFollowUpByPatientId({patient_id: pid, latest: false}).then(async res => {
+            console.log("get follow up", res);
+
+            const followUpData = res.data;
+            let newState = [];
+
+            for (let i = 0; i < followUpData.length; i++) {
+                let row = {
+                    id: followUpData[i].id,
+                    patientId: followUpData[i].patientId,
+                    followUpNotes: followUpData[i].followUpNotes,
+                    required: followUpData[i].required,
+                    frequency: followUpData[i].frequency,
+                    diagnosis: followUpData[i].diagnosis,
+                    treatment: followUpData[i].treatment,
+                }
+
+                newState.push(row);
+            }
+
+            this.setState({followUpData: newState})
         });
     }
 
@@ -193,67 +199,13 @@ class PatientDetailForm extends React.Component {
                     </div>
                     <Tabs id="controlled-tab-example">
                         <Tab eventKey="reading_information" title="Reading Information">
-                            <ReactTableContainer className="rtc"
-                                                 width="100%"
-                                                 height="275px"
-                                                 scrollbarStyle={{
-                                                     background: {backgroundColor: "transparent"},
-                                                     backgroundFocus: {backgroundColor: "#f0f0f0"},
-                                                     foreground: {backgroundColor: "#e2e2e2"},
-                                                     foregroundFocus: {backgroundColor: "#acacac"}
-                                                 }}
-                            >
-                                <table className="html-table">
-                                    <thead>
-                                    </thead>
-                                    <tbody>
-                                    {this.state.readingData.map(row => (
-                                        <tr key={row.id}>
-                                            <td className="text-center" id={'first'}>
-                                                {row.vitalsTrafficLight === "Green" ?
-                                                    <GreenResponse/> : null
-                                                }
-                                                {row.vitalsTrafficLight === "Yellow_up" ?
-                                                    <TriangleResponseReading isUp={true}/> : null
-                                                }
-                                                {row.vitalsTrafficLight === "Yellow_down" ?
-                                                    <TriangleResponseReading isUp={false}/> : null
-                                                }
-                                                {row.vitalsTrafficLight === "Red_up" ?
-                                                    <RedResponse isUp={true}/> : null
-                                                }
-                                                {row.vitalsTrafficLight === "Red_down" ?
-                                                    <RedResponse isUp={false}/> : null
-                                                }
-                                            </td>
-                                            <td>
-                                                <strong>{row.timestamp}</strong><br/>
-                                                <strong>{row.timestampTime}</strong>
-                                            </td>
-                                            <td>
-                                                <b>SYS:</b> {row.systolicBloodPressure}<br/>
-                                                <b>DIA:</b> {row.diastolicBloodPressure}<br/>
-                                                <b>Pulse (bpm):</b> {row.pulseRate}
-                                            </td>
-                                            <td>
-                                                <b>Pregnant:</b> Yes <br/>
-                                                <b>Gestational
-                                                    Age:</b> {row.gestationalAge} {row.gestationalAgeTimeUnit}
-                                            </td>
-                                            <td><b>Symptoms:</b> {row.symptoms}</td>
-                                        </tr>
-                                    ))}
-                                    </tbody>
-                                </table>
-                            </ReactTableContainer>
+                            <ReadingTable />
                             <Row>
-                                <Col/>
-                                <Col/>
-                                <Col>
+                                <Col className={"text-right"}>
                                     <Button variant="success" size="sm" as={Link} to="addReadingDetail">New
                                         Reading</Button>&nbsp;
                                     <Button variant="primary" size="sm">View List</Button>&nbsp;
-                                    <GraphDialog></GraphDialog>
+                                    <GraphDialog/>
                                 </Col>
                             </Row>
                         </Tab>
@@ -264,15 +216,13 @@ class PatientDetailForm extends React.Component {
                                         <Form.Control
                                             as="textarea"
                                             rows="6"
-                                            placeholder="Medical History Notes go here..."/>
+                                            placeholder="Enter Medical History Notes"/>
                                     </Form.Group>
                                 </Col>
                             </Row>
                             <Row>
-                                <Col></Col>
-                                <Col></Col>
-                                <Col>
-                                    <Button variant="warning" size="sm">
+                                <Col className={"text-right"}>
+                                    <Button variant="warning" size="sm" className={"text-right"}>
                                         Save Changes
                                     </Button>
                                 </Col>
@@ -310,14 +260,12 @@ class PatientDetailForm extends React.Component {
                                         <Form.Control
                                             as="textarea"
                                             rows="3"
-                                            placeholder="Drug history notes go here..."/>
+                                            placeholder="Enter Drug History Notes"/>
                                     </Form.Group>
                                 </Col>
                             </Row>
                             <Row>
-                                <Col></Col>
-                                <Col></Col>
-                                <Col>
+                                <Col className={"text-right"}>
                                     <Button variant="warning" size="sm">
                                         Save Changes
                                     </Button>
@@ -343,24 +291,7 @@ class PatientDetailForm extends React.Component {
                             </Table>
                         </Tab>
                         <Tab eventKey="follow_ups" title="Follow Ups">
-                            <Table bordered hover size="sm">
-                                <thead>
-                                <th>VHT</th>
-                                <th>Location</th>
-                                <th>Frequency</th>
-                                <th>Start Date</th>
-                                <th>End Date</th>
-                                </thead>
-                                <tbody>
-                                <tr>
-                                    <td>John Smith</td>
-                                    <td>Village No. 1</td>
-                                    <td>Once every 2 Weeks</td>
-                                    <td>2019/09/18</td>
-                                    <td>N/A</td>
-                                </tr>
-                                </tbody>
-                            </Table>
+
                         </Tab>
                     </Tabs>
                 </Container>

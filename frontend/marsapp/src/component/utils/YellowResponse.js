@@ -10,10 +10,12 @@ const YellowResponse = ({isUp}) => {
                     <Col>
                         <strong>Warning</strong>
                         <div id = {'triangle'}/>
-                        {isUp ?
-                            <FaArrowUp id={"arrow"}/> :
-                            <FaArrowDown id={"arrow"}/>
-                        }
+                        <div id={"first"}>
+                            {isUp ?
+                                <FaArrowUp id={"arrow"}/> :
+                                <FaArrowDown id={"arrow"}/>
+                            }
+                        </div>
                     </Col>
                 </Row>
             </Alert>

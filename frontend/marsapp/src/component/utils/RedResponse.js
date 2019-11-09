@@ -6,16 +6,18 @@ const RedResponse = ({isUp}) => {
     return (
         <>
             <Alert id={'reading-response'}>
-                <Row>
-                    <Col>
+                <div>
+                    <div>
                         <strong>Urgent</strong>
-                        <div id = {'octagon'}/>
-                        {isUp ?
-                            <FaArrowUp id={"arrow"}/> :
-                            <FaArrowDown id={"arrow"}/>
-                        }
-                    </Col>
-                </Row>
+                        <div id = {"octagon"}/>
+                        <div id={"first"}>
+                            {isUp ?
+                                <FaArrowUp id={"arrow"}/> :
+                                <FaArrowDown id={"arrow"}/>
+                            }
+                        </div>
+                    </div>
+                </div>
             </Alert>
         </>
     );
