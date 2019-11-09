@@ -64,12 +64,11 @@ public class Reading {
 	@Column(name = "date_last_saved")
 	private Timestamp dateLastSaved;
 
-	@NotNull
 	@Column(name = "date_recheck_vitals_needed")
 	private Timestamp recheckVitalsDate;
 
 	@NotBlank
-	@Size(max = 32)
+	@Size(max = 128)
 	@Column(name = "device_info")
 	private String deviceInformation;
 
