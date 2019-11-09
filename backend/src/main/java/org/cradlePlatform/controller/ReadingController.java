@@ -66,19 +66,21 @@ public class ReadingController {
     }
 
     @PostMapping(path="/api/readings-multi")
-    public ResponseEntity<?> addReadings(@RequestBody ReadingUploadWrapper readings) {
-        boolean hasInvalidReadings = false;
+    public ResponseEntity<String> addReadings(@RequestBody ReadingUploadWrapper readings) {
+        boolean hasInvalidReadings = true;
+        boolean trafficLightIsValid = true;
+        boolean referralValid = true;
+
         for (Reading reading : readings.getReadings()) {
+            trafficLightIsValid &= readingService.isValidTrafficLight(reading);
+            referralValid &= readingService.isValidReferralToHealthCentre(reading);
+        }
 
-            Boolean trafficLightIsValid = readingService.isValidTrafficLight(reading);
-            Boolean referralValid = readingService.isValidReferralToHealthCentre(reading);
-
-            if (trafficLightIsValid && referralValid) {
+        if(trafficLightIsValid && referralValid) {
+            hasInvalidReadings = false;
+            for (Reading reading : readings.getReadings()) {
                 readingRepository.save(reading);
-            } else {
-                hasInvalidReadings = true;
             }
-
         }
 
         if (hasInvalidReadings) {
