@@ -14,6 +14,9 @@ class FollowUpDetail extends React.Component {
 
     submit = data => {
         console.log("data",data)
+        api.followUp.addFollowUp(data).then(res=>{
+            console.log(res);
+        })
         // api.followUp.addFollowUp()
     }
     render() {

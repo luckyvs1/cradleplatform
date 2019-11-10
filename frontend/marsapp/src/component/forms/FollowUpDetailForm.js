@@ -149,36 +149,6 @@ class FollowUpDetailForm extends React.Component {
                                 />
                             </Form.Group>
                         </Col>
-                        <Col>
-                            <Form.Group>
-                                <Form.Label>Start Date</Form.Label>
-                                <Form.Control
-                                    type="date"
-                                    id="start_date"
-                                    name="start_date"/>
-                            </Form.Group>
-                        </Col>
-                        <Col>
-                            <Form.Group>
-                                <Form.Label>End Date</Form.Label>
-                                <Form.Control
-                                    type="date"
-                                    id="end_date"
-                                    name="end_date"/>
-                            </Form.Group>
-                        </Col>
-                    </Row>
-                    <Row className="mb-4">
-                        <Col>
-                            <Form.Group>
-                                <Form.Label>Alerts</Form.Label>
-                                <Form.Control as="select">
-                                    {alertOptions.map(alert => (
-                                        <option key={alert.value} value={alert.value}>{alert.text}</option>
-                                    ))}
-                                </Form.Control>
-                            </Form.Group>
-                        </Col>
                     </Row>
                     <Row>
                         <Col className={"text-right"}>
@@ -202,5 +172,5 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
-//export default connect(mapStateToProps, mapDispatchToProps)(FollowUpDetailForm);
+// export default connect(mapStateToProps, mapDispatchToProps)(FollowUpDetailForm);
 export default withRouter(FollowUpDetailForm);
