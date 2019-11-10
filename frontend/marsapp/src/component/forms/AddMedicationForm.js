@@ -74,12 +74,23 @@ class AddMedicationForm extends React.Component {
         return errors;
     }
     componentDidMount(){
-        const pid = this.props.location.medication.pid;
-        console.log("Patient pid is " + pid);
-        api.drug.getDrugHistoryByPatientId({patient_id: pid}).then(res => {
-            console.log("Drug History ID for Patient ID " + pid + " is " + res.data[0].id);
-            this.state.data.drug_history_id = res.data[0].id;
-        });
+        //in the case of the user reloading the page, the drug_history_id will be lost and crash
+        //the app since it doesn't know where to get the patient_id from. This should resolve it.
+        try{
+            const pid = this.props.location.medication.pid;
+            console.log("Patient pid is " + pid);
+            api.drug.getDrugHistoryByPatientId({patient_id: pid}).then(res => {
+                console.log("Drug History ID for Patient ID " + pid + " is " + res.data[0].id);
+                this.state.data.drug_history_id = res.data[0].id;
+                localStorage.setItem('drug_history_id', JSON.stringify(res.data[0].id));
+            });
+        }
+        catch(exception){
+            this.state.data.drug_history_id = JSON.parse(localStorage.getItem('drug_history_id'));
+            //console.log("Use local storage: " + JSON.parse(localStorage.getItem('drug_history_id')));
+            //console.log("Drug history:" + this.state.data.drug_history_id);
+        }
+
     }
 
     render() {
