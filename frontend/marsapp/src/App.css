@@ -926,7 +926,7 @@ li a {
 }
 
 .rtc {
-    border: 1px solid #c5c5c5;
+    border: 1px solid #ececec;
     border-radius: 3px;
 }
 
@@ -946,7 +946,7 @@ li a {
     height: 50px;
     background: red;
     position: relative;
-    margin-left: -3px;
+    margin-left: 31px;
 }
 #octagon:before {
     content: "";
@@ -977,7 +977,7 @@ li a {
     background: green;
     border-radius: 50%;
     position: center;
-    margin-left: -3px;
+    margin-left: 31px;
 }
 
 #triangle{
@@ -987,7 +987,7 @@ li a {
     border-right: 25px solid transparent;
     border-bottom: 50px solid yellow;
     position: relative;
-    margin-left: -3px;
+    margin-left: 31px;
 }
 
 #pat-detail > div.row > div.col > div{
@@ -1002,6 +1002,38 @@ li a {
     padding: 0px !important;
 }
 
-#first {
-    margin-left: 14px !important;
+#warning-shift {
+    margin-left: -4px !important;
+}
+
+.table-wrapper-scroll-y {
+    display: block;
+    max-height: 440px;
+    overflow-y: auto;
+    -ms-overflow-style: -ms-autohiding-scrollbar;
+}
+
+.nav-tabs {
+    border-bottom: 0px !important;
+}
+
+#tab-text-colour {
+    color: #000000 !important;
+    font-family: "Helvetica Neue", sans-serif;
+    text-decoration: none;
+    background-color: transparent;
+}
+
+.nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
+    color: #4fc58c !important;
+    font-family: "Helvetica Neue", sans-serif;
+    background-color: #ececec !important;
+    border-color: #dee2e6 #dee2e6 #fff;
+}
+
+.nav-tabs .nav-link {
+    border: 1px solid transparent;
+    border-top-left-radius: .25rem;
+    border-top-right-radius: .25rem;
+    color: #000000;
 }

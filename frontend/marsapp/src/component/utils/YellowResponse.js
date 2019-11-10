@@ -8,9 +8,9 @@ const YellowResponse = ({isUp}) => {
             <Alert id={'reading-response'}>
                 <Row>
                     <Col>
-                        <strong>Warning</strong>
-                        <div id = {'triangle'}/>
-                        <div id={"first"}>
+                        <strong id={"warning-shift"}>Warning</strong>
+                        <div id = {'triangle'} className={"text-center"}/>
+                        <div className={"text-center"}>
                             {isUp ?
                                 <FaArrowUp id={"arrow"}/> :
                                 <FaArrowDown id={"arrow"}/>

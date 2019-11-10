@@ -13,10 +13,15 @@ import TopNavigation from "../navigation/TopNavigation";
 import {Button, Col, Container, Form, Row, Table} from 'react-bootstrap';
 import GraphDialog from "../utils/GraphDialog"
 import {withRouter} from "react-router-dom";
-import ReadingTable from "./ReadingTable";
-
+import GreenResponse from "../utils/GreenResponse";
+import RedResponse from "../utils/RedResponse";
+import TriangleResponseReading from "../utils/YellowResponse";
 
 class PatientDetailForm extends React.Component {
+    // functions
+    // states
+    // submit
+    // validate
     constructor(props) {
         super(props);
         this.state = {
@@ -52,17 +57,21 @@ class PatientDetailForm extends React.Component {
             console.log("get patient id", res);
 
             const patientData = res.data;
+
             if (patientData.sex === 'F') {
                 patientData.sexFull = 'Female';
             } else if (patientData.sex === 'M') {
                 patientData.sexFull = 'Male';
             }
 
+            patientData.dob = new Date (patientData.dob).toLocaleDateString();
+            patientData.gestationalStartDate = new Date (patientData.gestationalStartDate).toLocaleDateString();
+
             this.setState({patientData})
-        })
+        });
 
         api.reading.getReadingForPatient({patient_id: pid, latest: false}).then(async res => {
-            // console.log("get reading id", res);
+            console.log("get reading id", res);
 
             const readingData = res.data;
             let newState = [];
@@ -77,7 +86,7 @@ class PatientDetailForm extends React.Component {
                         month: '2-digit',
                         year: 'numeric',
                     }),
-                    symptoms: readingData[i].symptoms,
+                    symptoms: readingData[i].symptoms.replace(/,/g, ', '),
                     otherSymptoms: readingData[i].otherSymptoms,
                     systolicBloodPressure: readingData[i].systolicBloodPressure,
                     diastolicBloodPressure: readingData[i].diastolicBloodPressure,
@@ -88,7 +97,6 @@ class PatientDetailForm extends React.Component {
                     gestationalAge: readingData[i].gestationalAge,
                     timestampTime: new Date(readingData[i].timestamp).toLocaleTimeString(),
                     vitalsTrafficLight: readingData[i].vitalsTrafficLight,
-                    pregnant: readingData[i].pregnant,
                 }
 
                 newState.push(row);
@@ -197,15 +205,69 @@ class PatientDetailForm extends React.Component {
                             </Col>
                         </Row>
                     </div>
-                    <Tabs id="controlled-tab-example">
+                    <Tabs class="nav nav-tabs">
                         <Tab eventKey="reading_information" title="Reading Information">
-                            <ReadingTable />
+                            <div className="table-wrapper-scroll-y my-custom-scrollbar rtc"
+                                            scrollbarStyle={{
+                                                background: {backgroundColor: "transparent"},
+                                                backgroundFocus: {backgroundColor: "#f0f0f0"},
+                                                foreground: {backgroundColor: "#e2e2e2"},
+                                                foregroundFocus: {backgroundColor: "#acacac"}
+                                            }}>
+                                <table className="table table-hover">
+                                    <thead>
+                                    <tr>
+                                        <th scope="col">Date & Time</th>
+                                        <th scope="col">Traffic Light</th>
+                                        <th scope="col">Systolic</th>
+                                        <th scope="col">Diastolic</th>
+                                        <th scope="col">Pulse Rate</th>
+                                        <th scope="col">Gestational Age</th>
+                                        <th scope="col">Symptoms</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {this.state.readingData.map(row => (
+                                        <tr key={row.id}>
+                                            <td>
+                                                {row.timestamp}<br/>
+                                                {row.timestampTime}
+                                            </td>
+                                            <td className="text-center" id={'first'}>
+                                                {row.vitalsTrafficLight === "Green" ?
+                                                    <GreenResponse/> : null
+                                                }
+                                                {row.vitalsTrafficLight === "Yellow_up" ?
+                                                    <TriangleResponseReading isUp={true}/> : null
+                                                }
+                                                {row.vitalsTrafficLight === "Yellow_down" ?
+                                                    <TriangleResponseReading isUp={false}/> : null
+                                                }
+                                                {row.vitalsTrafficLight === "Red_up" ?
+                                                    <RedResponse isUp={true}/> : null
+                                                }
+                                                {row.vitalsTrafficLight === "Red_down" ?
+                                                    <RedResponse isUp={false}/> : null
+                                                }
+                                            </td>
+                                            <td> {row.systolicBloodPressure} </td>
+                                            <td> {row.diastolicBloodPressure} </td>
+                                            <td> {row.pulseRate} </td>
+                                            <td> {row.gestationalAge} {row.gestationalAgeTimeUnit} </td>
+                                            <td> {row.symptoms} </td>
+                                        </tr>
+                                    ))}
+                                    </tbody>
+                                </table>
+                            </div>
                             <Row>
+                                <Col/>
+                                <Col/>
                                 <Col className={"text-right"}>
                                     <Button variant="success" size="sm" as={Link} to="addReadingDetail">New
                                         Reading</Button>&nbsp;
                                     <Button variant="primary" size="sm">View List</Button>&nbsp;
-                                    <GraphDialog/>
+                                    <GraphDialog></GraphDialog>
                                 </Col>
                             </Row>
                         </Tab>
@@ -216,13 +278,13 @@ class PatientDetailForm extends React.Component {
                                         <Form.Control
                                             as="textarea"
                                             rows="6"
-                                            placeholder="Enter Medical History Notes"/>
+                                            placeholder="Medical History Notes go here..."/>
                                     </Form.Group>
                                 </Col>
                             </Row>
                             <Row>
                                 <Col className={"text-right"}>
-                                    <Button variant="warning" size="sm" className={"text-right"}>
+                                    <Button variant="warning" size="sm">
                                         Save Changes
                                     </Button>
                                 </Col>
@@ -260,13 +322,13 @@ class PatientDetailForm extends React.Component {
                                         <Form.Control
                                             as="textarea"
                                             rows="3"
-                                            placeholder="Enter Drug History Notes"/>
+                                            placeholder="Drug history notes go here..."/>
                                     </Form.Group>
                                 </Col>
                             </Row>
                             <Row>
                                 <Col className={"text-right"}>
-                                    <Button variant="warning" size="sm">
+                                <Button variant="warning" size="sm">
                                         Save Changes
                                     </Button>
                                 </Col>
@@ -291,12 +353,42 @@ class PatientDetailForm extends React.Component {
                             </Table>
                         </Tab>
                         <Tab eventKey="follow_ups" title="Follow Ups">
-
+                            <div className="table-wrapper-scroll-y my-custom-scrollbar rtc"
+                                 scrollbarStyle={{
+                                     background: {backgroundColor: "transparent"},
+                                     backgroundFocus: {backgroundColor: "#f0f0f0"},
+                                     foreground: {backgroundColor: "#e2e2e2"},
+                                     foregroundFocus: {backgroundColor: "#acacac"}
+                                 }}>
+                                <table className="table table-bordered">
+                                    <thead>
+                                    <tr>
+                                        <th scope="col">Required</th>
+                                        <th scope="col">Frequency</th>
+                                        <th scope="col">Diagnosis</th>
+                                        <th scope="col">Treatments</th>
+                                        <th scope="col">Notes</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {this.state.followUpData.map(row => (
+                                        <tr key={row.id}>
+                                            <td>  {row.required === "1" ?
+                                                    "Follow Up Required" : "Follow Up Not Required"}
+                                            </td>
+                                            <td> {row.frequency} </td>
+                                            <td> {row.diagnosis} </td>
+                                            <td> {row.treatment} </td>
+                                            <td> {row.followUpNotes} </td>
+                                        </tr>
+                                    ))}
+                                    </tbody>
+                                </table>
+                            </div>
                         </Tab>
                     </Tabs>
                 </Container>
             </div>
-
         );
     }
 }
@@ -316,4 +408,3 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 export default withRouter(PatientDetailForm)
-

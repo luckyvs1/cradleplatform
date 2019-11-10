@@ -13,7 +13,7 @@ const GreenResponse = () => {
             <Alert id={'reading-response'}>
                 <div>
                     <div>
-                        <strong style={left}>OK</strong>
+                        <strong>OK</strong>
                         <div id = {"circle"}/>
                     </div>
                 </div>
