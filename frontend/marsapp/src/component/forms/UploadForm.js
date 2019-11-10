@@ -19,9 +19,9 @@ const options = [
 ]
 
 class UploadForm extends  React.Component {
-   // funcitons
-//    states
-    //submit
+    // funcitons
+    // states
+    // submit
     // validate
 
     render() {

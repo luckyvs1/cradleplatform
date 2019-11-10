@@ -621,7 +621,7 @@ li a {
     z-index: 1000;
     position: fixed;
     left: 250px;
-    top:56px !important;
+    top:0px !important;
     width: 50px;
     height: 100%;
     margin-left: -250px;
@@ -648,9 +648,13 @@ li a {
     font-size: 24px!important;
 
 }
+#menuHeader{
+    z-index: 1001 !important;
+}
 #menuHeader button{
     margin-left: -295px !important;
     margin-top: -5px !important;
+
 }
 #menuHeader button h2{
     font-size: 1.5rem !important;
@@ -667,7 +671,7 @@ li a {
 
 .sidebar-nav {
     position: absolute;
-    top: 75px;
+    top: 125px;
     width: 250px;
     margin: 0;
     padding: 0;
@@ -710,6 +714,9 @@ li a {
 
 .navbar>.container {
     align-content: center !important;
+}
+.navbar{
+    background-color: white !important;
 }
 #navbar-wrapper {
     width: 100%;
@@ -912,15 +919,43 @@ li a {
 }
 
 
+#submit-reading-btn{
+    position: center;
+}
+
 #success-alert {
-    width:500px !important;
+    left: 25% !important;
+    width: calc(100% - 50%) !important;
     top: 40%;
-    left: 35%;
     z-index: 10000 !important;
 }
-#error-alert {
-    width:500px !important;
-    top: 40%;
-    left: 35%;
+#reading-response {
+    left: 25% !important;
+    width: calc(100% - 50%) !important;
+    top: 100%;
     z-index: 10000 !important;
+}
+#advice-response {
+    left: 25% !important;
+    width: calc(100% - 50%) !important;
+    top: 100%;
+    text-align: center!important;
+    z-index: 10000 !important;
+}
+
+#error-alert {
+    left: 25% !important;
+    width: calc(100% - 50%) !important;
+    top: 100%;
+    z-index: 10000 !important;
+}
+#arrow {
+    width: 3rem !important;
+    height: 3rem !important;
+    color: #010102 !important;
+}
+
+#circle-arrow {
+    width: 7rem !important;
+    height: 7rem !important;
 }

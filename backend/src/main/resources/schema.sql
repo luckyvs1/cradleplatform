@@ -145,6 +145,7 @@ CREATE TABLE Reading (
                           'Yellow_down',
                           'Red_up',
                           'Red_down'),
+    diagnosis       TEXT,
     PRIMARY KEY (id),
     FOREIGN KEY (reader_id) REFERENCES User(id) ON DELETE CASCADE,
     FOREIGN KEY (patient_id) REFERENCES Patient(id) ON DELETE CASCADE
@@ -181,7 +182,7 @@ CREATE TABLE Monitor (
 insert into User values ('1', 'VHT_user', 'password123');
 insert into User values ('2', 'HealthWorker', 'password123');
 insert into User values ('3', 'Admin_user', 'password123');
-insert into User values ('4', 'justTesting', 'customerTesting');
+insert into User values ('4', 'customerTesting', 'justTesting');
 
 insert into User_Info values ('1',
                               'Bob',
@@ -247,9 +248,9 @@ insert into Reading values (1,
                             '2019-10-24',
                             ('Bleeding'),
                             'Confusion',
-                            118,
-                            78,
-                            180,
+                            135,
+                            85,
+                            117,
                             'Good vitals',
                             False,
                             'CradlePlatform1.0',
@@ -264,7 +265,8 @@ insert into Reading values (1,
                             'Northern Uganda',
                             True,
                             True,
-                            'Green');
+                            'Green',
+                            '');
 
 insert into FollowUp values (2,
                              1,
