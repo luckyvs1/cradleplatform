@@ -19,18 +19,13 @@ class AddMedicationDetail extends React.Component {
            startDate: data.start_date,
            endDate: data.end_date
         };
-        console.log(formattedData);
         if(formattedData.startDate != null)
             formattedData.startDate = this.formatDate(formattedData.startDate);
         if(formattedData.endDate != null)
             formattedData.endDate = this.formatDate(formattedData.endDate);
-        console.log(formattedData);
-        api.medication.addAMedication(JSON.stringify(formattedData)).then(res =>
-            {
-            console.log("added medication", res)
+        api.medication.addAMedication(JSON.stringify(formattedData)).then(res => {
             this.onShowAlert("Successfully added medication", false, true)
-
-            }).catch(error => {this.onShowAlert(error.response.data)})
+        }).catch(error => {this.onShowAlert(error.response.data)})
 
     }
     onShowAlert = (message, error, confirm) => {
