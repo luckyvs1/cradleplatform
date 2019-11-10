@@ -25,36 +25,34 @@ class LoginPage extends React.Component {
     }
 
     submit = data => {
-        if (!this.checkToken()) {
-            api.user.login(data)
-                .then(res => {
-                    if (res) {
-                        let accessToken = res.data.access_token;
-                        this.props.updateLogIn(accessToken);
-                        auth.login(() => {
-                            localStorage.setItem('loginToken' ,  res.data.authenticated);
-                            localStorage.setItem('loginUserId' ,  res.data.id);
-                            localStorage.loginUserId = res.data.id; // should be the id of the logged in user
-                            localStorage.loginToken = res.data.authenticated;
-                            this.props.history.push("/homePage");
-                        })
-                    }
-                }).catch(error => {
-                switch (error.response.status) {
-                    case 401:
-                        this.onShowAlert("Username or password is incorrect. Please try again.");
-                        break
+        api.user.login(data)
+            .then(res => {
+                if (res) {
+                    let accessToken = res.data.access_token;
+                    this.props.updateLogIn(accessToken);
+                    auth.login(() => {
+                        localStorage.setItem('loginToken', res.data.access_token);
+                        localStorage.setItem('loginUserId', res.data.id);
+                        this.props.history.push("/homePage");
+                    })
                 }
+            }).catch(error => {
+            switch (error.response.status) {
+                case 401:
+                    this.onShowAlert("Username or password is incorrect. Please try again.");
+                    break
+            }
+        })
+    };
+
+
+    componentDidMount() {
+        if (localStorage.getItem('loginToken')) {
+            auth.login(() => {
+                this.props.history.push("/homePage");
             })
         }
-
-    };
-    checkToken = () => {
-        console.log('localStorage.getItem(\'loginToken\')',localStorage.getItem('loginToken'))
-        return false;
     }
-
-
 
 
     onShowAlert = (message) => {
