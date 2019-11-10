@@ -66,25 +66,6 @@ public class PatientController {
     @PostMapping(path="/api/patients")
     @ResponseStatus(code = HttpStatus.CREATED)
     public @ResponseBody String addNewPatient (@RequestBody Patient patient){
-        /*Patient newPatient = new Patient();
-        newPatient.setAttestationNo(patient.getAttestationNo());
-        newPatient.setFirstName(patient.getFirstName());
-        newPatient.setLastName(patient.getLastName());
-        newPatient.setVillageNo(patient.getVillageNo());
-        newPatient.setZoneNo(patient.getZoneNo());
-        newPatient.setHouseholdNo(patient.getHouseholdNo());
-        newPatient.setBlockNo(patient.getBlockNo());
-        newPatient.setTankNo(patient.getTankNo());
-        newPatient.setInitials(patient.getInitials());
-        newPatient.setSex(patient.getSex());
-        newPatient.setAge(patient.getAge());
-        newPatient.setDob(patient.getDob());
-        newPatient.setPregnant(patient.isPregnant());
-        newPatient.setGestationalStartDate(patient.getGestationalStartDate());
-        newPatient.setGestationAgeUnit(patient.getGestationAgeUnit());
-        newPatient.setCurrentGestationalAge(patient.getCurrentGestationalAge());
-        patientRepository.save(newPatient);
-         */
         patientRepository.save(patient);
         return "Saved Patient";
     }

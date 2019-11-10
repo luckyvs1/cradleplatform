@@ -25,12 +25,12 @@ public class ReadingService {
     public static final int MIN_HEART_RATE = 40;
 
     // Analysis Functions
-    public static Boolean isValidTrafficLight(@NotNull Reading reading){
+    public static Boolean isValidTrafficLight(@NotNull Reading reading) {
         VitalsTrafficLight validTrafficLight = getVitalsTrafficLight(reading);
         return (reading.getVitalsTrafficLight() == validTrafficLight);
     }
 
-    public static VitalsTrafficLight getVitalsTrafficLight(@NotNull Reading reading){
+    public static VitalsTrafficLight getVitalsTrafficLight(@NotNull Reading reading) {
 
         int systolicBloodPressure = reading.getSystolicBloodPressure();
         int diastolicBloodPressure = reading.getDiastolicBloodPressure();

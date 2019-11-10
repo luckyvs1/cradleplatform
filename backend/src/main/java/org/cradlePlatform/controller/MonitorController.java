@@ -13,13 +13,7 @@ public class MonitorController {
 
     @PostMapping(path="/api/monitors")
     public String addMonitor (@RequestBody Monitor monitor) {
-
-        Monitor newMonitor = new Monitor();
-        newMonitor.setVhtId(monitor.getVhtId());
-        newMonitor.setPatientId(monitor.getPatientId());
-
-        monitorRepository.save(newMonitor);
-
+        monitorRepository.save(monitor);
         return "Saved Monitor";
     }
 

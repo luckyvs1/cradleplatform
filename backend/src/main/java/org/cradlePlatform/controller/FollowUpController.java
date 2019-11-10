@@ -56,14 +56,7 @@ public class FollowUpController {
     @PostMapping(path="/api/followUps")
     @ResponseStatus(code = HttpStatus.CREATED)
     public String addFollowUp(@RequestBody FollowUp followUp) {
-        FollowUp newFollowUp = new FollowUp();
-        newFollowUp.setPatientId(followUp.getPatientId());
-        newFollowUp.setFollowUpNotes(followUp.getFollowUpNotes());
-        newFollowUp.setRequired(followUp.getRequired());
-        newFollowUp.setFrequency(followUp.getFrequency());
-        newFollowUp.setDiagnosis(followUp.getDiagnosis());
-        newFollowUp.setTreatment(followUp.getTreatment());
-        followUpRepository.save(newFollowUp);
+        followUpRepository.save(followUp);
         return "Saved Follow Up";
     }
 

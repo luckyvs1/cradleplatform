@@ -48,9 +48,8 @@ public class AdminController {
      */
     @PostMapping(path="/api/admins")
     @ResponseStatus(code = HttpStatus.CREATED)
-    public String addNewAdmin (@RequestBody Admin admin){
-        Admin newAdmin = new Admin(admin.getId());
-        adminRepository.save(newAdmin);
+    public String addNewAdmin (@RequestBody Admin admin) {
+        adminRepository.save(admin);
         return "Saved Admin";
     }
 

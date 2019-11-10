@@ -243,7 +243,7 @@ class AddReadingForm extends React.Component {
                                             name="diastolicBloodPressure"
                                             placeholder="Diastolic Blood Pressure"
                                             value={data.diastolicBloodPressure}
-                                            isInvalid={data.systolicBloodPressure < 10 || data.systolicBloodPressure > 300}
+                                            isInvalid={data.diastolicBloodPressure < 10 || data.diastolicBloodPressure > 300}
                                             onChange={this.onChange}/>
                                     </Form.Group>
                                 </Col>
@@ -256,7 +256,7 @@ class AddReadingForm extends React.Component {
                                             name="pulseRate"
                                             placeholder="Heart Rate"
                                             value={data.pulseRate}
-                                            isInvalid={data.systolicBloodPressure < 40 || data.systolicBloodPressure > 200}
+                                            isInvalid={data.pulseRate < 40 || data.pulseRate > 200}
                                             onChange={this.onChange}/>
                                     </Form.Group>
                                 </Col>
@@ -321,7 +321,7 @@ class AddReadingForm extends React.Component {
                                         <Form.Check onChange={this.onChange} name={'feverish'} type="checkbox"
                                                     label="Feverish" value={this.state.checkBox.feverish}/>
                                         <Form.Check onChange={this.onChange} name={'abdominal'} type="checkbox"
-                                                    label="Adbdominal" value={this.state.checkBox.abdominal}/>
+                                                    label="Abdominal" value={this.state.checkBox.abdominal}/>
                                         <Form.Check onChange={this.onChange} name={'unwell'} type="checkbox"
                                                     label="Unwell" value={this.state.checkBox.unwell}/>
                                     </Form.Group>

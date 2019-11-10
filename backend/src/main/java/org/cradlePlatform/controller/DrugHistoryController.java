@@ -40,10 +40,7 @@ public class DrugHistoryController {
     @PostMapping(path="/api/drugHistories")
     @ResponseStatus(code = HttpStatus.CREATED)
     public String addDrugHistory (@RequestBody DrugHistory dh) {
-        DrugHistory newDrugHistory = new DrugHistory();
-        newDrugHistory.setPatientId(dh.getPatientId());
-        newDrugHistory.setHistoryText(dh.getHistoryText());
-        drugHistoryRepository.save(newDrugHistory);
+        drugHistoryRepository.save(dh);
         return "Saved Drug History";
     }
 
