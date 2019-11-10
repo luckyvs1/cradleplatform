@@ -91,10 +91,6 @@ class FollowUpDetailForm extends React.Component {
                                     name="patientId"
                                     value={this.state.data.patientId}
                                 />
-                                {/*error handling*/}
-                                {/* <Form.Text className="text-muted">
-                                    {errors.email && <InlineError text={errors.email} />}
-                                </Form.Text> */}
                             </Form.Group>
                         </Col>
                     </Row>
@@ -109,10 +105,6 @@ class FollowUpDetailForm extends React.Component {
                                     value={this.state.data.followUpNotes}
                                     onChange={this.handleChange}
                                 />
-                                {/*error handling*/}
-                                {/* <Form.Text className="text-muted">
-                                    {errors.email && <InlineError text={errors.email} />}
-                                </Form.Text> */}
                             </Form.Group>
                         </Col>
                     </Row>
@@ -127,10 +119,6 @@ class FollowUpDetailForm extends React.Component {
                                     value={this.state.data.diagnosis}
                                     onChange={this.handleChange}
                                 />
-                                {/*error handling*/}
-                                {/* <Form.Text className="text-muted">
-                                    {errors.email && <InlineError text={errors.email} />}
-                                </Form.Text> */}
                             </Form.Group>
                         </Col>
                     </Row>
@@ -145,10 +133,6 @@ class FollowUpDetailForm extends React.Component {
                                     value={this.state.data.treatment}
                                     onChange={this.handleChange}
                                 />
-                                {/*error handling*/}
-                                {/* <Form.Text className="text-muted">
-                                    {errors.email && <InlineError text={errors.email} />}
-                                </Form.Text> */}
                             </Form.Group>
                         </Col>
                     </Row>
@@ -163,10 +147,6 @@ class FollowUpDetailForm extends React.Component {
                                     value={this.state.data.frequency}
                                     onChange={this.handleChange}
                                 />
-                                {/*error handling*/}
-                                {/* <Form.Text className="text-muted">
-                                    {errors.email && <InlineError text={errors.email} />}
-                                </Form.Text> */}
                             </Form.Group>
                         </Col>
                         <Col>
@@ -176,10 +156,6 @@ class FollowUpDetailForm extends React.Component {
                                     type="date"
                                     id="start_date"
                                     name="start_date"/>
-                                {/*error handling*/}
-                                {/* <Form.Text className="text-muted">
-                                    {errors.email && <InlineError text={errors.email} />}
-                                </Form.Text> */}
                             </Form.Group>
                         </Col>
                         <Col>
@@ -189,10 +165,6 @@ class FollowUpDetailForm extends React.Component {
                                     type="date"
                                     id="end_date"
                                     name="end_date"/>
-                                {/*error handling*/}
-                                {/* <Form.Text className="text-muted">
-                                    {errors.email && <InlineError text={errors.email} />}
-                                </Form.Text> */}
                             </Form.Group>
                         </Col>
                     </Row>
@@ -205,10 +177,6 @@ class FollowUpDetailForm extends React.Component {
                                         <option key={alert.value} value={alert.value}>{alert.text}</option>
                                     ))}
                                 </Form.Control>
-                                {/* enable his for error handling */}
-                                {/* <Form.Text className="text-muted">
-                                    {errors.email && <InlineError text={errors.email} />}
-                                </Form.Text> */}
                             </Form.Group>
                         </Col>
                     </Row>
