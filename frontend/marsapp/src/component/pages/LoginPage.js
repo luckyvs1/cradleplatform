@@ -25,27 +25,38 @@ class LoginPage extends React.Component {
     }
 
     submit = data => {
-        api.user.login(data)
-            .then(res => {
-                if (res) {
-                    let accessToken = res.data.access_token;
-                    this.props.updateLogIn(accessToken);
-                    auth.login(() => {
-                        localStorage.loginToken = res.data.authenticated;
-                        localStorage.loginUserId = res.data.id; // should be the id of the logged in user
-                        this.props.history.push("/homePage");
-                    })
-                }
-            }).catch(error => {
-            switch (error.response.status) {
+        if (!this.checkToken()) {
+            api.user.login(data)
+                .then(res => {
+                    if (res) {
+                        let accessToken = res.data.access_token;
+                        this.props.updateLogIn(accessToken);
+                        auth.login(() => {
+                            localStorage.setItem('loginToken' ,  res.data.authenticated);
+                            localStorage.setItem('loginUserId' ,  res.data.id);
+                            localStorage.loginUserId = res.data.id; // should be the id of the logged in user
+                            localStorage.loginToken = res.data.authenticated;
+                            this.props.history.push("/homePage");
+                        })
+                    }
+                }).catch(error => {
+                switch (error.response.status) {
                     case 401:
                         this.onShowAlert("Username or password is incorrect. Please try again.");
                         break
                 }
-        })
-
+            })
+        }
 
     };
+    checkToken = () => {
+        console.log('localStorage.getItem(\'loginToken\')',localStorage.getItem('loginToken'))
+        return false;
+    }
+
+
+
+
     onShowAlert = (message) => {
         this.setState({
                 isShow: true,
@@ -77,8 +88,7 @@ class LoginPage extends React.Component {
 
 // needed incase of redux use
 const mapStateToProps = (state, ownProps) => {
-    return {
-    }
+    return {}
 }
 const mapDispatchToProps = (dispatch) => {
     return {
