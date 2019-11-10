@@ -95,7 +95,7 @@ class PatientDetailForm extends React.Component {
                     id: readingData[i].id,
                     readerId: readingData[i].readerId,
                     patientId: readingData[i].patientId,
-                    timestamp: new Date(readingData[i].timestamp).toDateString(undefined, {
+                    timestamp: new Date(readingData[i].timestamp).toLocaleDateString(undefined, {
                         day:'2-digit',
                         month: '2-digit',
                         year: 'numeric',
