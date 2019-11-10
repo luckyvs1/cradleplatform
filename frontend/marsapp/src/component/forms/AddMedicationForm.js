@@ -95,7 +95,7 @@ class AddMedicationForm extends React.Component {
                         </Col>
                     </Row>
                     <Form onSubmit={this.onSubmit}>
-                        <Form.Group as={Col}>
+                        <Form.Group>
                              <Form.Label>Medication Name</Form.Label>
                                 <Form.Control
                                     type="text"
@@ -111,10 +111,11 @@ class AddMedicationForm extends React.Component {
                             <Form.Group as={Col}>
                                 <Form.Control
                                     type="number"
+                                    min="0"
                                     id="dose"
                                     autofocus="autofocus"
                                     name="dose"
-                                    placeholder="Enter dose..."
+                                    placeholder="Enter dose (positive number only)"
                                     value={dosage_edit.dose}
                                     onChange={this.onChangeDose}/>
                                 {errors.dose && <InlineError text={errors.dose}/>}
@@ -124,7 +125,7 @@ class AddMedicationForm extends React.Component {
                                     type="text"
                                     id="unit"
                                     name="unit"
-                                    placeholder="Enter unit..."
+                                    placeholder="Enter unit"
                                     value={dosage_edit.unit}
                                     onChange={this.onChangeDose}/>
                                 {errors.unit && <InlineError text={errors.unit}/>}
@@ -132,15 +133,15 @@ class AddMedicationForm extends React.Component {
                             <Form.Group as={Col}>
                                 <Form.Control
                                     type="number"
+                                    min = "0"
                                     autofocus="autofocus"
                                     id="times_per_day"
                                     name="times_per_day"
-                                    placeholder="How often?"
+                                    placeholder="How many times per day? (positive no. only)"
                                     value={dosage_edit.times_per_day}
                                     onChange={this.onChangeDose}/>
                                 {errors.times_per_day && <InlineError text={errors.times_per_day}/>}
                             </Form.Group>
-                            <Form.Label>times per day</Form.Label>
                         </Form.Row>
                         <Form.Row>
                             <Form.Group as={Col} style={{display:'flex', justifyContent: 'center'}}>
