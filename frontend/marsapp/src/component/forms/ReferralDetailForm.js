@@ -20,7 +20,7 @@ class ReferralDetailForm extends React.Component {
         console.dir("props");
         console.dir(props);
         this.state = {
-            data: {
+            referralData: {
                 healthFacility: "",
                 id: 0,
                 notesAction: "",
@@ -30,23 +30,127 @@ class ReferralDetailForm extends React.Component {
                 referrerId: "",
                 timestamp: null
             },
-            initials: this.props.location.state.initials
-        }
+            patientData: {
+                id: 0,
+                attestationNo: 0,
+                firstName: "",
+                lastName: "",
+                villageNo: "",
+                zoneNo: "",
+                householdNo: "",
+                blockNo: "",
+                tankNo: "",
+                initials: "",
+                sex: null,
+                age: 0,
+                dob: null,
+                pregnant: null,
+                gestationalStartDate: null,
+                gestationAgeUnit: null,
+                currentGestationalAge: 0
+            },
+            readingData: {
+                id: 0,
+                patientId: 0,
+                readerId: "0",
+                symptoms: [], // API returns a string listing the symptoms, but it gets parsed into an array
+                otherSymptoms: "",
+                pulseRate: 0,
+                diastolicBloodPressure: 0,
+                systolicBloodPressure: 0,
+                gestationalAge: 0,
+                gestationalAgeTimeUnit: "",
+                needFollowUp: false,
+                recheckVitalsDate: null,
+                region: "",
+                notes: "",
+                vitalsTrafficLight: {
+                    advice: "Patient is likely healthy. Continue normal care.",
+                    analysis: "Patient is likely healthy",
+                    briefAdvice: "Continue normal care",
+                    condition: "BP < 140 systolic and < 90 diastolic and shock index < 0.9"
+                },
+                diagnosis: "",
+                timestamp: null,
+            },
+            referrerName: ""
+        };
     }
 
     componentDidMount() {
         let data =  this.props.location.state;
         api.referral.getReferralById(data).then(res => {
-            const data = res.data[0];
-            this.setState({data});
-            console.log("state", this.state);
+                const referralData = res.data[0];
+                this.setState({referralData});
+        }).then(res => {
+            const patientId = this.state.referralData.patientId;
+            api.patient.getPatientById({id: patientId}).then(res => {
+                const patientData = res.data;
+                this.setState({patientData});
+            });
 
-            // TODO: Get rest of information, such as patient data
+            const readingId = this.state.referralData.readingId;
+            api.reading.getReadingById({id: readingId}).then(res => {
+                const readingData = res.data[0];
+
+                const symptoms = readingData.symptoms;
+                const symptomsArr = symptoms.split(','); // TODO: Double-check how symptoms are split up
+                readingData.symptoms = symptomsArr;
+
+                const timestamp = readingData.timestamp;
+                readingData.timestamp = new Date(timestamp).toISOString().substr(0,10);
+
+                this.setState({readingData});
+                console.log(this.state);
+            });
+
+            const referrerId = this.state.referralData.referrerId;
+            api.userInfo.getUserInfoById(referrerId).then(res => {
+                const data = res.data;
+                const referrerName = data.firstName + " " + data.lastName;
+                this.setState({referrerName});
+            });
         });
     }
 
+    getSymptomButton(symptom) {
+        let returned = false;
+
+        this.state.readingData.symptoms.forEach(function (item) {
+            if (item.valueOf() == symptom.valueOf()) {
+                returned = true;
+            }
+        });
+
+        if (returned) {
+            return (
+                <Button key={symptom} variant="outline-primary" size="sm" active> {symptom} </Button>
+            );
+        }
+        else {
+            return (
+                <Button key={symptom} variant="outline-primary" size="sm" disabled> {symptom} </Button>
+            );
+        }
+    }
+
+    setSymptomsButtonsForReferralInfo() {
+        // TODO: Make the main symptoms into enums rather than strings if possible. Check with mobile app
+        const allSymptoms = ["No Symptoms", "Headache", "Bleeding", "Blurred Vision", "Feverish", "Abdominal Pain", "Unwell"];
+
+        return (
+            <div>
+                <Col>
+                    {allSymptoms.map(symptom => (
+                        this.getSymptomButton(symptom)
+                    ))}
+                </Col>
+            </div>
+        )
+    }
+
     render() {
-        const {data} = this.state;
+        const {referralData, patientData, readingData, referrerName} = this.state;
         return (
             <div>
                 <TopNavigation authenticated={true}></TopNavigation>
@@ -70,7 +174,7 @@ class ReferralDetailForm extends React.Component {
                                                     type="text"
                                                     id="patient"
                                                     name="patient"
-                                                    value={data.patientId} />
+                                                    value={referralData.patientId} />
                                                 {/*error handling*/}
                                                 {/* <Form.Text className="text-muted">
                                                 {errors.email && <InlineError text={errors.email} />}
@@ -84,7 +188,7 @@ class ReferralDetailForm extends React.Component {
                                                     type="text"
                                                     id="initials"
                                                     name="initials"
-                                                    value={this.state.initials} />
+                                                    value={patientData.initials} />
                                                 {/*error handling*/}
                                                 {/* <Form.Text className="text-muted">
                                                 {errors.email && <InlineError text={errors.email} />}
@@ -98,7 +202,7 @@ class ReferralDetailForm extends React.Component {
                                                     type="number"
                                                     id="age"
                                                     name="age"
-                                                    value={'35'} />
+                                                    value={patientData.age} />
                                                 {/*error handling*/}
                                                 {/* <Form.Text className="text-muted">
                                                 {errors.email && <InlineError text={errors.email} />}
@@ -112,7 +216,7 @@ class ReferralDetailForm extends React.Component {
                                                     type="text"
                                                     id="sex"
                                                     name="sex"
-                                                    value={'Female'} />
+                                                    value={patientData.sex} />
                                                 {/*error handling*/}
                                                 {/* <Form.Text className="text-muted">
                                                 {errors.email && <InlineError text={errors.email} />}
@@ -126,7 +230,7 @@ class ReferralDetailForm extends React.Component {
                                                     type="text"
                                                     id="pregnant"
                                                     name="pregnant"
-                                                    value={'Yes'} />
+                                                    value={patientData.pregnant} />
                                                 {/*error handling*/}
                                                 {/* <Form.Text className="text-muted">
                                                 {errors.email && <InlineError text={errors.email} />}
@@ -140,7 +244,7 @@ class ReferralDetailForm extends React.Component {
                                                     type="text"
                                                     id="age"
                                                     name="age"
-                                                    value={'5 months'} />
+                                                    value={patientData.currentGestationalAge + " " + patientData.gestationAgeUnit} />
                                                 {/*error handling*/}
                                                 {/* <Form.Text className="text-muted">
                                                 {errors.email && <InlineError text={errors.email} />}
@@ -158,7 +262,7 @@ class ReferralDetailForm extends React.Component {
                                                     type="text"
                                                     id="zone"
                                                     name="zone"
-                                                    value={'5'}/>
+                                                    value={patientData.zoneNo}/>
                                                 {/*error handling*/}
                                                 {/* <Form.Text className="text-muted">
                                                 {errors.email && <InlineError text={errors.email} />}
@@ -172,7 +276,7 @@ class ReferralDetailForm extends React.Component {
                                                     type="text"
                                                     id="block_number"
                                                     name="block_number"
-                                                    value={'5'} />
+                                                    value={patientData.blockNo} />
                                                 {/*error handling*/}
                                                 {/* <Form.Text className="text-muted">
                                                 {errors.email && <InlineError text={errors.email} />}
@@ -186,7 +290,7 @@ class ReferralDetailForm extends React.Component {
                                                     type="text"
                                                     id="tank_number"
                                                     name="tank_number"
-                                                    value={'5'} />
+                                                    value={patientData.tankNo} />
                                                 {/*error handling*/}
                                                 {/* <Form.Text className="text-muted">
                                                 {errors.email && <InlineError text={errors.email} />}
@@ -200,7 +304,7 @@ class ReferralDetailForm extends React.Component {
                                                     type="text"
                                                     id="village_number"
                                                     name="village_number"
-                                                    value={'5'} />
+                                                    value={patientData.villageNo} />
                                                 {/*error handling*/}
                                                 {/* <Form.Text className="text-muted">
                                                 {errors.email && <InlineError text={errors.email} />}
@@ -214,7 +318,7 @@ class ReferralDetailForm extends React.Component {
                                                     type="text"
                                                     id="household_number"
                                                     name="household_number"
-                                                    value={'5'} />
+                                                    value={patientData.householdNo} />
                                                 {/*error handling*/}
                                                 {/* <Form.Text className="text-muted">
                                                 {errors.email && <InlineError text={errors.email} />}
@@ -234,7 +338,8 @@ class ReferralDetailForm extends React.Component {
                                         <Form.Control
                                             type="date"
                                             id="date"
-                                            name="date" />
+                                            name="date"
+                                            value={readingData.timestamp}/>
                                         {/*error handling*/}
                                         {/* <Form.Text className="text-muted">
                                         {errors.email && <InlineError text={errors.email} />}
@@ -248,7 +353,7 @@ class ReferralDetailForm extends React.Component {
                                             type="text"
                                             id="referrer"
                                             name="referrer"
-                                            value={'John Smith'} />
+                                            value={referrerName} />
                                         {/*error handling*/}
                                         {/* <Form.Text className="text-muted">
                                         {errors.email && <InlineError text={errors.email} />}
@@ -262,7 +367,7 @@ class ReferralDetailForm extends React.Component {
                                             type="text"
                                             id="blood_pressure"
                                             name="blood_pressure"
-                                            value={'120/80'} />
+                                            value={ readingData.systolicBloodPressure + " / " + readingData.diastolicBloodPressure } />
                                         {/*error handling*/}
                                         {/* <Form.Text className="text-muted">
                                         {errors.email && <InlineError text={errors.email} />}
@@ -276,7 +381,7 @@ class ReferralDetailForm extends React.Component {
                                             type="number"
                                             id="heart_rate"
                                             name="heart_rate"
-                                            value={'60'} />
+                                            value={readingData.pulseRate} />
                                         {/*error handling*/}
                                         {/* <Form.Text className="text-muted">
                                         {errors.email && <InlineError text={errors.email} />}
@@ -290,7 +395,7 @@ class ReferralDetailForm extends React.Component {
                                             type="text"
                                             id="status"
                                             name="status"
-                                            value={'Likely Healthy'} />
+                                            value={readingData.vitalsTrafficLight.analysis} />
                                         {/*error handling*/}
                                         {/* <Form.Text className="text-muted">
                                         {errors.email && <InlineError text={errors.email} />}
@@ -304,7 +409,7 @@ class ReferralDetailForm extends React.Component {
                                             type="text"
                                             id="referred_to"
                                             name="referred_to"
-                                            value={'health_facility_name'} />
+                                            value={referralData.healthFacility} />
                                         {/*error handling*/}
                                         {/* <Form.Text className="text-muted">
                                         {errors.email && <InlineError text={errors.email} />}
@@ -316,22 +421,15 @@ class ReferralDetailForm extends React.Component {
                                 <Col>
                                     <Form.Group>
                                         <Form.Label>Symptoms</Form.Label>
+                                        <Row className="mb-2">
+                                            { this.setSymptomsButtonsForReferralInfo() }
+                                        </Row>
                                         <Form.Control
                                             as="textarea"
                                             rows="3"
-                                            placeholder="Additional Symptoms" />
+                                            placeholder="Additional Symptoms"
+                                            value={"Additional Symptoms:\n" + readingData.otherSymptoms}/>
                                     </Form.Group>
-                                </Col>
-                            </Row>
-                            <Row className="mb-2">
-                                <Col>
-                                    <Button variant="outline-primary" size="sm">No Symptoms</Button>&nbsp;
-                                    <Button variant="outline-primary" size="sm">Headache</Button>&nbsp;
-                                    <Button variant="outline-primary" size="sm">Bleeding</Button>&nbsp;
-                                    <Button variant="outline-primary" size="sm">Blurred Vision</Button>&nbsp;
-                                    <Button variant="outline-primary" size="sm">Feverish</Button>&nbsp;
-                                    <Button variant="outline-primary" size="sm">Adbdominal pain</Button>&nbsp;
-                                    <Button variant="outline-primary" size="sm">Unwell</Button>&nbsp;
                                 </Col>
                             </Row>
                             <Row className="mb-4">
@@ -341,117 +439,119 @@ class ReferralDetailForm extends React.Component {
                                         <Form.Control
                                             as="textarea"
                                             rows="3"
-                                            placeholder="Comments" />
+                                            placeholder="Comments"
+                                            value={"Comments:\n" + readingData.notes}/>
                                     </Form.Group>
                                 </Col>
                             </Row>
                         </Tab>
                         <Tab eventKey="contact" title="Diagnosis Detail">
                             <br></br>
-                            <Row>
-                                <Col md={4}>
-                                    <Form.Group>
-                                        <Form.Label>Date</Form.Label>
-                                        <Form.Control
-                                            type="date"
-                                            id="date"
-                                            name="date" />
-                                        {/*error handling*/}
-                                        {/* <Form.Text className="text-muted">
-                                        {errors.email && <InlineError text={errors.email} />}
-                                    </Form.Text> */}
-                                    </Form.Group>
-                                </Col>
-                                <Col md={4}>
-                                    <Form.Group>
-                                        <Form.Label>Healthworker</Form.Label>
-                                        <Form.Control
-                                            type="text"
-                                            id="healthworker"
-                                            name="healthworker"
-                                            value={'Mary Sue'} />
-                                        {/*error handling*/}
-                                        {/* <Form.Text className="text-muted">
-                                        {errors.email && <InlineError text={errors.email} />}
-                                    </Form.Text> */}
-                                    </Form.Group>
-                                </Col>
-                                <Col md={4}>
-                                    <Form.Group>
-                                        <Form.Label>Blood Pressure</Form.Label>
-                                        <Form.Control
-                                            type="text"
-                                            id="blood_pressure"
-                                            name="blood_pressure"
-                                            value={'120/80'} />
-                                        {/*error handling*/}
-                                        {/* <Form.Text className="text-muted">
-                                        {errors.email && <InlineError text={errors.email} />}
-                                    </Form.Text> */}
-                                    </Form.Group>
-                                </Col>
-                                <Col md={4}>
-                                    <Form.Group>
-                                        <Form.Label>Heart Rate</Form.Label>
-                                        <Form.Control
-                                            type="number"
-                                            id="heart_rate"
-                                            name="heart_rate"
-                                            value={'60'} />
-                                        {/*error handling*/}
-                                        {/* <Form.Text className="text-muted">
-                                        {errors.email && <InlineError text={errors.email} />}
-                                    </Form.Text> */}
-                                    </Form.Group>
-                                </Col>
-                                <Col md={4}>
-                                    <Form.Group>
-                                        <Form.Label>Status</Form.Label>
-                                        <Form.Control
-                                            type="text"
-                                            id="status"
-                                            name="status"
-                                            value={'Likely Healthy'} />
-                                        {/*error handling*/}
-                                        {/* <Form.Text className="text-muted">
-                                        {errors.email && <InlineError text={errors.email} />}
-                                    </Form.Text> */}
-                                    </Form.Group>
-                                </Col>
-                            </Row>
-                            <Row>
-                                <Col>
-                                    <Form.Group>
-                                        <Form.Label>Symptoms</Form.Label>
-                                        <Form.Control
-                                            as="textarea"
-                                            rows="3"
-                                            placeholder="Additional Symptoms" />
-                                    </Form.Group>
-                                </Col>
-                            </Row>
-                            <Row className="mb-2">
-                                <Col>
-                                    <Button variant="outline-primary" size="sm">No Symptoms</Button>&nbsp;
-                                    <Button variant="outline-primary" size="sm">Headache</Button>&nbsp;
-                                    <Button variant="outline-primary" size="sm">Bleeding</Button>&nbsp;
-                                    <Button variant="outline-primary" size="sm">Blurred Vision</Button>&nbsp;
-                                    <Button variant="outline-primary" size="sm">Feverish</Button>&nbsp;
-                                    <Button variant="outline-primary" size="sm">Adbdominal pain</Button>&nbsp;
-                                    <Button variant="outline-primary" size="sm">Unwell</Button>&nbsp;
-                                </Col>
-                            </Row>
-                            <Row>
-                                <Col>
-                                    <Form.Group>
-                                        <Form.Label>Follow-up Care Needed</Form.Label>
-                                        <Form.Control
-                                            as="textarea"
-                                            rows="3"
-                                            placeholder="Follow-up care details" />
-                                    </Form.Group>
-                                </Col>
-                            </Row>
+                            {/*TODO: Want to be able to let readings be taken when giving diagnosis*/}
+                            {/*<Row>*/}
+                            {/*    <Col md={4}>*/}
+                            {/*        <Form.Group>*/}
+                            {/*            <Form.Label>Date</Form.Label>*/}
+                            {/*            <Form.Control*/}
+                            {/*                type="date"*/}
+                            {/*                id="date"*/}
+                            {/*                name="date" />*/}
+                            {/*            /!*error handling*!/*/}
+                            {/*            /!* <Form.Text className="text-muted">*/}
+                            {/*            {errors.email && <InlineError text={errors.email} />}*/}
+                            {/*        </Form.Text> *!/*/}
+                            {/*        </Form.Group>*/}
+                            {/*    </Col>*/}
+                            {/*    <Col md={4}>*/}
+                            {/*        <Form.Group>*/}
+                            {/*            <Form.Label>Healthworker</Form.Label>*/}
+                            {/*            <Form.Control*/}
+                            {/*                type="text"*/}
+                            {/*                id="healthworker"*/}
+                            {/*                name="healthworker"*/}
+                            {/*                value={'Mary Sue'} />*/}
+                            {/*            /!*error handling*!/*/}
+                            {/*            /!* <Form.Text className="text-muted">*/}
+                            {/*            {errors.email && <InlineError text={errors.email} />}*/}
+                            {/*        </Form.Text> *!/*/}
+                            {/*        </Form.Group>*/}
+                            {/*    </Col>*/}
+                            {/*    <Col md={4}>*/}
+                            {/*        <Form.Group>*/}
+                            {/*            <Form.Label>Blood Pressure</Form.Label>*/}
+                            {/*            <Form.Control*/}
+                            {/*                type="text"*/}
+                            {/*                id="blood_pressure"*/}
+                            {/*                name="blood_pressure"*/}
+                            {/*                value={'120/80'} />*/}
+                            {/*            /!*error handling*!/*/}
+                            {/*            /!* <Form.Text className="text-muted">*/}
+                            {/*            {errors.email && <InlineError text={errors.email} />}*/}
+                            {/*        </Form.Text> *!/*/}
+                            {/*        </Form.Group>*/}
+                            {/*    </Col>*/}
+                            {/*    <Col md={4}>*/}
+                            {/*        <Form.Group>*/}
+                            {/*            <Form.Label>Heart Rate</Form.Label>*/}
+                            {/*            <Form.Control*/}
+                            {/*                type="number"*/}
+                            {/*                id="heart_rate"*/}
+                            {/*                name="heart_rate"*/}
+                            {/*                value={'60'} />*/}
+                            {/*            /!*error handling*!/*/}
+                            {/*            /!* <Form.Text className="text-muted">*/}
+                            {/*            {errors.email && <InlineError text={errors.email} />}*/}
+                            {/*        </Form.Text> *!/*/}
+                            {/*        </Form.Group>*/}
+                            {/*    </Col>*/}
+                            {/*    <Col md={4}>*/}
+                            {/*        <Form.Group>*/}
+                            {/*            <Form.Label>Status</Form.Label>*/}
+                            {/*            <Form.Control*/}
+                            {/*                type="text"*/}
+                            {/*                id="status"*/}
+                            {/*                name="status"*/}
+                            {/*                value={'Likely Healthy'} />*/}
+                            {/*            /!*error handling*!/*/}
+                            {/*            /!* <Form.Text className="text-muted">*/}
+                            {/*            {errors.email && <InlineError text={errors.email} />}*/}
+                            {/*        </Form.Text> *!/*/}
+                            {/*        </Form.Group>*/}
+                            {/*    </Col>*/}
+                            {/*</Row>*/}
+                            {/*<Row>*/}
+                            {/*    <Col>*/}
+                            {/*        <Form.Group>*/}
+                            {/*            <Form.Label>Symptoms</Form.Label>*/}
+                            {/*            <Form.Control*/}
+                            {/*                as="textarea"*/}
+                            {/*                rows="3"*/}
+                            {/*                placeholder="Additional Symptoms" />*/}
+                            {/*        </Form.Group>*/}
+                            {/*    </Col>*/}
+                            {/*</Row>*/}
+                            {/*<Row className="mb-2">*/}
+                            {/*    <Col>*/}
+                            {/*        <Button variant="outline-primary" size="sm">No Symptoms</Button>&nbsp;*/}
+                            {/*        <Button variant="outline-primary" size="sm">Headache</Button>&nbsp;*/}
+                            {/*        <Button variant="outline-primary" size="sm">Bleeding</Button>&nbsp;*/}
+                            {/*        <Button variant="outline-primary" size="sm">Blurred Vision</Button>&nbsp;*/}
+                            {/*        <Button variant="outline-primary" size="sm">Feverish</Button>&nbsp;*/}
+                            {/*        <Button variant="outline-primary" size="sm">Adbdominal pain</Button>&nbsp;*/}
+                            {/*        <Button variant="outline-primary" size="sm">Unwell</Button>&nbsp;*/}
+                            {/*    </Col>*/}
+                            {/*</Row>*/}
+                            {/*<Row>*/}
+                            {/*    <Col>*/}
+                            {/*        <Form.Group>*/}
+                            {/*            <Form.Label>Follow-up Care Needed</Form.Label>*/}
+                            {/*            <Form.Control*/}
+                            {/*                as="textarea"*/}
+                            {/*                rows="3"*/}
+                            {/*                placeholder="Follow-up care details" />*/}
+                            {/*        </Form.Group>*/}
+                            {/*    </Col>*/}
+                            {/*</Row>*/}
                             <Row>
                                 <Col>
                                     <Form.Group>
@@ -459,341 +559,13 @@ class ReferralDetailForm extends React.Component {
                                         <Form.Control
                                             as="textarea"
                                             rows="3"
-                                            placeholder="Diagnosis" />
+                                            placeholder="Diagnosis"
+                                            value={readingData.diagnosis}/>
                                     </Form.Group>
                                 </Col>
                             </Row> 
                         </Tab>
                     </Tabs>
-                    {/* <Grid>
-                        <Grid.Column width={4}>
-                            <Form size={'small'}>
-                                <Form.Group grouped>
-                                    <Form.Field>
-                                        <label>Assign To:</label>
-                                        <Dropdown
-                                            placeholder='Select Assignee'
-                                            fluid
-                                            selection
-                                            options={friendOptions}
-                                        />
-                                    </Form.Field>
-                                    <Form.Field>
-                                        <label>Status:</label>
-                                        <Dropdown
-                                            placeholder='Select Status'
-                                            fluid
-                                            selection
-                                            options={statusOptions}
-                                        />
-                                    </Form.Field>
-                                </Form.Group>
-                            </Form>
-                        </Grid.Column>
-                        <Grid.Column width={9}>
-                            <Tabs className="" size={'large'}>
-                                <Tab eventKey="t" title="Patient Information">
-                                    <Grid>
-                                        <Grid.Column width={8}>
-                                            <Form.Group grouped>
-                                                <Form.Field
-                                                    control={Input}
-                                                    label='Patient ID:'
-                                                    value={'0123456'}
-                                                />
-                                                <Form.Field
-                                                    control={Input}
-                                                    label='Initials: '
-                                                    value={'AS'}
-                                                />
-                                                <Form.Field
-                                                    control={Input}
-                                                    label='Age:'
-                                                    value={'35'}
-
-                                                />
-                                                <Form.Field
-                                                    control={Input}
-                                                    label='Sex:'
-                                                    value={'Female'}
-
-                                                />
-                                                <Form.Field
-                                                    control={Input}
-                                                    label='Pregnant:'
-                                                    value={'Yes'}
-
-                                                />
-                                                <Form.Field
-                                                    control={Input}
-                                                    label='Age:'
-                                                    value={'5 Months '}
-                                                />
-                                            </Form.Group>
-                                        </Grid.Column>
-                                        <Grid.Column width={8}>
-                                            <Form.Group grouped>
-                                                <Form.Field
-                                                    control={Input}
-                                                    label='Zone:'
-                                                    value={'5'}
-                                                />
-                                                <Form.Field
-                                                    control={Input}
-                                                    label='Block No: '
-                                                    value={'5'}
-                                                />
-                                                <Form.Field
-                                                    control={Input}
-                                                    label='Tank No:'
-                                                    value={'5'}
-
-                                                />
-                                                <Form.Field
-                                                    control={Input}
-                                                    label='Village No:'
-                                                    value={'5'}
-
-                                                />
-                                                <Form.Field
-                                                    control={Input}
-                                                    label='Houshold No:'
-                                                    value={'5'}
-
-                                                />
-                                            </Form.Group>
-
-                                        </Grid.Column>
-                                    </Grid>
-                                </Tab>
-                                <Tab eventKey="tt" title="Referral Detail">
-                                    <Grid>
-                                        <Grid.Column width={8}>
-                                            <Form.Group grouped>
-                                                <Form.Field
-                                                    control={Input}
-                                                    label='Date:'
-                                                    value={'2019/05/05 '}
-                                                />
-                                                <Form.Field
-                                                    control={Input}
-                                                    label='Referrer: '
-                                                    value={'John Smith'}
-                                                />
-                                                <Form.Field
-                                                    control={Input}
-                                                    label='Referred to:'
-                                                    value={'health_facility_name '}
-                                                />
-                                            </Form.Group>
-                                        </Grid.Column>
-                                        <Grid.Column width={8}>
-                                            <Form.Group grouped>
-                                                <Form.Field
-                                                    control={Input}
-                                                    label='Blood Pressure:'
-                                                    value={' 120/80 '}
-                                                />
-                                                <Form.Field
-                                                    control={Input}
-                                                    label='Heart Rate: '
-                                                    value={'60'}
-                                                />
-                                                <Form.Field
-                                                    control={Input}
-                                                    label='Status:'
-                                                    value={'ikely Healthy'}
-                                                />
-                                            </Form.Group>
-
-                                        </Grid.Column>
-                                    </Grid>
-                                    <Grid.Column>
-                                        <Grid>
-                                            <Grid.Column width={3}>
-                                                <Form size={'small'}>
-                                                    <Form.Group grouped>
-                                                        <Form.Field
-                                                            control={Checkbox}
-                                                            label='No Symptoms (patient Healthy)'
-                                                        />
-                                                        <Form.Field
-                                                            control={Checkbox}
-                                                            label='Headache'
-                                                        />
-                                                    </Form.Group>
-                                                </Form>
-
-                                            </Grid.Column>
-                                            <Grid.Column width={3}>
-                                                <Form size={'small'}>
-                                                    <Form.Group grouped>
-                                                        <Form.Field
-                                                            control={Checkbox}
-                                                            label='Headache'
-                                                        />
-                                                        <Form.Field
-                                                            control={Checkbox}
-                                                            label='Blurred vision'
-                                                        />
-                                                        <Form.Field
-                                                            control={Checkbox}
-                                                            label='Abdominal pain'
-                                                        />
-                                                    </Form.Group>
-                                                </Form>
-                                            </Grid.Column>
-                                            <Grid.Column width={3}>
-                                                <Form size={'small'}>
-                                                    <Form.Group grouped>
-                                                        <Form.Field
-                                                            control={Checkbox}
-                                                            label='Bleeding'
-                                                        />
-                                                        <Form.Field
-                                                            control={Checkbox}
-                                                            label='Feverish'
-                                                        />
-                                                        <Form.Field
-                                                            control={Checkbox}
-                                                            label='Unwell'
-                                                        />
-                                                    </Form.Group>
-                                                </Form>
-                                            </Grid.Column>
-                                            <Grid.Column width={5}>
-                                                <Form size={'large'}>
-                                                    <Form.Field
-                                                        control={TextArea}
-                                                        label='Other Symptoms'
-                                                        placeholder='Tell us more about you... that is breaking'
-                                                    />
-                                                    <Form.Field
-                                                        control={TextArea}
-                                                        label='Comments'
-                                                        placeholder='Additional comments and actions taken...'
-                                                    />
-
-                                                </Form>
-                                            </Grid.Column>
-                                        </Grid>
-                                    </Grid.Column>
-                                </Tab>
-                                <Tab eventKey="ttt" title="Diagnosis Detail">
-                                    <Grid>
-                                        <Grid.Column width={8}>
-                                            <Form.Group grouped>
-                                                <Form.Field
-                                                    control={Input}
-                                                    label='Date:'
-                                                    value={'2019/05/15'}
-                                                />
-                                                <Form.Field
-                                                    control={Input}
-                                                    label='Healthworker:'
-                                                    value={'Mary Sue'}
-                                                />
-                                            </Form.Group>
-                                        </Grid.Column>
-                                        <Grid.Column width={8}>
-                                            <Form.Group grouped>
-
-                                                <Form.Field
-                                                    control={Input}
-                                                    label='Blood Pressure: '
-                                                    value={'120/80'}
-                                                />
-                                                <Form.Field
-                                                    control={Input}
-                                                    label='Heart Rate:'
-                                                    value={'60'}
-                                                />
-                                                <Form.Field
-                                                    control={Input}
-                                                    label='Status:'
-                                                    value={'Likely Healthy'}
-                                                />
-                                            </Form.Group>
-                                        </Grid.Column>
-                                    </Grid>
-                                    <Grid.Column>
-                                        <Grid>
-                                            <Grid.Column width={3}>
-                                                <Form size={'small'}>
-                                                    <Form.Group grouped>
-                                                        <Form.Field
-                                                            control={Checkbox}
-                                                            label='No Symptoms (patient Healthy)'
-                                                        />
-                                                        <Form.Field
-                                                            control={Checkbox}
-                                                            label='Headache'
-                                                        />
-                                                    </Form.Group>
-                                                </Form>
-
-                                            </Grid.Column>
-                                            <Grid.Column width={3}>
-                                                <Form size={'small'}>
-                                                    <Form.Group grouped>
-                                                        <Form.Field
-                                                            control={Checkbox}
-                                                            label='Headache'
-                                                        />
-                                                        <Form.Field
-                                                            control={Checkbox}
-                                                            label='Blurred vision'
-                                                        />
-                                                        <Form.Field
-                                                            control={Checkbox}
-                                                            label='Abdominal pain'
-                                                        />
-                                                    </Form.Group>
-                                                </Form>
-                                            </Grid.Column>
-                                            <Grid.Column width={3}>
-                                                <Form size={'small'}>
-                                                    <Form.Group grouped>
-                                                        <Form.Field
-                                                            control={Checkbox}
-                                                            label='Bleeding'
-                                                        />
-                                                        <Form.Field
-                                                            control={Checkbox}
-                                                            label='Feverish'
-                                                        />
-                                                        <Form.Field
-                                                            control={Checkbox}
-                                                            label='Unwell'
-                                                        />
-                                                    </Form.Group>
-                                                </Form>
-                                            </Grid.Column>
-                                            <Grid.Column width={5}>
-                                                <Form size={'small'}>
-                                                    <Form.Field
-                                                        control={TextArea}
-                                                        label='Other Symptoms'
-                                                        placeholder='Tell us more about you... that is breaking'
-                                                    />
-                                                    <Form.Field
-                                                        control={TextArea}
-                                                        label='Follow-up Care Needed'
-                                                        placeholder='Follow-up care detail...'
-                                                    />
-                                                    <Form.Field
-                                                        control={TextArea}
-                                                        label='Diagnosis'
-                                                        placeholder='Diagnosis...'
-                                                    />
-                                                </Form>
-                                            </Grid.Column>
-                                        </Grid>
-                                    </Grid.Column>
-                                </Tab>
-                            </Tabs>
-                        </Grid.Column>
-                    </Grid> */}
                 </Container>
             </div>
         );
