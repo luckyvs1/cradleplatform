@@ -67,25 +67,22 @@ public class ReadingController {
 
     @PostMapping(path="/api/readings-multi")
     public ResponseEntity<String> addReadings(@RequestBody ReadingUploadWrapper readings) {
-        int numInvalidReadings = 0;
+        boolean trafficLightIsValid = true;
+        boolean referralValid = true;
+
         for (Reading reading : readings.getReadings()) {
-
-            Boolean trafficLightIsValid = readingService.isValidTrafficLight(reading);
-            Boolean referralValid = readingService.isValidReferralToHealthCentre(reading);
-
-            if (trafficLightIsValid && referralValid) {
-                readingRepository.save(reading);
-            } else {
-                numInvalidReadings++;
-            }
-
+            trafficLightIsValid &= readingService.isValidTrafficLight(reading);
+            referralValid &= readingService.isValidReferralToHealthCentre(reading);
         }
 
-        if (numInvalidReadings == readings.getReadings().size()) {
+        if(trafficLightIsValid && referralValid) {
+            for (Reading reading : readings.getReadings()) {
+                readingRepository.save(reading);
+            }
+        }
+
+        if (!(trafficLightIsValid && referralValid)) {
             return new ResponseEntity<String>("No readings were saved", HttpStatus.BAD_REQUEST);
-        } else if (numInvalidReadings > 0) {
-            //TODO: Not all readings were saved due to error
-            return new ResponseEntity<String>("Not all readings were saved", HttpStatus.CREATED);
         } else {
             return new ResponseEntity<String>("Saved readings", HttpStatus.CREATED);
         }
