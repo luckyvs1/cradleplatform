@@ -29,6 +29,7 @@ import AllFollowUp from "./component/pages/followUp/AllFollowUp";
 import FollowUpDetail from "./component/pages/followUp/FollowUpDetail";
 import ListUser from "./component/pages/users/ListUser"
 import AddUsers from "./component/pages/users/AddUsers"
+import CreateDiagnosis from "./component/pages/readings/CreateDiagnosis"
 
 const App = ({location, isAuthenticated}) => (
 
@@ -139,6 +140,12 @@ const App = ({location, isAuthenticated}) => (
             exact
             component={AddUsers}
         />
+            <UserRoute
+                location={location}
+                path="/createDiagnosis"
+                exact
+                component={CreateDiagnosis}
+            />
     </div>
 );
 
