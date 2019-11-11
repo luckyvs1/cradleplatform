@@ -7,8 +7,9 @@
 import React from "react";
 import TopNavigation from "../navigation/TopNavigation";
 import {Button, Col, Container, Form, Row, Tab, Tabs} from 'react-bootstrap';
+import InlineError from "../messages/InlineError";
 import api from "../../api"
-import {withRouter} from "react-router-dom";
+import {Link, withRouter} from "react-router-dom";
 
 class ReferralDetailForm extends React.Component {
     // functions
@@ -17,8 +18,6 @@ class ReferralDetailForm extends React.Component {
     // validate
     constructor(props) {
         super(props);
-        console.dir("props");
-        console.dir(props);
         this.state = {
             referralData: {
                 healthFacility: "",
@@ -73,7 +72,8 @@ class ReferralDetailForm extends React.Component {
                 diagnosis: "",
                 timestamp: null,
             },
-            referrerName: ""
+            referrerName: "",
+            errors: {}
         };
     }
 
@@ -102,6 +102,10 @@ class ReferralDetailForm extends React.Component {
 
                 this.setState({readingData});
                 console.log(this.state);
+
+                if (readingData.diagnosis == "") {
+                    this.state.errors.requireDiagnosis = "This referral requires a diagnosis response.";
+                }
             });
 
             const referrerId = this.state.referralData.referrerId;
@@ -147,6 +151,27 @@ class ReferralDetailForm extends React.Component {
                 </Col>
             </div>
         )
+    }
+
+    checkDiagnosisExist() {
+        if (this.state.errors.requireDiagnosis) {
+            return (
+                <div>
+                    <Row>
+                        <Col>
+                            <Form.Text className="text-muted">
+                                <InlineError text={this.state.errors.requireDiagnosis} />
+                            </Form.Text>
+                        </Col>
+                        <Col className="text-right">
+                            <Button variant="primary" size="sm" as={Link} to={ {pathname: '/createDiagnosis', state: {readingId: this.state.readingData.id}} }>
+                                Add Diagnosis
+                            </Button>
+                        </Col>
+                    </Row>
+                </div>
+            )
+        }
     }
 
     render() {
@@ -447,6 +472,7 @@ class ReferralDetailForm extends React.Component {
                         </Tab>
                         <Tab eventKey="contact" title="Diagnosis Detail">
                             <br></br>
+                            { this.checkDiagnosisExist() }
                             {/*TODO: Want to be able to let readings be taken when giving diagnosis*/}
                             {/*<Row>*/}
                             {/*    <Col md={4}>*/}
@@ -563,7 +589,7 @@ class ReferralDetailForm extends React.Component {
                                             value={readingData.diagnosis}/>
                                     </Form.Group>
                                 </Col>
-                            </Row> 
+                            </Row>
                         </Tab>
                     </Tabs>
                 </Container>
