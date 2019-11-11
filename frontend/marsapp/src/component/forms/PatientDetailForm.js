@@ -64,8 +64,8 @@ class PatientDetailForm extends React.Component {
                 patientData.sexFull = 'Male';
             }
 
-            patientData.dob = new Date (patientData.dob).toLocaleDateString();
-            patientData.gestationalStartDate = new Date (patientData.gestationalStartDate).toLocaleDateString();
+            patientData.dob = new Date(patientData.dob).toLocaleDateString();
+            patientData.gestationalStartDate = new Date(patientData.gestationalStartDate).toLocaleDateString();
 
             this.setState({patientData})
         });
@@ -207,12 +207,12 @@ class PatientDetailForm extends React.Component {
                     <Tabs class="nav nav-tabs">
                         <Tab eventKey="reading_information" title="Reading Information">
                             <div className="table-wrapper-scroll-y my-custom-scrollbar rtc"
-                                            scrollbarStyle={{
-                                                background: {backgroundColor: "transparent"},
-                                                backgroundFocus: {backgroundColor: "#f0f0f0"},
-                                                foreground: {backgroundColor: "#e2e2e2"},
-                                                foregroundFocus: {backgroundColor: "#acacac"}
-                                            }}>
+                                 scrollbarStyle={{
+                                     background: {backgroundColor: "transparent"},
+                                     backgroundFocus: {backgroundColor: "#f0f0f0"},
+                                     foreground: {backgroundColor: "#e2e2e2"},
+                                     foregroundFocus: {backgroundColor: "#acacac"}
+                                 }}>
                                 <table className="table table-hover">
                                     <thead>
                                     <tr>
@@ -336,7 +336,7 @@ class PatientDetailForm extends React.Component {
                             </Row>
                             <Row>
                                 <Col className={"text-right"}>
-                                <Button variant="warning" size="sm">
+                                    <Button variant="warning" size="sm">
                                         Save Changes
                                     </Button>
                                 </Col>
@@ -364,7 +364,7 @@ class PatientDetailForm extends React.Component {
                                     {this.state.followUpData.map(row => (
                                         <tr key={row.id}>
                                             <td>  {row.required === true ?
-                                                    "Follow Up Required" : "Follow Up Not Required"}
+                                                "Follow Up Required" : "Follow Up Not Required"}
                                             </td>
                                             <td> {row.frequency} </td>
                                             <td> {row.diagnosis} </td>
