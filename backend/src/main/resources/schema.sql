@@ -59,15 +59,17 @@ CREATE TABLE Patient (
     gestational_start_date DATE,
     gestational_age_unit  ENUM('weeks', 'months', 'none'),
     current_gestational_age       INTEGER,
-    CHECK (
-            (pregnant IS TRUE AND current_gestational_age IS NOT NULL) OR
-            (pregnant IS FALSE AND current_gestational_age = 0)
+    CONSTRAINT isPregnant CHECK (
+            (pregnant IS TRUE AND current_gestational_age > 0 AND gestational_age_unit != 'none')
         ),
-    CHECK (
+    CONSTRAINT isNotPregnant CHECK (
+            (pregnant IS FALSE AND current_gestational_age = 0 AND gestational_age_unit = 'none')
+        ),
+    CONSTRAINT hasValidAttestationNumberOrName CHECK (
             (attestation_no IS NOT NULL) OR
             (first_name IS NOT NULL AND last_name IS NOT NULL)
         ),
-    UNIQUE (attestation_no),
+    UNIQUE(attestation_no),
     PRIMARY KEY (id)
 );
 
@@ -75,6 +77,7 @@ CREATE TABLE Drug_History (
     id          INTEGER     NOT NULL AUTO_INCREMENT,
     patient_id  INTEGER NOT NULL,
     history     TEXT,
+    UNIQUE(patient_id),
     PRIMARY KEY (id),
     FOREIGN KEY (patient_id) REFERENCES Patient(id) ON DELETE CASCADE
 );
@@ -130,8 +133,8 @@ CREATE TABLE Reading (
     need_followup   BOOLEAN         NOT NULL,
     app_version     VARCHAR(32)     NOT NULL,
     date_last_saved TIMESTAMP       NOT NULL,
-    date_recheck_vitals_needed TIMESTAMP    NOT NULL,
-    device_info     VARCHAR(32)     NOT NULL,
+    date_recheck_vitals_needed TIMESTAMP,
+    device_info     VARCHAR(128)     NOT NULL,
     gestational_age_unit  ENUM('weeks', 'months', 'none'),
     gestational_age INTEGER,
     manually_changed_OCR_results VARCHAR(16)   NOT NULL,
@@ -146,6 +149,9 @@ CREATE TABLE Reading (
                           'Red_up',
                           'Red_down'),
     diagnosis       TEXT,
+    CONSTRAINT hasValidGestationalAgeUnits CHECK (
+        (gestational_age_unit != 'none' AND gestational_age > 0)
+        ),
     PRIMARY KEY (id),
     FOREIGN KEY (reader_id) REFERENCES User(id) ON DELETE CASCADE,
     FOREIGN KEY (patient_id) REFERENCES Patient(id) ON DELETE CASCADE
