@@ -10,6 +10,8 @@ import {Col, Container, Row, Button, Modal, Form} from 'react-bootstrap';
 import {connect} from "react-redux";
 import FollowUpListTable from "../utils/FollowUpListTable"
 import api from "../../api"
+import ConfirmAlert from "../utils/ConfirmAlert";
+import ErrorAlert from "../utils/ErrorAlert";
 
 class AllFollowUpForm extends React.Component {
     constructor(props) {
@@ -34,7 +36,9 @@ class AllFollowUpForm extends React.Component {
                 treatment: "",
             },
             showModal: false,
-
+            isShowConfirm: false,
+            isShowError: false,
+            message: ""
         };
         this.handleChange = this.handleChange.bind(this);
 
@@ -56,17 +60,52 @@ class AllFollowUpForm extends React.Component {
         })
     }
 
-    addFollowUp = () => {
-        this.setState({
-            ...this.state,
-            showModal: true,
+    handleSubmit = (e) => {
+        api.followUp.addFollowUp(this.state.addData).then(res => {
+            if (res) {
+                this.setState({
+                    ...this.state,
+                    showModal: false,
+                })
+                this.onShowAlert("New Follow Up Added" , true);
+            }
+        }).catch(error => {
+            this.setState({
+                ...this.state,
+                showModal: false,
+            })
+            this.onShowAlert("Failed To Add New Follow Up" , false);
         })
     }
-
-    handleSubmit = (e) => {
-        api.followUp.addFollowUp(this.state.addData).then(res=>{
-            console.log(this.state)
-        })
+    onShowAlert = (message, isConfirm) => {
+        if (isConfirm) {
+            this.setState({
+                    isShowConfirm: true,
+                    message: message
+                },
+                () => {
+                    window.setTimeout(() => {
+                        this.setState({
+                            isShowConfirm: false,
+                            message: message
+                        })
+                        window.location.reload();
+                    }, 2000)
+                });
+        } else {
+            this.setState({
+                    isShowError: true,
+                    message: message
+                },
+                () => {
+                    window.setTimeout(() => {
+                        this.setState({
+                            isShowError: false,
+                            message: message
+                        })
+                    }, 2000)
+                });
+        }
     }
 
 
@@ -97,6 +136,8 @@ class AllFollowUpForm extends React.Component {
                             Add Follow Up
                         </Button>
                     </Col>
+                    <ConfirmAlert show={this.state.isShowConfirm} message={this.state.message}></ConfirmAlert>
+                    <ErrorAlert show={this.state.isShowError} message={this.state.message}></ErrorAlert>
                 </Container>
 
 
