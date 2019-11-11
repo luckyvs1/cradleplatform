@@ -166,6 +166,14 @@ class AddReadingForm extends React.Component {
         }
         let seconds = Math.floor((counter / 1000) % 60);
         let minute = Math.floor((counter / 1000 / 60));
+
+        const MAX_SYSTOLIC = 300;
+        const MIN_SYSTOLIC = 10;
+        const MAX_DIASTOLIC = 300;
+        const MIN_DIASTOLIC = 10;
+        const MAX_HEART_RATE = 300;
+        const MIN_HEART_RATE = 30;
+
         const {data, errors} = this.state;
         return (
             <div>
@@ -230,7 +238,7 @@ class AddReadingForm extends React.Component {
                                             placeholder="Systolic Blood Pressure"
                                             inputRef={el => this.inputEl = el}
                                             value={data.systolicBloodPressure}
-                                            isInvalid={data.systolicBloodPressure < 10 || data.systolicBloodPressure > 300}
+                                            isInvalid={data.systolicBloodPressure < MIN_SYSTOLIC || data.systolicBloodPressure > MAX_SYSTOLIC}
                                             onChange={this.onChange}/>
                                     </Form.Group>
                                 </Col>
@@ -243,7 +251,7 @@ class AddReadingForm extends React.Component {
                                             name="diastolicBloodPressure"
                                             placeholder="Diastolic Blood Pressure"
                                             value={data.diastolicBloodPressure}
-                                            isInvalid={data.diastolicBloodPressure < 10 || data.diastolicBloodPressure > 300}
+                                            isInvalid={data.diastolicBloodPressure < MIN_DIASTOLIC || data.diastolicBloodPressure > MAX_DIASTOLIC}
                                             onChange={this.onChange}/>
                                     </Form.Group>
                                 </Col>
@@ -256,7 +264,7 @@ class AddReadingForm extends React.Component {
                                             name="pulseRate"
                                             placeholder="Heart Rate"
                                             value={data.pulseRate}
-                                            isInvalid={data.pulseRate < 30 || data.pulseRate > 300}
+                                            isInvalid={data.pulseRate < MIN_HEART_RATE || data.pulseRate > MAX_HEART_RATE}
                                             onChange={this.onChange}/>
                                     </Form.Group>
                                 </Col>
