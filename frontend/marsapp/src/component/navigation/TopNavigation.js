@@ -36,6 +36,7 @@ class TopNavigation extends React.Component {
     }
     handleClick(e){
         localStorage.removeItem("loginToken");
+        localStorage.removeItem("loginUserId");
     }
 
     render() {
