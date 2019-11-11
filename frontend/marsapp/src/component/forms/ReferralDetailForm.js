@@ -101,9 +101,8 @@ class ReferralDetailForm extends React.Component {
                 readingData.timestamp = new Date(timestamp).toISOString().substr(0,10);
 
                 this.setState({readingData});
-                console.log(this.state);
 
-                if (readingData.diagnosis == "") {
+                if (this.state.readingData.diagnosis === "") {
                     this.state.errors.requireDiagnosis = "This referral requires a diagnosis response.";
                 }
             });
@@ -164,7 +163,7 @@ class ReferralDetailForm extends React.Component {
                             </Form.Text>
                         </Col>
                         <Col className="text-right">
-                            <Button variant="primary" size="sm" as={Link} to={ {pathname: '/createDiagnosis', state: {readingId: this.state.readingData.id}} }>
+                            <Button variant="primary" size="sm" as={Link} to={ {pathname: '/createDiagnosis', state: {data: this.state.readingData}} }>
                                 Add Diagnosis
                             </Button>
                         </Col>
