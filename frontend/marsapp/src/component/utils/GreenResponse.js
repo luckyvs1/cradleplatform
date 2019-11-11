@@ -14,7 +14,7 @@ const GreenResponse = () => {
                 <div>
                     <div>
                         <strong>OK</strong>
-                        <div id = {"circle"}/>
+                        <div id={"circle"}/>
                     </div>
                 </div>
             </Alert>

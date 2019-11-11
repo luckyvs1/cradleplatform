@@ -45,7 +45,6 @@ ui-header {
 }
 
 
-
 .ui-wrapper {
     display: grid;
     grid-template-rows: auto auto;
@@ -446,8 +445,6 @@ ui-header {
 }
 
 
-
-
 /*
 * handles sidebar menu css
 */
@@ -473,6 +470,7 @@ ui-header {
     font-size: 2em;
     line-height: 60px;
 }
+
 /*
 * handles the three lines button that closes and open the menu
 */
@@ -621,19 +619,20 @@ li a {
     z-index: 1000;
     position: fixed;
     left: 250px;
-    top:56px !important;
+    top: 56px !important;
     width: 50px;
     height: 100%;
     margin-left: -250px;
     overflow-y: auto;
     overflow-x: hidden;
-    background: #343a40!important;
+    background: #343a40 !important;
     transition: all 0.5s ease;
 }
 
-.sidebar-wrapper:hover{
+.sidebar-wrapper:hover {
     width: 240px !important;
 }
+
 #wrapper.toggled .sidebar-wrapper {
     width: 250px;
 }
@@ -645,16 +644,19 @@ li a {
     text-align: center;
     padding: 20px 0;
     z-index: 2000;
-    font-size: 24px!important;
+    font-size: 24px !important;
 
 }
-#menuHeader button{
+
+#menuHeader button {
     margin-left: -295px !important;
     margin-top: -5px !important;
 }
-#menuHeader button h2{
+
+#menuHeader button h2 {
     font-size: 1.5rem !important;
 }
+
 .sidebar-brand h2 {
     margin: 0;
     font-weight: 600;
@@ -673,30 +675,35 @@ li a {
     padding: 0;
     list-style: none;
 }
+
 .sidebar-nav > ul {
     text-indent: 10px;
     line-height: 42px;
     margin-left: -60px !important;
     margin-top: -75px !important;
 }
+
 .sidebar-nav > ul > a {
     display: block;
     text-decoration: none;
     color: #757575 !important;
     font-weight: 600 !important;
-    font-size: 18px!important;
+    font-size: 18px !important;
 }
+
 .sidebar-nav > ul > a:hover,
 .sidebar-nav > ul.active > a {
     text-decoration: none;
     color: #fff !important;
     background: #454b54 !important;
 }
+
 .sidebar-nav > ul > a i.fas {
     font-size: 18px;
     width: 50px;
     padding-right: 50px !important;
 }
+
 .sidebar-nav > ul > div > a {
     font-size: 18px;
     display: block;
@@ -704,22 +711,26 @@ li a {
     color: #757575 !important;
     font-weight: 600 !important;
 }
+
 .dropdown-menu {
 
 }
 
-.navbar>.container {
+.navbar > .container {
     align-content: center !important;
 }
+
 #navbar-wrapper {
     width: 100%;
     position: absolute;
     z-index: 2;
 }
+
 #wrapper.toggled #navbar-wrapper {
     position: absolute;
     margin-right: -250px;
 }
+
 #navbar-wrapper .navbar {
     border-width: 0 0 0 0;
     background-color: #eee;
@@ -727,9 +738,11 @@ li a {
     margin-bottom: 0;
     border-radius: 0;
 }
+
 #navbar-wrapper .navbar a {
     color: #757575;
 }
+
 #navbar-wrapper .navbar a:hover {
     color: #4b5b58;
 }
@@ -740,15 +753,17 @@ li a {
     padding: 15px;
     top: 100px;
 }
+
 #wrapper.toggled #content-wrapper {
     position: absolute;
     margin-right: -250px;
 }
 
 @media (min-width: 992px) {
-    .container{
-        padding-left: 50px!important;
+    .container {
+        padding-left: 50px !important;
     }
+
     #wrapper {
         padding-left: 250px;
     }
@@ -802,7 +817,7 @@ li a {
 
     sidebar-wrapper {
         width: 60px;
-        padding-right: 50px!important;
+        padding-right: 50px !important;
     }
 
     #wrapper.toggled #navbar-wrapper {
@@ -847,6 +862,7 @@ li a {
     #wrapper.toggled sidebar-wrapper {
         width: 250px;
     }
+
     #wrapper.toggled #navbar-wrapper {
         position: absolute;
         margin-right: -250px;
@@ -880,6 +896,7 @@ li a {
 .modal {
     font-size: 12px;
 }
+
 .modal > .header {
     width: 100%;
     border-bottom: 1px solid gray;
@@ -887,16 +904,19 @@ li a {
     text-align: center;
     padding: 5px;
 }
+
 .modal > .content {
     width: 100%;
     padding: 10px 5px;
 }
+
 .modal > .actions {
     width: 100%;
     padding: 10px 5px;
     margin: auto;
     text-align: center;
 }
+
 .modal > .close {
     cursor: pointer;
     position: absolute;
@@ -913,13 +933,14 @@ li a {
 
 
 #success-alert {
-    width:500px !important;
+    width: 500px !important;
     top: 40%;
     left: 35%;
     z-index: 10000 !important;
 }
+
 #error-alert {
-    width:500px !important;
+    width: 500px !important;
     top: 40%;
     left: 35%;
     z-index: 10000 !important;
@@ -948,6 +969,7 @@ li a {
     position: relative;
     margin-left: 31px;
 }
+
 #octagon:before {
     content: "";
     width: 50px;
@@ -959,6 +981,7 @@ li a {
     border-left: 15px solid #ffffff;
     border-right: 15px solid #ffffff;
 }
+
 #octagon:after {
     content: "";
     width: 50px;
@@ -980,7 +1003,7 @@ li a {
     margin-left: 31px;
 }
 
-#triangle{
+#triangle {
     width: 0;
     height: 0;
     border-left: 25px solid transparent;
@@ -990,7 +1013,7 @@ li a {
     margin-left: 31px;
 }
 
-#pat-detail > div.row > div.col > div{
+#pat-detail > div.row > div.col > div {
     padding-right: 50px !important;
     float: right !important;
     display: inline-block;

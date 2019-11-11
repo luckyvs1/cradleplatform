@@ -9,7 +9,7 @@ const RedResponse = ({isUp}) => {
                 <div>
                     <div>
                         <strong>Urgent</strong>
-                        <div id = {"octagon"}/>
+                        <div id={"octagon"}/>
                         <div>
                             {isUp ?
                                 <FaArrowUp id={"arrow"}/> :
