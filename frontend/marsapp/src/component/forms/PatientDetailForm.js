@@ -148,7 +148,22 @@ class PatientDetailForm extends React.Component {
                                     {this.state.patientData.attestationNo}
                                 </div>
                             </Col>
+                            <Col>
+                                <strong>Initials:</strong>
+                                <div>
+                                    {this.state.patientData.initials}
+                                </div>
+                            </Col>
+                            <Col>
+                                <strong>Pregnant:</strong>
+                                <div>
+                                    {this.state.patientData.pregnant === true
+                                        ? "Yes" : "No"}
+                                </div>
+                            </Col>
 
+                        </Row>
+                        <Row>
                             <Col>
                                 <strong>Village Number:</strong>
                                 <div>
@@ -156,25 +171,9 @@ class PatientDetailForm extends React.Component {
                                 </div>
                             </Col>
                             <Col>
-                                <strong>Pregnant:</strong>
+                                <strong>Age:</strong>
                                 <div>
-                                    {this.state.patientData.pregnant}
-                                </div>
-                            </Col>
-
-                        </Row>
-                        <Row>
-                            <Col>
-                                <strong>Initials: </strong>
-                                <div>
-                                    {this.state.patientData.initials}
-                                </div>
-                            </Col>
-
-                            <Col>
-                                <strong>Zone Number:</strong>
-                                <div>
-                                    {this.state.patientData.zoneNo}
+                                    {this.state.patientData.age}
                                 </div>
                             </Col>
                             <Col>
@@ -186,21 +185,21 @@ class PatientDetailForm extends React.Component {
                         </Row>
                         <Row className="mb-4">
                             <Col>
-                                <strong>Age:</strong>
+                                <strong>Sex:</strong>
                                 <div>
-                                    {this.state.patientData.age}
+                                    {this.state.patientData.sexFull}
+                                </div>
+                            </Col>
+                            <Col>
+                                <strong>Zone Number:</strong>
+                                <div>
+                                    {this.state.patientData.zoneNo}
                                 </div>
                             </Col>
                             <Col>
                                 <strong>Date of Birth:</strong>
                                 <div>
                                     {this.state.patientData.dob}
-                                </div>
-                            </Col>
-                            <Col>
-                                <strong>Sex:</strong>
-                                <div>
-                                    {this.state.patientData.sexFull}
                                 </div>
                             </Col>
                         </Row>
@@ -261,13 +260,11 @@ class PatientDetailForm extends React.Component {
                                 </table>
                             </div>
                             <Row>
-                                <Col/>
-                                <Col/>
                                 <Col className={"text-right"}>
                                     <Button variant="success" size="sm" as={Link} to="addReadingDetail">New
                                         Reading</Button>&nbsp;
                                     <Button variant="primary" size="sm">View List</Button>&nbsp;
-                                    <GraphDialog></GraphDialog>
+                                    <GraphDialog></GraphDialog>&nbsp;
                                 </Col>
                             </Row>
                         </Tab>
@@ -291,31 +288,42 @@ class PatientDetailForm extends React.Component {
                             </Row>
                         </Tab>
                         <Tab eventKey="drug_history" title="Drug History">
-                            <Table bordered hover size="sm">
-                                <thead>
-                                <th>Start Date</th>
-                                <th>End Date</th>
-                                <th>Drug</th>
-                                <th>Dosage</th>
-                                <th>Side Effects</th>
-                                </thead>
-                                <tbody>
-                                <tr>
-                                    <td>2019/02/02</td>
-                                    <td> -</td>
-                                    <td>drugname1</td>
-                                    <td>1 tablet twice a day</td>
-                                    <td>Sleepiness</td>
-                                </tr>
-                                <tr>
-                                    <td>2018/12/02</td>
-                                    <td>2019/01/22</td>
-                                    <td>drugname2</td>
-                                    <td>1 tablet twice a day</td>
-                                    <td>None</td>
-                                </tr>
-                                </tbody>
-                            </Table>
+                            <div className="table-wrapper-scroll-y my-custom-scrollbar rtc"
+                                 scrollbarStyle={{
+                                     background: {backgroundColor: "transparent"},
+                                     backgroundFocus: {backgroundColor: "#f0f0f0"},
+                                     foreground: {backgroundColor: "#e2e2e2"},
+                                     foregroundFocus: {backgroundColor: "#acacac"}
+                                 }}>
+                                <table className="table table-bordered">
+                                    <thead>
+                                    <th scope="col">Current Drug</th>
+                                    <th scope="col">Start Date</th>
+                                    <th scope="col">End Date</th>
+                                    <th scope="col">Drug</th>
+                                    <th scope="col">Dosage</th>
+                                    <th scope="col">Side Effects</th>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td>Yes</td>
+                                        <td>2019/02/02</td>
+                                        <td> -</td>
+                                        <td>drugname1</td>
+                                        <td>1 tablet twice a day</td>
+                                        <td>Sleepiness</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Yes</td>
+                                        <td>2018/12/02</td>
+                                        <td>2019/01/22</td>
+                                        <td>drugname2</td>
+                                        <td>1 tablet twice a day</td>
+                                        <td>None</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
                             <Row>
                                 <Col>
                                     <Form.Group>
@@ -333,24 +341,6 @@ class PatientDetailForm extends React.Component {
                                     </Button>
                                 </Col>
                             </Row>
-                        </Tab>
-                        <Tab eventKey="current_medication" title="Current Medication">
-                            <Table bordered hover size="sm">
-                                <thead>
-                                <th>Start Date</th>
-                                <th>Drug</th>
-                                <th>Dosage</th>
-                                <th>Side Effects</th>
-                                </thead>
-                                <tbody>
-                                <tr>
-                                    <td>2019/02/02</td>
-                                    <td>drugname1</td>
-                                    <td>1 tablet twice a day</td>
-                                    <td>Sleepiness</td>
-                                </tr>
-                                </tbody>
-                            </Table>
                         </Tab>
                         <Tab eventKey="follow_ups" title="Follow Ups">
                             <div className="table-wrapper-scroll-y my-custom-scrollbar rtc"
@@ -373,7 +363,7 @@ class PatientDetailForm extends React.Component {
                                     <tbody>
                                     {this.state.followUpData.map(row => (
                                         <tr key={row.id}>
-                                            <td>  {row.required === "1" ?
+                                            <td>  {row.required === true ?
                                                     "Follow Up Required" : "Follow Up Not Required"}
                                             </td>
                                             <td> {row.frequency} </td>
