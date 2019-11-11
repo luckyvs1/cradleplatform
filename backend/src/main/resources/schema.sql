@@ -182,7 +182,7 @@ CREATE TABLE Monitor (
 insert into User values ('1', 'VHT_user', 'password123');
 insert into User values ('2', 'HealthWorker', 'password123');
 insert into User values ('3', 'Admin_user', 'password123');
-insert into User values ('4', 'justTesting', 'customerTesting');
+insert into User values ('4', 'customerTesting', 'justTesting');
 
 insert into User_Info values ('1',
                               'Bob',
@@ -248,9 +248,9 @@ insert into Reading values (1,
                             '2019-10-24',
                             ('Bleeding'),
                             'Confusion',
-                            118,
-                            78,
-                            180,
+                            135,
+                            85,
+                            117,
                             'Good vitals',
                             False,
                             'CradlePlatform1.0',

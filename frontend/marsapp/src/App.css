@@ -44,7 +44,6 @@ ui-header {
     text-align: center;
 }
 
-
 .ui-wrapper {
     display: grid;
     grid-template-rows: auto auto;
@@ -470,7 +469,6 @@ ui-header {
     font-size: 2em;
     line-height: 60px;
 }
-
 /*
 * handles the three lines button that closes and open the menu
 */
@@ -619,7 +617,7 @@ li a {
     z-index: 1000;
     position: fixed;
     left: 250px;
-    top: 56px !important;
+    top:0px !important;
     width: 50px;
     height: 100%;
     margin-left: -250px;
@@ -632,7 +630,6 @@ li a {
 .sidebar-wrapper:hover {
     width: 240px !important;
 }
-
 #wrapper.toggled .sidebar-wrapper {
     width: 250px;
 }
@@ -647,16 +644,16 @@ li a {
     font-size: 24px !important;
 
 }
-
-#menuHeader button {
+#menuHeader{
+    z-index: 1001 !important;
+}
+#menuHeader button{
     margin-left: -295px !important;
     margin-top: -5px !important;
 }
-
 #menuHeader button h2 {
     font-size: 1.5rem !important;
 }
-
 .sidebar-brand h2 {
     margin: 0;
     font-weight: 600;
@@ -669,20 +666,18 @@ li a {
 
 .sidebar-nav {
     position: absolute;
-    top: 75px;
+    top: 125px;
     width: 250px;
     margin: 0;
     padding: 0;
     list-style: none;
 }
-
 .sidebar-nav > ul {
     text-indent: 10px;
     line-height: 42px;
     margin-left: -60px !important;
     margin-top: -75px !important;
 }
-
 .sidebar-nav > ul > a {
     display: block;
     text-decoration: none;
@@ -690,20 +685,17 @@ li a {
     font-weight: 600 !important;
     font-size: 18px !important;
 }
-
 .sidebar-nav > ul > a:hover,
 .sidebar-nav > ul.active > a {
     text-decoration: none;
     color: #fff !important;
     background: #454b54 !important;
 }
-
 .sidebar-nav > ul > a i.fas {
     font-size: 18px;
     width: 50px;
     padding-right: 50px !important;
 }
-
 .sidebar-nav > ul > div > a {
     font-size: 18px;
     display: block;
@@ -711,7 +703,6 @@ li a {
     color: #757575 !important;
     font-weight: 600 !important;
 }
-
 .dropdown-menu {
 
 }
@@ -719,18 +710,18 @@ li a {
 .navbar > .container {
     align-content: center !important;
 }
-
+.navbar{
+    background-color: white !important;
+}
 #navbar-wrapper {
     width: 100%;
     position: absolute;
     z-index: 2;
 }
-
 #wrapper.toggled #navbar-wrapper {
     position: absolute;
     margin-right: -250px;
 }
-
 #navbar-wrapper .navbar {
     border-width: 0 0 0 0;
     background-color: #eee;
@@ -738,11 +729,9 @@ li a {
     margin-bottom: 0;
     border-radius: 0;
 }
-
 #navbar-wrapper .navbar a {
     color: #757575;
 }
-
 #navbar-wrapper .navbar a:hover {
     color: #4b5b58;
 }
@@ -753,7 +742,6 @@ li a {
     padding: 15px;
     top: 100px;
 }
-
 #wrapper.toggled #content-wrapper {
     position: absolute;
     margin-right: -250px;
@@ -763,7 +751,6 @@ li a {
     .container {
         padding-left: 50px !important;
     }
-
     #wrapper {
         padding-left: 250px;
     }
@@ -862,7 +849,6 @@ li a {
     #wrapper.toggled sidebar-wrapper {
         width: 250px;
     }
-
     #wrapper.toggled #navbar-wrapper {
         position: absolute;
         margin-right: -250px;
@@ -896,7 +882,6 @@ li a {
 .modal {
     font-size: 12px;
 }
-
 .modal > .header {
     width: 100%;
     border-bottom: 1px solid gray;
@@ -904,19 +889,16 @@ li a {
     text-align: center;
     padding: 5px;
 }
-
 .modal > .content {
     width: 100%;
     padding: 10px 5px;
 }
-
 .modal > .actions {
     width: 100%;
     padding: 10px 5px;
     margin: auto;
     text-align: center;
 }
-
 .modal > .close {
     cursor: pointer;
     position: absolute;
@@ -932,18 +914,46 @@ li a {
 }
 
 
+#submit-reading-btn{
+    position: center;
+}
+
 #success-alert {
     width: 500px !important;
+    left: 25% !important;
+    width: calc(100% - 50%) !important;
     top: 40%;
-    left: 35%;
+    z-index: 10000 !important;
+}
+#reading-response {
+    left: 25% !important;
+    width: calc(100% - 50%) !important;
+    top: 100%;
+    z-index: 10000 !important;
+}
+#advice-response {
+    left: 25% !important;
+    width: calc(100% - 50%) !important;
+    top: 100%;
+    text-align: center!important;
     z-index: 10000 !important;
 }
 
 #error-alert {
-    width: 500px !important;
-    top: 40%;
-    left: 35%;
+    left: 25% !important;
+    width: calc(100% - 50%) !important;
+    top: 100%;
     z-index: 10000 !important;
+}
+#arrow {
+    width: 3rem !important;
+    height: 3rem !important;
+    color: #010102 !important;
+}
+
+#circle-arrow {
+    width: 7rem !important;
+    height: 7rem !important;
 }
 
 .rtc {
