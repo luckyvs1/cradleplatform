@@ -1021,10 +1021,6 @@ li a {
     font-family: "Helvetica Neue", sans-serif;
 }
 
-#reading-response {
-    padding: 0px !important;
-}
-
 #warning-shift {
     margin-left: -4px !important;
 }
@@ -1059,4 +1055,8 @@ li a {
     border-top-left-radius: .25rem;
     border-top-right-radius: .25rem;
     color: #000000;
+}
+
+.table td, .table th {
+    text-align: center !important;
 }

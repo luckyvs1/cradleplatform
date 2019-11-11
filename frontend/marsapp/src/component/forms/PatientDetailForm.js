@@ -54,8 +54,6 @@ class PatientDetailForm extends React.Component {
         const pid = this.props.location.state.pid;
 
         api.patient.getPatientById({id: pid}).then(res => {
-            console.log("get patient id", res);
-
             const patientData = res.data;
 
             if (patientData.sex === 'F') {
@@ -71,8 +69,6 @@ class PatientDetailForm extends React.Component {
         });
 
         api.reading.getReadingForPatient({patient_id: pid, latest: false}).then(async res => {
-            console.log("get reading id", res);
-
             const readingData = res.data;
             let newState = [];
 
@@ -106,8 +102,6 @@ class PatientDetailForm extends React.Component {
         });
 
         api.followUp.getFollowUpByPatientId({patient_id: pid, latest: false}).then(async res => {
-            console.log("get follow up", res);
-
             const followUpData = res.data;
             let newState = [];
 
@@ -286,6 +280,24 @@ class PatientDetailForm extends React.Component {
                                     </Button>
                                 </Col>
                             </Row>
+                        </Tab>
+                        <Tab eventKey="current_medication" title="Current Medication">
+                            <Table bordered hover size="sm">
+                                <thead>
+                                <th>Start Date</th>
+                                <th>Drug</th>
+                                <th>Dosage</th>
+                                <th>Side Effects</th>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>2019/02/02</td>
+                                    <td>drugname1</td>
+                                    <td>1 tablet twice a day</td>
+                                    <td>Sleepiness</td>
+                                </tr>
+                                </tbody>
+                            </Table>
                         </Tab>
                         <Tab eventKey="drug_history" title="Drug History">
                             <div className="table-wrapper-scroll-y my-custom-scrollbar rtc"
