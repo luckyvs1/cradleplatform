@@ -22,10 +22,7 @@ class CreateDiagnosisForm extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-            data: {
-                readingId: this.props.location.state.readingId,
-                diagnosis: ""
-            },
+            data: this.props.location.state.data,
             errors: {}
         };
         this.onChange = this.onChange.bind(this);
@@ -54,7 +51,8 @@ class CreateDiagnosisForm extends React.Component {
         this.setState({errors}); //if there are errors returned, display them
 
         if(Object.keys(errors).length === 0){ //if no errors
-            // api.user.createUser(this.state.userData, config)
+            console.log(this.state.data);
+            // api.reading.updateAReading(this.state.data)
             //     .catch(error => {
             //         console.log("createDiagnosis error ", error.message);
             //     });
@@ -63,10 +61,13 @@ class CreateDiagnosisForm extends React.Component {
 
     validate = (state) => {
         const errors = {};
-        const emptyWarning = "Field cannot be blank";
 
         if(!state.data.diagnosis) {
-            errors.diagnosis = emptyWarning;
+            errors.diagnosis = "Field cannot be blank";
+        }
+
+        if(!state.data.id || (state.data.id == 0)) {
+            errors.noReadingId = "Cannot find target reading or referral for the diagnosis";
         }
 
         return errors;
@@ -87,6 +88,7 @@ class CreateDiagnosisForm extends React.Component {
                     <Form onSubmit={this.onSubmit}>
                         <Row>
                             <Col>
+                                {errors.noReadingId && <InlineError text={errors.noReadingId}/>}
                                 <Form.Row>
                                     <Form.Group as={Col}>
                                         <Form.Label>Diagnosis</Form.Label>
