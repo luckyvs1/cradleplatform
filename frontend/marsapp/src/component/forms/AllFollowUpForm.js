@@ -9,6 +9,7 @@ import TopNavigation from "../navigation/TopNavigation";
 import {Col, Container, Row, Button, Modal, Form} from 'react-bootstrap';
 import {connect} from "react-redux";
 import FollowUpListTable from "../utils/FollowUpListTable"
+import api from "../../api"
 
 class AllFollowUpForm extends React.Component {
     constructor(props) {
@@ -63,8 +64,9 @@ class AllFollowUpForm extends React.Component {
     }
 
     handleSubmit = (e) => {
-
-        console.log(this.state)
+        api.followUp.addFollowUp(this.state.addData).then(res=>{
+            console.log(this.state)
+        })
     }
 
 
