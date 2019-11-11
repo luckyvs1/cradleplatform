@@ -256,7 +256,7 @@ class AddReadingForm extends React.Component {
                                             name="pulseRate"
                                             placeholder="Heart Rate"
                                             value={data.pulseRate}
-                                            isInvalid={data.pulseRate < 40 || data.pulseRate > 200}
+                                            isInvalid={data.pulseRate < 30 || data.pulseRate > 300}
                                             onChange={this.onChange}/>
                                     </Form.Group>
                                 </Col>
