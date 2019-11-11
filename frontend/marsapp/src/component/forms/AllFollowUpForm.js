@@ -4,21 +4,16 @@
  *  Contains the contents and functionality of the FollowUp page.
  */
 
-import React from "react";
-import {makeStyles} from "@material-ui/core";
-import {Link} from "react-router-dom";
+import React, {useState} from "react";
 import TopNavigation from "../navigation/TopNavigation";
-import PropTypes from "prop-types";
-import {
-    Container,
-    Row,
-    Col,
-    Table
-} from 'react-bootstrap';
+import {Button, Col, Container, Form, Modal, Row} from 'react-bootstrap';
 import {connect} from "react-redux";
 import FollowUpListTable from "../utils/FollowUpListTable"
+import InlineError from "../messages/InlineError";
 
 class AllFollowUpForm extends React.Component {
+
+
     constructor(props) {
         super(props);
         this.state = {
@@ -31,10 +26,26 @@ class AllFollowUpForm extends React.Component {
                 required: null,
                 treatment: "",
             }],
+            showModal: false,
+
+
         };
     }
 
+    addFollowUp = () => {
+        this.setState({
+            ...this.state,
+            showModal:true,
+        })
+    }
+
     render() {
+        const handleClose = () => {
+            this.setState({
+                ...this.state,
+                showModal:false,
+            })
+        };
         return (
             <div>
                 <TopNavigation authenticated={true}></TopNavigation>
@@ -47,10 +58,33 @@ class AllFollowUpForm extends React.Component {
                     </Row>
                     <Row>
                         <Col>
-                            <FollowUpListTable />
+                            <FollowUpListTable/>
                         </Col>
                     </Row>
+                    <Col className="text-right">
+                        <Button variant="primary" onClick={this.addFollowUp}>
+                            Add Follow Up
+                        </Button>
+                    </Col>
                 </Container>
+
+
+                <Modal show={this.state.showModal} onHide={handleClose} animation={false}>
+                    <Modal.Header closeButton>
+                        <Modal.Title>Add New Follow Up </Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <Button variant="secondary" onClick={handleClose}>
+                            Close
+                        </Button>
+                        <Button variant="primary">
+                            Save Changes
+                        </Button>
+                    </Modal.Footer>
+                </Modal>
             </div>
         );
     }
