@@ -21,8 +21,8 @@ public class ReadingService {
     public static final int MIN_SYSTOLIC = 10;
     public static final int MAX_DIASTOLIC = 300;
     public static final int MIN_DIASTOLIC = 10;
-    public static final int MAX_HEART_RATE = 200;
-    public static final int MIN_HEART_RATE = 40;
+    public static final int MAX_HEART_RATE = 300;
+    public static final int MIN_HEART_RATE = 30;
 
     // Analysis Functions
     public static Boolean isValidTrafficLight(@NotNull Reading reading) {

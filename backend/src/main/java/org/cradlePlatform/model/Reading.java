@@ -46,7 +46,7 @@ public class Reading {
 	@Column(name = "diastolic_bp")
 	private int diastolicBloodPressure;
 
-	@Range(min = 40, max = 200)
+	@Range(min = 30, max = 300)
 	@Column(name = "pulse_rate")
 	private int pulseRate;
 
