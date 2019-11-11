@@ -15,7 +15,7 @@ const store = createStore(
     composeWithDevTools(applyMiddleware(thunk))
 );
 
-if(localStorage.getItem('loginToken')){
+if (localStorage.getItem('loginToken')){
     auth.setAuth();
 }
 
