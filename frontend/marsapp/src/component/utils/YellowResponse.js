@@ -10,8 +10,8 @@ const YellowResponse = ({isUp}) => {
                     <div id={'triangle'} className={"text-center"}/>
                     <div className={"text-center"}>
                         {isUp ?
-                            <FaArrowUp id={"arrow"}/> :
-                            <FaArrowDown id={"arrow"}/>
+                            <FaArrowUp id={"reading-table-response-arrow"}/> :
+                            <FaArrowDown id={"reading-table-response-arrow"}/>
                         }
                     </div>
                 </div>
