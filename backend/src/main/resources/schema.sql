@@ -86,6 +86,9 @@ CREATE TABLE Medication (
     dosage          VARCHAR (32)    NOT NULL,
     start_date      DATE            NOT NULL,
     end_date        DATE,
+    CONSTRAINT isEndDateValid  CHECK (
+            (end_date IS NULL OR end_date >= start_date)
+        ),
     PRIMARY KEY (id),
     FOREIGN KEY (drug_history_id) REFERENCES Drug_History(id) ON DELETE CASCADE
 );
