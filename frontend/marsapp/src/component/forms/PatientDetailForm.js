@@ -62,8 +62,8 @@ class PatientDetailForm extends React.Component {
                 patientData.sexFull = 'Male';
             }
 
-            patientData.dob = new Date(patientData.dob).toLocaleDateString();
-            patientData.gestationalStartDate = new Date(patientData.gestationalStartDate).toLocaleDateString();
+            patientData.dob = this.formatDate(patientData.dob);
+            patientData.gestationalStartDate = this.formatDate(patientData.gestationalStartDate)
 
             this.setState({patientData})
         });
@@ -77,11 +77,7 @@ class PatientDetailForm extends React.Component {
                     id: readingData[i].id,
                     readerId: readingData[i].readerId,
                     patientId: readingData[i].patientId,
-                    timestamp: new Date(readingData[i].timestamp).toLocaleDateString(undefined, {
-                        day: '2-digit',
-                        month: '2-digit',
-                        year: 'numeric',
-                    }),
+                    timestamp: this.formatDate(new Date(readingData[i].timestamp)),
                     symptoms: readingData[i].symptoms.replace(/,/g, ', '),
                     otherSymptoms: readingData[i].otherSymptoms,
                     systolicBloodPressure: readingData[i].systolicBloodPressure,
@@ -121,6 +117,20 @@ class PatientDetailForm extends React.Component {
 
             this.setState({followUpData: newState})
         });
+    }
+
+    formatDate = date =>{
+        let d = new Date(date),
+            month = '' + (d.getMonth() + 1),
+            day = '' + d.getDate(),
+            year = d.getFullYear();
+
+        if (month.length < 2)
+            month = '0' + month;
+        if (day.length < 2)
+            day = '0' + day;
+
+        return [year, month, day].join('-');
     }
 
     render() {
@@ -291,7 +301,7 @@ class PatientDetailForm extends React.Component {
                                 </thead>
                                 <tbody>
                                 <tr>
-                                    <td>2019/02/02</td>
+                                    <td>2019-02-02</td>
                                     <td>drugname1</td>
                                     <td>1 tablet twice a day</td>
                                     <td>Sleepiness</td>
@@ -319,17 +329,17 @@ class PatientDetailForm extends React.Component {
                                     <tbody>
                                     <tr>
                                         <td>Yes</td>
-                                        <td>2019/02/02</td>
-                                        <td> -</td>
-                                        <td>drugname1</td>
+                                        <td>2019-02-02</td>
+                                        <td> - </td>
+                                        <td>Vicodin</td>
                                         <td>1 tablet twice a day</td>
                                         <td>Sleepiness</td>
                                     </tr>
                                     <tr>
                                         <td>Yes</td>
-                                        <td>2018/12/02</td>
-                                        <td>2019/01/22</td>
-                                        <td>drugname2</td>
+                                        <td>2018-12-02</td>
+                                        <td>2019-01-22</td>
+                                        <td>Synthroid</td>
                                         <td>1 tablet twice a day</td>
                                         <td>None</td>
                                     </tr>
