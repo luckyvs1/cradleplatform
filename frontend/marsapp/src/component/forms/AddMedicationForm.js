@@ -122,7 +122,7 @@ class AddMedicationForm extends React.Component {
                             <Form.Group as={Col}>
                                 <Form.Control
                                     type="number"
-                                    min="0"
+                                    min="1"
                                     id="dose"
                                     autofocus="autofocus"
                                     name="dose"
@@ -144,7 +144,7 @@ class AddMedicationForm extends React.Component {
                             <Form.Group as={Col}>
                                 <Form.Control
                                     type="number"
-                                    min = "0"
+                                    min = "1"
                                     autofocus="autofocus"
                                     id="times_per_day"
                                     name="times_per_day"
@@ -179,6 +179,7 @@ class AddMedicationForm extends React.Component {
                                     showYearDropdown
                                     dropdownMode="select"
                                     dateFormat="yyyy-MM-dd"
+                                    minDate={new Date()}
                                     onChange={this.onChangeEnd}
                                 />
                             </Form.Group>
