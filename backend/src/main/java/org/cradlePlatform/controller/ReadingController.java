@@ -88,6 +88,28 @@ public class ReadingController {
         }
     }
 
+    /**
+     * Add a Diagnosis text to an existing Reading with matching id in the db.
+     * @param id id of Reading to edit
+     * @param diagnosis String with diagnosis text to add to reading
+     * @return 200 if success, 404 if no matching id
+     */
+    @PutMapping(path="/api/readings/{id}/diagnosis")
+    public @ResponseBody ResponseEntity<String> editDiagnosis(@PathVariable(value="id") int id, @RequestBody String diagnosis) {
+        Optional<Reading> fetchedReadingOptional = readingRepository.findById(id);
+        if (fetchedReadingOptional.isPresent()) {
+            Reading fetchedReading = fetchedReadingOptional.get();
+
+            fetchedReading.setDiagnosis(diagnosis);
+            readingRepository.save(fetchedReading);
+            String responseMsg = "Added diagnosis to Reading #" + id;
+            return new ResponseEntity<String>(responseMsg, HttpStatus.OK);
+        } else {
+            String responseMsg = "Reading with id " + id + " not found";
+            return new ResponseEntity<String>(responseMsg, HttpStatus.NOT_FOUND);
+        }
+    }
+
     @GetMapping(path="/api/readings")
     public Iterable<Reading> getAllReadings() {
         return readingRepository.findAll();
