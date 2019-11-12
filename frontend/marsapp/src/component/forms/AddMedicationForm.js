@@ -61,7 +61,6 @@ class AddMedicationForm extends React.Component {
         event.preventDefault();
         const errors = this.validate(this.state.data, this.state.dosage_edit);
         this.setState({errors});
-        console.log("Frequency: " +this.state.dosage_edit.frequency);
         var dosageText = this.state.dosage_edit.dose + " " + this.state.dosage_edit.unit + " " + this.state.dosage_edit.times + " " + this.state.dosage_edit.frequency;
         this.state.data.dosage = dosageText;
         if(Object.keys(errors).length === 0){
@@ -154,7 +153,7 @@ class AddMedicationForm extends React.Component {
                                 {errors.times && <InlineError text={errors.times}/>}
                             </Form.Group>
                             <Form.Group as={Col}>
-                                <Form.Control as="select" id="frequency" name="frequency" onChange={this.onChange} value={dosage_edit.frequency}>
+                                <Form.Control as="select" id="frequency" name="frequency" onChange={this.onChangeDose} value={dosage_edit.frequency}>
                                     <option value={"times per day"}>times per day</option>
                                     <option value={"times per week"}>times per week</option>
                                     <option value={"times per month"}>times per month</option>
