@@ -59,11 +59,9 @@ CREATE TABLE Patient (
     gestational_start_date DATE,
     gestational_age_unit  ENUM('weeks', 'months', 'none'),
     current_gestational_age       INTEGER,
-    CONSTRAINT isPregnant CHECK (
+    CONSTRAINT hasValidPregnantValue CHECK (
             (pregnant IS TRUE AND current_gestational_age > 0 AND gestational_age_unit != 'none')
-        ),
-    CONSTRAINT isNotPregnant CHECK (
-            (pregnant IS FALSE AND current_gestational_age = 0 AND gestational_age_unit = 'none')
+            OR (pregnant IS FALSE AND current_gestational_age = 0 AND gestational_age_unit = 'none')
         ),
     CONSTRAINT hasValidAttestationNumberOrName CHECK (
             (attestation_no IS NOT NULL) OR
