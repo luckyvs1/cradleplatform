@@ -29,15 +29,22 @@ class AddMedicationForm extends React.Component {
                    drug_name: "",
                    dosage: "",
                    start_date : new Date(),
-                   end_date : null
+                   end_date : null,
+                   notes: ""
                 },
                 dosage_edit:{
                     dose: "",
                     unit: "",
-                    times_per_day: ""
+                    times: "",
+                    frequency: ""
                 },
                 errors: {}
             };
+            this.onChange = this.onChange.bind(this);
+            this.onChangeDose = this.onChangeDose.bind(this);
+            this.onSubmit = this.onSubmit.bind(this);
+            this.onChangeStart = this.onChangeStart.bind(this);
+            this.onChangeEnd = this.onChangeEnd.bind(this);
         }
     onChange = e => this.setState({data: {...this.state.data, [e.target.name]: e.target.value} });
     onChangeDose = e => this.setState({dosage_edit: {...this.state.dosage_edit, [e.target.name]: e.target.value} });
@@ -54,11 +61,10 @@ class AddMedicationForm extends React.Component {
         event.preventDefault();
         const errors = this.validate(this.state.data, this.state.dosage_edit);
         this.setState({errors});
-        var dosageText = this.state.dosage_edit.dose + " " + this.state.dosage_edit.unit + " " + this.state.dosage_edit.times_per_day + " times per day";
+        console.log("Frequency: " +this.state.dosage_edit.frequency);
+        var dosageText = this.state.dosage_edit.dose + " " + this.state.dosage_edit.unit + " " + this.state.dosage_edit.times + " " + this.state.dosage_edit.frequency;
         this.state.data.dosage = dosageText;
         if(Object.keys(errors).length === 0){
-            //console.log(this.state.data);
-            //console.log(this.state.dosage_edit);
             this.props.submit(this.state.data);
         }
     };
@@ -69,7 +75,7 @@ class AddMedicationForm extends React.Component {
         if(!data.drug_name) errors.drug_name = emptyWarning;
         if(!dosage_edit.dose) errors.dose = emptyWarning;
         if(!dosage_edit.unit) errors.unit = emptyWarning;
-        if(!dosage_edit.times_per_day) errors.times_per_day = emptyWarning;
+        if(!dosage_edit.times) errors.times = emptyWarning;
         if(data.start_date == "") errors.start_date = emptyWarning;
         return errors;
     }
@@ -78,17 +84,13 @@ class AddMedicationForm extends React.Component {
         //the app since it doesn't know where to get the patient_id from. This should resolve it.
         try{
             const pid = this.props.location.medication.pid;
-            console.log("Patient pid is " + pid);
             api.drug.getDrugHistoryByPatientId({patient_id: pid}).then(res => {
-                console.log("Drug History ID for Patient ID " + pid + " is " + res.data[0].id);
                 this.state.data.drug_history_id = res.data[0].id;
                 localStorage.setItem('drug_history_id', JSON.stringify(res.data[0].id));
             });
         }
         catch(exception){
             this.state.data.drug_history_id = JSON.parse(localStorage.getItem('drug_history_id'));
-            //console.log("Use local storage: " + JSON.parse(localStorage.getItem('drug_history_id')));
-            //console.log("Drug history:" + this.state.data.drug_history_id);
         }
 
     }
@@ -124,7 +126,6 @@ class AddMedicationForm extends React.Component {
                                     type="number"
                                     min="1"
                                     id="dose"
-                                    autofocus="autofocus"
                                     name="dose"
                                     placeholder="Enter dose (positive number only)"
                                     value={dosage_edit.dose}
@@ -145,13 +146,19 @@ class AddMedicationForm extends React.Component {
                                 <Form.Control
                                     type="number"
                                     min = "1"
-                                    autofocus="autofocus"
-                                    id="times_per_day"
-                                    name="times_per_day"
-                                    placeholder="How many times per day? (positive no. only)"
-                                    value={dosage_edit.times_per_day}
+                                    id="times"
+                                    name="times"
+                                    placeholder="How often? (positive no. only)"
+                                    value={dosage_edit.times}
                                     onChange={this.onChangeDose}/>
-                                {errors.times_per_day && <InlineError text={errors.times_per_day}/>}
+                                {errors.times && <InlineError text={errors.times}/>}
+                            </Form.Group>
+                            <Form.Group as={Col}>
+                                <Form.Control as="select" id="frequency" name="frequency" onChange={this.onChange} value={dosage_edit.frequency}>
+                                    <option value={"times per day"}>times per day</option>
+                                    <option value={"times per week"}>times per week</option>
+                                    <option value={"times per month"}>times per month</option>
+                                </Form.Control>
                             </Form.Group>
                         </Form.Row>
                         <Form.Row>
@@ -165,6 +172,7 @@ class AddMedicationForm extends React.Component {
                                     showYearDropdown
                                     dropdownMode="select"
                                     dateFormat="yyyy-MM-dd"
+                                    minDate={new Date()}
                                     onChange={this.onChangeStart}
                                 />
                                 {errors.start_date && <InlineError text={errors.start_date}/>}
@@ -184,6 +192,17 @@ class AddMedicationForm extends React.Component {
                                 />
                             </Form.Group>
                         </Form.Row>
+                        <Form.Group>
+                            <Form.Label>Medication Notes</Form.Label>
+                            <Form.Control
+                                as="textarea"
+                                rows="4"
+                                id="notes"
+                                name="notes"
+                                placeholder="Enter your notes here..."
+                                value={data.notes}
+                                onChange={this.onChange}/>
+                        </Form.Group>
                         <Form.Row style={{float: 'right'}}>
                             <Button primary type="submit" >Create</Button>
                         </Form.Row>
