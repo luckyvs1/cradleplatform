@@ -6,18 +6,21 @@ import ErrorAlert from "../../utils/ErrorAlert";
 import ConfirmAlert from "../../utils/ConfirmAlert";
 import api from "../../../api";
 class AddMedicationDetail extends React.Component {
+
     state = {
         isShowError: false,
         isShowConfirm: false,
         message: "",
     }
+
     submit = (data) => {
         var formattedData = {
            drugHistoryId: data.drug_history_id,
            drugName: data.drug_name,
            dosage: data.dosage,
            startDate: data.start_date,
-           endDate: data.end_date
+           endDate: data.end_date,
+           medicationNotes: data.notes
         };
         if(formattedData.startDate != null)
             formattedData.startDate = this.formatDate(formattedData.startDate);
@@ -28,6 +31,7 @@ class AddMedicationDetail extends React.Component {
         }).catch(error => {this.onShowAlert(error.response.data)})
 
     }
+
     onShowAlert = (message, error, confirm) => {
         this.setState({
             ...this.state,
@@ -44,12 +48,14 @@ class AddMedicationDetail extends React.Component {
             }, 2000)
         });
     }
+
     formatDate = date =>{
         function pad(num){ return ('00'+num).slice(-2) };
         return  date.getUTCFullYear()        + '-' +
-                pad(date.getUTCMonth() + 1) + '-' +
+                pad(date.getUTCMonth() + 1)  + '-' +
                 pad(date.getUTCDate());
     }
+
     render() {
         return (
         <div>
