@@ -294,8 +294,8 @@ public class Reading {
 		this.uploadImages = uploadImages;
 	}
 
-	public VitalsTrafficLight getVitalsTrafficLight() {
-		return vitalsTrafficLight;
+	public String getVitalsTrafficLight() {
+		return VitalsTrafficLight.getVitalsTrafficLightText(vitalsTrafficLight);
 	}
 
 	public void setVitalsTrafficLight(VitalsTrafficLight vitalsTrafficLight) {
