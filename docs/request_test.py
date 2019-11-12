@@ -22,6 +22,9 @@ readingurl = "http://localhost:8080/api/readings-multi"
 hcrefurl = "http://localhost:8080/api/health-centre/healthfacility21/referrals"
 medbypatienturl = "http://localhost:8080/api/patients/1/medications"
 readingInitialsAgeUrl = "http://localhost:8080/api/patientInfoReadings"
+addDiagnosisUrl = "http://localhost:8080/api/readings/1/diagnosis"
+diagnosisText = "The patient seems healthy and should come back for checkups."
+
 mhdata = {
     "patientId": "1",
     "medicalHistoryText": "gfhgfhfghffssss",
@@ -157,7 +160,8 @@ readingdata =  {
 # resp = requests.post(readingurl, data=json.dumps(readingdata), headers=header)
 # resp = requests.get(hcrefurl, headers=header)
 # resp = requests.get(medbypatienturl, headers=header)
-resp = requests.get(readingInitialsAgeUrl, headers=header)
+# resp = requests.get(readingInitialsAgeUrl, headers=header)
+resp = requests.put(addDiagnosisUrl, data=diagnosisText, headers=header)
 
 print(resp)
 print(resp.status_code)

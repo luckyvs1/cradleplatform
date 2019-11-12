@@ -91,7 +91,7 @@ public class ReadingController {
     /**
      * Add a Diagnosis text to an existing Reading with matching id in the db.
      * @param id id of Reading to edit
-     * @param diagnosis String with diagnosis text to add to reading
+     * @param diagnosis String with diagnosis text to add to reading (not in JSON format)
      * @return 200 if success, 404 if no matching id
      */
     @PutMapping(path="/api/readings/{id}/diagnosis")
