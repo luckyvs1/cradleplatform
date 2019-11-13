@@ -120,7 +120,7 @@ public class ReadingGetWrapper {
 		return this.reading.getUploadImages();
 	}
 
-	public VitalsTrafficLight getVitalsTrafficLight() {
+	public String getVitalsTrafficLight() {
 		return this.reading.getVitalsTrafficLight();
 	}
 

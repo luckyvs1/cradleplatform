@@ -20,7 +20,7 @@ public class ReadingService {
     // Analysis Functions
     public static Boolean isValidTrafficLight(@NotNull Reading reading) {
         VitalsTrafficLight validTrafficLight = getVitalsTrafficLight(reading);
-        return (reading.getVitalsTrafficLight() == validTrafficLight);
+        return (reading.getVitalsTrafficLight() == VitalsTrafficLight.getVitalsTrafficLightText(validTrafficLight));
     }
 
     public static VitalsTrafficLight getVitalsTrafficLight(@NotNull Reading reading) {
@@ -61,11 +61,11 @@ public class ReadingService {
     }
 
     public boolean isValidReferralToHealthCentre(@NotNull Reading reading) {
-        return ((reading.getVitalsTrafficLight() == VitalsTrafficLight.Yellow_up && reading.getNeedFollowUp() == true)
-                || (reading.getVitalsTrafficLight() == VitalsTrafficLight.Red_up && reading.getNeedFollowUp() == true)
-                || (reading.getVitalsTrafficLight() == VitalsTrafficLight.Red_down && reading.getNeedFollowUp() == true)
-                || (reading.getVitalsTrafficLight() == VitalsTrafficLight.Yellow_down && reading.getNeedFollowUp() == false)
-                || (reading.getVitalsTrafficLight() == VitalsTrafficLight.Green && reading.getNeedFollowUp() == false));
+        return ((reading.getVitalsTrafficLight() == VitalsTrafficLight.getVitalsTrafficLightText(VitalsTrafficLight.Yellow_up) && reading.getNeedFollowUp() == true)
+                || (reading.getVitalsTrafficLight() == VitalsTrafficLight.getVitalsTrafficLightText(VitalsTrafficLight.Red_up) && reading.getNeedFollowUp() == true)
+                || (reading.getVitalsTrafficLight() == VitalsTrafficLight.getVitalsTrafficLightText(VitalsTrafficLight.Red_down) && reading.getNeedFollowUp() == true)
+                || (reading.getVitalsTrafficLight() == VitalsTrafficLight.getVitalsTrafficLightText(VitalsTrafficLight.Yellow_down) && reading.getNeedFollowUp() == false)
+                || (reading.getVitalsTrafficLight() == VitalsTrafficLight.getVitalsTrafficLightText(VitalsTrafficLight.Green) && reading.getNeedFollowUp() == false));
     }
 
     public boolean isReferralToHealthCentreRecommended(@NotNull VitalsTrafficLight vitalsTrafficLight) {
