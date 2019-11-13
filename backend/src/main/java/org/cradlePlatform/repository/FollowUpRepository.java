@@ -8,6 +8,6 @@ import java.util.Optional;
 
 @Repository
 public interface FollowUpRepository extends CrudRepository<FollowUp, Integer> {
-	Iterable<FollowUp> findByPatientId(int patientId);
+	Iterable<FollowUp> findByPatientIdOrderByIdDesc(int patientId);
 	Iterable<FollowUp> findTopByPatientIdOrderByIdDesc(int patientId);
 }

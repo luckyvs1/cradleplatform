@@ -14,7 +14,7 @@ class ChartsPage extends React.Component {
             labels: ["January", "February", "March", "April", "May", "June", "July"],
             datasets: [
                 {
-                    label: "My First dataset",
+                    label: "Blood Pressure Trend",
                     fill: true,
                     lineTension: 0.3,
                     backgroundColor: "rgba(225, 204,230, .3)",
@@ -66,7 +66,7 @@ export default function GraphDialog(origData, {handleClick}) {
 
             <Modal show={show} onHide={handleClose} animation={false} size={'lg'}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Patient Blood Pressure Graph </Modal.Title>
+                    <Modal.Title>Patient Blood Pressure Trend </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <ChartsPage></ChartsPage>
