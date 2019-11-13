@@ -28,7 +28,7 @@ class AddMedicationDetail extends React.Component {
             formattedData.endDate = this.formatDate(formattedData.endDate);
         api.medication.addAMedication(JSON.stringify(formattedData)).then(res => {
             this.onShowAlert("Successfully added medication", false, true)
-        }).catch(error => {this.onShowAlert(error.response.data)})
+        }).catch(error => {this.onShowAlert("Error: failure to add medication. Please contact admin.", true, false)})
 
     }
 
