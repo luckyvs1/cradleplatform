@@ -80,6 +80,7 @@ class PatientDetailForm extends React.Component {
         api.reading.getReadingForPatient({patient_id: pid, latest: false}).then(async res => {
             const readingData = res.data;
             let newState = [];
+            console.log("reading", res);
 
             for (let i = 0; i < readingData.length; i++) {
                 let row = {
