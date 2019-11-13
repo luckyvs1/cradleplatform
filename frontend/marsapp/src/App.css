@@ -983,7 +983,7 @@ li a {
     height: 50px;
     background: red;
     position: relative;
-    margin-left: 28px;
+    margin-left: 20px;
 }
 
 #octagon:before {
@@ -1016,7 +1016,7 @@ li a {
     background: green;
     border-radius: 50%;
     position: center;
-    margin-left: 28px;
+    margin-left: 20px;
 }
 
 #triangle {
@@ -1026,7 +1026,7 @@ li a {
     border-right: 25px solid transparent;
     border-bottom: 50px solid yellow;
     position: relative;
-    margin-left: 28px;
+    margin-left: 20px;
 }
 
 #pat-detail > div.row > div.col > div {

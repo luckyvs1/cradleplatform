@@ -101,6 +101,7 @@ class PatientDetailForm extends React.Component {
                     gestationalAge: readingData[i].gestationalAge,
                     timestampTime: new Date(readingData[i].timestamp).toLocaleTimeString(),
                     vitalsTrafficLight: readingData[i].vitalsTrafficLight,
+                    diagnosis: readingData[i].diagnosis,
                 }
 
                 newState.push(row);
@@ -222,7 +223,7 @@ class PatientDetailForm extends React.Component {
                     </div>
                     <Tabs class="nav nav-tabs">
                         <Tab eventKey="reading_information" title="Reading Information">
-                            <div className="table-wrapper-scroll-y my-custom-scrollbar rtc"
+                            <div className="table-responsive text-nowrap table-wrapper-scroll-y my-custom-scrollbar rtc"
                                  scrollbarStyle={{
                                      background: {backgroundColor: "transparent"},
                                      backgroundFocus: {backgroundColor: "#f0f0f0"},
@@ -239,6 +240,7 @@ class PatientDetailForm extends React.Component {
                                         <th scope="col">Pulse Rate (bpm)</th>
                                         <th scope="col">Gestational Age</th>
                                         <th scope="col">Symptoms</th>
+                                        <th scope="col">Diagnosis</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -270,6 +272,7 @@ class PatientDetailForm extends React.Component {
                                             <td> {row.pulseRate} </td>
                                             <td> {row.gestationalAge} {row.gestationalAgeTimeUnit} </td>
                                             <td> {row.symptoms} </td>
+                                            <td> {row.diagnosis} </td>
                                         </tr>
                                     ))}
                                     </tbody>
@@ -304,22 +307,42 @@ class PatientDetailForm extends React.Component {
                             </Row>
                         </Tab>
                         <Tab eventKey="current_medication" title="Current Medication">
-                            <Table bordered hover size="sm">
-                                <thead>
-                                <th>Start Date</th>
-                                <th>Drug</th>
-                                <th>Dosage</th>
-                                <th>Side Effects</th>
-                                </thead>
-                                <tbody>
-                                <tr>
-                                    <td>2019-02-02</td>
-                                    <td>drugname1</td>
-                                    <td>1 tablet twice a day</td>
-                                    <td>Sleepiness</td>
-                                </tr>
-                                </tbody>
-                            </Table>
+                            <div className="table-wrapper-scroll-y my-custom-scrollbar rtc"
+                                 scrollbarStyle={{
+                                     background: {backgroundColor: "transparent"},
+                                     backgroundFocus: {backgroundColor: "#f0f0f0"},
+                                     foreground: {backgroundColor: "#e2e2e2"},
+                                     foregroundFocus: {backgroundColor: "#acacac"}
+                                 }}>
+                                <table className="table table-bordered">
+                                    <thead>
+                                    <th scope="col">Current Drug</th>
+                                    <th scope="col">Start Date</th>
+                                    <th scope="col">Drug</th>
+                                    <th scope="col">Dosage</th>
+                                    <th scope="col">Side Effects</th>
+                                    <th scope="col">Medication Notes</th>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td>Yes</td>
+                                        <td>2019-02-02</td>
+                                        <td>Vicodin</td>
+                                        <td>1 tablet twice a day</td>
+                                        <td>Sleepiness</td>
+                                        <td>Sleepiness</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Yes</td>
+                                        <td>2018-12-02</td>
+                                        <td>Synthroid</td>
+                                        <td>1 tablet twice a day</td>
+                                        <td>None</td>
+                                        <td>Patient may get dizzy</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
                         </Tab>
                         <Tab eventKey="drug_history" title="Drug History">
                             <div className="table-wrapper-scroll-y my-custom-scrollbar rtc"
