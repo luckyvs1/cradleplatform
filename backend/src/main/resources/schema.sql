@@ -87,6 +87,10 @@ CREATE TABLE Medication (
     dosage          VARCHAR (32)    NOT NULL,
     start_date      DATE            NOT NULL,
     end_date        DATE,
+    notes           TEXT,
+    CONSTRAINT isEndDateValid  CHECK (
+            (end_date IS NULL OR end_date >= start_date)
+        ),
     PRIMARY KEY (id),
     FOREIGN KEY (drug_history_id) REFERENCES Drug_History(id) ON DELETE CASCADE
 );
@@ -282,6 +286,6 @@ insert into FollowUp values (2,
 
 insert into Referral values (1, '1', 1, 1, '2019-01-01', 'healthfacility1', 'notes', 'notes2');
 insert into Drug_History values (1, 1, 'Patient 1 Drug History');
-insert into Medication values (1, 1, 'Advil', '15mg per day', '2019-11-11', '2019-12-11');
+insert into Medication values (1, 1, 'Advil', '15mg per day', '2019-11-11', '2019-12-11', 'notes');
 insert into Medical_History values (1, '1', 'my medical history');
 insert into Monitor values ('1', 1);
