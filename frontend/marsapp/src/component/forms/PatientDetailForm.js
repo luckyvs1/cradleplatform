@@ -62,8 +62,17 @@ class PatientDetailForm extends React.Component {
                 patientData.sexFull = 'Male';
             }
 
-            patientData.dob = this.formatDate(patientData.dob);
-            patientData.gestationalStartDate = this.formatDate(patientData.gestationalStartDate)
+            if (patientData.dob != null) {
+                patientData.dob = this.formatDate(patientData.dob);
+            } else {
+                patientData.dob = "";
+            }
+
+            if (patientData.gestationalStartDate != null) {
+                patientData.gestationalStartDate = this.formatDate(patientData.gestationalStartDate)
+            } else {
+                patientData.gestationalStartDate = "";
+            }
 
             this.setState({patientData})
         });
