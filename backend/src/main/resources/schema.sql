@@ -148,7 +148,7 @@ CREATE TABLE Reading (
                           'Red_down'),
     diagnosis       TEXT,
     CONSTRAINT hasValidGestationalAgeUnits CHECK (
-        (gestational_age_unit != 'none' AND gestational_age > 0)
+        ((gestational_age_unit != 'none' AND gestational_age > 0) OR (gestational_age_unit = 'none' AND gestational_age = 0))
         ),
     PRIMARY KEY (id),
     FOREIGN KEY (reader_id) REFERENCES User(id) ON DELETE CASCADE,
