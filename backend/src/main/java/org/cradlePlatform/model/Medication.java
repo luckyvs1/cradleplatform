@@ -36,16 +36,12 @@ public class Medication {
     @Column(name="end_date", nullable=false)
     private Date endDate;
 
-    @Column(name="notes")
-    private String medicationNotes;
-
     public Medication() {
         this.drugHistoryId = -1;
         this.drugName = "";
         this.dosage = "";
         this.startDate = new Date();
         this.endDate = new Date();
-        this.medicationNotes = "";
     }
 
     public int getId() {
@@ -91,8 +87,4 @@ public class Medication {
     public void setEndDate(Date endDate) {
         this.endDate = endDate;
     }
-
-    public String getMedicationNotes() { return medicationNotes; }
-
-    public void setMedicationNotes(String medicationNotes) { this.medicationNotes = medicationNotes; }
 }

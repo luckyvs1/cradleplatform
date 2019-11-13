@@ -54,7 +54,7 @@ export default {
     },
     drug:{
         getAllDrugHistory:data=> axios.get(`http://${host}:${port}/api/drugHistories` , {data}),
-        getDrugHistoryByPatientId:data=> axios.get(`http://${host}:${port}/api/drugHistories?patientId=${data.patient_id}`),
+        getDrugHistoryById:data=> axios.get(`http://${host}:${port}/api/drugHistories?${data.patientid}`),
         addDrugHistory:data=> axios.post(`http://${host}:${port}/api/drugHistories`, {data}),
     },
     reading:{
@@ -64,7 +64,6 @@ export default {
         processReading: data => axios.post(`http://${host}:${port}/api/readings-process`, data),
         getReadingForPat:data=> axios.post(`http://${host}:${port}/api/patients/patientId=${data.patientId}/readings?latest=${data.latest}`),
 
-        getReadingForPatient:data=> axios.get(`http://${host}:${port}/api/patients/${data.patient_id}/readings?latest=${data.latest}`),
         uploadReading: data =>axios.post(`http://${host}:${port}/api/readings` , {}).then(res => console.log(res)),
 
     },
@@ -74,11 +73,6 @@ export default {
         createReferral:data=> axios.post(`http://${host}:${port}/api/referrals` , {data}),
     },
     medication:{
-        addAMedication: data => axios.post(`http://${host}:${port}/api/medications`, data,
-            {
-                headers: {
-                    'Content-Type': 'application/json;charset=utf-8'
-                }}),
     },
     followUp: {
         getAllFollowUps:data=> axios.get(`http://${host}:${port}/api/followUps`),

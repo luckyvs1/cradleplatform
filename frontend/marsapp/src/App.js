@@ -19,7 +19,6 @@ import PatientDetail from "./component/pages/patients/PatientDetail";
 import './App.css';
 import Help from "./component/pages/help/Help";
 import ListPatient from "./component/pages/patients/ListPatient";
-import AddMedicationDetail from "./component/pages/patients/AddMedicationDetail";
 import Referral from "./component/pages/Referral/Referral";
 import ReferralDetail from "./component/pages/Referral/ReferralDetail";
 import CreateReferral from "./component/pages/Referral/CreateReferral";
@@ -30,6 +29,7 @@ import AllFollowUp from "./component/pages/followUp/AllFollowUp";
 import FollowUpDetail from "./component/pages/followUp/FollowUpDetail";
 import ListUser from "./component/pages/users/ListUser"
 import AddUsers from "./component/pages/users/AddUsers"
+
 const App = ({location, isAuthenticated}) => (
 
     <div className="ui-toolbar">
@@ -138,12 +138,6 @@ const App = ({location, isAuthenticated}) => (
             path="/addUser"
             exact
             component={AddUsers}
-        />
-        <UserRoute
-            location={location}
-            path="/addMedication"
-            exact
-            component={AddMedicationDetail}
         />
     </div>
 );

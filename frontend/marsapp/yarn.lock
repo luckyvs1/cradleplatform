@@ -9518,11 +9518,6 @@ react-shapes@^0.1.0:
     lodash "^4.5.1"
     react-property-editor "^1.0.1"
 
-react-table-container@^2.0.3:
-  version "2.0.3"
-  resolved "https://registry.yarnpkg.com/react-table-container/-/react-table-container-2.0.3.tgz#f30cebd1143b1a753e57078c7512036a3bab092b"
-  integrity sha512-15g+4t7IvKOKrJvb3erhjpTOmjFN+7ikmdRl3lQBDZrX4PIJS/zvJi40Q/Dw6PQ5L0HBucrb9UiDBGO3P9LA0A==
-
 react-text-mask@^5.4.3:
   version "5.4.3"
   resolved "https://registry.yarnpkg.com/react-text-mask/-/react-text-mask-5.4.3.tgz#991efb4299e30c2e6c2c46d13f617169463e0d2d"
