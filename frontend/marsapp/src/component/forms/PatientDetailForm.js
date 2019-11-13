@@ -60,8 +60,10 @@ class PatientDetailForm extends React.Component {
                 patientData.sexFull = 'Female';
             } else if (patientData.sex === 'M') {
                 patientData.sexFull = 'Male';
+            } else if (patientData.sex === 'Other') {
+                patientData.sexFull = 'Other';
             }
-
+ 
             if (patientData.dob != null) {
                 patientData.dob = this.formatDate(patientData.dob);
             } else {
