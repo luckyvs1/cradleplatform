@@ -1043,7 +1043,7 @@ li a {
 
 .table-wrapper-scroll-y {
     display: block;
-    max-height: 440px;
+    max-height: 360px;
     overflow-y: auto;
     -ms-overflow-style: -ms-autohiding-scrollbar;
 }
