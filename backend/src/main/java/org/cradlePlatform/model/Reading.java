@@ -18,6 +18,13 @@ import java.util.Date;
 @Table(name = "Reading")
 public class Reading {
 
+	public static final int MAX_SYSTOLIC = 300;
+	public static final int MIN_SYSTOLIC = 10;
+	public static final int MAX_DIASTOLIC = 300;
+	public static final int MIN_DIASTOLIC = 10;
+	public static final int MAX_HEART_RATE = 300;
+	public static final int MIN_HEART_RATE = 30;
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
@@ -38,15 +45,15 @@ public class Reading {
 	@Column(name = "other_symptoms")
 	private String otherSymptoms;
 
-	@Range(min = 10, max = 300)
+	@Range(min = MIN_SYSTOLIC, max = MAX_SYSTOLIC)
 	@Column(name = "systolic_bp")
 	private int systolicBloodPressure;
 
-	@Range(min = 10, max = 300)
+	@Range(min = MIN_DIASTOLIC, max = MAX_DIASTOLIC)
 	@Column(name = "diastolic_bp")
 	private int diastolicBloodPressure;
 
-	@Range(min = 40, max = 200)
+	@Range(min = MIN_HEART_RATE, max = MAX_HEART_RATE)
 	@Column(name = "pulse_rate")
 	private int pulseRate;
 
@@ -309,4 +316,16 @@ public class Reading {
 	public void setDiagnosis(String diagnosis) {
 		this.diagnosis = diagnosis;
 	}
+
+	public static int getMaxSystolic() { return MAX_SYSTOLIC; }
+
+	public static int getMinSystolic() { return MIN_SYSTOLIC; }
+
+	public static int getMaxDiastolic() { return MAX_DIASTOLIC; }
+
+	public static int getMinDiastolic() { return MIN_DIASTOLIC; }
+
+	public static int getMaxHeartRate() { return MAX_HEART_RATE; }
+
+	public static int getMinHeartRate() { return MIN_HEART_RATE; }
 }
