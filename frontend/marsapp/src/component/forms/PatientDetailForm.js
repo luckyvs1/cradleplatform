@@ -222,9 +222,9 @@ class PatientDetailForm extends React.Component {
                                     <tr>
                                         <th scope="col">Date & Time</th>
                                         <th scope="col">Traffic Light</th>
-                                        <th scope="col">Systolic</th>
-                                        <th scope="col">Diastolic</th>
-                                        <th scope="col">Pulse Rate</th>
+                                        <th scope="col">Systolic (mmHg)</th>
+                                        <th scope="col">Diastolic (mmHg)</th>
+                                        <th scope="col">Pulse Rate (bpm)</th>
                                         <th scope="col">Gestational Age</th>
                                         <th scope="col">Symptoms</th>
                                     </tr>
