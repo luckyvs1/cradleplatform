@@ -54,7 +54,6 @@ class AccountForm extends React.Component {
     }
 
     submit = event => {
-
         if (event) {
             this.props.submit(this.state.data)
         }
