@@ -1,6 +1,6 @@
 # CradlePlatform
 ## Project Intro
-The Cradle Platform Project is a web interface that works with the existing Cradle Android App
+The Cradle Platform Project is a web interface that works with the existing Cradle VSA Android App
 to help monitor the health of pregnant women in developing countries.
 
 This new web interface will simplify and streamline workers' process of taking patients' vitals,
