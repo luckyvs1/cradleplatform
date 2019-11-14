@@ -351,7 +351,7 @@ class PatientDetailForm extends React.Component {
                                 </table>
                             </div>
                             <div style={{float: 'right'}}>
-                                <Button variant="primary" size="sm" onClick={() => this.handleMedicationSubmit()}>
+                                <Button variant="primary" size="sm" onClick={this.handleMedicationSubmit}>
                                     Add New Medication
                                 </Button>
                             </div>

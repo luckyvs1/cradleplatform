@@ -61,7 +61,7 @@ class AddMedicationForm extends React.Component {
         event.preventDefault();
         const errors = this.validate(this.state.data, this.state.dosage_edit);
         this.setState({errors});
-        var dosageText = this.state.dosage_edit.dose + " " + this.state.dosage_edit.unit + " " + this.state.dosage_edit.times + " " + this.state.dosage_edit.frequency;
+        let dosageText = this.state.dosage_edit.dose + " " + this.state.dosage_edit.unit + " " + this.state.dosage_edit.times + " " + this.state.dosage_edit.frequency;
         this.state.data.dosage = dosageText;
         if(Object.keys(errors).length === 0){
             this.props.submit(this.state.data);
