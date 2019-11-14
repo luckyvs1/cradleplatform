@@ -710,6 +710,9 @@ li a {
 .navbar > .container {
     align-content: center !important;
 }
+.navbar{
+    background-color: white !important;
+}
 #navbar-wrapper {
     width: 100%;
     position: absolute;
