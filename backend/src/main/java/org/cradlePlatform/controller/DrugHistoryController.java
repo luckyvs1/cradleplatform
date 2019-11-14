@@ -20,13 +20,13 @@ public class DrugHistoryController {
     // GET mappings
 
     /**
-     * Retrieve all DrugHistories from the DB for a corresponding patientID.
+     * Retrieve DrugHistory from the DB for a corresponding patientID.
      * e.g. /api/drugHistories?patientId=123
      * @param patientId patientId to get DrugHistories for
      * @return 200: Success
      */
     @GetMapping(path="/api/drugHistories")
-    public Iterable<DrugHistory> getDrugHistoriesByPatientId(@RequestParam int patientId) {
+    public DrugHistory getDrugHistoriesByPatientId(@RequestParam int patientId) {
         return drugHistoryRepository.findByPatientId(patientId);
     }
 
