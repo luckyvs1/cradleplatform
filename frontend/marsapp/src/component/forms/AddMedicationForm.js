@@ -84,8 +84,8 @@ class AddMedicationForm extends React.Component {
         try{
             const pid = this.props.location.medication.pid;
             api.drug.getDrugHistoryByPatientId({patient_id: pid}).then(res => {
-                this.state.data.drug_history_id = res.data[0].id;
-                localStorage.setItem('drug_history_id', JSON.stringify(res.data[0].id));
+                this.state.data.drug_history_id = res.data.id;
+                localStorage.setItem('drug_history_id', JSON.stringify(res.data.id));
             });
         }
         catch(exception){
