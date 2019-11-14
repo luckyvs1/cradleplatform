@@ -73,6 +73,7 @@ public class ReadingController {
         for (Reading reading : readings.getReadings()) {
             trafficLightIsValid &= readingService.isValidTrafficLight(reading);
             referralValid &= readingService.isValidReferralToHealthCentre(reading);
+            System.out.println(reading.toString());
         }
 
         if(trafficLightIsValid && referralValid) {
