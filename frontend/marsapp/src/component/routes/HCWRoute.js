@@ -6,7 +6,7 @@
 import React from "react";
 import HCW from "../../actions/authHCW"
 
-import {Redirect, Route} from "react-router-dom";
+import {HashRouter, Redirect, Route} from "react-router-dom";
 import auth from "../../actions/auth";
 
 
