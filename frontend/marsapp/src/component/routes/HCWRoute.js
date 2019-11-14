@@ -25,7 +25,7 @@ export const HCWRoute = ({component: Component, ...rest}) => {
                     return (
                         <Redirect
                             to={{
-                                pathname: "/homePage",
+                                pathname: props.history.goBack(),
                                 state: {
                                     from: props.location
                                 }
