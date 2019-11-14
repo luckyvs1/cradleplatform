@@ -80,7 +80,7 @@ const App = ({location, isAuthenticated}) => (
             exact
             component={CreateReferral}
         />
-        <UserRoute
+        <HCWRoute
             location={location}
             path="/patientDetail"
             exact

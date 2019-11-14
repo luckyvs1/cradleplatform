@@ -82,9 +82,9 @@ class LoginPage extends React.Component {
     }
 
     componentDidMount() {
-        // if (localStorage.getItem('loginToken') && localStorage.getItem('loginUserId')) {
-        //     this.processRole(localStorage.getItem('loginUserId'))
-        // }
+        if (localStorage.getItem('loginToken') && localStorage.getItem('loginUserId')) {
+            this.processRole(localStorage.getItem('loginUserId'))
+        }
     }
 
 
