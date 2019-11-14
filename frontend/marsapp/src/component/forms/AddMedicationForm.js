@@ -87,11 +87,9 @@ class AddMedicationForm extends React.Component {
             api.drug.getDrugHistoryByPatientId({patient_id: pid}).then(res => {
                 console.log(res.data);
                 if(res.data == null){
-                    console.log("--Patient has no drug history--");
                     alert("Patient's Drug History doesn't exist. Please contact admin.");
                     this.props.history.go(-1);
                 }else{
-                    console.log("--Patient has drug history--");
                     this.state.data.drug_history_id = res.data.id;
                     localStorage.setItem('drug_history_id', JSON.stringify(res.data.id));
                 }
