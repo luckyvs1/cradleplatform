@@ -9,6 +9,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import PropTypes from "prop-types";
 import TopNavigation from "../navigation/TopNavigation";
+import { Alert } from "react-alert"
 import {
     Container,
     Row,
@@ -87,6 +88,7 @@ class AddMedicationForm extends React.Component {
                 console.log(res.data);
                 if(res.data == null){
                     console.log("--Patient has no drug history--");
+                    alert("Patient's Drug History doesn't exist. Please contact admin.");
                     this.props.history.go(-1);
                 }else{
                     console.log("--Patient has drug history--");
