@@ -15,9 +15,9 @@ const store = createStore(
     composeWithDevTools(applyMiddleware(thunk))
 );
 
-if (localStorage.getItem('loginToken')){
-    auth.setAuth();
-}
+// if (localStorage.getItem('loginToken')){
+//     // auth.setAuth();
+// }
 
 ReactDOM.render(
     <BrowserRouter>

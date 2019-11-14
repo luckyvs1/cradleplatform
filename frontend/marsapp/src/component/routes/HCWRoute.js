@@ -7,6 +7,7 @@ import React from "react";
 import HCW from "../../actions/authHCW"
 
 import {Redirect, Route} from "react-router-dom";
+import auth from "../../actions/auth";
 
 
 export const HCWRoute = ({component: Component, ...rest}) => {
@@ -14,13 +15,17 @@ export const HCWRoute = ({component: Component, ...rest}) => {
         <Route
             {...rest}
             render={props => {
-                if (HCW.isAuthenticated()) {
+                console.log("ROUTING CHEKC", HCW.isAuthenticated() )
+                console.log("ROUTING CHEKC", auth.isAuthenticated() )
+
+                if (HCW.isAuthenticated()  || auth.isAuthenticated()) {
+                    console.log("ROUTING CHEKC")
                     return <Component {...props} />;
                 } else {
                     return (
                         <Redirect
                             to={{
-                                pathname: "/homePage",
+                                pathname: "/",
                                 state: {
                                     from: props.location
                                 }

@@ -20,7 +20,7 @@ export const VHTRoute = ({component: Component, ...rest}) => {
                     return (
                         <Redirect
                             to={{
-                                pathname: "/homePage",
+                                pathname: "/",
                                 state: {
                                     from: props.location
                                 }
