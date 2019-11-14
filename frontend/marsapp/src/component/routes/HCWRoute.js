@@ -25,7 +25,7 @@ export const HCWRoute = ({component: Component, ...rest}) => {
                     return (
                         <Redirect
                             to={{
-                                pathname: "/",
+                                pathname: "/homePage",
                                 state: {
                                     from: props.location
                                 }
