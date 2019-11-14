@@ -10,6 +10,7 @@ import org.cradlePlatform.repository.DrugHistoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import java.util.Optional;
 
 @CrossOrigin(origins = {"http://cmpt373.csil.sfu.ca:8044", "http://localhost:3000"})
 @RestController
@@ -26,7 +27,7 @@ public class DrugHistoryController {
      * @return 200: Success
      */
     @GetMapping(path="/api/drugHistories")
-    public DrugHistory getDrugHistoriesByPatientId(@RequestParam int patientId) {
+    public Optional<DrugHistory> getDrugHistoriesByPatientId(@RequestParam int patientId) {
         return drugHistoryRepository.findByPatientId(patientId);
     }
 
