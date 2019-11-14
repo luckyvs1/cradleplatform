@@ -33,8 +33,6 @@ class LoginPage extends React.Component {
                 if (res) {
                     let accessToken = res.data.access_token;
                     this.props.updateLogIn(accessToken);
-
-                    console.log(res)
                     this.processRole(res.data.id);
                 }
             }).catch(error => {
@@ -48,13 +46,6 @@ class LoginPage extends React.Component {
 
     processRole(id){
         api.userInfo.getUserInfoById(id).then(res=>{
-            console.log(res.data.role)
-            console.log("VHT" , VHT.isAuthenticated())
-            console.log("Admin" , auth.isAuthenticated())
-            console.log("Healthworker" , HCW.isAuthenticated())
-
-
-
             switch (res.data.role) {
                 case "Healthworker":
                     HCW.login(() => {
