@@ -6,9 +6,12 @@ package org.cradlePlatform.controller;
 
 import org.cradlePlatform.model.Patient;
 import org.cradlePlatform.model.Reading;
+import org.cradlePlatform.model.DrugHistory;
 import org.cradlePlatform.repository.PatientRepository;
 import org.cradlePlatform.repository.ReadingRepository;
+import org.cradlePlatform.repository.DrugHistoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,6 +25,9 @@ public class PatientController {
 
     @Autowired
     private ReadingRepository readingRepository;
+
+    @Autowired
+    private DrugHistoryRepository drugHistoryRepository;
 
     // GET mappings
 
@@ -59,14 +65,30 @@ public class PatientController {
     // POST mappings
 
     /**
-     * Create a new patient
+     * Create a new patient and associates the patient with a drug history id
      * @param patient
      * @return
      */
     @PostMapping(path="/api/patients")
     @ResponseStatus(code = HttpStatus.CREATED)
-    public @ResponseBody String addNewPatient (@RequestBody Patient patient){
+    public ResponseEntity<String> addNewPatient (@RequestBody Patient patient){
+        if(patient.getAttestationNo() == null){
+            return new ResponseEntity<String>("Attestation number can't be null", HttpStatus.BAD_REQUEST);
+        }
         patientRepository.save(patient);
-        return "Saved Patient";
+
+        // Attestation number can be empty so its not unique which would result in an iterable
+        Iterable<Patient> patients = patientRepository.findPatientByAttestationNo(patient.getAttestationNo());
+
+        for(Patient savedPatient: patients) {
+            if(patient.equals(savedPatient)) {
+                DrugHistory drugHistory = new DrugHistory();
+                drugHistory.setPatientId(savedPatient.getId());
+                drugHistoryRepository.save(drugHistory);
+                return new ResponseEntity<String>("Patient and drug history id created", HttpStatus.CREATED);
+            }
+        }
+        
+        return new ResponseEntity<String>("Failed to create patient and drug history", HttpStatus.BAD_REQUEST);
     }
 }

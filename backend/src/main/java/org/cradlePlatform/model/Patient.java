@@ -13,7 +13,6 @@ import java.util.Date;
 @Entity
 @Table(name = "Patient")
 public class Patient {
-
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name="id", unique=true, nullable = false)
@@ -239,5 +238,32 @@ public class Patient {
 
     public void setCurrentGestationalAge(int currentGestationalAge) {
         this.currentGestationalAge = currentGestationalAge;
+    }
+
+    public boolean equals(Object object) {
+        if (this == object) return true;
+        if (object == null || getClass() != object.getClass()) return false;
+        if (!super.equals(object)) return false;
+        Patient patient = (Patient) object;
+        return age == patient.age &&
+                pregnant == patient.pregnant &&
+                currentGestationalAge == patient.currentGestationalAge &&
+                java.util.Objects.equals(attestationNo, patient.attestationNo) &&
+                java.util.Objects.equals(firstName, patient.firstName) &&
+                java.util.Objects.equals(lastName, patient.lastName) &&
+                java.util.Objects.equals(villageNo, patient.villageNo) &&
+                java.util.Objects.equals(zoneNo, patient.zoneNo) &&
+                java.util.Objects.equals(householdNo, patient.householdNo) &&
+                java.util.Objects.equals(blockNo, patient.blockNo) &&
+                java.util.Objects.equals(tankNo, patient.tankNo) &&
+                java.util.Objects.equals(initials, patient.initials) &&
+                java.util.Objects.equals(sex, patient.sex) &&
+                java.util.Objects.equals(dob, patient.dob) &&
+                java.util.Objects.equals(gestationalStartDate, patient.gestationalStartDate) &&
+                java.util.Objects.equals(gestationAgeUnit, patient.gestationAgeUnit);
+    }
+
+    public int hashCode() {
+        return java.util.Objects.hash(super.hashCode(), attestationNo, firstName, lastName, villageNo, zoneNo, householdNo, blockNo, tankNo, initials, sex, age, dob, pregnant, gestationalStartDate, gestationAgeUnit, currentGestationalAge);
     }
 }
