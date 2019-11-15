@@ -23,6 +23,7 @@ class CreateDiagnosisForm extends React.Component {
         super(props);
         this.state = {
             data: this.props.location.state.data,
+            referrerId: this.props.location.state.referrerId,
             errors: {}
         };
         this.onChange = this.onChange.bind(this);
@@ -38,24 +39,31 @@ class CreateDiagnosisForm extends React.Component {
     });
 
     onSubmit = (event) => {
-        // TODO: Add a success message or toast when user is created
-
         const config = {
             headers: {
-                "Accept" : "application/json"
+                'Content-Type': 'application/json;charset=utf-8',
+                'Accept' : 'application/json'
             }
         };
 
         event.preventDefault();
         const errors = this.validate(this.state);
         this.setState({errors}); //if there are errors returned, display them
-
         if(Object.keys(errors).length === 0){ //if no errors
-            console.log(this.state.data);
-            // api.reading.updateAReading(this.state.data)
-            //     .catch(error => {
-            //         console.log("createDiagnosis error ", error.message);
-            //     });
+            api.reading.uploadDiagnosis({patient_id: this.state.data.patientId, diagnosis: this.state.data.diagnosis}, config)
+                .then(
+                    // TODO: Success toast
+                    this.props.history.push({
+                        pathname:  '/referralDetail',
+                        state: {
+                            referrerId: this.state.referrerId
+                        }
+                    })
+                )
+                .catch(error => {
+                    // TODO: Failure toast
+                    console.log("createDiagnosis error ", error.message);
+                });
         }
     };
 
