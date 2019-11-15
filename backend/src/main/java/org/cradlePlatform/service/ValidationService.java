@@ -1,3 +1,7 @@
+/**
+ * ValidationService handles the common helpers required for custom validationsof fields
+ */
+
 package org.cradlePlatform.service;
 
 import org.cradlePlatform.model.Patient;
@@ -7,7 +11,6 @@ import org.cradlePlatform.repository.PatientRepository;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.Optional;
-import java.lang.reflect.Field;
 import org.springframework.util.StringUtils;
 
 @Service
@@ -17,27 +20,16 @@ public class ValidationService {
     private PatientRepository patientRepository;
 
     // If attestation number is valid digits of length 11 use the current else use empty string
-    public String getValidAttestationNo(Patient patient) {
+    public String getValidAttestationNo(Patient patient){
         int ATTESTATION_NO_LENGTH = 11;
-        String defaultAttestationNo = "";
         String zeroOrMoreDigitsPattern = "[0-9]*";
-        String accessField = "attestation_no";
         Pattern pattern = Pattern.compile(zeroOrMoreDigitsPattern);
 
-        // Converts null and variations of whitespace to empty string
-        if(StringUtils.isEmpty(patient.getAttestationNo())) {
-            try {
-                Field field = patient.getClass().getDeclaredField(accessField);
-                field.setAccessible(true);
-                field.get(patient);
-                field.set(patient, defaultAttestationNo);
-            } catch (NoSuchFieldException e) {
-                throw new IllegalArgumentException("No such field: " + accessField);
-            } catch (IllegalAccessException e) {
-                throw new IllegalArgumentException("Illegal access for field: " + accessField);
-            }
+        if (patient.getAttestationNo() == null){
+            throw new IllegalArgumentException("Attestation number cannot be null");
         }
 
+        // Converts variations of whitespace to empty string
         String formattedAttestationNo = StringUtils.trimAllWhitespace(patient.getAttestationNo());
         Matcher matcher = pattern.matcher(formattedAttestationNo);
 
@@ -54,6 +46,6 @@ public class ValidationService {
             throw new IllegalArgumentException(String.format("Attestation number must be of length %d: %s", ATTESTATION_NO_LENGTH, formattedAttestationNo));
         }
 
-        return patient.getAttestationNo();
+        return formattedAttestationNo;
     }
 }
