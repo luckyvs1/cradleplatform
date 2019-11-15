@@ -1076,3 +1076,12 @@ li a {
 .table td, .table th {
     text-align: center !important;
 }
+
+#column-wrap {
+    word-break: break-word !important;
+    min-width: 600px !important;
+}
+
+#no-wrap, .table th{
+    white-space: nowrap !important;
+}

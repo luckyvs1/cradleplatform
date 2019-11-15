@@ -223,7 +223,7 @@ class PatientDetailForm extends React.Component {
                     </div>
                     <Tabs class="nav nav-tabs">
                         <Tab eventKey="reading_information" title="Reading Information">
-                            <div className="table-responsive text-nowrap table-wrapper-scroll-y my-custom-scrollbar rtc"
+                            <div className="table-responsive table-wrapper-scroll-y my-custom-scrollbar rtc"
                                  scrollbarStyle={{
                                      background: {backgroundColor: "transparent"},
                                      backgroundFocus: {backgroundColor: "#f0f0f0"},
@@ -271,8 +271,8 @@ class PatientDetailForm extends React.Component {
                                             <td> {row.diastolicBloodPressure} </td>
                                             <td> {row.pulseRate} </td>
                                             <td> {row.gestationalAge} {row.gestationalAgeTimeUnit} </td>
-                                            <td> {row.symptoms} </td>
-                                            <td> {row.diagnosis} </td>
+                                            <td id={'column-wrap'}>  {row.symptoms} </td>
+                                            <td id={'column-wrap'}> {row.diagnosis} </td>
                                         </tr>
                                     ))}
                                     </tbody>
