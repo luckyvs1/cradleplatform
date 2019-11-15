@@ -62,8 +62,7 @@ class ReferralListTable extends React.Component{
         this.props.history.push({
             pathname: '/referralDetail',
             state: {
-                referrerId: row.id,
-                initials: row.pname // TODO, remove later when data is obtained in referralDetails page
+                referrerId: row.id
             }
         });
     };

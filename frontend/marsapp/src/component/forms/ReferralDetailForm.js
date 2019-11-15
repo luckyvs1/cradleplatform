@@ -153,28 +153,18 @@ class ReferralDetailForm extends React.Component {
     }
 
     checkDiagnosisExist() {
+        // TODO: Fix bug where the require diagnosis does not show up, when it should, when first visiting the details page for the first time
         if (this.state.errors.requireDiagnosis) {
             return (
                 <div>
-                    <Row>
-                        <Col>
-                            <Form.Text className="text-muted">
-                                <InlineError text={this.state.errors.requireDiagnosis} />
-                            </Form.Text>
-                        </Col>
-                        <Col className="text-right">
-                            <Button variant="primary" size="sm" as={Link} to={ {pathname: '/createDiagnosis', state: {data: this.state.readingData}} }>
-                                Add Diagnosis
-                            </Button>
-                        </Col>
-                    </Row>
+
                 </div>
             )
         }
     }
 
     render() {
-        const {referralData, patientData, readingData, referrerName} = this.state;
+        const {referralData, patientData, readingData, referrerName, errors} = this.state;
         return (
             <div>
                 <TopNavigation authenticated={true}></TopNavigation>
@@ -471,7 +461,21 @@ class ReferralDetailForm extends React.Component {
                         </Tab>
                         <Tab eventKey="contact" title="Diagnosis Detail">
                             <br></br>
-                            { this.checkDiagnosisExist() }
+                            <Row>
+                                <Col>
+                                    <Form.Text className="text-muted">
+                                        {errors.requireDiagnosis && <InlineError text={errors.requireDiagnosis}/>}
+                                    </Form.Text>
+                                </Col>
+                                <Col className="text-right">
+                                    {
+                                        errors.requireDiagnosis &&
+                                        <Button variant="primary" size="sm" as={Link} to={ {pathname: '/createDiagnosis', state: {data: this.state.readingData, referrerId: this.state.referralData.id}} }>
+                                            Add Diagnosis
+                                        </Button>
+                                    }
+                                </Col>
+                            </Row>
                             {/*TODO: Want to be able to let readings be taken when giving diagnosis*/}
                             {/*<Row>*/}
                             {/*    <Col md={4}>*/}
