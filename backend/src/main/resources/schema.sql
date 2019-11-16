@@ -190,10 +190,12 @@ insert into User values ('5', 'DebZuluka', 'justTesting');
 insert into User values ('6', 'BazilioOkello', 'justTesting');
 insert into User values ('7', 'CKitumba', 'justTesting');
 insert into User values ('8', 'DWakikona', 'justTesting');
+insert into User values ('9', 'EKakooza', 'justTesting');
+insert into User values ('10', 'GabrielM', 'justTesting');
 
 insert into User_Info values ('1',
-                              'Bob',
-                              'Smith',
+                              'Geoffrey',
+                              'Bukenya',
                               '1980-01-01',
                               'Uganda',
                               '077-241-8761',
@@ -201,8 +203,8 @@ insert into User_Info values ('1',
                               'VHT');
 
 insert into User_Info values ('2',
-                              'Sally',
-                              'Jane',
+                              'Jessica',
+                              'Nasasira',
                               '1985-01-01',
                               'Uganda',
                               '077-241-8762',
@@ -210,8 +212,8 @@ insert into User_Info values ('2',
                               'Healthworker');
 
 insert into User_Info values ('3',
-                              'Mary',
-                              'Anne',
+                              'Hilary',
+                              'Alupo',
                               '1975-01-01',
                               'Uganda',
                               '077-241-8763',
@@ -263,9 +265,29 @@ insert into User_Info values ('8',
                               'worker3@healthclinic.com',
                               'Healthworker');
 
+insert into User_Info values ('9',
+                              'Ezra',
+                              'Kakooza',
+                              '1960-03-03',
+                              'Uganda',
+                              '077-241-8766',
+                              'vht3@healthclinic.com',
+                              'VHT');
+
+insert into User_Info values ('10',
+                              'Gabriel',
+                              'Mukisa',
+                              '1955-03-03',
+                              'Uganda',
+                              '077-241-8766',
+                              'vht4@healthclinic.com',
+                              'VHT');
+
 insert into VHT values ('1');
 insert into VHT values ('5');
 insert into VHT values ('6');
+insert into VHT values ('9');
+insert into VHT values ('10');
 insert into Healthworker values ('2');
 insert into Healthworker values ('7');
 insert into Healthworker values ('8');
