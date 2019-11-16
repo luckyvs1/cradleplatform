@@ -97,6 +97,9 @@ class TopNavigation extends React.Component {
                                         <Nav.Link as={Link} to="listUser">
                                             <i className="fas fa-users-cog"></i> Users
                                         </Nav.Link>
+                                        <Nav.Link as={Link} to="transferVHT">
+                                            <i className="fas fa-exchange-alt"></i> Transfer VHT
+                                        </Nav.Link>
                                     </ul>
                                 </div>
                             </aside>
