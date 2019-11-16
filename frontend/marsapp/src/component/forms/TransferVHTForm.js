@@ -11,23 +11,38 @@ class TransferVHTForm extends React.Component {
                 <Container>
                     <Row>
                         <Col>
-                            <Form.Label>From VHT Id</Form.Label>
+                            <Form.Label >
+                                <h2>Transfer From</h2>
+                            </Form.Label>
                             <Form.Control
+                                size={'lg'}
                                 type="text"
                                 id="firstvht"
                                 name="firstvht"
+                                placeholder={"VHT id"}
+
                                 // value={this.state.data.patientId}
                             />
                         </Col>
-                        <Col>
-                            <Button>Transfer</Button>
+                        <Col className={"text-center"} style={{top:'23px'}}>
+                            <Form.Label >
+                                <h2></h2>
+                            </Form.Label>
+                            <Button variant="primary" size="lg" block>
+                                <i className="fas fa-exchange-alt"></i>
+                                {'\t\t'}Transfer Data
+                            </Button>
                         </Col>
                         <Col>
-                            <Form.Label>To VHT Id</Form.Label>
+                            <Form.Label>
+                                <h2>Transfer To</h2>
+                            </Form.Label>
                             <Form.Control
+                                size={'lg'}
                                 type="text"
                                 id="secondvht"
                                 name="secondvht"
+                                placeholder={"VHT id"}
                                 // value={this.state.data.patientId}
                             />
                         </Col>
