@@ -47,6 +47,7 @@ class PatientDetailForm extends React.Component {
             }],
             readingData: [],
             followUpData: [],
+            medicalHistoryData: [],
         };
     }
 
@@ -130,6 +131,10 @@ class PatientDetailForm extends React.Component {
 
             this.setState({followUpData: newState})
         });
+
+        api.medicalHistory.getLastMedicalHistoryByPatientId({id: pid, latest: false}).then(async res => {
+            this.setState({medicalHistoryData: res.data});
+        })
     }
 
     formatDate = date =>{
@@ -288,6 +293,31 @@ class PatientDetailForm extends React.Component {
                             </Row>
                         </Tab>
                         <Tab eventKey="medical_history" title="Medical History">
+                            <div className="table-wrapper-scroll-y my-custom-scrollbar rtc"
+                                 scrollbarStyle={{
+                                     background: {backgroundColor: "transparent"},
+                                     backgroundFocus: {backgroundColor: "#f0f0f0"},
+                                     foreground: {backgroundColor: "#e2e2e2"},
+                                     foregroundFocus: {backgroundColor: "#acacac"}
+                                 }}>
+                                <table className="table table-bordered">
+                                    <thead>
+                                        <th scope="col">Date</th>
+                                        <th scope="col">Medical Notes</th>
+                                    </thead>
+                                    <tbody>
+                                        {this.state.medicalHistoryData.map(row => (
+                                            <tr key={row.id}>
+                                                <td>
+                                                    {row.timestamp}<br/>
+                                                    {row.timestampTime}
+                                                </td>
+                                                <td> {row.medicalHistoryText} </td>
+                                            </tr>
+                                        ))}
+                                    </tbody>
+                                </table>
+                            </div>
                             <Row>
                                 <Col>
                                     <Form.Group>
