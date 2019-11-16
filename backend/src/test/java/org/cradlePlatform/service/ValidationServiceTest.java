@@ -12,7 +12,7 @@ public class ValidationServiceTest {
     public void nullAttestationNumber() throws Exception {
         ValidationService validationService = new ValidationService();
         Patient patient = new Patient();
-        validationService.getValidAttestationNo(patient);
+        validationService.validateAttestationNo(patient);
     }
 
     @Test (expected = IllegalArgumentException.class)
@@ -21,7 +21,7 @@ public class ValidationServiceTest {
         Patient patient = new Patient();
         String nonNumericAttestationNumber = "NonDigits1";
         patient.setAttestationNo(nonNumericAttestationNumber);
-        validationService.getValidAttestationNo(patient);
+        validationService.validateAttestationNo(patient);
     }
 
     @Test (expected = IllegalArgumentException.class)
@@ -30,7 +30,7 @@ public class ValidationServiceTest {
         Patient patient = new Patient();
         String invalidLengthAttestationNumber = "123456789";
         patient.setAttestationNo(invalidLengthAttestationNumber);
-        validationService.getValidAttestationNo(patient);
+        validationService.validateAttestationNo(patient);
     }
 
     @Test
@@ -40,7 +40,7 @@ public class ValidationServiceTest {
         String defaultAttestationNumber = "";
         String whiteSpaceAttestationNumber = " ";
         patient.setAttestationNo(whiteSpaceAttestationNumber);
-        assertEquals(validationService.getValidAttestationNo(patient), defaultAttestationNumber);
+        assertEquals(validationService.validateAttestationNo(patient), defaultAttestationNumber);
     }
 
     // TODO: Connection between server and database not established to do integration test
@@ -52,7 +52,7 @@ public class ValidationServiceTest {
         // Default attestation number which already exists in schema
         String invalidAttestationNumber = "17182982734";
         patient.setAttestationNo(invalidAttestationNumber);
-        validationService.getValidAttestationNo(patient);
+        validationService.validateAttestationNo(patient);
     }
 
     // TODO: Connection between server and database not established to do integration test
@@ -64,7 +64,7 @@ public class ValidationServiceTest {
         // Test could fail if this attestation number already exists in the system
         String attestationNumber = "999999999999";
         patient.setAttestationNo(attestationNumber);
-        assertEquals(validationService.getValidAttestationNo(patient), attestationNumber);
+        assertEquals(validationService.validateAttestationNo(patient), attestationNumber);
     }
 
 }

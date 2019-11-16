@@ -71,7 +71,7 @@ public class PatientController {
     @PostMapping(path="/api/patients")
     public ResponseEntity<String> addNewPatient (@RequestBody Patient patient){
         try {
-            String validAttestationNo = validationService.getValidAttestationNo(patient);
+            String validAttestationNo = validationService.validateAttestationNo(patient);
             patient.setAttestationNo(validAttestationNo);
         } catch (IllegalArgumentException e) {
             return new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);

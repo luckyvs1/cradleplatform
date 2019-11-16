@@ -20,7 +20,7 @@ public class ValidationService {
     private PatientRepository patientRepository;
 
     // If attestation number is valid digits of length 11 use the current else use empty string
-    public String getValidAttestationNo(Patient patient){
+    public String validateAttestationNo(Patient patient){
         int ATTESTATION_NO_LENGTH = 11;
         String zeroOrMoreDigitsPattern = "[0-9]*";
         Pattern pattern = Pattern.compile(zeroOrMoreDigitsPattern);
