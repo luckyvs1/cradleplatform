@@ -515,7 +515,32 @@ insert into FollowUp values (2,
                              'Take medicine as prescribed');
 
 insert into Referral values (1, '1', 1, 1, '2019-01-01', 'healthfacility1', 'notes', 'notes2');
-insert into Drug_History values (1, 1, 'Patient 1 Drug History');
-insert into Medication values (1, 1, 'Advil', '15mg per day', '2019-11-11', '2019-12-11');
-insert into Medical_History values (1, '1', 'my medical history');
+
+insert into Drug_History values (1, 1, 'Trial of various blood pressure reduction medications');
+insert into Drug_History values (2, 2, '');
+insert into Drug_History values (3, 3, '');
+insert into Drug_History values (4, 4, '');
+insert into Drug_History values (5, 5, '');
+insert into Drug_History values (6, 6, 'No medications prescribed to date');
+insert into Drug_History values (7, 7, 'No medications prescribed to date');
+insert into Drug_History values (8, 8, 'No medications prescribed to date');
+insert into Drug_History values (9, 9, 'No medications prescribed to date');
+insert into Drug_History values (10, 10, 'No medications prescribed to date');
+
+insert into Medication values (1, 1, 'Bumetanide', '2 tablets once per day', '2019-11-11', '2019-12-11');
+insert into Medication values (2, 1, 'Chlorthalidone', '1 tablet twice per day', '2019-11-11', '2019-12-11');
+insert into Medication values (3, 1, 'Indapamide', '1 tablet once per day', '2019-11-11', '2019-12-11');
+insert into Medication values (4, 1, 'Advil', '1 tablet once per month', '2019-11-11', '');
+insert into Medication values (5, 2, 'Bumetanide', '2 tablets once per day', '2019-11-11', '2019-12-11');
+insert into Medication values (6, 2, 'Chlorthalidone', '1 tablet twice per day', '2019-11-11', '2019-12-11');
+insert into Medication values (7, 3, 'Indapamide', '1 tablet once per day', '2019-11-11', '2019-12-11');
+insert into Medication values (8, 3, 'Advil', '1 tablet once per month', '2019-11-11', '');
+insert into Medication values (9, 4, 'Indapamide', '1 tablet once per day', '2019-11-11', '2019-12-11');
+insert into Medication values (10, 5, 'Advil', '1 tablet once per month', '2019-11-11', '');
+
+insert into Medical_History values (1, 1, 'Immunizations: Flu vaccine yearly. Pneumovax 2006
+Allergic to Penicillin-developed a diffuse rash after an injection');
+insert into Medical_History values (2, 2, 'Immunizations: Flu vaccine yearly.');
+
+
 insert into Monitor values ('1', 1);
