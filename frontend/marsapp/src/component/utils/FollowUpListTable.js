@@ -50,9 +50,8 @@ class FollowUpListTable extends React.Component {
     render() {
         const {data} = this.state;
         return (
-            <div>
-                <Col>
-                    <Table bordered hover size="sm" className={"table-wrapper-scroll-y my-custom-scrollbar"}>
+                <Col className={"table-wrapper-scroll-y my-custom-scrollbar"}>
+                    <Table bordered hover size="sm" >
                         <thead>
                         <tr>
                             <th>Patient ID</th>
@@ -77,7 +76,6 @@ class FollowUpListTable extends React.Component {
                         </tbody>
                     </Table>
                 </Col>
-            </div>
         );
     }
 }
