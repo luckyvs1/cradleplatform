@@ -111,7 +111,7 @@ class ListPatientForm extends React.Component {
     };
 
     render() {
-        const { isLoading, searchValue, filteredData } = this.state;
+        const {isLoading, searchValue, filteredData} = this.state;
 
         return (
             <div>
@@ -133,9 +133,8 @@ class ListPatientForm extends React.Component {
                         </Col>
                     </Row>
                     <Row>
-                        <Col className="text-right">
-                            <Form className="float-right" inline>
-                                <i className="fas fa-search"></i>
+                        <Col className="text-left">
+                            <Form className="float-left" inline>
                                 <FormControl
                                     ref={this.searchInput}
                                     type="text"
@@ -143,28 +142,34 @@ class ListPatientForm extends React.Component {
                                     className="mr-sm-2"
                                     onChange={() => this.handleSearchChange()}
                                 />
+                                <i className="fas fa-search"></i>
+
                             </Form>
                         </Col>
                     </Row>
+                    <br></br>
                     <Row>
-                        <Col>
-                            <Table hover size="sm">
-                                <thead>
+                        <div>
+                            <Col>
+                                <Table hover size="sm" className={"table-wrapper-scroll-y"}>
+                                    <thead>
                                     <tr>
-                                        <th width="200">Patient ID</th>
-                                        <th>Initials</th>
+                                        <th width={350}>Patient ID</th>
+                                        <th width={450}>Initials</th>
                                     </tr>
-                                </thead>
-                                <tbody>
+                                    </thead>
+                                    <tbody>
                                     {this.state.filteredData.map(row => (
-                                        <tr key={row.pid} class='clickable-row' onClick={() => this.handleItemClick(row)}>
+                                        <tr key={row.pid} class='clickable-row'
+                                            onClick={() => this.handleItemClick(row)}>
                                             <td>{row.pid}</td>
                                             <td>{row.initial}</td>
                                         </tr>
                                     ))}
-                                </tbody>
-                            </Table>
-                        </Col>
+                                    </tbody>
+                                </Table>
+                            </Col>
+                        </div>
                     </Row>
                 </Container>
             </div>
