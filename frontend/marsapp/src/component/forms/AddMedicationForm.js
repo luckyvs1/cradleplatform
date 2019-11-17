@@ -37,7 +37,7 @@ class AddMedicationForm extends React.Component {
                     dose: "",
                     unit: "",
                     times: "",
-                    frequency: ""
+                    frequency: "times per day"
                 },
                 errors: {},
             };
@@ -83,17 +83,8 @@ class AddMedicationForm extends React.Component {
         //in the case of the user reloading the page, the drug_history_id will be lost and crash
         //the app since it doesn't know where to get the patient_id from. This should resolve it.
         try{
-            const pid = this.props.location.medication.pid;
-            api.drug.getDrugHistoryByPatientId({patient_id: pid}).then(res => {
-                console.log(res.data);
-                if(res.data == null){
-                    alert("Patient's Drug History doesn't exist. Please contact admin.");
-                    this.props.history.go(-1);
-                }else{
-                    this.state.data.drug_history_id = res.data.id;
-                    localStorage.setItem('drug_history_id', JSON.stringify(res.data.id));
-                }
-            });
+            this.setState({data: {...this.state.data, drug_history_id: this.props.location.medication.drug_id}})
+            localStorage.setItem('drug_history_id', JSON.stringify(this.props.location.medication.drug_id));
         }
         catch(exception){
             this.state.data.drug_history_id = JSON.parse(localStorage.getItem('drug_history_id'));
