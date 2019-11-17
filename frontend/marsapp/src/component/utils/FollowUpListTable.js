@@ -50,7 +50,7 @@ class FollowUpListTable extends React.Component{
         const {data} = this.state;
         return (
             <div>
-                <Table bordered hover size="sm">
+                <Table bordered hover size="sm" className={"table-wrapper-scroll-y my-custom-scrollbar rtc"}>
                     <thead>
                         <tr>
                             <th>Patient ID</th>
