@@ -28,7 +28,6 @@ class CreateDiagnosisForm extends React.Component {
         };
         this.onChange = this.onChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
-        console.log(this.state);
     }
 
     onChange = e => this.setState({
