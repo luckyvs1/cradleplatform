@@ -35,7 +35,8 @@ export default {
         getAllVHT: data => axios.get(`http://${host}:${port}/api/vht`),
         getVHTById: data => axios.get(`http://${host}:${port}/api/vht/${data.vhtId}`),
         createVHT: data => axios.post(`http://${host}:${port}/api/vht` , {data}),
-        getVHTPatReading: (vhtId ,patientId )=> axios.get(`http://${host}:${port}/api/vhts/${vhtId}/patients/${patientId}/readings`)
+        getVHTPatReading: (vhtId ,patientId )=> axios.get(`http://${host}:${port}/api/vhts/${vhtId}/patients/${patientId}/readings`),
+        getVHTPatientByPatId: (vhtId ,patientId )=> axios.get(`http://${host}:${port}/api/vhts/${vhtId}/patients/${patientId}`)
     },
     userInfo:{
         getUserInfoById:data=> axios.get(`http://${host}:${port}/api/user-information/${data}`),

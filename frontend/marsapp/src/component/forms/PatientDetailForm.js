@@ -53,59 +53,32 @@ class PatientDetailForm extends React.Component {
     componentDidMount() {
         const pid = this.props.location.state.pid;
 
-        if (localStorage.getItem('isVHT') == "true") {
-            api.vht.getVHTPatReading(localStorage.getItem('loginUserId'), pid).then(res => {
-                const patientData = res.data;
+        api.patient.getPatientById({id: pid}).then(res => {
+            const patientData = res.data;
 
-                if (patientData.sex === 'F') {
-                    patientData.sexFull = 'Female';
-                } else if (patientData.sex === 'M') {
-                    patientData.sexFull = 'Male';
-                } else if (patientData.sex === 'Other') {
-                    patientData.sexFull = 'Other';
-                }
+            if (patientData.sex === 'F') {
+                patientData.sexFull = 'Female';
+            } else if (patientData.sex === 'M') {
+                patientData.sexFull = 'Male';
+            } else if (patientData.sex === 'Other') {
+                patientData.sexFull = 'Other';
+            }
 
-                if (patientData.dob != null) {
-                    patientData.dob = this.formatDate(patientData.dob);
-                } else {
-                    patientData.dob = "";
-                }
+            if (patientData.dob != null) {
+                patientData.dob = this.formatDate(patientData.dob);
+            } else {
+                patientData.dob = "";
+            }
 
-                if (patientData.gestationalStartDate != null) {
-                    patientData.gestationalStartDate = this.formatDate(patientData.gestationalStartDate)
-                } else {
-                    patientData.gestationalStartDate = "";
-                }
+            if (patientData.gestationalStartDate != null) {
+                patientData.gestationalStartDate = this.formatDate(patientData.gestationalStartDate)
+            } else {
+                patientData.gestationalStartDate = "";
+            }
 
-                this.setState({patientData})
-            })
-        } else {
-            api.patient.getPatientById({id: pid}).then(res => {
-                const patientData = res.data;
+            this.setState({patientData})
+        });
 
-                if (patientData.sex === 'F') {
-                    patientData.sexFull = 'Female';
-                } else if (patientData.sex === 'M') {
-                    patientData.sexFull = 'Male';
-                } else if (patientData.sex === 'Other') {
-                    patientData.sexFull = 'Other';
-                }
-
-                if (patientData.dob != null) {
-                    patientData.dob = this.formatDate(patientData.dob);
-                } else {
-                    patientData.dob = "";
-                }
-
-                if (patientData.gestationalStartDate != null) {
-                    patientData.gestationalStartDate = this.formatDate(patientData.gestationalStartDate)
-                } else {
-                    patientData.gestationalStartDate = "";
-                }
-
-                this.setState({patientData})
-            });
-        }
         api.reading.getReadingForPatient({patient_id: pid, latest: false}).then(async res => {
             const readingData = res.data;
             let newState = [];
@@ -136,7 +109,6 @@ class PatientDetailForm extends React.Component {
 
             this.setState({readingData: newState})
         });
-
         api.followUp.getFollowUpByPatientId({patient_id: pid, latest: false}).then(async res => {
             const followUpData = res.data;
             let newState = [];
