@@ -308,10 +308,11 @@ class PatientDetailForm extends React.Component {
                                     <tbody>
                                         {this.state.medicalHistoryData.map(row => (
                                             <tr key={row.id}>
-                                                <td>
-                                                    {row.timestamp}<br/>
-                                                    {row.timestampTime}
-                                                </td>
+                                                {/*For after the MedicalHistory Table has a timestamp*/}
+                                                {/*<td>*/}
+                                                {/*    {row.timestamp}<br/>*/}
+                                                {/*    {row.timestampTime}*/}
+                                                {/*</td>*/}
                                                 <td> {row.medicalHistoryText} </td>
                                             </tr>
                                         ))}
