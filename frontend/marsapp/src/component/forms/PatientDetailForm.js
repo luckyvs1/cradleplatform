@@ -53,32 +53,59 @@ class PatientDetailForm extends React.Component {
     componentDidMount() {
         const pid = this.props.location.state.pid;
 
-        api.patient.getPatientById({id: pid}).then(res => {
-            const patientData = res.data;
+        if (localStorage.getItem('isVHT') == "true") {
+            api.vht.getVHTPatReading(localStorage.getItem('loginUserId'), pid).then(res => {
+                const patientData = res.data;
 
-            if (patientData.sex === 'F') {
-                patientData.sexFull = 'Female';
-            } else if (patientData.sex === 'M') {
-                patientData.sexFull = 'Male';
-            } else if (patientData.sex === 'Other') {
-                patientData.sexFull = 'Other';
-            }
- 
-            if (patientData.dob != null) {
-                patientData.dob = this.formatDate(patientData.dob);
-            } else {
-                patientData.dob = "";
-            }
+                if (patientData.sex === 'F') {
+                    patientData.sexFull = 'Female';
+                } else if (patientData.sex === 'M') {
+                    patientData.sexFull = 'Male';
+                } else if (patientData.sex === 'Other') {
+                    patientData.sexFull = 'Other';
+                }
 
-            if (patientData.gestationalStartDate != null) {
-                patientData.gestationalStartDate = this.formatDate(patientData.gestationalStartDate)
-            } else {
-                patientData.gestationalStartDate = "";
-            }
+                if (patientData.dob != null) {
+                    patientData.dob = this.formatDate(patientData.dob);
+                } else {
+                    patientData.dob = "";
+                }
 
-            this.setState({patientData})
-        });
+                if (patientData.gestationalStartDate != null) {
+                    patientData.gestationalStartDate = this.formatDate(patientData.gestationalStartDate)
+                } else {
+                    patientData.gestationalStartDate = "";
+                }
 
+                this.setState({patientData})
+            })
+        } else {
+            api.patient.getPatientById({id: pid}).then(res => {
+                const patientData = res.data;
+
+                if (patientData.sex === 'F') {
+                    patientData.sexFull = 'Female';
+                } else if (patientData.sex === 'M') {
+                    patientData.sexFull = 'Male';
+                } else if (patientData.sex === 'Other') {
+                    patientData.sexFull = 'Other';
+                }
+
+                if (patientData.dob != null) {
+                    patientData.dob = this.formatDate(patientData.dob);
+                } else {
+                    patientData.dob = "";
+                }
+
+                if (patientData.gestationalStartDate != null) {
+                    patientData.gestationalStartDate = this.formatDate(patientData.gestationalStartDate)
+                } else {
+                    patientData.gestationalStartDate = "";
+                }
+
+                this.setState({patientData})
+            });
+        }
         api.reading.getReadingForPatient({patient_id: pid, latest: false}).then(async res => {
             const readingData = res.data;
             let newState = [];
@@ -132,7 +159,7 @@ class PatientDetailForm extends React.Component {
         });
     }
 
-    formatDate = date =>{
+    formatDate = date => {
         let d = new Date(date),
             month = '' + (d.getMonth() + 1),
             day = '' + d.getDate(),
@@ -365,7 +392,7 @@ class PatientDetailForm extends React.Component {
                                     <tr>
                                         <td>Yes</td>
                                         <td>2019-02-02</td>
-                                        <td> - </td>
+                                        <td> -</td>
                                         <td>Vicodin</td>
                                         <td>1 tablet twice a day</td>
                                         <td>Sleepiness</td>
