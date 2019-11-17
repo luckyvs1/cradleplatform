@@ -133,7 +133,7 @@ class AddMedicationForm extends React.Component {
                                     min="1"
                                     id="dose"
                                     name="dose"
-                                    placeholder="Enter dose (positive number only)"
+                                    placeholder="Enter dose"
                                     value={dosage_edit.dose}
                                     onChange={this.onChangeDose}/>
                                 {errors.dose && <InlineError text={errors.dose}/>}
@@ -154,7 +154,7 @@ class AddMedicationForm extends React.Component {
                                     min = "1"
                                     id="times"
                                     name="times"
-                                    placeholder="How often? (positive no. only)"
+                                    placeholder="How often?"
                                     value={dosage_edit.times}
                                     onChange={this.onChangeDose}/>
                                 {errors.times && <InlineError text={errors.times}/>}
@@ -168,7 +168,7 @@ class AddMedicationForm extends React.Component {
                             </Form.Group>
                         </Form.Row>
                         <Form.Row>
-                            <Form.Group as={Col} style={{display:'flex', justifyContent: 'center'}}>
+                            <Form.Group as={Col}>
                                 <Form.Label>Start Date &nbsp; &nbsp;</Form.Label>
                                 <DatePicker
                                     value={data.start_date}
