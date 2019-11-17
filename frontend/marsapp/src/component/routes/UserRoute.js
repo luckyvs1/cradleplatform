@@ -20,7 +20,7 @@ export const UserRoute = ({component: Component, ...rest}) => {
                     return (
                         <Redirect
                             to={{
-                                pathname: "/",
+                                pathname: props.history.goBack(),
                                 state: {
                                     from: props.location
                                 }
