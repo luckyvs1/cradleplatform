@@ -25,11 +25,7 @@ class ReferralListTable extends React.Component{
 
             for (let i = 0; i < data.length; i++) {
                 // query patient name
-                // TODO: Find a nicer way to use the api, or change the api's requested parameter
-                let getDataParam = {
-                    id: data[i].patientId
-                };
-                const thePatient = await api.patient.getPatientById(getDataParam).then(res => {
+                const thePatient = await api.patient.getPatientById({id: data[i].patientId}).then(res => {
                     return res.data.initials;
                 });
 
@@ -62,7 +58,7 @@ class ReferralListTable extends React.Component{
         this.props.history.push({
             pathname: '/referralDetail',
             state: {
-                referrerId: row.id
+                id: row.id
             }
         });
     };
