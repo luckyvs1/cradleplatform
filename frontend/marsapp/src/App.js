@@ -87,13 +87,13 @@ const App = ({location, isAuthenticated}) => (
             exact
             component={PatientDetail}
         />
-        <HCWRoute
+        <VHTRoute
             location={location}
             path="/allFollowUp"
             exact
             component={AllFollowUp}
         />
-        <HCWRoute
+        <VHTRoute
             location={location}
             path="/followUpDetail"
             exact
