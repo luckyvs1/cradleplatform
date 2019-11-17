@@ -71,9 +71,8 @@ class ReferralListTable extends React.Component {
 
     render() {
         return (
-            <div>
-                <Col>
-                    <Table bordered hover size="small" className={"table-wrapper-scroll-y my-custom-scrollbar"}>
+                <Col className={"table-wrapper-scroll-y my-custom-scrollbar"}>
+                    <Table bordered hover size="small" >
                         <thead>
                         <tr>
                             <th>Patient ID</th>
@@ -98,7 +97,6 @@ class ReferralListTable extends React.Component {
                         </tbody>
                     </Table>
                 </Col>
-            </div>
         );
     }
 }
