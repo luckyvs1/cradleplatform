@@ -442,7 +442,7 @@ class ReferralDetailForm extends React.Component {
                                         <Form.Control
                                             as="textarea"
                                             rows="3"
-                                            placeholder="Additional Symptoms"
+                                            placeholder="Additional Symptoms:"
                                             value={"Additional Symptoms:\n" + readingData.otherSymptoms}/>
                                     </Form.Group>
                                 </Col>
@@ -455,7 +455,7 @@ class ReferralDetailForm extends React.Component {
                                             as="textarea"
                                             rows="3"
                                             placeholder="Comments"
-                                            value={"Comments:\n" + readingData.notes}/>
+                                            value={readingData.notes}/>
                                     </Form.Group>
                                 </Col>
                             </Row>
