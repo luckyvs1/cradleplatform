@@ -33,7 +33,7 @@ class LoginPage extends React.Component {
                 if (res) {
                     let accessToken = res.data.access_token;
                     this.props.updateLogIn(accessToken);
-                    this.processRole(res.data.id);
+                    this.processRole(res.data.id , accessToken);
                 }
             }).catch(error => {
             switch (error.response.status) {
@@ -44,27 +44,29 @@ class LoginPage extends React.Component {
         })
     };
 
-    processRole(id){
+    processRole(id , accessToken){
         api.userInfo.getUserInfoById(id).then(res=>{
             switch (res.data.role) {
                 case "Healthworker":
                     HCW.login(() => {
-                        localStorage.setItem('loginToken', res.data.access_token);
+                        localStorage.setItem('loginToken', accessToken);
                         localStorage.setItem('loginUserId', res.data.id);
                         this.props.history.push("/homePage");
                     })
                     break;
                 case "Admin":
                     auth.login(() => {
-                        localStorage.setItem('loginToken', res.data.access_token);
+                        localStorage.setItem('loginToken', accessToken);
                         localStorage.setItem('loginUserId', res.data.id);
                         this.props.history.push("/homePage");
                     })
                     break;
                 case "VHT":
+                    console.log(res.data)
                     VHT.login(() => {
-                        localStorage.setItem('loginToken', res.data.access_token);
+                        localStorage.setItem('loginToken', accessToken);
                         localStorage.setItem('loginUserId', res.data.id);
+                        localStorage.setItem('isVHT', res.data.role == "VHT");
                         this.props.history.push("/homePage");
                     })
                     break;

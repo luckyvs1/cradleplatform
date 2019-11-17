@@ -30,13 +30,14 @@ import FollowUpDetail from "./component/pages/followUp/FollowUpDetail";
 import ListUser from "./component/pages/users/ListUser"
 import AddUsers from "./component/pages/users/AddUsers"
 import {HCWRoute} from "./component/routes/HCWRoute";
+import {VHTRoute} from "./component/routes/VHTRoute";
 
 const App = ({location, isAuthenticated}) => (
 
     <div className="ui-toolbar">
         {isAuthenticated && <TopNavigation/>}
         <Route location={location} path="/" exact component={LoginPage}/>
-        <HCWRoute
+        <VHTRoute
             location={location} path="/homePage" exact component={HomePage}/>
         <HCWRoute
             location={location}
