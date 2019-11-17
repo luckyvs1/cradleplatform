@@ -45,13 +45,13 @@ const App = ({location, isAuthenticated}) => (
             exact
             component={SignupPage}
         />
-        <HCWRoute
+        <VHTRoute
             location={location}
             path="/addReadingDetail"
             exact
             component={AddReadingDetail}
         />
-        <HCWRoute
+        <VHTRoute
             location={location}
             path="/listPatient"
             exact
@@ -81,7 +81,7 @@ const App = ({location, isAuthenticated}) => (
             exact
             component={CreateReferral}
         />
-        <HCWRoute
+        <VHTRoute
             location={location}
             path="/patientDetail"
             exact
@@ -105,7 +105,7 @@ const App = ({location, isAuthenticated}) => (
             exact
             component={Account}
         />
-        <HCWRoute
+        <VHTRoute
             location={location}
             path="/addPatient"
             exact
