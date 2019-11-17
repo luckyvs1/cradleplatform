@@ -542,5 +542,13 @@ insert into Medical_History values (1, 1, 'Immunizations: Flu vaccine yearly. Pn
 Allergic to Penicillin-developed a diffuse rash after an injection');
 insert into Medical_History values (2, 2, 'Immunizations: Flu vaccine yearly.');
 
-
 insert into Monitor values ('1', 1);
+insert into Monitor values ('1', 2);
+insert into Monitor values ('1', 3);
+insert into Monitor values ('1', 9);
+insert into Monitor values ('5', 4);
+insert into Monitor values ('5', 5);
+insert into Monitor values ('5', 10);
+insert into Monitor values ('6', 6);
+insert into Monitor values ('6', 7);
+insert into Monitor values ('9', 8);
