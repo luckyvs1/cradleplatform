@@ -81,6 +81,7 @@ class ReferralDetailForm extends React.Component {
         let data =  this.props.location.state;
         api.referral.getReferralById(data).then(res => {
                 const referralData = res.data[0];
+                console.log(referralData);
                 this.setState({referralData});
         }).then(res => {
             const patientId = this.state.referralData.patientId;
