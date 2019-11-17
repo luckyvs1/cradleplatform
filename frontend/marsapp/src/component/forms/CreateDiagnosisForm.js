@@ -17,14 +17,19 @@ import {
 import InlineError from "../messages/InlineError";
 import api from "../../api"
 import {withRouter} from "react-router-dom";
+import ErrorAlert from "../utils/ErrorAlert";
+import ConfirmAlert from "../utils/ConfirmAlert";
 
 class CreateDiagnosisForm extends React.Component {
     constructor(props){
         super(props);
         this.state = {
             data: this.props.location.state.data,
-            referrerId: this.props.location.state.referrerId,
-            errors: {}
+            referralId: this.props.location.state.referralId,
+            errors: {},
+            isShowError: false,
+            isShowConfirm: false,
+            message: ""
         };
         this.onChange = this.onChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
@@ -50,17 +55,20 @@ class CreateDiagnosisForm extends React.Component {
         this.setState({errors}); //if there are errors returned, display them
         if(Object.keys(errors).length === 0){ //if no errors
             api.reading.uploadDiagnosis({patient_id: this.state.data.patientId, diagnosis: this.state.data.diagnosis}, config)
-                .then(
+                .then(res => {
                     // TODO: Success toast
+                    this.onShowAlert("Successfully added Diagnosis", false, true);
                     this.props.history.push({
                         pathname:  '/referralDetail',
                         state: {
-                            referrerId: this.state.referrerId
+                            id: this.state.referralId
                         }
-                    })
-                )
+                    });
+                })
+
                 .catch(error => {
                     // TODO: Failure toast
+                    this.onShowAlert("Error: failed to add diagnosis.", true, false);
                     console.log("createDiagnosis error ", error.message);
                 });
         }
@@ -78,6 +86,24 @@ class CreateDiagnosisForm extends React.Component {
         }
 
         return errors;
+    };
+
+    onShowAlert = (message, error, confirm) => {
+        console.log("in show", this.state);
+        this.setState({
+            ...this.state,
+            isShowError: error,
+            isShowConfirm: confirm,
+            message: message
+        }, () => {
+            window.setTimeout(() => {
+                this.setState({
+                    ...this.state,
+                    isShowError: false,
+                    isShowConfirm: false
+                })
+            }, 2000)
+        });
     };
 
     render() {
@@ -117,6 +143,8 @@ class CreateDiagnosisForm extends React.Component {
                         </Row>
                     </Form>
                 </Container>
+                <ErrorAlert show={this.state.isShowError} message={this.state.message} />
+                <ConfirmAlert show={this.state.isShowConfirm} message={this.state.message} />
             </div>
         );
     }

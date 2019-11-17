@@ -383,7 +383,7 @@ class ReferralDetailForm extends React.Component {
                                             type="text"
                                             id="blood_pressure"
                                             name="blood_pressure"
-                                            value={ readingData.systolicBloodPressure + " / " + readingData.diastolicBloodPressure } />
+                                            value={ readingData.systolicBloodPressure + " / " + readingData.diastolicBloodPressure + "mmHg"} />
                                         {/*error handling*/}
                                         {/* <Form.Text className="text-muted">
                                         {errors.email && <InlineError text={errors.email} />}
@@ -397,7 +397,7 @@ class ReferralDetailForm extends React.Component {
                                             type="number"
                                             id="heart_rate"
                                             name="heart_rate"
-                                            value={readingData.pulseRate} />
+                                            value={readingData.pulseRate + "BPM"} />
                                         {/*error handling*/}
                                         {/* <Form.Text className="text-muted">
                                         {errors.email && <InlineError text={errors.email} />}
