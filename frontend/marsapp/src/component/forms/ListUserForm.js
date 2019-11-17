@@ -55,9 +55,136 @@ class ListUserForm extends React.Component {
                         </Col>
                     </Row>
                     <Row>
-                        <Col>
-                            <Table hover size="sm">
+
+                        <Col  className={"table-wrapper-scroll-y my-custom-scrollbar"}>
+                            <Table hover size="sm" >
                                 <tbody>
+                                {this.state.data.map(row => (
+                                    <tr key={row.id} class='clickable-row'>
+                                        <td>
+                                            <Row>
+                                                <Col>
+                                                    <Link>
+                                                        <strong>{row.firstName} {row.lastName}</strong> <br/>
+                                                        {row.phone} <br/>
+                                                        {row.role}
+                                                    </Link>
+                                                </Col>
+                                                <Col className="text-right">
+                                                    <DialogEditUser value={row}></DialogEditUser>
+                                                </Col>
+                                            </Row>
+                                        </td>
+                                    </tr>
+                                ))}
+                                {this.state.data.map(row => (
+                                    <tr key={row.id} class='clickable-row'>
+                                        <td>
+                                            <Row>
+                                                <Col>
+                                                    <Link>
+                                                        <strong>{row.firstName} {row.lastName}</strong> <br/>
+                                                        {row.phone} <br/>
+                                                        {row.role}
+                                                    </Link>
+                                                </Col>
+                                                <Col className="text-right">
+                                                    <DialogEditUser value={row}></DialogEditUser>
+                                                </Col>
+                                            </Row>
+                                        </td>
+                                    </tr>
+                                ))}
+                                {this.state.data.map(row => (
+                                    <tr key={row.id} class='clickable-row'>
+                                        <td>
+                                            <Row>
+                                                <Col>
+                                                    <Link>
+                                                        <strong>{row.firstName} {row.lastName}</strong> <br/>
+                                                        {row.phone} <br/>
+                                                        {row.role}
+                                                    </Link>
+                                                </Col>
+                                                <Col className="text-right">
+                                                    <DialogEditUser value={row}></DialogEditUser>
+                                                </Col>
+                                            </Row>
+                                        </td>
+                                    </tr>
+                                ))}
+                                {this.state.data.map(row => (
+                                    <tr key={row.id} class='clickable-row'>
+                                        <td>
+                                            <Row>
+                                                <Col>
+                                                    <Link>
+                                                        <strong>{row.firstName} {row.lastName}</strong> <br/>
+                                                        {row.phone} <br/>
+                                                        {row.role}
+                                                    </Link>
+                                                </Col>
+                                                <Col className="text-right">
+                                                    <DialogEditUser value={row}></DialogEditUser>
+                                                </Col>
+                                            </Row>
+                                        </td>
+                                    </tr>
+                                ))}
+                                {this.state.data.map(row => (
+                                    <tr key={row.id} class='clickable-row'>
+                                        <td>
+                                            <Row>
+                                                <Col>
+                                                    <Link>
+                                                        <strong>{row.firstName} {row.lastName}</strong> <br/>
+                                                        {row.phone} <br/>
+                                                        {row.role}
+                                                    </Link>
+                                                </Col>
+                                                <Col className="text-right">
+                                                    <DialogEditUser value={row}></DialogEditUser>
+                                                </Col>
+                                            </Row>
+                                        </td>
+                                    </tr>
+                                ))}
+                                {this.state.data.map(row => (
+                                    <tr key={row.id} class='clickable-row'>
+                                        <td>
+                                            <Row>
+                                                <Col>
+                                                    <Link>
+                                                        <strong>{row.firstName} {row.lastName}</strong> <br/>
+                                                        {row.phone} <br/>
+                                                        {row.role}
+                                                    </Link>
+                                                </Col>
+                                                <Col className="text-right">
+                                                    <DialogEditUser value={row}></DialogEditUser>
+                                                </Col>
+                                            </Row>
+                                        </td>
+                                    </tr>
+                                ))}
+                                {this.state.data.map(row => (
+                                    <tr key={row.id} class='clickable-row'>
+                                        <td>
+                                            <Row>
+                                                <Col>
+                                                    <Link>
+                                                        <strong>{row.firstName} {row.lastName}</strong> <br/>
+                                                        {row.phone} <br/>
+                                                        {row.role}
+                                                    </Link>
+                                                </Col>
+                                                <Col className="text-right">
+                                                    <DialogEditUser value={row}></DialogEditUser>
+                                                </Col>
+                                            </Row>
+                                        </td>
+                                    </tr>
+                                ))}
                                 {this.state.data.map(row => (
                                     <tr key={row.id} class='clickable-row'>
                                         <td>
