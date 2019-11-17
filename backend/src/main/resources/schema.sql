@@ -67,6 +67,9 @@ CREATE TABLE Patient (
             (attestation_no IS NOT NULL) OR
             (first_name IS NOT NULL AND last_name IS NOT NULL)
         ),
+    CONSTRAINT hasValidAge CHECK (
+            (age >= 18)
+        ),
     PRIMARY KEY (id)
 );
 
@@ -128,16 +131,16 @@ CREATE TABLE Reading (
     pulse_rate      INTEGER         NOT NULL,
     notes           TEXT,
     need_followup   BOOLEAN         NOT NULL,
-    app_version     VARCHAR(32)     NOT NULL,
+    app_version     VARCHAR(32),
     date_last_saved TIMESTAMP       NOT NULL,
     date_recheck_vitals_needed TIMESTAMP,
-    device_info     VARCHAR(128)     NOT NULL,
+    device_info     VARCHAR(128),
     gestational_age_unit  ENUM('weeks', 'months', 'none'),
     gestational_age INTEGER,
-    manually_changed_OCR_results VARCHAR(16)   NOT NULL,
-    path_to_photo   VARCHAR(128)    NOT NULL,
+    manually_changed_OCR_results VARCHAR(16),
+    path_to_photo   VARCHAR(128),
     total_OCR_seconds   FLOAT       NOT NULL,
-    region          VARCHAR(32)     NOT NULL,
+    region          VARCHAR(32),
     OCR_enabled     BOOLEAN         NOT NULL,
     upload_images   BOOLEAN         NOT NULL,
     reading_analysis  ENUM('Green',
@@ -186,10 +189,16 @@ insert into User values ('1', 'VHT_user', 'password123');
 insert into User values ('2', 'HealthWorker', 'password123');
 insert into User values ('3', 'Admin_user', 'password123');
 insert into User values ('4', 'customerTesting', 'justTesting');
+insert into User values ('5', 'DebZuluka', 'justTesting');
+insert into User values ('6', 'BazilioOkello', 'justTesting');
+insert into User values ('7', 'CKitumba', 'justTesting');
+insert into User values ('8', 'DWakikona', 'justTesting');
+insert into User values ('9', 'EKakooza', 'justTesting');
+insert into User values ('10', 'GabrielM', 'justTesting');
 
 insert into User_Info values ('1',
-                              'Bob',
-                              'Smith',
+                              'Geoffrey',
+                              'Bukenya',
                               '1980-01-01',
                               'Uganda',
                               '077-241-8761',
@@ -197,8 +206,8 @@ insert into User_Info values ('1',
                               'VHT');
 
 insert into User_Info values ('2',
-                              'Sally',
-                              'Jane',
+                              'Jessica',
+                              'Nasasira',
                               '1985-01-01',
                               'Uganda',
                               '077-241-8762',
@@ -206,8 +215,8 @@ insert into User_Info values ('2',
                               'Healthworker');
 
 insert into User_Info values ('3',
-                              'Mary',
-                              'Anne',
+                              'Hilary',
+                              'Alupo',
                               '1975-01-01',
                               'Uganda',
                               '077-241-8763',
@@ -215,17 +224,80 @@ insert into User_Info values ('3',
                               'Admin');
 
 insert into User_Info values ('4',
-                              'Test',
-                              'User',
-                              '2019-10-28',
+                              'Ester',
+                              'Masane',
+                              '1970-10-28',
                               'Uganda',
                               '077-241-8764',
                               'admin2@healthclinic.com',
                               'Admin');
 
+insert into User_Info values ('5',
+                              'Deborah',
+                              'Zuluka',
+                              '1970-04-03',
+                              'Uganda',
+                              '077-241-8765',
+                              'vht2@healthclinic.com',
+                              'VHT');
+
+insert into User_Info values ('6',
+                              'Bazilio',
+                              'Olara-Okello',
+                              '1965-04-03',
+                              'Uganda',
+                              '077-241-8766',
+                              'vht3@healthclinic.com',
+                              'VHT');
+
+insert into User_Info values ('7',
+                              'Christine',
+                              'Kitumba',
+                              '1960-04-03',
+                              'Uganda',
+                              '077-241-8767',
+                              'worker2@healthclinic.com',
+                              'Healthworker');
+
+insert into User_Info values ('8',
+                              'David',
+                              'Wakikona',
+                              '1955-04-03',
+                              'Uganda',
+                              '077-241-8768',
+                              'worker3@healthclinic.com',
+                              'Healthworker');
+
+insert into User_Info values ('9',
+                              'Ezra',
+                              'Kakooza',
+                              '1960-03-03',
+                              'Uganda',
+                              '077-241-8766',
+                              'vht3@healthclinic.com',
+                              'VHT');
+
+insert into User_Info values ('10',
+                              'Gabriel',
+                              'Mukisa',
+                              '1955-03-03',
+                              'Uganda',
+                              '077-241-8766',
+                              'vht4@healthclinic.com',
+                              'VHT');
+
 insert into VHT values ('1');
+insert into VHT values ('5');
+insert into VHT values ('6');
+insert into VHT values ('9');
+insert into VHT values ('10');
+
 insert into Healthworker values ('2');
+insert into Healthworker values ('7');
+insert into Healthworker values ('8');
+
 insert into Admin values ('3');
+insert into Admin values ('4');
 
 insert into Patient values (1,
                             '17182982734',
@@ -241,7 +313,7 @@ insert into Patient values (1,
                             26,
                             '1993-01-05',
                             True,
-                            '2019-06-01',
+                            '2019-08-10',
                             'months',
                             3);
 
@@ -258,7 +330,154 @@ insert into Patient values (2,
                             'M',
                             25,
                             '1994-01-05',
-                            false,
+                            False,
+                            null,
+                            'none',
+                            0);
+
+insert into Patient values (3,
+                            '49886151953',
+                            'Kizza',
+                            'Makubaya',
+                            'V003',
+                            'Z003',
+                            'H003',
+                            'B001',
+                            'T001',
+                            'KM',
+                            'Other',
+                            43,
+                            '1976-01-05',
+                            False,
+                            null,
+                            'none',
+                            0);
+
+insert into Patient values (4,
+                            '67958437492',
+                            'Maria',
+                            'Mutagamba',
+                            'V001',
+                            'Z001',
+                            'H001',
+                            'B001',
+                            'T001',
+                            'MM',
+                            'F',
+                            22,
+                            '1997-01-05',
+                            True,
+                            '2019-10-26',
+                            'weeks',
+                            3);
+
+insert into Patient values (5,
+                            '',
+                            'Musa',
+                            'Adrisi',
+                            'V001',
+                            'Z001',
+                            'H002',
+                            '',
+                            'T001',
+                            'MA',
+                            'M',
+                            51,
+                            '1968-04-05',
+                            False,
+                            null,
+                            'none',
+                            0);
+
+insert into Patient values (6,
+                            '',
+                            'Jesca',
+                            'Eriyo',
+                            'V001',
+                            'Z001',
+                            'H002',
+                            '',
+                            'T001',
+                            'JE',
+                            'F',
+                            18,
+                            '2001-05-05',
+                            False,
+                            null,
+                            'none',
+                            0);
+
+/*
+Patients with minimum fields
+ */
+insert into Patient values (7,
+                            '86979421630',
+                            '',
+                            '',
+                            'V001',
+                            'Z001',
+                            '',
+                            '',
+                            '',
+                            'AP',
+                            'F',
+                            67,
+                            null,
+                            False,
+                            null,
+                            'none',
+                            0);
+
+insert into Patient values (8,
+                            '77217719981',
+                            '',
+                            '',
+                            'V002',
+                            'Z004',
+                            '',
+                            '',
+                            '',
+                            'ZA',
+                            'M',
+                            37,
+                            null,
+                            False,
+                            null,
+                            'none',
+                            0);
+
+insert into Patient values (9,
+                            '01685214073',
+                            '',
+                            '',
+                            'V002',
+                            'Z004',
+                            '',
+                            '',
+                            '',
+                            'FG',
+                            'Other',
+                            23,
+                            null,
+                            False,
+                            null,
+                            'none',
+                            0);
+
+insert into Patient values (10,
+                            '00740758493',
+                            'Kahinda',
+                            'Otafiire',
+                            'V002',
+                            'Z004',
+                            '',
+                            '',
+                            '',
+                            'KO',
+                            'M',
+                            32,
+                            '1987-04-14',
+                            False,
                             null,
                             'none',
                             0);
@@ -289,16 +508,312 @@ insert into Reading values (1,
                             'Green',
                             '');
 
-insert into FollowUp values (2,
+insert into Reading values (2,
+                            '1',
+                            1,
+                            '2019-11-01',
+                            'No Symptoms',
+                            '',
+                            140,
+                            85,
+                            126,
+                            '',
+                            False,
+                            'CradlePlatform1.0',
+                            '2019-11-01',
+                            null,
+                            'Google Pixel',
+                            'months',
+                            4,
+                            '4',
+                            '/photos',
+                            3.14,
+                            'Northern Uganda',
+                            True,
+                            True,
+                            'Yellow_down',
+                            '');
+
+insert into Reading values (3,
+                            '1',
+                            1,
+                            '2019-11-15',
+                            'Blurred Vision,Feverish,Unwell',
+                            '',
+                            115,
+                            85,
+                            196,
+                            'Shock',
+                            True,
+                            'CradlePlatform1.0',
+                            '2019-11-15',
+                            null,
+                            'Google Pixel',
+                            'months',
+                            4,
+                            '4',
+                            '/photos',
+                            3.14,
+                            'Northern Uganda',
+                            True,
+                            True,
+                            'Red_down',
+                            '');
+
+insert into Reading values (4,
+                            '1',
+                            1,
+                            '2019-11-16',
+                            'Headache',
+                            'Nausea',
+                            140,
+                            90,
+                            117,
+                            '',
+                            True,
+                            'CradlePlatform1.0',
+                            '2019-11-16',
+                            null,
+                            'Google Pixel',
+                            'months',
+                            4,
+                            '4',
+                            '/photos',
+                            3.14,
+                            'Northern Uganda',
+                            True,
+                            True,
+                            'Yellow_up',
+                            '');
+
+insert into Reading values (5,
+                            '1',
+                            1,
+                            '2019-11-17',
+                            'Abdominal pain',
+                            '',
+                            160,
+                            85,
+                            139,
+                            '',
+                            True,
+                            'CradlePlatform1.0',
+                            '2019-11-17',
+                            null,
+                            'Google Pixel',
+                            'months',
+                            4,
+                            '4',
+                            '/photos',
+                            3.14,
+                            'Northern Uganda',
+                            True,
+                            True,
+                            'Red_up',
+                            '');
+
+insert into Reading values (6,
+                            '1',
+                            2,
+                            '2019-11-17',
+                            'Abdominal pain',
+                            '',
+                            140,
+                            90,
+                            117,
+                            '',
+                            True,
+                            'CradlePlatform1.0',
+                            '2019-11-17',
+                            null,
+                            'Google Pixel',
+                            'months',
+                            4,
+                            '4',
+                            '/photos',
+                            3.14,
+                            'Northern Uganda',
+                            True,
+                            True,
+                            'Yellow_up',
+                            '');
+
+insert into Reading values (7,
+                            '5',
+                            4,
+                            '2019-11-18',
+                            'No Symptoms',
+                            '',
+                            135,
+                            85,
+                            117,
+                            'Good vitals',
+                            False,
+                            'CradlePlatform1.0',
+                            '2019-11-18',
+                            null,
+                            'Google Pixel',
+                            'weeks',
+                            3,
+                            '4',
+                            '/photos',
+                            3.14,
+                            'Southern Uganda',
+                            True,
+                            True,
+                            'Green',
+                            '');
+
+insert into Reading values (8,
+                            '6',
+                            6,
+                            '2019-11-18',
+                            'No Symptoms',
+                            '',
+                            135,
+                            85,
+                            117,
+                            'Good vitals',
+                            False,
+                            'CradlePlatform1.0',
+                            '2019-11-18',
+                            null,
+                            'Google Pixel',
+                            'none',
+                            0,
+                            '4',
+                            '/photos',
+                            3.14,
+                            'Southern Uganda',
+                            True,
+                            True,
+                            'Green',
+                            '');
+
+insert into Reading values (9,
+                            '5',
+                            4,
+                            '2019-11-19',
+                            'Abdominal pain',
+                            'Very sick',
+                            160,
+                            85,
+                            139,
+                            '',
+                            True,
+                            'CradlePlatform1.0',
+                            '2019-11-19',
+                            null,
+                            'Google Pixel',
+                            'weeks',
+                            3,
+                            '4',
+                            '/photos',
+                            3.14,
+                            'Southern Uganda',
+                            True,
+                            True,
+                            'Red_up',
+                            '');
+
+insert into Reading values (10,
+                            '6',
+                            6,
+                            '2019-11-20',
+                            'Abdominal pain',
+                            'Very sick',
+                            135,
+                            85,
+                            117,
+                            'Good vitals',
+                            True,
+                            'CradlePlatform1.0',
+                            '2019-11-20',
+                            null,
+                            'Google Pixel',
+                            'none',
+                            0,
+                            '4',
+                            '/photos',
+                            3.14,
+                            'Southern Uganda',
+                            True,
+                            True,
+                            'Green',
+                            'Take prescribed medication and stay hydrated');
+
+insert into FollowUp values (1,
                              1,
+                             'Vitals to be rechecked',
+                             True,
+                             'Once a week',
+                             'High blood pressure',
+                             'Take medicine as prescribed');
+
+insert into FollowUp values (2,
+                             2,
+                             'Vitals to be rechecked',
+                             True,
+                             'Once a month',
+                             '',
+                             'Take medicine as prescribed');
+
+ insert into FollowUp values (3,
+                             4,
                              'Vitals to be rechecked',
                              True,
                              'Once a month',
                              'High blood pressure',
                              'Take medicine as prescribed');
 
-insert into Referral values (1, '1', 1, 1, '2019-01-01', 'healthfacility1', 'notes', 'notes2');
-insert into Drug_History values (1, 1, 'Patient 1 Drug History');
-insert into Medication values (1, 1, 'Advil', '15mg per day', '2019-11-11', '2019-12-11');
-insert into Medical_History values (1, '1', 'my medical history');
+ insert into FollowUp values (4,
+                             6,
+                             'Vitals to be rechecked',
+                             True,
+                             'Once a month',
+                             '',
+                             'Take medicine as prescribed');
+
+insert into Referral values (1, '1', 1, 3, '2019-11-15', 'Bidibidi', 'Patient was unwell', '');
+insert into Referral values (2, '1', 1, 4, '2019-11-16', 'Bidibidi', 'Patient had nausea', '');
+insert into Referral values (3, '1', 1, 5, '2019-11-17', 'Bidibidi', 'Patient had abdominal pain', '');
+insert into Referral values (4, '1', 2, 6, '2019-11-18', 'Bidibidi', 'Patient had abdominal pain', '');
+insert into Referral values (5, '5', 4, 9, '2019-11-19', 'Bidibidi', 'Patient is very sick', '');
+insert into Referral values (6, '6', 6, 10, '2019-11-20', 'Bidibidi', 'Patient is very sick', 'Told them to drink more water');
+
+insert into Drug_History values (1, 1, 'Trial of various blood pressure reduction medications');
+insert into Drug_History values (2, 2, '');
+insert into Drug_History values (3, 3, '');
+insert into Drug_History values (4, 4, '');
+insert into Drug_History values (5, 5, '');
+insert into Drug_History values (6, 6, 'No medications prescribed to date');
+insert into Drug_History values (7, 7, 'No medications prescribed to date');
+insert into Drug_History values (8, 8, 'No medications prescribed to date');
+insert into Drug_History values (9, 9, 'No medications prescribed to date');
+insert into Drug_History values (10, 10, 'No medications prescribed to date');
+
+insert into Medication values (1, 1, 'Bumetanide', '2 tablets once per day', '2019-11-11', '2019-12-11');
+insert into Medication values (2, 1, 'Chlorthalidone', '1 tablet twice per day', '2019-11-11', '2019-12-11');
+insert into Medication values (3, 1, 'Indapamide', '1 tablet once per day', '2019-11-11', '2019-12-11');
+insert into Medication values (4, 1, 'Advil', '1 tablet once per month', '2019-11-11', null);
+insert into Medication values (5, 2, 'Bumetanide', '2 tablets once per day', '2019-11-11', '2019-12-11');
+insert into Medication values (6, 2, 'Chlorthalidone', '1 tablet twice per day', '2019-11-11', '2019-12-11');
+insert into Medication values (7, 3, 'Indapamide', '1 tablet once per day', '2019-11-11', '2019-12-11');
+insert into Medication values (8, 3, 'Advil', '1 tablet once per month', '2019-11-11', null);
+insert into Medication values (9, 4, 'Indapamide', '1 tablet once per day', '2019-11-11', '2019-12-11');
+insert into Medication values (10, 5, 'Advil', '1 tablet once per month', '2019-11-11', null);
+
+insert into Medical_History values (1, 1, 'Immunizations: Flu vaccine yearly. Pneumovax 2006
+Allergic to Penicillin-developed a diffuse rash after an injection');
+insert into Medical_History values (2, 2, 'Immunizations: Flu vaccine yearly.');
+
 insert into Monitor values ('1', 1);
+insert into Monitor values ('1', 2);
+insert into Monitor values ('1', 3);
+insert into Monitor values ('1', 9);
+insert into Monitor values ('5', 4);
+insert into Monitor values ('5', 5);
+insert into Monitor values ('5', 10);
+insert into Monitor values ('6', 6);
+insert into Monitor values ('6', 7);
+insert into Monitor values ('9', 8);
