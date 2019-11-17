@@ -291,9 +291,11 @@ insert into VHT values ('5');
 insert into VHT values ('6');
 insert into VHT values ('9');
 insert into VHT values ('10');
+
 insert into Healthworker values ('2');
 insert into Healthworker values ('7');
 insert into Healthworker values ('8');
+
 insert into Admin values ('3');
 insert into Admin values ('4');
 
@@ -724,7 +726,6 @@ insert into Reading values (10,
                             85,
                             117,
                             'Good vitals',
-                            '',
                             True,
                             'CradlePlatform1.0',
                             '2019-11-20',
@@ -741,15 +742,44 @@ insert into Reading values (10,
                             'Green',
                             'Take prescribed medication and stay hydrated');
 
-insert into FollowUp values (2,
+insert into FollowUp values (1,
                              1,
+                             'Vitals to be rechecked',
+                             True,
+                             'Once a week',
+                             'High blood pressure',
+                             'Take medicine as prescribed');
+
+insert into FollowUp values (2,
+                             2,
+                             'Vitals to be rechecked',
+                             True,
+                             'Once a month',
+                             '',
+                             'Take medicine as prescribed');
+
+ insert into FollowUp values (3,
+                             4,
                              'Vitals to be rechecked',
                              True,
                              'Once a month',
                              'High blood pressure',
                              'Take medicine as prescribed');
 
-insert into Referral values (1, '1', 1, 1, '2019-01-01', 'healthfacility1', 'notes', 'notes2');
+ insert into FollowUp values (4,
+                             6,
+                             'Vitals to be rechecked',
+                             True,
+                             'Once a month',
+                             '',
+                             'Take medicine as prescribed');
+
+insert into Referral values (1, '1', 1, 3, '2019-11-15', 'Bidibidi', 'Patient was unwell', '');
+insert into Referral values (2, '1', 1, 4, '2019-11-16', 'Bidibidi', 'Patient had nausea', '');
+insert into Referral values (3, '1', 1, 5, '2019-11-17', 'Bidibidi', 'Patient had abdominal pain', '');
+insert into Referral values (4, '1', 2, 6, '2019-11-18', 'Bidibidi', 'Patient had abdominal pain', '');
+insert into Referral values (5, '5', 4, 9, '2019-11-19', 'Bidibidi', 'Patient is very sick', '');
+insert into Referral values (6, '6', 6, 10, '2019-11-20', 'Bidibidi', 'Patient is very sick', 'Told them to drink more water');
 
 insert into Drug_History values (1, 1, 'Trial of various blood pressure reduction medications');
 insert into Drug_History values (2, 2, '');
@@ -765,13 +795,13 @@ insert into Drug_History values (10, 10, 'No medications prescribed to date');
 insert into Medication values (1, 1, 'Bumetanide', '2 tablets once per day', '2019-11-11', '2019-12-11');
 insert into Medication values (2, 1, 'Chlorthalidone', '1 tablet twice per day', '2019-11-11', '2019-12-11');
 insert into Medication values (3, 1, 'Indapamide', '1 tablet once per day', '2019-11-11', '2019-12-11');
-insert into Medication values (4, 1, 'Advil', '1 tablet once per month', '2019-11-11', '');
+insert into Medication values (4, 1, 'Advil', '1 tablet once per month', '2019-11-11', null);
 insert into Medication values (5, 2, 'Bumetanide', '2 tablets once per day', '2019-11-11', '2019-12-11');
 insert into Medication values (6, 2, 'Chlorthalidone', '1 tablet twice per day', '2019-11-11', '2019-12-11');
 insert into Medication values (7, 3, 'Indapamide', '1 tablet once per day', '2019-11-11', '2019-12-11');
-insert into Medication values (8, 3, 'Advil', '1 tablet once per month', '2019-11-11', '');
+insert into Medication values (8, 3, 'Advil', '1 tablet once per month', '2019-11-11', null);
 insert into Medication values (9, 4, 'Indapamide', '1 tablet once per day', '2019-11-11', '2019-12-11');
-insert into Medication values (10, 5, 'Advil', '1 tablet once per month', '2019-11-11', '');
+insert into Medication values (10, 5, 'Advil', '1 tablet once per month', '2019-11-11', null);
 
 insert into Medical_History values (1, 1, 'Immunizations: Flu vaccine yearly. Pneumovax 2006
 Allergic to Penicillin-developed a diffuse rash after an injection');
