@@ -10,6 +10,7 @@ import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import auth from "../../actions/auth"
 import {Container, Nav, Navbar, NavDropdown, Row, Col} from 'react-bootstrap';
+import VHT from "../../actions/authVHT";
 
 const bottomMarginStyle = {
     marginBottom: '40px',
@@ -34,9 +35,12 @@ class TopNavigation extends React.Component {
             document.getElementsByClassName("sidebar-wrapper")[0].setAttribute("style", `width:${width} px !important;`)
         }
     }
-    handleClick(e){
+
+    handleClick(e) {
         localStorage.removeItem("loginToken");
         localStorage.removeItem("loginUserId");
+        localStorage.removeItem("isVHT");
+
     }
 
     render() {
@@ -84,9 +88,12 @@ class TopNavigation extends React.Component {
                                         <Nav.Link as={Link} to="allFollowUp">
                                             <i className="fas fa-search"></i> Follow Ups
                                         </Nav.Link>
-                                        <Nav.Link as={Link} to="referral">
+                                        {VHT.isAuthenticated() ?
+                                            null:
+                                            <Nav.Link as={Link} to="referral">
                                             <i className="fas fa-redo"></i> Referrals
-                                        </Nav.Link>
+                                            </Nav.Link>
+                                        }
                                         <Nav.Link as={Link} to="listPatient">
                                             <i className="fas fa-users"></i> Patients
                                         </Nav.Link>
