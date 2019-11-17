@@ -149,27 +149,25 @@ class ListPatientForm extends React.Component {
                     </Row>
                     <br></br>
                     <Row>
-                        <div>
-                            <Col>
-                                <Table hover size="sm" className={"table-wrapper-scroll-y"}>
-                                    <thead>
-                                    <tr>
-                                        <th width={350}>Patient ID</th>
-                                        <th width={450}>Initials</th>
+                        <Col className={"table-wrapper-scroll-y my-custom-scrollbar"}>
+                            <Table hover size="sm">
+                                <thead>
+                                <tr>
+                                    <th>Patient ID</th>
+                                    <th>Initials</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {this.state.filteredData.map(row => (
+                                    <tr key={row.pid} class='clickable-row'
+                                        onClick={() => this.handleItemClick(row)}>
+                                        <td>{row.pid}</td>
+                                        <td>{row.initial}</td>
                                     </tr>
-                                    </thead>
-                                    <tbody>
-                                    {this.state.filteredData.map(row => (
-                                        <tr key={row.pid} class='clickable-row'
-                                            onClick={() => this.handleItemClick(row)}>
-                                            <td>{row.pid}</td>
-                                            <td>{row.initial}</td>
-                                        </tr>
-                                    ))}
-                                    </tbody>
-                                </Table>
-                            </Col>
-                        </div>
+                                ))}
+                                </tbody>
+                            </Table>
+                        </Col>
                     </Row>
                 </Container>
             </div>
