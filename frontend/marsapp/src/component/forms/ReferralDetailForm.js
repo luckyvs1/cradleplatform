@@ -10,6 +10,8 @@ import {Button, Col, Container, Form, Row, Tab, Tabs} from 'react-bootstrap';
 import InlineError from "../messages/InlineError";
 import api from "../../api"
 import {Link, withRouter} from "react-router-dom";
+import ErrorAlert from "../utils/ErrorAlert";
+import ConfirmAlert from "../utils/ConfirmAlert";
 
 class ReferralDetailForm extends React.Component {
     // functions
@@ -73,7 +75,10 @@ class ReferralDetailForm extends React.Component {
                 timestamp: null,
             },
             referrerName: "",
-            errors: {}
+            errors: {},
+            isShowError: false,
+            isShowConfirm: false,
+            message: ""
         };
     }
 
@@ -116,6 +121,11 @@ class ReferralDetailForm extends React.Component {
                 this.setState({referrerName});
             });
         });
+
+        console.log("testingg:", data.isShowConfirm);
+        if (data.isShowError || data.isShowConfirm) {
+            this.onShowAlert(data.message, data.isShowError, data.isShowConfirm);
+        }
     }
 
     getSymptomButton(symptom) {
@@ -154,16 +164,23 @@ class ReferralDetailForm extends React.Component {
         )
     }
 
-    checkDiagnosisExist() {
-        // TODO: Fix bug where the require diagnosis does not show up, when it should, when first visiting the details page for the first time
-        if (this.state.errors.requireDiagnosis) {
-            return (
-                <div>
-
-                </div>
-            )
-        }
-    }
+    onShowAlert = (message, error, confirm) => {
+        console.log("in show alert details", this.state);
+        this.setState({
+            ...this.state,
+            isShowError: error,
+            isShowConfirm: confirm,
+            message: message
+        }, () => {
+            window.setTimeout(() => {
+                this.setState({
+                    ...this.state,
+                    isShowError: false,
+                    isShowConfirm: false
+                })
+            }, 2000)
+        });
+    };
 
     render() {
         const {referralData, patientData, readingData, referrerName, errors} = this.state;
@@ -470,7 +487,7 @@ class ReferralDetailForm extends React.Component {
                                     </Form.Text>
                                 </Col>
                                 <Col className="text-right">
-                                    <Button variant="primary" size="sm" as={Link} to={ {pathname: '/createDiagnosis', state: {data: this.state.readingData, referrerId: this.state.referralData.id}} }>
+                                    <Button variant="primary" size="sm" as={Link} to={ {pathname: '/createDiagnosis', state: {data: this.state.readingData, referralId: this.state.referralData.id}} }>
                                         Update Diagnosis
                                     </Button>
                                 </Col>
@@ -595,6 +612,8 @@ class ReferralDetailForm extends React.Component {
                         </Tab>
                     </Tabs>
                 </Container>
+                <ErrorAlert show={this.state.isShowError} message={this.state.message} />
+                <ConfirmAlert show={this.state.isShowConfirm} message={this.state.message} />
             </div>
         );
     }

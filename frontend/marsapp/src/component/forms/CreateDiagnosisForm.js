@@ -61,7 +61,10 @@ class CreateDiagnosisForm extends React.Component {
                     this.props.history.push({
                         pathname:  '/referralDetail',
                         state: {
-                            id: this.state.referralId
+                            id: this.state.referralId,
+                            isShowError: this.state.isShowError,
+                            isShowConfirm: this.state.isShowConfirm,
+                            message: this.state.message
                         }
                     });
                 })
