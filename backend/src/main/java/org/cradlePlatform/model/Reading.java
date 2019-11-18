@@ -18,6 +18,13 @@ import java.util.Date;
 @Table(name = "Reading")
 public class Reading {
 
+	public static final int MAX_SYSTOLIC = 300;
+	public static final int MIN_SYSTOLIC = 10;
+	public static final int MAX_DIASTOLIC = 300;
+	public static final int MIN_DIASTOLIC = 10;
+	public static final int MAX_HEART_RATE = 300;
+	public static final int MIN_HEART_RATE = 30;
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
@@ -38,15 +45,15 @@ public class Reading {
 	@Column(name = "other_symptoms")
 	private String otherSymptoms;
 
-	@Range(min = 10, max = 300)
+	@Range(min = MIN_SYSTOLIC, max = MAX_SYSTOLIC)
 	@Column(name = "systolic_bp")
 	private int systolicBloodPressure;
 
-	@Range(min = 10, max = 300)
+	@Range(min = MIN_DIASTOLIC, max = MAX_DIASTOLIC)
 	@Column(name = "diastolic_bp")
 	private int diastolicBloodPressure;
 
-	@Range(min = 40, max = 200)
+	@Range(min = MIN_HEART_RATE, max = MAX_HEART_RATE)
 	@Column(name = "pulse_rate")
 	private int pulseRate;
 
@@ -64,12 +71,11 @@ public class Reading {
 	@Column(name = "date_last_saved")
 	private Timestamp dateLastSaved;
 
-	@NotNull
 	@Column(name = "date_recheck_vitals_needed")
 	private Timestamp recheckVitalsDate;
 
 	@NotBlank
-	@Size(max = 32)
+	@Size(max = 128)
 	@Column(name = "device_info")
 	private String deviceInformation;
 
@@ -295,8 +301,8 @@ public class Reading {
 		this.uploadImages = uploadImages;
 	}
 
-	public VitalsTrafficLight getVitalsTrafficLight() {
-		return vitalsTrafficLight;
+	public String getVitalsTrafficLight() {
+		return VitalsTrafficLight.getVitalsTrafficLightText(vitalsTrafficLight);
 	}
 
 	public void setVitalsTrafficLight(VitalsTrafficLight vitalsTrafficLight) {
@@ -309,5 +315,48 @@ public class Reading {
 
 	public void setDiagnosis(String diagnosis) {
 		this.diagnosis = diagnosis;
+	}
+
+	public static int getMaxSystolic() { return MAX_SYSTOLIC; }
+
+	public static int getMinSystolic() { return MIN_SYSTOLIC; }
+
+	public static int getMaxDiastolic() { return MAX_DIASTOLIC; }
+
+	public static int getMinDiastolic() { return MIN_DIASTOLIC; }
+
+	public static int getMaxHeartRate() { return MAX_HEART_RATE; }
+
+	public static int getMinHeartRate() { return MIN_HEART_RATE; }
+
+	@java.lang.Override
+	public java.lang.String toString() {
+		return "Reading{" +
+				"id=" + id +
+				", readerId='" + readerId + '\'' +
+				", patientId=" + patientId +
+				", timestamp=" + timestamp +
+				", symptoms='" + symptoms + '\'' +
+				", otherSymptoms='" + otherSymptoms + '\'' +
+				", systolicBloodPressure=" + systolicBloodPressure +
+				", diastolicBloodPressure=" + diastolicBloodPressure +
+				", pulseRate=" + pulseRate +
+				", notes='" + notes + '\'' +
+				", needFollowUp=" + needFollowUp +
+				", appVersion='" + appVersion + '\'' +
+				", dateLastSaved=" + dateLastSaved +
+				", recheckVitalsDate=" + recheckVitalsDate +
+				", deviceInformation='" + deviceInformation + '\'' +
+				", gestationalAgeTimeUnit=" + gestationalAgeTimeUnit +
+				", gestationalAge=" + gestationalAge +
+				", manuallyChangedOcrResults='" + manuallyChangedOcrResults + '\'' +
+				", photoPath='" + photoPath + '\'' +
+				", totalOcrSeconds=" + totalOcrSeconds +
+				", region='" + region + '\'' +
+				", ocrEnabled=" + ocrEnabled +
+				", uploadImages=" + uploadImages +
+				", vitalsTrafficLight=" + vitalsTrafficLight +
+				", diagnosis='" + diagnosis + '\'' +
+				'}';
 	}
 }

@@ -2,8 +2,9 @@ package org.cradlePlatform.service;
 
 import org.cradlePlatform.model.Reading;
 import org.cradlePlatform.model.VitalsTrafficLight;
-import javax.validation.constraints.NotNull;
 import org.springframework.stereotype.Service;
+
+import javax.validation.constraints.NotNull;
 
 @Service
 public class ReadingService {
@@ -16,17 +17,10 @@ public class ReadingService {
     public static final double SHOCK_HIGH = 1.7;
     public static final double SHOCK_MEDIUM = 0.9;
 
-    public static final int MAX_SYSTOLIC = 300;
-    public static final int MIN_SYSTOLIC = 10;
-    public static final int MAX_DIASTOLIC = 300;
-    public static final int MIN_DIASTOLIC = 10;
-    public static final int MAX_HEART_RATE = 200;
-    public static final int MIN_HEART_RATE = 40;
-
     // Analysis Functions
     public static Boolean isValidTrafficLight(@NotNull Reading reading) {
         VitalsTrafficLight validTrafficLight = getVitalsTrafficLight(reading);
-        return (reading.getVitalsTrafficLight() == validTrafficLight);
+        return (reading.getVitalsTrafficLight() == VitalsTrafficLight.getVitalsTrafficLightText(validTrafficLight));
     }
 
     public static VitalsTrafficLight getVitalsTrafficLight(@NotNull Reading reading) {
@@ -67,11 +61,11 @@ public class ReadingService {
     }
 
     public boolean isValidReferralToHealthCentre(@NotNull Reading reading) {
-        return ((reading.getVitalsTrafficLight() == VitalsTrafficLight.Yellow_up && reading.getNeedFollowUp() == true)
-                || (reading.getVitalsTrafficLight() == VitalsTrafficLight.Red_up && reading.getNeedFollowUp() == true)
-                || (reading.getVitalsTrafficLight() == VitalsTrafficLight.Red_down && reading.getNeedFollowUp() == true)
-                || (reading.getVitalsTrafficLight() == VitalsTrafficLight.Yellow_down && reading.getNeedFollowUp() == false)
-                || (reading.getVitalsTrafficLight() == VitalsTrafficLight.Green && reading.getNeedFollowUp() == false));
+        return ((reading.getVitalsTrafficLight() == VitalsTrafficLight.getVitalsTrafficLightText(VitalsTrafficLight.Yellow_up) && reading.getNeedFollowUp() == true)
+                || (reading.getVitalsTrafficLight() == VitalsTrafficLight.getVitalsTrafficLightText(VitalsTrafficLight.Red_up) && reading.getNeedFollowUp() == true)
+                || (reading.getVitalsTrafficLight() == VitalsTrafficLight.getVitalsTrafficLightText(VitalsTrafficLight.Red_down) && reading.getNeedFollowUp() == true)
+                || (reading.getVitalsTrafficLight() == VitalsTrafficLight.getVitalsTrafficLightText(VitalsTrafficLight.Yellow_down) && reading.getNeedFollowUp() == false)
+                || (reading.getVitalsTrafficLight() == VitalsTrafficLight.getVitalsTrafficLightText(VitalsTrafficLight.Green) && reading.getNeedFollowUp() == false));
     }
 
     public boolean isReferralToHealthCentreRecommended(@NotNull VitalsTrafficLight vitalsTrafficLight) {
@@ -81,12 +75,12 @@ public class ReadingService {
     }
 
     public boolean isValidReadingValues(@NotNull Reading reading) {
-        return ((reading.getSystolicBloodPressure() >= MIN_SYSTOLIC)
-                && (reading.getSystolicBloodPressure() <= MAX_SYSTOLIC)
-                && (reading.getDiastolicBloodPressure() >= MIN_DIASTOLIC)
-                && (reading.getDiastolicBloodPressure() <= MAX_DIASTOLIC)
-                && (reading.getPulseRate() >= MIN_HEART_RATE)
-                && (reading.getPulseRate() <= MAX_HEART_RATE));
+        return ((reading.getSystolicBloodPressure() >= reading.getMinSystolic())
+                && (reading.getSystolicBloodPressure() <= reading.getMaxSystolic())
+                && (reading.getDiastolicBloodPressure() >= reading.getMinDiastolic())
+                && (reading.getDiastolicBloodPressure() <= reading.getMaxDiastolic())
+                && (reading.getPulseRate() >= reading.getMinHeartRate())
+                && (reading.getPulseRate() <= reading.getMaxHeartRate()));
     }
 
     public String getValidationResponse(VitalsTrafficLight vitalsTrafficLight, Boolean followUpRequired) {

@@ -60,10 +60,10 @@ export default {
     reading:{
         addAReferral:data=> axios.post(`http://${host}:${port}/api/readings` , {data}),
         addAReading: data => axios.post(`http://${host}:${port}/api/readings`, data),
-        getReadingForPat:data=> axios.post(`http://${host}:${port}/api/patients/patientId=${data.patientId}/readings?latest=${data.latest}`),
-
+        getReadingAdvice: data => axios.get(`http://${host}:${port}/api/readings-advice/${data}`),
+        processReading: data => axios.post(`http://${host}:${port}/api/readings-process`, data),
+        getReadingForPatient:data=> axios.get(`http://${host}:${port}/api/patients/${data.patient_id}/readings?latest=${data.latest}`),
         uploadReading: data =>axios.post(`http://${host}:${port}/api/readings` , {}).then(res => console.log(res)),
-
     },
     referral:{
         getAllReferral:data=> axios.get(`http://${host}:${port}/api/referrals` ),
@@ -74,9 +74,8 @@ export default {
     },
     followUp: {
         getAllFollowUps:data=> axios.get(`http://${host}:${port}/api/followUps`),
-        getFollowUpByPatientId:data=> axios.get(`http://${host}:${port}/api/patients/followUps?patientId=${data.patientId}`),
         getFollowUpByFollowUpId:data=> axios.get(`http://${host}:${port}/api/followUps/${data.followUpId}`),
-        getLastFollowUpByPatientId:data=> axios.get(`http://${host}:${port}/api/patients/followUps/patientId=${data.patientId}&latest=${true}`),
+        getFollowUpByPatientId:data=> axios.get(`http://${host}:${port}/api/patients/${data.patient_id}/follow-ups?latest=${data.latest}`),
         addFollowUp:data=> axios.post(`http://${host}:${port}/api/followUps` , {data}),
 
     },

@@ -108,27 +108,47 @@ public class ReadingController {
 
     @PostMapping(path="/api/readings-multi")
     public ResponseEntity<String> addReadings(@RequestBody ReadingUploadWrapper readings) {
-        int numInvalidReadings = 0;
+        boolean trafficLightIsValid = true;
+
         for (Reading reading : readings.getReadings()) {
-
-            Boolean trafficLightIsValid = readingService.isValidTrafficLight(reading);
-            Boolean referralValid = readingService.isValidReferralToHealthCentre(reading);
-
-            if (trafficLightIsValid && referralValid) {
-                readingRepository.save(reading);
-            } else {
-                numInvalidReadings++;
+            trafficLightIsValid &= readingService.isValidTrafficLight(reading);
+            if (!trafficLightIsValid) {
+                System.out.println(reading.toString());
             }
-
         }
 
-        if (numInvalidReadings == readings.getReadings().size()) {
+        if(trafficLightIsValid) {
+            for (Reading reading : readings.getReadings()) {
+                readingRepository.save(reading);
+            }
+        }
+
+        if (!trafficLightIsValid) {
             return new ResponseEntity<String>("No readings were saved", HttpStatus.BAD_REQUEST);
-        } else if (numInvalidReadings > 0) {
-            //TODO: Not all readings were saved due to error
-            return new ResponseEntity<String>("Not all readings were saved", HttpStatus.CREATED);
         } else {
             return new ResponseEntity<String>("Saved readings", HttpStatus.CREATED);
+        }
+    }
+
+    /**
+     * Add a Diagnosis text to an existing Reading with matching id in the db.
+     * @param id id of Reading to edit
+     * @param diagnosis String with diagnosis text to add to reading (not in JSON format)
+     * @return 200 if success, 404 if no matching id
+     */
+    @PutMapping(path="/api/readings/{id}/diagnosis")
+    public @ResponseBody ResponseEntity<String> editDiagnosis(@PathVariable(value="id") int id, @RequestBody String diagnosis) {
+        Optional<Reading> fetchedReadingOptional = readingRepository.findById(id);
+        if (fetchedReadingOptional.isPresent()) {
+            Reading fetchedReading = fetchedReadingOptional.get();
+
+            fetchedReading.setDiagnosis(diagnosis);
+            readingRepository.save(fetchedReading);
+            String responseMsg = "Added diagnosis to Reading #" + id;
+            return new ResponseEntity<String>(responseMsg, HttpStatus.OK);
+        } else {
+            String responseMsg = "Reading with id " + id + " not found";
+            return new ResponseEntity<String>(responseMsg, HttpStatus.NOT_FOUND);
         }
     }
 

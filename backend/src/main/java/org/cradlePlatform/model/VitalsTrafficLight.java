@@ -168,4 +168,21 @@ public enum VitalsTrafficLight {
     public String getConditionText() {
         return conditionText;
     }
+
+    public static String getVitalsTrafficLightText(VitalsTrafficLight vitalsTrafficLight) {
+        switch (vitalsTrafficLight) {
+            case Green:
+                return "Green";
+            case Yellow_up:
+                return "Yellow_up";
+            case Yellow_down:
+                return "Yellow_down";
+            case Red_up:
+                return "Red_up";
+            case Red_down:
+                return "Red_down";
+            default:
+                return null;
+        }
+    }
 }
