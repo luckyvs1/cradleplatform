@@ -274,11 +274,11 @@ class ReferralDetailForm extends React.Component {
                                         </Col>
                                         <Col md={6}>
                                             <Form.Group>
-                                                <Form.Label>Age</Form.Label>
+                                                <Form.Label>Gestational Age</Form.Label>
                                                 <Form.Control
                                                     type="text"
-                                                    id="age"
-                                                    name="age"
+                                                    id="gestational_age"
+                                                    name="gestational_age"
                                                     value={patientData.currentGestationalAge + " " + patientData.gestationAgeUnit} />
                                                 {/*error handling*/}
                                                 {/* <Form.Text className="text-muted">
