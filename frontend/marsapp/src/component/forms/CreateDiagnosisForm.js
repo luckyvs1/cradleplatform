@@ -56,7 +56,6 @@ class CreateDiagnosisForm extends React.Component {
         if(Object.keys(errors).length === 0){ //if no errors
             api.reading.uploadDiagnosis({patient_id: this.state.data.patientId, diagnosis: this.state.data.diagnosis}, config)
                 .then(res => {
-                    // TODO: Success toast
                     this.onShowAlert("Successfully added Diagnosis", false, true);
                     this.props.history.push({
                         pathname:  '/referralDetail',
@@ -70,7 +69,6 @@ class CreateDiagnosisForm extends React.Component {
                 })
 
                 .catch(error => {
-                    // TODO: Failure toast
                     this.onShowAlert("Error: failed to add diagnosis.", true, false);
                     console.log("createDiagnosis error ", error.message);
                 });
@@ -92,7 +90,6 @@ class CreateDiagnosisForm extends React.Component {
     };
 
     onShowAlert = (message, error, confirm) => {
-        console.log("in show", this.state);
         this.setState({
             ...this.state,
             isShowError: error,

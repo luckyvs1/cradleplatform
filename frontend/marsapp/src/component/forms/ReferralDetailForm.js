@@ -65,12 +65,7 @@ class ReferralDetailForm extends React.Component {
                 recheckVitalsDate: null,
                 region: "",
                 notes: "",
-                vitalsTrafficLight: {
-                    advice: "Patient is likely healthy. Continue normal care.",
-                    analysis: "Patient is likely healthy",
-                    briefAdvice: "Continue normal care",
-                    condition: "BP < 140 systolic and < 90 diastolic and shock index < 0.9"
-                },
+                vitalsTrafficLight: "",
                 diagnosis: "",
                 timestamp: null,
             },
@@ -112,6 +107,8 @@ class ReferralDetailForm extends React.Component {
                 if (this.state.readingData.diagnosis === "") {
                     this.state.errors.requireDiagnosis = "This referral requires a diagnosis response.";
                 }
+
+                console.log("check reading", this.state);
             });
 
             const referrerId = this.state.referralData.referrerId;
@@ -122,7 +119,6 @@ class ReferralDetailForm extends React.Component {
             });
         });
 
-        console.log("testingg:", data.isShowConfirm);
         if (data.isShowError || data.isShowConfirm) {
             this.onShowAlert(data.message, data.isShowError, data.isShowConfirm);
         }
@@ -165,7 +161,6 @@ class ReferralDetailForm extends React.Component {
     }
 
     onShowAlert = (message, error, confirm) => {
-        console.log("in show alert details", this.state);
         this.setState({
             ...this.state,
             isShowError: error,
@@ -400,7 +395,7 @@ class ReferralDetailForm extends React.Component {
                                             type="text"
                                             id="blood_pressure"
                                             name="blood_pressure"
-                                            value={ readingData.systolicBloodPressure + " / " + readingData.diastolicBloodPressure + "mmHg"} />
+                                            value={readingData.systolicBloodPressure + " / " + readingData.diastolicBloodPressure + " mmHg"} />
                                         {/*error handling*/}
                                         {/* <Form.Text className="text-muted">
                                         {errors.email && <InlineError text={errors.email} />}
@@ -411,10 +406,10 @@ class ReferralDetailForm extends React.Component {
                                     <Form.Group>
                                         <Form.Label>Heart Rate</Form.Label>
                                         <Form.Control
-                                            type="number"
+                                            type="text"
                                             id="heart_rate"
                                             name="heart_rate"
-                                            value={readingData.pulseRate + "BPM"} />
+                                            value={readingData.pulseRate + " BPM"} />
                                         {/*error handling*/}
                                         {/* <Form.Text className="text-muted">
                                         {errors.email && <InlineError text={errors.email} />}
@@ -428,7 +423,7 @@ class ReferralDetailForm extends React.Component {
                                             type="text"
                                             id="status"
                                             name="status"
-                                            value={readingData.vitalsTrafficLight.analysis} />
+                                            value={readingData.vitalsTrafficLight} />
                                         {/*error handling*/}
                                         {/* <Form.Text className="text-muted">
                                         {errors.email && <InlineError text={errors.email} />}
