@@ -11,6 +11,7 @@ import {connect} from "react-redux";
 import auth from "../../actions/auth"
 import {Container, Nav, Navbar, NavDropdown, Row, Col} from 'react-bootstrap';
 import VHT from "../../actions/authVHT";
+import HCW from "../../actions/authHCW";
 
 const bottomMarginStyle = {
     marginBottom: '40px',
@@ -100,11 +101,11 @@ class TopNavigation extends React.Component {
                                         <Nav.Link as={Link} to="addReadingDetail">
                                             <i className="fas fa-notes-medical"></i> Readings
                                         </Nav.Link>
-                                        {auth.isAuthenticated() ?
+                                        {VHT.isAuthenticated() || HCW.isAuthenticated() ?
+                                            null:
                                             <Nav.Link as={Link} to="listUser">
                                                 <i className="fas fa-users-cog"></i> Users
                                             </Nav.Link>
-                                            : null
                                         }
                                     </ul>
                                 </div>

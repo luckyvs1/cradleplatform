@@ -76,6 +76,7 @@ export default {
     },
     followUp: {
         getAllFollowUps:data=> axios.get(`http://${host}:${port}/api/followUps`),
+        getAllFollowUpsForVHT:data=> axios.get(`http://${host}:${port}/api/vhts/${data}/followUps`),
         getFollowUpByFollowUpId:data=> axios.get(`http://${host}:${port}/api/followUps/${data.followUpId}`),
         getFollowUpByPatientId:data=> axios.get(`http://${host}:${port}/api/patients/${data.patient_id}/follow-ups?latest=${data.latest}`),
         addFollowUp:data=> axios.post(`http://${host}:${port}/api/followUps` , data),
