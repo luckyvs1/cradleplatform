@@ -470,12 +470,9 @@ class ReferralDetailForm extends React.Component {
                                     </Form.Text>
                                 </Col>
                                 <Col className="text-right">
-                                    {
-                                        errors.requireDiagnosis &&
-                                        <Button variant="primary" size="sm" as={Link} to={ {pathname: '/createDiagnosis', state: {data: this.state.readingData, referrerId: this.state.referralData.id}} }>
-                                            Add Diagnosis
-                                        </Button>
-                                    }
+                                    <Button variant="primary" size="sm" as={Link} to={ {pathname: '/createDiagnosis', state: {data: this.state.readingData, referrerId: this.state.referralData.id}} }>
+                                        Update Diagnosis
+                                    </Button>
                                 </Col>
                             </Row>
                             {/*TODO: Want to be able to let readings be taken when giving diagnosis*/}
