@@ -9,7 +9,6 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import PropTypes from "prop-types";
 import TopNavigation from "../navigation/TopNavigation";
-import { Alert } from "react-alert"
 import {
     Container,
     Row,
