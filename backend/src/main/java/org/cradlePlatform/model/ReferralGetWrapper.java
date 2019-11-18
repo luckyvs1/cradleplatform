@@ -11,8 +11,8 @@ public class ReferralGetWrapper {
   public ReferralGetWrapper() {}
 
   public ReferralGetWrapper(Referral referral,
-                            Patient patient,
-                            UserInfo referrer) {
+      Patient patient,
+      UserInfo referrer) {
     this.referral = referral;
     this.patient = patient;
     this.referrer = referrer;
@@ -22,32 +22,32 @@ public class ReferralGetWrapper {
     return this.referral.getId();
   }
 
-	public UserInfo getReferrer() {
-		return this.referrer;
-	}
+  public UserInfo getReferrer() {
+    return this.referrer;
+  }
 
-	public Patient getPatient() {
-		return this.patient;
-	}
+  public Patient getPatient() {
+    return this.patient;
+  }
 
-	public int getReadingId() {
-		return this.referral.getReadingId();
-	}
+  public int getReadingId() {
+    return this.referral.getReadingId();
+  }
 
-	public Timestamp getTimestamp() {
-		return this.referral.getTimestamp();
-	}
+  public Timestamp getTimestamp() {
+    return this.referral.getTimestamp();
+  }
 
-	public String getHealthFacility() {
-		return this.referral.getHealthFacility();
-	}
+  public String getHealthFacility() {
+    return this.referral.getHealthFacility();
+  }
 
-	public String getNotesReason() {
-		return this.referral.getNotesReason();
-	}
+  public String getNotesReason() {
+    return this.referral.getNotesReason();
+  }
 
-	public String getNotesAction() {
-		return this.referral.getNotesAction();
-	}
+  public String getNotesAction() {
+    return this.referral.getNotesAction();
+  }
 
 }

@@ -44,8 +44,8 @@ public class ReferralController {
     }
 
     @GetMapping(path="/api/referralsWithUserInfo")
-    public Iterable<ReferralGetWrapper> getAllReferralsWithUserInfo() {
-        return referralRepository.findReferralsWithUserInfo();
+    public Iterable<ReferralGetWrapper> getAllReferralsWithPatientAndReferrerUserInfo() {
+        return referralRepository.findReferralsWithPatientAndReferrerUserInfo();
     }
 }
 

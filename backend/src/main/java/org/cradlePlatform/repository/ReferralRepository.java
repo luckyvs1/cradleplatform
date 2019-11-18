@@ -13,5 +13,5 @@ public interface ReferralRepository extends CrudRepository<Referral, Integer> {
   @Query("SELECT new org.cradlePlatform.model.ReferralGetWrapper(R, P, UI) FROM Referral R"
     + " JOIN Patient P ON R.patientId=P.id"
     + " JOIN UserInfo UI ON R.referrerId=UI.id")
-  Iterable<ReferralGetWrapper> findReferralsWithUserInfo();
+  Iterable<ReferralGetWrapper> findReferralsWithPatientAndReferrerUserInfo();
 }
