@@ -19,9 +19,6 @@ public class Medication {
     @Column(name="id", nullable=false, unique=true)
     private int id;
 
-    @Column(name="drug_history_id", nullable=false)
-    private int drugHistoryId;
-
     @Column(name="drug_name", length=32, nullable=false)
     @Size(max = 32)
     private String drugName;
@@ -30,14 +27,15 @@ public class Medication {
     @Size(max = 32)
     private String dosage;
 
+    @Temporal(TemporalType.DATE)
     @Column(name="start_date", nullable=false)
     private Date startDate;
 
+    @Temporal(TemporalType.DATE)
     @Column(name="end_date", nullable=false)
     private Date endDate;
 
     public Medication() {
-        this.drugHistoryId = -1;
         this.drugName = "";
         this.dosage = "";
         this.startDate = new Date();
@@ -46,14 +44,6 @@ public class Medication {
 
     public int getId() {
         return id;
-    }
-
-    public int getDrugHistoryId() {
-        return drugHistoryId;
-    }
-
-    public void setDrugHistoryId(int drugHistoryId) {
-        this.drugHistoryId = drugHistoryId;
     }
 
     public String getDrugName() {

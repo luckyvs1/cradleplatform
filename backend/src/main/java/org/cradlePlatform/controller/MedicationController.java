@@ -18,15 +18,15 @@ public class MedicationController {
 
     // GET mappings
 
-    /**
-     * Get all Medications associated with a DrugHistory by DrugHistoryId
-     * @param drugHistoryId
-     * @return Array of Medications
-     */
-    @GetMapping(path="/api/medications")
-    public Iterable<Medication> getParentDrugHistoryById(@RequestParam int drugHistoryId) {
-        return medicationRepository.findByDrugHistoryId(drugHistoryId);
-    }
+//    /**
+//     * Get all Medications associated with a DrugHistory by DrugHistoryId
+//     * @param drugHistoryId
+//     * @return Array of Medications
+//     */
+//    @GetMapping(path="/api/medications")
+//    public Iterable<Medication> getParentDrugHistoryById(@RequestParam int drugHistoryId) {
+//        return medicationRepository.findByDrugHistoryId(drugHistoryId);
+//    }
 
     /**
      * Get all Medications associated with a Patient
@@ -35,7 +35,7 @@ public class MedicationController {
      */
     @GetMapping(path="/api/patients/{patientId}/medications")
     public Iterable<Medication> getMedicationsByPatient(@PathVariable(value = "patientId") int patientId) {
-        return medicationRepository.findMedicationsByDrugHistoryAndPatientId(patientId);
+        return medicationRepository.findMedicationsByPatientId(patientId);
     }
 
     // POST mappings

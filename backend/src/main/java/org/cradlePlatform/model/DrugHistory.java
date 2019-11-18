@@ -5,42 +5,28 @@
 
 package org.cradlePlatform.model;
 
-import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Size;
 
 @Entity
+@IdClass(DrugHistoryId.class)
 @Table(name = "Drug_History")
 public class DrugHistory {
 
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Column(name="id", nullable=false, unique=true)
-    private int id;
-
-    @Column(name="patient_id", nullable=false, unique=false)
+    @Column(name="patient_id")
     private int patientId;
 
-    @Column(name="history")
-    private String historyText;
+    @Id
+    @Column(name="medication_id")
+    private int medicationId;
 
-    public DrugHistory() {
-        this.patientId = -1;
-        this.historyText = "";
+    public int getMedicationId() {
+        return medicationId;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public String getHistoryText() {
-        return historyText;
-    }
-
-    public void setHistoryText(String historyText) {
-        this.historyText = historyText;
+    public void setMedicationId(int medicationId) {
+        this.medicationId = medicationId;
     }
 
     public int getPatientId() {
