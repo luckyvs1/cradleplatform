@@ -6,6 +6,7 @@ package org.cradlePlatform.controller;
 
 import java.util.Optional;
 import org.cradlePlatform.model.Referral;
+import org.cradlePlatform.model.ReferralGetWrapper;
 import org.cradlePlatform.repository.ReferralRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -40,6 +41,11 @@ public class ReferralController {
     @GetMapping(path="/api/health-centre/{health-centre}/referrals")
     public Iterable<Referral> getReferralsByHealthCentre(@PathVariable(value = "health-centre") String healthCentre) {
         return referralRepository.findByHealthFacility(healthCentre);
+    }
+
+    @GetMapping(path="/api/referralsWithUserInfo")
+    public Iterable<ReferralGetWrapper> getAllReferralsWithPatientAndReferrerUserInfo() {
+        return referralRepository.findReferralsWithPatientAndReferrerUserInfo();
     }
 }
 

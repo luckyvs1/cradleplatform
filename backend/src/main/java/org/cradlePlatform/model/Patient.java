@@ -8,6 +8,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import javax.validation.constraints.Min;
 import java.util.Date;
 
 @Entity
@@ -63,6 +64,7 @@ public class Patient {
     private Sex sex;
 
     @Column(name = "age")
+    @Min(value = 18, message = "Minimum age must be 18")
     private int age;
 
     @Column(name = "dob")
