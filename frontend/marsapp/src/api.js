@@ -56,7 +56,7 @@ export default {
     },
     drug:{
         getAllDrugHistory:data=> axios.get(`http://${host}:${port}/api/drugHistories` , {data}),
-        getDrugHistoryById:data=> axios.get(`http://${host}:${port}/api/drugHistories?${data.patientid}`),
+        getDrugHistoryByPatientId:data=> axios.get(`http://${host}:${port}/api/drugHistories?patientId=${data.patient_id}`),
         addDrugHistory:data=> axios.post(`http://${host}:${port}/api/drugHistories`, {data}),
     },
     reading:{
@@ -73,6 +73,11 @@ export default {
         createReferral:data=> axios.post(`http://${host}:${port}/api/referrals` , {data}),
     },
     medication:{
+        addAMedication: data => axios.post(`http://${host}:${port}/api/medications`, data,
+            {
+                headers: {
+                    'Content-Type': 'application/json;charset=utf-8'
+                }}),
     },
     followUp: {
         getAllFollowUps:data=> axios.get(`http://${host}:${port}/api/followUps`),
