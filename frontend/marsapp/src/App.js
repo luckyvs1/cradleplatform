@@ -29,7 +29,6 @@ import AllFollowUp from "./component/pages/followUp/AllFollowUp";
 import FollowUpDetail from "./component/pages/followUp/FollowUpDetail";
 import ListUser from "./component/pages/users/ListUser"
 import AddUsers from "./component/pages/users/AddUsers"
-import {HCWRoute} from "./component/routes/HCWRoute";
 
 const App = ({location, isAuthenticated}) => (
 
@@ -139,6 +138,12 @@ const App = ({location, isAuthenticated}) => (
             path="/addUser"
             exact
             component={AddUsers}
+        />
+        <UserRoute
+            location={location}
+            path="/addMedication"
+            exact
+            component={AddMedicationDetail}
         />
     </div>
 );

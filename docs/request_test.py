@@ -53,7 +53,8 @@ meddata = {
     "drugName": "tylenol",
     "dosage": "once a day as needed",
     "startDate": "2019-09-26",
-    "endDate": "2019-09-30"
+    "endDate": "2019-09-30",
+    "medicationNotes": "notes"
 }
 fudata = {
     "id": 2,
