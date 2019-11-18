@@ -88,6 +88,13 @@ class ReferralDetailForm extends React.Component {
             const patientId = this.state.referralData.patientId;
             api.patient.getPatientById({id: patientId}).then(res => {
                 const patientData = res.data;
+
+                if (patientData.pregnant) {
+                    patientData.pregnant = "Yes";
+                } else {
+                    patientData.pregnant = "No";
+                }
+
                 this.setState({patientData});
             });
 
