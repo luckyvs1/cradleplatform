@@ -983,7 +983,7 @@ li a {
     height: 50px;
     background: red;
     position: relative;
-    margin-left: 20px;
+    margin-left: calc(100% - 77%) !important;
 }
 
 #octagon:before {
@@ -1016,7 +1016,7 @@ li a {
     background: green;
     border-radius: 50%;
     position: center;
-    margin-left: 20px;
+    margin-left: calc(100% - 77%) !important;
 }
 
 #triangle {
@@ -1026,7 +1026,7 @@ li a {
     border-right: 25px solid transparent;
     border-bottom: 50px solid yellow;
     position: relative;
-    margin-left: 20px;
+    margin-left: calc(100% - 77%) !important;
 }
 
 #pat-detail > div.row > div.col > div {
@@ -1043,7 +1043,7 @@ li a {
 
 .table-wrapper-scroll-y {
     display: block;
-    max-height: 360px;
+    max-height: 500px;
     overflow-y: auto;
     -ms-overflow-style: -ms-autohiding-scrollbar;
 }
@@ -1075,13 +1075,23 @@ li a {
 
 .table td, .table th {
     text-align: center !important;
+    min-width: calc(100% - 88%) !important;
 }
 
-#column-wrap {
+#diagnosis-wrap {
     word-break: break-word !important;
     min-width: 600px !important;
 }
 
+#symptoms-wrap {
+    word-break: break-word !important;
+    min-width: 300px !important;
+}
+
 #no-wrap, .table th{
     white-space: nowrap !important;
+}
+
+#timestamp-col {
+    width: calc(100% - 88%) !important;
 }

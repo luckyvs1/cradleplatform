@@ -54,7 +54,7 @@ export default {
     },
     drug:{
         getAllDrugHistory:data=> axios.get(`http://${host}:${port}/api/drugHistories` , {data}),
-        getDrugHistoryById:data=> axios.get(`http://${host}:${port}/api/drugHistories?${data.patientid}`),
+        getDrugHistoryByPatientId:data=> axios.get(`http://${host}:${port}/api/patients/${data.patient_id}/drugHistories`),
         addDrugHistory:data=> axios.post(`http://${host}:${port}/api/drugHistories`, {data}),
     },
     reading:{
@@ -85,8 +85,7 @@ export default {
         addNewHealthWorker:data=> axios.post(`http://${host}:${port}/api/healthWorkers` , {data}),
     },
     medicalHistory:{
-        getAllMedicalHistories:data=> axios.get(`http://${host}:${port}/api/medicalHistories`),
-        getLastMedicalHistoryByPatientId:data=> axios.get(`http://${host}:${port}/api/medicalHistories?patientId=${data.id}&latest=${data.latest}`),
+        getAllMedicalHistories:data=> axios.get(`http://${host}:${port}/api/patients/${data.patient_id}/medicalHistories`),
         addMedicalHistory:data=> axios.post(`http://${host}:${port}/api/medicalHistories` , {data}),
 
         getAllMedication:data=> axios.get(`http://${host}:${port}/api/medications`),

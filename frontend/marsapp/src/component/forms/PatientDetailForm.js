@@ -47,6 +47,8 @@ class PatientDetailForm extends React.Component {
             }],
             readingData: [],
             followUpData: [],
+            drugHistory: [],
+            medicalHistory: [],
         };
     }
 
@@ -129,6 +131,40 @@ class PatientDetailForm extends React.Component {
             }
 
             this.setState({followUpData: newState})
+        });
+
+        api.drug.getDrugHistoryByPatientId({patient_id: pid}).then(async res => {
+            const drugHistory = res.data;
+            let newState = [];
+
+            for (let i = 0; i < drugHistory.length; i++) {
+                let row = {
+                    timestamp: this.formatDate(new Date(drugHistory[i].timestamp)),
+                    timestampTime: new Date(drugHistory[i].timestamp).toLocaleTimeString(),
+                    history: drugHistory[i].history,
+                }
+
+                newState.push(row);
+            }
+
+            this.setState({drugHistory: newState})
+        });
+
+        api.medicalHistory.getAllMedicalHistories({patient_id: pid}).then(async res => {
+            const medicalHistory = res.data;
+            let newState = [];
+
+            for (let i = 0; i < medicalHistory.length; i++) {
+                let row = {
+                    timestamp: this.formatDate(new Date(medicalHistory[i].timestamp)),
+                    timestampTime: new Date(medicalHistory[i].timestamp).toLocaleTimeString(),
+                    history: medicalHistory[i].history,
+                }
+
+                newState.push(row);
+            }
+
+            this.setState({medicalHistory: newState})
         });
     }
 
@@ -223,7 +259,7 @@ class PatientDetailForm extends React.Component {
                     </div>
                     <Tabs class="nav nav-tabs">
                         <Tab eventKey="reading_information" title="Reading Information">
-                            <div className="table-responsive table-wrapper-scroll-y my-custom-scrollbar rtc"
+                            <div className="table-responsive table-bordered table-wrapper-scroll-y my-custom-scrollbar rtc"
                                  scrollbarStyle={{
                                      background: {backgroundColor: "transparent"},
                                      backgroundFocus: {backgroundColor: "#f0f0f0"},
@@ -235,9 +271,9 @@ class PatientDetailForm extends React.Component {
                                     <tr>
                                         <th scope="col">Date & Time</th>
                                         <th scope="col">Traffic Light</th>
-                                        <th scope="col">Systolic (mmHg)</th>
-                                        <th scope="col">Diastolic (mmHg)</th>
-                                        <th scope="col">Pulse Rate (bpm)</th>
+                                        <th scope="col">Systolic<br/> (mmHg)</th>
+                                        <th scope="col">Diastolic<br/> (mmHg)</th>
+                                        <th scope="col">Pulse Rate<br/> (bpm)</th>
                                         <th scope="col">Gestational Age</th>
                                         <th scope="col">Symptoms</th>
                                         <th scope="col">Diagnosis</th>
@@ -271,8 +307,8 @@ class PatientDetailForm extends React.Component {
                                             <td> {row.diastolicBloodPressure} </td>
                                             <td> {row.pulseRate} </td>
                                             <td> {row.gestationalAge} {row.gestationalAgeTimeUnit} </td>
-                                            <td id={'column-wrap'}>  {row.symptoms} </td>
-                                            <td id={'column-wrap'}> {row.diagnosis} </td>
+                                            <td id={'symptoms-wrap'}>  {row.symptoms} </td>
+                                            <td id={'diagnosis-wrap'}> {row.diagnosis} </td>
                                         </tr>
                                     ))}
                                     </tbody>
@@ -282,26 +318,50 @@ class PatientDetailForm extends React.Component {
                                 <Col className={"text-right"}>
                                     <Button variant="success" size="sm" as={Link} to="addReadingDetail">New
                                         Reading</Button>&nbsp;
-                                    <Button variant="primary" size="sm">View List</Button>&nbsp;
                                     <GraphDialog></GraphDialog>&nbsp;
                                 </Col>
                             </Row>
                         </Tab>
                         <Tab eventKey="medical_history" title="Medical History">
+                            <div className="table-wrapper-scroll-y my-custom-scrollbar rtc"
+                                 scrollbarStyle={{
+                                     background: {backgroundColor: "transparent"},
+                                     backgroundFocus: {backgroundColor: "#f0f0f0"},
+                                     foreground: {backgroundColor: "#e2e2e2"},
+                                     foregroundFocus: {backgroundColor: "#acacac"}
+                                 }}>
+                                <table className="table table-bordered">
+                                    <thead>
+                                    <th scope="col" id={"timestamp-col"}>Date & Time</th>
+                                    <th scope="col">Notes</th>
+                                    </thead>
+                                    <tbody>
+                                    {this.state.medicalHistory.map(row => (
+                                        <tr key={row.id}>
+                                            <td id={"timestamp-col"}>
+                                                {row.timestamp}<br/>
+                                                {row.timestampTime}
+                                            </td>
+                                            <td id={"diagnosis-wrap"}> {row.history} </td>
+                                        </tr>
+                                    ))}
+                                    </tbody>
+                                </table>
+                            </div>
                             <Row>
                                 <Col>
                                     <Form.Group>
                                         <Form.Control
                                             as="textarea"
                                             rows="6"
-                                            placeholder="Medical History Notes go here..."/>
+                                            placeholder="Enter Medical Notes..."/>
                                     </Form.Group>
                                 </Col>
                             </Row>
                             <Row>
                                 <Col className={"text-right"}>
                                     <Button variant="warning" size="sm">
-                                        Save Changes
+                                        Save Note
                                     </Button>
                                 </Col>
                             </Row>
@@ -354,30 +414,19 @@ class PatientDetailForm extends React.Component {
                                  }}>
                                 <table className="table table-bordered">
                                     <thead>
-                                    <th scope="col">Current Drug</th>
-                                    <th scope="col">Start Date</th>
-                                    <th scope="col">End Date</th>
-                                    <th scope="col">Drug</th>
-                                    <th scope="col">Dosage</th>
-                                    <th scope="col">Side Effects</th>
+                                    <th scope="col" id={"timestamp-col"}>Date & Time</th>
+                                    <th scope="col">Notes</th>
                                     </thead>
                                     <tbody>
-                                    <tr>
-                                        <td>Yes</td>
-                                        <td>2019-02-02</td>
-                                        <td> - </td>
-                                        <td>Vicodin</td>
-                                        <td>1 tablet twice a day</td>
-                                        <td>Sleepiness</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Yes</td>
-                                        <td>2018-12-02</td>
-                                        <td>2019-01-22</td>
-                                        <td>Synthroid</td>
-                                        <td>1 tablet twice a day</td>
-                                        <td>None</td>
-                                    </tr>
+                                    {this.state.drugHistory.map(row => (
+                                        <tr key={row.id}>
+                                            <td id={"timestamp-col"}>
+                                                {row.timestamp}<br/>
+                                                {row.timestampTime}
+                                            </td>
+                                            <td id={"diagnosis-wrap"}> {row.history} </td>
+                                        </tr>
+                                    ))}
                                     </tbody>
                                 </table>
                             </div>
@@ -387,14 +436,14 @@ class PatientDetailForm extends React.Component {
                                         <Form.Control
                                             as="textarea"
                                             rows="3"
-                                            placeholder="Drug history notes go here..."/>
+                                            placeholder="Enter Drug Notes..."/>
                                     </Form.Group>
                                 </Col>
                             </Row>
                             <Row>
                                 <Col className={"text-right"}>
                                     <Button variant="warning" size="sm">
-                                        Save Changes
+                                        Save Note
                                     </Button>
                                 </Col>
                             </Row>
