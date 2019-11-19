@@ -1,5 +1,20 @@
 stages:
-  -test
+  - build
+  - test
+
+docker build:
+  stage: build
+  script:
+    - echo pwd
+    - cd backend
+    - sh build_and_run_backend_and_database.sh
+    - docker exec -it marssql bin/bash
+    - mysql -u root -p
+    - pass
+    - use marsdb;
+    - exit
+    - exit
+    - echo pwd
 
 postman_tests:
   stage: test
