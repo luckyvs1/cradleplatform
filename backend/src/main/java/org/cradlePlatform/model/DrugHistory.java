@@ -5,28 +5,32 @@
 
 package org.cradlePlatform.model;
 
-
 import javax.persistence.*;
 
 @Entity
-@IdClass(DrugHistoryId.class)
 @Table(name = "Drug_History")
 public class DrugHistory {
 
     @Id
-    @Column(name="patient_id")
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @Column(name = "id")
+    private int id;
+
+    @Column(name = "patient_id")
     private int patientId;
 
-    @Id
-    @Column(name="medication_id")
-    private int medicationId;
+    private String history;
 
-    public int getMedicationId() {
-        return medicationId;
+    public int getId() {
+        return id;
     }
 
-    public void setMedicationId(int medicationId) {
-        this.medicationId = medicationId;
+    public String getHistory() {
+        return history;
+    }
+
+    public void setHistory(String history) {
+        this.history = history;
     }
 
     public int getPatientId() {

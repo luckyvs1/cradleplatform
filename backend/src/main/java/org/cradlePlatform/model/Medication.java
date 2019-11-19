@@ -6,7 +6,6 @@
 package org.cradlePlatform.model;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 import java.util.Date;
 
@@ -16,23 +15,26 @@ public class Medication {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="id", nullable=false, unique=true)
+    @Column(name="id")
     private int id;
 
-    @Column(name="drug_name", length=32, nullable=false)
+    @Column(name = "patient_id")
+    private int patientId;
+
+    @Column(name="drug_name")
     @Size(max = 32)
     private String drugName;
 
-    @Column(name="dosage", length=32, nullable=false)
-    @Size(max = 32)
+    @Column(name="dosage")
+    @Size(max = 256)
     private String dosage;
 
     @Temporal(TemporalType.DATE)
-    @Column(name="start_date", nullable=false)
+    @Column(name="start_date")
     private Date startDate;
 
     @Temporal(TemporalType.DATE)
-    @Column(name="end_date", nullable=false)
+    @Column(name="end_date")
     private Date endDate;
 
     public Medication() {
@@ -44,6 +46,10 @@ public class Medication {
 
     public int getId() {
         return id;
+    }
+
+    public int getPatientId() {
+        return patientId;
     }
 
     public String getDrugName() {

@@ -72,28 +72,29 @@ CREATE TABLE Patient (
 );
 
 CREATE TABLE Drug_History (
-    id          INTEGER     NOT NULL AUTO_INCREMENT,
-    patient_id  INTEGER NOT NULL,
+    id          INTEGER     AUTO_INCREMENT,
+    patient_id  INTEGER     NOT NULL,
+    timestamp   TIMESTAMP   NOT NULL,
     history     TEXT,
-    UNIQUE(patient_id),
     PRIMARY KEY (id),
     FOREIGN KEY (patient_id) REFERENCES Patient(id) ON DELETE CASCADE
 );
 
 CREATE TABLE Medication (
-    id              INTEGER         NOT NULL AUTO_INCREMENT,
-    drug_history_id INTEGER         NOT NULL,
+    id              INTEGER         AUTO_INCREMENT,
+    patient_id      INTEGER,
     drug_name       VARCHAR (32)    NOT NULL,
-    dosage          VARCHAR (32)    NOT NULL,
+    dosage          VARCHAR (256)   NOT NULL,
     start_date      DATE            NOT NULL,
     end_date        DATE,
     PRIMARY KEY (id),
-    FOREIGN KEY (drug_history_id) REFERENCES Drug_History(id) ON DELETE CASCADE
+    FOREIGN KEY (patient_id) REFERENCES Patient(id)
 );
 
 CREATE TABLE Medical_History (
     id          INTEGER     NOT NULL AUTO_INCREMENT,
-    patient_id  INTEGER NOT NULL,
+    patient_id  INTEGER     NOT NULL,
+    timestamp   TIMESTAMP   NOT NULL,
     history     TEXT,
     PRIMARY KEY (id),
     FOREIGN KEY (patient_id) REFERENCES Patient(id) ON DELETE CASCADE
