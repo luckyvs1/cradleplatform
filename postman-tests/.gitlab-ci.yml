@@ -1,0 +1,15 @@
+stages:
+  -test
+
+postman_tests:
+  stage: test
+  image:
+    name: postman/newman_alpine33
+    entrypoint: [""]
+  script:
+    - newman -- version
+    - npm instal -g newman-reporter-html
+  artifacts:
+    when: always
+    paths:
+      - report.html
