@@ -39,5 +39,9 @@ public interface MonitorRepository extends CrudRepository<Monitor, String> {
                 "FROM  Patient p INNER JOIN Monitor m ON p.id = m.patientId " +
                 "WHERE m.vhtId = :vhtId AND m.patientId = :patientId)")
     Iterable<FollowUp> findFollowUpVhtIdAndPatientId(@Param("vhtId") String vhtId, @Param("patientId") String patientId);
+
+    @Query("UPDATE Monitor " +
+            "SET VHT_id = :vhtId2 WHERE VHT_id = :vhtId1")
+    void transferPatientOfTwoVHTs(@Param("vhtId1") String vhtId1, @Param("vhtId2") String vhtId2);
 }
 

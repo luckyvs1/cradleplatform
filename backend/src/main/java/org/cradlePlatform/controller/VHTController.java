@@ -60,4 +60,13 @@ public class VHTController {
         //This returns a JSON or XML with the users
         return vhtRepository.findAll();
     }
+    /*
+    Transfer responsibility (patient assignment) from vhtId1 to vhtId2
+     */
+    @PostMapping(path="/api/vhts/swap/{vhtId1}/{vhtId2}")
+    public String transferPatientOfVHTs(@PathVariable(value="vhtId1") String vhtId1,
+                                  @PathVariable(value="vhtId2") String vhtId2){
+        monitorRepository.transferPatientOfTwoVHTs(vhtId1, vhtId2);
+        return "Successful Transfer";
+    }
 }
