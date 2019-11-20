@@ -46,8 +46,8 @@ CREATE TABLE Patient (
     attestation_no      VARCHAR (32),
     first_name          VARCHAR (32),
     last_name           VARCHAR (32),
-    village_no          VARCHAR (32)    NOT NULL,
-    zone_no             VARCHAR (32)    NOT NULL,
+    village_no          VARCHAR (32),
+    zone_no             VARCHAR (32),
     household_no        VARCHAR (32),
     block_no            VARCHAR (32),
     tank_no             VARCHAR (32),
@@ -796,16 +796,16 @@ insert into Drug_History values (8, 8, 'No medications prescribed to date');
 insert into Drug_History values (9, 9, 'No medications prescribed to date');
 insert into Drug_History values (10, 10, 'No medications prescribed to date');
 
-insert into Medication values (1, 1, 'Bumetanide', '2 tablets once per day', '2019-11-11', '2019-12-11');
-insert into Medication values (2, 1, 'Chlorthalidone', '1 tablet twice per day', '2019-11-11', '2019-12-11');
-insert into Medication values (3, 1, 'Indapamide', '1 tablet once per day', '2019-11-11', '2019-12-11');
-insert into Medication values (4, 1, 'Advil', '1 tablet once per month', '2019-11-11', null);
-insert into Medication values (5, 2, 'Bumetanide', '2 tablets once per day', '2019-11-11', '2019-12-11');
-insert into Medication values (6, 2, 'Chlorthalidone', '1 tablet twice per day', '2019-11-11', '2019-12-11');
-insert into Medication values (7, 3, 'Indapamide', '1 tablet once per day', '2019-11-11', '2019-12-11');
-insert into Medication values (8, 3, 'Advil', '1 tablet once per month', '2019-11-11', null);
-insert into Medication values (9, 4, 'Indapamide', '1 tablet once per day', '2019-11-11', '2019-12-11');
-insert into Medication values (10, 5, 'Advil', '1 tablet once per month', '2019-11-11', null);
+insert into Medication values (1, 1, 'Bumetanide', '2 tablets once per day', '2019-11-11', '2019-12-11','If you have diabetes, bumetanide may affect your blood sugar.');
+insert into Medication values (2, 1, 'Chlorthalidone', '1 tablet twice per day', '2019-11-11', '2019-12-11','Dizziness, lightheadedness, or stomach upset may occur.');
+insert into Medication values (3, 1, 'Indapamide', '1 tablet once per day', '2019-11-11', '2019-12-11','Dizziness or headache may occur.');
+insert into Medication values (4, 1, 'Advil', '1 tablet once per month', '2019-11-11', null, 'This medication may raise your blood pressure.');
+insert into Medication values (5, 2, 'Bumetanide', '2 tablets once per day', '2019-11-11', '2019-12-11','If you have diabetes, bumetanide may affect your blood sugar.');
+insert into Medication values (6, 2, 'Chlorthalidone', '1 tablet twice per day', '2019-11-11', '2019-12-11','Dizziness, lightheadedness, or stomach upset may occur.');
+insert into Medication values (7, 3, 'Indapamide', '1 tablet once per day', '2019-11-11', '2019-12-11', 'Dizziness or headache may occur.');
+insert into Medication values (8, 3, 'Advil', '1 tablet once per month', '2019-11-11', null, 'This medication may raise your blood pressure.');
+insert into Medication values (9, 4, 'Indapamide', '1 tablet once per day', '2019-11-11', '2019-12-11', 'Dizziness or headache may occur.');
+insert into Medication values (10, 5, 'Advil', '1 tablet once per month', '2019-11-11', null, 'This medication may raise your blood pressure.');
 
 insert into Medical_History values (1, 1, 'Immunizations: Flu vaccine yearly. Pneumovax 2006
 Allergic to Penicillin-developed a diffuse rash after an injection');
