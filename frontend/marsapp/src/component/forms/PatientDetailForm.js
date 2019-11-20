@@ -52,14 +52,15 @@ class PatientDetailForm extends React.Component {
             message: ""
         };
     }
+
     handleMedicationSubmit = () => {
         api.drug.getDrugHistoryByPatientId({patient_id: this.state.patientData.id}).then(res => {
-            if(res.data == null){
+            if (res.data == null) {
                 this.onShowAlert("Patient has no Drug History. Please contact your admin.", true);
-            }else{
+            } else {
                 this.props.history.push({
                     pathname: '/addMedication',
-                    medication:{
+                    medication: {
                         drug_id: res.data.id
                     }
                 });
@@ -80,6 +81,7 @@ class PatientDetailForm extends React.Component {
             }, 2000)
         });
     }
+
     componentDidMount() {
         const pid = this.props.location.state.pid;
 
@@ -327,11 +329,13 @@ class PatientDetailForm extends React.Component {
                                 </Col>
                             </Row>
                             <Row>
-                                <Col className={"text-right"}>
-                                    <Button variant="warning" size="sm">
-                                        Save Changes
-                                    </Button>
-                                </Col>
+                                {localStorage.getItem("isVHT") == "true" ? null :
+                                    <Col className={"text-right"}>
+                                        <Button variant="warning" size="sm">
+                                            Save Changes
+                                        </Button>
+                                    </Col>
+                                }
                             </Row>
                         </Tab>
                         <Tab eventKey="current_medication" title="Current Medication">
@@ -372,9 +376,11 @@ class PatientDetailForm extends React.Component {
                                 </table>
                             </div>
                             <div style={{float: 'right'}}>
-                                <Button variant="primary" size="sm" onClick={this.handleMedicationSubmit}>
-                                    Add New Medication
-                                </Button>
+                                {localStorage.getItem("isVHT") == "true" ? null :
+                                    <Button variant="primary" size="sm" onClick={this.handleMedicationSubmit}>
+                                        Add New Medication
+                                    </Button>
+                                }
                             </div>
                         </Tab>
                         <Tab eventKey="drug_history" title="Drug History">
@@ -426,9 +432,11 @@ class PatientDetailForm extends React.Component {
                             </Row>
                             <Row>
                                 <Col className={"text-right"}>
-                                    <Button variant="warning" size="sm">
-                                        Save Changes
-                                    </Button>
+                                    {localStorage.getItem("isVHT") == "true" ? null :
+                                        <Button variant="warning" size="sm">
+                                            Save Changes
+                                        </Button>
+                                    }
                                 </Col>
                             </Row>
                         </Tab>
