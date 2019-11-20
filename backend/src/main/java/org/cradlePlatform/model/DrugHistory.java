@@ -6,6 +6,7 @@
 package org.cradlePlatform.model;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
 
 @Entity
 @Table(name = "Drug_History")
@@ -13,16 +14,29 @@ public class DrugHistory {
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Column(name = "id")
     private int id;
 
     @Column(name = "patient_id")
     private int patientId;
 
+    private Timestamp timestamp;
+
     private String history;
 
     public int getId() {
         return id;
+    }
+
+    public DrugHistory() {
+        this.history = "";
+    }
+
+    public int getPatientId() {
+        return patientId;
+    }
+
+    public Timestamp getTimestamp() {
+        return timestamp;
     }
 
     public String getHistory() {
@@ -31,13 +45,5 @@ public class DrugHistory {
 
     public void setHistory(String history) {
         this.history = history;
-    }
-
-    public int getPatientId() {
-        return patientId;
-    }
-
-    public void setPatientId(int patientId) {
-        this.patientId = patientId;
     }
 }

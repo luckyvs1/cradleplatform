@@ -25,9 +25,9 @@ public class DrugHistoryController {
      * @param patientId patientId to get DrugHistories for
      * @return 200: Success
      */
-    @GetMapping(path="/api/drugHistories")
-    public Iterable<DrugHistory> getDrugHistoriesByPatientId(@RequestParam int patientId) {
-        return drugHistoryRepository.findByPatientId(patientId);
+    @GetMapping(path="/api/patients/{patientId}/drugHistories")
+    public Iterable<DrugHistory> getDrugHistoriesByPatientId(@PathVariable(value = "patientId") int patientId) {
+        return drugHistoryRepository.findByPatientIdOrderByTimestampDesc(patientId);
     }
 
     // POST mappings

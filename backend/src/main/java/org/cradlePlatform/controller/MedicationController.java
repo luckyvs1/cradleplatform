@@ -43,16 +43,16 @@ public class MedicationController {
 
     // DELETE mappings
 
-//    @DeleteMapping(path = "/api/patients/{patientId}/medications/{drugId}")
-//    public ResponseEntity<Void> deleteMedication(@PathVariable(value = "patientId") int patientId,
-//                                                 @PathVariable(value = "drugId") int drugId) {
-//
-//        medicationRepository.deleteByPatientIdAndId(patientId, drugId);
-//        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-//    }
+    @DeleteMapping(path = "/api/patients/{patientId}/medications/{drugId}")
+    public ResponseEntity<Void> deleteSpecificMedication(@PathVariable(value = "patientId") int patientId,
+                                                         @PathVariable(value = "drugId") int drugId) {
+
+        medicationRepository.deleteByPatientIdAndId(patientId, drugId);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
 
     @DeleteMapping(path = "/api/patients/{patientId}/medications")
-    public ResponseEntity<Void> deleteMedication(@PathVariable(value = "patientId") int patientId) {
+    public ResponseEntity<Void> deleteAllMedications(@PathVariable(value = "patientId") int patientId) {
 
         medicationRepository.deleteByPatientId(patientId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);

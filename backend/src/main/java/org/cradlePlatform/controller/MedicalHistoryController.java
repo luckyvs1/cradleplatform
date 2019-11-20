@@ -23,14 +23,9 @@ public class MedicalHistoryController {
      * @param patientId patientId of patient to get MedicalHistory for
      * @return 200: JSON of patient's MedicalHistory(ies)
      */
-    @GetMapping(path="/api/medicalHistories")
-    public Iterable<MedicalHistory> getMedicalHistoryByPatientId(@RequestParam int patientId,
-                                                          @RequestParam(value = "latest", required = false) boolean latest) {
-        if (latest) {
-            return medicalHistoryRepository.findTopByPatientIdOrderByIdDesc(patientId);
-        } else {
-            return medicalHistoryRepository.findAllByPatientId(patientId);
-        }
+    @GetMapping(path="/api/patients/{patientId}/medicalHistories")
+    public Iterable<MedicalHistory> getMedicalHistoryByPatientId(@PathVariable(value = "patientId") int patientId) {
+        return medicalHistoryRepository.findAllByPatientIdOrderByTimestampDesc(patientId);
 
     }
 
@@ -38,8 +33,8 @@ public class MedicalHistoryController {
 
     @PostMapping(path="/api/medicalHistories")
     @ResponseStatus(code = HttpStatus.CREATED)
-    public String addMedicalHistory (@RequestBody MedicalHistory mh) {
-        medicalHistoryRepository.save(mh);
-        return "Saved Medical History";
+    public String addMedicalHistory (@RequestBody MedicalHistory medicalHistory) {
+        medicalHistoryRepository.save(medicalHistory);
+        return "Saved Medical Note";
     }
 }

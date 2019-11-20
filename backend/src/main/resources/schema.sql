@@ -92,8 +92,8 @@ CREATE TABLE Medication (
 );
 
 CREATE TABLE Medical_History (
-    id          INTEGER     NOT NULL AUTO_INCREMENT,
-    patient_id  INTEGER     NOT NULL,
+    id          INTEGER     AUTO_INCREMENT,
+    patient_id  INTEGER,
     timestamp   TIMESTAMP   NOT NULL,
     history     TEXT,
     PRIMARY KEY (id),
@@ -115,7 +115,7 @@ CREATE TABLE FollowUp (
 CREATE TABLE Reading (
     id              INTEGER         NOT NULL AUTO_INCREMENT,
     reader_id       VARCHAR (32)    NOT NULL,
-    patient_id      INTEGER    NOT NULL,
+    patient_id      INTEGER         NOT NULL,
     timestamp       TIMESTAMP       NOT NULL,
     symptoms        SET('No Symptoms',
                         'Headache',
@@ -265,14 +265,14 @@ insert into Patient values (2,
                             'none',
                             0);
 
-insert into Reading values (1,
+insert into Reading values (5,
                             '1',
                             1,
                             '2019-10-24',
                             'Bleeding',
                             'Confusion',
-                            135,
-                            85,
+                            45,
+                            70,
                             117,
                             'Good vitals',
                             False,
