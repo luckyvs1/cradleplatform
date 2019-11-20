@@ -165,7 +165,7 @@ readingdata =  {
 #resp = requests.put(addDiagnosisUrl, data=diagnosisText, headers=header)
 
 
-transferVHTUrl = "http://localhost:8080/api/vhts/transfer/1&10"
+transferVHTUrl = "http://localhost:8080/api/vhts/transfer/2&10"
 resp = requests.post(transferVHTUrl, headers=header)
 print(resp)
 print(resp.status_code)
