@@ -1,20 +1,20 @@
-#stages:
-#  - build
-#  - test
+stages:
+  - build_backend
+  - build_frontend
 
-docker_build:
-#  stage: build
-  script:
-    - echo pwd
-    - cd backend
-    - sh build_and_run_backend_and_database.sh
-    - docker exec -it marssql bin/bash
-    - mysql -u root -p
-    - pass
-    - use marsdb;
-    - exit
-    - exit
-    - echo pwd
+#docker_build:
+##  stage: build
+#  script:
+#    - echo pwd
+#    - cd backend
+#    - sh build_and_run_backend_and_database.sh
+#    - docker exec -it marssql bin/bash
+#    - mysql -u root -p
+#    - pass
+#    - use marsdb;
+#    - exit
+#    - exit
+#    - echo pwd
 
 #postman_tests:
 #  stage: test
@@ -28,3 +28,18 @@ docker_build:
 #    when: always
 #    paths:
 #      - report.html
+
+
+build_backend:
+  script:
+      - echo pwd
+      - cd backend
+      - sh build_and_run_backend_and_database.sh
+
+build_frontend:
+  script:
+    - cd frontend
+    - cd marsapp
+    - echo `pwd`
+    - ls
+    - sh build_and_run_frontend.sh
