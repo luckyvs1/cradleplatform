@@ -9,7 +9,7 @@ import api from "../../api";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 
-class FollowUpListTable extends React.Component {
+class FollowUpListTable extends React.Component{
     constructor(props) {
         super(props);
         this.state = {
@@ -57,32 +57,32 @@ class FollowUpListTable extends React.Component {
     render() {
         const {data} = this.state;
         return (
-            <div>
-                <Table bordered hover size="sm">
-                    <thead>
-                    <tr>
-                        <th>Patient ID</th>
-                        <th>Diagnosis</th>
-                        <th>Follow Up Notes</th>
-                        <th>Treatment</th>
-                        <th>Frequency</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {this.state.data.map(row => (
-                        <tr key={row.id}
-                            class='clickable-row'
-                            onClick={() => this.handleItemClick(row)}>
-                            <td>{row.patientId}</td>
-                            <td>{row.diagnosis}</td>
-                            <td>{row.followUpNotes}</td>
-                            <td>{row.treatment}</td>
-                            <td>{row.frequency}</td>
+                <Col className={"table-wrapper-scroll-y my-custom-scrollbar"}>
+                    <Table bordered hover size="sm" >
+                        <thead>
+                        <tr>
+                            <th>Patient ID</th>
+                            <th>Diagnosis</th>
+                            <th>Follow Up Notes</th>
+                            <th>Treatment</th>
+                            <th>Frequency</th>
                         </tr>
-                    ))}
-                    </tbody>
-                </Table>
-            </div>
+                        </thead>
+                        <tbody>
+                        {this.state.data.map(row => (
+                            <tr key={row.id}
+                                class='clickable-row'
+                                onClick={() => this.handleItemClick(row)}>
+                                <td>{row.patientId}</td>
+                                <td>{row.diagnosis}</td>
+                                <td>{row.followUpNotes}</td>
+                                <td>{row.treatment}</td>
+                                <td>{row.frequency}</td>
+                            </tr>
+                        ))}
+                        </tbody>
+                    </Table>
+                </Col>
         );
     }
 }

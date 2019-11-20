@@ -41,6 +41,7 @@ class FloatingMenuItem extends React.Component {
 }
 
 
+
 class HomePage extends React.Component {
     state = {activeItem: 'bio'};
 
@@ -64,11 +65,9 @@ class HomePage extends React.Component {
             console.log("All referral", res);
         });
 
-
         api.followUp.getAllFollowUps(null).then(res => {
             console.log("All follow up", res);
         });
-
     }
 
     render() {

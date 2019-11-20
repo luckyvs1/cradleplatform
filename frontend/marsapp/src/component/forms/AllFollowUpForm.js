@@ -67,14 +67,14 @@ class AllFollowUpForm extends React.Component {
                     ...this.state,
                     showModal: false,
                 })
-                this.onShowAlert("New Follow Up Added" , true);
+                this.onShowAlert("New Follow Up Added", true);
             }
         }).catch(error => {
             this.setState({
                 ...this.state,
                 showModal: false,
             })
-            this.onShowAlert("Failed To Add New Follow Up" , false);
+            this.onShowAlert("Failed To Add New Follow Up", false);
         })
     }
     onShowAlert = (message, isConfirm) => {
@@ -127,9 +127,7 @@ class AllFollowUpForm extends React.Component {
                         </Col>
                     </Row>
                     <Row>
-                        <Col>
-                            <FollowUpListTable/>
-                        </Col>
+                        <FollowUpListTable/>
                     </Row>
                     <Col className="text-right">
                         <Button variant="primary" onClick={this.addFollowUp}>
