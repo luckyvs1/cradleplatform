@@ -1,44 +1,6 @@
-#stages:
-#  - build_backend
-#  - build_frontend
-
-#docker_build:
-##  stage: build
-#  script:
-#    - echo pwd
-#    - cd backend
-#    - sh build_and_run_backend_and_database.sh
-#    - docker exec -it marssql bin/bash
-#    - mysql -u root -p
-#    - pass
-#    - use marsdb;
-#    - exit
-#    - exit
-#    - echo pwd
-
-#postman_tests:
-#  stage: test
-#  image:
-#    name: postman/newman_alpine33
-#    entrypoint: [""]
-#  script:
-#    - newman -- version
-#    - npm instal -g newman-reporter-html
-#  artifacts:
-#    when: always
-#    paths:
-#      - report.html
-
-
+# TODO: Currently on the CSIL Gitlab the Gitlab Runner won't pickup the job
+# Else this will run the Spring Boot start up tests Controller and JUnit on CI
 build_backend:
   script:
       - cd backend
       - sh build_and_run_backend_and_database.sh
-
-#build_frontend:
-#  script:
-#    - cd frontend
-#    - cd marsapp
-#    - echo `pwd`
-#    - ls
-#    - sh build_and_run_frontend.sh
