@@ -1,6 +1,6 @@
-stages:
-  - build
-  - test
+#stages:
+#  - build
+#  - test
 
 docker build:
   stage: build
@@ -16,15 +16,15 @@ docker build:
     - exit
     - echo pwd
 
-postman_tests:
-  stage: test
-  image:
-    name: postman/newman_alpine33
-    entrypoint: [""]
-  script:
-    - newman -- version
-    - npm instal -g newman-reporter-html
-  artifacts:
-    when: always
-    paths:
-      - report.html
+#postman_tests:
+#  stage: test
+#  image:
+#    name: postman/newman_alpine33
+#    entrypoint: [""]
+#  script:
+#    - newman -- version
+#    - npm instal -g newman-reporter-html
+#  artifacts:
+#    when: always
+#    paths:
+#      - report.html
