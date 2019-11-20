@@ -100,7 +100,7 @@ const App = ({location, isAuthenticated}) => (
             exact
             component={FollowUpDetail}
         />
-        <HCWRoute
+        <VHTRoute
             location={location}
             path="/account"
             exact

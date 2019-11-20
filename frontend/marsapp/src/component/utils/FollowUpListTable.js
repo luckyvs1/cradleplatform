@@ -8,6 +8,7 @@ import {Table} from 'react-bootstrap';
 import api from "../../api";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
+import Col from "react-bootstrap/Col";
 
 class FollowUpListTable extends React.Component{
     constructor(props) {
