@@ -1,6 +1,6 @@
 stages:
   - build_backend
-  - build_frontend
+#  - build_frontend
 
 #docker_build:
 ##  stage: build
@@ -32,14 +32,13 @@ stages:
 
 build_backend:
   script:
-      - echo pwd
       - cd backend
       - sh build_and_run_backend_and_database.sh
 
-build_frontend:
-  script:
-    - cd frontend
-    - cd marsapp
-    - echo `pwd`
-    - ls
-    - sh build_and_run_frontend.sh
+#build_frontend:
+#  script:
+#    - cd frontend
+#    - cd marsapp
+#    - echo `pwd`
+#    - ls
+#    - sh build_and_run_frontend.sh
