@@ -41,7 +41,6 @@ class TopNavigation extends React.Component {
         localStorage.removeItem("loginToken");
         localStorage.removeItem("loginUserId");
         localStorage.removeItem("isVHT");
-
     }
 
     render() {

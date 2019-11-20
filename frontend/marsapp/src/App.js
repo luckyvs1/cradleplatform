@@ -58,7 +58,7 @@ const App = ({location, isAuthenticated}) => (
             exact
             component={ListPatient}
         />
-        <HCWRoute
+        <VHTRoute
             location={location}
             path="/help"
             exact
