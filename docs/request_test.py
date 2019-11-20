@@ -23,7 +23,6 @@ hcrefurl = "http://localhost:8080/api/health-centre/healthfacility21/referrals"
 medbypatienturl = "http://localhost:8080/api/patients/1/medications"
 readingInitialsAgeUrl = "http://localhost:8080/api/patientInfoReadings"
 addDiagnosisUrl = "http://localhost:8080/api/readings/1/diagnosis"
-transferVHTUrl = "http://localhost:8080/api/vhts/swap/1/5"
 diagnosisText = "The patient seems healthy and should come back for checkups."
 
 mhdata = {
@@ -165,6 +164,8 @@ readingdata =  {
 # resp = requests.get(readingInitialsAgeUrl, headers=header)
 #resp = requests.put(addDiagnosisUrl, data=diagnosisText, headers=header)
 
+
+transferVHTUrl = "http://localhost:8080/api/vhts/transfer/1&10"
 resp = requests.post(transferVHTUrl, headers=header)
 print(resp)
 print(resp.status_code)
