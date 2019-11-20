@@ -16,6 +16,8 @@ import {withRouter} from "react-router-dom";
 import GreenResponse from "../utils/GreenResponse";
 import RedResponse from "../utils/RedResponse";
 import TriangleResponseReading from "../utils/YellowResponse";
+import PropTypes from "prop-types";
+import moment from "moment";
 
 class PatientDetailForm extends React.Component {
     // functions
@@ -24,6 +26,7 @@ class PatientDetailForm extends React.Component {
     // validate
     constructor(props) {
         super(props);
+        let date = moment(new Date()).format('YYYY-MM-DDTHH:MM:SSZ');
         this.state = {
             patientData: [{
                 id: 0,
@@ -45,11 +48,19 @@ class PatientDetailForm extends React.Component {
                 currentGestationalAge: 0,
                 sexFull: "",
             }],
+            medicalData:{
+                patientId: 1,
+                timestamp: "2019-10-24T00:00:00.000+0000",
+                history: ""
+            },
             readingData: [],
             followUpData: [],
             drugHistory: [],
             medicalHistory: [],
         };
+        this.onChange = this.onChange.bind(this);
+        this.onChangeTimestamp = this.onChangeTimestamp.bind(this);
+        this.onSubmit = this.onSubmit.bind(this);
     }
 
     componentDidMount() {
@@ -166,6 +177,42 @@ class PatientDetailForm extends React.Component {
 
             this.setState({medicalHistory: newState})
         });
+    }
+
+    onChange = e => this.setState({medicalData: {...this.state.medicalData, [e.target.name]: e.target.value} });
+    onChangeTimestamp = timestamp =>
+        this.setState({
+            medicalData: {...this.state.medicalData, timestamp: timestamp}
+        });
+
+    onSubmit = (event) => {
+        event.preventDefault();
+        alert("Note Saved");
+
+        let formattedData = {
+            patientId: this.state.medicalData.patientId,
+            timestamp: this.state.medicalData.timestamp,
+            history: this.state.medicalData.history
+        };
+
+        console.log(formattedData);
+        api.medicalHistory.addMedicalHistory(JSON.stringify(formattedData)).then(res =>
+            {console.log("MEDICAL NOTE", res);}
+        )
+        // this.props.submit(this.state.medicalData);
+        // const errors = this.validate(this.state.medicalData);
+        // this.setState({errors});
+        // if(Object.keys(errors).length === 0){
+        //     alert("Note Saved");
+        //     this.props.submit(this.state.medicalData);
+        // }
+    };
+
+    validate = (medicalData) => {
+        const errors = {};
+        let emptyWarning = "Field cannot be blank";
+        if(!medicalData.history) errors.history = emptyWarning;
+        return errors;
     }
 
     formatDate = date =>{
@@ -350,19 +397,22 @@ class PatientDetailForm extends React.Component {
                             </div>
                             <Row>
                                 <Col>
-                                    <Form.Group>
+                                    <Form onSubmit={this.onSubmit}>
                                         <Form.Control
+                                            type="text"
                                             as="textarea"
                                             rows="6"
-                                            placeholder="Enter Medical Notes..."/>
-                                    </Form.Group>
-                                </Col>
-                            </Row>
-                            <Row>
-                                <Col className={"text-right"}>
-                                    <Button variant="warning" size="sm">
-                                        Save Note
-                                    </Button>
+                                            placeholder="Enter Medical Notes..."
+                                            onChange={this.onChange}
+                                            value={this.state.medicalData.history}/>
+                                        <Row>
+                                            <Col className={"text-right"}>
+                                                <Button primary type="submit" size="sm">
+                                                    Save Note
+                                                </Button>
+                                            </Col>
+                                        </Row>
+                                    </Form>
                                 </Col>
                             </Row>
                         </Tab>
@@ -489,18 +539,22 @@ class PatientDetailForm extends React.Component {
     }
 }
 
-const mapStateToProps = (state, ownProps) => {
-    return {
-        userid: state.data
-    }
+PatientDetailForm.propTypes = {
+    submit: PropTypes.func.isRequired
 };
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-        updateReadings: (data) => {
-            dispatch({type: "readings", data: data})
-        }
-    }
-};
+// const mapStateToProps = (state, ownProps) => {
+//     return {
+//         userid: state.data
+//     }
+// };
+//
+// const mapDispatchToProps = (dispatch) => {
+//     return {
+//         updateReadings: (data) => {
+//             dispatch({type: "readings", data: data})
+//         }
+//     }
+// };
 
 export default withRouter(PatientDetailForm)

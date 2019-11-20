@@ -63,7 +63,7 @@ export default {
         getReadingAdvice: data => axios.get(`http://${host}:${port}/api/readings-advice/${data}`),
         processReading: data => axios.post(`http://${host}:${port}/api/readings-process`, data),
         getReadingForPatient:data=> axios.get(`http://${host}:${port}/api/patients/${data.patient_id}/readings?latest=${data.latest}`),
-        uploadReading: data =>axios.post(`http://${host}:${port}/api/readings` , {}).then(res => console.log(res)),
+        uploadReading: data =>axios.post(`http://${host}:${port}s/api/readings` , {}).then(res => console.log(res)),
     },
     referral:{
         getAllReferral:data=> axios.get(`http://${host}:${port}/api/referrals` ),
@@ -71,6 +71,8 @@ export default {
         createReferral:data=> axios.post(`http://${host}:${port}/api/referrals` , {data}),
     },
     medication:{
+        deleteAllPatientMedications:data=> axios.delete(`http://${host}:${port}/api/patients/${data.patient_id}/medications/${data.drug_id}`),
+        deleteAMedication:data=> axios.delete(`http://${host}:${port}/api/patients/${data.patient_id}/medications`),
     },
     followUp: {
         getAllFollowUps:data=> axios.get(`http://${host}:${port}/api/followUps`),
