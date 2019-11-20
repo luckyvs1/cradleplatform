@@ -50,7 +50,7 @@ class PatientDetailForm extends React.Component {
             }],
             medicalData:{
                 patientId: 1,
-                timestamp: "2019-10-24T00:00:00.000+0000",
+                timestamp: date,
                 history: ""
             },
             readingData: [],
@@ -196,9 +196,7 @@ class PatientDetailForm extends React.Component {
         };
 
         console.log(formattedData);
-        api.medicalHistory.addMedicalHistory(JSON.stringify(formattedData)).then(res =>
-            {console.log("MEDICAL NOTE", res);}
-        )
+        api.medicalHistory.addMedicalHistory(formattedData);
         // this.props.submit(this.state.medicalData);
         // const errors = this.validate(this.state.medicalData);
         // this.setState({errors});
@@ -400,11 +398,13 @@ class PatientDetailForm extends React.Component {
                                     <Form onSubmit={this.onSubmit}>
                                         <Form.Control
                                             type="text"
+                                            id="history"
+                                            name="history"
                                             as="textarea"
                                             rows="6"
                                             placeholder="Enter Medical Notes..."
                                             onChange={this.onChange}
-                                            value={this.state.medicalData.history}/>
+                                        />
                                         <Row>
                                             <Col className={"text-right"}>
                                                 <Button primary type="submit" size="sm">

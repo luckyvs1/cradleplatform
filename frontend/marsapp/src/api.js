@@ -88,7 +88,7 @@ export default {
     },
     medicalHistory:{
         getAllMedicalHistories:data=> axios.get(`http://${host}:${port}/api/patients/${data.patient_id}/medicalHistories`),
-        addMedicalHistory:data=> axios.post(`http://${host}:${port}/api/medicalHistories` , {data}),
+        addMedicalHistory:data=> axios.post(`http://${host}:${port}/api/medicalHistories`, data),
 
         getAllMedication:data=> axios.get(`http://${host}:${port}/api/medications`),
         getMedicationForDrugHist:data=> axios.get(`http://${host}:${port}/api/medications?drugHistoryId=${data.id}`),
