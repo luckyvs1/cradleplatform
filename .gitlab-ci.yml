@@ -2,8 +2,8 @@
 #  - build
 #  - test
 
-docker build:
-  stage: build
+docker_build:
+#  stage: build
   script:
     - echo pwd
     - cd backend
