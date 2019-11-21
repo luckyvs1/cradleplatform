@@ -8,6 +8,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import javax.validation.constraints.Min;
 import java.util.Date;
 
 @Entity
@@ -31,14 +32,12 @@ public class Patient {
     @Column(name = "last_name")
     private String lastName;
 
-    @NotBlank(message = "Village Number Can't Be Empty")
     @Size(max = 32)
-    @Column(name = "village_no", length=32, nullable=false)
+    @Column(name = "village_no", length=32)
     private String villageNo;
 
-    @NotBlank(message = "Zone Number Can't Be Empty")
     @Size(max = 32)
-    @Column(name = "zone_no", length=32, nullable=false)
+    @Column(name = "zone_no", length=32)
     private String zoneNo;
 
     @Column(name="household_no", length=32)
@@ -63,6 +62,7 @@ public class Patient {
     private Sex sex;
 
     @Column(name = "age")
+    @Min(value = 18, message = "Minimum age must be 18")
     private int age;
 
     @Column(name = "dob")

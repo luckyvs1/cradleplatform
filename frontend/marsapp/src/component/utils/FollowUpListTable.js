@@ -8,8 +8,9 @@ import {Table} from 'react-bootstrap';
 import api from "../../api";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
+import Col from "react-bootstrap/Col";
 
-class FollowUpListTable extends React.Component{
+class FollowUpListTable extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -49,9 +50,9 @@ class FollowUpListTable extends React.Component{
     render() {
         const {data} = this.state;
         return (
-            <div>
-                <Table bordered hover size="sm">
-                    <thead>
+                <Col className={"table-wrapper-scroll-y my-custom-scrollbar"}>
+                    <Table bordered hover size="sm" >
+                        <thead>
                         <tr>
                             <th>Patient ID</th>
                             <th>Diagnosis</th>
@@ -59,8 +60,8 @@ class FollowUpListTable extends React.Component{
                             <th>Treatment</th>
                             <th>Frequency</th>
                         </tr>
-                    </thead>
-                    <tbody>
+                        </thead>
+                        <tbody>
                         {this.state.data.map(row => (
                             <tr key={row.id}
                                 class='clickable-row'
@@ -72,9 +73,9 @@ class FollowUpListTable extends React.Component{
                                 <td>{row.frequency}</td>
                             </tr>
                         ))}
-                    </tbody>
-                </Table>
-            </div>
+                        </tbody>
+                    </Table>
+                </Col>
         );
     }
 }

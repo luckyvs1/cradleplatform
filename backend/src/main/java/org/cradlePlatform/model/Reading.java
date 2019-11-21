@@ -328,4 +328,35 @@ public class Reading {
 	public static int getMaxHeartRate() { return MAX_HEART_RATE; }
 
 	public static int getMinHeartRate() { return MIN_HEART_RATE; }
+
+	@java.lang.Override
+	public java.lang.String toString() {
+		return "Reading{" +
+				"id=" + id +
+				", readerId='" + readerId + '\'' +
+				", patientId=" + patientId +
+				", timestamp=" + timestamp +
+				", symptoms='" + symptoms + '\'' +
+				", otherSymptoms='" + otherSymptoms + '\'' +
+				", systolicBloodPressure=" + systolicBloodPressure +
+				", diastolicBloodPressure=" + diastolicBloodPressure +
+				", pulseRate=" + pulseRate +
+				", notes='" + notes + '\'' +
+				", needFollowUp=" + needFollowUp +
+				", appVersion='" + appVersion + '\'' +
+				", dateLastSaved=" + dateLastSaved +
+				", recheckVitalsDate=" + recheckVitalsDate +
+				", deviceInformation='" + deviceInformation + '\'' +
+				", gestationalAgeTimeUnit=" + gestationalAgeTimeUnit +
+				", gestationalAge=" + gestationalAge +
+				", manuallyChangedOcrResults='" + manuallyChangedOcrResults + '\'' +
+				", photoPath='" + photoPath + '\'' +
+				", totalOcrSeconds=" + totalOcrSeconds +
+				", region='" + region + '\'' +
+				", ocrEnabled=" + ocrEnabled +
+				", uploadImages=" + uploadImages +
+				", vitalsTrafficLight=" + vitalsTrafficLight +
+				", diagnosis='" + diagnosis + '\'' +
+				'}';
+	}
 }
