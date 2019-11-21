@@ -1,6 +1,0 @@
-# TODO: Currently on the CSIL Gitlab the Gitlab Runner won't pickup the job
-# Else this will run the Spring Boot start up tests Controller and JUnit on CI
-build_backend:
-  script:
-      - cd backend
-      - sh build_and_run_backend_and_database.sh
