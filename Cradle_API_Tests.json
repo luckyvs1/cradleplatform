@@ -1,0 +1,61 @@
+{
+	"info": {
+		"name": "Cradle API Tests",
+		"_postman_id": "f8487286-6ada-3957-b264-d48b4e7b19a4",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GetPatientById",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Response is valid\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"// Used patient id of 1 in pre-request script",
+							"pm.test(\"Check patient id is equal to 1\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.id).to.eql(1);",
+							"});"
+						]
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"// Use patient id 1 in GET",
+							"pm.globals.set('patientId', '1');",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "{{url}}/api/patients/{{patientId}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"patients",
+						"{{patientId}}"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}
