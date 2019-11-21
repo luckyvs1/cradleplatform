@@ -90,4 +90,23 @@ public class FollowUpController {
         String responseMsg = "FollowUp with id " + id + " not found";
         return new ResponseEntity<String>(responseMsg, HttpStatus.NOT_FOUND);
     }
+
+    // DELETE mapping
+
+    /**
+     * Delete an existing FollowUp with matching id.
+     * @param id
+     * @return 200 if success, 404 if no matching id
+     */
+    @DeleteMapping(path="/api/followUps/{id}")
+    public @ResponseBody ResponseEntity<String> deleteFollowUp(@PathVariable(value = "id") int id) {
+        if (followUpRepository.existsById(id)) {
+            followUpRepository.deleteById(id);
+            String responseMsg = "Deleted FollowUp #" + id;
+            return new ResponseEntity<String>(responseMsg, HttpStatus.OK);
+        } else {
+            String responseMsg = "FollowUp with id " + id + " not found.";
+            return new ResponseEntity<String>(responseMsg, HttpStatus.NOT_FOUND);
+        }
+    }
 }

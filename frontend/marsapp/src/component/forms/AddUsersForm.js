@@ -120,9 +120,6 @@ class AddUsersForm extends React.Component {
         else if(state.userData.password.length < 8 || state.userData.username.password > 32 ) {
             errors.password = "Password needs to be between 8 - 32 characters.";
         }
-        if(!state.userData.password2){
-            errors.password2 = emptyWarning;
-        }
         if(state.userData.password !== state.password2) {
             errors.password2 = "Password does not match";
         }
