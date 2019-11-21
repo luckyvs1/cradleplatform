@@ -64,12 +64,13 @@ class FollowUpDetail extends React.Component {
     }
 
     remove = data => {
-        api.followUp.removeFollowUpById(data.id).then(res=>{
-            if (res) {
-                this.onShowAlert("Delete Successful" , false)
-
+        api.followUp.removeFollowUpById(data.id).then(res=> {
+                if (res) {
+                    this.onShowAlert("Delete Successful", false);
+                    this.props.history.push("/allFollowUp");
+                }
             }
-        }).catch(error=>{
+        ).catch(error=>{
             this.onShowAlert("Delete Failed" , true)
         });
     }
