@@ -146,6 +146,12 @@ const App = ({location, isAuthenticated}) => (
             exact
             component={TransferVHT}
         ></UserRoute>
+        <UserRoute
+            location={location}
+            path="/addMedication"
+            exact
+            component={AddMedicationDetail}
+        />
     </div>
 );
 

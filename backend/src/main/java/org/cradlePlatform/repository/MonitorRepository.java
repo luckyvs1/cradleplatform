@@ -6,10 +6,11 @@ import org.cradlePlatform.model.Patient;
 import org.cradlePlatform.model.Reading;
 import org.cradlePlatform.model.FollowUp;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
-
 import java.util.List;
 
 @Repository
@@ -39,5 +40,11 @@ public interface MonitorRepository extends CrudRepository<Monitor, String> {
                 "FROM  Patient p INNER JOIN Monitor m ON p.id = m.patientId " +
                 "WHERE m.vhtId = :vhtId AND m.patientId = :patientId)")
     Iterable<FollowUp> findFollowUpVhtIdAndPatientId(@Param("vhtId") String vhtId, @Param("patientId") String patientId);
+
+    @Transactional
+    @Modifying
+    @Query("UPDATE Monitor " +
+            "SET VHT_id = :vhtId2 WHERE VHT_id = :vhtId1")
+    void transferPatientOfTwoVHTs(@Param("vhtId1") String vhtId1, @Param("vhtId2") String vhtId2);
 }
 

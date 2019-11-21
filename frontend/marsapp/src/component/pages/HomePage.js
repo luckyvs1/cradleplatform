@@ -41,9 +41,8 @@ class FloatingMenuItem extends React.Component {
 }
 
 
-
 class HomePage extends React.Component {
-    state = { activeItem: 'bio' };
+    state = {activeItem: 'bio'};
 
     constructor(props) {
         super(props);
@@ -56,12 +55,12 @@ class HomePage extends React.Component {
     }
 
     toggleMenu() {
-        this.setState({ toggled: !this.state.toggled });
+        this.setState({toggled: !this.state.toggled});
 
     }
 
     componentDidMount() {
-        api.referral.getAllReferral(null).then(res =>{
+        api.referral.getAllReferral(null).then(res => {
             console.log("All referral", res);
         });
 
@@ -77,13 +76,13 @@ class HomePage extends React.Component {
         if (this.state.toggled) {
             icon = "clear";
             buttons.push(
-                <FloatingMenuItem label="Item 1" icon="create" action="" key="i1" />);
+                <FloatingMenuItem label="Item 1" icon="create" action="" key="i1"/>);
             buttons.push(
-                <FloatingMenuItem label="Short Cut 2" icon="drafts" action="" key="i2" />);
+                <FloatingMenuItem label="Short Cut 2" icon="drafts" action="" key="i2"/>);
 
         }
 
-        buttons.push(<FloatingMenuItem label="" icon={icon} action={this.toggleMenu.bind(this)} key="m" />);
+        buttons.push(<FloatingMenuItem label="" icon={icon} action={this.toggleMenu.bind(this)} key="m"/>);
 
 
         return (
@@ -100,9 +99,7 @@ class HomePage extends React.Component {
                                 </Col>
                             </Row>
                             <Row>
-                                <Col>
-                                    <ReferralListTable />
-                                </Col>
+                                <ReferralListTable/>
                             </Row>
                         </Col>
                         <Col>
@@ -113,14 +110,12 @@ class HomePage extends React.Component {
                                 </Col>
                             </Row>
                             <Row>
-                                <Col>
-                                    <FollowUpListTable />
-                                </Col>
+                                <FollowUpListTable/>
                             </Row>
                         </Col>
                     </Row>
                 </Container>
-                </div>
+            </div>
 
         );
 

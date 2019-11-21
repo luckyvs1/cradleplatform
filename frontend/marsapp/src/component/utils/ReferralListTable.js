@@ -6,8 +6,9 @@ import React from "react";
 import {withRouter} from "react-router-dom";
 import {Table} from 'react-bootstrap';
 import api from "../../api";
+import Col from "react-bootstrap/Col";
 
-class ReferralListTable extends React.Component{
+class ReferralListTable extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -39,7 +40,7 @@ class ReferralListTable extends React.Component{
                 });
 
                 // TODO: Handle assignee and status when db schema updates
-                const theDate =  new Date(data[i].timestamp).toDateString();
+                const theDate = new Date(data[i].timestamp).toDateString();
 
                 let row = {
                     id: data[i].id,
@@ -70,9 +71,9 @@ class ReferralListTable extends React.Component{
 
     render() {
         return (
-            <div>
-                <Table bordered hover size="small">
-                    <thead>
+                <Col className={"table-wrapper-scroll-y my-custom-scrollbar"}>
+                    <Table bordered hover size="small" >
+                        <thead>
                         <tr>
                             <th>Patient ID</th>
                             <th>Patient Initials</th>
@@ -81,10 +82,10 @@ class ReferralListTable extends React.Component{
                             <th>Referral Date</th>
                             <th>Status</th>
                         </tr>
-                    </thead>
-                    <tbody>
+                        </thead>
+                        <tbody>
                         {this.state.data.map(row => (
-                            <tr key={row.id}  class='clickable-row' onClick={() => this.handleItemClick(row)}>
+                            <tr key={row.id} class='clickable-row' onClick={() => this.handleItemClick(row)}>
                                 <td>{row.pid}</td>
                                 <td>{row.pname}</td>
                                 <td>{row.referrer}</td>
@@ -93,9 +94,9 @@ class ReferralListTable extends React.Component{
                                 <td>{row.status}</td>
                             </tr>
                         ))}
-                    </tbody>
-                </Table>
-            </div>
+                        </tbody>
+                    </Table>
+                </Col>
         );
     }
 }
