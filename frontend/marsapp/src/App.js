@@ -30,6 +30,7 @@ import FollowUpDetail from "./component/pages/followUp/FollowUpDetail";
 import ListUser from "./component/pages/users/ListUser"
 import AddUsers from "./component/pages/users/AddUsers"
 import TransferVHT from "./component/pages/TransferVHT";
+import AddMedicationDetail from "./component/pages/patients/AddMedicationDetail";
 
 const App = ({location, isAuthenticated}) => (
 
