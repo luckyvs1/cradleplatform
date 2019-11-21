@@ -72,7 +72,6 @@ class ReferralListTable extends React.Component {
                             <th>Patient ID</th>
                             <th>Patient Initials</th>
                             <th>Referred By</th>
-                            <th>Assigned to</th>
                             <th>Referral Date</th>
                             <th>Status</th>
                         </tr>
@@ -83,7 +82,6 @@ class ReferralListTable extends React.Component {
                                 <td>{row.pid}</td>
                                 <td>{row.pname}</td>
                                 <td>{row.referrer}</td>
-                                <td>{row.assignee}</td>
                                 <td>{row.dateof}</td>
                                 <td>{row.status}</td>
                             </tr>

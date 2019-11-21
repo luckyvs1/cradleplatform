@@ -133,15 +133,6 @@ class ReferralForm extends React.Component {
                             <Form size={'small'}>
                                 <Form.Group widths={'equal'}>
                                     <Form.Field>
-                                        <label>Assign To:</label>
-                                        <Dropdown
-                                            placeholder='Select Assignee'
-                                            fluid
-                                            selection
-                                            options={this.state.assignedTo}
-                                        />
-                                    </Form.Field>
-                                    <Form.Field>
                                         <label>Status:</label>
                                         <Dropdown
                                             placeholder='Select Status'
