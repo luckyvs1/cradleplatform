@@ -18,11 +18,14 @@
 							"    pm.response.to.have.status(200);",
 							"});",
 							"",
-							"// Used patient id of 1 in pre-request script",
-							"pm.test(\"Check patient id is equal to 1\", function () {",
-							"    var jsonData = pm.response.json();",
-							"    pm.expect(jsonData.id).to.eql(1);",
-							"});"
+							"// Check the returned response patient id matches the id of the stored variable",
+							"pm.test(\"Check patient id is equal to stored variable\", function () {",
+							"    let jsonData = pm.response.json();",
+							"    // Variables get saved as string so need to use parse int to get back value ",
+							"    // Else test will fail due to comparison between integer and string",
+							"    pm.expect(jsonData.id).to.deep.equal(parseInt(pm.variables.get(\"patientId\")));",
+							"});",
+							""
 						]
 					}
 				},
@@ -31,8 +34,12 @@
 					"script": {
 						"type": "text/javascript",
 						"exec": [
-							"// Use patient id 1 in GET",
-							"pm.globals.set('patientId', '1');",
+							"pm.sendRequest('{{url}}/api/patients/', function (err, res) {",
+							"    let responseJSON = res.json();",
+							"    // Saving a value in variable converts it to a string",
+							"    pm.variables.set('patientId', responseJSON[0].id);",
+							"});",
+							"",
 							""
 						]
 					}
