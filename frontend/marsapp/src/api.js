@@ -34,7 +34,8 @@ export default {
     vht:{
         getAllVHT: data => axios.get(`http://${host}:${port}/api/vht`),
         getVHTById: data => axios.get(`http://${host}:${port}/api/vht/${data.vhtId}`),
-        createVHT: data => axios.post(`http://${host}:${port}/api/vht` , {data})
+        createVHT: data => axios.post(`http://${host}:${port}/api/vht` , {data}),
+        transferVHT: (vhtId1 , vhtId2) => axios.post(`http://${host}:${port}/api/vhts/transfer/${vhtId1}&${vhtId2}`)
     },
     userInfo:{
         getUserInfoById:data=> axios.get(`http://${host}:${port}/api/user-information/${data}`),

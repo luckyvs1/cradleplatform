@@ -4,6 +4,24 @@ import TopNavigation from "../navigation/TopNavigation";
 import {Button, Col, Container, Form, Row} from "react-bootstrap";
 
 class TransferVHTForm extends React.Component {
+
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            data: {
+               vhtId1:null,
+               vhtId2:null,
+            },
+        };
+        this.handleChange = this.handleChange.bind(this);
+    }
+    handleChange(event) {
+        this.setState({
+            data: {...this.state.data, [event.target.name]: event.target.value}
+        });
+    }
+
     render() {
         return (
             <div>
@@ -20,8 +38,8 @@ class TransferVHTForm extends React.Component {
                                 id="firstvht"
                                 name="firstvht"
                                 placeholder={"VHT id"}
-
-                                // value={this.state.data.patientId}
+                                onChange={this.handleChange}
+                                value={this.state.data.vhtId1}
                             />
                         </Col>
                         <Col className={"text-center"} style={{top:'23px'}}>
@@ -43,7 +61,8 @@ class TransferVHTForm extends React.Component {
                                 id="secondvht"
                                 name="secondvht"
                                 placeholder={"VHT id"}
-                                // value={this.state.data.patientId}
+                                onChange={this.handleChange}
+                                value={this.state.data.vhtId2}
                             />
                         </Col>
                     </Row>
