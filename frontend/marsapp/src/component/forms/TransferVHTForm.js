@@ -10,8 +10,8 @@ class TransferVHTForm extends React.Component {
         super(props);
         this.state = {
             data: {
-               vhtId1:null,
-               vhtId2:null,
+                firstvht:null,
+                secondvht:null,
             },
         };
         this.handleChange = this.handleChange.bind(this);
@@ -21,6 +21,13 @@ class TransferVHTForm extends React.Component {
             data: {...this.state.data, [event.target.name]: event.target.value}
         });
     }
+
+    submit = event => {
+        if (event) {
+            this.props.submit(this.state.data)
+        }
+    };
+
 
     render() {
         return (
@@ -46,7 +53,7 @@ class TransferVHTForm extends React.Component {
                             <Form.Label >
                                 <h2></h2>
                             </Form.Label>
-                            <Button variant="primary" size="lg" block>
+                            <Button variant="primary" size="lg" block onClick={this.submit}>
                                 <i className="fas fa-exchange-alt"></i>
                                 {'\t\t'}Transfer Data
                             </Button>
