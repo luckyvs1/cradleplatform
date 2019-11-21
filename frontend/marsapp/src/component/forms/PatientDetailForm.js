@@ -26,7 +26,6 @@ class PatientDetailForm extends React.Component {
     // validate
     constructor(props) {
         super(props);
-        let date = moment(new Date()).format('YYYY-MM-DDTHH:MM:SSZ');
         this.state = {
             patientData: [{
                 id: 0,
@@ -49,9 +48,14 @@ class PatientDetailForm extends React.Component {
                 sexFull: "",
             }],
             medicalData:{
-                patientId: 1,
-                timestamp: date,
-                history: ""
+                patientId: 0,
+                timestamp: null,
+                history: "",
+            },
+            drugData:{
+                patientId: 0,
+                timestamp: null,
+                history: "",
             },
             readingData: [],
             followUpData: [],
@@ -59,7 +63,6 @@ class PatientDetailForm extends React.Component {
             medicalHistory: [],
         };
         this.onChange = this.onChange.bind(this);
-        this.onChangeTimestamp = this.onChangeTimestamp.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
     }
 
@@ -76,7 +79,7 @@ class PatientDetailForm extends React.Component {
             } else if (patientData.sex === 'Other') {
                 patientData.sexFull = 'Other';
             }
- 
+
             if (patientData.dob != null) {
                 patientData.dob = this.formatDate(patientData.dob);
             } else {
@@ -161,6 +164,13 @@ class PatientDetailForm extends React.Component {
             this.setState({drugHistory: newState})
         });
 
+        this.getData();
+        // this.intervalID = setInterval(this.getData.bind(this), 1000);
+    }
+
+    getData = () => {
+        const pid = this.props.location.state.pid;
+
         api.medicalHistory.getAllMedicalHistories({patient_id: pid}).then(async res => {
             const medicalHistory = res.data;
             let newState = [];
@@ -179,39 +189,78 @@ class PatientDetailForm extends React.Component {
         });
     }
 
-    onChange = e => this.setState({medicalData: {...this.state.medicalData, [e.target.name]: e.target.value} });
-    onChangeTimestamp = timestamp =>
-        this.setState({
-            medicalData: {...this.state.medicalData, timestamp: timestamp}
-        });
+    componentWillUnmount() {
+        clearInterval(this.intervalID);
+    }
 
-    onSubmit = (event) => {
-        event.preventDefault();
-        alert("Note Saved");
-
-        let formattedData = {
-            patientId: this.state.medicalData.patientId,
-            timestamp: this.state.medicalData.timestamp,
-            history: this.state.medicalData.history
-        };
-
-        console.log(formattedData);
-        api.medicalHistory.addMedicalHistory(formattedData);
-        // this.props.submit(this.state.medicalData);
-        // const errors = this.validate(this.state.medicalData);
-        // this.setState({errors});
-        // if(Object.keys(errors).length === 0){
-        //     alert("Note Saved");
-        //     this.props.submit(this.state.medicalData);
+    onChange = e => {
+        // if (e.target.name === "medicalNote") {
+        //     this.setState({medicalData:
+        //             {...this.state.medicalData,
+        //                 [e.target.name]: e.target.value} })
         // }
+        // if (e.target.name === "drugNote") {
+        //     this.setState({drugData:
+        //             {...this.state.drugData,
+        //                 [e.target.name]: e.target.value} })
+        // }
+
+        this.setState({medicalData:
+                {...this.state.medicalData,
+                    [e.target.name]: e.target.value} });
+
+
+        this.setState({drugData:
+                {...this.state.drugData,
+                    [e.target.name]: e.target.value} });
+    }
+
+    onSubmit = (event , isMedical) => {
+        event.preventDefault();
+        let date = moment(new Date()).format('YYYY-MM-DDTHH:MM:SSZ');
+
+      //1=> SET the data
+        // 2 on call back call api
+        // 3 retrieve data
+
+        this.setState({
+            ...this.state,
+            medicalData :{
+                ...this.state.medicalData,
+                patientId: this.props.location.state.pid,
+                timestamp: date,
+            }
+        }, ()=>{
+            if(isMedical){
+                api.medicalHistory.addMedicalHistory(this.state.medicalData).then(res=>{
+                    if(res){
+                        console.log(res);
+                        this.getData();
+                    }
+                } , ()=> {
+                    this.setState({
+                        history: "",
+                    });
+                });
+            }else{
+                api.drug.addDrugHistory(this.state.medicalData).then(res=>{
+                    if(res){
+                        console.log(res);
+                        // this.getData();
+                    }
+                } , ()=> {
+                    this.setState({
+                        history: "",
+                    });
+                });
+            }
+
+        })
+
+
+
     };
 
-    validate = (medicalData) => {
-        const errors = {};
-        let emptyWarning = "Field cannot be blank";
-        if(!medicalData.history) errors.history = emptyWarning;
-        return errors;
-    }
 
     formatDate = date =>{
         let d = new Date(date),
@@ -360,7 +409,7 @@ class PatientDetailForm extends React.Component {
                                 </table>
                             </div>
                             <Row>
-                                <Col className={"text-right"}>
+                                <Col className={"text-right"} style={{marginTop: "10px"}}>
                                     <Button variant="success" size="sm" as={Link} to="addReadingDetail">New
                                         Reading</Button>&nbsp;
                                     <GraphDialog></GraphDialog>&nbsp;
@@ -369,6 +418,7 @@ class PatientDetailForm extends React.Component {
                         </Tab>
                         <Tab eventKey="medical_history" title="Medical History">
                             <div className="table-wrapper-scroll-y my-custom-scrollbar rtc"
+                                 id={"history-table-height"}
                                  scrollbarStyle={{
                                      background: {backgroundColor: "transparent"},
                                      backgroundFocus: {backgroundColor: "#f0f0f0"},
@@ -395,19 +445,19 @@ class PatientDetailForm extends React.Component {
                             </div>
                             <Row>
                                 <Col>
-                                    <Form onSubmit={this.onSubmit}>
+                                    <Form >
                                         <Form.Control
                                             type="text"
                                             id="history"
                                             name="history"
                                             as="textarea"
-                                            rows="6"
+                                            rows="4"
                                             placeholder="Enter Medical Notes..."
                                             onChange={this.onChange}
                                         />
                                         <Row>
-                                            <Col className={"text-right"}>
-                                                <Button primary type="submit" size="sm">
+                                            <Col className={"text-right"} style={{marginTop: "10px"}}>
+                                                <Button  onClick={(e)=>{this.onSubmit(e , true)}} primary type="submit" size="sm" disabled={!this.state.medicalData.history}>
                                                     Save Note
                                                 </Button>
                                             </Col>
@@ -456,6 +506,7 @@ class PatientDetailForm extends React.Component {
                         </Tab>
                         <Tab eventKey="drug_history" title="Drug History">
                             <div className="table-wrapper-scroll-y my-custom-scrollbar rtc"
+                                 id={"history-table-height"}
                                  scrollbarStyle={{
                                      background: {backgroundColor: "transparent"},
                                      backgroundFocus: {backgroundColor: "#f0f0f0"},
@@ -483,18 +534,25 @@ class PatientDetailForm extends React.Component {
                             <Row>
                                 <Col>
                                     <Form.Group>
-                                        <Form.Control
-                                            as="textarea"
-                                            rows="3"
-                                            placeholder="Enter Drug Notes..."/>
+                                        <Form >
+                                            <Form.Control
+                                                type="text"
+                                                id="history"
+                                                name="history"
+                                                as="textarea"
+                                                rows="4"
+                                                placeholder="Enter Drug Notes..."
+                                                onChange={this.onChange}
+                                            />
+                                            <Row>
+                                                <Col className={"text-right"} style={{marginTop: "10px"}}>
+                                                    <Button onClick={(e)=>{this.onSubmit(e , false)}} primary type="submit" size="sm" disabled={!this.state.drugData.history}>
+                                                        Save Note
+                                                    </Button>
+                                                </Col>
+                                            </Row>
+                                        </Form>
                                     </Form.Group>
-                                </Col>
-                            </Row>
-                            <Row>
-                                <Col className={"text-right"}>
-                                    <Button variant="warning" size="sm">
-                                        Save Note
-                                    </Button>
                                 </Col>
                             </Row>
                         </Tab>
