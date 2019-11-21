@@ -332,7 +332,9 @@ class PatientDetailForm extends React.Component {
                                 <table className="table table-bordered">
                                     {/*TODO: Include date of note creation after the MedicalHistory Table has a timestamp*/}
                                     <thead>
-                                        {/*<th scope="col">Date</th>*/}
+                                        <th scope="col">
+                                            {/*Date*/}
+                                        </th>
                                         <th scope="col">Medical Notes</th>
                                     </thead>
                                     <tbody>
