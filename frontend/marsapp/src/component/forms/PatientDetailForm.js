@@ -16,7 +16,6 @@ import {withRouter} from "react-router-dom";
 import GreenResponse from "../utils/GreenResponse";
 import RedResponse from "../utils/RedResponse";
 import TriangleResponseReading from "../utils/YellowResponse";
-import PropTypes from "prop-types";
 import moment from "moment";
 import ErrorAlert from "../utils/ErrorAlert";
 
@@ -632,23 +631,5 @@ class PatientDetailForm extends React.Component {
         );
     }
 }
-
-// PatientDetailForm.propTypes = {
-//     submit: PropTypes.func.isRequired
-// };
-
-// const mapStateToProps = (state, ownProps) => {
-//     return {
-//         userid: state.data
-//     }
-// };
-//
-// const mapDispatchToProps = (dispatch) => {
-//     return {
-//         updateReadings: (data) => {
-//             dispatch({type: "readings", data: data})
-//         }
-//     }
-// };
 
 export default withRouter(PatientDetailForm)
