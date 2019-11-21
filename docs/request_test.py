@@ -162,8 +162,11 @@ readingdata =  {
 # resp = requests.get(hcrefurl, headers=header)
 # resp = requests.get(medbypatienturl, headers=header)
 # resp = requests.get(readingInitialsAgeUrl, headers=header)
-resp = requests.put(addDiagnosisUrl, data=diagnosisText, headers=header)
+#resp = requests.put(addDiagnosisUrl, data=diagnosisText, headers=header)
 
+
+transferVHTUrl = "http://localhost:8080/api/vhts/transfer/2&10"
+resp = requests.post(transferVHTUrl, headers=header)
 print(resp)
 print(resp.status_code)
 print(resp.text)
