@@ -8,7 +8,7 @@ import React from "react";
 import {Link} from "react-router-dom";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
-
+import auth from "../../actions/auth"
 import {Container, Nav, Navbar, NavDropdown, Row, Col} from 'react-bootstrap';
 
 const bottomMarginStyle = {
@@ -93,10 +93,12 @@ class TopNavigation extends React.Component {
                                         <Nav.Link as={Link} to="addReadingDetail">
                                             <i className="fas fa-notes-medical"></i> Readings
                                         </Nav.Link>
-                                        {/*TODO: Only show Users tab to Admins*/}
-                                        <Nav.Link as={Link} to="listUser">
-                                            <i className="fas fa-users-cog"></i> Users
-                                        </Nav.Link>
+                                        {auth.isAuthenticated() ?
+                                            <Nav.Link as={Link} to="listUser">
+                                                <i className="fas fa-users-cog"></i> Users
+                                            </Nav.Link>
+                                            : null
+                                        }
                                         <Nav.Link as={Link} to="transferVHT">
                                             <i className="fas fa-exchange-alt"></i> Transfer VHT
                                         </Nav.Link>
