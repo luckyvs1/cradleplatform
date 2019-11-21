@@ -7,7 +7,6 @@ import org.cradlePlatform.model.MedicalHistory;
 import org.cradlePlatform.repository.MedicalHistoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 @CrossOrigin(origins = {"http://cmpt373.csil.sfu.ca:8044", "http://localhost:3000"})
@@ -23,15 +22,15 @@ public class MedicalHistoryController {
      * @param patientId patientId of patient to get MedicalHistory for
      * @return 200: JSON of patient's MedicalHistory(ies)
      */
-    @GetMapping(path="/api/patients/{patientId}/medicalHistories")
+    @GetMapping(path="/api/patients/{patientId}/medical-notes")
     public Iterable<MedicalHistory> getMedicalHistoryByPatientId(@PathVariable(value = "patientId") int patientId) {
         return medicalHistoryRepository.findAllByPatientIdOrderByTimestampAsc(patientId);
 
     }
 
     // POST mappings
-    
-    @PostMapping(path="/api/medicalHistories")
+
+    @PostMapping(path="/api/medical-notes")
     @ResponseStatus(code = HttpStatus.CREATED)
     public String addMedicalHistory (@RequestBody MedicalHistory medicalHistory) {
         medicalHistoryRepository.save(medicalHistory);
