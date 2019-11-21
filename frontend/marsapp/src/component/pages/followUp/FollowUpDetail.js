@@ -62,11 +62,14 @@ class FollowUpDetail extends React.Component {
         }
     }
 
+    remove = data => {
+        console.log("remove me" , data);
+    }
 
-    render() {
+        render() {
         return (
             <div>
-                <FollowUpDetailForm submit={this.submit}></FollowUpDetailForm>
+                <FollowUpDetailForm submit={this.submit} remove={this.remove}></FollowUpDetailForm>
                 <ConfirmAlert message={this.state.isShowConfirmMsg} show={this.state.isShowConfirm}></ConfirmAlert>
             </div>
         );

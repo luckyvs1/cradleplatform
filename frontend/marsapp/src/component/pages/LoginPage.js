@@ -26,7 +26,6 @@ class LoginPage extends React.Component {
         isShow: false,
         message: ""
     }
-
     submit = data => {
         api.user.login(data)
             .then(res => {
@@ -73,6 +72,7 @@ class LoginPage extends React.Component {
     }
 
     componentDidMount() {
+        // localStorage.removeItem('loginUserId')
         if (localStorage.getItem('loginToken') && localStorage.getItem('loginUserId')) {
             this.processRole(localStorage.getItem('loginUserId'))
         }
