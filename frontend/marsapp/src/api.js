@@ -76,6 +76,7 @@ export default {
                 headers: {
                     'Content-Type': 'application/json;charset=utf-8'
                 }}),
+        getMedications: data => axios.get(`http://${host}:${port}/api/patients/${data.patient_id}/medications`),
         deleteAllPatientMedications:data=> axios.delete(`http://${host}:${port}/api/patients/${data.patient_id}/medications/${data.drug_id}`),
         deleteAMedication:data=> axios.delete(`http://${host}:${port}/api/patients/${data.patient_id}/medications`),
     },

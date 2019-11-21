@@ -57,6 +57,7 @@ class PatientDetailForm extends React.Component {
             followUpData: [],
             drugHistory: [],
             medicalHistory: [],
+            medicationData: [],
             isShowError: false,
             message: ""
         };
@@ -152,6 +153,25 @@ class PatientDetailForm extends React.Component {
 
             this.setState({readingData: newState})
         });
+
+        api.medication.getMedications({patient_id: pid}).then(async res => {
+            const medicationData = res.data;
+            let newState = [];
+
+            for (let i = 0; i < medicationData.length; i++) {
+                let row = {
+                    drugName: medicationData[i].drugName,
+                    dosage: medicationData[i].dosage,
+                    startDate: medicationData[i].startDate,
+                    endDate: medicationData[i].endDate,
+                    notes: medicationData[i].medicationNotes,
+                }
+
+                newState.push(row);
+            }
+
+            this.setState({medicationData: newState})
+        })
 
         api.followUp.getFollowUpByPatientId({patient_id: pid, latest: false}).then(async res => {
             const followUpData = res.data;
@@ -429,6 +449,42 @@ class PatientDetailForm extends React.Component {
                                 </Col>
                             </Row>
                         </Tab>
+                        <Tab eventKey="current_medication" title="Current Medication">
+                            <div className="table-wrapper-scroll-y my-custom-scrollbar rtc"
+                                 scrollbarStyle={{
+                                     background: {backgroundColor: "transparent"},
+                                     backgroundFocus: {backgroundColor: "#f0f0f0"},
+                                     foreground: {backgroundColor: "#e2e2e2"},
+                                     foregroundFocus: {backgroundColor: "#acacac"}
+                                 }}>
+                                <table className="table table-bordered">
+                                    <thead>
+                                    <th scope="col">Drug</th>
+                                    <th scope="col">Dosage</th>
+                                    <th scope="col">Start Date</th>
+                                    <th scope="col">End Date</th>
+                                    <th scope="col">Medication Notes</th>
+                                    </thead>
+                                    <tbody>
+                                    {this.state.medicationData.map(row => (
+                                        <tr key={row.id}>
+                                            <td> {row.drugName} </td>
+                                            <td> {row.dosage} </td>
+                                            <td> {row.startDate} </td>
+                                            <td> {row.endDate}</td>
+                                            <td id={"diagnosis-wrap"}>
+                                                {row.notes}</td>
+                                        </tr>
+                                    ))}
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div style={{float: 'right'}}>
+                                <Button variant="primary" size="sm" onClick={this.handleMedicationSubmit}>
+                                    Add New Medication
+                                </Button>
+                            </div>
+                        </Tab>
                         <Tab eventKey="medical_history" title="Medical History">
                             <div className="table-wrapper-scroll-y my-custom-scrollbar rtc"
                                  id={"history-table-height"}
@@ -480,49 +536,6 @@ class PatientDetailForm extends React.Component {
                                     </Form>
                                 </Col>
                             </Row>
-                        </Tab>
-                        <Tab eventKey="current_medication" title="Current Medication">
-                            <div className="table-wrapper-scroll-y my-custom-scrollbar rtc"
-                                 scrollbarStyle={{
-                                     background: {backgroundColor: "transparent"},
-                                     backgroundFocus: {backgroundColor: "#f0f0f0"},
-                                     foreground: {backgroundColor: "#e2e2e2"},
-                                     foregroundFocus: {backgroundColor: "#acacac"}
-                                 }}>
-                                <table className="table table-bordered">
-                                    <thead>
-                                    <th scope="col">Current Drug</th>
-                                    <th scope="col">Start Date</th>
-                                    <th scope="col">Drug</th>
-                                    <th scope="col">Dosage</th>
-                                    <th scope="col">Side Effects</th>
-                                    <th scope="col">Medication Notes</th>
-                                    </thead>
-                                    <tbody>
-                                    <tr>
-                                        <td>Yes</td>
-                                        <td>2019-02-02</td>
-                                        <td>Vicodin</td>
-                                        <td>1 tablet twice a day</td>
-                                        <td>Sleepiness</td>
-                                        <td>Sleepiness</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Yes</td>
-                                        <td>2018-12-02</td>
-                                        <td>Synthroid</td>
-                                        <td>1 tablet twice a day</td>
-                                        <td>None</td>
-                                        <td>Patient may get dizzy</td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                            <div style={{float: 'right'}}>
-                                <Button variant="primary" size="sm" onClick={this.handleMedicationSubmit}>
-                                    Add New Medication
-                                </Button>
-                            </div>
                         </Tab>
                         <Tab eventKey="drug_history" title="Drug History">
                             <div className="table-wrapper-scroll-y my-custom-scrollbar rtc"
