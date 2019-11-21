@@ -469,7 +469,7 @@ class ReferralDetailForm extends React.Component {
                                         <Form.Control
                                             as="textarea"
                                             rows="3"
-                                            placeholder="Comments"
+                                            placeholder="No comments..."
                                             value={readingData.notes}/>
                                     </Form.Group>
                                 </Col>
