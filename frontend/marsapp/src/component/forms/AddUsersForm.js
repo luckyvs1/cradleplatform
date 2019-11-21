@@ -123,9 +123,6 @@ class AddUsersForm extends React.Component {
         if(!state.userData.password2){
             errors.password2 = emptyWarning;
         }
-        if(state.userData.password !== state.password2) {
-            errors.password2 = "Password does not match";
-        }
         if(!state.userInfoData.role) errors.role = emptyWarning;
         return errors;
     };
