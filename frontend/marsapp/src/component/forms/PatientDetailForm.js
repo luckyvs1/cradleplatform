@@ -330,18 +330,18 @@ class PatientDetailForm extends React.Component {
                                      foregroundFocus: {backgroundColor: "#acacac"}
                                  }}>
                                 <table className="table table-bordered">
+                                    {/*TODO: Include date of note creation after the MedicalHistory Table has a timestamp*/}
                                     <thead>
-                                        <th scope="col">Date</th>
+                                        {/*<th scope="col">Date</th>*/}
                                         <th scope="col">Medical Notes</th>
                                     </thead>
                                     <tbody>
                                         {this.state.medicalHistoryData.map(row => (
                                             <tr key={row.id}>
-                                                {/*For after the MedicalHistory Table has a timestamp*/}
-                                                {/*<td>*/}
-                                                {/*    {row.timestamp}<br/>*/}
-                                                {/*    {row.timestampTime}*/}
-                                                {/*</td>*/}
+                                                <td>
+                                                    {/*{row.timestamp}<br/>*/}
+                                                    {/*{row.timestampTime}*/}
+                                                </td>
                                                 <td> {row.medicalHistoryText} </td>
                                             </tr>
                                         ))}
@@ -353,7 +353,7 @@ class PatientDetailForm extends React.Component {
                                     <Form.Group>
                                         <Form.Control
                                             as="textarea"
-                                            rows="6"
+                                            rows="3"
                                             placeholder="Medical History Notes go here..."/>
                                     </Form.Group>
                                 </Col>
