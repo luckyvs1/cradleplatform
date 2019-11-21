@@ -48,7 +48,7 @@ class PatientDetailForm extends React.Component {
                 currentGestationalAge: 0,
                 sexFull: "",
             }],
-            notesData:{
+            notesData: {
                 patientId: 0,
                 timestamp: null,
                 history: "",
@@ -63,15 +63,16 @@ class PatientDetailForm extends React.Component {
         this.onChange = this.onChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
     }
+
     handleMedicationSubmit = () => {
         api.drug.getDrugHistoryByPatientId({patient_id: this.state.patientData.id}).then(res => {
-            if(res.data == null){
+            if (res.data == null) {
                 this.onShowAlert("Patient has no Drug History. Please contact your admin.", true);
-            }else{
+            } else {
                 this.props.history.push({
                     pathname: '/addMedication',
-                    medication:{
-                        drug_id: res.data.id
+                    state: {
+                        pid: this.props.location.state.pid,
                     }
                 });
             }
@@ -220,56 +221,49 @@ class PatientDetailForm extends React.Component {
     }
 
     onChange = e => {
-        // if (e.target.name === "medicalNote") {
-        //     this.setState({medicalData:
-        //             {...this.state.medicalData,
-        //                 [e.target.name]: e.target.value} })
-        // }
-        // if (e.target.name === "drugNote") {
-        //     this.setState({drugData:
-        //             {...this.state.drugData,
-        //                 [e.target.name]: e.target.value} })
-        // }
-
-        this.setState({notesData:
-                {...this.state.notesData,
-                    [e.target.name]: e.target.value} });
+        this.setState({
+            notesData:
+                {
+                    ...this.state.notesData,
+                    [e.target.name]: e.target.value
+                }
+        });
     }
 
-    onSubmit = (event , isMedical) => {
+    onSubmit = (event, isMedical) => {
         event.preventDefault();
         let date = moment(new Date()).format('YYYY-MM-DDTHH:MM:SSZ');
 
-      //1=> SET the data
+        //1=> SET the data
         // 2 on call back call api
         // 3 retrieve data
 
         this.setState({
             ...this.state,
-            notesData :{
+            notesData: {
                 ...this.state.notesData,
                 patientId: this.props.location.state.pid,
                 timestamp: date,
             }
-        }, ()=>{
-            if(isMedical){
-                api.medicalHistory.addMedicalHistory(this.state.notesData).then(res=>{
-                    if(res){
+        }, () => {
+            if (isMedical) {
+                api.medicalHistory.addMedicalHistory(this.state.notesData).then(res => {
+                    if (res) {
                         console.log(res);
                         this.getMedicalNotes(this.props.location.state.pid);
                     }
-                } , ()=> {
+                }, () => {
                     this.setState({
                         history: "",
                     });
                 });
-            }else{
-                api.drug.addDrugHistory(this.state.notesData).then(res=>{
-                    if(res){
+            } else {
+                api.drug.addDrugHistory(this.state.notesData).then(res => {
+                    if (res) {
                         console.log(res);
                         this.getDrugNotes(this.props.location.state.pid);
                     }
-                } , ()=> {
+                }, () => {
                     this.setState({
                         history: "",
                     });
@@ -280,7 +274,7 @@ class PatientDetailForm extends React.Component {
     };
 
 
-    formatDate = date =>{
+    formatDate = date => {
         let d = new Date(date),
             month = '' + (d.getMonth() + 1),
             day = '' + d.getDate(),
@@ -371,13 +365,14 @@ class PatientDetailForm extends React.Component {
                     </div>
                     <Tabs class="nav nav-tabs">
                         <Tab eventKey="reading_information" title="Reading Information">
-                            <div className="table-responsive table-bordered table-wrapper-scroll-y my-custom-scrollbar rtc"
-                                 scrollbarStyle={{
-                                     background: {backgroundColor: "transparent"},
-                                     backgroundFocus: {backgroundColor: "#f0f0f0"},
-                                     foreground: {backgroundColor: "#e2e2e2"},
-                                     foregroundFocus: {backgroundColor: "#acacac"}
-                                 }}>
+                            <div
+                                className="table-responsive table-bordered table-wrapper-scroll-y my-custom-scrollbar rtc"
+                                scrollbarStyle={{
+                                    background: {backgroundColor: "transparent"},
+                                    backgroundFocus: {backgroundColor: "#f0f0f0"},
+                                    foreground: {backgroundColor: "#e2e2e2"},
+                                    foregroundFocus: {backgroundColor: "#acacac"}
+                                }}>
                                 <table className="table table-hover">
                                     <thead>
                                     <tr>
@@ -463,7 +458,7 @@ class PatientDetailForm extends React.Component {
                             </div>
                             <Row>
                                 <Col>
-                                    <Form >
+                                    <Form>
                                         <Form.Control
                                             type="text"
                                             name="history"
@@ -474,7 +469,10 @@ class PatientDetailForm extends React.Component {
                                         />
                                         <Row>
                                             <Col className={"text-right"} style={{marginTop: "10px"}}>
-                                                <Button  onClick={(e)=>{this.onSubmit(e , true)}} primary type="submit" size="sm" disabled={!this.state.notesData.history}>
+                                                <Button onClick={(e) => {
+                                                    this.onSubmit(e, true)
+                                                }} primary type="submit" size="sm"
+                                                        disabled={!this.state.notesData.history}>
                                                     Save Note
                                                 </Button>
                                             </Col>
@@ -556,7 +554,7 @@ class PatientDetailForm extends React.Component {
                             <Row>
                                 <Col>
                                     <Form.Group>
-                                        <Form >
+                                        <Form>
                                             <Form.Control
                                                 type="text"
                                                 name="history"
@@ -567,7 +565,10 @@ class PatientDetailForm extends React.Component {
                                             />
                                             <Row>
                                                 <Col className={"text-right"} style={{marginTop: "10px"}}>
-                                                    <Button onClick={(e)=>{this.onSubmit(e , false)}} primary type="submit" size="sm" disabled={!this.state.notesData.history}>
+                                                    <Button onClick={(e) => {
+                                                        this.onSubmit(e, false)
+                                                    }} primary type="submit" size="sm"
+                                                            disabled={!this.state.notesData.history}>
                                                         Save Note
                                                     </Button>
                                                 </Col>
@@ -619,9 +620,9 @@ class PatientDetailForm extends React.Component {
     }
 }
 
-PatientDetailForm.propTypes = {
-    submit: PropTypes.func.isRequired
-};
+// PatientDetailForm.propTypes = {
+//     submit: PropTypes.func.isRequired
+// };
 
 // const mapStateToProps = (state, ownProps) => {
 //     return {
