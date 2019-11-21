@@ -79,10 +79,8 @@ class ReferralDetailForm extends React.Component {
 
     componentDidMount() {
         let data =  this.props.location.state;
-        console.log(data);
         api.referral.getReferralById(data).then(res => {
                 const referralData = res.data;
-                console.log(res);
                 this.setState({referralData});
         }).then(cont => {
             const patientId = this.state.referralData.patientId;
@@ -99,7 +97,6 @@ class ReferralDetailForm extends React.Component {
             });
 
             const readingId = this.state.referralData.readingId;
-            console.log("readingID:", readingId);
             api.reading.getReadingById({readingid: readingId}).then(res => {
                 const readingData = res.data;
 
@@ -114,9 +111,6 @@ class ReferralDetailForm extends React.Component {
                 if (this.state.readingData.diagnosis === "") {
                     this.state.errors.requireDiagnosis = "This referral requires a diagnosis response.";
                 }
-
-                console.log("check res", res);
-                console.log("check reading", this.state.readingData);
             });
 
             const referrerId = this.state.referralData.referrerId;

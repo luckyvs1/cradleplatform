@@ -51,7 +51,6 @@ class ReferralListTable extends React.Component {
                 newState.push(row);
             }
             this.setState({data: newState});
-            console.log("state:", this.state);
         })
     }
 
