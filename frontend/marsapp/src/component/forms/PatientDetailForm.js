@@ -147,31 +147,14 @@ class PatientDetailForm extends React.Component {
             this.setState({followUpData: newState})
         });
 
-        api.drug.getDrugHistoryByPatientId({patient_id: pid}).then(async res => {
-            const drugHistory = res.data;
-            let newState = [];
-
-            for (let i = 0; i < drugHistory.length; i++) {
-                let row = {
-                    timestamp: this.formatDate(new Date(drugHistory[i].timestamp)),
-                    timestampTime: new Date(drugHistory[i].timestamp).toLocaleTimeString(),
-                    history: drugHistory[i].history,
-                }
-
-                newState.push(row);
-            }
-
-            this.setState({drugHistory: newState})
-        });
-
-        this.getData();
-        // this.intervalID = setInterval(this.getData.bind(this), 1000);
+        this.getMedicalNotes(pid);
+        this.getDrugNotes(pid);
     }
 
-    getData = () => {
-        const pid = this.props.location.state.pid;
+    getMedicalNotes = (pid) => {
+        const patientId = pid;
 
-        api.medicalHistory.getAllMedicalHistories({patient_id: pid}).then(async res => {
+        api.medicalHistory.getAllMedicalHistories({patient_id: patientId}).then(async res => {
             const medicalHistory = res.data;
             let newState = [];
 
@@ -189,8 +172,25 @@ class PatientDetailForm extends React.Component {
         });
     }
 
-    componentWillUnmount() {
-        clearInterval(this.intervalID);
+    getDrugNotes = (pid) => {
+        const patientId = pid;
+
+        api.drug.getDrugHistoryByPatientId({patient_id: patientId}).then(async res => {
+            const drugHistory = res.data;
+            let newState = [];
+
+            for (let i = 0; i < drugHistory.length; i++) {
+                let row = {
+                    timestamp: this.formatDate(new Date(drugHistory[i].timestamp)),
+                    timestampTime: new Date(drugHistory[i].timestamp).toLocaleTimeString(),
+                    history: drugHistory[i].history,
+                }
+
+                newState.push(row);
+            }
+
+            this.setState({drugHistory: newState})
+        });
     }
 
     onChange = e => {
@@ -207,11 +207,6 @@ class PatientDetailForm extends React.Component {
 
         this.setState({medicalData:
                 {...this.state.medicalData,
-                    [e.target.name]: e.target.value} });
-
-
-        this.setState({drugData:
-                {...this.state.drugData,
                     [e.target.name]: e.target.value} });
     }
 
@@ -235,7 +230,7 @@ class PatientDetailForm extends React.Component {
                 api.medicalHistory.addMedicalHistory(this.state.medicalData).then(res=>{
                     if(res){
                         console.log(res);
-                        this.getData();
+                        this.getMedicalNotes(this.props.location.state.pid);
                     }
                 } , ()=> {
                     this.setState({
@@ -243,10 +238,10 @@ class PatientDetailForm extends React.Component {
                     });
                 });
             }else{
-                api.drug.addDrugHistory(this.state.medicalData).then(res=>{
+                api.drug.addDrugHistory(this.state.drugData).then(res=>{
                     if(res){
                         console.log(res);
-                        // this.getData();
+                        this.getDrugNotes(this.props.location.state.pid);
                     }
                 } , ()=> {
                     this.setState({
@@ -256,9 +251,6 @@ class PatientDetailForm extends React.Component {
             }
 
         })
-
-
-
     };
 
 
@@ -448,7 +440,6 @@ class PatientDetailForm extends React.Component {
                                     <Form >
                                         <Form.Control
                                             type="text"
-                                            id="history"
                                             name="history"
                                             as="textarea"
                                             rows="4"
@@ -537,7 +528,6 @@ class PatientDetailForm extends React.Component {
                                         <Form >
                                             <Form.Control
                                                 type="text"
-                                                id="history"
                                                 name="history"
                                                 as="textarea"
                                                 rows="4"
