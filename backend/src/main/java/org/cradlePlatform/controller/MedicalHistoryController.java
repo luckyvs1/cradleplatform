@@ -25,12 +25,12 @@ public class MedicalHistoryController {
      */
     @GetMapping(path="/api/patients/{patientId}/medicalHistories")
     public Iterable<MedicalHistory> getMedicalHistoryByPatientId(@PathVariable(value = "patientId") int patientId) {
-        return medicalHistoryRepository.findAllByPatientIdOrderByTimestampDesc(patientId);
+        return medicalHistoryRepository.findAllByPatientIdOrderByTimestampAsc(patientId);
 
     }
 
     // POST mappings
-
+    
     @PostMapping(path="/api/medicalHistories")
     @ResponseStatus(code = HttpStatus.CREATED)
     public String addMedicalHistory (@RequestBody MedicalHistory medicalHistory) {
