@@ -53,9 +53,9 @@ export default {
             }}),
     },
     drug:{
-        getAllDrugHistory:data=> axios.get(`http://${host}:${port}/api/drugHistories` , {data}),
-        getDrugHistoryByPatientId:data=> axios.get(`http://${host}:${port}/api/patients/${data.patient_id}/drugHistories`),
-        addDrugHistory:data=> axios.post(`http://${host}:${port}/api/drugHistories`, data),
+        getAllDrugHistory:data=> axios.get(`http://${host}:${port}/api/drug-notes` , data),
+        getDrugHistoryByPatientId:data=> axios.get(`http://${host}:${port}/api/patients/${data.patient_id}/drug-notes`),
+        addDrugHistory:data=> axios.post(`http://${host}:${port}/api/drug-notes`, data),
     },
     reading:{
         addAReferral:data=> axios.post(`http://${host}:${port}/api/readings` , {data}),
@@ -92,11 +92,7 @@ export default {
         addNewHealthWorker:data=> axios.post(`http://${host}:${port}/api/healthWorkers` , {data}),
     },
     medicalHistory:{
-        getAllMedicalHistories:data=> axios.get(`http://${host}:${port}/api/patients/${data.patient_id}/medicalHistories`),
-        addMedicalHistory:data=> axios.post(`http://${host}:${port}/api/medicalHistories`, data),
-
-        getAllMedication:data=> axios.get(`http://${host}:${port}/api/medications`),
-        getMedicationForDrugHist:data=> axios.get(`http://${host}:${port}/api/medications?drugHistoryId=${data.id}`),
-        addNewMedication:data=> axios.post(`http://${host}:${port}/api/medications?` , {data}),
+        getAllMedicalHistories:data=> axios.get(`http://${host}:${port}/api/patients/${data.patient_id}/medical-notes`),
+        addMedicalHistory:data=> axios.post(`http://${host}:${port}/api/medical-notes`, data),
     },
 };
