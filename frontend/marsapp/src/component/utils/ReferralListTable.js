@@ -35,17 +35,26 @@ class ReferralListTable extends React.Component {
                     return res.data.firstName + " " + res.data.lastName;
                 });
 
-                // TODO: Handle assignee and status when db schema updates
                 const theDate = new Date(data[i].timestamp).toDateString();
+
+                const diagnosis = await api.reading.getReadingById({readingid: data[i].readingId}).then(res => {
+                    return res.data.diagnosis;
+                });
+
+                let theStatus = "";
+                if (diagnosis) {
+                    theStatus = "Done";
+                } else {
+                    theStatus = "Requires response";
+                }
 
                 let row = {
                     id: data[i].id,
                     pid: data[i].patientId,
                     pname: thePatient,
                     referrer: theReferrer,
-                    assignee: "",
                     dateof: theDate,
-                    status: "",
+                    status: theStatus,
                 };
 
                 newState.push(row);
