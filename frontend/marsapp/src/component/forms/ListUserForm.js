@@ -34,6 +34,7 @@ class ListUserForm extends React.Component {
         api.userInfo.getAllUserInfo(null).then(res => {
             // get user information
             const data = res.data;
+            console.log( "list user",data)
             this.setState({data})
         })
     }
