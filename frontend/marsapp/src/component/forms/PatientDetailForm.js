@@ -47,12 +47,7 @@ class PatientDetailForm extends React.Component {
                 currentGestationalAge: 0,
                 sexFull: "",
             }],
-            medicalData:{
-                patientId: 0,
-                timestamp: null,
-                history: "",
-            },
-            drugData:{
+            notesData:{
                 patientId: 0,
                 timestamp: null,
                 history: "",
@@ -205,8 +200,8 @@ class PatientDetailForm extends React.Component {
         //                 [e.target.name]: e.target.value} })
         // }
 
-        this.setState({medicalData:
-                {...this.state.medicalData,
+        this.setState({notesData:
+                {...this.state.notesData,
                     [e.target.name]: e.target.value} });
     }
 
@@ -220,14 +215,14 @@ class PatientDetailForm extends React.Component {
 
         this.setState({
             ...this.state,
-            medicalData :{
-                ...this.state.medicalData,
+            notesData :{
+                ...this.state.notesData,
                 patientId: this.props.location.state.pid,
                 timestamp: date,
             }
         }, ()=>{
             if(isMedical){
-                api.medicalHistory.addMedicalHistory(this.state.medicalData).then(res=>{
+                api.medicalHistory.addMedicalHistory(this.state.notesData).then(res=>{
                     if(res){
                         console.log(res);
                         this.getMedicalNotes(this.props.location.state.pid);
@@ -238,7 +233,7 @@ class PatientDetailForm extends React.Component {
                     });
                 });
             }else{
-                api.drug.addDrugHistory(this.state.drugData).then(res=>{
+                api.drug.addDrugHistory(this.state.notesData).then(res=>{
                     if(res){
                         console.log(res);
                         this.getDrugNotes(this.props.location.state.pid);
@@ -448,7 +443,7 @@ class PatientDetailForm extends React.Component {
                                         />
                                         <Row>
                                             <Col className={"text-right"} style={{marginTop: "10px"}}>
-                                                <Button  onClick={(e)=>{this.onSubmit(e , true)}} primary type="submit" size="sm" disabled={!this.state.medicalData.history}>
+                                                <Button  onClick={(e)=>{this.onSubmit(e , true)}} primary type="submit" size="sm" disabled={!this.state.notesData.history}>
                                                     Save Note
                                                 </Button>
                                             </Col>
@@ -536,7 +531,7 @@ class PatientDetailForm extends React.Component {
                                             />
                                             <Row>
                                                 <Col className={"text-right"} style={{marginTop: "10px"}}>
-                                                    <Button onClick={(e)=>{this.onSubmit(e , false)}} primary type="submit" size="sm" disabled={!this.state.drugData.history}>
+                                                    <Button onClick={(e)=>{this.onSubmit(e , false)}} primary type="submit" size="sm" disabled={!this.state.notesData.history}>
                                                         Save Note
                                                     </Button>
                                                 </Col>
