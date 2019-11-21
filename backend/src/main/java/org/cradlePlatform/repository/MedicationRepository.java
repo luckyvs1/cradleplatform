@@ -9,8 +9,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface MedicationRepository extends CrudRepository<Medication, Integer> {
-	@Query("SELECT m FROM Medication m, DrugHistory d WHERE  d.patientId = :patientId")
-	Iterable<Medication> findMedicationsByPatientId(@Param("patientId") int patientId);
+	Iterable<Medication> findMedicationsByPatientId(int patientId);
 
 	@Modifying
 	@Query("DELETE FROM Medication m WHERE m.patientId = :patientId AND m.id = :drugId")
