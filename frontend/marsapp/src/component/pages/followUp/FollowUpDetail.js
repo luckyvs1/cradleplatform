@@ -10,6 +10,7 @@ import {connect} from "react-redux";
 import FollowUpDetailForm from "../../forms/FollowUpDetailForm";
 import api from "../../../api";
 import ConfirmAlert from "../../utils/ConfirmAlert";
+import ErrorAlert from "../../utils/ErrorAlert";
 
 class FollowUpDetail extends React.Component {
     state = {
@@ -68,6 +69,7 @@ class FollowUpDetail extends React.Component {
             <div>
                 <FollowUpDetailForm submit={this.submit}></FollowUpDetailForm>
                 <ConfirmAlert message={this.state.isShowConfirmMsg} show={this.state.isShowConfirm}></ConfirmAlert>
+                <ErrorAlert message={this.state.isShowErrorMsg} show={this.state.isShowError}></ErrorAlert>
             </div>
         );
     }
