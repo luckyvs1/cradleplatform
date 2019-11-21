@@ -24,7 +24,7 @@ public class MedicalHistoryController {
      */
     @GetMapping(path="/api/patients/{patientId}/medical-notes")
     public Iterable<MedicalHistory> getMedicalHistoryByPatientId(@PathVariable(value = "patientId") int patientId) {
-        return medicalHistoryRepository.findAllByPatientIdOrderByTimestampAsc(patientId);
+        return medicalHistoryRepository.findByPatientIdOrderByTimestampDesc(patientId);
 
     }
 
