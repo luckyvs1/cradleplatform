@@ -7,7 +7,7 @@
 // TODO: Handle assignee filter, status filter, and sort by,
 
 import React from "react";
-import { makeStyles } from "@material-ui/core";
+import {makeStyles} from "@material-ui/core";
 import {
     Form,
     Dropdown
@@ -164,9 +164,7 @@ class ReferralForm extends React.Component {
                         </Col>
                     </Row>
                     <Row>
-                        <Col>
-                            <ReferralListTable/>
-                        </Col>
+                        <ReferralListTable/>
                     </Row>
                 </Container>
             </div>

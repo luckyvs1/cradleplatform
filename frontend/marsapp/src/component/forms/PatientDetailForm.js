@@ -16,6 +16,7 @@ import {withRouter} from "react-router-dom";
 import GreenResponse from "../utils/GreenResponse";
 import RedResponse from "../utils/RedResponse";
 import TriangleResponseReading from "../utils/YellowResponse";
+import ErrorAlert from "../utils/ErrorAlert";
 
 class PatientDetailForm extends React.Component {
     // functions
@@ -48,9 +49,38 @@ class PatientDetailForm extends React.Component {
             readingData: [],
             followUpData: [],
             medicalHistoryData: [],
+            isShowError: false,
+            message: ""
         };
     }
-
+    handleMedicationSubmit = () => {
+        api.drug.getDrugHistoryByPatientId({patient_id: this.state.patientData.id}).then(res => {
+            if(res.data == null){
+                this.onShowAlert("Patient has no Drug History. Please contact your admin.", true);
+            }else{
+                this.props.history.push({
+                    pathname: '/addMedication',
+                    medication:{
+                        drug_id: res.data.id
+                    }
+                });
+            }
+        });
+    };
+    onShowAlert = (message, show) => {
+        this.setState({
+            ...this.state,
+            isShowError: show,
+            message: message
+        }, () => {
+            window.setTimeout(() => {
+                this.setState({
+                    ...this.state,
+                    isShowError: false
+                })
+            }, 2000)
+        });
+    }
     componentDidMount() {
         const pid = this.props.location.state.pid;
 
@@ -64,7 +94,7 @@ class PatientDetailForm extends React.Component {
             } else if (patientData.sex === 'Other') {
                 patientData.sexFull = 'Other';
             }
- 
+
             if (patientData.dob != null) {
                 patientData.dob = this.formatDate(patientData.dob);
             } else {
@@ -107,7 +137,6 @@ class PatientDetailForm extends React.Component {
 
                 newState.push(row);
             }
-
             this.setState({readingData: newState})
         });
 
@@ -374,6 +403,11 @@ class PatientDetailForm extends React.Component {
                                     </tbody>
                                 </table>
                             </div>
+                            <div style={{float: 'right'}}>
+                                <Button variant="primary" size="sm" onClick={this.handleMedicationSubmit}>
+                                    Add New Medication
+                                </Button>
+                            </div>
                         </Tab>
                         <Tab eventKey="drug_history" title="Drug History">
                             <div className="table-wrapper-scroll-y my-custom-scrollbar rtc"
@@ -465,6 +499,7 @@ class PatientDetailForm extends React.Component {
                             </div>
                         </Tab>
                     </Tabs>
+                    <ErrorAlert show={this.state.isShowError} message={this.state.message}></ErrorAlert>
                 </Container>
             </div>
         );
