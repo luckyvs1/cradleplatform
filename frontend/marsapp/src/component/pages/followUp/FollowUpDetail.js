@@ -20,7 +20,6 @@ class FollowUpDetail extends React.Component {
         isShowErrorMsg: "",
     }
     submit = data => {
-        console.log("data", data)
         api.followUp.addFollowUp(data).then(res => {
             if (res) {
                 this.onShowAlert("Saved follow up details" , false)
