@@ -55,8 +55,9 @@ class ListUserForm extends React.Component {
                         </Col>
                     </Row>
                     <Row>
-                        <Col>
-                            <Table hover size="sm">
+
+                        <Col  className={"table-wrapper-scroll-y my-custom-scrollbar"}>
+                            <Table hover size="sm" >
                                 <tbody>
                                 {this.state.data.map(row => (
                                     <tr key={row.id} class='clickable-row'>

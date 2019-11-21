@@ -46,6 +46,11 @@ public class FollowUpController {
         return followUpRepository.findAll();
     }
 
+    @GetMapping(path="/api/vhts/{id}/followUps")
+    public Iterable<FollowUp> getFollowUpsByVhtId(@PathVariable(value = "id") String id) {
+        return followUpRepository.findFollowUpsByVhtId(id);
+    }
+
     // POST mappings
 
     /**

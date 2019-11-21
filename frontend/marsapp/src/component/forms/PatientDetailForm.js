@@ -18,6 +18,7 @@ import RedResponse from "../utils/RedResponse";
 import TriangleResponseReading from "../utils/YellowResponse";
 import PropTypes from "prop-types";
 import moment from "moment";
+import ErrorAlert from "../utils/ErrorAlert";
 
 class PatientDetailForm extends React.Component {
     // functions
@@ -56,9 +57,39 @@ class PatientDetailForm extends React.Component {
             followUpData: [],
             drugHistory: [],
             medicalHistory: [],
+            isShowError: false,
+            message: ""
         };
         this.onChange = this.onChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
+    }
+    handleMedicationSubmit = () => {
+        api.drug.getDrugHistoryByPatientId({patient_id: this.state.patientData.id}).then(res => {
+            if(res.data == null){
+                this.onShowAlert("Patient has no Drug History. Please contact your admin.", true);
+            }else{
+                this.props.history.push({
+                    pathname: '/addMedication',
+                    medication:{
+                        drug_id: res.data.id
+                    }
+                });
+            }
+        });
+    };
+    onShowAlert = (message, show) => {
+        this.setState({
+            ...this.state,
+            isShowError: show,
+            message: message
+        }, () => {
+            window.setTimeout(() => {
+                this.setState({
+                    ...this.state,
+                    isShowError: false
+                })
+            }, 2000)
+        });
     }
 
     componentDidMount() {
@@ -489,6 +520,11 @@ class PatientDetailForm extends React.Component {
                                     </tbody>
                                 </table>
                             </div>
+                            <div style={{float: 'right'}}>
+                                <Button variant="primary" size="sm" onClick={this.handleMedicationSubmit}>
+                                    Add New Medication
+                                </Button>
+                            </div>
                         </Tab>
                         <Tab eventKey="drug_history" title="Drug History">
                             <div className="table-wrapper-scroll-y my-custom-scrollbar rtc"
@@ -576,6 +612,7 @@ class PatientDetailForm extends React.Component {
                             </div>
                         </Tab>
                     </Tabs>
+                    <ErrorAlert show={this.state.isShowError} message={this.state.message}></ErrorAlert>
                 </Container>
             </div>
         );

@@ -19,6 +19,7 @@ import PatientDetail from "./component/pages/patients/PatientDetail";
 import './App.css';
 import Help from "./component/pages/help/Help";
 import ListPatient from "./component/pages/patients/ListPatient";
+import AddMedicationDetail from "./component/pages/patients/AddMedicationDetail";
 import Referral from "./component/pages/Referral/Referral";
 import ReferralDetail from "./component/pages/Referral/ReferralDetail";
 import CreateReferral from "./component/pages/Referral/CreateReferral";
@@ -29,93 +30,94 @@ import AllFollowUp from "./component/pages/followUp/AllFollowUp";
 import FollowUpDetail from "./component/pages/followUp/FollowUpDetail";
 import ListUser from "./component/pages/users/ListUser"
 import AddUsers from "./component/pages/users/AddUsers"
+import {HCWRoute} from "./component/routes/HCWRoute";
 
 const App = ({location, isAuthenticated}) => (
 
     <div className="ui-toolbar">
         {isAuthenticated && <TopNavigation/>}
         <Route location={location} path="/" exact component={LoginPage}/>
-        <UserRoute
+        <HCWRoute
             location={location} path="/homePage" exact component={HomePage}/>
-        <UserRoute
+        <HCWRoute
             location={location}
             path="/signup"
             exact
             component={SignupPage}
         />
-        <UserRoute
+        <HCWRoute
             location={location}
             path="/addReadingDetail"
             exact
             component={AddReadingDetail}
         />
-        <UserRoute
+        <HCWRoute
             location={location}
             path="/listPatient"
             exact
             component={ListPatient}
         />
-        <UserRoute
+        <HCWRoute
             location={location}
             path="/help"
             exact
             component={Help}
         />
-        <UserRoute
+        <HCWRoute
             location={location}
             path="/referral"
             exact
             component={Referral}
         />
-        <UserRoute
+        <HCWRoute
             location={location}
             path="/referralDetail"
             exact
             component={ReferralDetail}
         />
-        <UserRoute
+        <HCWRoute
             location={location}
             path="/createReferral"
             exact
             component={CreateReferral}
         />
-        <UserRoute
+        <HCWRoute
             location={location}
             path="/patientDetail"
             exact
             component={PatientDetail}
         />
-        <UserRoute
+        <HCWRoute
             location={location}
             path="/allFollowUp"
             exact
             component={AllFollowUp}
         />
-        <UserRoute
+        <HCWRoute
             location={location}
             path="/followUpDetail"
             exact
             component={FollowUpDetail}
         />
-        <UserRoute
+        <HCWRoute
             location={location}
             path="/account"
             exact
             component={Account}
         />
-        <UserRoute
+        <HCWRoute
             location={location}
             path="/addPatient"
             exact
             component={AddPatient}
         />
-        <UserRoute
+        <HCWRoute
             location={location}
             path="/forgot_password"
             exact
             component={ForgotPasswordPage}
         />
-        <UserRoute
+        <HCWRoute
             location={location}
             path="/reset_password/:token"
             exact
@@ -138,6 +140,12 @@ const App = ({location, isAuthenticated}) => (
             path="/addUser"
             exact
             component={AddUsers}
+        />
+        <HCWRoute
+            location={location}
+            path="/addMedication"
+            exact
+            component={AddMedicationDetail}
         />
     </div>
 );

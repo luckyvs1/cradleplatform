@@ -4,6 +4,7 @@
  */
 package org.cradlePlatform.controller;
 
+import org.cradlePlatform.service.ValidationService;
 import org.cradlePlatform.model.Patient;
 import org.cradlePlatform.model.Reading;
 import org.cradlePlatform.repository.PatientRepository;
@@ -11,6 +12,7 @@ import org.cradlePlatform.repository.ReadingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.http.ResponseEntity;
 
 import java.util.Optional;
 
@@ -22,6 +24,9 @@ public class PatientController {
 
     @Autowired
     private ReadingRepository readingRepository;
+
+    @Autowired
+    private ValidationService validationService;
 
     // GET mappings
 
@@ -64,9 +69,15 @@ public class PatientController {
      * @return
      */
     @PostMapping(path="/api/patients")
-    @ResponseStatus(code = HttpStatus.CREATED)
-    public @ResponseBody String addNewPatient (@RequestBody Patient patient){
+    public ResponseEntity<String> addNewPatient (@RequestBody Patient patient){
+        try {
+            String validAttestationNo = validationService.validateAttestationNo(patient);
+            patient.setAttestationNo(validAttestationNo);
+        } catch (IllegalArgumentException e) {
+            return new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
         patientRepository.save(patient);
-        return "Saved Patient";
+        return new ResponseEntity<String>("Saved patient", HttpStatus.CREATED);
+
     }
 }
