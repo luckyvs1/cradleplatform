@@ -15,10 +15,10 @@ class TransferVHT extends React.Component{
     submit = data => {
         api.vht.transferVHT(data.firstvht , data.secondvht).then(res => {
             if (res) {
-                this.onShowAlert("Saved follow up details" , false)
+                this.onShowAlert("Transferred Patients!" , false)
             }
         }).catch(error=>{
-            this.onShowAlert("Failed to save follow up details" , true)
+            this.onShowAlert("Failed to Transfer Patients" , true)
 
         })
     }
