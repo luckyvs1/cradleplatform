@@ -48,7 +48,7 @@ public class ReadingController {
         }
     }
 
-    private String saveSMSReading() {
+    private ResponseEntity<String> saveSMSReading() {
         try {
             currentSMSReadingBody = currentSMSReadingBody.replace("END0;", "");
             Gson g = new Gson();
@@ -59,10 +59,12 @@ public class ReadingController {
                 readingRepository.save(p);
             }
             currentSMSReadingBody = "";
-            return "Success";
+            //return "Success";
+            return new ResponseEntity<String>("Success", HttpStatus.ACCEPTED);
         }catch (Exception e) {
             currentSMSReadingBody = "";
-            return "Failed";
+            //return "Failed";
+            return new ResponseEntity<String>("Failed", HttpStatus.BAD_REQUEST);
         }
     }
 
