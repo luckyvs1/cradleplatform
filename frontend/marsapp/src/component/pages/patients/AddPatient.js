@@ -48,7 +48,8 @@ class AddPatient extends React.Component {
             formattedData.gestationalStartDate = this.formatDate(formattedData.gestationalStartDate);
 
         api.patient.createPatient(JSON.stringify(formattedData)).then(res =>{
-            this.onShowAlert("Successfully added patient", false, true)
+            this.onShowAlert("Successfully added patient. Redirecting back to Patient List...", false, true)
+
         }).catch(error => {this.onShowAlert("Error: failure to add patient. Please contact admin.", true, false)})
     }
 
@@ -66,6 +67,9 @@ class AddPatient extends React.Component {
                     isShowConfirm: false
                 })
             }, 2000)
+            window.setTimeout(() => {
+                this.props.history.push("/listPatient");
+            },2000)
         });
     }
     formatDate = date =>{
