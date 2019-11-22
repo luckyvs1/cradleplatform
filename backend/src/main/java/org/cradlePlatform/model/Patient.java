@@ -32,14 +32,12 @@ public class Patient {
     @Column(name = "last_name")
     private String lastName;
 
-    @NotBlank(message = "Village Number Can't Be Empty")
     @Size(max = 32)
-    @Column(name = "village_no", length=32, nullable=false)
+    @Column(name = "village_no", length=32)
     private String villageNo;
 
-    @NotBlank(message = "Zone Number Can't Be Empty")
     @Size(max = 32)
-    @Column(name = "zone_no", length=32, nullable=false)
+    @Column(name = "zone_no", length=32)
     private String zoneNo;
 
     @Column(name="household_no", length=32)

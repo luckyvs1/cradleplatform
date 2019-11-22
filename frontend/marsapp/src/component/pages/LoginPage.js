@@ -11,6 +11,9 @@ import styled from 'styled-components';
 import auth from "../../actions/auth"
 import {connect} from "react-redux";
 import api from "../../api"
+import HCW from "../../actions/authHCW"
+import VHT from "../../actions/authVHT"
+
 import ErrorAlert from "../utils/ErrorAlert";
 
 const TopMarginStyle = styled.div`
@@ -30,11 +33,7 @@ class LoginPage extends React.Component {
                 if (res) {
                     let accessToken = res.data.access_token;
                     this.props.updateLogIn(accessToken);
-                    auth.login(() => {
-                        localStorage.setItem('loginToken', res.data.access_token);
-                        localStorage.setItem('loginUserId', res.data.id);
-                        this.props.history.push("/homePage");
-                    })
+                    this.processRole(res.data.id);
                 }
             }).catch(error => {
             switch (error.response.status) {
@@ -45,12 +44,37 @@ class LoginPage extends React.Component {
         })
     };
 
+    processRole(id){
+        api.userInfo.getUserInfoById(id).then(res=>{
+            switch (res.data.role) {
+                case "Healthworker":
+                    HCW.login(() => {
+                        localStorage.setItem('loginToken', res.data.access_token);
+                        localStorage.setItem('loginUserId', res.data.id);
+                        this.props.history.push("/homePage");
+                    })
+                    break;
+                case "Admin":
+                    auth.login(() => {
+                        localStorage.setItem('loginToken', res.data.access_token);
+                        localStorage.setItem('loginUserId', res.data.id);
+                        this.props.history.push("/homePage");
+                    })
+                    break;
+                case "VHT":
+                    VHT.login(() => {
+                        localStorage.setItem('loginToken', res.data.access_token);
+                        localStorage.setItem('loginUserId', res.data.id);
+                        this.props.history.push("/homePage");
+                    })
+                    break;
+            }
+        })
+    }
 
     componentDidMount() {
-        if (localStorage.getItem('loginToken')) {
-            auth.login(() => {
-                this.props.history.push("/homePage");
-            })
+        if (localStorage.getItem('loginToken') && localStorage.getItem('loginUserId')) {
+            this.processRole(localStorage.getItem('loginUserId'))
         }
     }
 
