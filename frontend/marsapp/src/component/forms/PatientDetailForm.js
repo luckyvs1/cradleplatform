@@ -268,7 +268,6 @@ class PatientDetailForm extends React.Component {
             if (isMedical) {
                 api.medicalHistory.addMedicalHistory(this.state.notesData).then(res => {
                     if (res) {
-                        console.log(res);
                         this.getMedicalNotes(this.props.location.state.pid);
                     }
                 }, () => {
@@ -279,7 +278,6 @@ class PatientDetailForm extends React.Component {
             } else {
                 api.drug.addDrugHistory(this.state.notesData).then(res => {
                     if (res) {
-                        console.log(res);
                         this.getDrugNotes(this.props.location.state.pid);
                     }
                 }, () => {
