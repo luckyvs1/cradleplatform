@@ -35,7 +35,7 @@ public class ReadingController {
     private static String currentSMSReadingBody = "";
 
     @PostMapping(path="/api/smsreadings")
-    public String smsReadings(@RequestParam String Body){
+    public ResponseEntity<String> smsReadings(@RequestParam String Body){
         currentSMSReadingBody += Body;
         currentSMSReadingBody = currentSMSReadingBody.replace("<", "[");
         currentSMSReadingBody = currentSMSReadingBody.replace(">", "]");
@@ -44,7 +44,7 @@ public class ReadingController {
         if(currentSMSReadingBody.endsWith("END0;")) {
             return saveSMSReading();
         } else {
-            return "Reading";
+            return new ResponseEntity<String>("Reading", HttpStatus.ACCEPTED);
         }
     }
 
@@ -55,16 +55,14 @@ public class ReadingController {
             Reading p = g.fromJson(currentSMSReadingBody, Reading.class);
             Boolean trafficLightIsValid = readingService.isValidTrafficLight(p);
             p.setRecheckVitalsDate(new Timestamp(System.currentTimeMillis()));
-            if(trafficLightIsValid){
+            if(trafficLightIsValid) {
                 readingRepository.save(p);
             }
             currentSMSReadingBody = "";
-            //return "Success";
             return new ResponseEntity<String>("Success", HttpStatus.ACCEPTED);
         }catch (Exception e) {
             currentSMSReadingBody = "";
-            //return "Failed";
-            return new ResponseEntity<String>("Failed", HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<String>("Failed", HttpStatus.ACCEPTED);
         }
     }
 
