@@ -16,7 +16,7 @@ import java.util.List;
 @Repository
 public interface MonitorRepository extends CrudRepository<Monitor, String> {
 
-    @Query("SELECT p FROM Patient p, Monitor m WHERE m.vhtId = :id")
+    @Query("SELECT p FROM Patient p, Monitor m WHERE m.vhtId = :id AND p.id = m.patientId")
     List<Patient> getPatientsByVhtId(@Param("id") String id);
 
     @Query("SELECT p " +
