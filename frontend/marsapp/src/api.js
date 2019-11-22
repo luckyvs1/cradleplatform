@@ -60,8 +60,8 @@ export default {
         getAllDrugHistory: data => axios.get(`http://${host}:${port}/api/drug-notes`, data),
         getDrugHistoryByPatientId: data => axios.get(`http://${host}:${port}/api/patients/${data.patient_id}/drug-notes`),
         addDrugHistory: data => axios.post(`http://${host}:${port}/api/drug-notes`, data),
-        getDrugNoteById: data => axios.get(`http://${host}:${port}/api/drug-notes/${data.id}`)
-
+        getDrugNoteById: data => axios.get(`http://${host}:${port}/api/drug-notes/${data.id}`),
+        deleteDrugNote: data => axios.delete(`http://${host}:${port}/api/drug-notes/${data.id}`)
     },
     reading: {
         addAReferral: data => axios.post(`http://${host}:${port}/api/readings`, {data}),

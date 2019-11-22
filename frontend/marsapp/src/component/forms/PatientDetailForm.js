@@ -327,27 +327,27 @@ class PatientDetailForm extends React.Component {
         })
     };
 
-    onDelete = (event, isMedical) => {
+    onDelete = (event, isMedical, rowId) => {
         event.preventDefault();
-
+        console.log("DELETE")
         this.setState({
             ...this.state,
             notesData: {
                 ...this.state.notesData,
-                id: this.state.currentRowId,
-                patientId: this.props.location.state.pid,
-                timestamp: this.state.notesData.timestamp
+                id: "",
+                patientId: "",
+                timestamp: ""
             }
         }, () => {
             if (isMedical) {
-                api.medicalHistory.addMedicalHistory(this.state.notesData).then(res => {
+                api.medicalHistory.deleteMedicalNote({id: rowId}).then(res => {
                     if (res) {
                         console.log(res);
                         this.getMedicalNotes(this.props.location.state.pid);
                     }
                 });
             } else {
-                api.drug.addDrugHistory(this.state.notesData).then(res => {
+                api.drug.deleteDrugNote({id: rowId}).then(res => {
                     if (res) {
                         console.log(res);
                         this.getDrugNotes(this.props.location.state.pid);
@@ -620,7 +620,9 @@ class PatientDetailForm extends React.Component {
                                                 {row.timestampTime}
                                             </td>
                                             <td id={"diagnosis-wrap"}> {row.history}</td>
-                                            <td><Button size="sm"><i className="fas fa-trash"/></Button></td>
+                                            <td><Button size="sm"
+                                                        onClick={(event) => this.onDelete(event, true, row.id)}><i
+                                                className="fas fa-trash"/></Button></td>
                                             <td><Button size="sm" onClick={() => this.editMedicalNotes(row)}><i
                                                 className="fas fa-edit"/></Button></td>
                                         </tr>
@@ -677,7 +679,7 @@ class PatientDetailForm extends React.Component {
                                                 {row.timestampTime}
                                             </td>
                                             <td id={"diagnosis-wrap"}> {row.history} </td>
-                                            <td><Button size="sm"><i className="fas fa-trash"/></Button></td>
+                                            <td><Button size="sm"  onClick={(event) => this.onDelete(event, false, row.id)}><i className="fas fa-trash"/></Button></td>
                                             <td><Button size="sm" onClick={() => this.editDrugNotes(row)}><i
                                                 className="fas fa-edit"/></Button></td>
                                         </tr>
