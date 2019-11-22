@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Optional;
+
 @CrossOrigin(origins = {"http://cmpt373.csil.sfu.ca:8044", "http://localhost:3000"})
 @RestController
 public class MedicalHistoryController {
@@ -25,7 +27,11 @@ public class MedicalHistoryController {
     @GetMapping(path="/api/patients/{patientId}/medical-notes")
     public Iterable<MedicalHistory> getMedicalHistoryByPatientId(@PathVariable(value = "patientId") int patientId) {
         return medicalHistoryRepository.findByPatientIdOrderByTimestampDesc(patientId);
+    }
 
+    @GetMapping(path="/api/medical-notes/{id}")
+    public Optional<MedicalHistory> getMedicalHistoryById(@PathVariable(value = "id") int id){
+        return medicalHistoryRepository.findById(id);
     }
 
     // POST mappings

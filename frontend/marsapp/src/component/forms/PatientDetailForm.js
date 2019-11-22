@@ -59,7 +59,8 @@ class PatientDetailForm extends React.Component {
             medicationData: [],
             isShowError: false,
             message: "",
-            showModal: false,
+            showMedicalNoteModal: false,
+            showDrugNoteModal: false,
             currentRowId: 0,
             currentNote: "",
         };
@@ -326,20 +327,63 @@ class PatientDetailForm extends React.Component {
         })
     };
 
-    editNotes = (row) => {
+    onDelete = (event, isMedical) => {
+        event.preventDefault();
+
+        this.setState({
+            ...this.state,
+            notesData: {
+                ...this.state.notesData,
+                id: this.state.currentRowId,
+                patientId: this.props.location.state.pid,
+                timestamp: this.state.notesData.timestamp
+            }
+        }, () => {
+            if (isMedical) {
+                api.medicalHistory.addMedicalHistory(this.state.notesData).then(res => {
+                    if (res) {
+                        console.log(res);
+                        this.getMedicalNotes(this.props.location.state.pid);
+                    }
+                });
+            } else {
+                api.drug.addDrugHistory(this.state.notesData).then(res => {
+                    if (res) {
+                        console.log(res);
+                        this.getDrugNotes(this.props.location.state.pid);
+                    }
+                });
+            }
+        })
+    };
+
+    editMedicalNotes = (row) => {
         api.medicalHistory.getMedicalNoteById({id: row.id}).then(async res => {
             const medicalNoteData = res.data;
 
-            console.log("TIMESTAMP", medicalNoteData.timestamp);
-
-            console.log("ROW DATA", row)
             this.setState({
                 ...this.state,
-                showModal: true,
+                showMedicalNoteModal: true,
                 currentRowId: row.id,
                 currentNote: medicalNoteData.history,
                 notesData: {
                     timestamp: medicalNoteData.timestamp
+                }
+            })
+        });
+    }
+
+    editDrugNotes = (row) => {
+        api.drug.getDrugNoteById({id: row.id}).then(async res => {
+            const drugNoteData = res.data;
+
+            this.setState({
+                ...this.state,
+                showDrugNoteModal: true,
+                currentRowId: row.id,
+                currentNote: drugNoteData.history,
+                notesData: {
+                    timestamp: drugNoteData.timestamp
                 }
             })
         });
@@ -371,7 +415,8 @@ class PatientDetailForm extends React.Component {
         const handleClose = () => {
             this.setState({
                 ...this.state,
-                showModal: false,
+                showMedicalNoteModal: false,
+                showDrugNoteModal: false,
             })
         };
         return (
@@ -576,7 +621,7 @@ class PatientDetailForm extends React.Component {
                                             </td>
                                             <td id={"diagnosis-wrap"}> {row.history}</td>
                                             <td><Button size="sm"><i className="fas fa-trash"/></Button></td>
-                                            <td><Button size="sm" onClick={() => this.editNotes(row)}><i
+                                            <td><Button size="sm" onClick={() => this.editMedicalNotes(row)}><i
                                                 className="fas fa-edit"/></Button></td>
                                         </tr>
                                     ))}
@@ -621,6 +666,8 @@ class PatientDetailForm extends React.Component {
                                     <thead>
                                     <th scope="col" id={"timestamp-col"}>Date & Time</th>
                                     <th scope="col">Notes</th>
+                                    <th scope="col">Delete</th>
+                                    <th scope="col">Edit</th>
                                     </thead>
                                     <tbody>
                                     {this.state.drugHistory.map(row => (
@@ -630,6 +677,9 @@ class PatientDetailForm extends React.Component {
                                                 {row.timestampTime}
                                             </td>
                                             <td id={"diagnosis-wrap"}> {row.history} </td>
+                                            <td><Button size="sm"><i className="fas fa-trash"/></Button></td>
+                                            <td><Button size="sm" onClick={() => this.editDrugNotes(row)}><i
+                                                className="fas fa-edit"/></Button></td>
                                         </tr>
                                     ))}
                                     </tbody>
@@ -700,7 +750,7 @@ class PatientDetailForm extends React.Component {
                     <ErrorAlert show={this.state.isShowError} message={this.state.message}/>
                 </Container>
 
-                <Modal size="lg" show={this.state.showModal} onHide={handleClose} animation={true} centered>
+                <Modal size="lg" show={this.state.showMedicalNoteModal} onHide={handleClose} animation={true} centered>
                     <Modal.Header closeButton>
                         <Modal.Title>Edit Note</Modal.Title>
                     </Modal.Header>
@@ -721,6 +771,34 @@ class PatientDetailForm extends React.Component {
                         <Button variant="secondary">Close</Button>
                         <Button onClick={(e) => {
                             this.onUpdate(e, true)
+                        }} primary type="submit" size="sm"
+                                disabled={!this.state.notesData.history}>
+                            Save Changes
+                        </Button>
+                    </Modal.Footer>
+                </Modal>
+
+                <Modal size="lg" show={this.state.showDrugNoteModal} onHide={handleClose} animation={true} centered>
+                    <Modal.Header closeButton>
+                        <Modal.Title>Edit Note</Modal.Title>
+                    </Modal.Header>
+
+                    <Modal.Body>
+                        <Form>
+                            <Form.Control
+                                type="text"
+                                name="history"
+                                as="textarea"
+                                rows="4"
+                                onChange={this.onChange}
+                            >{this.state.currentNote}</Form.Control>
+                        </Form>
+                    </Modal.Body>
+
+                    <Modal.Footer>
+                        <Button variant="secondary">Close</Button>
+                        <Button onClick={(e) => {
+                            this.onUpdate(e, false)
                         }} primary type="submit" size="sm"
                                 disabled={!this.state.notesData.history}>
                             Save Changes
