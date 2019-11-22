@@ -45,7 +45,8 @@ class AddPatientForm extends React.Component {
             this.onChange = this.onChange.bind(this);
             this.onChangeDateGest = this.onChangeDateGest.bind(this);
             this.onSubmit = this.onSubmit.bind(this);
-            this. isValidAttest = this.isValidAttest.bind(this);
+            this.isValidAttest = this.isValidAttest.bind(this);
+            this.gettingAgeFromDOB = this.gettingAgeFromDOB.bind(this);
         }
     isValidAttest = str => {
         return /^(?=.*\d)[\d ]+$/.test(str) && str.replace(/[^0-9]/g, "").length == 11;
@@ -68,11 +69,21 @@ class AddPatientForm extends React.Component {
             this.props.submit(this.state.data);
         }
     };
+    gettingAgeFromDOB = birthday => {
+        let ageDif = Date.now() - birthday.getTime();
+        let ageDate = new Date(ageDif);
+        return Math.abs(ageDate.getUTCFullYear() - 1970);
+    }
     validate = (data) => {
         const errors = {};
         let emptyWarning = "Field cannot be blank";
         if(!this.isValidAttest(data.attestationNo)) errors.attestationNo = "Not a valid 11-digit number";
         if(data.age < 18) errors.age = "Minimum age must be 18";
+        if(this.gettingAgeFromDOB(data.dob) != data.age){
+            if(errors.age) errors.age += " and "; else errors.age ="";
+            errors.age += "Age not corresponding with date of birth";
+            errors.dob = "Date of Birth not corresponding with current age";
+        }
         if(!data.initials) errors.initials = emptyWarning;
         return errors;
     }
@@ -143,8 +154,8 @@ class AddPatientForm extends React.Component {
                                             id="dob"
                                             name="dob"
                                             dateFormat="yyyy-MM-dd"
-                                            onChange={this.onChangeDob}
-                                        />
+                                            onChange={this.onChangeDob}/>
+                                            {errors.dob && <InlineError text={errors.dob}/>}
                                     </Form.Group>
                                     <Form.Group as={Col}>
                                         <Form.Label>Age</Form.Label>
