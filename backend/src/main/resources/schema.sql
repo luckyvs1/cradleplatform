@@ -74,7 +74,7 @@ CREATE TABLE Patient (
 );
 
 CREATE TABLE Drug_History (
-    id          INTEGER     AUTO_INCREMENT,
+    id          INTEGER     NOT NULL AUTO_INCREMENT,
     patient_id  INTEGER     NOT NULL,
     timestamp   TIMESTAMP   NOT NULL,
     history     TEXT,
@@ -83,8 +83,8 @@ CREATE TABLE Drug_History (
 );
 
 CREATE TABLE Medication (
-    id              INTEGER         AUTO_INCREMENT,
-    patient_id      INTEGER,
+    id              INTEGER         NOT NULL AUTO_INCREMENT,
+    patient_id      INTEGER         NOT NULL,
     drug_name       VARCHAR (32)    NOT NULL,
     dosage          VARCHAR (256)   NOT NULL,
     start_date      DATE            NOT NULL,
@@ -94,12 +94,12 @@ CREATE TABLE Medication (
             (end_date IS NULL OR end_date >= start_date)
         ),
     PRIMARY KEY (id),
-    FOREIGN KEY (patient_id) REFERENCES Patient(id) ON DELETE CASCADE 
+    FOREIGN KEY (patient_id) REFERENCES Patient(id) ON DELETE CASCADE
 );
 
 CREATE TABLE Medical_History (
-    id          INTEGER     AUTO_INCREMENT,
-    patient_id  INTEGER,
+    id          INTEGER     NOT NULL AUTO_INCREMENT,
+    patient_id  INTEGER     NOT NULL,
     timestamp   TIMESTAMP   NOT NULL,
     history     TEXT,
     PRIMARY KEY (id),
@@ -108,7 +108,7 @@ CREATE TABLE Medical_History (
 
 CREATE TABLE FollowUp (
     id          INTEGER     NOT NULL AUTO_INCREMENT,
-    patient_id  INTEGER NOT NULL,
+    patient_id  INTEGER     NOT NULL,
     notes       TEXT,
     required    BOOLEAN,
     frequency   TEXT,
