@@ -13,13 +13,11 @@ import SignupPage from "./component/pages/SignupPage";
 import ForgotPasswordPage from "./component/pages/ForgotPasswordPage";
 import ResetPasswordPage from "./component/pages/ResetPasswordPage";
 import {UserRoute} from "./component/routes/UserRoute";
-import {AdminRoute} from "./component/routes/AdminRoute";
 import TopNavigation from "./component/navigation/TopNavigation";
 import PatientDetail from "./component/pages/patients/PatientDetail";
 import './App.css';
 import Help from "./component/pages/help/Help";
 import ListPatient from "./component/pages/patients/ListPatient";
-import AddMedicationDetail from "./component/pages/patients/AddMedicationDetail";
 import Referral from "./component/pages/Referral/Referral";
 import ReferralDetail from "./component/pages/Referral/ReferralDetail";
 import CreateReferral from "./component/pages/Referral/CreateReferral";
@@ -149,7 +147,7 @@ const App = ({location, isAuthenticated}) => (
             path="/transferVHT"
             exact
             component={TransferVHT}
-        ></HCWRoute>
+        />
         <HCWRoute
             location={location}
             path="/addMedication"
