@@ -30,6 +30,7 @@ import AllFollowUp from "./component/pages/followUp/AllFollowUp";
 import FollowUpDetail from "./component/pages/followUp/FollowUpDetail";
 import ListUser from "./component/pages/users/ListUser"
 import AddUsers from "./component/pages/users/AddUsers"
+import CreateDiagnosis from "./component/pages/readings/CreateDiagnosis"
 import {HCWRoute} from "./component/routes/HCWRoute";
 import {VHTRoute} from "./component/routes/VHTRoute";
 
@@ -142,11 +143,17 @@ const App = ({location, isAuthenticated}) => (
             exact
             component={AddUsers}
         />
-        <UserRoute
+        <HCWRoute
             location={location}
             path="/addMedication"
             exact
             component={AddMedicationDetail}
+        />
+        <HCWRoute
+            location={location}
+            path="/createDiagnosis"
+            exact
+            component={CreateDiagnosis}
         />
     </div>
 );

@@ -26,11 +26,7 @@ class ReferralListTable extends React.Component {
 
             for (let i = 0; i < data.length; i++) {
                 // query patient name
-                // TODO: Find a nicer way to use the api, or change the api's requested parameter
-                let getDataParam = {
-                    id: data[i].patientId
-                };
-                const thePatient = await api.patient.getPatientById(getDataParam).then(res => {
+                const thePatient = await api.patient.getPatientById({id: data[i].patientId}).then(res => {
                     return res.data.initials;
                 });
 
@@ -39,23 +35,31 @@ class ReferralListTable extends React.Component {
                     return res.data.firstName + " " + res.data.lastName;
                 });
 
-                // TODO: Handle assignee and status when db schema updates
                 const theDate = new Date(data[i].timestamp).toDateString();
+
+                const diagnosis = await api.reading.getReadingById({readingid: data[i].readingId}).then(res => {
+                    return res.data.diagnosis;
+                });
+
+                let theStatus = "";
+                if (diagnosis) {
+                    theStatus = "Done";
+                } else {
+                    theStatus = "Requires response";
+                }
 
                 let row = {
                     id: data[i].id,
                     pid: data[i].patientId,
                     pname: thePatient,
                     referrer: theReferrer,
-                    assignee: "",
                     dateof: theDate,
-                    status: "",
+                    status: theStatus,
                 };
 
                 newState.push(row);
             }
             this.setState({data: newState});
-            console.log("state:", this.state);
         })
     }
 
@@ -63,8 +67,7 @@ class ReferralListTable extends React.Component {
         this.props.history.push({
             pathname: '/referralDetail',
             state: {
-                referrerId: row.id,
-                initials: row.pname // TODO, remove later when data is obtained in referralDetails page
+                id: row.id
             }
         });
     };
@@ -78,7 +81,6 @@ class ReferralListTable extends React.Component {
                             <th>Patient ID</th>
                             <th>Patient Initials</th>
                             <th>Referred By</th>
-                            <th>Assigned to</th>
                             <th>Referral Date</th>
                             <th>Status</th>
                         </tr>
@@ -89,7 +91,6 @@ class ReferralListTable extends React.Component {
                                 <td>{row.pid}</td>
                                 <td>{row.pname}</td>
                                 <td>{row.referrer}</td>
-                                <td>{row.assignee}</td>
                                 <td>{row.dateof}</td>
                                 <td>{row.status}</td>
                             </tr>
