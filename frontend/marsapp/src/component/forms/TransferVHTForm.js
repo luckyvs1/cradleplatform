@@ -87,7 +87,7 @@ class TransferVHTForm extends React.Component {
                                 <h2></h2>
                             </Form.Label>
                             <Button variant="primary" size="lg" block onClick={this.submit}>
-                                <i className="fas fa-exchange-alt"></i>
+                                <i className="fas fa-arrow-right"></i>
                                 {'\t\t'}Transfer Data
                             </Button>
                         </Col>
