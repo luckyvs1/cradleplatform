@@ -61,7 +61,7 @@ public class DrugHistoryController {
      */
     @DeleteMapping(path="/api/drug-notes/{id}")
     public @ResponseBody
-    ResponseEntity<String> deleteFollowUp(@PathVariable(value = "id") int id) {
+    ResponseEntity<String> deleteDrugNote(@PathVariable(value = "id") int id) {
         if (drugHistoryRepository.existsById(id)) {
             drugHistoryRepository.deleteById(id);
             String responseMsg = "Deleted Drug Note ID #" + id;
@@ -71,5 +71,4 @@ public class DrugHistoryController {
             return new ResponseEntity<String>(responseMsg, HttpStatus.NOT_FOUND);
         }
     }
-
 }

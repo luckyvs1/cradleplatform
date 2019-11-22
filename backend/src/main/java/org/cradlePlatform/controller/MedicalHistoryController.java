@@ -7,6 +7,7 @@ import org.cradlePlatform.model.MedicalHistory;
 import org.cradlePlatform.repository.MedicalHistoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
@@ -41,5 +42,25 @@ public class MedicalHistoryController {
     public String addMedicalHistory (@RequestBody MedicalHistory medicalHistory) {
         medicalHistoryRepository.save(medicalHistory);
         return "Saved Medical Note";
+    }
+
+    // DELETE mapping
+
+    /**
+     * Delete an existing MedicalNote with matching id.
+     * @param id
+     * @return 200 if success, 404 if no matching id
+     */
+    @DeleteMapping(path="/api/medical-notes/{id}")
+    public @ResponseBody
+    ResponseEntity<String> deleteMedicalNote(@PathVariable(value = "id") int id) {
+        if (medicalHistoryRepository.existsById(id)) {
+            medicalHistoryRepository.deleteById(id);
+            String responseMsg = "Deleted Medical Note ID #" + id;
+            return new ResponseEntity<String>(responseMsg, HttpStatus.OK);
+        } else {
+            String responseMsg = "Medical Note with ID " + id + " not found.";
+            return new ResponseEntity<String>(responseMsg, HttpStatus.NOT_FOUND);
+        }
     }
 }
