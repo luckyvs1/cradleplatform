@@ -54,7 +54,7 @@ class CreateDiagnosisForm extends React.Component {
         const errors = this.validate(this.state);
         this.setState({errors}); //if there are errors returned, display them
         if(Object.keys(errors).length === 0){ //if no errors
-            api.reading.uploadDiagnosis({patient_id: this.state.data.patientId, diagnosis: this.state.data.diagnosis}, config)
+            api.reading.uploadDiagnosis({readingid: this.state.data.id, diagnosis: this.state.data.diagnosis}, config)
                 .then(res => {
                     this.onShowAlert("Successfully added Diagnosis", false, true);
                     this.props.history.push({

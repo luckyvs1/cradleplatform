@@ -65,7 +65,7 @@ export default {
         getReadingForPatient:data=> axios.get(`http://${host}:${port}/api/patients/${data.patient_id}/readings?latest=${data.latest}`),
         getReadingById:data=>  axios.get(`http://${host}:${port}/api/readings/${data.readingid}`),
         uploadReading: data =>axios.post(`http://${host}:${port}/api/readings` , {}).then(res => console.log(res)),
-        uploadDiagnosis: (data, header) =>axios.put(`http://${host}:${port}/api/readings/${data.patient_id}/diagnosis`, data.diagnosis, header),
+        uploadDiagnosis: (data, header) =>axios.put(`http://${host}:${port}/api/readings/${data.readingid}/diagnosis`, data.diagnosis, header),
     },
     referral:{
         getAllReferral:data=> axios.get(`http://${host}:${port}/api/referrals` ),
