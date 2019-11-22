@@ -73,8 +73,6 @@ class AddPatientForm extends React.Component {
         let emptyWarning = "Field cannot be blank";
         if(!this.isValidAttest(data.attestationNo)) errors.attestationNo = "Not a valid 11-digit number";
         if(data.age < 18) errors.age = "Minimum age must be 18";
-        if(!data.villageNo) errors.villageNo = emptyWarning;
-        if(!data.zoneNo) errors.zoneNo = emptyWarning;
         if(!data.initials) errors.initials = emptyWarning;
         return errors;
     }
@@ -229,7 +227,6 @@ class AddPatientForm extends React.Component {
                                         placeholder="Enter here..."
                                         value={data.villageNo}
                                         onChange={this.onChange}/>
-                                        {errors.villageNo && <InlineError text={errors.villageNo}/>}
                                 </Form.Group>
                                 <Form.Group as={Col}>
                                     <Form.Label>Zone #</Form.Label>
@@ -240,7 +237,6 @@ class AddPatientForm extends React.Component {
                                         placeholder="Enter here..."
                                         value={data.zoneNo}
                                         onChange={this.onChange}/>
-                                        {errors.zoneNo && <InlineError text={errors.zoneNo}/>}
                                 </Form.Group>
                             </Form.Row>
                             <Form.Row>
