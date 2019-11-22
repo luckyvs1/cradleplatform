@@ -94,7 +94,7 @@ CREATE TABLE Medication (
             (end_date IS NULL OR end_date >= start_date)
         ),
     PRIMARY KEY (id),
-    FOREIGN KEY (patient_id) REFERENCES Patient(id)
+    FOREIGN KEY (patient_id) REFERENCES Patient(id) ON DELETE CASCADE 
 );
 
 CREATE TABLE Medical_History (
@@ -487,14 +487,14 @@ insert into Patient values (10,
                             'none',
                             0);
 
-insert into Reading values (5,
+insert into Reading values (1,
                             '1',
                             1,
                             '2019-10-24',
                             'Bleeding',
                             'Confusion',
-                            45,
-                            70,
+                            135,
+                            85,
                             117,
                             'Good vitals',
                             False,
