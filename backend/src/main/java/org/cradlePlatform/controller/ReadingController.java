@@ -6,7 +6,10 @@
  */
 package org.cradlePlatform.controller;
 
+import java.sql.Timestamp;
 import java.util.Optional;
+
+import com.google.gson.*;
 import org.cradlePlatform.model.Reading;
 import org.cradlePlatform.model.VitalsTrafficLight;
 import org.cradlePlatform.model.ReadingUploadWrapper;
@@ -28,6 +31,41 @@ public class ReadingController {
 
     @Autowired
     private ReadingService readingService;
+
+    private static String currentSMSReadingBody = "";
+
+    @PostMapping(path="/api/smsreadings")
+    public ResponseEntity<String> smsReadings(@RequestParam String Body){
+        currentSMSReadingBody += Body;
+        currentSMSReadingBody = currentSMSReadingBody.replace("<", "[");
+        currentSMSReadingBody = currentSMSReadingBody.replace(">", "]");
+        currentSMSReadingBody = currentSMSReadingBody.replace("(", "{");
+        currentSMSReadingBody = currentSMSReadingBody.replace(")", "}");
+        if(currentSMSReadingBody.endsWith("END0;")) {
+            return saveSMSReading();
+        } else {
+            return new ResponseEntity<String>("Reading", HttpStatus.ACCEPTED);
+        }
+    }
+
+    private ResponseEntity<String> saveSMSReading() {
+        try {
+            currentSMSReadingBody = currentSMSReadingBody.replace("END0;", "");
+            Gson g = new Gson();
+            Reading p = g.fromJson(currentSMSReadingBody, Reading.class);
+            Boolean trafficLightIsValid = readingService.isValidTrafficLight(p);
+            p.setRecheckVitalsDate(new Timestamp(System.currentTimeMillis()));
+            if(trafficLightIsValid) {
+                readingRepository.save(p);
+            }
+            currentSMSReadingBody = "";
+            return new ResponseEntity<String>("Success", HttpStatus.ACCEPTED);
+        }catch (Exception e) {
+            currentSMSReadingBody = "";
+            return new ResponseEntity<String>("Failed", HttpStatus.ACCEPTED);
+        }
+    }
+
 
     @PostMapping(path="/api/readings")
     public ResponseEntity<String> addReading(@RequestBody Reading reading){
