@@ -72,7 +72,6 @@ class LoginPage extends React.Component {
     }
 
     componentDidMount() {
-        // localStorage.removeItem('loginUserId')
         if (localStorage.getItem('loginToken') && localStorage.getItem('loginUserId')) {
             this.processRole(localStorage.getItem('loginUserId'))
         }
