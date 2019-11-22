@@ -6,10 +6,7 @@
  */
 package org.cradlePlatform.controller;
 
-import java.lang.reflect.Type;
 import java.sql.Timestamp;
-import java.time.ZonedDateTime;
-import java.util.Date;
 import java.util.Optional;
 
 import com.google.gson.*;
@@ -20,7 +17,6 @@ import org.cradlePlatform.model.ReadingGetWrapper;
 import org.cradlePlatform.repository.ReadingRepository;
 import org.cradlePlatform.service.ReadingService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.ResponseEntity;
