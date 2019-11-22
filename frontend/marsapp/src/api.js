@@ -84,10 +84,8 @@ export default {
         getAllFollowUps:data=> axios.get(`http://${host}:${port}/api/followUps`),
         getFollowUpByFollowUpId:data=> axios.get(`http://${host}:${port}/api/followUps/${data.followUpId}`),
         getFollowUpByPatientId:data=> axios.get(`http://${host}:${port}/api/patients/${data.patient_id}/follow-ups?latest=${data.latest}`),
-        addFollowUp:data=> axios.post(`http://${host}:${port}/api/followUps` , {data}),
         removeFollowUpById:data=> axios.delete(`http://${host}:${port}/api/followUps/${data}`),
         addFollowUp:data=> axios.post(`http://${host}:${port}/api/followUps` , data),
-
     },
     healthCareWorker:{
         getAllHealthWorkers:data=> axios.get(`http://${host}:${port}/api/healthWorkers`),
