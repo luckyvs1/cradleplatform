@@ -36,8 +36,7 @@ class TopNavigation extends React.Component {
             document.getElementsByClassName("sidebar-wrapper")[0].setAttribute("style", `width:${width} px !important;`)
         }
     }
-
-    handleClick(e) {
+    handleClick(e){
         localStorage.removeItem("loginToken");
         localStorage.removeItem("loginUserId");
         localStorage.removeItem("isVHT");
