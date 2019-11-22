@@ -9,7 +9,17 @@ import {connect} from "react-redux";
 import axios from "axios";
 import AddPatientForm from "../../forms/AddPatientForm";
 import api from "../../../api";
+import ErrorAlert from "../../utils/ErrorAlert";
+import ConfirmAlert from "../../utils/ConfirmAlert";
+
 class AddPatient extends React.Component {
+
+    state = {
+            isShowError: false,
+            isShowConfirm: false,
+            message: "",
+    }
+
     submit = (data) => {
         //The reason that I copy each data field into the formattedData was because I couldn't format the dates (dob and gestationalStartDate)
         //into SQL DATE format directly without crashing the app. Will try to figure this out for the next iteration (refactoring)
@@ -37,11 +47,27 @@ class AddPatient extends React.Component {
         if(formattedData.gestationalStartDate != null)
             formattedData.gestationalStartDate = this.formatDate(formattedData.gestationalStartDate);
 
-        api.patient.createPatient(JSON.stringify(formattedData)).then(res =>
-            {console.log("created patient", res);}
-        )
+        api.patient.createPatient(JSON.stringify(formattedData)).then(res =>{
+            this.onShowAlert("Successfully added patient", false, true)
+        }).catch(error => {this.onShowAlert("Error: failure to add patient. Please contact admin.", true, false)})
     }
 
+    onShowAlert = (message, error, confirm) => {
+        this.setState({
+            ...this.state,
+            isShowError: error,
+            isShowConfirm: confirm,
+            message: message
+        }, () => {
+            window.setTimeout(() => {
+                this.setState({
+                    ...this.state,
+                    isShowError: false,
+                    isShowConfirm: false
+                })
+            }, 2000)
+        });
+    }
     formatDate = date =>{
         function pad(num){ return ('00'+num).slice(-2) };
         return  date.getUTCFullYear()        + '-' +
@@ -50,7 +76,11 @@ class AddPatient extends React.Component {
     }
     render() {
         return (
+        <div>
             <AddPatientForm submit = {this.submit}></AddPatientForm>
+            <ErrorAlert show={this.state.isShowError} message={this.state.message}></ErrorAlert>
+            <ConfirmAlert show={this.state.isShowConfirm} message={this.state.message}></ConfirmAlert>
+        </div>
         );
     }
 }

@@ -45,8 +45,11 @@ class AddPatientForm extends React.Component {
             this.onChange = this.onChange.bind(this);
             this.onChangeDateGest = this.onChangeDateGest.bind(this);
             this.onSubmit = this.onSubmit.bind(this);
+            this. isValidAttest = this.isValidAttest.bind(this);
         }
-
+    isValidAttest = str => {
+        return /^(?=.*\d)[\d ]+$/.test(str) && str.replace(/[^0-9]/g, "").length == 11;
+    }
     onChange = e => this.setState({data: {...this.state.data, [e.target.name]: e.target.value} });
     onChangeDob = date =>
         this.setState({
@@ -68,6 +71,8 @@ class AddPatientForm extends React.Component {
     validate = (data) => {
         const errors = {};
         let emptyWarning = "Field cannot be blank";
+        if(!this.isValidAttest(data.attestationNo)) errors.attestationNo = "Not a valid 11-digit number";
+        if(data.age < 18) errors.age = "Minimum age must be 18";
         if(!data.villageNo) errors.villageNo = emptyWarning;
         if(!data.zoneNo) errors.zoneNo = emptyWarning;
         if(!data.initials) errors.initials = emptyWarning;
@@ -210,9 +215,10 @@ class AddPatientForm extends React.Component {
                                         type="text"
                                         id="attestationNo"
                                         name="attestationNo"
-                                        placeholder="Enter here..."
+                                        placeholder="Enter 11-digit number only"
                                         value={data.attestationNo}
                                         onChange={this.onChange}/>
+                                        {errors.attestationNo && <InlineError text={errors.attestationNo}/>}
                                 </Form.Group>
                                 <Form.Group as={Col}>
                                     <Form.Label>Village #</Form.Label>
