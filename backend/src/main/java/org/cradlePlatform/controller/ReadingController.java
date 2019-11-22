@@ -59,8 +59,11 @@ public class ReadingController {
             currentSMSReadingBody = currentSMSReadingBody.replace("END0;", "");
             Gson g = new Gson();
             Reading p = g.fromJson(currentSMSReadingBody, Reading.class);
+            Boolean trafficLightIsValid = readingService.isValidTrafficLight(p);
             p.setRecheckVitalsDate(new Timestamp(System.currentTimeMillis()));
-            readingRepository.save(p);
+            if(trafficLightIsValid){
+                readingRepository.save(p);
+            }
             currentSMSReadingBody = "";
             return "Success";
         }catch (Exception e) {
