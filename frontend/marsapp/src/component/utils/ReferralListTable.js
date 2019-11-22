@@ -35,23 +35,31 @@ class ReferralListTable extends React.Component {
                     return res.data.firstName + " " + res.data.lastName;
                 });
 
-                // TODO: Handle assignee and status when db schema updates
                 const theDate = new Date(data[i].timestamp).toDateString();
+
+                const diagnosis = await api.reading.getReadingById({readingid: data[i].readingId}).then(res => {
+                    return res.data.diagnosis;
+                });
+
+                let theStatus = "";
+                if (diagnosis) {
+                    theStatus = "Done";
+                } else {
+                    theStatus = "Requires response";
+                }
 
                 let row = {
                     id: data[i].id,
                     pid: data[i].patientId,
                     pname: thePatient,
                     referrer: theReferrer,
-                    assignee: "",
                     dateof: theDate,
-                    status: "",
+                    status: theStatus,
                 };
 
                 newState.push(row);
             }
             this.setState({data: newState});
-            console.log("state:", this.state);
         })
     }
 
@@ -73,7 +81,6 @@ class ReferralListTable extends React.Component {
                             <th>Patient ID</th>
                             <th>Patient Initials</th>
                             <th>Referred By</th>
-                            <th>Assigned to</th>
                             <th>Referral Date</th>
                             <th>Status</th>
                         </tr>
@@ -84,7 +91,6 @@ class ReferralListTable extends React.Component {
                                 <td>{row.pid}</td>
                                 <td>{row.pname}</td>
                                 <td>{row.referrer}</td>
-                                <td>{row.assignee}</td>
                                 <td>{row.dateof}</td>
                                 <td>{row.status}</td>
                             </tr>

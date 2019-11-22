@@ -79,12 +79,10 @@ class ReferralDetailForm extends React.Component {
 
     componentDidMount() {
         let data =  this.props.location.state;
-        console.log(data);
         api.referral.getReferralById(data).then(res => {
                 const referralData = res.data;
-                console.log(res);
                 this.setState({referralData});
-        }).then(res => {
+        }).then(cont => {
             const patientId = this.state.referralData.patientId;
             api.patient.getPatientById({id: patientId}).then(res => {
                 const patientData = res.data;
@@ -99,12 +97,11 @@ class ReferralDetailForm extends React.Component {
             });
 
             const readingId = this.state.referralData.readingId;
-            api.reading.getReadingById({id: readingId}).then(res => {
-                const readingData = res.data[0];
+            api.reading.getReadingById({readingid: readingId}).then(res => {
+                const readingData = res.data;
 
                 const symptoms = readingData.symptoms;
-                const symptomsArr = symptoms.split(','); // TODO: Double-check how symptoms are split up
-                readingData.symptoms = symptomsArr;
+                readingData.symptoms = symptoms.split(','); // TODO: Double-check how symptoms are split up
 
                 const timestamp = readingData.timestamp;
                 readingData.timestamp = new Date(timestamp).toISOString().substr(0,10);
@@ -114,8 +111,6 @@ class ReferralDetailForm extends React.Component {
                 if (this.state.readingData.diagnosis === "") {
                     this.state.errors.requireDiagnosis = "This referral requires a diagnosis response.";
                 }
-
-                console.log("check reading", this.state);
             });
 
             const referrerId = this.state.referralData.referrerId;
@@ -474,7 +469,7 @@ class ReferralDetailForm extends React.Component {
                                         <Form.Control
                                             as="textarea"
                                             rows="3"
-                                            placeholder="Comments"
+                                            placeholder="No comments..."
                                             value={readingData.notes}/>
                                     </Form.Group>
                                 </Col>
