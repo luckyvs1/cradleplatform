@@ -76,7 +76,6 @@ class AddPatientForm extends React.Component {
     }
     validate = (data) => {
         const errors = {};
-        let emptyWarning = "Field cannot be blank";
         if(!this.isValidAttest(data.attestationNo)) errors.attestationNo = "Not a valid 11-digit number";
         if(data.age < 18) errors.age = "Minimum age must be 18";
         if(this.gettingAgeFromDOB(data.dob) != data.age){
@@ -84,7 +83,8 @@ class AddPatientForm extends React.Component {
             errors.age += "Age not corresponding with date of birth";
             errors.dob = "Date of Birth not corresponding with current age";
         }
-        if(!data.initials) errors.initials = emptyWarning;
+        if(!data.initials) errors.initials = "Empty field";
+        if(data.initials.length > 3) errors.initials = "Invalid initials: maximum of 3 characters";
         return errors;
     }
     render() {
