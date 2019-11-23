@@ -476,12 +476,9 @@ class PatientDetailForm extends React.Component {
                                 </table>
                             </div>
                             <div style={{float: 'right'}}>
-                                <Button variant="primary" size="sm" style={{marginTop: "10px"}}
-                                        onClick={this.handleMedicationSubmit}>
-                                    Add New Medication
-                                </Button>
                                 {localStorage.getItem("isVHT") == "true" ? null :
-                                    <Button variant="primary" size="sm" onClick={this.handleMedicationSubmit}>
+                                    <Button variant="primary" size="sm" style={{marginTop: "10px"}}
+                                            onClick={this.handleMedicationSubmit}>
                                         Add New Medication
                                     </Button>
                                 }
