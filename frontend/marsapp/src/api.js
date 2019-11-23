@@ -34,7 +34,8 @@ export default {
     vht:{
         getAllVHT: data => axios.get(`http://${host}:${port}/api/vht`),
         getVHTById: data => axios.get(`http://${host}:${port}/api/vht/${data.vhtId}`),
-        createVHT: data => axios.post(`http://${host}:${port}/api/vht` , {data})
+        createVHT: data => axios.post(`http://${host}:${port}/api/vht` , {data}),
+        transferVHT: (vhtId1 , vhtId2) => axios.post(`http://${host}:${port}/api/vhts/transfer/${vhtId1}&${vhtId2}`)
     },
     userInfo:{
         getUserInfoById:data=> axios.get(`http://${host}:${port}/api/user-information/${data}`),
@@ -63,11 +64,13 @@ export default {
         getReadingAdvice: data => axios.get(`http://${host}:${port}/api/readings-advice/${data}`),
         processReading: data => axios.post(`http://${host}:${port}/api/readings-process`, data),
         getReadingForPatient:data=> axios.get(`http://${host}:${port}/api/patients/${data.patient_id}/readings?latest=${data.latest}`),
+        getReadingById:data=>  axios.get(`http://${host}:${port}/api/readings/${data.readingid}`),
         uploadReading: data =>axios.post(`http://${host}:${port}/api/readings` , {}).then(res => console.log(res)),
+        uploadDiagnosis: (data, header) =>axios.put(`http://${host}:${port}/api/readings/${data.readingid}/diagnosis`, data.diagnosis, header),
     },
     referral:{
         getAllReferral:data=> axios.get(`http://${host}:${port}/api/referrals` ),
-        getReferralById:data=> axios.get(`http://${host}:${port}/api/referrals?referrerId=${data.referrerId}`),
+        getReferralById:data=> axios.get(`http://${host}:${port}/api/referrals/${data.id}`),
         createReferral:data=> axios.post(`http://${host}:${port}/api/referrals` , {data}),
     },
     medication:{
@@ -81,7 +84,7 @@ export default {
         getAllFollowUps:data=> axios.get(`http://${host}:${port}/api/followUps`),
         getFollowUpByFollowUpId:data=> axios.get(`http://${host}:${port}/api/followUps/${data.followUpId}`),
         getFollowUpByPatientId:data=> axios.get(`http://${host}:${port}/api/patients/${data.patient_id}/follow-ups?latest=${data.latest}`),
-        addFollowUp:data=> axios.post(`http://${host}:${port}/api/followUps` , {data}),
+        addFollowUp:data=> axios.post(`http://${host}:${port}/api/followUps` , data),
 
     },
     healthCareWorker:{

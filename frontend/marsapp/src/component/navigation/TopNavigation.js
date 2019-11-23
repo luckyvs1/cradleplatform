@@ -9,7 +9,7 @@ import {Link} from "react-router-dom";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import auth from "../../actions/auth"
-import {Container, Nav, Navbar, NavDropdown, Row, Col} from 'react-bootstrap';
+import {Container, Nav, Navbar, NavDropdown} from 'react-bootstrap';
 
 const bottomMarginStyle = {
     marginBottom: '40px',
@@ -84,7 +84,7 @@ class TopNavigation extends React.Component {
                                         <Nav.Link as={Link} to="allFollowUp">
                                             <i className="fas fa-search"></i> Follow Ups
                                         </Nav.Link>
-                                        <Nav.Link as={Link} to="referral">
+                                        <Nav.Link as={Link} to="referral" >
                                             <i className="fas fa-redo"></i> Referrals
                                         </Nav.Link>
                                         <Nav.Link as={Link} to="listPatient">
@@ -93,12 +93,15 @@ class TopNavigation extends React.Component {
                                         <Nav.Link as={Link} to="addReadingDetail">
                                             <i className="fas fa-notes-medical"></i> Readings
                                         </Nav.Link>
-                                        {auth.isAuthenticated() ?
+                                        {auth.isAuthenticated()  ?
                                             <Nav.Link as={Link} to="listUser">
                                                 <i className="fas fa-users-cog"></i> Users
                                             </Nav.Link>
                                             : null
                                         }
+                                        <Nav.Link as={Link} to="transferVHT">
+                                            <i className="fas fa-exchange-alt"></i> Transfer VHT
+                                        </Nav.Link>
                                     </ul>
                                 </div>
                             </aside>
