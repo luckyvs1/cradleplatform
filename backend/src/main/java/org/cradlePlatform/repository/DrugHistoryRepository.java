@@ -8,5 +8,5 @@ import java.util.Optional;
 
 @Repository
 public interface DrugHistoryRepository extends CrudRepository<DrugHistory, Integer> {
-	Optional<DrugHistory> findByPatientId(int patientId);
+	Iterable<DrugHistory> findByPatientIdOrderByTimestampDesc(int patientId);
 }

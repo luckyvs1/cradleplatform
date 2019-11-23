@@ -10,7 +10,6 @@ import org.cradlePlatform.repository.DrugHistoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import java.util.Optional;
 
 @CrossOrigin(origins = {"http://cmpt373.csil.sfu.ca:8044", "http://localhost:3000"})
 @RestController
@@ -26,9 +25,9 @@ public class DrugHistoryController {
      * @param patientId patientId to get DrugHistories for
      * @return 200: Success
      */
-    @GetMapping(path="/api/drugHistories")
-    public Optional<DrugHistory> getDrugHistoriesByPatientId(@RequestParam int patientId) {
-        return drugHistoryRepository.findByPatientId(patientId);
+    @GetMapping(path="/api/patients/{patientId}/drug-notes")
+    public Iterable<DrugHistory> getDrugHistoriesByPatientId(@PathVariable(value = "patientId") int patientId) {
+        return drugHistoryRepository.findByPatientIdOrderByTimestampDesc(patientId);
     }
 
     // POST mappings
@@ -38,7 +37,7 @@ public class DrugHistoryController {
 	 * @param dh DrugHistory formatted data to store
 	 * @return 201: Created success
 	 */
-    @PostMapping(path="/api/drugHistories")
+    @PostMapping(path="/api/drug-notes")
     @ResponseStatus(code = HttpStatus.CREATED)
     public String addDrugHistory (@RequestBody DrugHistory dh) {
         drugHistoryRepository.save(dh);
