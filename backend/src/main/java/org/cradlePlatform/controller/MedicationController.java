@@ -43,12 +43,17 @@ public class MedicationController {
 
     // DELETE mappings
 
-    @DeleteMapping(path = "/api/patients/{patientId}/medications/{drugId}")
-    public ResponseEntity<Void> deleteSpecificMedication(@PathVariable(value = "patientId") int patientId,
-                                                         @PathVariable(value = "drugId") int drugId) {
+    @DeleteMapping(path = "/api/medications/{drugId}")
+    public ResponseEntity<String> deleteSpecificMedication(@PathVariable(value = "drugId") int drugId) {
 
-        medicationRepository.deleteByPatientIdAndId(patientId, drugId);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        if (medicationRepository.existsById(drugId)) {
+            medicationRepository.deleteById(drugId);
+            String responseMsg = "Deleted Drug with Id " + drugId + ".";
+            return new ResponseEntity<String>(responseMsg, HttpStatus.OK);
+        }else {
+            String responseMsg = "Drug with ID " + drugId + " not found.";
+            return new ResponseEntity<String>(responseMsg, HttpStatus.NOT_FOUND);
+        }
     }
 
     @DeleteMapping(path = "/api/patients/{patientId}/medications")
