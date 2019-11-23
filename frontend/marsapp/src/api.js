@@ -84,8 +84,9 @@ export default {
                 }
             }),
         getMedications: data => axios.get(`http://${host}:${port}/api/patients/${data.patient_id}/medications`),
-        deleteAllPatientMedications: data => axios.delete(`http://${host}:${port}/api/patients/${data.patient_id}/medications/${data.drug_id}`),
-        deleteAMedication: data => axios.delete(`http://${host}:${port}/api/patients/${data.patient_id}/medications`),
+        deleteAMedication: data => axios.delete(`http://${host}:${port}/api/medications/${data.drug_id}`),
+        deleteAllPatientMedications: data => axios.delete(`http://${host}:${port}/api/patients/${data.patient_id}/medications`),
+
     },
     followUp: {
         getAllFollowUps: data => axios.get(`http://${host}:${port}/api/followUps`),

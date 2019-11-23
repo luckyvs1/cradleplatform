@@ -1082,7 +1082,7 @@ li a {
 
 #diagnosis-wrap {
     word-break: break-word !important;
-    min-width: 600px !important;
+    max-width: 600px !important;
 }
 
 #symptoms-wrap {
@@ -1097,3 +1097,8 @@ li a {
 #timestamp-col {
     width: calc(100% - 88%) !important;
 }
+
+#col-width {
+    width: calc(100% - 92%) !important;
+}
+
