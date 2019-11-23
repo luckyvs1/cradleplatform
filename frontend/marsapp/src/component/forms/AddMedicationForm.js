@@ -21,33 +21,34 @@ import api from "../../api";
 import InlineError from "../messages/InlineError";
 
 class AddMedicationForm extends React.Component {
-    constructor(props){
-            super(props);
-            this.state = {
-                data:{
-                   drug_history_id : 0,
-                   drug_name: "",
-                   dosage: "",
-                   start_date : new Date(),
-                   end_date : null,
-                   notes: ""
-                },
-                dosage_edit:{
-                    dose: "",
-                    unit: "",
-                    times: "",
-                    frequency: "times per day"
-                },
-                errors: {},
-            };
-            this.onChange = this.onChange.bind(this);
-            this.onChangeDose = this.onChangeDose.bind(this);
-            this.onSubmit = this.onSubmit.bind(this);
-            this.onChangeStart = this.onChangeStart.bind(this);
-            this.onChangeEnd = this.onChangeEnd.bind(this);
-        }
-    onChange = e => this.setState({data: {...this.state.data, [e.target.name]: e.target.value} });
-    onChangeDose = e => this.setState({dosage_edit: {...this.state.dosage_edit, [e.target.name]: e.target.value} });
+    constructor(props) {
+        super(props);
+        this.state = {
+            data: {
+                patient_id: this.props.location.state.pid,
+                drug_name: "",
+                dosage: "",
+                start_date: new Date(),
+                end_date: null,
+                notes: ""
+            },
+            dosage_edit: {
+                dose: "",
+                unit: "",
+                times: "",
+                frequency: "times per day"
+            },
+            errors: {},
+        };
+        this.onChange = this.onChange.bind(this);
+        this.onChangeDose = this.onChangeDose.bind(this);
+        this.onSubmit = this.onSubmit.bind(this);
+        this.onChangeStart = this.onChangeStart.bind(this);
+        this.onChangeEnd = this.onChangeEnd.bind(this);
+    }
+
+    onChange = e => this.setState({data: {...this.state.data, [e.target.name]: e.target.value}});
+    onChangeDose = e => this.setState({dosage_edit: {...this.state.dosage_edit, [e.target.name]: e.target.value}});
     onChangeStart = date =>
         this.setState({
             data: {...this.state.data, start_date: date}
@@ -56,14 +57,13 @@ class AddMedicationForm extends React.Component {
         this.setState({
             data: {...this.state.data, end_date: date}
         });
-
     onSubmit = (event) => {
         event.preventDefault();
         const errors = this.validate(this.state.data, this.state.dosage_edit);
         this.setState({errors});
         let dosageText = this.state.dosage_edit.dose + " " + this.state.dosage_edit.unit + " " + this.state.dosage_edit.times + " " + this.state.dosage_edit.frequency;
         this.state.data.dosage = dosageText;
-        if(Object.keys(errors).length === 0){
+        if (Object.keys(errors).length === 0) {
             this.props.submit(this.state.data);
         }
     };
@@ -71,28 +71,28 @@ class AddMedicationForm extends React.Component {
     validate = (data, dosage_edit, date_edit) => {
         const errors = {};
         let emptyWarning = "Field cannot be blank";
-        if(!data.drug_name) errors.drug_name = emptyWarning;
-        if(!dosage_edit.dose) errors.dose = emptyWarning;
-        if(!dosage_edit.unit) errors.unit = emptyWarning;
-        if(!dosage_edit.times) errors.times = emptyWarning;
-        if(data.start_date == "") errors.start_date = emptyWarning;
+        if (!data.drug_name) errors.drug_name = emptyWarning;
+        if (!dosage_edit.dose) errors.dose = emptyWarning;
+        if (!dosage_edit.unit) errors.unit = emptyWarning;
+        if (!dosage_edit.times) errors.times = emptyWarning;
+        if (data.start_date == "") errors.start_date = emptyWarning;
         return errors;
     }
-    componentDidMount(){
+
+    componentDidMount() {
         //in the case of the user reloading the page, the drug_history_id will be lost and crash
         //the app since it doesn't know where to get the patient_id from. This should resolve it.
-        try{
-            this.setState({data: {...this.state.data, drug_history_id: this.props.location.medication.drug_id}})
-            localStorage.setItem('drug_history_id', JSON.stringify(this.props.location.medication.drug_id));
-        }
-        catch(exception){
-            this.state.data.drug_history_id = JSON.parse(localStorage.getItem('drug_history_id'));
-        }
-
+        // try{
+        //     this.setState({data: {...this.state.data, patient_id: this.props.location.state.pid}})
+        //     localStorage.setItem('patient_id', JSON.stringify(this.props.location.state.pid));
+        // }
+        // catch(exception){
+        //     this.state.data.patient_id = JSON.parse(localStorage.getItem('drug_history_id'));
+        // }
     }
 
     render() {
-        const { data, dosage_edit, errors } = this.state;
+        const {data, dosage_edit, errors} = this.state;
         return (
             <div>
                 <TopNavigation authenticated={true}></TopNavigation>
@@ -105,15 +105,15 @@ class AddMedicationForm extends React.Component {
                     </Row>
                     <Form onSubmit={this.onSubmit}>
                         <Form.Group>
-                             <Form.Label>Medication Name</Form.Label>
-                                <Form.Control
-                                    type="text"
-                                    id="drug_name"
-                                    name="drug_name"
-                                    placeholder="Enter drug name..."
-                                    value={data.drug_name}
-                                    onChange={this.onChange}/>
-                                {errors.drug_name && <InlineError text={errors.drug_name}/>}
+                            <Form.Label>Medication Name</Form.Label>
+                            <Form.Control
+                                type="text"
+                                id="drug_name"
+                                name="drug_name"
+                                placeholder="Enter drug name..."
+                                value={data.drug_name}
+                                onChange={this.onChange}/>
+                            {errors.drug_name && <InlineError text={errors.drug_name}/>}
                         </Form.Group>
                         <Form.Label>Dosage - ex: <u>2</u> <u>tablets</u> <u>3</u> times per day</Form.Label>
                         <Form.Row>
@@ -141,7 +141,7 @@ class AddMedicationForm extends React.Component {
                             <Form.Group as={Col}>
                                 <Form.Control
                                     type="number"
-                                    min = "1"
+                                    min="1"
                                     id="times"
                                     name="times"
                                     placeholder="How often?"
@@ -150,7 +150,8 @@ class AddMedicationForm extends React.Component {
                                 {errors.times && <InlineError text={errors.times}/>}
                             </Form.Group>
                             <Form.Group as={Col}>
-                                <Form.Control as="select" id="frequency" name="frequency" onChange={this.onChangeDose} value={dosage_edit.frequency}>
+                                <Form.Control as="select" id="frequency" name="frequency" onChange={this.onChangeDose}
+                                              value={dosage_edit.frequency}>
                                     <option value={"times per day"}>times per day</option>
                                     <option value={"times per week"}>times per week</option>
                                     <option value={"times per month"}>times per month</option>
@@ -200,7 +201,7 @@ class AddMedicationForm extends React.Component {
                                 onChange={this.onChange}/>
                         </Form.Group>
                         <Form.Row style={{float: 'right'}}>
-                            <Button primary type="submit" >Create</Button>
+                            <Button primary type="submit">Create</Button>
                         </Form.Row>
                     </Form>
                 </Container>
@@ -208,6 +209,7 @@ class AddMedicationForm extends React.Component {
         );
     }
 }
+
 AddMedicationForm.propTypes = {
     submit: PropTypes.func.isRequired
 };

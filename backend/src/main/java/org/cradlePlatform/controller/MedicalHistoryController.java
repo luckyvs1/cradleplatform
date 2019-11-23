@@ -7,7 +7,6 @@ import org.cradlePlatform.model.MedicalHistory;
 import org.cradlePlatform.repository.MedicalHistoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 @CrossOrigin(origins = {"http://cmpt373.csil.sfu.ca:8044", "http://localhost:3000"})
@@ -19,27 +18,22 @@ public class MedicalHistoryController {
     // GET mappings
 
     /**
-     * Get all MedicalHistories or the latest of a patient from the DB by their patientId
+     * Get all MedicalHistories of a patient from the DB by their patientId
      * @param patientId patientId of patient to get MedicalHistory for
      * @return 200: JSON of patient's MedicalHistory(ies)
      */
-    @GetMapping(path="/api/medicalHistories")
-    public Iterable<MedicalHistory> getMedicalHistoryByPatientId(@RequestParam int patientId,
-                                                          @RequestParam(value = "latest", required = false) boolean latest) {
-        if (latest) {
-            return medicalHistoryRepository.findTopByPatientIdOrderByIdDesc(patientId);
-        } else {
-            return medicalHistoryRepository.findAllByPatientId(patientId);
-        }
+    @GetMapping(path="/api/patients/{patientId}/medical-notes")
+    public Iterable<MedicalHistory> getMedicalHistoryByPatientId(@PathVariable(value = "patientId") int patientId) {
+        return medicalHistoryRepository.findByPatientIdOrderByTimestampDesc(patientId);
 
     }
 
     // POST mappings
 
-    @PostMapping(path="/api/medicalHistories")
+    @PostMapping(path="/api/medical-notes")
     @ResponseStatus(code = HttpStatus.CREATED)
-    public String addMedicalHistory (@RequestBody MedicalHistory mh) {
-        medicalHistoryRepository.save(mh);
-        return "Saved Medical History";
+    public String addMedicalHistory (@RequestBody MedicalHistory medicalHistory) {
+        medicalHistoryRepository.save(medicalHistory);
+        return "Saved Medical Note";
     }
 }

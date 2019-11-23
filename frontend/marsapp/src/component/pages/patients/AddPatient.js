@@ -6,9 +6,9 @@
 
 import React from "react";
 import {connect} from "react-redux";
-import axios from "axios";
 import AddPatientForm from "../../forms/AddPatientForm";
 import api from "../../../api";
+
 class AddPatient extends React.Component {
     submit = (data) => {
         //The reason that I copy each data field into the formattedData was because I couldn't format the dates (dob and gestationalStartDate)

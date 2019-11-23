@@ -7,7 +7,7 @@ const TriangleResponseReading = ({show, message, isUp}) => {
     return (
         <>
             <Alert id={'reading-response'} show={show} variant="warning">
-                <Alert.Heading>Warning</Alert.Heading>
+                <Alert.Heading>Attention</Alert.Heading>
                 <Row>
                     <Col>
                         {isUp ?
