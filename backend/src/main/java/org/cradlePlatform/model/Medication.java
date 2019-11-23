@@ -6,7 +6,6 @@
 package org.cradlePlatform.model;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 import java.util.Date;
 
@@ -16,31 +15,32 @@ public class Medication {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="id", nullable=false, unique=true)
+    @Column(name="id")
     private int id;
 
-    @Column(name="drug_history_id", nullable=false)
-    private int drugHistoryId;
+    @Column(name = "patient_id")
+    private int patientId;
 
-    @Column(name="drug_name", length=32, nullable=false)
+    @Column(name="drug_name")
     @Size(max = 32)
     private String drugName;
 
-    @Column(name="dosage", length=32, nullable=false)
-    @Size(max = 32)
+    @Column(name="dosage")
+    @Size(max = 256)
     private String dosage;
 
-    @Column(name="start_date", nullable=false)
+    @Temporal(TemporalType.DATE)
+    @Column(name="start_date")
     private Date startDate;
 
-    @Column(name="end_date", nullable=false)
+    @Temporal(TemporalType.DATE)
+    @Column(name="end_date")
     private Date endDate;
 
     @Column(name="notes")
     private String medicationNotes;
 
     public Medication() {
-        this.drugHistoryId = -1;
         this.drugName = "";
         this.dosage = "";
         this.startDate = new Date();
@@ -52,12 +52,8 @@ public class Medication {
         return id;
     }
 
-    public int getDrugHistoryId() {
-        return drugHistoryId;
-    }
-
-    public void setDrugHistoryId(int drugHistoryId) {
-        this.drugHistoryId = drugHistoryId;
+    public int getPatientId() {
+        return patientId;
     }
 
     public String getDrugName() {

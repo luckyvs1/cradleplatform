@@ -5,8 +5,8 @@
 package org.cradlePlatform.model;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.NotNull;
+import java.sql.Timestamp;
 
 @Entity
 @Table(name = "Medical_History")
@@ -14,19 +14,17 @@ public class MedicalHistory {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="id", nullable=false, unique=true)
     private int id;
 
-    @Column(name="patient_id", nullable=false)
+    @Column(name="patient_id")
     private int patientId;
 
-    @Column(name="history")
-    private String medicalHistoryText;
+    @NotNull
+    private Timestamp timestamp;
 
+    private String history;
 
     public MedicalHistory() {
-        this.patientId = -1;
-        this.medicalHistoryText = "";
     }
 
     public int getId() {
@@ -41,11 +39,19 @@ public class MedicalHistory {
         this.patientId = patientId;
     }
 
-    public String getMedicalHistoryText() {
-        return medicalHistoryText;
+    public Timestamp getTimestamp() {
+        return timestamp;
     }
 
-    public void setMedicalHistoryText(String medicalHistoryText) {
-        this.medicalHistoryText = medicalHistoryText;
+    public void setTimestamp(Timestamp timestamp) {
+        this.timestamp = timestamp;
+    }
+
+    public String getHistory() {
+        return history;
+    }
+
+    public void setHistory(String history) {
+        this.history = history;
     }
 }

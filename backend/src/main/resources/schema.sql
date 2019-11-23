@@ -75,18 +75,18 @@ CREATE TABLE Patient (
 
 CREATE TABLE Drug_History (
     id          INTEGER     NOT NULL AUTO_INCREMENT,
-    patient_id  INTEGER NOT NULL,
+    patient_id  INTEGER     NOT NULL,
+    timestamp   TIMESTAMP   NOT NULL,
     history     TEXT,
-    UNIQUE(patient_id),
     PRIMARY KEY (id),
     FOREIGN KEY (patient_id) REFERENCES Patient(id) ON DELETE CASCADE
 );
 
 CREATE TABLE Medication (
     id              INTEGER         NOT NULL AUTO_INCREMENT,
-    drug_history_id INTEGER         NOT NULL,
+    patient_id      INTEGER         NOT NULL,
     drug_name       VARCHAR (32)    NOT NULL,
-    dosage          VARCHAR (32)    NOT NULL,
+    dosage          VARCHAR (256)   NOT NULL,
     start_date      DATE            NOT NULL,
     end_date        DATE,
     notes           TEXT,
@@ -94,12 +94,13 @@ CREATE TABLE Medication (
             (end_date IS NULL OR end_date >= start_date)
         ),
     PRIMARY KEY (id),
-    FOREIGN KEY (drug_history_id) REFERENCES Drug_History(id) ON DELETE CASCADE
+    FOREIGN KEY (patient_id) REFERENCES Patient(id) ON DELETE CASCADE
 );
 
 CREATE TABLE Medical_History (
     id          INTEGER     NOT NULL AUTO_INCREMENT,
-    patient_id  INTEGER NOT NULL,
+    patient_id  INTEGER     NOT NULL,
+    timestamp   TIMESTAMP   NOT NULL,
     history     TEXT,
     PRIMARY KEY (id),
     FOREIGN KEY (patient_id) REFERENCES Patient(id) ON DELETE CASCADE
@@ -107,7 +108,7 @@ CREATE TABLE Medical_History (
 
 CREATE TABLE FollowUp (
     id          INTEGER     NOT NULL AUTO_INCREMENT,
-    patient_id  INTEGER NOT NULL,
+    patient_id  INTEGER     NOT NULL,
     notes       TEXT,
     required    BOOLEAN,
     frequency   TEXT,
@@ -120,7 +121,7 @@ CREATE TABLE FollowUp (
 CREATE TABLE Reading (
     id              INTEGER         NOT NULL AUTO_INCREMENT,
     reader_id       VARCHAR (32)    NOT NULL,
-    patient_id      INTEGER    NOT NULL,
+    patient_id      INTEGER         NOT NULL,
     timestamp       TIMESTAMP       NOT NULL,
     symptoms        SET('No Symptoms',
                         'Headache',
@@ -785,16 +786,16 @@ insert into Referral values (4, '1', 2, 6, '2019-11-18', 'Bidibidi', 'Patient ha
 insert into Referral values (5, '5', 4, 9, '2019-11-19', 'Bidibidi', 'Patient is very sick', '');
 insert into Referral values (6, '6', 6, 10, '2019-11-20', 'Bidibidi', 'Patient is very sick', 'Told them to drink more water');
 
-insert into Drug_History values (1, 1, 'Trial of various blood pressure reduction medications');
-insert into Drug_History values (2, 2, '');
-insert into Drug_History values (3, 3, '');
-insert into Drug_History values (4, 4, '');
-insert into Drug_History values (5, 5, '');
-insert into Drug_History values (6, 6, 'No medications prescribed to date');
-insert into Drug_History values (7, 7, 'No medications prescribed to date');
-insert into Drug_History values (8, 8, 'No medications prescribed to date');
-insert into Drug_History values (9, 9, 'No medications prescribed to date');
-insert into Drug_History values (10, 10, 'No medications prescribed to date');
+insert into Drug_History values (1, 1,'2019-11-21 00:00:01', 'Trial of various blood pressure reduction medications');
+insert into Drug_History values (2, 2, '2019-11-22 00:00:01','');
+insert into Drug_History values (3, 3, '2019-11-23 00:00:01','');
+insert into Drug_History values (4, 4, '2019-11-20 00:00:01','');
+insert into Drug_History values (5, 5, '2019-11-19 00:00:01','');
+insert into Drug_History values (6, 6, '2019-11-22 00:00:01','No medications prescribed to date');
+insert into Drug_History values (7, 7, '2019-11-29 00:00:01','No medications prescribed to date');
+insert into Drug_History values (8, 8, '2019-11-27 00:00:01','No medications prescribed to date');
+insert into Drug_History values (9, 9, '2019-11-26 00:00:01','No medications prescribed to date');
+insert into Drug_History values (10, 10,'2019-11-21 00:00:01','No medications prescribed to date');
 
 insert into Medication values (1, 1, 'Bumetanide', '2 tablets once per day', '2019-11-11', '2019-12-11','If you have diabetes, bumetanide may affect your blood sugar.');
 insert into Medication values (2, 1, 'Chlorthalidone', '1 tablet twice per day', '2019-11-11', '2019-12-11','Dizziness, lightheadedness, or stomach upset may occur.');
@@ -807,9 +808,9 @@ insert into Medication values (8, 3, 'Advil', '1 tablet once per month', '2019-1
 insert into Medication values (9, 4, 'Indapamide', '1 tablet once per day', '2019-11-11', '2019-12-11', 'Dizziness or headache may occur.');
 insert into Medication values (10, 5, 'Advil', '1 tablet once per month', '2019-11-11', null, 'This medication may raise your blood pressure.');
 
-insert into Medical_History values (1, 1, 'Immunizations: Flu vaccine yearly. Pneumovax 2006
+insert into Medical_History values (1, 1, '2019-11-21 00:00:01','Immunizations: Flu vaccine yearly. Pneumovax 2006
 Allergic to Penicillin-developed a diffuse rash after an injection');
-insert into Medical_History values (2, 2, 'Immunizations: Flu vaccine yearly.');
+insert into Medical_History values (2, 2, '2019-11-21 00:00:01', 'Immunizations: Flu vaccine yearly.');
 
 insert into Monitor values ('1', 1);
 insert into Monitor values ('1', 2);

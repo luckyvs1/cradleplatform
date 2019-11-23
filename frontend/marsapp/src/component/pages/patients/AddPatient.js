@@ -6,7 +6,6 @@
 
 import React from "react";
 import {connect} from "react-redux";
-import axios from "axios";
 import AddPatientForm from "../../forms/AddPatientForm";
 import api from "../../../api";
 import ErrorAlert from "../../utils/ErrorAlert";

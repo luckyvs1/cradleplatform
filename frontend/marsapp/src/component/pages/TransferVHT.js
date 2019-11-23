@@ -1,18 +1,11 @@
-/**
- * Class: FollowUpDetail
- * Summary:
- *  Base file for showing contents of FollowUp Detail page.
- */
-
-
-import React from "react";
+import * as React from "react";
+import TransferVHTForm from "../forms/TransferVHTForm";
 import {connect} from "react-redux";
-import FollowUpDetailForm from "../../forms/FollowUpDetailForm";
-import api from "../../../api";
-import ConfirmAlert from "../../utils/ConfirmAlert";
-import ErrorAlert from "../../utils/ErrorAlert";
+import api from "../../api";
+import ConfirmAlert from "../utils/ConfirmAlert";
+import ErrorAlert from "../utils/ErrorAlert";
 
-class FollowUpDetail extends React.Component {
+class TransferVHT extends React.Component{
     state = {
         isShowConfirm: false,
         isShowError: false,
@@ -20,15 +13,17 @@ class FollowUpDetail extends React.Component {
         isShowErrorMsg: "",
     }
     submit = data => {
-        api.followUp.addFollowUp(data).then(res => {
+        api.vht.transferVHT(data.firstvht , data.secondvht).then(res => {
             if (res) {
-                this.onShowAlert("Saved follow up details" , false)
+                this.onShowAlert("Transferred Patients!" , false)
             }
         }).catch(error=>{
-            this.onShowAlert("Failed to save follow up details" , true)
+            this.onShowAlert("Failed to Transfer Patients" , true)
 
         })
     }
+
+
 
     onShowAlert = (message, isError) => {
         if (isError) {
@@ -62,22 +57,17 @@ class FollowUpDetail extends React.Component {
         }
     }
 
-    remove = data => {
-        api.followUp.removeFollowUpById(data.id).then(res=> {
-                if (res) {
-                    this.onShowAlert("Delete Successful", false);
-                    this.props.history.push("/allFollowUp");
-                }
-            }
-        ).catch(error=>{
-            this.onShowAlert("Delete Failed" , true)
-        });
-    }
 
-        render() {
-        return (
+
+
+    render() {
+        return(
             <div>
-                <FollowUpDetailForm submit={this.submit} remove={this.remove}></FollowUpDetailForm>
+                <TransferVHTForm submit={this.submit}></TransferVHTForm>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
                 <ConfirmAlert message={this.state.isShowConfirmMsg} show={this.state.isShowConfirm}></ConfirmAlert>
                 <ErrorAlert message={this.state.isShowErrorMsg} show={this.state.isShowError}></ErrorAlert>
             </div>
@@ -85,4 +75,4 @@ class FollowUpDetail extends React.Component {
     }
 }
 
-export default connect(null,)(FollowUpDetail);
+export default connect(null,)(TransferVHT);

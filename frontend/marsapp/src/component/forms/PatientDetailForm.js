@@ -16,6 +16,7 @@ import {withRouter} from "react-router-dom";
 import GreenResponse from "../utils/GreenResponse";
 import RedResponse from "../utils/RedResponse";
 import TriangleResponseReading from "../utils/YellowResponse";
+import moment from "moment";
 import ErrorAlert from "../utils/ErrorAlert";
 
 class PatientDetailForm extends React.Component {
@@ -46,21 +47,32 @@ class PatientDetailForm extends React.Component {
                 currentGestationalAge: 0,
                 sexFull: "",
             }],
+            notesData: {
+                patientId: 0,
+                timestamp: null,
+                history: "",
+            },
             readingData: [],
             followUpData: [],
+            drugHistory: [],
+            medicalHistory: [],
+            medicationData: [],
             isShowError: false,
             message: ""
         };
+        this.onChange = this.onChange.bind(this);
+        this.onSubmit = this.onSubmit.bind(this);
     }
+
     handleMedicationSubmit = () => {
         api.drug.getDrugHistoryByPatientId({patient_id: this.state.patientData.id}).then(res => {
-            if(res.data == null){
+            if (res.data == null) {
                 this.onShowAlert("Patient has no Drug History. Please contact your admin.", true);
-            }else{
+            } else {
                 this.props.history.push({
                     pathname: '/addMedication',
-                    medication:{
-                        drug_id: res.data.id
+                    state: {
+                        pid: this.props.location.state.pid,
                     }
                 });
             }
@@ -80,6 +92,7 @@ class PatientDetailForm extends React.Component {
             }, 2000)
         });
     }
+
     componentDidMount() {
         const pid = this.props.location.state.pid;
 
@@ -136,8 +149,28 @@ class PatientDetailForm extends React.Component {
 
                 newState.push(row);
             }
+
             this.setState({readingData: newState})
         });
+
+        api.medication.getMedications({patient_id: pid}).then(async res => {
+            const medicationData = res.data;
+            let newState = [];
+
+            for (let i = 0; i < medicationData.length; i++) {
+                let row = {
+                    drugName: medicationData[i].drugName,
+                    dosage: medicationData[i].dosage,
+                    startDate: medicationData[i].startDate,
+                    endDate: medicationData[i].endDate,
+                    notes: medicationData[i].medicationNotes,
+                }
+
+                newState.push(row);
+            }
+
+            this.setState({medicationData: newState})
+        })
 
         api.followUp.getFollowUpByPatientId({patient_id: pid, latest: false}).then(async res => {
             const followUpData = res.data;
@@ -159,9 +192,105 @@ class PatientDetailForm extends React.Component {
 
             this.setState({followUpData: newState})
         });
+
+        this.getMedicalNotes(pid);
+        this.getDrugNotes(pid);
     }
 
-    formatDate = date =>{
+    getMedicalNotes = (pid) => {
+        const patientId = pid;
+
+        api.medicalHistory.getAllMedicalHistories({patient_id: patientId}).then(async res => {
+            const medicalHistory = res.data;
+            let newState = [];
+
+            for (let i = 0; i < medicalHistory.length; i++) {
+                let row = {
+                    timestamp: this.formatDate(new Date(medicalHistory[i].timestamp)),
+                    timestampTime: new Date(medicalHistory[i].timestamp).toLocaleTimeString(),
+                    history: medicalHistory[i].history,
+                }
+
+                newState.push(row);
+            }
+
+            this.setState({medicalHistory: newState})
+        });
+    }
+
+    getDrugNotes = (pid) => {
+        const patientId = pid;
+
+        api.drug.getDrugHistoryByPatientId({patient_id: patientId}).then(async res => {
+            const drugHistory = res.data;
+            let newState = [];
+
+            for (let i = 0; i < drugHistory.length; i++) {
+                let row = {
+                    timestamp: this.formatDate(new Date(drugHistory[i].timestamp)),
+                    timestampTime: new Date(drugHistory[i].timestamp).toLocaleTimeString(),
+                    history: drugHistory[i].history,
+                }
+
+                newState.push(row);
+            }
+
+            this.setState({drugHistory: newState})
+        });
+    }
+
+    onChange = e => {
+        this.setState({
+            notesData:
+                {
+                    ...this.state.notesData,
+                    [e.target.name]: e.target.value
+                }
+        });
+    }
+
+    onSubmit = (event, isMedical) => {
+        event.preventDefault();
+        let date = moment(new Date()).format('YYYY-MM-DDTHH:MM:SSZ');
+
+        //1=> SET the data
+        // 2 on call back call api
+        // 3 retrieve data
+
+        this.setState({
+            ...this.state,
+            notesData: {
+                ...this.state.notesData,
+                patientId: this.props.location.state.pid,
+                timestamp: date,
+            }
+        }, () => {
+            if (isMedical) {
+                api.medicalHistory.addMedicalHistory(this.state.notesData).then(res => {
+                    if (res) {
+                        this.getMedicalNotes(this.props.location.state.pid);
+                    }
+                }, () => {
+                    this.setState({
+                        notesData: {history: ""}
+                    });
+                });
+            } else {
+                api.drug.addDrugHistory(this.state.notesData).then(res => {
+                    if (res) {
+                        this.getDrugNotes(this.props.location.state.pid);
+                    }
+                }, () => {
+                    this.setState({
+                        notesData: {history: ""}
+                    });
+                });
+            }
+        })
+    };
+
+
+    formatDate = date => {
         let d = new Date(date),
             month = '' + (d.getMonth() + 1),
             day = '' + d.getDate(),
@@ -252,21 +381,22 @@ class PatientDetailForm extends React.Component {
                     </div>
                     <Tabs class="nav nav-tabs">
                         <Tab eventKey="reading_information" title="Reading Information">
-                            <div className="table-responsive text-nowrap table-wrapper-scroll-y my-custom-scrollbar rtc"
-                                 scrollbarStyle={{
-                                     background: {backgroundColor: "transparent"},
-                                     backgroundFocus: {backgroundColor: "#f0f0f0"},
-                                     foreground: {backgroundColor: "#e2e2e2"},
-                                     foregroundFocus: {backgroundColor: "#acacac"}
-                                 }}>
+                            <div
+                                className="table-responsive table-bordered table-wrapper-scroll-y my-custom-scrollbar rtc"
+                                scrollbarStyle={{
+                                    background: {backgroundColor: "transparent"},
+                                    backgroundFocus: {backgroundColor: "#f0f0f0"},
+                                    foreground: {backgroundColor: "#e2e2e2"},
+                                    foregroundFocus: {backgroundColor: "#acacac"}
+                                }}>
                                 <table className="table table-hover">
                                     <thead>
                                     <tr>
                                         <th scope="col">Date & Time</th>
                                         <th scope="col">Traffic Light</th>
-                                        <th scope="col">Systolic (mmHg)</th>
-                                        <th scope="col">Diastolic (mmHg)</th>
-                                        <th scope="col">Pulse Rate (bpm)</th>
+                                        <th scope="col">Systolic<br/> (mmHg)</th>
+                                        <th scope="col">Diastolic<br/> (mmHg)</th>
+                                        <th scope="col">Pulse Rate<br/> (bpm)</th>
                                         <th scope="col">Gestational Age</th>
                                         <th scope="col">Symptoms</th>
                                         <th scope="col">Diagnosis</th>
@@ -300,38 +430,18 @@ class PatientDetailForm extends React.Component {
                                             <td> {row.diastolicBloodPressure} </td>
                                             <td> {row.pulseRate} </td>
                                             <td> {row.gestationalAge} {row.gestationalAgeTimeUnit} </td>
-                                            <td> {row.symptoms} </td>
-                                            <td> {row.diagnosis} </td>
+                                            <td id={'symptoms-wrap'}>  {row.symptoms} </td>
+                                            <td id={'diagnosis-wrap'}> {row.diagnosis} </td>
                                         </tr>
                                     ))}
                                     </tbody>
                                 </table>
                             </div>
                             <Row>
-                                <Col className={"text-right"}>
+                                <Col className={"text-right"} style={{marginTop: "10px"}}>
                                     <Button variant="success" size="sm" as={Link} to="addReadingDetail">New
                                         Reading</Button>&nbsp;
-                                    <Button variant="primary" size="sm">View List</Button>&nbsp;
                                     <GraphDialog></GraphDialog>&nbsp;
-                                </Col>
-                            </Row>
-                        </Tab>
-                        <Tab eventKey="medical_history" title="Medical History">
-                            <Row>
-                                <Col>
-                                    <Form.Group>
-                                        <Form.Control
-                                            as="textarea"
-                                            rows="6"
-                                            placeholder="Medical History Notes go here..."/>
-                                    </Form.Group>
-                                </Col>
-                            </Row>
-                            <Row>
-                                <Col className={"text-right"}>
-                                    <Button variant="warning" size="sm">
-                                        Save Changes
-                                    </Button>
                                 </Col>
                             </Row>
                         </Tab>
@@ -345,41 +455,36 @@ class PatientDetailForm extends React.Component {
                                  }}>
                                 <table className="table table-bordered">
                                     <thead>
-                                    <th scope="col">Current Drug</th>
-                                    <th scope="col">Start Date</th>
                                     <th scope="col">Drug</th>
                                     <th scope="col">Dosage</th>
-                                    <th scope="col">Side Effects</th>
+                                    <th scope="col">Start Date</th>
+                                    <th scope="col">End Date</th>
                                     <th scope="col">Medication Notes</th>
                                     </thead>
                                     <tbody>
-                                    <tr>
-                                        <td>Yes</td>
-                                        <td>2019-02-02</td>
-                                        <td>Vicodin</td>
-                                        <td>1 tablet twice a day</td>
-                                        <td>Sleepiness</td>
-                                        <td>Sleepiness</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Yes</td>
-                                        <td>2018-12-02</td>
-                                        <td>Synthroid</td>
-                                        <td>1 tablet twice a day</td>
-                                        <td>None</td>
-                                        <td>Patient may get dizzy</td>
-                                    </tr>
+                                    {this.state.medicationData.map(row => (
+                                        <tr key={row.id}>
+                                            <td> {row.drugName} </td>
+                                            <td> {row.dosage} </td>
+                                            <td> {row.startDate} </td>
+                                            <td> {row.endDate}</td>
+                                            <td id={"diagnosis-wrap"}>
+                                                {row.notes}</td>
+                                        </tr>
+                                    ))}
                                     </tbody>
                                 </table>
                             </div>
                             <div style={{float: 'right'}}>
-                                <Button variant="primary" size="sm" onClick={this.handleMedicationSubmit}>
+                                <Button variant="primary" size="sm" style={{marginTop: "10px"}}
+                                        onClick={this.handleMedicationSubmit}>
                                     Add New Medication
                                 </Button>
                             </div>
                         </Tab>
-                        <Tab eventKey="drug_history" title="Drug History">
+                        <Tab eventKey="medical_history" title="Medical History">
                             <div className="table-wrapper-scroll-y my-custom-scrollbar rtc"
+                                 id={"history-table-height"}
                                  scrollbarStyle={{
                                      background: {backgroundColor: "transparent"},
                                      backgroundFocus: {backgroundColor: "#f0f0f0"},
@@ -388,48 +493,98 @@ class PatientDetailForm extends React.Component {
                                  }}>
                                 <table className="table table-bordered">
                                     <thead>
-                                    <th scope="col">Current Drug</th>
-                                    <th scope="col">Start Date</th>
-                                    <th scope="col">End Date</th>
-                                    <th scope="col">Drug</th>
-                                    <th scope="col">Dosage</th>
-                                    <th scope="col">Side Effects</th>
+                                    <th scope="col" id={"timestamp-col"}>Date & Time</th>
+                                    <th scope="col">Notes</th>
                                     </thead>
                                     <tbody>
-                                    <tr>
-                                        <td>Yes</td>
-                                        <td>2019-02-02</td>
-                                        <td> - </td>
-                                        <td>Vicodin</td>
-                                        <td>1 tablet twice a day</td>
-                                        <td>Sleepiness</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Yes</td>
-                                        <td>2018-12-02</td>
-                                        <td>2019-01-22</td>
-                                        <td>Synthroid</td>
-                                        <td>1 tablet twice a day</td>
-                                        <td>None</td>
-                                    </tr>
+                                    {this.state.medicalHistory.map(row => (
+                                        <tr key={row.id}>
+                                            <td id={"timestamp-col"}>
+                                                {row.timestamp}<br/>
+                                                {row.timestampTime}
+                                            </td>
+                                            <td id={"diagnosis-wrap"}> {row.history} </td>
+                                        </tr>
+                                    ))}
+                                    </tbody>
+                                </table>
+                            </div>
+                            <Row>
+                                <Col>
+                                    <Form>
+                                        <Form.Control
+                                            type="text"
+                                            name="history"
+                                            as="textarea"
+                                            rows="4"
+                                            placeholder="Enter Medical Notes..."
+                                            onChange={this.onChange}
+                                        />
+                                        <Row>
+                                            <Col className={"text-right"} style={{marginTop: "10px"}}>
+                                                <Button onClick={(e) => {
+                                                    this.onSubmit(e, true)
+                                                }} primary type="submit" size="sm"
+                                                        disabled={!this.state.notesData.history}>
+                                                    Save Note
+                                                </Button>
+                                            </Col>
+                                        </Row>
+                                    </Form>
+                                </Col>
+                            </Row>
+                        </Tab>
+                        <Tab eventKey="drug_history" title="Drug History">
+                            <div className="table-wrapper-scroll-y my-custom-scrollbar rtc"
+                                 id={"history-table-height"}
+                                 scrollbarStyle={{
+                                     background: {backgroundColor: "transparent"},
+                                     backgroundFocus: {backgroundColor: "#f0f0f0"},
+                                     foreground: {backgroundColor: "#e2e2e2"},
+                                     foregroundFocus: {backgroundColor: "#acacac"}
+                                 }}>
+                                <table className="table table-bordered">
+                                    <thead>
+                                    <th scope="col" id={"timestamp-col"}>Date & Time</th>
+                                    <th scope="col">Notes</th>
+                                    </thead>
+                                    <tbody>
+                                    {this.state.drugHistory.map(row => (
+                                        <tr key={row.id}>
+                                            <td id={"timestamp-col"}>
+                                                {row.timestamp}<br/>
+                                                {row.timestampTime}
+                                            </td>
+                                            <td id={"diagnosis-wrap"}> {row.history} </td>
+                                        </tr>
+                                    ))}
                                     </tbody>
                                 </table>
                             </div>
                             <Row>
                                 <Col>
                                     <Form.Group>
-                                        <Form.Control
-                                            as="textarea"
-                                            rows="3"
-                                            placeholder="Drug history notes go here..."/>
+                                        <Form>
+                                            <Form.Control
+                                                type="text"
+                                                name="history"
+                                                as="textarea"
+                                                rows="4"
+                                                placeholder="Enter Drug Notes..."
+                                                onChange={this.onChange}
+                                            />
+                                            <Row>
+                                                <Col className={"text-right"} style={{marginTop: "10px"}}>
+                                                    <Button onClick={(e) => {
+                                                        this.onSubmit(e, false)
+                                                    }} primary type="submit" size="sm"
+                                                            disabled={!this.state.notesData.history}>
+                                                        Save Note
+                                                    </Button>
+                                                </Col>
+                                            </Row>
+                                        </Form>
                                     </Form.Group>
-                                </Col>
-                            </Row>
-                            <Row>
-                                <Col className={"text-right"}>
-                                    <Button variant="warning" size="sm">
-                                        Save Changes
-                                    </Button>
                                 </Col>
                             </Row>
                         </Tab>
@@ -474,19 +629,5 @@ class PatientDetailForm extends React.Component {
         );
     }
 }
-
-const mapStateToProps = (state, ownProps) => {
-    return {
-        userid: state.data
-    }
-};
-
-const mapDispatchToProps = (dispatch) => {
-    return {
-        updateReadings: (data) => {
-            dispatch({type: "readings", data: data})
-        }
-    }
-};
 
 export default withRouter(PatientDetailForm)

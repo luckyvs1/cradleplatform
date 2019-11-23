@@ -26,7 +26,6 @@ class LoginPage extends React.Component {
         isShow: false,
         message: ""
     }
-
     submit = data => {
         api.user.login(data)
             .then(res => {
