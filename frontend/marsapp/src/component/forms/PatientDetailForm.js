@@ -476,10 +476,12 @@ class PatientDetailForm extends React.Component {
                                 </table>
                             </div>
                             <div style={{float: 'right'}}>
-                                <Button variant="primary" size="sm" style={{marginTop: "10px"}}
-                                        onClick={this.handleMedicationSubmit}>
-                                    Add New Medication
-                                </Button>
+                                {localStorage.getItem("isVHT") == "true" ? null :
+                                    <Button variant="primary" size="sm" style={{marginTop: "10px"}}
+                                            onClick={this.handleMedicationSubmit}>
+                                        Add New Medication
+                                    </Button>
+                                }
                             </div>
                         </Tab>
                         <Tab eventKey="medical_history" title="Medical History">

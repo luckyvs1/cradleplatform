@@ -35,7 +35,9 @@ export default {
         getAllVHT: data => axios.get(`http://${host}:${port}/api/vht`),
         getVHTById: data => axios.get(`http://${host}:${port}/api/vht/${data.vhtId}`),
         createVHT: data => axios.post(`http://${host}:${port}/api/vht` , {data}),
-        transferVHT: (vhtId1 , vhtId2) => axios.post(`http://${host}:${port}/api/vhts/transfer/${vhtId1}&${vhtId2}`)
+        transferVHT: (vhtId1 , vhtId2) => axios.post(`http://${host}:${port}/api/vhts/transfer/${vhtId1}&${vhtId2}`),
+        getVHTPatReading: (vhtId ,patientId )=> axios.get(`http://${host}:${port}/api/vhts/${vhtId}/patients/${patientId}/readings`),
+        getVHTPatientByPatId: (vhtId ,patientId )=> axios.get(`http://${host}:${port}/api/vhts/${vhtId}/patients/${patientId}`)
     },
     userInfo:{
         getUserInfoById:data=> axios.get(`http://${host}:${port}/api/user-information/${data}`),
@@ -46,7 +48,7 @@ export default {
     patient: {
         getAllPatients: data => axios.get(`http://${host}:${port}/api/patients`),
         getPatientById :data =>  axios.get(`http://${host}:${port}/api/patients/${data.id}`),
-        getPatientsForVHT :data =>  axios.get(`http://${host}:${port}/api/vht/${data.vhtId}/patients`),
+        getPatientsForVHT :data =>  axios.get(`http://${host}:${port}/api/vhts/${data}/patients`),
         createPatient :data =>  axios.post(`http://${host}:${port}/api/patients` , data,
             {
             headers: {
@@ -85,6 +87,7 @@ export default {
     },
     followUp: {
         getAllFollowUps:data=> axios.get(`http://${host}:${port}/api/followUps`),
+        getAllFollowUpsForVHT:data=> axios.get(`http://${host}:${port}/api/vhts/${data}/followUps`),
         getFollowUpByFollowUpId:data=> axios.get(`http://${host}:${port}/api/followUps/${data.followUpId}`),
         getFollowUpByPatientId:data=> axios.get(`http://${host}:${port}/api/patients/${data.patient_id}/follow-ups?latest=${data.latest}`),
         removeFollowUpById:data=> axios.delete(`http://${host}:${port}/api/followUps/${data}`),

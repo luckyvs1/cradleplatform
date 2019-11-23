@@ -44,24 +44,47 @@ class ListPatientForm extends React.Component {
             filteredData: this.state.data,
             searchValue: ''
         });
+        if(localStorage.getItem('isVHT')=== "true") {
+            api.patient.getPatientsForVHT(localStorage.getItem('loginUserId')).then(async res => {
+                // fetching all follow up
+                const data = res.data;
+                let newState = [];
 
-        api.patient.getAllPatients(null).then(async res => {
-            // fetching all follow up
-            const data = res.data;
-            let newState = [];
-
-            for (let i = 0; i < data.length; i++) {
-                let row = {
-                    pid: data[i].id,
-                    initial: data[i].initials
-                };
-                newState.push(row);
-            }
-            this.setState({
-                data: newState,
-                filteredData: newState,
+                for (let i = 0; i < data.length; i++) {
+                    let row = {
+                        pid: data[i].id,
+                        initial: data[i].initials
+                    };
+                    newState.push(row);
+                }
+                this.setState({
+                    data: newState,
+                    filteredData: newState,
+                });
             });
-        });
+
+        }else{
+            api.patient.getAllPatients(null).then(async res => {
+                // fetching all follow up
+                const data = res.data;
+                let newState = [];
+
+                for (let i = 0; i < data.length; i++) {
+                    let row = {
+                        pid: data[i].id,
+                        initial: data[i].initials
+                    };
+                    newState.push(row);
+                }
+                this.setState({
+                    data: newState,
+                    filteredData: newState,
+                });
+            });
+        }
+
+
+
 
         this.setState({
             isLoading: false,
@@ -76,8 +99,6 @@ class ListPatientForm extends React.Component {
         });
 
         setTimeout(() => {
-            console.log(this.state);
-
             if (this.state.searchValue.length < 1) {
                 return this.setState({
                     isLoading: false,

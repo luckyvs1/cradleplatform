@@ -41,6 +41,7 @@ class FloatingMenuItem extends React.Component {
 }
 
 
+
 class HomePage extends React.Component {
     state = {activeItem: 'bio'};
 
@@ -91,17 +92,25 @@ class HomePage extends React.Component {
 
                 <Container>
                     <Row>
-                        <Col>
-                            <Row>
-                                <Col>
-                                    <h2>New Referrals</h2>
-                                    <hr></hr>
-                                </Col>
-                            </Row>
-                            <Row>
-                                <ReferralListTable/>
-                            </Row>
-                        </Col>
+                        {localStorage.getItem('isVHT') ? null :
+
+                            <Col>
+                                <Row>
+                                    <Col>
+
+                                        <h2>New Referrals</h2>
+                                        <hr></hr>
+                                    </Col>
+                                </Row>
+
+                                <Row>
+                                    <Col>
+                                        <ReferralListTable/>
+                                    </Col>
+                                </Row>
+                            </Col>
+                        }
+
                         <Col>
                             <Row>
                                 <Col>
@@ -110,7 +119,9 @@ class HomePage extends React.Component {
                                 </Col>
                             </Row>
                             <Row>
-                                <FollowUpListTable/>
+                                <Col>
+                                    <FollowUpListTable/>
+                                </Col>
                             </Row>
                         </Col>
                     </Row>

@@ -48,9 +48,12 @@ class AccountForm extends React.Component {
     }
 
     handleChange(event) {
-        this.setState({
-            data: {...this.state.data, [event.target.name]: event.target.value}
-        });
+        if (localStorage.getItem("isVHT") == "true" && event.target.name == "role") {
+        }else{
+            this.setState({
+                data: {...this.state.data, [event.target.name]: event.target.value}
+            });
+        }
     }
 
     submit = event => {

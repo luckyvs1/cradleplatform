@@ -32,13 +32,14 @@ import TransferVHT from "./component/pages/TransferVHT";
 import AddMedicationDetail from "./component/pages/patients/AddMedicationDetail";
 import CreateDiagnosis from "./component/pages/readings/CreateDiagnosis"
 import {HCWRoute} from "./component/routes/HCWRoute";
+import {VHTRoute} from "./component/routes/VHTRoute";
 
 const App = ({location, isAuthenticated}) => (
 
     <div className="ui-toolbar">
         {isAuthenticated && <TopNavigation/>}
         <Route location={location} path="/" exact component={LoginPage}/>
-        <HCWRoute
+        <VHTRoute
             location={location} path="/homePage" exact component={HomePage}/>
         <HCWRoute
             location={location}
@@ -46,19 +47,19 @@ const App = ({location, isAuthenticated}) => (
             exact
             component={SignupPage}
         />
-        <HCWRoute
+        <VHTRoute
             location={location}
             path="/addReadingDetail"
             exact
             component={AddReadingDetail}
         />
-        <HCWRoute
+        <VHTRoute
             location={location}
             path="/listPatient"
             exact
             component={ListPatient}
         />
-        <HCWRoute
+        <VHTRoute
             location={location}
             path="/help"
             exact
@@ -82,31 +83,31 @@ const App = ({location, isAuthenticated}) => (
             exact
             component={CreateReferral}
         />
-        <HCWRoute
+        <VHTRoute
             location={location}
             path="/patientDetail"
             exact
             component={PatientDetail}
         />
-        <HCWRoute
+        <VHTRoute
             location={location}
             path="/allFollowUp"
             exact
             component={AllFollowUp}
         />
-        <HCWRoute
+        <VHTRoute
             location={location}
             path="/followUpDetail"
             exact
             component={FollowUpDetail}
         />
-        <HCWRoute
+        <VHTRoute
             location={location}
             path="/account"
             exact
             component={Account}
         />
-        <HCWRoute
+        <VHTRoute
             location={location}
             path="/addPatient"
             exact

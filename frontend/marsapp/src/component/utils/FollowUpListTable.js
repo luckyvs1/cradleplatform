@@ -10,7 +10,7 @@ import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import Col from "react-bootstrap/Col";
 
-class FollowUpListTable extends React.Component {
+class FollowUpListTable extends React.Component{
     constructor(props) {
         super(props);
         this.state = {
@@ -27,10 +27,18 @@ class FollowUpListTable extends React.Component {
     }
 
     componentDidMount() {
-        api.followUp.getAllFollowUps(null).then(res => {
-            const data = res.data;
-            this.setState({data});
-        })
+
+        if (localStorage.getItem('isVHT') == "true") {
+            api.followUp.getAllFollowUpsForVHT(localStorage.getItem('loginUserId')).then(res => {
+                const data = res.data;
+                this.setState({data});
+            })
+        } else {
+            api.followUp.getAllFollowUps(null).then(res => {
+                const data = res.data;
+                this.setState({data});
+            })
+        }
     }
 
     // submit = event => {
