@@ -44,8 +44,6 @@ class ListPatientForm extends React.Component {
             filteredData: this.state.data,
             searchValue: ''
         });
-        console.log("in")
-
         if(localStorage.getItem('isVHT')=== "true") {
             api.patient.getPatientsForVHT(localStorage.getItem('loginUserId')).then(async res => {
                 // fetching all follow up
@@ -101,8 +99,6 @@ class ListPatientForm extends React.Component {
         });
 
         setTimeout(() => {
-            console.log(this.state);
-
             if (this.state.searchValue.length < 1) {
                 return this.setState({
                     isLoading: false,
