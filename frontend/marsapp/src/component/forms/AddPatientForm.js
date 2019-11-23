@@ -45,8 +45,12 @@ class AddPatientForm extends React.Component {
             this.onChange = this.onChange.bind(this);
             this.onChangeDateGest = this.onChangeDateGest.bind(this);
             this.onSubmit = this.onSubmit.bind(this);
+            this.isValidAttest = this.isValidAttest.bind(this);
+            this.gettingAgeFromDOB = this.gettingAgeFromDOB.bind(this);
         }
-
+    isValidAttest = str => {
+        return /^(?=.*\d)[\d ]+$/.test(str) && str.replace(/[^0-9]/g, "").length == 11;
+    }
     onChange = e => this.setState({data: {...this.state.data, [e.target.name]: e.target.value} });
     onChangeDob = date =>
         this.setState({
@@ -65,12 +69,22 @@ class AddPatientForm extends React.Component {
             this.props.submit(this.state.data);
         }
     };
+    gettingAgeFromDOB = birthday => {
+        let ageDif = Date.now() - birthday.getTime();
+        let ageDate = new Date(ageDif);
+        return Math.abs(ageDate.getUTCFullYear() - 1970);
+    }
     validate = (data) => {
         const errors = {};
-        let emptyWarning = "Field cannot be blank";
-        if(!data.villageNo) errors.villageNo = emptyWarning;
-        if(!data.zoneNo) errors.zoneNo = emptyWarning;
-        if(!data.initials) errors.initials = emptyWarning;
+        if(!this.isValidAttest(data.attestationNo)) errors.attestationNo = "Not a valid 11-digit number";
+        if(data.age < 18) errors.age = "Minimum age must be 18";
+        if(this.gettingAgeFromDOB(data.dob) != data.age){
+            if(errors.age) errors.age += " and "; else errors.age ="";
+            errors.age += "Age not corresponding with date of birth";
+            errors.dob = "Date of Birth not corresponding with current age";
+        }
+        if(!data.initials) errors.initials = "Empty field";
+        if(data.initials.length > 3) errors.initials = "Invalid initials: maximum of 3 characters";
         return errors;
     }
     render() {
@@ -140,8 +154,8 @@ class AddPatientForm extends React.Component {
                                             id="dob"
                                             name="dob"
                                             dateFormat="yyyy-MM-dd"
-                                            onChange={this.onChangeDob}
-                                        />
+                                            onChange={this.onChangeDob}/>
+                                            {errors.dob && <InlineError text={errors.dob}/>}
                                     </Form.Group>
                                     <Form.Group as={Col}>
                                         <Form.Label>Age</Form.Label>
@@ -210,9 +224,10 @@ class AddPatientForm extends React.Component {
                                         type="text"
                                         id="attestationNo"
                                         name="attestationNo"
-                                        placeholder="Enter here..."
+                                        placeholder="Enter 11-digit number only"
                                         value={data.attestationNo}
                                         onChange={this.onChange}/>
+                                        {errors.attestationNo && <InlineError text={errors.attestationNo}/>}
                                 </Form.Group>
                                 <Form.Group as={Col}>
                                     <Form.Label>Village #</Form.Label>
@@ -223,7 +238,6 @@ class AddPatientForm extends React.Component {
                                         placeholder="Enter here..."
                                         value={data.villageNo}
                                         onChange={this.onChange}/>
-                                        {errors.villageNo && <InlineError text={errors.villageNo}/>}
                                 </Form.Group>
                                 <Form.Group as={Col}>
                                     <Form.Label>Zone #</Form.Label>
@@ -234,7 +248,6 @@ class AddPatientForm extends React.Component {
                                         placeholder="Enter here..."
                                         value={data.zoneNo}
                                         onChange={this.onChange}/>
-                                        {errors.zoneNo && <InlineError text={errors.zoneNo}/>}
                                 </Form.Group>
                             </Form.Row>
                             <Form.Row>
