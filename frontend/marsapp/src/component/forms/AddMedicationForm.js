@@ -79,18 +79,6 @@ class AddMedicationForm extends React.Component {
         return errors;
     }
 
-    componentDidMount() {
-        //in the case of the user reloading the page, the drug_history_id will be lost and crash
-        //the app since it doesn't know where to get the patient_id from. This should resolve it.
-        // try{
-        //     this.setState({data: {...this.state.data, patient_id: this.props.location.state.pid}})
-        //     localStorage.setItem('patient_id', JSON.stringify(this.props.location.state.pid));
-        // }
-        // catch(exception){
-        //     this.state.data.patient_id = JSON.parse(localStorage.getItem('drug_history_id'));
-        // }
-    }
-
     render() {
         const {data, dosage_edit, errors} = this.state;
         return (
