@@ -10,7 +10,7 @@ import Tab from "react-bootstrap/Tab";
 import {Link} from "react-router-dom";
 import api from "../../api";
 import TopNavigation from "../navigation/TopNavigation";
-import {Button, Col, Container, Form, Row, Modal} from 'react-bootstrap';
+import {Button, Col, Container, Form, Row, Table} from 'react-bootstrap';
 import GraphDialog from "../utils/GraphDialog"
 import {withRouter} from "react-router-dom";
 import GreenResponse from "../utils/GreenResponse";
@@ -18,6 +18,7 @@ import RedResponse from "../utils/RedResponse";
 import TriangleResponseReading from "../utils/YellowResponse";
 import moment from "moment";
 import ErrorAlert from "../utils/ErrorAlert";
+import Modal from "react-bootstrap/Modal";
 
 class PatientDetailForm extends React.Component {
     // functions
@@ -594,7 +595,7 @@ class PatientDetailForm extends React.Component {
                                             <td> {row.dosage} </td>
                                             <td> {row.startDate} </td>
                                             <td> {row.endDate}</td>
-                                            <td id={"diagnosis-wrap"}>
+                                            <td id={"symptoms-wrap"}>
                                                 {row.notes}</td>
                                             <td id={"col-width"}><Button size="sm"
                                                                          onClick={(event) => this.onDeleteMedication(event, false, row.id)}><i
@@ -605,20 +606,16 @@ class PatientDetailForm extends React.Component {
                                 </table>
                             </div>
                             <div style={{float: 'right'}}>
-                                {localStorage.getItem("isVHT") == "true" ? null :
+                                <Button size="sm" style={{marginTop: "10px"}}
+                                        onClick={(event) => this.onDeleteMedication(event, true,  this.state.patientData.id)}><i
+                                    className="fas fa-trash"/> Delete All
+                                </Button>&nbsp;
+                                {localStorage.getItem("isVHT") === "true" ? null :
                                     <Button variant="primary" size="sm" style={{marginTop: "10px"}}
                                             onClick={this.handleMedicationSubmit}>
                                         Add New Medication
                                     </Button>
                                 }
-                                <Button size="sm" style={{marginTop: "10px"}}
-                                        onClick={(event) => this.onDeleteMedication(event, true,  this.state.patientData.id)}><i
-                                    className="fas fa-trash"/> Delete All
-                                </Button>&nbsp;
-                                <Button variant="primary" size="sm" style={{marginTop: "10px"}}
-                                        onClick={this.handleMedicationSubmit}>
-                                    Add New Medication
-                                </Button>&nbsp;
                             </div>
                         </Tab>
                         <Tab eventKey="medical_history" title="Medical History">
