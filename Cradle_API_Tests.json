@@ -40,6 +40,13 @@
 					"script": {
 						"type": "text/javascript",
 						"exec": [
+							"pm.sendRequest(pm.environment.get(\"url\")+'/api/patients/', function (err, res) {",
+							"    let responseJSON = res.json();",
+							"    // Saving a value in variable converts it to a string",
+							"    pm.environment.set('patientId', responseJSON[0].id);",
+							"});",
+							"",
+							"",
 							"let patientSchema = JSON.stringify({",
 							"  \"type\": \"object\",",
 							"  \"properties\": {",
@@ -114,12 +121,6 @@
 							"    \"gestationAgeUnit\",",
 							"    \"currentGestationalAge\"",
 							"  ]",
-							"});",
-							"",
-							"pm.sendRequest('{{url}}/api/patients/', function (err, res) {",
-							"    let responseJSON = res.json();",
-							"    // Saving a value in variable converts it to a string",
-							"    pm.environment.set('patientId', responseJSON[0].id);",
 							"});",
 							"",
 							"pm.environment.set('patientSchema', patientSchema);"
