@@ -51,9 +51,10 @@ export default {
         getPatientsForVHT :data =>  axios.get(`http://${host}:${port}/api/vhts/${data}/patients`),
         createPatient :data =>  axios.post(`http://${host}:${port}/api/patients` , data,
             {
-            headers: {
-                'Content-Type': 'application/json;charset=utf-8'
-            }}),
+                headers: {
+                    'Content-Type': 'application/json;charset=utf-8'
+                }
+            }),
     },
     drug:{
         getAllDrugHistory:data=> axios.get(`http://${host}:${port}/api/drug-notes` , data),
@@ -65,25 +66,27 @@ export default {
         addAReading: data => axios.post(`http://${host}:${port}/api/readings`, data),
         getReadingAdvice: data => axios.get(`http://${host}:${port}/api/readings-advice/${data}`),
         processReading: data => axios.post(`http://${host}:${port}/api/readings-process`, data),
-        getReadingForPatient:data=> axios.get(`http://${host}:${port}/api/patients/${data.patient_id}/readings?latest=${data.latest}`),
-        getReadingById:data=>  axios.get(`http://${host}:${port}/api/readings/${data.readingid}`),
-        uploadReading: data =>axios.post(`http://${host}:${port}/api/readings` , {}).then(res => console.log(res)),
-        uploadDiagnosis: (data, header) =>axios.put(`http://${host}:${port}/api/readings/${data.readingid}/diagnosis`, data.diagnosis, header),
+        getReadingForPatient: data => axios.get(`http://${host}:${port}/api/patients/${data.patient_id}/readings?latest=${data.latest}`),
+        getReadingById: data => axios.get(`http://${host}:${port}/api/readings/${data.readingid}`),
+        uploadReading: data => axios.post(`http://${host}:${port}/api/readings`, {}).then(res => console.log(res)),
+        uploadDiagnosis: (data, header) => axios.put(`http://${host}:${port}/api/readings/${data.readingid}/diagnosis`, data.diagnosis, header),
     },
-    referral:{
-        getAllReferral:data=> axios.get(`http://${host}:${port}/api/referrals` ),
-        getReferralById:data=> axios.get(`http://${host}:${port}/api/referrals/${data.id}`),
-        createReferral:data=> axios.post(`http://${host}:${port}/api/referrals` , {data}),
+    referral: {
+        getAllReferral: data => axios.get(`http://${host}:${port}/api/referrals`),
+        getReferralById: data => axios.get(`http://${host}:${port}/api/referrals/${data.id}`),
+        createReferral: data => axios.post(`http://${host}:${port}/api/referrals`, {data}),
     },
-    medication:{
+    medication: {
         addAMedication: data => axios.post(`http://${host}:${port}/api/medications`, data,
             {
                 headers: {
                     'Content-Type': 'application/json;charset=utf-8'
-                }}),
+                }
+            }),
         getMedications: data => axios.get(`http://${host}:${port}/api/patients/${data.patient_id}/medications`),
-        deleteAllPatientMedications:data=> axios.delete(`http://${host}:${port}/api/patients/${data.patient_id}/medications/${data.drug_id}`),
-        deleteAMedication:data=> axios.delete(`http://${host}:${port}/api/patients/${data.patient_id}/medications`),
+        deleteAMedication: data => axios.delete(`http://${host}:${port}/api/medications/${data.drug_id}`),
+        deleteAllPatientMedications: data => axios.delete(`http://${host}:${port}/api/patients/${data.patient_id}/medications`),
+
     },
     followUp: {
         getAllFollowUps:data=> axios.get(`http://${host}:${port}/api/followUps`),
@@ -93,13 +96,15 @@ export default {
         removeFollowUpById:data=> axios.delete(`http://${host}:${port}/api/followUps/${data}`),
         addFollowUp:data=> axios.post(`http://${host}:${port}/api/followUps` , data),
     },
-    healthCareWorker:{
-        getAllHealthWorkers:data=> axios.get(`http://${host}:${port}/api/healthWorkers`),
-        getHealthWorkerById:data=> axios.get(`http://${host}:${port}/api/healthWorkers/${data.id}`),
-        addNewHealthWorker:data=> axios.post(`http://${host}:${port}/api/healthWorkers` , {data}),
+    healthCareWorker: {
+        getAllHealthWorkers: data => axios.get(`http://${host}:${port}/api/healthWorkers`),
+        getHealthWorkerById: data => axios.get(`http://${host}:${port}/api/healthWorkers/${data.id}`),
+        addNewHealthWorker: data => axios.post(`http://${host}:${port}/api/healthWorkers`, {data}),
     },
-    medicalHistory:{
-        getAllMedicalHistories:data=> axios.get(`http://${host}:${port}/api/patients/${data.patient_id}/medical-notes`),
-        addMedicalHistory:data=> axios.post(`http://${host}:${port}/api/medical-notes`, data),
+    medicalHistory: {
+        getAllMedicalHistories: data => axios.get(`http://${host}:${port}/api/patients/${data.patient_id}/medical-notes`),
+        addMedicalHistory: data => axios.post(`http://${host}:${port}/api/medical-notes`, data),
+        getMedicalNoteById: data => axios.get(`http://${host}:${port}/api/medical-notes/${data.id}`),
+        deleteMedicalNote: data => axios.delete(`http://${host}:${port}/api/medical-notes/${data.id}`)
     },
 };

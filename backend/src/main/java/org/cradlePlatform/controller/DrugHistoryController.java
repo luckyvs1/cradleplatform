@@ -9,7 +9,10 @@ import org.cradlePlatform.model.DrugHistory;
 import org.cradlePlatform.repository.DrugHistoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Optional;
 
 @CrossOrigin(origins = {"http://cmpt373.csil.sfu.ca:8044", "http://localhost:3000"})
 @RestController
@@ -30,6 +33,11 @@ public class DrugHistoryController {
         return drugHistoryRepository.findByPatientIdOrderByTimestampDesc(patientId);
     }
 
+    @GetMapping(path="/api/drug-notes/{id}")
+    public Optional<DrugHistory> getDrugHistoryById(@PathVariable(value = "id") int id){
+        return drugHistoryRepository.findById(id);
+    }
+
     // POST mappings
 
 	/**
@@ -44,4 +52,23 @@ public class DrugHistoryController {
         return "Saved Drug History";
     }
 
+    // DELETE mapping
+
+    /**
+     * Delete an existing DrugNote with matching id.
+     * @param id
+     * @return 200 if success, 404 if no matching id
+     */
+    @DeleteMapping(path="/api/drug-notes/{id}")
+    public @ResponseBody
+    ResponseEntity<String> deleteDrugNote(@PathVariable(value = "id") int id) {
+        if (drugHistoryRepository.existsById(id)) {
+            drugHistoryRepository.deleteById(id);
+            String responseMsg = "Deleted Drug Note ID #" + id;
+            return new ResponseEntity<String>(responseMsg, HttpStatus.OK);
+        } else {
+            String responseMsg = "Drug Note with ID " + id + " not found.";
+            return new ResponseEntity<String>(responseMsg, HttpStatus.NOT_FOUND);
+        }
+    }
 }

@@ -1097,3 +1097,8 @@ li a {
 #timestamp-col {
     width: calc(100% - 88%) !important;
 }
+
+#col-width {
+    width: calc(100% - 92%) !important;
+}
+

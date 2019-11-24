@@ -12,9 +12,5 @@ public interface MedicationRepository extends CrudRepository<Medication, Integer
 	Iterable<Medication> findMedicationsByPatientId(int patientId);
 
 	@Modifying
-	@Query("DELETE FROM Medication m WHERE m.patientId = :patientId AND m.id = :drugId")
-	void deleteByPatientIdAndId(@Param("patientId") int patientId, @Param("drugId") int drugId);
-
-	@Modifying
 	void deleteByPatientId(int patientId);
 }

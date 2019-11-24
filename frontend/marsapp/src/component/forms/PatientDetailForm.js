@@ -18,6 +18,7 @@ import RedResponse from "../utils/RedResponse";
 import TriangleResponseReading from "../utils/YellowResponse";
 import moment from "moment";
 import ErrorAlert from "../utils/ErrorAlert";
+import Modal from "react-bootstrap/Modal";
 
 class PatientDetailForm extends React.Component {
     // functions
@@ -58,7 +59,11 @@ class PatientDetailForm extends React.Component {
             medicalHistory: [],
             medicationData: [],
             isShowError: false,
-            message: ""
+            message: "",
+            showMedicalNoteModal: false,
+            showDrugNoteModal: false,
+            currentRowId: 0,
+            currentNote: "",
         };
         this.onChange = this.onChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
@@ -125,7 +130,7 @@ class PatientDetailForm extends React.Component {
         api.reading.getReadingForPatient({patient_id: pid, latest: false}).then(async res => {
             const readingData = res.data;
             let newState = [];
-            console.log("reading", res);
+            
 
             for (let i = 0; i < readingData.length; i++) {
                 let row = {
@@ -153,25 +158,6 @@ class PatientDetailForm extends React.Component {
             this.setState({readingData: newState})
         });
 
-        api.medication.getMedications({patient_id: pid}).then(async res => {
-            const medicationData = res.data;
-            let newState = [];
-
-            for (let i = 0; i < medicationData.length; i++) {
-                let row = {
-                    drugName: medicationData[i].drugName,
-                    dosage: medicationData[i].dosage,
-                    startDate: medicationData[i].startDate,
-                    endDate: medicationData[i].endDate,
-                    notes: medicationData[i].medicationNotes,
-                }
-
-                newState.push(row);
-            }
-
-            this.setState({medicationData: newState})
-        })
-
         api.followUp.getFollowUpByPatientId({patient_id: pid, latest: false}).then(async res => {
             const followUpData = res.data;
             let newState = [];
@@ -195,6 +181,7 @@ class PatientDetailForm extends React.Component {
 
         this.getMedicalNotes(pid);
         this.getDrugNotes(pid);
+        this.getMedications(pid);
     }
 
     getMedicalNotes = (pid) => {
@@ -206,6 +193,7 @@ class PatientDetailForm extends React.Component {
 
             for (let i = 0; i < medicalHistory.length; i++) {
                 let row = {
+                    id: medicalHistory[i].id,
                     timestamp: this.formatDate(new Date(medicalHistory[i].timestamp)),
                     timestampTime: new Date(medicalHistory[i].timestamp).toLocaleTimeString(),
                     history: medicalHistory[i].history,
@@ -227,6 +215,7 @@ class PatientDetailForm extends React.Component {
 
             for (let i = 0; i < drugHistory.length; i++) {
                 let row = {
+                    id: drugHistory[i].id,
                     timestamp: this.formatDate(new Date(drugHistory[i].timestamp)),
                     timestampTime: new Date(drugHistory[i].timestamp).toLocaleTimeString(),
                     history: drugHistory[i].history,
@@ -236,6 +225,30 @@ class PatientDetailForm extends React.Component {
             }
 
             this.setState({drugHistory: newState})
+        });
+    }
+
+    getMedications = (pid) => {
+        const patientId = pid;
+
+        api.medication.getMedications({patient_id: patientId}).then(async res => {
+            const medicationData = res.data;
+            let newState = [];
+
+            for (let i = 0; i < medicationData.length; i++) {
+                let row = {
+                    id: medicationData[i].id,
+                    drugName: medicationData[i].drugName,
+                    dosage: medicationData[i].dosage,
+                    startDate: medicationData[i].startDate,
+                    endDate: medicationData[i].endDate,
+                    notes: medicationData[i].medicationNotes,
+                }
+
+                newState.push(row);
+            }
+
+            this.setState({medicationData: newState})
         });
     }
 
@@ -289,6 +302,111 @@ class PatientDetailForm extends React.Component {
         })
     };
 
+    onUpdate = (event, isMedical) => {
+        event.preventDefault();
+
+        this.setState({
+            ...this.state,
+            notesData: {
+                ...this.state.notesData,
+                id: this.state.currentRowId,
+                patientId: this.props.location.state.pid,
+                timestamp: this.state.notesData.timestamp
+            }
+        }, () => {
+            if (isMedical) {
+                api.medicalHistory.addMedicalHistory(this.state.notesData).then(res => {
+                    if (res) {
+                        this.getMedicalNotes(this.props.location.state.pid);
+                        this.setState({showMedicalNoteModal: false})
+                    }
+                });
+            } else {
+                api.drug.addDrugHistory(this.state.notesData).then(res => {
+                    if (res) {
+                        this.getDrugNotes(this.props.location.state.pid);
+                        this.setState({showDrugNoteModal: false})
+                    }
+                });
+            }
+        })
+    };
+
+    onDelete = (event, isMedical, rowId) => {
+        event.preventDefault();
+        this.setState({
+            ...this.state,
+            notesData: {
+                ...this.state.notesData,
+                id: "",
+                patientId: "",
+                timestamp: ""
+            }
+        }, () => {
+            if (isMedical) {
+                api.medicalHistory.deleteMedicalNote({id: rowId}).then(res => {
+                    if (res) {
+                        this.getMedicalNotes(this.props.location.state.pid);
+                    }
+                });
+            } else {
+                api.drug.deleteDrugNote({id: rowId}).then(res => {
+                    if (res) {
+                        this.getDrugNotes(this.props.location.state.pid);
+                    }
+                });
+            }
+        })
+    };
+
+    onDeleteMedication = (event, deleteAll, id) => {
+        if (deleteAll) {
+            api.medication.deleteAllPatientMedications({patient_id: id}).then(res => {
+                if (res) {
+                    this.getMedications(this.props.location.state.pid);
+                }
+            });
+        } else {
+            api.medication.deleteAMedication({drug_id: id}).then(res => {
+                if (res) {
+                    this.getMedications(this.props.location.state.pid);
+                }
+            });
+        }
+    }
+
+    editMedicalNotes = (row) => {
+        api.medicalHistory.getMedicalNoteById({id: row.id}).then(async res => {
+            const medicalNoteData = res.data;
+
+            this.setState({
+                ...this.state,
+                showMedicalNoteModal: true,
+                currentRowId: row.id,
+                currentNote: medicalNoteData.history,
+                notesData: {
+                    timestamp: medicalNoteData.timestamp
+                }
+            })
+        });
+    }
+
+    editDrugNotes = (row) => {
+        api.drug.getDrugNoteById({id: row.id}).then(async res => {
+            const drugNoteData = res.data;
+
+            this.setState({
+                ...this.state,
+                showDrugNoteModal: true,
+                currentRowId: row.id,
+                currentNote: drugNoteData.history,
+
+                notesData: {
+                    timestamp: drugNoteData.timestamp
+                }
+            })
+        });
+    }
 
     formatDate = date => {
         let d = new Date(date),
@@ -305,6 +423,13 @@ class PatientDetailForm extends React.Component {
     }
 
     render() {
+        const handleClose = () => {
+            this.setState({
+                ...this.state,
+                showMedicalNoteModal: false,
+                showDrugNoteModal: false,
+            })
+        };
         return (
             <div>
                 <TopNavigation authenticated={true}></TopNavigation>
@@ -460,6 +585,7 @@ class PatientDetailForm extends React.Component {
                                     <th scope="col">Start Date</th>
                                     <th scope="col">End Date</th>
                                     <th scope="col">Medication Notes</th>
+                                    <th scope="col">Delete</th>
                                     </thead>
                                     <tbody>
                                     {this.state.medicationData.map(row => (
@@ -468,15 +594,22 @@ class PatientDetailForm extends React.Component {
                                             <td> {row.dosage} </td>
                                             <td> {row.startDate} </td>
                                             <td> {row.endDate}</td>
-                                            <td id={"diagnosis-wrap"}>
+                                            <td id={"symptoms-wrap"}>
                                                 {row.notes}</td>
+                                            <td id={"col-width"}><Button size="sm"
+                                                                         onClick={(event) => this.onDeleteMedication(event, false, row.id)}><i
+                                                className="fas fa-trash"/></Button></td>
                                         </tr>
                                     ))}
                                     </tbody>
                                 </table>
                             </div>
                             <div style={{float: 'right'}}>
-                                {localStorage.getItem("isVHT") == "true" ? null :
+                                <Button size="sm" style={{marginTop: "10px"}}
+                                        onClick={(event) => this.onDeleteMedication(event, true,  this.state.patientData.id)}><i
+                                    className="fas fa-trash"/> Delete All
+                                </Button>&nbsp;
+                                {localStorage.getItem("isVHT") === "true" ? null :
                                     <Button variant="primary" size="sm" style={{marginTop: "10px"}}
                                             onClick={this.handleMedicationSubmit}>
                                         Add New Medication
@@ -496,7 +629,9 @@ class PatientDetailForm extends React.Component {
                                 <table className="table table-bordered">
                                     <thead>
                                     <th scope="col" id={"timestamp-col"}>Date & Time</th>
-                                    <th scope="col">Notes</th>
+                                    <th scope="col" id={"diagnosis-wrap"}>Notes</th>
+                                    <th scope="col" id={"col-width"}>Edit</th>
+                                    <th scope="col" id={"col-width"}>Delete</th>
                                     </thead>
                                     <tbody>
                                     {this.state.medicalHistory.map(row => (
@@ -505,7 +640,13 @@ class PatientDetailForm extends React.Component {
                                                 {row.timestamp}<br/>
                                                 {row.timestampTime}
                                             </td>
-                                            <td id={"diagnosis-wrap"}> {row.history} </td>
+                                            <td id={"diagnosis-wrap"}> {row.history}</td>
+                                            <td id={"col-width"}><Button size="sm"
+                                                                         onClick={() => this.editMedicalNotes(row)}><i
+                                                className="fas fa-edit"/></Button></td>
+                                            <td id={"col-width"}><Button size="sm"
+                                                                         onClick={(event) => this.onDelete(event, true, row.id)}><i
+                                                className="fas fa-trash"/></Button></td>
                                         </tr>
                                     ))}
                                     </tbody>
@@ -549,6 +690,8 @@ class PatientDetailForm extends React.Component {
                                     <thead>
                                     <th scope="col" id={"timestamp-col"}>Date & Time</th>
                                     <th scope="col">Notes</th>
+                                    <th scope="col">Edit</th>
+                                    <th scope="col">Delete</th>
                                     </thead>
                                     <tbody>
                                     {this.state.drugHistory.map(row => (
@@ -558,6 +701,12 @@ class PatientDetailForm extends React.Component {
                                                 {row.timestampTime}
                                             </td>
                                             <td id={"diagnosis-wrap"}> {row.history} </td>
+                                            <td id={"col-width"}><Button size="sm"
+                                                                         onClick={() => this.editDrugNotes(row)}><i
+                                                className="fas fa-edit"/></Button></td>
+                                            <td id={"col-width"}><Button size="sm"
+                                                                         onClick={(event) => this.onDelete(event, false, row.id)}><i
+                                                className="fas fa-trash"/></Button></td>
                                         </tr>
                                     ))}
                                     </tbody>
@@ -625,8 +774,64 @@ class PatientDetailForm extends React.Component {
                             </div>
                         </Tab>
                     </Tabs>
-                    <ErrorAlert show={this.state.isShowError} message={this.state.message}></ErrorAlert>
+                    <ErrorAlert show={this.state.isShowError} message={this.state.message}/>
                 </Container>
+
+                <Modal size="lg" show={this.state.showMedicalNoteModal} onHide={handleClose} animation={true} centered>
+                    <Modal.Header closeButton>
+                        <Modal.Title>Edit Note</Modal.Title>
+                    </Modal.Header>
+
+                    <Modal.Body>
+                        <Form>
+                            <Form.Control
+                                type="text"
+                                name="history"
+                                as="textarea"
+                                rows="4"
+                                onChange={this.onChange}
+                            >{this.state.currentNote}</Form.Control>
+                        </Form>
+                    </Modal.Body>
+
+                    <Modal.Footer>
+                        <Button variant="secondary" size="sm" onClick={handleClose}>Close</Button>
+                        <Button onClick={(e) => {
+                            this.onUpdate(e, true)
+                        }} primary type="submit" size="sm"
+                                disabled={!this.state.notesData.history}>
+                            Save Changes
+                        </Button>
+                    </Modal.Footer>
+                </Modal>
+
+                <Modal size="lg" show={this.state.showDrugNoteModal} onHide={handleClose} animation={true} centered>
+                    <Modal.Header closeButton>
+                        <Modal.Title>Edit Note</Modal.Title>
+                    </Modal.Header>
+
+                    <Modal.Body>
+                        <Form>
+                            <Form.Control
+                                type="text"
+                                name="history"
+                                as="textarea"
+                                rows="4"
+                                onChange={this.onChange}
+                            >{this.state.currentNote}</Form.Control>
+                        </Form>
+                    </Modal.Body>
+
+                    <Modal.Footer>
+                        <Button variant="secondary" size="sm" onClick={handleClose}>Close</Button>
+                        <Button onClick={(e) => {
+                            this.onUpdate(e, false)
+                        }} primary type="submit" size="sm"
+                                disabled={!this.state.notesData.history}>
+                            Save Changes
+                        </Button>
+                    </Modal.Footer>
+                </Modal>
             </div>
         );
     }
