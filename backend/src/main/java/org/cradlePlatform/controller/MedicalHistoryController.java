@@ -21,7 +21,7 @@ public class MedicalHistoryController {
     // GET mappings
 
     /**
-     * Get all MedicalHistories or the latest of a patient from the DB by their patientId
+     * Get all MedicalHistories of a patient from the DB by their patientId
      * @param patientId patientId of patient to get MedicalHistory for
      * @return 200: JSON of patient's MedicalHistory(ies)
      */

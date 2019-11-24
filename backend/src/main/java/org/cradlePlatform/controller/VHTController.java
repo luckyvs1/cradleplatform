@@ -41,19 +41,19 @@ public class VHTController {
 
     @GetMapping(path="/api/vhts/{vhtId}/patients/{patientId}")
     public Patient getPatientByVhtIdAndPatientId(@PathVariable(value = "vhtId") String vhtId,
-                                                 @PathVariable(value = "patientId") String patientId) {
+                                                 @PathVariable(value = "patientId") int patientId) {
         return monitorRepository.getPatientByVhtIdAndPatientId(vhtId, patientId);
     }
 
     @GetMapping(path="/api/vhts/{vhtId}/patients/{patientId}/readings")
     public Iterable<Reading> getReadingByVhtIdAndPatientId(@PathVariable(value = "vhtId") String vhtId,
-                                                           @PathVariable(value = "patientId") String patientId) {
+                                                           @PathVariable(value = "patientId") int patientId) {
         return monitorRepository.findReadingByVhtIdAndPatientId(vhtId, patientId);
     }
 
     @GetMapping(path="/api/vhts/{vhtId}/patients/{patientId}/followup")
     public Iterable<FollowUp> getFollowUpByVhtIdAndPatientId(@PathVariable(value = "vhtId") String vhtId,
-                                                             @PathVariable(value = "patientId") String patientId) {
+                                                             @PathVariable(value = "patientId") int patientId) {
         return monitorRepository.findFollowUpVhtIdAndPatientId(vhtId, patientId);
     }
 

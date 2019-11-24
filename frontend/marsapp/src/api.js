@@ -18,54 +18,51 @@ if (process.env.NODE_ENV === PRODUCTION_ENVIRONMENT) {
 }
 
 export default {
-    admin: {
+    admin:{
         getAdminById: data => {
             axios.get(`http://${host}:${port}/api/admins/${data.id}`)
         },
-        createAdmin: data => axios.post(`http://${host}:${port}/api/admins`, {data}),
-        getAllAdmins: axios.get(`http://${host}:${port}/api/admins`)
+        createAdmin:data => axios.post(`http://${host}:${port}/api/admins` , {data}),
+        getAllAdmins : axios.get(`http://${host}:${port}/api/admins`)
     },
     user: {
-        login: (data) => axios.post(`http://${host}:${port}/api/users/login`, {
-            username: data.username,
-            password: data.password
-        }),
-        getAllUsers: data => axios.get(`http://${host}:${port}/api/users/`),
-        getUserById: data => axios.get(`http://${host}:${port}/api/users/${data}`),
-        createUser: (data, header) => axios.post(`http://${host}:${port}/api/users/`, data, header)
+        login: (data) => axios.post(`http://${host}:${port}/api/users/login`, {username:data.username,password:data.password}),
+        getAllUsers:data=> axios.get(`http://${host}:${port}/api/users/`),
+        getUserById:data=> axios.get(`http://${host}:${port}/api/users/${data}`),
+        createUser:(data, header) => axios.post(`http://${host}:${port}/api/users/`, data, header)
     },
-    vht: {
+    vht:{
         getAllVHT: data => axios.get(`http://${host}:${port}/api/vht`),
         getVHTById: data => axios.get(`http://${host}:${port}/api/vht/${data.vhtId}`),
-        createVHT: data => axios.post(`http://${host}:${port}/api/vht`, {data}),
-        transferVHT: (vhtId1, vhtId2) => axios.post(`http://${host}:${port}/api/vhts/transfer/${vhtId1}&${vhtId2}`)
+        createVHT: data => axios.post(`http://${host}:${port}/api/vht` , {data}),
+        transferVHT: (vhtId1 , vhtId2) => axios.post(`http://${host}:${port}/api/vhts/transfer/${vhtId1}&${vhtId2}`),
+        getVHTPatReading: (vhtId ,patientId )=> axios.get(`http://${host}:${port}/api/vhts/${vhtId}/patients/${patientId}/readings`),
+        getVHTPatientByPatId: (vhtId ,patientId )=> axios.get(`http://${host}:${port}/api/vhts/${vhtId}/patients/${patientId}`)
     },
-    userInfo: {
-        getUserInfoById: data => axios.get(`http://${host}:${port}/api/user-information/${data}`),
-        getAllUserInfo: data => axios.get(`http://${host}:${port}/api/user-information`),
-        createUserInfo: (data, header) => axios.post(`http://${host}:${port}/api/user-information`, data, header),
-        updateUserInfo: (data, header) => axios.post(`http://${host}:${port}/api/user-information`, data, header)
+    userInfo:{
+        getUserInfoById:data=> axios.get(`http://${host}:${port}/api/user-information/${data}`),
+        getAllUserInfo:data=> axios.get(`http://${host}:${port}/api/user-information`),
+        createUserInfo:(data, header) => axios.post(`http://${host}:${port}/api/user-information`, data, header),
+        updateUserInfo:(data, header) => axios.post(`http://${host}:${port}/api/user-information`, data, header)
     },
     patient: {
         getAllPatients: data => axios.get(`http://${host}:${port}/api/patients`),
-        getPatientById: data => axios.get(`http://${host}:${port}/api/patients/${data.id}`),
-        getPatientsForVHT: data => axios.get(`http://${host}:${port}/api/vht/${data.vhtId}/patients`),
-        createPatient: data => axios.post(`http://${host}:${port}/api/patients`, data,
+        getPatientById :data =>  axios.get(`http://${host}:${port}/api/patients/${data.id}`),
+        getPatientsForVHT :data =>  axios.get(`http://${host}:${port}/api/vhts/${data}/patients`),
+        createPatient :data =>  axios.post(`http://${host}:${port}/api/patients` , data,
             {
                 headers: {
                     'Content-Type': 'application/json;charset=utf-8'
                 }
             }),
     },
-    drug: {
-        getAllDrugHistory: data => axios.get(`http://${host}:${port}/api/drug-notes`, data),
-        getDrugHistoryByPatientId: data => axios.get(`http://${host}:${port}/api/patients/${data.patient_id}/drug-notes`),
-        addDrugHistory: data => axios.post(`http://${host}:${port}/api/drug-notes`, data),
-        getDrugNoteById: data => axios.get(`http://${host}:${port}/api/drug-notes/${data.id}`),
-        deleteDrugNote: data => axios.delete(`http://${host}:${port}/api/drug-notes/${data.id}`)
+    drug:{
+        getAllDrugHistory:data=> axios.get(`http://${host}:${port}/api/drug-notes` , data),
+        getDrugHistoryByPatientId:data=> axios.get(`http://${host}:${port}/api/patients/${data.patient_id}/drug-notes`),
+        addDrugHistory:data=> axios.post(`http://${host}:${port}/api/drug-notes`, data),
     },
-    reading: {
-        addAReferral: data => axios.post(`http://${host}:${port}/api/readings`, {data}),
+    reading:{
+        addAReferral:data=> axios.post(`http://${host}:${port}/api/readings` , {data}),
         addAReading: data => axios.post(`http://${host}:${port}/api/readings`, data),
         getReadingAdvice: data => axios.get(`http://${host}:${port}/api/readings-advice/${data}`),
         processReading: data => axios.post(`http://${host}:${port}/api/readings-process`, data),
@@ -92,11 +89,12 @@ export default {
 
     },
     followUp: {
-        getAllFollowUps: data => axios.get(`http://${host}:${port}/api/followUps`),
-        getFollowUpByFollowUpId: data => axios.get(`http://${host}:${port}/api/followUps/${data.followUpId}`),
-        getFollowUpByPatientId: data => axios.get(`http://${host}:${port}/api/patients/${data.patient_id}/follow-ups?latest=${data.latest}`),
-        addFollowUp: data => axios.post(`http://${host}:${port}/api/followUps`, data),
-
+        getAllFollowUps:data=> axios.get(`http://${host}:${port}/api/followUps`),
+        getAllFollowUpsForVHT:data=> axios.get(`http://${host}:${port}/api/vhts/${data}/followUps`),
+        getFollowUpByFollowUpId:data=> axios.get(`http://${host}:${port}/api/followUps/${data.followUpId}`),
+        getFollowUpByPatientId:data=> axios.get(`http://${host}:${port}/api/patients/${data.patient_id}/follow-ups?latest=${data.latest}`),
+        removeFollowUpById:data=> axios.delete(`http://${host}:${port}/api/followUps/${data}`),
+        addFollowUp:data=> axios.post(`http://${host}:${port}/api/followUps` , data),
     },
     healthCareWorker: {
         getAllHealthWorkers: data => axios.get(`http://${host}:${port}/api/healthWorkers`),

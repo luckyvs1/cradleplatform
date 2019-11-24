@@ -605,6 +605,12 @@ class PatientDetailForm extends React.Component {
                                 </table>
                             </div>
                             <div style={{float: 'right'}}>
+                                {localStorage.getItem("isVHT") == "true" ? null :
+                                    <Button variant="primary" size="sm" style={{marginTop: "10px"}}
+                                            onClick={this.handleMedicationSubmit}>
+                                        Add New Medication
+                                    </Button>
+                                }
                                 <Button size="sm" style={{marginTop: "10px"}}
                                         onClick={(event) => this.onDeleteMedication(event, true,  this.state.patientData.id)}><i
                                     className="fas fa-trash"/> Delete All

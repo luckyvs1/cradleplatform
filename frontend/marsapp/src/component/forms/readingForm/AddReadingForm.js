@@ -17,7 +17,7 @@ class AddReadingForm extends React.Component {
         super(props);
         let date = moment(new Date()).format('YYYY-MM-DDTHH:MM:SSZ');
         this.state = {
-            counter: Number(localStorage.getItem('counter')) == 0 ? 15000 : Number(localStorage.getItem('counter')),
+            counter: 0,
             data: {
                 readerId: 1,
                 patientId: 1,
@@ -144,6 +144,7 @@ class AddReadingForm extends React.Component {
     reset() {
         localStorage.removeItem('counter')
         localStorage.removeItem('isShowTimerDialog')
+        localStorage.removeItem('currentTimePlus15')
     }
 
     render() {
@@ -159,6 +160,7 @@ class AddReadingForm extends React.Component {
                 } else {
                     localStorage.removeItem('counter')
                     localStorage.removeItem('isShowTimerDialog')
+                    localStorage.removeItem('currentTimePlus15')
                     window.location.reload(false);
                 }
             }, 1000);
@@ -166,6 +168,7 @@ class AddReadingForm extends React.Component {
         }
         let seconds = Math.floor((counter / 1000) % 60);
         let minute = Math.floor((counter / 1000 / 60));
+
 
         const MAX_SYSTOLIC = 300;
         const MIN_SYSTOLIC = 10;
@@ -178,7 +181,7 @@ class AddReadingForm extends React.Component {
         return (
             <div>
                 <TopNavigation authenticated={true}></TopNavigation>
-                {!localStorage.getItem('isShowTimerDialog') ?
+                {!this.props.showDialog ?
                     <Container>
                         <Row>
                             <Col>
@@ -377,11 +380,14 @@ class AddReadingForm extends React.Component {
                     :
                     <Jumbotron style={{left: '100px'}} fluid={true} className={'text-center'}>
                         <h1>Please Wait For</h1>
-                        <h1>
-                            {minute} : {seconds}
-                        </h1>
+                        {counter > 0 ?
+                            <h1>
+                                {minute} : {seconds}
+                            </h1> :
+                            null
+                        }
                         <p>
-                            <Button variant="primary" onClick={this.reset}>Learn more</Button>
+                            <Button variant="primary" onClick={this.reset}>Testing purpose</Button>
                         </p>
                     </Jumbotron>
                 }

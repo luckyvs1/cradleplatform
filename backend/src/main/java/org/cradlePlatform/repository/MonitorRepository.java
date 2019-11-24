@@ -16,14 +16,14 @@ import java.util.List;
 @Repository
 public interface MonitorRepository extends CrudRepository<Monitor, String> {
 
-    @Query("SELECT p FROM Patient p, Monitor m WHERE m.vhtId = :id")
+    @Query("SELECT p FROM Patient p, Monitor m WHERE m.vhtId = :id AND p.id = m.patientId")
     List<Patient> getPatientsByVhtId(@Param("id") String id);
 
     @Query("SELECT p " +
             "FROM Patient p INNER JOIN Monitor m " +
             "ON p.id = m.patientId " +
             "WHERE m.vhtId = :vhtId AND m.patientId = :patientId")
-    Patient getPatientByVhtIdAndPatientId(@Param("vhtId") String vhtId, @Param("patientId") String patientId);
+    Patient getPatientByVhtIdAndPatientId(@Param("vhtId") String vhtId, @Param("patientId") int patientId);
 
     @Query( "SELECT r " +
             "FROM Reading r " +
@@ -31,7 +31,7 @@ public interface MonitorRepository extends CrudRepository<Monitor, String> {
                 "SELECT p " +
                 "FROM  Patient p INNER JOIN Monitor m ON p.id = m.patientId " +
                 "WHERE m.vhtId = :vhtId AND m.patientId = :patientId)")
-    Iterable<Reading> findReadingByVhtIdAndPatientId(@Param("vhtId") String vhtId, @Param("patientId") String patientId);
+    Iterable<Reading> findReadingByVhtIdAndPatientId(@Param("vhtId") String vhtId, @Param("patientId") int patientId);
 
     @Query( "SELECT f " +
             "FROM FollowUp f " +
@@ -39,7 +39,7 @@ public interface MonitorRepository extends CrudRepository<Monitor, String> {
                 "SELECT p " +
                 "FROM  Patient p INNER JOIN Monitor m ON p.id = m.patientId " +
                 "WHERE m.vhtId = :vhtId AND m.patientId = :patientId)")
-    Iterable<FollowUp> findFollowUpVhtIdAndPatientId(@Param("vhtId") String vhtId, @Param("patientId") String patientId);
+    Iterable<FollowUp> findFollowUpVhtIdAndPatientId(@Param("vhtId") String vhtId, @Param("patientId") int patientId);
 
     @Transactional
     @Modifying
