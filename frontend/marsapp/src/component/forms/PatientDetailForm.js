@@ -130,7 +130,7 @@ class PatientDetailForm extends React.Component {
         api.reading.getReadingForPatient({patient_id: pid, latest: false}).then(async res => {
             const readingData = res.data;
             let newState = [];
-            console.log("reading", res);
+            
 
             for (let i = 0; i < readingData.length; i++) {
                 let row = {
@@ -360,7 +360,6 @@ class PatientDetailForm extends React.Component {
     };
 
     onDeleteMedication = (event, deleteAll, id) => {
-        console.log("ROW ID ", id);
         if (deleteAll) {
             api.medication.deleteAllPatientMedications({patient_id: id}).then(res => {
                 if (res) {
