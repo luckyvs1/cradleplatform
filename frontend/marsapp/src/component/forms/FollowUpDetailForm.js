@@ -41,6 +41,11 @@ class FollowUpDetailForm extends React.Component {
             this.props.submit(this.state.data)
         }
     };
+    remove = event => {
+        if (event) {
+            this.props.remove(this.state.data)
+        }
+    };
 
 
     componentDidMount() {
@@ -153,6 +158,7 @@ class FollowUpDetailForm extends React.Component {
                     <Row>
                         <Col className={"text-right"}>
                             <Button variant="primary" onClick={this.submit}>Edit</Button>
+                            <Button variant="secondary" onClick={this.remove}>Remove</Button>
                         </Col>
                     </Row>
                 </Container>

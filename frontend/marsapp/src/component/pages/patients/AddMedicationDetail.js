@@ -15,7 +15,7 @@ class AddMedicationDetail extends React.Component {
 
     submit = (data) => {
         let formattedData = {
-           drugHistoryId: data.drug_history_id,
+           patientId: data.patient_id,
            drugName: data.drug_name,
            dosage: data.dosage,
            startDate: data.start_date,

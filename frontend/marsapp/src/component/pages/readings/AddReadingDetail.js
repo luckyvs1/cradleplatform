@@ -18,7 +18,7 @@ import moment from "moment";
 class AddReadingDetail extends React.Component {
     // color => Yellow , Green , Red
     state = {
-        counter: 15000, // ms
+        counter: 0, // ms
         isShowDialog: localStorage.getItem('isShowTimerDialog'),
         isShow: false,
         isShowError: false,
@@ -150,6 +150,8 @@ class AddReadingDetail extends React.Component {
         }, () => {
             sessionStorage.removeItem('testNo')
             localStorage.removeItem('color')
+            localStorage.removeItem('isShowTimerDialog')
+            localStorage.removeItem('currentTimePlus15')
         })
 
 
@@ -227,6 +229,9 @@ class AddReadingDetail extends React.Component {
                 localStorage.setItem('color', "Green")
                 break;
             case "Yellow_up":
+                localStorage.setItem('isShowTimerDialog', 'true');
+                localStorage.setItem('currentTimePlus15', (new Date().getTime() + 900000).toString())
+                localStorage.setItem('color', "Yellow")
                 this.setState({
                     ...this.state,
                     message: "Please Retest After 15 minutes",
@@ -234,14 +239,11 @@ class AddReadingDetail extends React.Component {
                     testNo: this.state.testNo + 1,
                     isShowDialog: true
                 })
-                let tt2 = moment(new Date()).add(15, 'm').toDate().getTime();
-                localStorage.setItem('currentTimePlus15', tt2.toString())
-                localStorage.setItem('color', "Yellow")
-                localStorage.setItem('isShowTimerDialog', 'true');
-                localStorage.removeItem('counter')
-                localStorage.setItem('counter', '15000');
                 break;
             case "Yellow_down":
+                localStorage.setItem('isShowTimerDialog', 'true');
+                localStorage.setItem('currentTimePlus15', (new Date().getTime() + 900000).toString())
+                localStorage.setItem('color', "Yellow")
                 this.setState({
                     ...this.state,
                     message: "Please Retest After 15 minutes",
@@ -249,13 +251,6 @@ class AddReadingDetail extends React.Component {
                     testNo: this.state.testNo + 1,
                     isShowDialog: true
                 })
-                let tt = moment(new Date()).add(15, 'm').toDate().getTime();
-
-                localStorage.setItem('currentTimePlus15', tt.toString())
-                localStorage.setItem('color', "Yellow")
-                localStorage.setItem('isShowTimerDialog', 'true');
-                localStorage.removeItem('counter')
-                localStorage.setItem('counter', '15000');
                 break;
             case "Red_up":
                 this.setState({

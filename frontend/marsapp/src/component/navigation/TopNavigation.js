@@ -9,7 +9,9 @@ import {Link} from "react-router-dom";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import auth from "../../actions/auth"
-import {Container, Nav, Navbar, NavDropdown} from 'react-bootstrap';
+import {Container, Nav, Navbar, NavDropdown, Row, Col} from 'react-bootstrap';
+import VHT from "../../actions/authVHT";
+import HCW from "../../actions/authHCW";
 
 const bottomMarginStyle = {
     marginBottom: '40px',
@@ -37,6 +39,7 @@ class TopNavigation extends React.Component {
     handleClick(e){
         localStorage.removeItem("loginToken");
         localStorage.removeItem("loginUserId");
+        localStorage.removeItem("isVHT");
     }
 
     render() {
@@ -63,9 +66,6 @@ class TopNavigation extends React.Component {
                                 <NavDropdown.Item as={Link} to="account">
                                     <i className="fas fa-user-alt"></i> Account
                                 </NavDropdown.Item>
-                                <NavDropdown.Item as={Link} to="help">
-                                    <i className="fas fa-graduation-cap"></i> Learning Materials
-                                </NavDropdown.Item>
                                 <NavDropdown.Divider/>
                                 <NavDropdown.Item as={Link} to="/" onClick={this.handleClick}>
                                     <i className="fas fa-sign-out-alt"></i> Logout
@@ -84,24 +84,27 @@ class TopNavigation extends React.Component {
                                         <Nav.Link as={Link} to="allFollowUp">
                                             <i className="fas fa-search"></i> Follow Ups
                                         </Nav.Link>
-                                        <Nav.Link as={Link} to="referral" >
+                                        {VHT.isAuthenticated() ?
+                                            null:
+                                            <Nav.Link as={Link} to="referral">
                                             <i className="fas fa-redo"></i> Referrals
-                                        </Nav.Link>
+                                            </Nav.Link>
+                                        }
                                         <Nav.Link as={Link} to="listPatient">
                                             <i className="fas fa-users"></i> Patients
                                         </Nav.Link>
                                         <Nav.Link as={Link} to="addReadingDetail">
                                             <i className="fas fa-notes-medical"></i> Readings
                                         </Nav.Link>
-                                        {auth.isAuthenticated()  ?
+                                        {VHT.isAuthenticated() || HCW.isAuthenticated() ?
+                                            null:
                                             <Nav.Link as={Link} to="listUser">
                                                 <i className="fas fa-users-cog"></i> Users
                                             </Nav.Link>
-                                            : null
                                         }
-                                        <Nav.Link as={Link} to="transferVHT">
-                                            <i className="fas fa-exchange-alt"></i> Transfer VHT
-                                        </Nav.Link>
+                                        <Nav.Link  as={Link} to="help">
+                                            <i className="fas fa-question"></i> Help
+                                        </Nav.Link >
                                     </ul>
                                 </div>
                             </aside>
