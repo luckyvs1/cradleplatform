@@ -24,7 +24,7 @@
 							"pm.test(\"Check patient id is equal to stored variable\", function () {",
 							"    // Variables get saved as string so need to use parse int to get back value ",
 							"    // Else test will fail due to comparison between integer and string",
-							"    pm.expect(jsonData.id).to.deep.equal(parseInt(pm.variables.get(\"patientId\")));",
+							"    pm.expect(jsonData.id).to.deep.equal(parseInt(pm.environment.get(\"patientId\")));",
 							"});",
 							"",
 							"pm.test(\"Patient schema is valid\", function() {",
@@ -119,7 +119,7 @@
 							"pm.sendRequest('{{url}}/api/patients/', function (err, res) {",
 							"    let responseJSON = res.json();",
 							"    // Saving a value in variable converts it to a string",
-							"    pm.variables.set('patientId', responseJSON[0].id);",
+							"    pm.environment.set('patientId', responseJSON[0].id);",
 							"});",
 							"",
 							"pm.environment.set('patientSchema', patientSchema);"
