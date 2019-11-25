@@ -40,6 +40,7 @@ class TopNavigation extends React.Component {
         localStorage.removeItem("loginToken");
         localStorage.removeItem("loginUserId");
         localStorage.removeItem("isVHT");
+        window.location.reload();
     }
 
     render() {
@@ -101,6 +102,12 @@ class TopNavigation extends React.Component {
                                             <Nav.Link as={Link} to="listUser">
                                                 <i className="fas fa-users-cog"></i> Users
                                             </Nav.Link>
+                                        }
+                                        {HCW.isAuthenticated() || auth.isAuthenticated()?
+                                            <Nav.Link as={Link} to="transferVHT">
+                                                <i className="fas fa-arrow-right"></i> Transfer
+                                            </Nav.Link> :
+                                            null
                                         }
                                         <Nav.Link  as={Link} to="help">
                                             <i className="fas fa-question"></i> Help
