@@ -682,6 +682,267 @@
 					"response": []
 				}
 			]
+		},
+		{
+			"name": "ReadingController",
+			"description": "",
+			"item": [
+				{
+					"name": "GetReadingById",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"let jsonData = pm.response.json();",
+									"",
+									"pm.test(\"Response is valid\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"// Check the returned response patient id matches the id of the stored variable",
+									"pm.test(\"Check reading id is equal to stored variable\", function () {",
+									"    // Variables get saved as string so need to use parse int to get back value ",
+									"    // Else test will fail due to comparison between integer and string",
+									"    pm.expect(jsonData.id).to.deep.equal(parseInt(pm.environment.get(\"readingId\")));",
+									"});",
+									"",
+									"pm.test(\"Reading schema is valid\", function() {",
+									"    // Load the JSON schema and validate against response schema",
+									"    const readingSchema = JSON.parse(pm.environment.get(\"readingSchema\"));",
+									"    tv4.validate(jsonData, readingSchema);",
+									"});"
+								]
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"pm.sendRequest(pm.environment.get(\"url\")+'/api/readings/', function (err, res) {",
+									"    let responseJSON = res.json();",
+									"    // Saving a value in variable converts it to a string",
+									"    pm.environment.set('readingId', responseJSON[0].id);",
+									"});",
+									"",
+									"",
+									"let readingSchema = JSON.stringify({",
+									"  \"type\": \"object\",",
+									"  \"properties\": {",
+									"    \"id\": {",
+									"      \"type\": \"integer\"",
+									"    },",
+									"    \"readerId\": {",
+									"      \"type\": \"string\"",
+									"    },",
+									"    \"patientId\": {",
+									"      \"type\": \"integer\"",
+									"    },",
+									"    \"timestamp\": {",
+									"      \"type\": \"string\"",
+									"    },",
+									"    \"symptoms\": {",
+									"      \"type\": \"string\"",
+									"    },",
+									"    \"otherSymptoms\": {",
+									"      \"type\": \"string\"",
+									"    },",
+									"    \"systolicBloodPressure\": {",
+									"      \"type\": \"integer\"",
+									"    },",
+									"    \"diastolicBloodPressure\": {",
+									"      \"type\": \"integer\"",
+									"    },",
+									"    \"pulseRate\": {",
+									"      \"type\": \"integer\"",
+									"    },",
+									"    \"notes\": {",
+									"      \"type\": \"string\"",
+									"    },",
+									"    \"needFollowUp\": {",
+									"      \"type\": \"boolean\"",
+									"    },",
+									"    \"appVersion\": {",
+									"      \"type\": \"string\"",
+									"    },",
+									"    \"dateLastSaved\": {",
+									"      \"type\": \"string\"",
+									"    },",
+									"    \"recheckVitalsDate\": {",
+									"      \"type\": \"string\"",
+									"    },",
+									"    \"deviceInformation\": {",
+									"      \"type\": \"string\"",
+									"    },",
+									"    \"gestationalAgeTimeUnit\": {",
+									"      \"type\": \"string\"",
+									"    },",
+									"    \"gestationalAge\": {",
+									"      \"type\": \"integer\"",
+									"    },",
+									"    \"manuallyChangedOcrResults\": {",
+									"      \"type\": \"string\"",
+									"    },",
+									"    \"photoPath\": {",
+									"      \"type\": \"string\"",
+									"    },",
+									"    \"totalOcrSeconds\": {",
+									"      \"type\": \"number\"",
+									"    },",
+									"    \"region\": {",
+									"      \"type\": \"string\"",
+									"    },",
+									"    \"ocrEnabled\": {",
+									"      \"type\": \"boolean\"",
+									"    },",
+									"    \"uploadImages\": {",
+									"      \"type\": \"boolean\"",
+									"    },",
+									"    \"vitalsTrafficLight\": {",
+									"      \"type\": \"string\"",
+									"    },",
+									"    \"diagnosis\": {",
+									"      \"type\": \"string\"",
+									"    }",
+									"  },",
+									"  \"required\": [",
+									"    \"id\",",
+									"    \"readerId\",",
+									"    \"patientId\",",
+									"    \"timestamp\",",
+									"    \"symptoms\",",
+									"    \"otherSymptoms\",",
+									"    \"systolicBloodPressure\",",
+									"    \"diastolicBloodPressure\",",
+									"    \"pulseRate\",",
+									"    \"notes\",",
+									"    \"needFollowUp\",",
+									"    \"appVersion\",",
+									"    \"dateLastSaved\",",
+									"    \"recheckVitalsDate\",",
+									"    \"deviceInformation\",",
+									"    \"gestationalAgeTimeUnit\",",
+									"    \"gestationalAge\",",
+									"    \"manuallyChangedOcrResults\",",
+									"    \"photoPath\",",
+									"    \"totalOcrSeconds\",",
+									"    \"region\",",
+									"    \"ocrEnabled\",",
+									"    \"uploadImages\",",
+									"    \"vitalsTrafficLight\",",
+									"    \"diagnosis\"",
+									"  ]",
+									"});",
+									"",
+									"pm.environment.set('readingSchema', readingSchema);"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{url}}/api/readings/{{readingId}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"readings",
+								"{{readingId}}"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "GetReadingsAdvice",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"let jsonData = pm.response.json();",
+									"",
+									"pm.test(\"Response is valid\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Reading advice schema is valid\", function() {",
+									"    // Load the JSON schema and validate against response schema",
+									"    const readingAdviceSchema = JSON.parse(pm.environment.get(\"readingAdviceSchema\"));",
+									"    tv4.validate(jsonData, readingAdviceSchema);",
+									"});"
+								]
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"pm.sendRequest(pm.environment.get(\"url\")+'/api/readings/', function (err, res) {",
+									"    let responseJSON = res.json();",
+									"    // Saving a value in variable converts it to a string",
+									"    pm.environment.set('vitalsTrafficLight', responseJSON[0].vitalsTrafficLight);",
+									"});",
+									"",
+									"",
+									"let readingAdviceSchema = JSON.stringify({",
+									"  \"type\": \"object\",",
+									"  \"properties\": {",
+									"    \"analysis\": {",
+									"      \"type\": \"string\"",
+									"    },",
+									"    \"briefAdvice\": {",
+									"      \"type\": \"string\"",
+									"    },",
+									"    \"advice\": {",
+									"      \"type\": \"string\"",
+									"    },",
+									"    \"condition\": {",
+									"      \"type\": \"string\"",
+									"    }",
+									"  },",
+									"  \"required\": [",
+									"    \"analysis\",",
+									"    \"briefAdvice\",",
+									"    \"advice\",",
+									"    \"condition\"",
+									"  ]",
+									"});",
+									"",
+									"pm.environment.set('readingAdviceSchema', readingAdviceSchema);"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{url}}/api/readings-advice/{{vitalsTrafficLight}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"readings-advice",
+								"{{vitalsTrafficLight}}"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
 		}
 	]
 }
