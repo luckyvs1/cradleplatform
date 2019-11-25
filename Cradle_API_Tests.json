@@ -7,196 +7,305 @@
 	},
 	"item": [
 		{
-			"name": "GetPatientById",
-			"event": [
+			"name": "PatientController",
+			"description": "",
+			"item": [
 				{
-					"listen": "test",
-					"script": {
-						"type": "text/javascript",
-						"exec": [
-							"let jsonData = pm.response.json();",
-							"",
-							"pm.test(\"Response is valid\", function () {",
-							"    pm.response.to.have.status(200);",
-							"});",
-							"",
-							"// Check the returned response patient id matches the id of the stored variable",
-							"pm.test(\"Check patient id is equal to stored variable\", function () {",
-							"    // Variables get saved as string so need to use parse int to get back value ",
-							"    // Else test will fail due to comparison between integer and string",
-							"    pm.expect(jsonData.id).to.deep.equal(parseInt(pm.environment.get(\"patientId\")));",
-							"});",
-							"",
-							"pm.test(\"Patient schema is valid\", function() {",
-							"    // Load the JSON schema and validate against response schema",
-							"    const patientSchema = JSON.parse(pm.environment.get(\"patientSchema\"));",
-							"    tv4.validate(jsonData, patientSchema);",
-							"});"
-						]
-					}
-				},
-				{
-					"listen": "prerequest",
-					"script": {
-						"type": "text/javascript",
-						"exec": [
-							"pm.sendRequest(pm.environment.get(\"url\")+'/api/patients/', function (err, res) {",
-							"    let responseJSON = res.json();",
-							"    // Saving a value in variable converts it to a string",
-							"    pm.environment.set('patientId', responseJSON[0].id);",
-							"});",
-							"",
-							"",
-							"let patientSchema = JSON.stringify({",
-							"  \"type\": \"object\",",
-							"  \"properties\": {",
-							"    \"id\": {",
-							"      \"type\": \"integer\"",
-							"    },",
-							"    \"attestationNo\": {",
-							"      \"type\": \"string\"",
-							"    },",
-							"    \"firstName\": {",
-							"      \"type\": \"string\"",
-							"    },",
-							"    \"lastName\": {",
-							"      \"type\": \"string\"",
-							"    },",
-							"    \"villageNo\": {",
-							"      \"type\": \"string\"",
-							"    },",
-							"    \"zoneNo\": {",
-							"      \"type\": \"string\"",
-							"    },",
-							"    \"householdNo\": {",
-							"      \"type\": \"string\"",
-							"    },",
-							"    \"blockNo\": {",
-							"      \"type\": \"string\"",
-							"    },",
-							"    \"tankNo\": {",
-							"      \"type\": \"string\"",
-							"    },",
-							"    \"initials\": {",
-							"      \"type\": \"string\"",
-							"    },",
-							"    \"sex\": {",
-							"      \"type\": \"string\"",
-							"    },",
-							"    \"age\": {",
-							"      \"type\": \"integer\"",
-							"    },",
-							"    \"dob\": {",
-							"      \"type\": \"string\"",
-							"    },",
-							"    \"pregnant\": {",
-							"      \"type\": \"boolean\"",
-							"    },",
-							"    \"gestationalStartDate\": {",
-							"      \"type\": \"string\"",
-							"    },",
-							"    \"gestationAgeUnit\": {",
-							"      \"type\": \"string\"",
-							"    },",
-							"    \"currentGestationalAge\": {",
-							"      \"type\": \"integer\"",
-							"    }",
-							"  },",
-							"  \"required\": [",
-							"    \"id\",",
-							"    \"attestationNo\",",
-							"    \"firstName\",",
-							"    \"lastName\",",
-							"    \"villageNo\",",
-							"    \"zoneNo\",",
-							"    \"householdNo\",",
-							"    \"blockNo\",",
-							"    \"tankNo\",",
-							"    \"initials\",",
-							"    \"sex\",",
-							"    \"age\",",
-							"    \"dob\",",
-							"    \"pregnant\",",
-							"    \"gestationalStartDate\",",
-							"    \"gestationAgeUnit\",",
-							"    \"currentGestationalAge\"",
-							"  ]",
-							"});",
-							"",
-							"pm.environment.set('patientSchema', patientSchema);"
-						]
-					}
-				}
-			],
-			"request": {
-				"method": "GET",
-				"header": [],
-				"body": {},
-				"url": {
-					"raw": "{{url}}/api/patients/{{patientId}}",
-					"host": [
-						"{{url}}"
+					"name": "PostPatient",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"Create response is valid\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});"
+								]
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"",
+									""
+								]
+							}
+						}
 					],
-					"path": [
-						"api",
-						"patients",
-						"{{patientId}}"
-					]
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"attestationNo\": \"\",\n    \"firstName\": \"Maria\",\n    \"lastName\": \"Allen\",\n    \"villageNo\": \"V001\",\n    \"zoneNo\": \"Z001\",\n    \"householdNo\": \"H001\",\n    \"blockNo\": \"B001\",\n    \"tankNo\": \"T001\",\n    \"initials\": \"MA\",\n    \"sex\": \"F\",\n    \"age\": 26,\n    \"dob\": \"1993-01-05\",\n    \"pregnant\": false,\n    \"gestationalStartDate\": null,\n    \"gestationAgeUnit\": \"none\",\n    \"currentGestationalAge\": 0\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/patients",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"patients"
+							]
+						},
+						"description": ""
+					},
+					"response": []
 				},
-				"description": ""
-			},
-			"response": []
+				{
+					"name": "GetPatientById",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"let jsonData = pm.response.json();",
+									"",
+									"pm.test(\"Response is valid\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"// Check the returned response patient id matches the id of the stored variable",
+									"pm.test(\"Check patient id is equal to stored variable\", function () {",
+									"    // Variables get saved as string so need to use parse int to get back value ",
+									"    // Else test will fail due to comparison between integer and string",
+									"    pm.expect(jsonData.id).to.deep.equal(parseInt(pm.environment.get(\"patientId\")));",
+									"});",
+									"",
+									"pm.test(\"Patient schema is valid\", function() {",
+									"    // Load the JSON schema and validate against response schema",
+									"    const patientSchema = JSON.parse(pm.environment.get(\"patientSchema\"));",
+									"    tv4.validate(jsonData, patientSchema);",
+									"});"
+								]
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"pm.sendRequest(pm.environment.get(\"url\")+'/api/patients/', function (err, res) {",
+									"    let responseJSON = res.json();",
+									"    // Saving a value in variable converts it to a string",
+									"    pm.environment.set('patientId', responseJSON[0].id);",
+									"});",
+									"",
+									"",
+									"let patientSchema = JSON.stringify({",
+									"  \"type\": \"object\",",
+									"  \"properties\": {",
+									"    \"id\": {",
+									"      \"type\": \"integer\"",
+									"    },",
+									"    \"attestationNo\": {",
+									"      \"type\": \"string\"",
+									"    },",
+									"    \"firstName\": {",
+									"      \"type\": \"string\"",
+									"    },",
+									"    \"lastName\": {",
+									"      \"type\": \"string\"",
+									"    },",
+									"    \"villageNo\": {",
+									"      \"type\": \"string\"",
+									"    },",
+									"    \"zoneNo\": {",
+									"      \"type\": \"string\"",
+									"    },",
+									"    \"householdNo\": {",
+									"      \"type\": \"string\"",
+									"    },",
+									"    \"blockNo\": {",
+									"      \"type\": \"string\"",
+									"    },",
+									"    \"tankNo\": {",
+									"      \"type\": \"string\"",
+									"    },",
+									"    \"initials\": {",
+									"      \"type\": \"string\"",
+									"    },",
+									"    \"sex\": {",
+									"      \"type\": \"string\"",
+									"    },",
+									"    \"age\": {",
+									"      \"type\": \"integer\"",
+									"    },",
+									"    \"dob\": {",
+									"      \"type\": \"string\"",
+									"    },",
+									"    \"pregnant\": {",
+									"      \"type\": \"boolean\"",
+									"    },",
+									"    \"gestationalStartDate\": {",
+									"      \"type\": \"string\"",
+									"    },",
+									"    \"gestationAgeUnit\": {",
+									"      \"type\": \"string\"",
+									"    },",
+									"    \"currentGestationalAge\": {",
+									"      \"type\": \"integer\"",
+									"    }",
+									"  },",
+									"  \"required\": [",
+									"    \"id\",",
+									"    \"attestationNo\",",
+									"    \"firstName\",",
+									"    \"lastName\",",
+									"    \"villageNo\",",
+									"    \"zoneNo\",",
+									"    \"householdNo\",",
+									"    \"blockNo\",",
+									"    \"tankNo\",",
+									"    \"initials\",",
+									"    \"sex\",",
+									"    \"age\",",
+									"    \"dob\",",
+									"    \"pregnant\",",
+									"    \"gestationalStartDate\",",
+									"    \"gestationAgeUnit\",",
+									"    \"currentGestationalAge\"",
+									"  ]",
+									"});",
+									"",
+									"pm.environment.set('patientSchema', patientSchema);"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{url}}/api/patients/{{patientId}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"patients",
+								"{{patientId}}"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
 		},
 		{
-			"name": "PostPatient",
-			"event": [
+			"name": "AdminController",
+			"description": "",
+			"item": [
 				{
-					"listen": "test",
-					"script": {
-						"type": "text/javascript",
-						"exec": [
-							"pm.test(\"Create response is valid\", function () {",
-							"    pm.response.to.have.status(201);",
-							"});"
-						]
-					}
-				},
-				{
-					"listen": "prerequest",
-					"script": {
-						"type": "text/javascript",
-						"exec": [
-							"",
-							""
-						]
-					}
-				}
-			],
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "application/json"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n    \"attestationNo\": \"\",\n    \"firstName\": \"Maria\",\n    \"lastName\": \"Allen\",\n    \"villageNo\": \"V001\",\n    \"zoneNo\": \"Z001\",\n    \"householdNo\": \"H001\",\n    \"blockNo\": \"B001\",\n    \"tankNo\": \"T001\",\n    \"initials\": \"MA\",\n    \"sex\": \"F\",\n    \"age\": 26,\n    \"dob\": \"1993-01-05\",\n    \"pregnant\": false,\n    \"gestationalStartDate\": null,\n    \"gestationAgeUnit\": \"none\",\n    \"currentGestationalAge\": 0\n}"
-				},
-				"url": {
-					"raw": "{{url}}/api/patients",
-					"host": [
-						"{{url}}"
+					"name": "GetAdminById",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"let jsonData = pm.response.json();",
+									"",
+									"pm.test(\"Response is valid\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Check admin id is equal to stored variable\", function () {",
+									"    pm.expect(jsonData.id).to.deep.equal(pm.environment.get(\"adminId\"));",
+									"});",
+									""
+								]
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"pm.sendRequest(pm.environment.get(\"url\")+'/api/admins/', function (err, res) {",
+									"    let responseJSON = res.json();",
+									"    // Saving a value in variable converts it to a string",
+									"    pm.environment.set('adminId', responseJSON[0].id);",
+									"});",
+									""
+								]
+							}
+						}
 					],
-					"path": [
-						"api",
-						"patients"
-					]
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{url}}/api/admins/{{adminId}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"admins",
+								"{{adminId}}"
+							]
+						},
+						"description": ""
+					},
+					"response": []
 				},
-				"description": ""
-			},
-			"response": []
+				{
+					"name": "PostAdmin",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"Create response is valid\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": \"1\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/admins/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"admins",
+								""
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
 		}
 	]
 }
