@@ -105,7 +105,7 @@ class TopNavigation extends React.Component {
                                         }
                                         {HCW.isAuthenticated() || auth.isAuthenticated()?
                                             <Nav.Link as={Link} to="transferVHT">
-                                                <i className="fas fa-arrow-right"></i> Users
+                                                <i className="fas fa-arrow-right"></i> Transfer
                                             </Nav.Link> :
                                             null
                                         }
