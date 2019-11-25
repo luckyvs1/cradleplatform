@@ -603,7 +603,85 @@
 		{
 			"name": "VHTController",
 			"description": "",
-			"item": []
+			"item": [
+				{
+					"name": "PostVHT",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"Create response is valid\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": \"1\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/vhts/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"vhts",
+								""
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "GetAllVHT",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"let jsonData = pm.response.json();",
+									"",
+									"pm.test(\"Response is valid\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{url}}/api/vhts",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"vhts"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
 		}
 	]
 }
