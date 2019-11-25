@@ -129,32 +129,6 @@ class ReferralForm extends React.Component {
                         </Col>
                     </Row>
                     <Row>
-                        <Col>
-                            <Form size={'small'}>
-                                <Form.Group widths={'equal'}>
-                                    <Form.Field>
-                                        <label>Status:</label>
-                                        <Dropdown
-                                            placeholder='Select Status'
-                                            fluid
-                                            selection
-                                            options={this.state.status}
-                                        />
-                                    </Form.Field>
-                                    <Form.Field>
-                                        <label>Sort By:</label>
-                                        <Dropdown
-                                            placeholder='Select Sort By'
-                                            fluid
-                                            selection
-                                            options={this.state.sortBy}
-                                        />
-                                    </Form.Field>
-                                </Form.Group>
-                            </Form>
-                        </Col>
-                    </Row>
-                    <Row>
                         <ReferralListTable/>
                     </Row>
                 </Container>
