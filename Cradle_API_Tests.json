@@ -209,6 +209,48 @@
 			"description": "",
 			"item": [
 				{
+					"name": "PostAdmin",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"Create response is valid\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": \"1\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/admins/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"admins",
+								""
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
 					"name": "GetAdminById",
 					"event": [
 						{
@@ -262,9 +304,129 @@
 						"description": ""
 					},
 					"response": []
+				}
+			]
+		},
+		{
+			"name": "DrugHistoryController",
+			"description": "",
+			"item": []
+		},
+		{
+			"name": "UserController",
+			"description": "",
+			"item": [
+				{
+					"name": "PostLogin",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"Login credentials for test user is valid\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"customerTesting\",\n    \"password\": \"justTesting\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/users/login",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"login"
+							]
+						},
+						"description": ""
+					},
+					"response": []
 				},
 				{
-					"name": "PostAdmin",
+					"name": "GetUserById",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"let jsonData = pm.response.json();",
+									"",
+									"pm.test(\"Response is valid\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"// Check the returned response user id matches the id of the stored variable",
+									"pm.test(\"Check user id is equal to stored variable\", function () {",
+									"    pm.expect(jsonData.id).to.deep.equal(pm.environment.get(\"userId\"));",
+									"});"
+								]
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"pm.sendRequest(pm.environment.get(\"url\")+'/api/users/', function (err, res) {",
+									"    let responseJSON = res.json();",
+									"    // Saving a value in variable converts it to a string",
+									"    pm.environment.set('userId', responseJSON[0].id);",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{url}}/api/users/{{userId}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"{{userId}}"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "FollowUpController",
+			"description": "",
+			"item": []
+		},
+		{
+			"name": "HealthWorkerController",
+			"description": "",
+			"item": [
+				{
+					"name": "PostHealthworker",
 					"event": [
 						{
 							"listen": "test",
@@ -291,14 +453,69 @@
 							"raw": "{\n    \"id\": \"1\"\n}"
 						},
 						"url": {
-							"raw": "{{url}}/api/admins/",
+							"raw": "{{url}}/api/healthWorkers/",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"api",
-								"admins",
+								"healthWorkers",
 								""
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "GetHealthworkerById",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"let jsonData = pm.response.json();",
+									"",
+									"pm.test(\"Response is valid\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Check health worker id is equal to stored variable\", function () {",
+									"    pm.expect(jsonData.id).to.deep.equal(pm.environment.get(\"healthworkerId\"));",
+									"});",
+									""
+								]
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"pm.sendRequest(pm.environment.get(\"url\")+'/api/healthWorkers/', function (err, res) {",
+									"    let responseJSON = res.json();",
+									"    // Saving a value in variable converts it to a string",
+									"    pm.environment.set('healthworkerId', responseJSON[0].id);",
+									"});",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{url}}/api/healthWorkers/{{healthworkerId}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"healthWorkers",
+								"{{healthworkerId}}"
 							]
 						},
 						"description": ""
@@ -306,6 +523,87 @@
 					"response": []
 				}
 			]
+		},
+		{
+			"name": "MedicalHistoryController",
+			"description": "",
+			"item": []
+		},
+		{
+			"name": "MonitorController",
+			"description": "",
+			"item": []
+		},
+		{
+			"name": "ReferralController",
+			"description": "",
+			"item": []
+		},
+		{
+			"name": "UserInfoController",
+			"description": "",
+			"item": [
+				{
+					"name": "GetUserInfoById",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"let jsonData = pm.response.json();",
+									"",
+									"pm.test(\"Response is valid\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Check user id is equal to stored variable\", function () {",
+									"    pm.expect(jsonData.id).to.deep.equal(pm.environment.get(\"userId\"));",
+									"});",
+									""
+								]
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"pm.sendRequest(pm.environment.get(\"url\")+'/api/user-information/', function (err, res) {",
+									"    let responseJSON = res.json();",
+									"    // Saving a value in variable converts it to a string",
+									"    pm.environment.set('userId', responseJSON[0].id);",
+									"});",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{url}}/api/user-information/{{userId}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"user-information",
+								"{{userId}}"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "VHTController",
+			"description": "",
+			"item": []
 		}
 	]
 }
