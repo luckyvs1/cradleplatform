@@ -27,10 +27,8 @@ public class VHTController {
 
     @PostMapping(path="/api/vhts")
     @ResponseStatus(code = HttpStatus.CREATED)
-    public String addNewVHT (@RequestParam String id) {
-        VHT newVHT = new VHT();
-        newVHT.setId(id);
-        vhtRepository.save(newVHT);
+    public String addNewVHT (@RequestBody VHT vht) {
+        vhtRepository.save(vht);
         return "Saved VHT";
     }
 

@@ -1,0 +1,948 @@
+{
+	"info": {
+		"name": "Cradle API Tests",
+		"_postman_id": "f8487286-6ada-3957-b264-d48b4e7b19a4",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "PatientController",
+			"description": "",
+			"item": [
+				{
+					"name": "PostPatient",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"Create response is valid\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});"
+								]
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"attestationNo\": \"\",\n    \"firstName\": \"Maria\",\n    \"lastName\": \"Allen\",\n    \"villageNo\": \"V001\",\n    \"zoneNo\": \"Z001\",\n    \"householdNo\": \"H001\",\n    \"blockNo\": \"B001\",\n    \"tankNo\": \"T001\",\n    \"initials\": \"MA\",\n    \"sex\": \"F\",\n    \"age\": 26,\n    \"dob\": \"1993-01-05\",\n    \"pregnant\": false,\n    \"gestationalStartDate\": null,\n    \"gestationAgeUnit\": \"none\",\n    \"currentGestationalAge\": 0\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/patients",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"patients"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "GetPatientById",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"let jsonData = pm.response.json();",
+									"",
+									"pm.test(\"Response is valid\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"// Check the returned response patient id matches the id of the stored variable",
+									"pm.test(\"Check patient id is equal to stored variable\", function () {",
+									"    // Variables get saved as string so need to use parse int to get back value ",
+									"    // Else test will fail due to comparison between integer and string",
+									"    pm.expect(jsonData.id).to.deep.equal(parseInt(pm.environment.get(\"patientId\")));",
+									"});",
+									"",
+									"pm.test(\"Patient schema is valid\", function() {",
+									"    // Load the JSON schema and validate against response schema",
+									"    const patientSchema = JSON.parse(pm.environment.get(\"patientSchema\"));",
+									"    tv4.validate(jsonData, patientSchema);",
+									"});"
+								]
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"pm.sendRequest(pm.environment.get(\"url\")+'/api/patients/', function (err, res) {",
+									"    let responseJSON = res.json();",
+									"    // Saving a value in variable converts it to a string",
+									"    pm.environment.set('patientId', responseJSON[0].id);",
+									"});",
+									"",
+									"",
+									"let patientSchema = JSON.stringify({",
+									"  \"type\": \"object\",",
+									"  \"properties\": {",
+									"    \"id\": {",
+									"      \"type\": \"integer\"",
+									"    },",
+									"    \"attestationNo\": {",
+									"      \"type\": \"string\"",
+									"    },",
+									"    \"firstName\": {",
+									"      \"type\": \"string\"",
+									"    },",
+									"    \"lastName\": {",
+									"      \"type\": \"string\"",
+									"    },",
+									"    \"villageNo\": {",
+									"      \"type\": \"string\"",
+									"    },",
+									"    \"zoneNo\": {",
+									"      \"type\": \"string\"",
+									"    },",
+									"    \"householdNo\": {",
+									"      \"type\": \"string\"",
+									"    },",
+									"    \"blockNo\": {",
+									"      \"type\": \"string\"",
+									"    },",
+									"    \"tankNo\": {",
+									"      \"type\": \"string\"",
+									"    },",
+									"    \"initials\": {",
+									"      \"type\": \"string\"",
+									"    },",
+									"    \"sex\": {",
+									"      \"type\": \"string\"",
+									"    },",
+									"    \"age\": {",
+									"      \"type\": \"integer\"",
+									"    },",
+									"    \"dob\": {",
+									"      \"type\": \"string\"",
+									"    },",
+									"    \"pregnant\": {",
+									"      \"type\": \"boolean\"",
+									"    },",
+									"    \"gestationalStartDate\": {",
+									"      \"type\": \"string\"",
+									"    },",
+									"    \"gestationAgeUnit\": {",
+									"      \"type\": \"string\"",
+									"    },",
+									"    \"currentGestationalAge\": {",
+									"      \"type\": \"integer\"",
+									"    }",
+									"  },",
+									"  \"required\": [",
+									"    \"id\",",
+									"    \"attestationNo\",",
+									"    \"firstName\",",
+									"    \"lastName\",",
+									"    \"villageNo\",",
+									"    \"zoneNo\",",
+									"    \"householdNo\",",
+									"    \"blockNo\",",
+									"    \"tankNo\",",
+									"    \"initials\",",
+									"    \"sex\",",
+									"    \"age\",",
+									"    \"dob\",",
+									"    \"pregnant\",",
+									"    \"gestationalStartDate\",",
+									"    \"gestationAgeUnit\",",
+									"    \"currentGestationalAge\"",
+									"  ]",
+									"});",
+									"",
+									"pm.environment.set('patientSchema', patientSchema);"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{url}}/api/patients/{{patientId}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"patients",
+								"{{patientId}}"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "AdminController",
+			"description": "",
+			"item": [
+				{
+					"name": "PostAdmin",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"Create response is valid\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": \"1\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/admins/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"admins",
+								""
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "GetAdminById",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"let jsonData = pm.response.json();",
+									"",
+									"pm.test(\"Response is valid\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Check admin id is equal to stored variable\", function () {",
+									"    pm.expect(jsonData.id).to.deep.equal(pm.environment.get(\"adminId\"));",
+									"});",
+									""
+								]
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"pm.sendRequest(pm.environment.get(\"url\")+'/api/admins/', function (err, res) {",
+									"    let responseJSON = res.json();",
+									"    // Saving a value in variable converts it to a string",
+									"    pm.environment.set('adminId', responseJSON[0].id);",
+									"});",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{url}}/api/admins/{{adminId}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"admins",
+								"{{adminId}}"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "DrugHistoryController",
+			"description": "",
+			"item": []
+		},
+		{
+			"name": "UserController",
+			"description": "",
+			"item": [
+				{
+					"name": "PostLogin",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"Login credentials for test user is valid\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"customerTesting\",\n    \"password\": \"justTesting\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/users/login",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"login"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "GetUserById",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"let jsonData = pm.response.json();",
+									"",
+									"pm.test(\"Response is valid\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"// Check the returned response user id matches the id of the stored variable",
+									"pm.test(\"Check user id is equal to stored variable\", function () {",
+									"    pm.expect(jsonData.id).to.deep.equal(pm.environment.get(\"userId\"));",
+									"});"
+								]
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"pm.sendRequest(pm.environment.get(\"url\")+'/api/users/', function (err, res) {",
+									"    let responseJSON = res.json();",
+									"    // Saving a value in variable converts it to a string",
+									"    pm.environment.set('userId', responseJSON[0].id);",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{url}}/api/users/{{userId}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"{{userId}}"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "FollowUpController",
+			"description": "",
+			"item": []
+		},
+		{
+			"name": "HealthWorkerController",
+			"description": "",
+			"item": [
+				{
+					"name": "PostHealthworker",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"Create response is valid\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": \"1\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/healthWorkers/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"healthWorkers",
+								""
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "GetHealthworkerById",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"let jsonData = pm.response.json();",
+									"",
+									"pm.test(\"Response is valid\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Check health worker id is equal to stored variable\", function () {",
+									"    pm.expect(jsonData.id).to.deep.equal(pm.environment.get(\"healthworkerId\"));",
+									"});",
+									""
+								]
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"pm.sendRequest(pm.environment.get(\"url\")+'/api/healthWorkers/', function (err, res) {",
+									"    let responseJSON = res.json();",
+									"    // Saving a value in variable converts it to a string",
+									"    pm.environment.set('healthworkerId', responseJSON[0].id);",
+									"});",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{url}}/api/healthWorkers/{{healthworkerId}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"healthWorkers",
+								"{{healthworkerId}}"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "MedicalHistoryController",
+			"description": "",
+			"item": []
+		},
+		{
+			"name": "MonitorController",
+			"description": "",
+			"item": []
+		},
+		{
+			"name": "ReferralController",
+			"description": "",
+			"item": []
+		},
+		{
+			"name": "UserInfoController",
+			"description": "",
+			"item": [
+				{
+					"name": "GetUserInfoById",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"let jsonData = pm.response.json();",
+									"",
+									"pm.test(\"Response is valid\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Check user id is equal to stored variable\", function () {",
+									"    pm.expect(jsonData.id).to.deep.equal(pm.environment.get(\"userId\"));",
+									"});",
+									""
+								]
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"pm.sendRequest(pm.environment.get(\"url\")+'/api/user-information/', function (err, res) {",
+									"    let responseJSON = res.json();",
+									"    // Saving a value in variable converts it to a string",
+									"    pm.environment.set('userId', responseJSON[0].id);",
+									"});",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{url}}/api/user-information/{{userId}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"user-information",
+								"{{userId}}"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "VHTController",
+			"description": "",
+			"item": [
+				{
+					"name": "PostVHT",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"Create response is valid\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": \"1\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/vhts/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"vhts",
+								""
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "GetAllVHT",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"let jsonData = pm.response.json();",
+									"",
+									"pm.test(\"Response is valid\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{url}}/api/vhts",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"vhts"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "ReadingController",
+			"description": "",
+			"item": [
+				{
+					"name": "GetReadingById",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"let jsonData = pm.response.json();",
+									"",
+									"pm.test(\"Response is valid\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"// Check the returned response patient id matches the id of the stored variable",
+									"pm.test(\"Check reading id is equal to stored variable\", function () {",
+									"    // Variables get saved as string so need to use parse int to get back value ",
+									"    // Else test will fail due to comparison between integer and string",
+									"    pm.expect(jsonData.id).to.deep.equal(parseInt(pm.environment.get(\"readingId\")));",
+									"});",
+									"",
+									"pm.test(\"Reading schema is valid\", function() {",
+									"    // Load the JSON schema and validate against response schema",
+									"    const readingSchema = JSON.parse(pm.environment.get(\"readingSchema\"));",
+									"    tv4.validate(jsonData, readingSchema);",
+									"});"
+								]
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"pm.sendRequest(pm.environment.get(\"url\")+'/api/readings/', function (err, res) {",
+									"    let responseJSON = res.json();",
+									"    // Saving a value in variable converts it to a string",
+									"    pm.environment.set('readingId', responseJSON[0].id);",
+									"});",
+									"",
+									"",
+									"let readingSchema = JSON.stringify({",
+									"  \"type\": \"object\",",
+									"  \"properties\": {",
+									"    \"id\": {",
+									"      \"type\": \"integer\"",
+									"    },",
+									"    \"readerId\": {",
+									"      \"type\": \"string\"",
+									"    },",
+									"    \"patientId\": {",
+									"      \"type\": \"integer\"",
+									"    },",
+									"    \"timestamp\": {",
+									"      \"type\": \"string\"",
+									"    },",
+									"    \"symptoms\": {",
+									"      \"type\": \"string\"",
+									"    },",
+									"    \"otherSymptoms\": {",
+									"      \"type\": \"string\"",
+									"    },",
+									"    \"systolicBloodPressure\": {",
+									"      \"type\": \"integer\"",
+									"    },",
+									"    \"diastolicBloodPressure\": {",
+									"      \"type\": \"integer\"",
+									"    },",
+									"    \"pulseRate\": {",
+									"      \"type\": \"integer\"",
+									"    },",
+									"    \"notes\": {",
+									"      \"type\": \"string\"",
+									"    },",
+									"    \"needFollowUp\": {",
+									"      \"type\": \"boolean\"",
+									"    },",
+									"    \"appVersion\": {",
+									"      \"type\": \"string\"",
+									"    },",
+									"    \"dateLastSaved\": {",
+									"      \"type\": \"string\"",
+									"    },",
+									"    \"recheckVitalsDate\": {",
+									"      \"type\": \"string\"",
+									"    },",
+									"    \"deviceInformation\": {",
+									"      \"type\": \"string\"",
+									"    },",
+									"    \"gestationalAgeTimeUnit\": {",
+									"      \"type\": \"string\"",
+									"    },",
+									"    \"gestationalAge\": {",
+									"      \"type\": \"integer\"",
+									"    },",
+									"    \"manuallyChangedOcrResults\": {",
+									"      \"type\": \"string\"",
+									"    },",
+									"    \"photoPath\": {",
+									"      \"type\": \"string\"",
+									"    },",
+									"    \"totalOcrSeconds\": {",
+									"      \"type\": \"number\"",
+									"    },",
+									"    \"region\": {",
+									"      \"type\": \"string\"",
+									"    },",
+									"    \"ocrEnabled\": {",
+									"      \"type\": \"boolean\"",
+									"    },",
+									"    \"uploadImages\": {",
+									"      \"type\": \"boolean\"",
+									"    },",
+									"    \"vitalsTrafficLight\": {",
+									"      \"type\": \"string\"",
+									"    },",
+									"    \"diagnosis\": {",
+									"      \"type\": \"string\"",
+									"    }",
+									"  },",
+									"  \"required\": [",
+									"    \"id\",",
+									"    \"readerId\",",
+									"    \"patientId\",",
+									"    \"timestamp\",",
+									"    \"symptoms\",",
+									"    \"otherSymptoms\",",
+									"    \"systolicBloodPressure\",",
+									"    \"diastolicBloodPressure\",",
+									"    \"pulseRate\",",
+									"    \"notes\",",
+									"    \"needFollowUp\",",
+									"    \"appVersion\",",
+									"    \"dateLastSaved\",",
+									"    \"recheckVitalsDate\",",
+									"    \"deviceInformation\",",
+									"    \"gestationalAgeTimeUnit\",",
+									"    \"gestationalAge\",",
+									"    \"manuallyChangedOcrResults\",",
+									"    \"photoPath\",",
+									"    \"totalOcrSeconds\",",
+									"    \"region\",",
+									"    \"ocrEnabled\",",
+									"    \"uploadImages\",",
+									"    \"vitalsTrafficLight\",",
+									"    \"diagnosis\"",
+									"  ]",
+									"});",
+									"",
+									"pm.environment.set('readingSchema', readingSchema);"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{url}}/api/readings/{{readingId}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"readings",
+								"{{readingId}}"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "GetReadingsAdvice",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"let jsonData = pm.response.json();",
+									"",
+									"pm.test(\"Response is valid\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Reading advice schema is valid\", function() {",
+									"    // Load the JSON schema and validate against response schema",
+									"    const readingAdviceSchema = JSON.parse(pm.environment.get(\"readingAdviceSchema\"));",
+									"    tv4.validate(jsonData, readingAdviceSchema);",
+									"});"
+								]
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"pm.sendRequest(pm.environment.get(\"url\")+'/api/readings/', function (err, res) {",
+									"    let responseJSON = res.json();",
+									"    // Saving a value in variable converts it to a string",
+									"    pm.environment.set('vitalsTrafficLight', responseJSON[0].vitalsTrafficLight);",
+									"});",
+									"",
+									"",
+									"let readingAdviceSchema = JSON.stringify({",
+									"  \"type\": \"object\",",
+									"  \"properties\": {",
+									"    \"analysis\": {",
+									"      \"type\": \"string\"",
+									"    },",
+									"    \"briefAdvice\": {",
+									"      \"type\": \"string\"",
+									"    },",
+									"    \"advice\": {",
+									"      \"type\": \"string\"",
+									"    },",
+									"    \"condition\": {",
+									"      \"type\": \"string\"",
+									"    }",
+									"  },",
+									"  \"required\": [",
+									"    \"analysis\",",
+									"    \"briefAdvice\",",
+									"    \"advice\",",
+									"    \"condition\"",
+									"  ]",
+									"});",
+									"",
+									"pm.environment.set('readingAdviceSchema', readingAdviceSchema);"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{url}}/api/readings-advice/{{vitalsTrafficLight}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"readings-advice",
+								"{{vitalsTrafficLight}}"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
