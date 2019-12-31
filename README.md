@@ -113,3 +113,47 @@ If running within Docker have this line uncommented:
 
 and comment out 
 `spring.datasource.url=jdbc:mysql://${MYSQL_HOST:localhost}:3306/marsdb`.
+
+# API Tests using Postman Newman
+
+## Running Postman API Tests
+
+### Running newman against a specific environment (startup backend end server and database) then:
+
+#### Install Newman:
+`npm install newman`
+ 
+#### Localhost:
+`newman run Cradle_API_Tests.json -e Local.postman_environment.json`
+
+##### Production:
+`newman run Cradle_API_Tests.json -e Production.postman_environment.json`
+
+## Adding to Postman API Tests
+
+### A sample test example:
+
+#### This gets the patient id to use in test:
+```
+pm.sendRequest(pm.environment.get("url")+'/api/patients/', function (err, res) {
+    let responseJSON = res.json();
+    // Saving a value in variable converts it to a string
+    pm.environment.set('patientId', responseJSON[0].id);
+});
+```
+
+#### After the request is made we check for a response code of 200 with the returned id to match the sent id:
+```
+let jsonData = pm.response.json();
+
+pm.test("Response is valid", function () {
+    pm.response.to.have.status(200);
+});
+
+// Check the returned response patient id matches the id of the stored variable
+pm.test("Check patient id is equal to stored variable", function () {
+    // Variables get saved as string so need to use parse int to get back value 
+    // Else test will fail due to comparison between integer and string
+    pm.expect(jsonData.id).to.deep.equal(parseInt(pm.environment.get("patientId")));
+});
+```
